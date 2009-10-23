@@ -1,0 +1,799 @@
+<?xml version='1.0'?>
+
+<!--
+  Overview.xml
+  Web IDL
+
+  This is written in XHTML 1.0 Strict with an inline <options> element that
+  helps the WebIDL.xsl stylesheet process the document (generating a table
+  of contents, section numbers, certain processing instructions).
+  -->
+
+<?xml-stylesheet href='WebIDL.xsl' type='text/xsl'?>
+
+<html xmlns='http://www.w3.org/1999/xhtml' xmlns:x='http://mcc.id.au/ns/local' xml:lang='en'>
+  <head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+    <title>File API</title>
+    <meta name='revision' content='$Id$'/>
+    <link rel='stylesheet' href='FileAPI.css' type='text/css'/>
+    <script src='section-links.js' type='application/ecmascript'/>
+    <script src='dfn.js' type='application/ecmascript'/>
+    <!--[if IE]>
+    <style type='text/css'>
+      .ignore {
+        -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+        filter: alpha(opacity=50);
+      }
+    </style>
+    <![endif]-->
+
+    <options xmlns='http://mcc.id.au/ns/local'>
+      <versions>
+        <cvs href='http://dev.w3.org/2006/webapi/FileAPI/'/>
+      </versions>
+      <editors>
+        <person homepage='http://arunranga.com/' email='arun@mozilla.com'>
+          <name>Arun Ranganathan</name>
+          <affiliation>Mozilla Corporation</affiliation>
+        </person>
+      </editors>
+      <maturity>ED</maturity>
+    </options>
+  </head>
+
+  <body>
+    <?top?>
+
+    <div class='section'>
+      <h2>Abstract</h2>
+     <p>
+      This specification provides an <acronym title="Application Programming Interface">API</acronym>
+      for representing file objects in web applications, as well as programmatically selecting them and accessing their data.  This includes:
+
+    </p>
+	<ul>
+	    <li>A <a class='dfnref' href='#dfn-filelist'>FileList</a> sequence, which represents an array of individually selected files from the underlying system.
+		The user interface for selection can be invoked via <code>&lt;input type=&quot;file&quot;&gt;</code>, i.e. when the
+		<code>input</code> element [<a href="#HTML5">HTML5</a>] is in the <a href="#FileUpload">File Upload</a> state.</li>
+	    <li>A <a class='dfnref' href="#dfn-Blob">Blob</a> interface, which represents raw binary data, and allows access to ranges of bytes within the Blob object.</li>
+            <li>A <a href='#dfn-file' class='dfnref'>File</a> interface, which includes readonly informational attributes about a file
+	        such as its name, its mediatype, and a URL to access its data.</li>
+            <li>A <a href='#dfn-filereader' class='dfnref'>FileReader</a> interface, which provides methods to read a
+            <a href="#dfn-file">File</a>, and an event model to obtain the results of these reads.</li>
+            <li>A <a href='#dfn-fileerror' class='dfnref'>FileError</a> interface and a <a href="#dfn-fileexception" class="dfnref">FileException</a> exception
+            which define error conditions used by this specification.</li>
+
+
+        </ul>
+  
+  <p>The section on Requirements and Use Cases [<a href="#requirements">REQ</a>] covers the motivation behind this specification.</p>
+    <p>
+      This API is designed to be used in conjunction with other APIs and elements on the web platform,
+      notably: <a href="#XHR2" class="dfnref">XMLHttpRequest</a> (e.g.  with an overloaded <code>send()</code>
+      method for <a href="#file">File</a> objects), <code>postMessage</code>, <code>DataTransfer</code> (part
+      of the <em>drag and drop API</em> defined in [<a href="#HTML5">HTML5</a>,]) and
+      <a href="#WebWorkers">Web Workers</a>. Additionally, it should be possible to programmatically obtain a list of files from the
+      <code>input</code> element [<a href="#HTML5">HTML5</a>] when it is
+      in the <a href="#FileUpload">File Upload state</a>.
+      These kinds of behaviors are defined in the appropriate affiliated specifications.
+    </p>
+
+      <?revision-note?>
+    </div>
+
+    <div class='section'>
+      <h2>Status of this Document</h2>
+      <?sotd-top public-webapps@w3.org http://lists.w3.org/Archives/Public/public-webapps/?>
+      <p>
+        Previous discussion of this specification has taken place on two other
+        mailing lists: <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a>
+        (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archive</a>)
+        and <a href="mailto:public-webapi@w3.org">public-webapi@w3.org</a>
+        (<a href="http://lists.w3.org/Archives/Public/public-webapi/">archive</a>). Ongoing
+        discussion will be on the <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a>
+        mailing list.
+      </p>
+      
+      <p>
+      <em>This section describes the status of this document at the time of its publication.
+      Other documents may supersede this document, since it is only an editor's draft.
+      A list of current <acronym title="World Wide Web Consortium">W3C</acronym>
+      publications and the latest revision of this technical report can be found in the 
+      <a href="http://www.w3.org/TR/"><acronym title="World Wide Web Consortium">W3C</acronym>
+      technical reports index</a> at http://www.w3.org/TR/.</em>
+      </p>
+
+    
+    <p>
+      This document is an Editor's Draft version only. It is <strong>not an official publication</strong> of
+      the <acronym title="World Wide Web Consortium">W3C</acronym>, and there is no consensus yet on some of the details
+      of this specification. The authors of this document are the members of the <acronym title="World Wide Web Consortium">W3C</acronym>
+      <a href="http://www.w3.org/2008/webapps">Web Applications</a> Working Group.
+    </p>
+    <p>
+      This document is produced by the <a href="http://www.w3.org/2008/webapps">Web <acronym title="Application Programming Interface">Applications</acronym>
+      <acronym title="Working Group">WG</acronym></a> in the <acronym title="World Wide Web Consortium">W3C</acronym>
+      <a href="http://www.w3.org/Interaction/">Interaction Domain</a>.
+    </p>
+    <p>
+      Web content and browser developers are encouraged to review this draft. Please send comments to
+      <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a>, the <acronym title="World Wide Web Consortium">W3C</acronym>'s
+      public email list for issues related to Web <acronym title="Application Programming Interface">API</acronym>s.
+      <a href="http://lists.w3.org/Archives/Public/public-webapps/">Archives</a> of the
+      list are available.
+    </p>
+    <p>
+        This document is produced by the <a href='http://www.w3.org/2008/webapps/'>Web Applications Working Group</a>,
+	part of the <a href='http://www.w3.org/2006/rwc/Activity'>Rich Web Clients Activity</a>
+        in the W3C <a href='http://www.w3.org/Interaction/'>Interaction Domain</a>.
+        Changes made to this document can be found in the
+        <a href='http://dev.w3.org/cvsweb/2006/webapi/FileAPI/Overview.xml'>W3C public CVS server</a>.
+    </p>
+      <?sotd-bottom http://www.w3.org/2004/01/pp-impl/42538/status?>
+    </div>
+
+    <div id='toc'>
+      <h2>Table of Contents</h2>
+      <?toc sections appendices?>
+    </div>
+
+    <div id='sections'>
+    <div id='introduction' class='section'>
+    <h2>Introduction</h2>
+
+      <p class='norm'>This section is informative.</p>
+
+      <p>
+      It is desirable for web applications to have the ability to manipulate as wide
+      as possible a range of user input, including files that a user may wish to upload 
+      to a remote server or manipulate inside a rich web application. This specification 
+      defines the basic representations for files, lists of files, errors raised by access to files,
+      and programmatic ways to read files.  The interfaces and API defined in this
+      specification can be used with other interfaces and APIs exposed to the web platform
+      (e.g. <a href="#XHR2" class="dfnref">XMLHttpRequest</a>).
+    </p>
+
+      </div>
+
+      <div id='conformance' class='section'>
+        <h2>Conformance</h2>
+
+        <p>
+          Everything in this specification is normative except for
+          examples and sections marked as being informative.
+        </p>
+        <p>
+          The keywords “<span class='rfc2119'>MUST</span>”,
+          “<span class='rfc2119'>MUST NOT</span>”,
+          “<span class='rfc2119'>REQUIRED</span>”,
+          “<span class='rfc2119'>SHALL</span>”,
+          “<span class='rfc2119'>SHALL NOT</span>”,
+          “<span class='rfc2119'>RECOMMENDED</span>”,
+          “<span class='rfc2119'>MAY</span>” and
+          “<span class='rfc2119'>OPTIONAL</span>” in this document are to be
+          interpreted as described in
+          <cite><a href='http://www.ietf.org/rfc/rfc2119'>Key words for use in RFCs to
+              Indicate Requirement Levels</a></cite>
+          <a href='#ref-RFC2119'>[RFC2119]</a>.
+        </p>
+        <p>
+          The following conformance classes are defined by this specification:
+        </p>
+        <dl>
+          <dt><dfn id='dfn-conforming-implementation'>conforming implementation</dfn></dt>
+          <dd>
+            <p>
+              A user agent is considered to be a
+              <a class='dfnref' href='#dfn-conforming-implementation'>conforming implementation</a>
+              if it satisfies all of the <span class='rfc2119'>MUST</span>-,
+              <span class='rfc2119'>REQUIRED</span>- and <span class='rfc2119'>SHALL</span>-level
+              criteria in this specification that apply to implementations.
+            </p>
+          </dd>         
+        </dl>
+      </div>
+      <div class='section'>
+        <h2>Terminology and Algorithms</h2>
+        <p>The terms and algorithms <dfn id="fragment">&lt;fragment></dfn>, <dfn id="scheme">&lt;scheme></dfn>, <dfn id="document-base-url">document base URL</dfn>,
+        <dfn id="event-handler-attributes">event handler attributes</dfn>, <dfn id="event-handler-event-type">event handler event type</dfn>,
+        <dfn id="Function"><code>Function</code></dfn>,
+        <dfn id="origin">origin</dfn>, <dfn id="resolve-a-URL">resolve a URL</dfn>, <dfn id="same-origin">same origin</dfn>,
+        <dfn id="task">task</dfn>, <dfn id="task-source">task source</dfn>, <dfn id="df-URL">URL</dfn>, <dfn id="URL-character-encoding">URL character encoding</dfn>, the
+        <dfn id="already-started">"already started" flag</dfn> for script processing, and
+        <dfn id="queue-a-task">queue a task</dfn> are defined by the HTML 5 specification [<a href="#HTML5">HTML5</a>]. </p>
+       <p>This specification includes algorithms (steps) as part of the definition of methods.  Conforming implementations (referred to as "user agents" from here on) MAY use other algorithms in the
+       implementation of these methods, provided
+       the end result is the same.</p> 
+      </div>
+
+      <div class='section'>
+        <h2>The FileList Sequence</h2>
+       
+       <p>
+          This sequence parameterized type exposes the list of files that have been selected.
+       </p>
+    <x:codeblock language='idl'>
+    typedef sequence&lt;File&gt; <dfn id='filelist'>FileList</dfn>;
+    </x:codeblock>
+    <div class='example'>
+    <p>
+      Sample usage typically involves DOM access to the input element (of type "file") within a form, and then accessing selected files.  
+    </p>
+    <x:codeblock language='es'>
+    <span class='comment'>// uploadData is a form element</span>
+    <span class='comment'>// fileChooser is input element of type 'file'</span>
+    var file = document.forms['uploadData']['fileChooser'].files[0];
+    
+    if(file)
+    {
+      <span class='comment'>// Perform file ops</span>
+    }  
+    </x:codeblock>
+    </div>
+    <div class="note">
+    The <code>HTMLInputElement</code> interface [<a href="#HTML5">HTML5</a>] has a readonly <code>FileList</code> attribute, which is what is
+    being accessed in the above example.  Some conforming user agents support multiple file selections within HTML forms, in which case the
+    <code>FileList</code> object SHOULD make available all selected files.
+    </div>
+    </div>
+  <div class="section">
+    <h2>The Blob Interface</h2>
+    <p>
+      This interface represents raw data.  It provides a method to <a href="#dfn-slice" class="dfnref">slice</a> data objects between ranges of bytes into
+      further chunks of raw data.
+      It also provides an attribute representing the size of the chunk of data.
+      The <a href="#dfn-file" class="dfnref">File</a> interface inherits from this interface.
+    </p>
+    <x:codeblock language = 'idl'>
+    interface <dfn id='dfn-Blob'>Blob</dfn> {
+      
+      readonly attribute unsigned long long <a href="#dfn-size" title='size'>size</a>;
+      
+      <span class='comment'>//slice Blob into byte-ranged chunks</span>
+      
+      Blob <a href="#dfn-slice" title='slice'>slice</a>(in long long <a href="#dfn-start" class="dfnref" title='start'>start</a>,
+                 in long long <a href="#dfn-offset" class="dfnref" title='offset'>offset</a>); <span class='comment'>// raises DOMException</span>
+    
+    }
+    </x:codeblock>
+    <div class='section'>
+    <h3>Attributes</h3>
+    <dl><dt id='dfn-size'><code>size</code></dt><dd><p>Represents the size of the Blob object in bytes.</p></dd></dl>
+    </div>
+    <div class='section'>
+    <h3>Methods and Parameters</h3>
+    <dl><dt id='dfn-slice'>The <code>slice</code> method</dt><dd><p>Returns a new <a href="#dfn-Blob" class="dfnref">Blob</a> object between the ranges of bytes specified.
+    The <dfn id='dfn-start'>start</dfn> parameter is a value for the start point of a <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call.
+    The <dfn id="dfn-offset">offset</dfn> parameter is a value for the end point of a
+    <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call as byte offsets from <code>start</code>.
+    The <a href="#dfn-slice" class="dfnref"><code>slice</code></a> method MUST raise an <code>INDEX_SIZE_ERR</code>
+    [<a href="#DOMException" class="dfnref">DOMException</a>] if called with range values that are out of bounds.  In particular:
+    <ul>
+    <li>If <a href="#dfn-start" class="dfnref"><code>start</code></a> + <a href="#dfn-offset" class="dfnref"><code>offset</code></a> > <a href="#dfn-size"><code>size</code></a>
+    then a user agent MUST raise an <code>INDEX_SIZE_ERR</code> [<a href="#DOMException">DOMException</a>].</li>
+    <li>If <a href="#dfn-start" class="dfnref"><code>start</code></a> > <a href="#dfn-size" class="dfnref"><code>size</code></a> then a user agent
+    MUST raise an <code>INDEX_SIZE_ERR</code> [<a href="#DOMException">DOMException</a>]</li>.
+    </ul>
+    </p></dd></dl>
+    </div>
+  </div>
+  <div class='section'>
+  <h2>The File Interface</h2>
+  <p>
+    This interface describes a single file in a <a href="#dfn-filelist" class="dfnrefs">FileList</a> and exposes its name, media type and a
+    <a href="#dfn-fileURN" class="dfnrefs">URN</a> to access the file. It inherits from <a href="#dfn-Blob" class='dfnrefs'>Blob</a>. 
+  </p>
+  <x:codeblock language='idl'>
+  interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blob</a> {
+
+      readonly attribute DOMString <a href="#dfn-name" class="dfnref">name</a>;
+      readonly attribute DOMString <a href="#dfn-mediatype" class="dfnref">mediaType</a>;
+      readonly attribute DOMString <a href="#dfn-urn" class="dfnref">urn</a>;
+};
+  </x:codeblock>
+  <div class="section">
+  <h3>Attributes</h3>
+  <p>
+  <dl>
+    <dt id="dfn-name"><code>name</code></dt>
+    <dd><p>The name of the file as a UTF8-encoded string. There are numerous file name variations on different systems; this is merely the name of the file, without path information.</p></dd>
+    <dt id="dfn-mediatype"><code>mediaType</code></dt>
+    <dd><p>The ASCII-encoded string representing the media type of the file, expressed as an RFC2046 MIME type [<a href="#RFC2046">RFC2046</a>]. User agents SHOULD return the MIME type of the file,
+    if it is known. If implementations cannot determine the media type of the file, they MUST return <code>null</code>.  A string is a valid MIME type if it matches the <code>media-type</code>
+    token defined in section 3.7 "Media Types" of RFC 2616 [<a href="#HTTP">HTTP</a>]. </p></dd>
+    <dt id="dfn-url"><code>url</code></dt>
+    <dd><p>The <a href="#dfn-fileURN" class="dfnref">URN</a> representing the <a href="#dfn-file" class="dfnref">File</a> object.</p></dd>
+    </dl>
+  </p>
+  </div>
+  </div>
+  <div class="section">
+  <h2>The FileReader Interface</h2>
+  <p>
+    This interface provides methods to read files in memory, and to access the data from those files using Events and
+    <a href="#event-handler-attributes">event handler attributes</a> [<a href="#DOM3Events">DOM3Events</a>][<a href="#HTML5">HTML5</a>].  The
+    <code>EventTarget</code> interface is defined in DOM 3 Events [<a href="#DOM3Events">DOM3Events</a>].  This interface is an <code>EventTarget</code> for
+    ProgressEvents [<a href="#ProgressEvents">ProgressEvents</a>].
+  </p>
+  <x:codeblock language="idl">
+
+[Constructor]
+interface <dfn id="dfn-filereader">FileReader</dfn> {
+
+  <span class="comment">// async read methods</span> 
+  void <a href="#dfn-readAsBinary" class="dfnref">readAsBinaryString</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">fileBlob</a>);
+  void <a href="#dfn-readAsText" class="dfnref">readAsText</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">fileBlob</a>, [Optional] in DOMString <a href="#dfn-encoding" class="dfnref">encoding</a>);
+  void <a href="#dfn-readAsDataURL" class="dfnref">readAsDataURL</a>(in <a href="#dfn-file" class="dfnref">File</a> <a href="#dfn-file-arg" class="dfnref">file</a>);
+
+  void <a href="#dfn-abort" class="dfnref">abort</a>();
+
+  <span class="comment">// states</span>
+  const unsigned short <a href="#dfn-initial" class="dfnref">INITIAL</a> = 0;
+  const unsigned short <a href="#dfn-loading" class="dfnref">LOADING</a> = 1;
+  const unsigned short <a href="#dfn-done" class="dfnref">DONE</a> = 2;
+  
+  
+  readonly attribute unsigned short <a class="dfnref" href="#dfn-readystate">readyState</a>;
+
+  <span class="comment">// file data</span>
+  readonly attribute DOMString <a href="#dfn-fileData" class="dfnref">fileData</a>;
+  
+  readonly attribute <a href="#dfn-fileerror" class="dfnref">FileError</a> <a href="#dfn-error" class="dfnref">error</a>;
+
+  <span class="comment">// event handler attributes</span>
+  attribute Function <a href="#dfn-onloadstart" class="dfnref">onloadstart</a>;
+  attribute Function <a href="#dfn-onprogress" class="dfnref">onprogress</a>;
+  attribute Function <a class="dfnref" href="#dfn-onload">onload</a>;
+  attribute Function <a class="dfnref" href="#dfn-onabort">onabort</a>;
+  attribute Function <a class="dfnref" href="#dfn-onerror">onerror</a>;
+  attribute Function <a class="dfnref" href="#dfn-onloadend">onloadend</a>;
+
+};
+FileReader implements EventTarget;
+  </x:codeblock>
+<div class='ednote'>
+<p><code>readAsBinaryString</code> and <code>readAsText</code> take <code>Blob</code> objects as parameters in this specification, whereas <code>readAsDataURL</code> takes <code>File</code>
+objects (which inherit from <code>Blob</code>).  While it is possible that in future versions of this specification, these two <code>FileReader</code> read methods can
+be called on other objects that inherit from <code>Blob</code>, in this specification we only treat the case of <code>Blob</code> objects as <code>File</code> objects.
+Thus, error conditions are <code>FileErrors.</code>
+</p>
+</div>
+<div class='section'>
+<h3>The FileReader Task Source</h3>
+<p>The <a href="#dfn-filereader" class="dfnref"><code>FileReader</code></a> interface enables asynchronous reads on individual files by dispatching events to event handler methods.
+Unless stated otherwise, the
+<a href="#task-source" class="dfnref">task source</a> that is used in this specification is the
+<a href="#dfn-filereader"><code>FileReader</code></a> <a href="event-task-source" class="dfnref">event task source</a>.  This task source is used for events tasks that are asynchronously dispatched, or for
+event <a href="#queue-a-task" class="dfnref">tasks that are queued</a> for dispatching.</p>
+</div>
+<div class='section'>
+<h3>Constructors</h3>
+<p>When the <code>FileReader()</code> constructor is invoked, the user agent MUST return a new <a href="#dfn-filereader"><code>FileReader</code></a> object. </p>
+</div>
+<div class='section'>
+<h3>Event Handler Attributes</h3>
+<p>
+The following are the <a href="#event-handler-attributes">event
+   handler attributes</a> (and their corresponding <a href="#event-handler-event-type" title="event handler event type">event
+   handler event types</a>) that user agents MUST support on
+   <code><a href="#dfn-filereader">FileReader</a></code> as
+   DOM attributes:  
+</p>
+<table>
+
+   <thead>
+    <tr>
+     <th><a linkindex="153" href="#event-handler-attributes-0" title="event handler
+      attributes">event handler attribute</a>
+
+     </th><th><a linkindex="154" href="#event-handler-event-type">event handler event type</a>
+
+   </th></tr></thead><tbody>
+    <tr>
+
+     <td><dfn id="onloadstart"><code>onloadstart</code></dfn>
+
+     </td><td><code><a href="#dfn-loadstart-event">loadstart</a></code>
+
+    </td></tr><tr>
+     <td><dfn id="onprogress"><code>onprogress</code></dfn>
+
+     </td><td><code><a href="#dfn-progress-event">progress</a></code>
+
+    </td></tr><tr>
+     <td><dfn id="onabort"><code>onabort</code></dfn>
+
+     </td><td><code title="abort-event"><a href="#dfn-abort-event">abort</a></code>
+
+    </td></tr><tr>
+     <td><dfn id="onerror"><code>onerror</code></dfn>
+
+     </td><td><code><a href="#dfn-error-event">error</a></code>
+
+    </td></tr><tr>
+     <td><dfn id="onload"><code>onload</code></dfn>
+
+     </td><td><code><a href="#dfn-load-event">load</a></code>
+
+    </td></tr><tr>
+     <td><dfn id="onloadend"><code>onloadend</code></dfn>
+
+     </td><td><code><a href="#dfn-loadend-event">loadend</a></code>
+  </td></tr></tbody></table>
+
+
+</div>
+<div class='section'>
+<h3>FileReader States</h3>
+<p>The <a href="#dfn-filereader" class="dfnref"><code>FileReader</code></a> object can be in one of 3 states.  The
+<dfn id="dfn-readystate"><code>readyState</code></dfn> attribute, on getting,
+MUST return the current state, which MUST be one of the following values:</p>
+<dl>
+ <dt><dfn id="dfn-initial"><code>INITIAL</code> (numeric value 0)</dfn></dt>
+ <dd><p>The object has been constructed, and there are no pending reads.</p></dd>
+ <dt><dfn id="dfn-loading"><code>LOADING</code> (numeric value 1)</dfn></dt>
+ <dd><p>A file is being read.  One of the <a href="#read-methods">read methods</a> is being processed.</p></dd>
+ <dt><dfn id='dfn-done'><code>DONE</code> (numeric value 2)</dfn></dt>
+ <dd><p>The entire file has been read into memory, or a <a href="#file-error-read">file error occurred during read</a>, or the read was
+ aborted using <a href="#dfn-abort"><code>abort()</code></a>.
+ The <a href="#dfn-filereader" class="dfnref">FileReader</a>
+is no longer reading a file.</p></dd>
+</dl>
+</div>
+<div class='section'>
+<h3>Reading a File</h3>
+<div class="ednote"><p>Issue: must prevent calls of the sort <code>reader.fileData</code> following a read call.</p></div>
+<div class='section'>
+<h4>Multiple Reads</h4>
+<p>
+ The <a href="#dfn-filereader" class="dfnref">FileReader</a> interface makes available three asynchronous <dfn id="read-methods">read methods</dfn> --
+ <a href="#dfn-readAsbBinaryString" class="dfnref"><code>readAsBinaryString</code></a>,
+ <a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a>, and <a href="#dfn-readAsDataURL" class="dfnref"><code>readAsDataURL</code></a>.  If
+ multiple read methods are called on the same <a href="#dfn-filereader" class="dfnref"><code>FileReader</code></a> object, user agents MUST call
+ <a href="#dfn-abort" class="dfnref"><code>abort</code></a> on previous read calls.  User agents MUST only process the <dfn id="last-call">last call</dfn>
+ to a read method, which is the call that occurs <em>last</em> in a script block that has the <a href="#already-started">"already started" flag</a> set
+ [<a href="#HTML5">HTML5</a>].
+</p>
+</div>
+<div class="ednote"><p>Add section covering the condition when multiple <a href="#dfn-filereader" class="dfnref">FileReader</a> objects access the same file.</p></div>
+<div class="section">
+<h4>The <code>fileData</code> attribute</h4>
+<p>On getting, the <dfn id="dfn-fileData"><code>fileData</code></dfn> attribute returns a file's data in string format or the empty string, 
+depending on the <a href="#read-method" class="#dfnref">read method</a> that has been called on the <a href="#dfn-filereader" class="dfnref"><code>FileReader</code></a> object, and
+any errors that may have occurred.
+It can also return <em>partial file data</em>.
+<dfn id="partial-file-data">Partial file data</dfn> is the part of the file that has been read into memory <em>currently</em>
+during processing one the two <a href="#read-method">read methods</a>,
+<a href="#dfn-readAsBinaryString" class="dfnref"><code>readAsBinaryString</code></a> and
+<a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a>.  The list below is normative for the <code>fileData</code> attribute:
+</p>
+<ul>
+  <li><p>On getting, if the <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> is <code>INITIAL</code> (no read method has been called)
+  then the <code>fileData</code> attribute MUST return the empty string.</p></li>
+  <li><p>On getting, if an error in reading the file has occurred (using <em>any</em> <a href="#read-method"> read method</a>),
+  then the <code>fileData</code> attribute MUST return the empty string.</p></li>
+  <li><p>On getting, if the <a href="#dfn-readAsDataURL" class="#dfnref"><code>readAsDataURL</code></a> <a href="#read-method">read method</a> is
+  used, the <code>fileData</code> attribute MUST return a Data URL [<a href="#DataURL">DataURL</a>] encoding of the file's data.</p></li>
+  <li><p>On getting, if the <a href="#dfn-readAsBinaryString" class="dfnref"><code>readAsBinaryString</code></a> <a href="#read-method">read method</a> is called
+  (and no error in reading the file has occurred), then the <code>fileData</code> attribute MUST return a string representing the file's data as a <dfn id="binary-string">binary string</dfn>, in which
+  every byte is represented by an integer in the range [0..255].  On getting, if <a href="#dfn-progress-event">progress</a> events are <a href="#queue-a-task">queued for
+  dispatch</a> while processing the
+  <a href="#dfn-readAsBinaryString"><code>readAsBinaryString</code></a> <a href="read-method">read method</a>, the <code>fileData</code>
+  attribute SHOULD return <a href="#partial-file-data">partial file data</a> in <a href="#binary-string">binary string</a> format.</p></li>
+  <li><p>On getting, if the <a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a> <a href="#read-method">read method</a> is called
+  (and no error in reading the file has occurred),
+  then the <code>fileData</code> attribute MUST return a string representing the file's data as a text string, and SHOULD encode the string in the format specified
+  by the <a href="#encoding-determination">encoding determination</a>.  On getting, if <a href="#dfn-progress-event">progress</a> events
+  are <a href="#queue-a-task">queued for dispatch</a> while processing the
+  <a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a> <a href="#read-method">read method</a>, this attibute SHOULD return
+  <a href="#partial-file-data">partial file data</a> in the format specified by
+  the <a href="#encoding-determination">encoding determination</a>).
+  </p></li>
+</ul>
+</div>
+<div class="section">
+<h4>The <code>readAsBinaryString()</code> method</h4>
+<p>
+When the <dfn id="dfn-readAsBinaryString"><code>readAsBinaryString(fileBlob)</code></dfn> method is called, the user agent MUST run the steps below (unless otherwise indicated).
+</p>
+<ol>
+  <li><p>Set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-initial" class="dfnref"><code>INITIAL</code></a>
+  and set
+  <a href="#dfn-fileData"><code>fileData</code></a> to the empty string.</p></li>
+  <li><p>If an <a href="#file-error-read">error occurs during file read</a>, set <a href="#dfn-readystate"><code>readyState</code></a> to
+  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-fileData"><code>fileData</code></a> to the empty string. Proceed to the error steps below.</p>
+  <ol>
+    <li><p><a href="#queue-a-task">Queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called
+    <a href="#dfn-loadend" class="dfnref"><code>loadend</code></a>. </p></li>
+    <li><p><a href="#queue-a-task">Queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called
+    <a href="#dfn-error-event"><code>error</code></a>.  <em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
+    <a href="#dfn-error"><code>error</code></a> attribute MUST be a
+    a <a href="#dfn-fileerror"><code>FileError</code></a> object with a valid <a href="#dfn-error">error code</a> that indicates the kind of
+    <a href="#file-error-read">file error that has occurred</a>.</p>
+    <div class="ednote"><p>There is the potential for confusion between the <code>error</code> attribute and the <code>error</code> event,
+    since both carry the same name (but it is a useful name).</p></div>
+    </li>
+    <li><p>Terminate this overall set of steps.</p></li>    
+  </ol>
+  </li>
+  <li><p>If no error has occurred, set <a href="#readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
+  <li><p><a href="#queue-a-task">Queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called <a href="#dfn-loadstart-event">loadstart</a>.</p></li>
+  <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  As the bytes from the <a href="#dfn-fileBlob"><code>fileBlob</code></a> argument are read,
+  user agents SHOULD ensure that on getting,
+  the <a href="#dfn-fileData"><code>fileData</code></a> attribute returns <a href="#partial-file-data">partial file data</a> representing the number of bytes currently <code>loaded</code>
+  (as a fraction of the <code>total</code>), as a <a href="#binary-string">binary string</a>.
+  <div class="note"><p>Both <code>loaded</code> and <code>total</code> are attributes on the affiliated <a href="#dfn-progress-event">progress</a> event [<a href="#ProgressEvents">ProgressEvents</a>]</p></div>.
+  </p></li>
+  <li><p>When the file has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
+  <li><p>Set the <a href="#dfn-fileData" class="dfnref"><code>fileData</code></a> attribute to be <a href="#dfn-fileBlob"><code>fileBlob</code></a>'s data content
+  represented as a <a href="#binary-string">binary string</a>;
+  on getting, the <a href="#dfn-fileData" class="dfnref"><code>fileData</code></a> attribute returns the (complete) data of <a href="#dfn-fileBlob"><code>fileBlob</code></a>
+  as a <a href="#binary-string">binary string</a>.</p></li>
+  <li><p>Terminate this overall set of steps.</p></li>
+</ol>
+</div>
+<div class="section">
+<h4>The <code>readAsDataURL()</code> method</h4>
+<p>When the <dfn id="dfn-readAsDataURL"><code>readAsDataURL(file)</code></dfn> method is called, the user agent MUST run the steps below (unless otherwise indicated).</p>
+<ol>
+  <li><p>Set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-initial" class="dfnref"><code>INITIAL</code></a> and set
+  <a href="#dfn-fileData"><code>fileData</code></a> to the empty string.</p></li>
+  <li><p>If an <a href="#file-error-read">error occurs during file read</a>, OR if a user agent's URL length limitations prevent returning data as a Data URL
+  [<a href="#DataURL">DataURL</a>]
+  set <a href="#dfn-readystate"><code>readyState</code></a> to
+  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-fileData"><code>fileData</code></a> to the empty string. Proceed to the error steps below.</p>
+  <ol>
+    <li><p><a href="#queue-a-task">Queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called
+    <a href="#dfn-loadend" class="dfnref"><code>loadend</code></a>. </p></li>
+    <li><p><a href="#queue-a-task">Queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called
+    <a href="#dfn-error-event"><code>error</code></a>.  <em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
+    <a href="#dfn-error"><code>error</code></a> attribute MUST be a
+    a <a href="#dfn-fileerror"><code>FileError</code></a> object with a valid <a href="#dfn-error">error code</a> that indicates the kind of
+    <a href="#file-error-read">file error that has occurred</a>.</p></li>
+    <li><p>Terminate this overall set of steps.</p></li>    
+  </ol>
+  </li>
+  <li><p>If no error has occurred, set <a href="#readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
+  <li><p><a href="#queue-a-task">Queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called <a href="#dfn-loadstart-event">loadstart</a>.</p></li>
+  <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  
+  </p></li>
+  <li><p>When the file has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
+  <li><p>Set the <a href="#dfn-fileData" class="dfnref"><code>fileData</code></a> attribute to be <a href="#dfn-file-arg"><code>file</code></a>'s data content
+  represented as a Data URL [<a href="#DataURL">DataURL</a>];
+  on getting, the <a href="#dfn-fileData" class="dfnref"><code>fileData</code></a> attribute returns the (complete) data of <a href="#dfn-file-arg"><code>file</code></a> as a
+  Data URL [<a href="#DataURL">DataURL</a>]</p></li>
+  <li><p>Terminate this overall set of steps.</p></li>
+</ol>
+</div>
+<div class='section'>
+<h4>The <code>readAsText()</code> method</h4>
+<p>
+When the <dfn id="dfn-readAsText"><code>readAsText(fileBlob, encoding)</code></dfn> method is called (the encoding argument is optional),
+the user agent MUST run the steps below (unless otherwise indicated).
+</p>
+<ol>
+  <li><p>Set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-initial" class="dfnref"><code>INITIAL</code></a>
+  and set
+  <a href="#dfn-fileData"><code>fileData</code></a> to the empty string.</p></li>
+  <li><p>If an <a href="#file-error-read">error occurs during file read</a>, OR if the <a href="#encoding-determination">encoding determination</a>
+  fails, set <a href="#dfn-readystate"><code>readyState</code></a> to
+  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-fileData"><code>fileData</code></a> to the empty string. Proceed to the error steps below.</p>
+  <ol>
+    <li><p><a href="#queue-a-task">Queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called
+    <a href="#dfn-loadend" class="dfnref"><code>loadend</code></a>. </p></li>
+    <li><p><a href="#queue-a-task">Queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called
+    <a href="#dfn-error-event"><code>error</code></a>.  <em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
+    <a href="#dfn-error"><code>error</code></a> attribute MUST be a
+    a <a href="#dfn-fileerror"><code>FileError</code></a> object with a valid <a href="#dfn-error">error code</a> that indicates the kind of
+    <a href="#file-error-read">file error that has occurred</a>.</p>
+    </li>
+    <li><p>Terminate this overall set of steps.</p></li>    
+  </ol>
+  </li>
+  <li><p>If no error has occurred, set <a href="#readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
+  <li><p><a href="#queue-a-task">Queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called <a href="#dfn-loadstart-event">loadstart</a>.</p></li>
+  <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  As the bytes from the <a href="#dfn-fileBlob"><code>fileBlob</code></a> argument are read,
+  user agents SHOULD ensure that on getting,
+  the <a href="#dfn-fileData"><code>fileData</code></a> attribute returns <a href="#partial-file-data">partial file data</a> representing the number of bytes currently <code>loaded</code>
+  (as a fraction of the <code>total</code>), encoded according to the <a href="#encoding-determination">encoding determination</a>.
+  <div class="note"><p>Both <code>loaded</code> and <code>total</code> are attributes on the affiliated <a href="#dfn-progress-event">progress</a> event [<a href="#ProgressEvents">ProgressEvents</a>]</p></div>.
+  </p></li>
+  <li><p>When the file has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
+  <li><p>Set the <a href="#dfn-fileData" class="dfnref"><code>fileData</code></a> attribute to be <a href="#dfn-fileBlob"><code>fileBlob</code></a>'s data content
+  represented as a string;
+  on getting, the <a href="#dfn-fileData" class="dfnref"><code>fileData</code></a> attribute returns the (complete) data of <a href="#dfn-fileBlob"><code>fileBlob</code></a>
+  as a string, encoded according to the <a href="#encoding-determination">encoding determination</a>.</p></li>
+  <li><p>Terminate this overall set of steps.
+  <div class="ednote">Issue: if it is determined that the <a href="#dfn-mediaType"><code>mediaType</code></a> attribute is one of <code>text/html</code>, <code>text/xml</code>,
+  or <code>application/xml</code> then the specification should allow HTML5 [<a href="#HTML5">HTML5</a>] parsing (creation of <code>Document</code>) or XML parsing specified
+  in XML specifications.  Should there be normative text for this? </div>
+  </p></li>
+</ol>
+</div>
+<div class="section">
+<h4>Blob and File Parameters</h4>
+<p>Each of the <a href="#read-method">read methods</a> take mandatory <a href="#dfn-file" class="dfnref"><code>File</code></a> or
+<a href="#dfn-Blob" class="dfnref"><code>Blob</code></a> parameters.
+</p>
+<dl>
+<dt><dfn id="dfn-file-arg">file</dfn></dt>
+<dd><p>This is a <a href="#dfn-file"><code>File</code></a> object used to invoke the <code>readAsDataURL()</code> method.  It will typically be a reference to a single file in a
+<a href="#dfn-filelist"><code>FileList</code></a></p></dd>
+<dt><dfn id="dfn-fileBlob">fileBlob</dfn></dt>
+<dd><p>This is a <a href="#dfn-Blob"><code>Blob</code></a> object used to invoke the <code>readAsText()</code> and <code>readAsBinaryString()</code> methods.
+For the purposes of this specification, it will typically be a reference to a single file in a
+<a href="#dfn-filelist"><code>FileList</code></a></p></dd>
+</dl>
+<div class="ednote">The design choice for why <code>readAsDataURL</code> takes <code>File</code> but the other read methods take <code>Blob</code> will have to be
+explained better.  It is for future use of
+<code>Blob</code>, e.g. when <code>ByteArray</code> primitives are more readily available on the platform.  Is merely saying "for future use" sufficient, like in the XHR2
+editor's draft?</div>
+</div>
+<div class='section'>
+<h4>Determining Encoding</h4>
+<p>When reading files using the <a href="#dfn-readAsText"><code>readAsText()</code></a> <a href="#read-method">read method</a>, the optional <dfn id="dfn-encoding"><code>
+encoding</code></dfn> string parameter MUST be a <em>name</em> or an <em>alias</em> of a character set
+used on the Internet [<a href="#IANACHARSET">IANACHARSET</a>], or else is considered invalid.  If the <code>encoding</code> argument supplied is valid, user agents SHOULD
+encode the file's data using that encoding.  If the <code>encoding</code> argument is invalid, or the optional <code>encoding</code> argument is not supplied,
+or the user agent cannot decode the <a href="#dfn-fileBlob"><code>fileBlob</code></a> using <code>encoding</code>, the following
+<dfn id="encoding-determination">encoding determination</dfn> algorithm must be
+followed:</p>
+<ol>
+<li>If the <code>encoding</code> argument is invalid, or the optional <code>encoding</code> argument is not supplied,
+or the user agent cannot decode the <a href="#dfn-fileBlob"><code>fileBlob</code></a> using <code>encoding</code>, then let <var>charset</var> be null.</li>
+<li>
+
+    <p>For each of the rows in the
+     following table, starting with the first one and going down, if the
+     first bytes of <a href="#dfn-fileBlob"><code>fileBlob</code></a> match the bytes given in the first
+     column, then let <var>charset</var> be the encoding given in the cell in
+     the second column of that row. If there is no match <var>charset</var>
+     remains null.</p>
+
+    <table>
+     <thead>
+      <tr>
+       <th>Bytes in Hexadecimal
+
+       </th><th>Description
+
+     </th></tr></thead><tbody><!-- UTF-32 is dead
+      <tr>
+       <td>00 00 FE FF
+       <td>UTF-32BE BOM
+      <tr>
+       <td>FF FE 00 00
+       <td>UTF-32LE BOM-->
+
+      <tr>
+       <td>FE FF
+
+       </td><td>UTF-16BE BOM
+
+      </td></tr><tr>
+
+       <td>FF FE
+
+       </td><td>UTF-16LE BOM
+
+      </td></tr><tr>
+       <td>EF BB BF
+
+       </td><td>UTF-8 BOM<!-- nobody uses this
+      <tr>
+       <td>DD 73 66 73
+       <td>UTF-EBCDIC
+-->
+        
+    </td></tr></tbody></table>
+
+   </li><li>
+    <p>If <var>charset</var> is null let <var>charset</var> be UTF-8.
+
+   </p></li><li>
+
+    <p>Return the result of decoding the <a href="#dfn-fileBlob"><code>fileBlob</code></a> using
+     <var>charset</var>; on getting, the <a href="#dfn-fileData"><code>fileData</code></a> attribute returns a string in <var>charset</var>. Replace bytes or sequences of bytes that are not
+     valid according to the <var>charset</var> with a single U+FFFD character [<a href="#UNICODE">UNICODE</a>].
+  </p></li>
+</ol>
+</div>
+</div>
+
+
+</div>
+  <div id="requirements" class="section">
+    <h2>Requirements and Use Cases</h2>
+      <p>This section covers what the requirements are for this API, as well as illustrates some use cases.  This version of the API does not satisfy all use cases;
+	   subsequent versions may elect to address these.</p>  
+	  <ul>
+	    <li><p>Once a user has given permission, user agents should provide the ability to read and parse data directly from a local file programmatically.</p>
+		  <ul>
+		    <li> Example: A lyrics viewer. User wants to read song lyrics from songs in his plist file.  User browses for plist file.  File is opened, 
+			 read, parsed, and presented to the user as a sortable, actionable list within a web application.  User can select songs to fetch lyrics.  User uses the 
+			 "browse for file" dialog.</li>		
+		  </ul>		  		  
+	    </li>
+	    <li><p>Data should be able to be stored locally so that it is available for later use, which is useful for offline data access for web applications.</p>
+		  <ul>
+		    <li>Example: A Calendar App.  User's company has a calendar. User wants to sync local events to company calendar, marked
+                        as "busy" slots (without leaking personal info).  User browses for file and selects it. The text/calendar file is parsed
+                        in the browser, allowing the user to merge the files to one calendar view.
+                        The user wants to then save the file back to his local calendar file. (using "Save As" ?).  The user can also send the
+			integrated calendar file back to the server calendar store asynchronously.</li>
+	          </ul>
+		  
+	    </li>
+	    <li><p>User agents should provide the ability to save a local file programmatically given an amount of data and a file name.</p>
+		  <ul>
+		    <li>Example: A Spreadsheet App.  User interacts with a form, and generates some input.  The form then generates a
+		        CSV (Comma Separated Variables) output for the user to import into a spreadsheet, and uses "Save...".  The generated
+			output can also be directly integrated into a web-based spreadsheet, and
+			uploaded asynchronously.</li>  
+		  </ul>
+	    </li>
+	    <li><p>User agents should provide a streamlined programmatic ability to send data from a file to a remote server that works more
+	           efficiently than form-based uploads today</p>
+		  <ul>
+		    <li>Example: A Video/Photo Upload App. User is able to select large files for upload, which can then be "chunk-transfered" to the server.</li>
+		  </ul>  
+	    </li>
+	    <li><p>User agents should provide an API exposed to script that exposes the features above.  The user is notified by UI anytime interaction with the file
+		   system takes place, giving the user full ability to cancel or abort the transaction.  The user is notified of any file selections, and can cancel these.
+		   No invocations to these APIs occur silently without user intervention. </p>
+	    </li>
+		  
+	  </ul>
+  </div>
+  
+  <div id='references' class='section'>
+    <h2>References</h2>
+
+      <div id='normative-references' class='section'>
+        <h3>Normative references</h3>
+	<dl class="bibliography">
+	<dt id="RFC2119">RFC2119</dt>
+	<dd><cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a></cite></dd>
+	<dt id="XHR2">XMLHttpRequest</dt>
+	<dd><cite><a href="http://www.w3.org/TR/XMLHttpRequest2/">XMLHttpRequest Level 2</a></cite></dd>
+	<dt id="HTML5">HTML5</dt>
+	<dd><cite><a href="http://dev.w3.org/html5/spec/Overview.html">HTML 5: A vocabulary and associated APIs for HTML and XHTML</a></cite></dd>
+        <dt id="ProgressEvents">ProgressEvents 1.0</dt>
+        <dd><cite><a href="http://www.w3.org/TR/progress-events">Progress Events 1.0</a></cite></dd>
+	<dt id="DataURL">RFC2397</dt>
+	<dd><cite><a href="http://www.ietf.org/rfc/rfc2397.txt">The "data" URL Scheme</a></cite></dd>
+	<dt id="FileUpload">File Upload State of the input element</dt>
+	<dd><cite><a href="http://dev.w3.org/html5/spec/Overview.html#file-upload-state">File Upload State of the HTML5 <code>input</code> Element</a></cite></dd>
+	<dt id="Workers">Web Workers</dt>
+	<dd><cite><a href="http://dev.w3.org/html5/workers/">Web Workers</a></cite></dd>
+	<dt id="DOM3Core">DOM 3 Core</dt>
+	<dd><cite><a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html">DOM 3 Core</a></cite></dd>
+        <dt id="DOM3Events">DOM 3 Events</dt>
+        <dd><cite><a href="http://www.w3.org/TR/DOM-Level-3-Events/">DOM 3 Events</a></cite></dd>
+	<dt id="DOMException">DOMException Extensions Defined in HTML5</dt>
+	<dd><cite><a href="http://dev.w3.org/html5/spec/Overview.html#exceptions">DOM 3 Core DOMException Extensions Defined in HTML5</a></cite></dd>
+	<dt id="Unicode">Unicode</dt>
+	<dd><cite><a href="http://www.unicode.org/versions/Unicode5.1.0/">The Unicode Standard, Version 5.1.0.</a></cite></dd>
+        <dt id="IANACHARSET">IANA Charsets</dt>
+        <dd><cite><a href="http://www.iana.org/assignments/character-sets">Official Names for Character Sets on the Internet</a></cite></dd>
+	<dt id="UUID">RFC4122</dt>
+	<dd><cite><a href="http://www.ietf.org/rfc/rfc4122.txt">A Universally Unique IDentifier (UUID) URN Namespace</a></cite></dd>
+	<dt id="HTTP">RFC2616</dt>
+	<dd><cite><a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html">Hypertext Transfer Protocol -- HTTP/1.1</a></cite></dd>
+	<dt id="ABNF">RFC5234</dt>
+	<dd><cite><a href="http://www.ietf.org/rfc/rfc5234.txt">Augmented BNF for Syntax Specifications: ABNF</a></cite></dd>
+	<dt id="RFC2046">RFC2046</dt>
+	<dd><cite><a href="http://www.ietf.org/rfc/rfc2046.txt">Multipurpose Internet Mail Extensions (MIME) Part Two: Media Extensions</a></cite></dd>
+	<dt id="RFC4648">RFC4648</dt>
+	<dd><cite><a href="http://tools.ietf.org/html/rfc4648">The Base16, Base32, and Base64 Data Encodings</a></cite></dd>
+	<dt id="RFC3986">RFC3986</dt>
+	<dd><cite><a href="http://www.ietf.org/rfc/rfc3986.txt">Uniform Resource Identifier (URI): Generic Syntax</a></cite></dd>
+	<dt id="RFC1738">RFC1738</dt>
+	<dd><cite><a href="http://tools.ietf.org/html/rfc1738">Uniform Resource Locators (URL)</a></cite></dd>
+	</dl>
+      </div>
+    </div>
+    </div>
+  </body>
+</html>
