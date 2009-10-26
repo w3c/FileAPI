@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>24 October 2009</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dt>Editor:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy;  <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>26 October 2009</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dt>Editor:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy;  <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
       <h2>Abstract</h2>
@@ -51,7 +51,7 @@
 
 
         </ul>
-        <p>Additionally, this specification defines objects to be used within threaded Web applications for the synchronous reading of files.</p>
+        <p>Additionally, this specification defines objects to be used within threaded web applications for the synchronous reading of files.</p>
   
   <p>The section on Requirements and Use Cases [<a href="#requirements">REQ</a>] covers the motivation behind this specification.</p>
     <p>
@@ -77,7 +77,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 24 October 2009 <b>Editor’s Draft</b> of the
+        This document is the 26 October 2009 <b>Editor’s Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -152,7 +152,7 @@
 
     <div id="toc">
       <h2>Table of Contents</h2>
-      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#terminology">3. Terminology and Algorithms</a></li><li><a href="#filelist">4. The FileList Sequence</a></li><li><a href="#blob">5. The Blob Interface</a><ul><li><a href="#attributes-blob">5.1. Attributes</a></li><li><a href="#methodsandparams-blob">5.2. Methods and Parameters</a></li></ul></li><li><a href="#file">6. The File Interface</a><ul><li><a href="#file-attrs">6.1. Attributes</a></li></ul></li><li><a href="#filereader-interface">7. The FileReader Interface</a><ul><li><a href="#filereader-task-source">7.1. The FileReader Task Source</a></li><li><a href="#filereaderConstrctr">7.2. Constructors</a></li><li><a href="#event-handler-attributes">7.3. Event Handler Attributes</a></li><li><a href="#filereader-state">7.4. FileReader States</a></li><li><a href="#reading-a-file">7.5. Reading a File</a><ul><li><a href="#MultipleReads">7.5.1. Multiple Reads</a></li><li><a href="#filedata-attr">7.5.2. The fileData attribute</a></li><li><a href="#readAsBinaryString">7.5.3. The readAsBinaryString() method</a></li><li><a href="#readAsDataURL">7.5.4. The readAsDataURL() method</a></li><li><a href="#readAsDataText">7.5.5. The readAsText() method</a></li><li><a href="#abort">7.5.6. The abort() method</a></li><li><a href="#blobAndFileParams">7.5.7. Blob and File Parameters</a></li><li><a href="#enctype">7.5.8. Determining Encoding</a></li><li><a href="#events">7.5.9. Events</a><ul><li><a href="#event-summary">7.5.9.1. Event Summary</a></li></ul></li></ul></li></ul></li><li><a href="#readingOnThreads">8. Reading on Threads</a><ul><li><a href="#FileReaderSync">8.1. The FileReaderSync Interface</a><ul><li><a href="#readAsBinaryStringSync">8.1.1. The readAsBinaryString method</a></li><li><a href="#readAsTextSync">8.1.2. The readAsText method</a></li><li><a href="#readAsDataURLSync">8.1.3. The readAsDataURL method</a></li></ul></li></ul></li><li><a href="#ErrorAndException">9. Errors and Exceptions</a><ul><li><a href="#FileErrorInterface">9.1. The FileError Interface</a></li><li><a href="#FileException">9.2. The FileException exception</a></li><li><a href="#ErrorDescriptions">9.3. Error Code Descriptions</a></li></ul></li><li><a href="#requirements">10. Requirements and Use Cases</a></li><li><a href="#references">11. References</a><ul><li><a href="#normative-references">11.1. Normative references</a></li></ul></li></ul></div>
+      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#terminology">3. Terminology and Algorithms</a></li><li><a href="#filelist">4. The FileList Sequence</a></li><li><a href="#blob">5. The Blob Interface</a><ul><li><a href="#attributes-blob">5.1. Attributes</a></li><li><a href="#methodsandparams-blob">5.2. Methods and Parameters</a></li></ul></li><li><a href="#file">6. The File Interface</a><ul><li><a href="#file-attrs">6.1. Attributes</a></li></ul></li><li><a href="#filereader-interface">7. The FileReader Interface</a><ul><li><a href="#filereader-task-source">7.1. The FileReader Task Source</a></li><li><a href="#filereaderConstrctr">7.2. Constructors</a></li><li><a href="#event-handler-attributes">7.3. Event Handler Attributes</a></li><li><a href="#filereader-state">7.4. FileReader States</a></li><li><a href="#reading-a-file">7.5. Reading a File</a><ul><li><a href="#MultipleReads">7.5.1. Multiple Reads</a></li><li><a href="#filedata-attr">7.5.2. The fileData attribute</a></li><li><a href="#readAsBinaryString">7.5.3. The readAsBinaryString() method</a></li><li><a href="#readAsDataURL">7.5.4. The readAsDataURL() method</a></li><li><a href="#readAsDataText">7.5.5. The readAsText() method</a></li><li><a href="#abort">7.5.6. The abort() method</a></li><li><a href="#blobAndFileParams">7.5.7. Blob and File Parameters</a></li><li><a href="#enctype">7.5.8. Determining Encoding</a></li><li><a href="#events">7.5.9. Events</a><ul><li><a href="#event-summary">7.5.9.1. Event Summary</a></li></ul></li></ul></li></ul></li><li><a href="#readingOnThreads">8. Reading on Threads</a><ul><li><a href="#FileReaderSync">8.1. The FileReaderSync Interface</a><ul><li><a href="#readAsBinaryStringSync">8.1.1. The readAsBinaryString method</a></li><li><a href="#readAsTextSync">8.1.2. The readAsText method</a></li><li><a href="#readAsDataURLSync">8.1.3. The readAsDataURL method</a></li></ul></li></ul></li><li><a href="#ErrorAndException">9. Errors and Exceptions</a><ul><li><a href="#FileErrorInterface">9.1. The FileError Interface</a></li><li><a href="#FileException">9.2. The FileException exception</a></li><li><a href="#ErrorDescriptions">9.3. Error Code Descriptions</a></li></ul></li><li><a href="#uri">10. A UUID URN for File reference</a><ul><li><a href="#origin-policy">10.1. Origin Policy for File URNs</a></li><li><a href="#lifetime">10.2. Lifetime Stipulation for File URNs</a></li><li><a href="#processing">10.3. Processing Model for File URNs</a><ul><li><a href="#200ok">10.3.1. 200 OK</a></li><li><a href="#403NotAllowd">10.3.2. 403 Not Allowed</a></li><li><a href="#404">10.3.3. 404 Not Found</a></li><li><a href="#500">10.3.4. 500 Internal Server Error</a></li></ul></li></ul></li><li><a href="#requirements">11. Requirements and Use Cases</a></li><li><a href="#references">12. References</a><ul><li><a href="#normative-references">12.1. Normative references</a></li></ul></li></ul></div>
     </div>
 
     <div id="sections">
@@ -162,16 +162,91 @@
       <p class="norm">This section is informative.</p>
 
       <p>
-      It is desirable for web applications to have the ability to manipulate as wide
+      Web applications should have the ability to manipulate as wide
       as possible a range of user input, including files that a user may wish to upload 
       to a remote server or manipulate inside a rich web application. This specification 
       defines the basic representations for files, lists of files, errors raised by access to files,
       and programmatic ways to read files.  The interfaces and API defined in this
-      specification can be used with other interfaces and APIs exposed to the web platform
-      (e.g. <a href="#XHR2" class="dfnref">XMLHttpRequest</a>).
+      specification can be used with other interfaces and APIs exposed to the web platform.
+      
     </p>
-    <div class="ednote"><div class="ednoteHeader">Editorial note</div><p>ToDo: Clean up sample code used to test M's patch, and include it here to flesh this section out more.</p></div>
-      </div>
+    <p>
+      File reads should happen asynchronously on the main thread, with an optional synchronous API used
+      within threaded web applications.  An asynchronous API for reading files prevents blocking and UI "freezing" on a user
+      agent's main thread.  This specification defines an asynchronous API based on an <em>event model</em> to read and access a file's
+      data.  Moreover,
+      this specification defines separate interfaces for <em>files</em> and the objects used to <em>read</em> a file's data.
+      While a <code>File</code> object provides a reference to a single
+    file that a user has selected from a file picker (typically spawned by the HTML <code>input</code> element), a <code>FileReader</code>
+    object provides asynchronous read methods to
+    access that file's data through event handler attributes and the firing of events.  The use of events and event handlers allows separate code blocks the ability
+    to monitor the <em>progress of the read</em> (which is useful for remote drives that appear to be local, but behave slower than local drives), error conditions that may arise,
+    and successful reading of a file.  An example will be illustrative.</p>
+    <div class="example"><div class="exampleHeader">Example</div>
+    <p>In the example below, different code blocks handle progress, error, and success conditions.</p>
+    <div class="block"><div class="blockTitleDiv"><span class="blockTitle">ECMAScript</span></div><div class="blockContent"><pre class="code"><code class="es-code">
+function startRead() {  
+  <span class="comment">// obtain input element through DOM</span> 
+  
+  var file = document.getElementById('file').files[0];
+  if(file){
+    getAsText(file);
+  }
+}
+
+function getAsText(readFile) {
+        
+  var reader = new FileReader();
+  
+  <span class="comment">// create some UI for progress monitoring</span>
+  var readProgress = document.createElement('div');
+  readProgress.className = 'read';
+  document.getElementById('monitors').appendChild(readProgress);
+  
+  <span class="comment">// For convenience add to reader</span>      
+  reader.log = readProgress;
+  
+  <span class="comment">// Read file into memory as UTF-16</span>      
+  reader.readAsText(readFile, "UTF-16");
+  
+  <span class="comment">// Handle progress, success, and errors</span>
+  reader.onprogress = updateProgress;
+  reader.onload = loaded;
+  reader.onerror = errorHandler;
+}
+
+function updateProgress(evt) {
+  if (evt.lengthComputable) {
+    <span class="comment">// evt.loaded and evt.total are ProgressEvent properties</span>
+    var loaded = (evt.loaded / evt.total);
+    if (loaded &lt; 1) {
+      <span class="comment">// Increase the prog bar length</span>
+      evt.target.log.style.width = (loaded * 200) + "px";
+    }
+  }
+}
+
+function loaded(evt) {  
+  <span class="comment">// Obtain the read file data</span>    
+  var fileString = evt.target.fileData;
+  <span class="comment">// Handle UTF-16 file dump</span>
+  if(utils.regexp.isChinese(fileString)) {
+    <span class="comment">//Chinese Characters + Name validation</span>
+  }
+  else {
+    <span class="comment">// run other charset test</span>
+  }
+  <span class="comment">// xhr.send(fileString)</span>     
+}
+
+function errorHandler(evt) {
+  if(evt.target.error.code == evt.target.error.NOT_READABLE_ERR) {
+    <span class="comment">// The file could not be read</span>
+  }
+}
+</code></pre></div></div>
+</div>
+</div>
 
       <div id="conformance" class="section">
         <h2>2. Conformance</h2>
@@ -235,7 +310,7 @@
     </code></pre></div></div>
     <div class="example"><div class="exampleHeader">Example</div>
     <p>
-      Sample usage typically involves DOM access to the input element (of type "file") within a form, and then accessing selected files.  
+      Sample usage typically involves DOM access to the <code>&lt;input type="file"&gt;</code> element within a form, and then accessing selected files.  
     </p>
     <div class="block"><div class="blockTitleDiv"><span class="blockTitle">ECMAScript</span></div><div class="blockContent"><pre class="code"><code class="es-code">
     <span class="comment">// uploadData is a form element</span>
@@ -251,7 +326,7 @@
     <div class="note"><div class="noteHeader">Note</div>
     The <code>HTMLInputElement</code> interface [<a href="#HTML5">HTML5</a>] has a readonly <code>FileList</code> attribute, which is what is
     being accessed in the above example.  Some conforming user agents support multiple file selections within HTML forms, in which case the
-    <code>FileList</code> object SHOULD make available all selected files.
+    <code>FileList</code> object MUST make available all selected files.
     </div>
     </div>
   <div id="blob" class="section">
@@ -1034,8 +1109,73 @@ the most appropriate code from the table below.</p>
 </p>
 </div>
   </div>
+<div id="uri" class="section">
+<h2>10. A UUID URN for File reference</h2>
+<p>
+<div class="ednote"><div class="ednoteHeader">Editorial note</div>
+<p>This section does not enjoy the full consensus of the WG.  In particular, some open questions remain:
+<ul><li>Will reusing the urn:uuid scheme described in RFC4122 [<a href="#RFC4122">RFC4122</a>] face origin-determination issues?
+</li><li>Are there further security caveats not cited sufficiently here?</li>
+<li>Is using a subset of HTTP response codes acceptable practice?</li></ul></p>
+</div>
+RFC4122 [<a href="#RFC4122">RFC4122</a>] describes a UUID URN namespace.  A <dfn id="dfn-fileURN">File URN</dfn> is a UUID URN described in
+RFC4122 [<a href="#RFC4122">RFC4122</a>] that is used to reference a <a href="#dfn-file"><code>File</code></a> object,
+subject to an <a href="#origin-policy-urn">origin policy</a>, a <a href="#lifetime-stipulation-urn">lifetime stipulation</a>, and a <a href="#processing-model-urn">processing model</a>.
+A valid <a href="#dfn-fileURN">File URN</a> takes the form urn:uuid:UUID where UUID matches the UUID production in Section 3 of RFC4122 [<a href="#RFC4122">RFC4122</a>], and is
+always a Version 1 UUID as described in Section 4.2.2 of RFC4122 [<a href="#RFC4122">RFC4122</a>].  Thus
+<code>urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6</code> is a valid <a href="#dfn-fileURN">File URN</a>.  
+</p>
+<div class="section" id="origin-policy">
+<h3>10.1. Origin Policy for File URNs</h3>
+<p>
+  The <dfn id="origin-policy-urn">origin</dfn> of <a href="#dfn-fileURN">File URN</a>s MUST be the origin of the script context that spawned the File object on which the urn attribute was called;
+  this is defined as the "first script" in HTML5 [<a href="#HTML5">HTML5</a>]. <a href="#dfn-fileURN">File URN</a> s MUST only be valid within this script context.
+  Retrieving them from within any other script context
+  results in a <code>403 Not Allowed</code> with an additional affiliated message that implementations MAY use (e.g. "Origin Violation"). [<a href="#processing-model-urn">
+  Processing Model for File URNs</a>]
+</p>
+</div>
+  <div id="lifetime" class="section">
+  <h3>10.2. Lifetime Stipulation for File URNs</h3>
+  <p>
+    User agents MUST ensure that the <dfn id="lifetime-stipulation-urn">lifetime</dfn> of <a href="#dfn-fileURN">File URN</a>s is the same as the lifetime of the <code>Document</code> [<a href="#HTML5">HTML5</a>] of the
+    origin script which spawned the <a href="#dfn-file"><code>File</code></a> object on which the <a href="#dfn-urn">urn</a> attribute was called.
+    When this <code>Document</code> is destroyed, implementations MUST treat requests for <a href="#dfn-fileURN">File URN</a>s created within this
+     <code>Document</code> as <code>404 Not Found</code>.[<a href="#processing-model-urn">Processing Model for <a href="#dfn-fileURN">File URN</a>s</a>]
+  </p>
+  </div>
+  <div id="processing" class="section">
+  <h3>10.3. Processing Model for File URNs</h3>
+  <p>The <dfn id="processing-model-urn">processing model</dfn> for <a href="#dfn-fileURN">File URN</a>s is that they MUST only support requests with
+  GET [<a href="#HTTP">HTTP</a>] and MUST only support a subset of responses [<a href="#HTTP">HTTP</a>], which are:</p>
+  <div id="200ok" class="section">
+  <h4>10.3.1. 200 OK</h4>
+
+<p>This response [<a href="#HTTP">HTTP</a>] MUST be used if the request has succeeded, namely the <a href="#dfn-fileURN">File URN</a>  has been requested with a
+GET, satisfies the <a href="#origin-policy-urn">origin requirement</a>, and satisfies the <a href="#lifetime-stipulation-urn">lifetime requirement.</a></p>
+  </div>
+<div id="403NotAllowd" class="section">
+<h4>10.3.2. 403 Not Allowed</h4>
+
+<p>This response [<a href="#HTTP">HTTP</a>] MUST be used if the request violates the <a href="#origin-policy-urn">origin requirement</a>.  Additionally, it MUST be used if
+the underlying file's permission structure has changed (thus preventing access from web content).  User agents MAY accompany this response with a message
+(e.g. "Origin Violation").</p>
+</div>
+<div class="section" id="404">
+<h4>10.3.3. 404 Not Found</h4>
+<p>This response [<a href="#HTTP">HTTP</a>] MUST be used if the request violates the <a href="#lifetime-stipulation-urn">lifetime</a> requirement (e.g. if a cached <a href="#dfn-fileURN">File URN</a>
+ persists after the specified lifetime of the URN has elapsed). Additionally, it MUST be used if the underlying file has moved.</p>
+</div>
+<div id="500" class="section">
+<h4>10.3.4. 500 Internal Server Error</h4>
+
+<p>This response [<a href="#HTTP">HTTP</a>] MAY be used as a generic error condition, including for security errors or access violations.  </p>
+</div>
+  </div>
+</div>
+    
   <div id="requirements" class="section">
-    <h2>10. Requirements and Use Cases</h2>
+    <h2>11. Requirements and Use Cases</h2>
       <p>This section covers what the requirements are for this API, as well as illustrates some use cases.  This version of the API does not satisfy all use cases;
 	   subsequent versions may elect to address these.</p>  
 	  <ul>
@@ -1079,10 +1219,10 @@ the most appropriate code from the table below.</p>
   </div>
   
   <div id="references" class="section">
-    <h2>11. References</h2>
+    <h2>12. References</h2>
 
       <div id="normative-references" class="section">
-        <h3>11.1. Normative references</h3>
+        <h3>12.1. Normative references</h3>
 	<dl class="bibliography">
 	<dt id="RFC2119">RFC2119</dt>
 	<dd><cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a></cite></dd>
