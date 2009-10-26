@@ -1202,10 +1202,18 @@ the underlying file's permission structure has changed (thus preventing access f
 		  
 	  </ul>
   </div>
-  
+   <div class="section">
+    <h2>Acknowledgements</h2>
+    
+    <p>
+      This specification was originally developed by the SVG Working Group. Many thanks to Mark Baker and Anne van Kesteren for their feedback.</p>
+    <p>Thanks to Robin Berjon for editing the original specification.</p>
+    <p>Special thanks to Jonas Sicking, Olli Pettay, Nikunj Mehta, Garrett Smith, Michael Nordman, Ian Hickson, Sam Weinig, Aaron Boodman, Julian Reschke</p>
+    <p>Thanks to the W3C WebApps WG, and to participants on the public-webapps@w3.org listserv</p>
+  </div>
   <div id='references' class='section'>
     <h2>References</h2>
-
+<div class="ednote"><p>ToDo: Add author names</p></div>
       <div id='normative-references' class='section'>
         <h3>Normative references</h3>
 	<dl class="bibliography">
@@ -1219,8 +1227,6 @@ the underlying file's permission structure has changed (thus preventing access f
         <dd><cite><a href="http://www.w3.org/TR/progress-events">Progress Events 1.0</a></cite></dd>
 	<dt id="DataURL">RFC2397</dt>
 	<dd><cite><a href="http://www.ietf.org/rfc/rfc2397.txt">The "data" URL Scheme</a></cite></dd>
-	<dt id="FileUpload">File Upload State of the input element</dt>
-	<dd><cite><a href="http://dev.w3.org/html5/spec/Overview.html#file-upload-state">File Upload State of the HTML5 <code>input</code> Element</a></cite></dd>
 	<dt id="Workers">Web Workers</dt>
 	<dd><cite><a href="http://dev.w3.org/html5/workers/">Web Workers</a></cite></dd>
 	<dt id="DOM3Core">DOM 3 Core</dt>
@@ -1230,28 +1236,36 @@ the underlying file's permission structure has changed (thus preventing access f
 	<dt id="DOMException">DOMException Extensions Defined in HTML5</dt>
 	<dd><cite><a href="http://dev.w3.org/html5/spec/Overview.html#exceptions">DOM 3 Core DOMException Extensions Defined in HTML5</a></cite></dd>
 	<dt id="Unicode">Unicode</dt>
-	<dd><cite><a href="http://www.unicode.org/versions/unicode5.1.0/">The Unicode Standard, Version 5.1.0.</a></cite></dd>
-        <dt id="IANACHARSET">IANA Charsets</dt>
-        <dd><cite><a href="http://www.iana.org/assignments/character-sets">Official Names for Character Sets on the Internet</a></cite></dd>
+	<dd><cite><a href="http://www.unicode.org/versions/unicode5.1.0/">The Unicode Standard, Version 5.1.0.</a></cite></dd>  
 	<dt id="UUID">RFC4122</dt>
-	<dd><cite><a href="http://www.ietf.org/rfc/rfc4122.txt">A Universally Unique IDentifier (UUID) URN Namespace</a></cite></dd>
+        <dd><cite><a href="http://www.ietf.org/rfc/rfc4122.txt">A Universally Unique IDentifier (UUID) URN Namespace</a></cite></dd>
 	<dt id="HTTP">RFC2616</dt>
 	<dd><cite><a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html">Hypertext Transfer Protocol -- HTTP/1.1</a></cite></dd>
-	<dt id="ABNF">RFC5234</dt>
-	<dd><cite><a href="http://www.ietf.org/rfc/rfc5234.txt">Augmented BNF for Syntax Specifications: ABNF</a></cite></dd>
 	<dt id="RFC2046">RFC2046</dt>
 	<dd><cite><a href="http://www.ietf.org/rfc/rfc2046.txt">Multipurpose Internet Mail Extensions (MIME) Part Two: Media Extensions</a></cite></dd>
-	<dt id="RFC4648">RFC4648</dt>
-	<dd><cite><a href="http://tools.ietf.org/html/rfc4648">The Base16, Base32, and Base64 Data Encodings</a></cite></dd>
 	<dt id="RFC3986">RFC3986</dt>
 	<dd><cite><a href="http://www.ietf.org/rfc/rfc3986.txt">Uniform Resource Identifier (URI): Generic Syntax</a></cite></dd>
 	<dt id="RFC1738">RFC1738</dt>
 	<dd><cite><a href="http://tools.ietf.org/html/rfc1738">Uniform Resource Locators (URL)</a></cite></dd>
-        <dt id="WebWorkers">Web Workers</dt>
-        <dd><cite><a href="http://www.w3.org/TR/workers/">Web Workers</a></cite></dd>
 	</dl>
       </div>
+    <div id="informative-references" class='section'>
+    <h3>Informative References</h3>
+    <dl>
+    <dt id="IANACHARSET">IANA Charsets</dt>
+    <dd><cite><a href="http://www.iana.org/assignments/character-sets">Official Names for Character Sets on the Internet</a></cite></dd>
+    <dt id="FileUpload">File Upload State of the input element</dt>
+    <dd><cite><a href="http://dev.w3.org/html5/spec/Overview.html#file-upload-state">File Upload State of the HTML5 <code>input</code> Element</a></cite></dd>
+    <dt id="ABNF">RFC5234</dt>
+    <dd><cite><a href="http://www.ietf.org/rfc/rfc5234.txt">Augmented BNF for Syntax Specifications: ABNF</a></cite></dd>
+    <dt id="RFC4648">RFC4648</dt>
+    <dd><cite><a href="http://tools.ietf.org/html/rfc4648">The Base16, Base32, and Base64 Data Encodings</a></cite></dd>
+    <dt id="Blob">Google Gears Blob API</dt>
+    <dd><cite><a href="http://code.google.com/apis/gears/api_blob.html">Google Gears Blob API</a></cite></dd>
+    </dl>
     </div>
+    </div>
+   
     </div>
   </body>
 </html>
