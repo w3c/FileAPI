@@ -331,7 +331,7 @@ function errorHandler(evt) {
       Blob <a href="#dfn-slice" title='slice'>slice</a>(in long long <a href="#dfn-start" class="dfnref" title='start'>start</a>,
                  in long long <a href="#dfn-length" class="dfnref" title='length'>length</a>); <span class='comment'>// raises DOMException</span>
     
-    }
+    };
     </x:codeblock>
     <div id='attributes-blob' class='section'>
     <h3>Attributes</h3>
@@ -1039,7 +1039,7 @@ Errors in the synchronous <a href="#read-method-sync">read methods</a> for Web W
   const unsigned short <a href="#dfn-NOT_READABLE_ERR">NOT_READABLE_ERR</a> = 24;
   const unsigned short <a href="#dfn-ENCODING_ERR">ENCODING_ERR</a> = 26;
  
-  attribute unsigned short <a href="#dfn-code-exception">code</a>;
+  unsigned short <a href="#dfn-code-exception">code</a>;
 };
 </x:codeblock>
 <p>The <dfn id="dfn-code-exception"><code>code</code></dfn> attribute MUST return one of the constants of the <a href="#dfn-FileException"><code>FileException</code></a>
