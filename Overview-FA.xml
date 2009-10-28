@@ -340,16 +340,16 @@ function errorHandler(evt) {
     <div id='methodsandparams-blob' class='section'>
     <h3>Methods and Parameters</h3>
     <dl><dt id='dfn-slice'>The <code>slice</code> method</dt>
-    <dd><p>Returns a new <a href="#dfn-Blob" class="dfnref">Blob</a> object between the ranges of bytes specified.
+    <dd><p>Returns a new <a href="#dfn-Blob" class="dfnref"><code>Blob</code></a> object between the ranges of bytes specified.
     The <dfn id='dfn-start'>start</dfn> parameter is a value for the start point of a <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call.
     The <dfn id="dfn-length">length</dfn> parameter is a value for the end point of a
     <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call as byte offsets from <code>start</code>.
     The <a href="#dfn-slice"><code>slice</code></a> method MUST <dfn id="clamp">clamp</dfn> on values of <a href="#dfn-size"><code>size</code></a> if index arithmetic exceeds the bounds of <a href="#dfn-size"><code>size</code></a>.
     In particular, this means that for a given slice call:
     <ul>
-      <li>If <a href="#dfn-start"><code>start</code></a> + <a href="#dfn-length"><code>length</code></a> > <a href="#dfn-size"><code>size</code></a> then a user agent MUST return a Blob object as if
+      <li>If <a href="#dfn-start"><code>start</code></a> + <a href="#dfn-length"><code>length</code></a> > <a href="#dfn-size"><code>size</code></a> then a user agent MUST return a <a href="#dfn-Blob"><code>Blob</code></a> object as if
       <a href="#dfn-slice"><code>slice</code></a>(<a href="#dfn-start"><code>start</code></a>, <a href="#dfn-size"><code>size</code></a>-<a href="#dfn-start"><code>start</code></a>) was called.  </li>
-      <li>If <a href="#dfn-start"><code>start</code></a> > <a href="#dfn-size"><code>size</code></a> then a user agent MUST return a Blob object of size 0</li>
+      <li>If <a href="#dfn-start"><code>start</code></a> > <a href="#dfn-size"><code>size</code></a> then a user agent MUST return a <a href="#dfn-Blob"><code>Blob</code></a> object of size 0</li>
     
     </ul>
       <div class="ednote"><p>The alternative is throwing a <code>DOMException</code> with <code>INDEX_SIZE_ERR</code></p></div>
