@@ -212,7 +212,7 @@ function updateProgress(evt) {
 
 function loaded(evt) {  
   <span class="comment">// Obtain the read file data</span>    
-  var fileString = evt.target.fileData;
+  var fileString = evt.target.result;
   <span class="comment">// Handle UTF-16 file dump</span>
   if(utils.regexp.isChinese(fileString)) {
     <span class="comment">//Chinese Characters + Name validation</span>
@@ -339,18 +339,20 @@ function errorHandler(evt) {
     </div>
     <div id='methodsandparams-blob' class='section'>
     <h3>Methods and Parameters</h3>
-    <dl><dt id='dfn-slice'>The <code>slice</code> method</dt><dd><p>Returns a new <a href="#dfn-Blob" class="dfnref">Blob</a> object between the ranges of bytes specified.
+    <dl><dt id='dfn-slice'>The <code>slice</code> method</dt>
+    <dd><p>Returns a new <a href="#dfn-Blob" class="dfnref">Blob</a> object between the ranges of bytes specified.
     The <dfn id='dfn-start'>start</dfn> parameter is a value for the start point of a <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call.
     The <dfn id="dfn-length">length</dfn> parameter is a value for the end point of a
     <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call as byte offsets from <code>start</code>.
-    The <a href="#dfn-slice" class="dfnref"><code>slice</code></a> method MUST raise an <code>INDEX_SIZE_ERR</code>
-    [<a href="#DOMException" class="dfnref">DOMException</a>] if called with range values that are out of bounds.  In particular:
+    The <a href="#dfn-slice"><code>slice</code></a> method MUST <dfn id="clamp">clamp</dfn> on values of <a href="#dfn-size"><code>size</code></a> if index arithmetic exceeds the bounds of <a href="#dfn-size"><code>size</code></a>.
+    In particular, this means that for a given slice call:
     <ul>
-    <li>If <a href="#dfn-start" class="dfnref"><code>start</code></a> + <a href="#dfn-length" class="dfnref"><code>length</code></a> > <a href="#dfn-size"><code>size</code></a>
-    then a user agent MUST raise an <code>INDEX_SIZE_ERR</code> [<a href="#DOMException">DOMException</a>].</li>
-    <li>If <a href="#dfn-start" class="dfnref"><code>start</code></a> > <a href="#dfn-size" class="dfnref"><code>size</code></a> then a user agent
-    MUST raise an <code>INDEX_SIZE_ERR</code> [<a href="#DOMException">DOMException</a>]</li>
+      <li>If <a href="#dfn-start"><code>start</code></a> + <a href="#dfn-length"><code>length</code></a> > <a href="#dfn-size"><code>size</code></a> then a user agent MUST return a Blob object as if
+      <a href="#dfn-slice"><code>slice</code></a>(<a href="#dfn-start"><code>start</code></a>, <a href="#dfn-size"><code>size</code></a>-<a href="#dfn-start"><code>start</code></a>) was called.  </li>
+      <li>If <a href="#dfn-start"><code>start</code></a> > <a href="#dfn-size"><code>size</code></a> then a user agent MUST return a Blob object of size 0</li>
+    
     </ul>
+      <div class="ednote"><p>The alternative is throwing a <code>DOMException</code> with <code>INDEX_SIZE_ERR</code></p></div>
     </p></dd></dl>
     </div>
   </div>
@@ -413,7 +415,7 @@ interface <dfn id="dfn-filereader">FileReader</dfn> {
   readonly attribute unsigned short <a class="dfnref" href="#dfn-readystate">readyState</a>;
 
   <span class="comment">// file data</span>
-  readonly attribute DOMString <a href="#dfn-fileData" class="dfnref">fileData</a>;
+  readonly attribute DOMString <a href="#dfn-result" class="dfnref">result</a>;
   
   readonly attribute <a href="#dfn-fileerror" class="dfnref">FileError</a> <a href="#dfn-error" class="dfnref">error</a>;
 
@@ -430,12 +432,6 @@ FileReader implements EventTarget;
   </x:codeblock>
 <div class='ednote'>
 <p>May need to use [Supplemental][NoInterfaceObject] interface implemented by WorkerUtils and Window.  May need normative language to link this spec. to the global object.</p>
-
-<p><code>readAsBinaryString</code> and <code>readAsText</code> take <code>Blob</code> objects as parameters in this specification, whereas <code>readAsDataURL</code> takes <code>File</code>
-objects (which inherit from <code>Blob</code>).  While it is possible that in future versions of this specification, these two <code>FileReader</code> read methods can
-be called on other objects that inherit from <code>Blob</code>, in this specification we only treat the case of <code>Blob</code> objects as <code>File</code> objects.
-Thus, error conditions are <code>FileErrors.</code>
-</p>
 </div>
 <div id='filereader-task-source' class='section'>
 <h3>The FileReader Task Source</h3>
@@ -539,37 +535,35 @@ is no longer reading a file.</p></dd>
 </p>
 </div>
 <div id='filedata-attr' class="section">
-<h4>The <code>fileData</code> attribute</h4>
-<p>On getting, the <dfn id="dfn-fileData"><code>fileData</code></dfn> attribute returns a file's data in string format, or <code>null</code>, 
+<h4>The <code>result</code> attribute</h4>
+<p>On getting, the <dfn id="dfn-result"><code>result</code></dfn> attribute returns a file's data in string format, or <code>null</code>, 
 depending on the <a href="#read-method" class="#dfnref">read method</a> that has been called on the <a href="#dfn-filereader" class="dfnref"><code>FileReader</code></a> object, and
 any errors that may have occurred.
 It can also return <em>partial file data</em>.
 <dfn id="partial-file-data">Partial file data</dfn> is the part of the file that has been read into memory <em>currently</em>
 during processing one of the two <a href="#read-method">read methods</a>,
 <a href="#dfn-readAsBinaryString" class="dfnref"><code>readAsBinaryString</code></a> and
-<a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a>.  The list below is normative for the <code>fileData</code> attribute:
+<a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a>.  The list below is normative for the <code>result</code> attribute:
 </p>
 <ul>
   <li><p>On getting, if the <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> is <code>INITIAL</code> (no read method has been called)
-  then the <code>fileData</code> attribute MUST return <code>null</code>.</p></li>
+  then the <code>result</code> attribute MUST return <code>null</code>.</p></li>
   <li><p>On getting, if an error in reading the file has occurred (using <em>any</em> <a href="#read-method"> read method</a>),
-  then the <code>fileData</code> attribute MUST return the <code>null</code>.</p></li>
+  then the <code>result</code> attribute MUST return the <code>null</code>.</p></li>
   <li><p>On getting, if the <a href="#dfn-readAsDataURL" class="#dfnref"><code>readAsDataURL</code></a> <a href="#read-method">read method</a> is
-  used, the <code>fileData</code> attribute MUST return a Data URL [<a href="#DataURL">DataURL</a>] encoding of the file's data.</p></li>
+  used, the <code>result</code> attribute MUST return a Data URL [<a href="#DataURL">DataURL</a>] encoding of the file's data.</p></li>
   <li><p>On getting, if the <a href="#dfn-readAsBinaryString" class="dfnref"><code>readAsBinaryString</code></a> <a href="#read-method">read method</a> is called
-  (and no error in reading the file has occurred), then the <code>fileData</code> attribute MUST return a string representing the file's data as a <dfn id="binary-string">binary string</dfn>, in which
-  every byte is represented by an integer in the range [0..255].  On getting, if <a href="#dfn-progress-event">progress</a> events are <a href="#queue-a-task">queued for
-  dispatch</a> while processing the
-  <a href="#dfn-readAsBinaryString"><code>readAsBinaryString</code></a> <a href="read-method">read method</a>, the <code>fileData</code>
+  (and no error in reading the file has occurred), then the <code>result</code> attribute MUST return a string representing the file's data as a <dfn id="binary-string">binary string</dfn>, in which
+  every byte is represented by an integer in the range [0..255].  On getting, <em>while processing</em> the
+  <a href="#dfn-readAsBinaryString"><code>readAsBinaryString</code></a> <a href="read-method">read method</a>, the <code>result</code>
   attribute SHOULD return <a href="#partial-file-data">partial file data</a> in <a href="#binary-string">binary string</a> format.</p></li>
   <li><p>On getting, if the <a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a> <a href="#read-method">read method</a> is called
   (and no error in reading the file has occurred),
-  then the <code>fileData</code> attribute MUST return a string representing the file's data as a text string, and SHOULD decode the string in memory in the format specified
-  by the <a href="#encoding-determination">encoding determination</a>.  On getting, if <a href="#dfn-progress-event">progress</a> events
-  are <a href="#queue-a-task">queued for dispatch</a> while processing the
+  then the <code>result</code> attribute MUST return a string representing the file's data as a text string, and SHOULD decode the string in memory in the format specified
+  by the <a href="#encoding-determination">encoding determination</a>.  On getting, <em>while processing</em> the
   <a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a> <a href="#read-method">read method</a>, this attibute SHOULD return
   <a href="#partial-file-data">partial file data</a> in the format specified by
-  the <a href="#encoding-determination">encoding determination</a>).
+  the <a href="#encoding-determination">encoding determination</a>.
   </p></li>
 </ul>
 </div>
@@ -581,9 +575,9 @@ When the <dfn id="dfn-readAsBinaryString"><code>readAsBinaryString(fileBlob)</co
 <ol>
   <li><p>Set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-initial" class="dfnref"><code>INITIAL</code></a>
   and set
-  <a href="#dfn-fileData"><code>fileData</code></a> to <code>null</code>.</p></li>
+  <a href="#dfn-result"><code>result</code></a> to <code>null</code>.</p></li>
   <li><p>If an <a href="#file-error-read">error occurs during file read</a>, set <a href="#dfn-readystate"><code>readyState</code></a> to
-  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-fileData"><code>fileData</code></a> to <code>null</code>. Proceed to the error steps below.</p>
+  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
   <ol>
     <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called
     <a href="#dfn-loadend" class="dfnref"><code>loadend</code></a>. </p></li>
@@ -602,14 +596,14 @@ When the <dfn id="dfn-readAsBinaryString"><code>readAsBinaryString(fileBlob)</co
   <li><p><a href="#queue-a-task">Queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
   <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  As the bytes from the <a href="#dfn-fileBlob"><code>fileBlob</code></a> argument are read,
   user agents SHOULD ensure that on getting,
-  the <a href="#dfn-fileData"><code>fileData</code></a> attribute returns <a href="#partial-file-data">partial file data</a> representing the number of bytes currently <code>loaded</code>
+  the <a href="#dfn-result"><code>result</code></a> attribute returns <a href="#partial-file-data">partial file data</a> representing the number of bytes currently <code>loaded</code>
   (as a fraction of the <code>total</code>), as a <a href="#binary-string">binary string</a>.
   <div class="note"><p>Both <code>loaded</code> and <code>total</code> are attributes on the affiliated <a href="#dfn-progress-event">progress</a> event [<a href="#ProgressEvents">ProgressEvents</a>]</p></div>.
   </p></li>
   <li><p>When the file has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
-  <li><p>Set the <a href="#dfn-fileData" class="dfnref"><code>fileData</code></a> attribute to be <a href="#dfn-fileBlob"><code>fileBlob</code></a>'s data content
+  <li><p>Set the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute to be <a href="#dfn-fileBlob"><code>fileBlob</code></a>'s data content
   represented as a <a href="#binary-string">binary string</a>;
-  on getting, the <a href="#dfn-fileData" class="dfnref"><code>fileData</code></a> attribute returns the (complete) data of <a href="#dfn-fileBlob"><code>fileBlob</code></a>
+  on getting, the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute returns the (complete) data of <a href="#dfn-fileBlob"><code>fileBlob</code></a>
   as a <a href="#binary-string">binary string</a>.</p></li>
   <li><p>Terminate this overall set of steps.</p></li>
 </ol>
@@ -619,11 +613,11 @@ When the <dfn id="dfn-readAsBinaryString"><code>readAsBinaryString(fileBlob)</co
 <p>When the <dfn id="dfn-readAsDataURL"><code>readAsDataURL(file)</code></dfn> method is called, the user agent MUST run the steps below (unless otherwise indicated).</p>
 <ol>
   <li><p>Set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-initial" class="dfnref"><code>INITIAL</code></a> and set
-  <a href="#dfn-fileData"><code>fileData</code></a> to <code>null</code>.</p></li>
+  <a href="#dfn-result"><code>result</code></a> to <code>null</code>.</p></li>
   <li><p>If an <a href="#file-error-read">error occurs during file read</a>, OR if a user agent's URL length limitations prevent returning data as a Data URL
   [<a href="#DataURL">DataURL</a>], 
   set <a href="#dfn-readystate"><code>readyState</code></a> to
-  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-fileData"><code>fileData</code></a> to <code>null</code>. Proceed to the error steps below.</p>
+  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
   <ol>
     <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called
     <a href="#dfn-loadend" class="dfnref"><code>loadend</code></a>. </p></li>
@@ -640,9 +634,9 @@ When the <dfn id="dfn-readAsBinaryString"><code>readAsBinaryString(fileBlob)</co
   <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  
   </p></li>
   <li><p>When the file has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
-  <li><p>Set the <a href="#dfn-fileData" class="dfnref"><code>fileData</code></a> attribute to be <a href="#dfn-file-arg"><code>file</code></a>'s data content
+  <li><p>Set the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute to be <a href="#dfn-file-arg"><code>file</code></a>'s data content
   represented as a Data URL [<a href="#DataURL">DataURL</a>];
-  on getting, the <a href="#dfn-fileData" class="dfnref"><code>fileData</code></a> attribute returns the (complete) data of <a href="#dfn-file-arg"><code>file</code></a> as a
+  on getting, the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute returns the (complete) data of <a href="#dfn-file-arg"><code>file</code></a> as a
   Data URL [<a href="#DataURL">DataURL</a>]</p></li>
   <li><p>Terminate this overall set of steps.</p></li>
 </ol>
@@ -656,10 +650,10 @@ the user agent MUST run the steps below (unless otherwise indicated).
 <ol>
   <li><p>Set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-initial" class="dfnref"><code>INITIAL</code></a>
   and set
-  <a href="#dfn-fileData"><code>fileData</code></a> to <code>null</code>.</p></li>
+  <a href="#dfn-result"><code>result</code></a> to <code>null</code>.</p></li>
   <li><p>If an <a href="#file-error-read">error occurs during file read</a>, 
   set <a href="#dfn-readystate"><code>readyState</code></a> to
-  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-fileData"><code>fileData</code></a> to <code>null</code>. Proceed to the error steps below.</p>
+  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
   <ol>
     <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called
     <a href="#dfn-loadend" class="dfnref"><code>loadend</code></a>. </p></li>
@@ -676,14 +670,14 @@ the user agent MUST run the steps below (unless otherwise indicated).
   <li><p><a href="#queue-a-task">Queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
   <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  As the bytes from the <a href="#dfn-fileBlob"><code>fileBlob</code></a> argument are read,
   user agents SHOULD ensure that on getting,
-  the <a href="#dfn-fileData"><code>fileData</code></a> attribute returns <a href="#partial-file-data">partial file data</a> representing the number of bytes currently <code>loaded</code>
+  the <a href="#dfn-result"><code>result</code></a> attribute returns <a href="#partial-file-data">partial file data</a> representing the number of bytes currently <code>loaded</code>
   (as a fraction of the <code>total</code>), decoded in memory according to the <a href="#encoding-determination">encoding determination</a>.
   <div class="note"><p>Both <code>loaded</code> and <code>total</code> are attributes on the affiliated <a href="#dfn-progress-event">progress</a> event [<a href="#ProgressEvents">ProgressEvents</a>]</p></div>.
   </p></li>
   <li><p>When the file has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
-  <li><p>Set the <a href="#dfn-fileData" class="dfnref"><code>fileData</code></a> attribute to be <a href="#dfn-fileBlob"><code>fileBlob</code></a>'s data content
+  <li><p>Set the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute to be <a href="#dfn-fileBlob"><code>fileBlob</code></a>'s data content
   represented as a string in a format determined by the <a href="#encoding-determination">encoding determination</a>;
-  on getting, the <a href="#dfn-fileData" class="dfnref"><code>fileData</code></a> attribute returns the (complete) data of <a href="#dfn-fileBlob"><code>fileBlob</code></a>
+  on getting, the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute returns the (complete) data of <a href="#dfn-fileBlob"><code>fileBlob</code></a>
   as a string, decoded in memory according to the <a href="#encoding-determination">encoding determination</a>.</p></li>
   <li><p>Terminate this overall set of steps.
   <div class="ednote">Issue: if it is determined that the <a href="#dfn-mediaType"><code>mediaType</code></a> attribute is one of <code>text/html</code>, <code>text/xml</code>,
@@ -697,7 +691,7 @@ the user agent MUST run the steps below (unless otherwise indicated).
 <p>
   When the <dfn id="dfn-abort"><code>abort()</code></dfn> method is called, the user agent MUST run the steps below:
   <ol>
-  <li><p>Set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a> and <a href="#dfn-fileData"><code>fileData</code></a>
+  <li><p>Set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a> and <a href="#dfn-result"><code>result</code></a>
   to <code>null</code>.</p></li>
   <li><p>Terminate any steps while processing a <a href="#read-methods">read method</a>.  For any <a href="#dfn-progress-event"><code>progress</code></a>
   event <code>e</code>that is 
@@ -797,7 +791,7 @@ or the user agent cannot decode the <a href="#dfn-fileBlob"><code>fileBlob</code
    </p></li><li>
 
     <p>Return the result of decoding the <a href="#dfn-fileBlob"><code>fileBlob</code></a> using
-     <var>charset</var>; on getting, the <a href="#dfn-fileData"><code>fileData</code></a> attribute of the <a href="#dfn-filereader"><code>FileReader</code></a>
+     <var>charset</var>; on getting, the <a href="#dfn-result"><code>result</code></a> attribute of the <a href="#dfn-filereader"><code>FileReader</code></a>
      object returns a string in <var>charset</var> format.  The synchronous
      <a href="#dfn-readAsTextSync"><code>readAsText</code></a> method of the <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object returns a string in <var>charset</var> format.
      Replace bytes or sequences of bytes that are not
@@ -817,13 +811,11 @@ read into memory, whichever is least frequent.</p></li>
 <li><p>When the data from the <a href="#dfn-file-arg"><code>file</code></a> or <a href="#dfn-fileBlob"><code>fileBlob</code></a>
 has been completely read into memory, <a href="#queue-a-task">queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called
 <a href="#dfn-load-event"><code>load</code></a></p></li>
+<li><p>When the data from the <a href="#dfn-file-arg"><code>file</code></a> or <a href="#dfn-fileBlob"><code>fileBlob</code></a>
+has been completely read into memory, <a href="#queue-a-task">queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called
+<a href="#dfn-loadend-event"><code>loadend</code></a></p></li>
 </ol>
-<div class="ednote">
-<p>Unlike XHR2, this specification does not say:</p>
-<p>3. When the data from the <a href="#dfn-file-arg"><code>file</code></a> or <a href="#dfn-fileBlob"><code>fileBlob</code></a> has been read into memory,
-<a href="#queue-a-task">queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called
-<a href="#dfn-loadend-event"><code>loadend</code></a></p>
-</div>
+
 </p>
 <p>
   When this specification says to <dfn id="dispatch-a-progress-event">dispatch a progress event</dfn> <em>called e</em> (for some
@@ -894,10 +886,9 @@ has been completely read into memory, <a href="#queue-a-task">queue a task</a> t
 
      </td><td><code>ProgressEvent</code>
 
-     </td><td>When the read has completed in failure (either due to  <a href="#file-error-read">error</a> or by invoking the
-      <code><a href="#dfn-abort">abort()</a></code> method .
+     </td><td>When the request has completed (either in success or failure). 
   </td></tr></tbody></table>
-<div class="ednote"><p>Issue: The use of <code>loadend</code> uniquely for errors and fail conditions differs from XHR2</p></div>
+
   </div>
 </div>
 </div>
@@ -993,8 +984,7 @@ by the underlying filesystem; attempts to read from them may be considered a sec
 make obtaining large files encoded as Data URLs impossible to return [<a href="#DataURL">DataURL</a>].  See <a href="#dfn-ENCODING_ERR"><code>ENCODING_ERR</code></a></p></li>
 <li><p>During the reading of a file, the Web application may itself wish to abort (see <a href="#dfn-abort"><code>abort()</code></a>) the call to an asynchronous read method. See
 <a href="#dfn-ABORT_ERR"><code>ABORT_ERR</code></a>
-<div class="ednote"><p>Issue: direct access to <code>fileData</code> (e.g. <code>reader.fileData</code>) could cause a call to <code>abort()</code> pending WG resolution.
-Furthermore, multiple reads may result in <code>abort()</code> being called on previous asynchronous <a href="#read-methods">read methods</a>, pending WG resolution.</p></div></p></li>
+</p></li>
     
     </ul>
   </p>
@@ -1097,7 +1087,7 @@ the most appropriate code from the table below.</p>
 <p>This section does not enjoy the full consensus of the WG.  In particular, some open questions remain:
 <ul><li>Will reusing the urn:uuid scheme described in RFC4122 [<a href="#RFC4122">RFC4122</a>] face origin-determination issues?
 </li><li>Are there further security caveats not cited sufficiently here?</li>
-<li>Is using a subset of HTTP response codes acceptable practice?</li></ul></p>
+<li>Is using a subset of HTTP response codes acceptable practice, or should we forgo response codes in this specification?</li></ul></p>
 </div>
 RFC4122 [<a href="#RFC4122">RFC4122</a>] describes a UUID URN namespace.  A <dfn id="dfn-fileURN">File URN</dfn> is a UUID URN described in
 RFC4122 [<a href="#RFC4122">RFC4122</a>] that is used to reference a <a href="#dfn-file"><code>File</code></a> object,
