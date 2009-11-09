@@ -693,15 +693,13 @@ the user agent MUST run the steps below (unless otherwise indicated).
   <ol>
   <li><p>Set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a> and <a href="#dfn-result"><code>result</code></a>
   to <code>null</code>.</p></li>
-  <li><p>Terminate any steps while processing a <a href="#read-methods">read method</a>.  For any <a href="#dfn-progress-event"><code>progress</code></a>
-  event <code>e</code>that is 
-  <a href="#dispatch-a-progress-event">being dispatched</a> while processing a <a href="#read-methods">read method</a>, call
-  <code>e.stopImmediatePropagation()</code> [<a href="#DOM3Events">DOM3Events</a>] </p></li>
+  <li><p>Terminate any steps while processing a <a href="#read-methods">read method</a>.   </p></li>
   <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called <a href="#dfn-error-event"><code>error</code></a>.  Set the <code>
     error</code> attribute to a <a href="#dfn-fileerror"><code>FileError</code></a> object with the appropriate <code>code</code>(in this case, <code>ABORT_ERR</code>;
     see <a href="#file-error-read">error conditions</a>). </p></li>
   <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called <a href="#dfn-abort-event"><code>abort</code></a></p></li>
   <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a></p></li>
+  <li><p>Stop dispatching any further progress events.</p></li>
   </ol>
 </p>
 </div>
@@ -823,7 +821,7 @@ has been completely read into memory, <a href="#queue-a-task">queue a task</a> t
   the following list MUST be followed:
   <ul>
   <li><p>The progress event <code>e</code> does not bubble.  <code>e.bubbles</code> MUST be false [<a href="#DOM3Events">DOM3Events</a>]</p></li>
-  <li><p>The progress event <code>e</code> is cancelable. <code>e.cancelable</code> MUST be true [<a href="#DOM3Events">DOM3Events</a>]</p></li>
+  <li><p>The progress event <code>e</code> is NOT cancelable. <code>e.cancelable</code> MUST be false [<a href="#DOM3Events">DOM3Events</a>]</p></li>
   <li><p>The progress event <code>e</code> is dispatched on the <a href="#dfn-filereader" class="dfnref"><code>FileReader</code></a> object
   (which is the <a href="#task-source">task source</a> in this specification, and the <code>EventTarget</code>).  User agents MUST call
   <code>reader.dispatchEvent(e)</code> [<a href="#DOM3Events">DOM3Events</a>]</p></li>
