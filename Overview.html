@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>28 October 2009</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dt>Editor:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy;  <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>9 November 2009</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Editor:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2009 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
       <h2>Abstract</h2>
@@ -65,7 +65,7 @@
       These kinds of behaviors are defined in the appropriate affiliated specifications.
     </p>
 
-      <div class="ednote"><div class="ednoteHeader">Editorial note</div><p>This is revision $Id$.</p><p>There are 9 further editorial notes in the document.</p></div>
+      <div class="ednote"><div class="ednoteHeader">Editorial note</div><p>This is revision $Id$.</p><p>There are 10 further editorial notes in the document.</p></div>
     </div>
 
     <div class="section">
@@ -77,7 +77,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 28 October 2009 <b>Editor’s Draft</b> of the
+        This document is the 9 November 2009 <b>Editor’s Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -103,13 +103,6 @@
       technical reports index</a> at http://www.w3.org/TR/.</em>
       </p>
 
-    
-    <p>
-      This document is an Editor's Draft version only. It is <strong>not an official publication</strong> of
-      the <acronym title="World Wide Web Consortium">W3C</acronym>, and there is no consensus yet on some of the details
-      of this specification. The authors of this document are the members of the <acronym title="World Wide Web Consortium">W3C</acronym>
-      <a href="http://www.w3.org/2008/webapps">Web Applications</a> Working Group.
-    </p>
     <p>
       This document is produced by the <a href="http://www.w3.org/2008/webapps">Web <acronym title="Application Programming Interface">Applications</acronym>
       <acronym title="Working Group">WG</acronym></a> in the <acronym title="World Wide Web Consortium">W3C</acronym>
@@ -152,7 +145,7 @@
 
     <div id="toc">
       <h2>Table of Contents</h2>
-      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#terminology">3. Terminology and Algorithms</a></li><li><a href="#filelist">4. The FileList Sequence</a></li><li><a href="#blob">5. The Blob Interface</a><ul><li><a href="#attributes-blob">5.1. Attributes</a></li><li><a href="#methodsandparams-blob">5.2. Methods and Parameters</a></li></ul></li><li><a href="#file">6. The File Interface</a><ul><li><a href="#file-attrs">6.1. Attributes</a></li></ul></li><li><a href="#filereader-interface">7. The FileReader Interface</a><ul><li><a href="#filereader-task-source">7.1. The FileReader Task Source</a></li><li><a href="#filereaderConstrctr">7.2. Constructors</a></li><li><a href="#event-handler-attributes">7.3. Event Handler Attributes</a></li><li><a href="#filereader-state">7.4. FileReader States</a></li><li><a href="#reading-a-file">7.5. Reading a File</a><ul><li><a href="#MultipleReads">7.5.1. Multiple Reads</a></li><li><a href="#filedata-attr">7.5.2. The result attribute</a></li><li><a href="#readAsBinaryString">7.5.3. The readAsBinaryString() method</a></li><li><a href="#readAsDataURL">7.5.4. The readAsDataURL() method</a></li><li><a href="#readAsDataText">7.5.5. The readAsText() method</a></li><li><a href="#abort">7.5.6. The abort() method</a></li><li><a href="#blobAndFileParams">7.5.7. Blob and File Parameters</a></li><li><a href="#enctype">7.5.8. Determining Encoding</a></li><li><a href="#events">7.5.9. Events</a><ul><li><a href="#event-summary">7.5.9.1. Event Summary</a></li></ul></li></ul></li></ul></li><li><a href="#readingOnThreads">8. Reading on Threads</a><ul><li><a href="#FileReaderSync">8.1. The FileReaderSync Interface</a><ul><li><a href="#readAsBinaryStringSync">8.1.1. The readAsBinaryString method</a></li><li><a href="#readAsTextSync">8.1.2. The readAsText method</a></li><li><a href="#readAsDataURLSync">8.1.3. The readAsDataURL method</a></li></ul></li></ul></li><li><a href="#ErrorAndException">9. Errors and Exceptions</a><ul><li><a href="#FileErrorInterface">9.1. The FileError Interface</a></li><li><a href="#FileException">9.2. The FileException exception</a></li><li><a href="#ErrorDescriptions">9.3. Error Code Descriptions</a></li></ul></li><li><a href="#uri">10. A UUID URN for File reference</a><ul><li><a href="#origin-policy">10.1. Origin Policy for File URNs</a></li><li><a href="#lifetime">10.2. Lifetime Stipulation for File URNs</a></li><li><a href="#processing">10.3. Processing Model for File URNs</a><ul><li><a href="#200ok">10.3.1. 200 OK</a></li><li><a href="#403NotAllowd">10.3.2. 403 Not Allowed</a></li><li><a href="#404">10.3.3. 404 Not Found</a></li><li><a href="#500">10.3.4. 500 Internal Server Error</a></li></ul></li></ul></li><li><a href="#requirements">11. Requirements and Use Cases</a></li><li><a href="#id28776">12. Acknowledgements</a></li><li><a href="#references">13. References</a><ul><li><a href="#normative-references">13.1. Normative references</a></li><li><a href="#informative-references">13.2. Informative References</a></li></ul></li></ul></div>
+      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#terminology">3. Terminology and Algorithms</a></li><li><a href="#filelist">4. The FileList Sequence</a></li><li><a href="#blob">5. The Blob Interface</a><ul><li><a href="#attributes-blob">5.1. Attributes</a></li><li><a href="#methodsandparams-blob">5.2. Methods and Parameters</a></li></ul></li><li><a href="#file">6. The File Interface</a><ul><li><a href="#file-attrs">6.1. Attributes</a></li></ul></li><li><a href="#filereader-interface">7. The FileReader Interface</a><ul><li><a href="#filereader-task-source">7.1. The FileReader Task Source</a></li><li><a href="#filereaderConstrctr">7.2. Constructors</a></li><li><a href="#event-handler-attributes">7.3. Event Handler Attributes</a></li><li><a href="#filereader-state">7.4. FileReader States</a></li><li><a href="#reading-a-file">7.5. Reading a File</a><ul><li><a href="#MultipleReads">7.5.1. Multiple Reads</a></li><li><a href="#filedata-attr">7.5.2. The result attribute</a></li><li><a href="#readAsBinaryString">7.5.3. The readAsBinaryString() method</a></li><li><a href="#readAsDataURL">7.5.4. The readAsDataURL() method</a></li><li><a href="#readAsDataText">7.5.5. The readAsText() method</a></li><li><a href="#abort">7.5.6. The abort() method</a></li><li><a href="#blobAndFileParams">7.5.7. Blob and File Parameters</a></li><li><a href="#enctype">7.5.8. Determining Encoding</a></li><li><a href="#events">7.5.9. Events</a><ul><li><a href="#event-summary">7.5.9.1. Event Summary</a></li></ul></li></ul></li></ul></li><li><a href="#readingOnThreads">8. Reading on Threads</a><ul><li><a href="#FileReaderSync">8.1. The FileReaderSync Interface</a><ul><li><a href="#readAsBinaryStringSync">8.1.1. The readAsBinaryString method</a></li><li><a href="#readAsTextSync">8.1.2. The readAsText method</a></li><li><a href="#readAsDataURLSync">8.1.3. The readAsDataURL method</a></li></ul></li></ul></li><li><a href="#ErrorAndException">9. Errors and Exceptions</a><ul><li><a href="#FileErrorInterface">9.1. The FileError Interface</a></li><li><a href="#FileException">9.2. The FileException exception</a></li><li><a href="#ErrorDescriptions">9.3. Error Code Descriptions</a></li></ul></li><li><a href="#uri">10. A UUID URN for File reference</a><ul><li><a href="#origin-policy">10.1. Origin Policy for File URNs</a></li><li><a href="#lifetime">10.2. Lifetime Stipulation for File URNs</a></li><li><a href="#processing">10.3. Processing Model for File URNs</a><ul><li><a href="#200ok">10.3.1. 200 OK</a></li><li><a href="#403NotAllowd">10.3.2. 403 Not Allowed</a></li><li><a href="#404">10.3.3. 404 Not Found</a></li><li><a href="#500">10.3.4. 500 Internal Server Error</a></li></ul></li></ul></li><li><a href="#security-discussion">11. Security Considerations</a></li><li><a href="#requirements">12. Requirements and Use Cases</a></li><li><a href="#id28884">13. Acknowledgements</a></li><li><a href="#references">14. References</a><ul><li><a href="#normative-references">14.1. Normative references</a></li><li><a href="#informative-references">14.2. Informative References</a></li></ul></li></ul></div>
     </div>
 
     <div id="sections">
@@ -198,14 +191,6 @@ function getAsText(readFile) {
         
   var reader = new FileReader();
   
-  <span class="comment">// create some UI for progress monitoring</span>
-  var readProgress = document.createElement('div');
-  readProgress.className = 'read';
-  document.getElementById('monitors').appendChild(readProgress);
-  
-  <span class="comment">// For convenience add to reader</span>      
-  reader.log = readProgress;
-  
   <span class="comment">// Read file into memory as UTF-16</span>      
   reader.readAsText(readFile, "UTF-16");
   
@@ -221,7 +206,7 @@ function updateProgress(evt) {
     var loaded = (evt.loaded / evt.total);
     if (loaded &lt; 1) {
       <span class="comment">// Increase the prog bar length</span>
-      evt.target.log.style.width = (loaded * 200) + "px";
+      <span class="comment">// style.width = (loaded * 200) + "px";</span>
     }
   }
 }
@@ -391,9 +376,9 @@ function errorHandler(evt) {
   <p>
   <dl>
     <dt id="dfn-name"><code>name</code></dt>
-    <dd><p>The name of the file as a UTF8-encoded string. There are numerous file name variations on different systems; this is merely the name of the file, without path information.</p></dd>
+    <dd><p>The name of the file. There are numerous file name variations on different systems; this is merely the name of the file, without path information.</p></dd>
     <dt id="dfn-mediatype"><code>mediaType</code></dt>
-    <dd><p>The ASCII-encoded string representing the media type of the file, expressed as an RFC2046 MIME type [<a href="#RFC2046">RFC2046</a>]. User agents SHOULD return the MIME type of the file,
+    <dd><p>The ASCII-encoded string in lower case representing the media type of the file, expressed as an RFC2046 MIME type [<a href="#RFC2046">RFC2046</a>]. User agents SHOULD return the MIME type of the file,
     if it is known. If implementations cannot determine the media type of the file, they MUST return <code>null</code>.  A string is a valid MIME type if it matches the <code>media-type</code>
     token defined in section 3.7 "Media Types" of RFC 2616 [<a href="#HTTP">HTTP</a>]. </p></dd>
     <dt id="dfn-urn"><code>urn</code></dt>
@@ -423,8 +408,8 @@ interface <dfn id="dfn-filereader">FileReader</dfn> {
   void <a href="#dfn-abort" class="dfnref">abort</a>();
 
   <span class="comment">// states</span>
-  const unsigned short <a href="#dfn-initial" class="dfnref">INITIAL</a> = 0;
-  const unsigned short <a href="#dfn-loading" class="dfnref">LOADING</a> = 1;
+  const unsigned short <a href="#dfn-empty" class="dfnref">EMPTY</a> = 0;
+  const unsigned short <a href="#dfn-reading" class="dfnref">READING</a> = 1;
   const unsigned short <a href="#dfn-done" class="dfnref">DONE</a> = 2;
   
   
@@ -519,9 +504,9 @@ The following are the <a href="#event-handler-attributes">event
 <dfn id="dfn-readystate"><code>readyState</code></dfn> attribute, on getting,
 MUST return the current state, which MUST be one of the following values:</p>
 <dl>
- <dt><dfn id="dfn-initial"><code>INITIAL</code> (numeric value 0)</dfn></dt>
+ <dt><dfn id="dfn-empty"><code>EMPTY</code> (numeric value 0)</dfn></dt>
  <dd><p>The object has been constructed, and there are no pending reads.</p></dd>
- <dt><dfn id="dfn-loading"><code>LOADING</code> (numeric value 1)</dfn></dt>
+ <dt><dfn id="dfn-reading"><code>READING</code> (numeric value 1)</dfn></dt>
  <dd><p>A file is being read.  One of the <a href="#read-methods">read methods</a> is being processed.</p></dd>
  <dt><dfn id="dfn-done"><code>DONE</code> (numeric value 2)</dfn></dt>
  <dd><p>The entire file has been read into memory, or a <a href="#file-error-read">file error occurred during read</a>, or the read was
@@ -561,7 +546,7 @@ during processing one of the two <a href="#read-method">read methods</a>,
 <a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a>.  The list below is normative for the <code>result</code> attribute:
 </p>
 <ul>
-  <li><p>On getting, if the <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> is <code>INITIAL</code> (no read method has been called)
+  <li><p>On getting, if the <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> is <code>EMPTY</code> (no read method has been called)
   then the <code>result</code> attribute MUST return <code>null</code>.</p></li>
   <li><p>On getting, if an error in reading the file has occurred (using <em>any</em> <a href="#read-method"> read method</a>),
   then the <code>result</code> attribute MUST return the <code>null</code>.</p></li>
@@ -588,7 +573,7 @@ during processing one of the two <a href="#read-method">read methods</a>,
 When the <dfn id="dfn-readAsBinaryString"><code>readAsBinaryString(fileBlob)</code></dfn> method is called, the user agent MUST run the steps below (unless otherwise indicated).
 </p>
 <ol>
-  <li><p>Set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-initial" class="dfnref"><code>INITIAL</code></a>
+  <li><p>Set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-empty" class="dfnref"><code>EMPTY</code></a>
   and set
   <a href="#dfn-result"><code>result</code></a> to <code>null</code>.</p></li>
   <li><p>If an <a href="#file-error-read">error occurs during file read</a>, set <a href="#dfn-readystate"><code>readyState</code></a> to
@@ -607,7 +592,7 @@ When the <dfn id="dfn-readAsBinaryString"><code>readAsBinaryString(fileBlob)</co
     <li><p>Terminate this overall set of steps.</p></li>    
   </ol>
   </li>
-  <li><p>If no error has occurred, set <a href="#readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
+  <li><p>If no error has occurred, set <a href="#readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-reading"><code>READING</code></a></p></li>
   <li><p><a href="#queue-a-task">Queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
   <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  As the bytes from the <a href="#dfn-fileBlob"><code>fileBlob</code></a> argument are read,
   user agents SHOULD ensure that on getting,
@@ -627,7 +612,7 @@ When the <dfn id="dfn-readAsBinaryString"><code>readAsBinaryString(fileBlob)</co
 <h4>7.5.4. The <code>readAsDataURL()</code> method</h4>
 <p>When the <dfn id="dfn-readAsDataURL"><code>readAsDataURL(file)</code></dfn> method is called, the user agent MUST run the steps below (unless otherwise indicated).</p>
 <ol>
-  <li><p>Set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-initial" class="dfnref"><code>INITIAL</code></a> and set
+  <li><p>Set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-empty" class="dfnref"><code>EMPTY</code></a> and set
   <a href="#dfn-result"><code>result</code></a> to <code>null</code>.</p></li>
   <li><p>If an <a href="#file-error-read">error occurs during file read</a>, OR if a user agent's URL length limitations prevent returning data as a Data URL
   [<a href="#DataURL">DataURL</a>], 
@@ -644,7 +629,7 @@ When the <dfn id="dfn-readAsBinaryString"><code>readAsBinaryString(fileBlob)</co
     <li><p>Terminate this overall set of steps.</p></li>    
   </ol>
   </li>
-  <li><p>If no error has occurred, set <a href="#readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
+  <li><p>If no error has occurred, set <a href="#readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-reading"><code>READING</code></a></p></li>
   <li><p><a href="#queue-a-task">Queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
   <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  
   </p></li>
@@ -663,7 +648,7 @@ When the <dfn id="dfn-readAsText"><code>readAsText(fileBlob, encoding)</code></d
 the user agent MUST run the steps below (unless otherwise indicated).
 </p>
 <ol>
-  <li><p>Set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-initial" class="dfnref"><code>INITIAL</code></a>
+  <li><p>Set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-empty" class="dfnref"><code>EMPTY</code></a>
   and set
   <a href="#dfn-result"><code>result</code></a> to <code>null</code>.</p></li>
   <li><p>If an <a href="#file-error-read">error occurs during file read</a>, 
@@ -681,7 +666,7 @@ the user agent MUST run the steps below (unless otherwise indicated).
     <li><p>Terminate this overall set of steps.</p></li>    
   </ol>
   </li>
-  <li><p>If no error has occurred, set <a href="#readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
+  <li><p>If no error has occurred, set <a href="#readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-reading"><code>READING</code></a></p></li>
   <li><p><a href="#queue-a-task">Queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
   <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  As the bytes from the <a href="#dfn-fileBlob"><code>fileBlob</code></a> argument are read,
   user agents SHOULD ensure that on getting,
@@ -989,10 +974,10 @@ arguments which, when encoded as Data URLs, exceed URL length limitations for th
 <a href="#dfn-NOT_FOUND_ERR"><code>NOT_FOUND_ERR</code></a></p></li>
     <li><p>A file may be unreadable.  This may be due to permission problems that occur after a reference to a file has been acquired
     (e.g. concurrent lock with another application). See <a href="#dfn-NOT_READABLE_ERR"><code>NOT_READABLE_ERR</code></a></p></li>
-    <li><p>User agents MAY determine that some files are unsafe for use within Web applications.  There may be general security issues with reading files.  For instance
-a user may be bombarded with the file picker associated with <code>&lt;input type="file"&gt;</code> (in a <em>"must choose"</em> loop) and a user agent may determine 
-it necessary to prevent file access by making read access to that file prohibited.  Additionally, some file and directory structures may be considered restricted
-by the underlying filesystem; attempts to read from them may be considered a security violation.  See <a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a></p></li>
+    <li><p>User agents MAY determine that some files are unsafe for use within Web applications.  A file may change on disk since the original file selection,
+    thus resulting in an invalid read.  Additionally, some file and directory structures may be considered restricted
+by the underlying filesystem; attempts to read from them may be considered a security violation.  See the <a href="#security-discussion">security considerations</a>.
+See <a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a></p></li>
     <li><p>Files may be too large to return to the data structures of a Web application.  An example might be that URL length limitations imposed by user agents on Data URLs may
 make obtaining large files encoded as Data URLs impossible to return [<a href="#DataURL">DataURL</a>].  See <a href="#dfn-ENCODING_ERR"><code>ENCODING_ERR</code></a></p></li>
 <li><p>During the reading of a file, the Web application may itself wish to abort (see <a href="#dfn-abort"><code>abort()</code></a>) the call to an asynchronous read method. See
@@ -1061,11 +1046,10 @@ the most appropriate code from the table below.</p>
 
     </td></tr><tr><td><dfn id="dfn-SECURITY_ERR" title="dfn-SECURITY_ERR"><code>SECURITY_ERR</code></dfn>
      </td><td><dfn id="dfn-filerror-code-18" title="dfn-filerror-code-18">18</dfn>
-     </td><td>User agents MAY use this code if: <ul><li>it is determined that an application is "looping" on file selection
-     (continuous prompting, till a file is chosen)</li>
+     </td><td>User agents MAY use this code if: <ul>
      <li>it is determined that certain files are unsafe for access within a Web application</li>
-     <li>it is determined that an interaction layer soliciting user permission is dismissed WITHOUT granting permission</li>
      <li>it is determined that too many read calls are being made on file resources </li>
+     <li>it is determined that the file has changed on disk since the user selected it</li>
      </ul>
      <p>This is a security error code to be used in situations not covered by any other error codes.</p>
 
@@ -1157,9 +1141,34 @@ the underlying file's permission structure has changed (thus preventing access f
 </div>
   </div>
 </div>
-    
+<div id="security-discussion" class="section">
+<h2>11. Security Considerations</h2>
+<p>
+  This section is <em>informative.</em>
+</p>
+<p>
+  This specification allows web content to read files from the underlying file system, as well as provides a means for files to be accessed by unique identifiers,
+  and as such is subject to some security considerations.  This specification also assumes that the
+  primary user interaction is with the <code>&lt;input type="file"/&gt;</code> element of HTML forms [<a href="#HTML5">HTML5</a>], and that all files that are being read by
+  <a href="#dfn-filereader"><code>FileReader</code></a> objects have first been selected by the user.  Important security considerations include preventing malicious file
+  selection attacks (selection looping), preventing access to system-sensitive files, and guarding against modifications of files on disk after a selection has taken place.
+</p>
+<p>
+<ul><li><p><dfn id="selection-looping">Preventing selection looping.</dfn>  During file selection, a user may be bombarded with the file picker associated with <code>&lt;input
+type="file"/&gt;</code> (in a "must choose" loop that forces selection before the file picker is dismissed) and a user agent may prevent file
+access to any selections by making the  <a href="#dfn-filelist"><code>FileList</code></a> object returned be of size 0.</p></li>
+<li><p><dfn id="sensitive-files">System-sensitive files</dfn> (e.g. files in /usr/bin, password files, other native operating system executables) typically should not
+be exposed to web content, and should not be accessed via <a href="#dfn-urn">URNs</a>.  User agents MAY raise a <a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a>
+if such files are accessed or a <a href="#read-methods">read method</a>
+is called on them.</p></li>
+<li><p><dfn id="post-selection-file-mods">Post-selection file modifications</dfn> occur when a file changes on disk after it has been selected.  In such cases, if a
+<a href="#read-methods">read method</a> is called on a file, user agents MAY raise a <code><a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a></code>.</p></li>
+</ul>
+</p>
+<div class="ednote"><div class="ednoteHeader">Editorial note</div><p>This section is provisional; more security data may supplement this in subsequent drafts.</p></div>
+</div>
   <div id="requirements" class="section">
-    <h2>11. Requirements and Use Cases</h2>
+    <h2>12. Requirements and Use Cases</h2>
       <p>This section covers what the requirements are for this API, as well as illustrates some use cases.  This version of the API does not satisfy all use cases;
 	   subsequent versions may elect to address these.</p>  
 	  <ul>
@@ -1202,7 +1211,7 @@ the underlying file's permission structure has changed (thus preventing access f
 	  </ul>
   </div>
    <div class="section">
-    <h2>12. Acknowledgements</h2>
+    <h2>13. Acknowledgements</h2>
     
     <p>
       This specification was originally developed by the SVG Working Group. Many thanks to Mark Baker and Anne van Kesteren for their feedback.</p>
@@ -1211,10 +1220,10 @@ the underlying file's permission structure has changed (thus preventing access f
     <p>Thanks to the W3C WebApps WG, and to participants on the public-webapps@w3.org listserv</p>
   </div>
   <div id="references" class="section">
-    <h2>13. References</h2>
+    <h2>14. References</h2>
 <div class="ednote"><div class="ednoteHeader">Editorial note</div><p>ToDo: Add author names</p></div>
       <div id="normative-references" class="section">
-        <h3>13.1. Normative references</h3>
+        <h3>14.1. Normative references</h3>
 	<dl class="bibliography">
 	<dt id="RFC2119">RFC2119</dt>
 	<dd><cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a></cite></dd>
@@ -1249,7 +1258,7 @@ the underlying file's permission structure has changed (thus preventing access f
 	</dl>
       </div>
     <div id="informative-references" class="section">
-    <h3>13.2. Informative References</h3>
+    <h3>14.2. Informative References</h3>
     <dl>
     <dt id="IANACHARSET">IANA Charsets</dt>
     <dd><cite><a href="http://www.iana.org/assignments/character-sets">Official Names for Character Sets on the Internet</a></cite></dd>
