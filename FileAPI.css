@@ -242,12 +242,6 @@ iframe {
   color: #005a9c;
 }
 
-#distinguishable-table {
-  font-size: 80%;
-}
-#distinguishable-table td {
-  text-align: "●";
-}
 .matrix {
   border-collapse: collapse;
   margin-left: auto;
