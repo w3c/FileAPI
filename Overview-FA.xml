@@ -536,7 +536,7 @@ during processing one of the two <a href="#read-methods">read methods</a>,
   <li><p>On getting, if the <a href="#dfn-readAsBinary" class="dfnref"><code>readAsBinaryString</code></a> <a href="#read-methods">read method</a> is called
   (and no error in reading the file has occurred), then the <code>result</code> attribute MUST return a string representing the file's data as a <dfn id="binary-string">binary string</dfn>, in which
   every byte is represented by an integer in the range [0..255].  On getting, <em>while processing</em> the
-  <a href="#dfn-readAsBinary"><code>readAsBinaryString</code></a> <a href="read-methods">read method</a>, the <code>result</code>
+  <a href="#dfn-readAsBinary"><code>readAsBinaryString</code></a> <a href="#read-methods">read method</a>, the <code>result</code>
   attribute SHOULD return <a href="#partial-file-data">partial file data</a> in <a href="#binary-string">binary string</a> format.</p></li>
   <li><p>On getting, if the <a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a> <a href="#read-methods">read method</a> is called
   (and no error in reading the file has occurred),
@@ -561,7 +561,7 @@ When the <dfn id="dfn-readAsBinary"><code>readAsBinaryString(fileBlob)</code></d
   <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
   <ol>
     <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called
-    <a href="#dfn-loadend" class="dfnref"><code>loadend</code></a>. </p></li>
+    <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
     <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called
     <a href="#dfn-error-event"><code>error</code></a>.  <em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
     <a href="#dfn-error"><code>error</code></a> attribute MUST be a
@@ -598,7 +598,7 @@ When the <dfn id="dfn-readAsBinary"><code>readAsBinaryString(fileBlob)</code></d
   <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
   <ol>
     <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called
-    <a href="#dfn-loadend" class="dfnref"><code>loadend</code></a>. </p></li>
+    <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
     <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called
     <a href="#dfn-error-event"><code>error</code></a>.  <em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
     <a href="#dfn-error"><code>error</code></a> attribute MUST be a
@@ -634,7 +634,7 @@ the user agent MUST run the steps below (unless otherwise indicated).
   <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
   <ol>
     <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called
-    <a href="#dfn-loadend" class="dfnref"><code>loadend</code></a>. </p></li>
+    <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
     <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called
     <a href="#dfn-error-event"><code>error</code></a>.  <em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
     <a href="#dfn-error"><code>error</code></a> attribute MUST be a
@@ -644,7 +644,7 @@ the user agent MUST run the steps below (unless otherwise indicated).
     <li><p>Terminate this overall set of steps.</p></li>    
   </ol>
   </li>
-  <li><p>If no error has occurred, set <a href="#readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
+  <li><p>If no error has occurred, set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
   <li><p><a href="#queue-a-task">Queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
   <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  As the bytes from the <a href="#dfn-fileBlob"><code>fileBlob</code></a> argument are read,
   user agents SHOULD ensure that on getting,
@@ -826,7 +826,7 @@ has been completely read into memory, <a href="#queue-a-task">queue a task</a> t
      </td><td>While reading (and decoding) <a href="#dfn-file-arg"><code>file</code></a> or <a href="#dfn-fileBlob"><code>fileBlob</code></a> data, and reporting <a href="#partial-file-data">partial file data</a> (<code>progess.loaded</code>/<code>progress.total</code>)
 
     </td></tr><tr>
-     <td><dfn id="abort-event" title="abort-event"><code>abort</code></dfn>
+     <td><dfn id="dfn-abort-event" title="abort-event"><code>abort</code></dfn>
 
      </td><td><code>ProgressEvent</code>
 
@@ -956,7 +956,7 @@ make obtaining large files encoded as Data URLs impossible to return [<a href="#
 <h3>The <code>FileError</code> Interface</h3>
 <p>
   This interface is used to report errors asynchronously.  The <a href="#dfn-filereader"><code>FileReader</code></a> object's <dfn id="dfn-error">error</dfn> attribute is a
-  <a href="#dfn-fileerror"><code>FileError</code></a> object, and is accessed asynchronously through the <a href="#onerror"><code>onerror</code></a> event handler when
+  <a href="#dfn-fileerror"><code>FileError</code></a> object, and is accessed asynchronously through the <a href="#dfn-onerror"><code>onerror</code></a> event handler when
   <a href="#dfn-error-event">error events</a> are generated.
 </p>
 <x:codeblock language="idl">
@@ -1171,7 +1171,7 @@ is called on them.</p></li>
 		  
 	  </ul>
   </div>
-   <div class="section">
+   <div id="acknowledgements-section" class="section">
     <h2>Acknowledgements</h2>
     
     <p>
