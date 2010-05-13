@@ -581,13 +581,13 @@ When the <dfn id="dfn-readAsBinary"><code>readAsBinaryString(fileBlob)</code></d
   <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
   <ol>
     <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called
-    <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
-    <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called
     <a href="#dfn-error-event"><code>error</code></a>.  <em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
     <a href="#dfn-error"><code>error</code></a> attribute MUST be a
     a <a href="#dfn-fileerror"><code>FileError</code></a> object with a valid <a href="#dfn-error-codes">error code</a> that indicates the kind of
     <a href="#file-error-read">file error that has occurred</a>.</p>
     </li>
+    <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called
+    <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
     <li><p>Terminate this overall set of steps.</p></li>    
   </ol>
   </li>
@@ -616,14 +616,14 @@ When the <dfn id="dfn-readAsBinary"><code>readAsBinaryString(fileBlob)</code></d
   [<a href="#DataURL">DataURL</a>], 
   set <a href="#dfn-readystate"><code>readyState</code></a> to
   <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
-  <ol>
-    <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called
-    <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
+  <ol>   
     <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called
     <a href="#dfn-error-event"><code>error</code></a>.  <em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
     <a href="#dfn-error"><code>error</code></a> attribute MUST be a
     a <a href="#dfn-fileerror"><code>FileError</code></a> object with a valid <a href="#dfn-error-codes">error code</a> that indicates the kind of
     <a href="#file-error-read">file error that has occurred</a>.</p></li>
+    <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called
+    <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
     <li><p>Terminate this overall set of steps.</p></li>    
   </ol>
   </li>
@@ -654,13 +654,13 @@ the user agent MUST run the steps below (unless otherwise indicated).
   <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
   <ol>
     <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called
-    <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
-    <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called
     <a href="#dfn-error-event"><code>error</code></a>.  <em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
     <a href="#dfn-error"><code>error</code></a> attribute MUST be a
     a <a href="#dfn-fileerror"><code>FileError</code></a> object with a valid <a href="#dfn-error-codes">error code</a> that indicates the kind of
     <a href="#file-error-read">file error that has occurred</a>.</p>
     </li>
+    <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called
+    <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
     <li><p>Terminate this overall set of steps.</p></li>    
   </ol>
   </li>
