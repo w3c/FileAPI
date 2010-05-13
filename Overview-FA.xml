@@ -323,6 +323,7 @@ function errorHandler(evt) {
     
     };
     </x:codeblock>
+                 <div class="ednote">The initial introduction of an ArrayBuffer property implies synchronous reads, which is a huge mistake and should be fixed. </div>
     <div id='attributes-blob' class='section'>
     <h3>Attributes</h3>
     <dl><dt id='dfn-size'><code>size</code></dt><dd><p>Represents the size of the Blob object in bytes.</p></dd>
