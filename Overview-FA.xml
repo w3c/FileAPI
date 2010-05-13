@@ -312,7 +312,7 @@ function errorHandler(evt) {
     interface <dfn id='dfn-Blob'>Blob</dfn> {
       
       readonly attribute unsigned long long <a href="#dfn-size" title='size'>size</a>;
-      readonly attribute ArrayBuffer <a href="#dfn-blobBuffer" title="blobBuffer">blobBuffer</a>;
+      <span class="comment">// readonly attribute ArrayBuffer <a href="#dfn-blobBuffer" title="blobBuffer">blobBuffer</a>; </span>
       readonly attribute DOMString <a href="#dfn-type" class="dfnref">type</a>;
       readonly attribute DOMString <a href="#dfn-url" class="dfnref">url</a>;
       <span class='comment'>//slice Blob into byte-ranged chunks</span>
@@ -326,7 +326,7 @@ function errorHandler(evt) {
     <div id='attributes-blob' class='section'>
     <h3>Attributes</h3>
     <dl><dt id='dfn-size'><code>size</code></dt><dd><p>Represents the size of the Blob object in bytes.</p></dd>
-        <dt id='dfn-blobBuffer'><code>blobBuffer</code></dt><dd><p>The <code>ArrayBuffer</code> representation of the <a href="#dfn-Blob" class="dfnrefs">Blob</a> object, which can be used with multiple different views of the binary data. [<a href="#TypedArrays">Typed Arrays</a>]</p></dd> 
+    <span class="comment"> // </span><dt id='dfn-blobBuffer'><code>blobBuffer</code></dt><dd><p>The <code>ArrayBuffer</code> representation of the <a href="#dfn-Blob" class="dfnrefs">Blob</a> object, which can be used with multiple different views of the binary data. [<a href="#TypedArrays">Typed Arrays</a>]</p></dd> 
     <dt id="dfn-type"><code>type</code></dt>
     <dd><p>The ASCII-encoded string in lower case representing the media type of the file, expressed as an RFC2046 MIME type [<a href="#RFC2046">RFC2046</a>]. User agents SHOULD return the MIME type of the file,
     if it is known. If implementations cannot determine the media type of the file, they MUST return the empty string.  A string is a valid MIME type if it matches the <code>media-type</code>
