@@ -57,7 +57,7 @@
 	<ul>
 	    <li>A <a class='dfnref' href='#dfn-filelist'>FileList</a> sequence, which represents an array of individually selected files from the underlying system.
 		The user interface for selection can be invoked via <code>&lt;input type=&quot;file&quot;&gt;</code>, i.e. when the
-		<code>input</code> element [<a href="#HTML5">HTML5</a>] is in the <a href="#FileUpload">File Upload</a> state.</li>
+		<code>input</code> element is in the <code>File Upload</code> state [<a href="#HTML5">HTML5</a>] .</li>
 	    <li>A <a class='dfnref' href="#dfn-Blob">Blob</a> interface, which represents raw binary data, and allows access to ranges of bytes within the Blob object.</li>
             <li>A <a href='#dfn-file' class='dfnref'>File</a> interface, which includes readonly informational attributes about a file
 	        such as its name, its mediatype, and a URL to access its data.</li>
@@ -77,8 +77,8 @@
       method for <a href="#file">File</a> objects), <code>postMessage</code>, <code>DataTransfer</code> (part
       of the <em>drag and drop API</em> defined in [<a href="#HTML5">HTML5</a>,]) and
       <a href="#Workers">Web Workers</a>. Additionally, it should be possible to programmatically obtain a list of files from the
-      <code>input</code> element [<a href="#HTML5">HTML5</a>] when it is
-      in the <a href="#FileUpload">File Upload state</a>.
+      <code>input</code> element when it is
+      in the <code>File Upload state</code>[<a href="#HTML5">HTML5</a>].
       These kinds of behaviors are defined in the appropriate affiliated specifications.
     </p>
 
@@ -312,17 +312,30 @@ function errorHandler(evt) {
     interface <dfn id='dfn-Blob'>Blob</dfn> {
       
       readonly attribute unsigned long long <a href="#dfn-size" title='size'>size</a>;
-      
+      readonly attribute ArrayBuffer <a href="#dfn-blobBuffer" title="blobBuffer">blobBuffer</a>;
+      readonly attribute DOMString <a href="#dfn-type" class="dfnref">type</a>;
+      readonly attribute DOMString <a href="#dfn-url" class="dfnref">url</a>;
       <span class='comment'>//slice Blob into byte-ranged chunks</span>
       
       Blob <a href="#dfn-slice" title='slice'>slice</a>(in long long <a href="#dfn-start" class="dfnref" title='start'>start</a>,
-                 in long long <a href="#dfn-length" class="dfnref" title='length'>length</a>); <span class='comment'>// raises DOMException</span>
+                 in long long <a href="#dfn-length" class="dfnref" title='length'>length</a>,
+                 optional DOMString <a href="#dfn-contentTypeBlob">contentType</a>); 
     
     };
     </x:codeblock>
     <div id='attributes-blob' class='section'>
     <h3>Attributes</h3>
-    <dl><dt id='dfn-size'><code>size</code></dt><dd><p>Represents the size of the Blob object in bytes.</p></dd></dl>
+    <dl><dt id='dfn-size'><code>size</code></dt><dd><p>Represents the size of the Blob object in bytes.</p></dd>
+        <dt id='dfn-blobBuffer'><code>blobBuffer</code></dt><dd><p>The <code>ArrayBuffer</code> representation of the <a href="#dfn-Blob" class="dfnrefs">Blob</a> object, which can be used with multiple different views of the binary data. [<a href="#TypedArrays">Typed Arrays</a>]</p></dd> 
+    <dt id="dfn-type"><code>type</code></dt>
+    <dd><p>The ASCII-encoded string in lower case representing the media type of the file, expressed as an RFC2046 MIME type [<a href="#RFC2046">RFC2046</a>]. User agents SHOULD return the MIME type of the file,
+    if it is known. If implementations cannot determine the media type of the file, they MUST return the empty string.  A string is a valid MIME type if it matches the <code>media-type</code>
+    token defined in section 3.7 "Media Types" of RFC 2616 [<a href="#HTTP">HTTP</a>]. </p></dd>
+    <dt id="dfn-url"><code>url</code></dt>
+    <dd><p>The <a href="#dfn-fileURL" class="dfnref">URL</a> representing the <a href="#dfn-Blob" class="dfnref">Blob</a> object.</p></dd>
+    
+    
+    </dl>
     </div>
     <div id='methodsandparams-blob' class='section'>
     <h3>Methods and Parameters</h3>
@@ -331,6 +344,8 @@ function errorHandler(evt) {
     <p>The <dfn id='dfn-start'>start</dfn> parameter is a value for the start point of a <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call.</p>
     <p>The <dfn id="dfn-length">length</dfn> parameter is a value for the end point of a
     <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call as byte offsets from <code>start</code>.</p>
+    <p>The <dfn id="dfn-contentTypeBlob">contentType</dfn> parameter is optional, and can be used to set a content type on a
+    <a href="#dfn-Blob">Blob</a>.</p>
     <p>The <a href="#dfn-slice"><code>slice</code></a> method MUST <dfn id="clamp">clamp</dfn> on values of <a href="#dfn-size"><code>size</code></a> if index arithmetic exceeds the bounds of <a href="#dfn-size"><code>size</code></a>.
     In particular, this means that for a given slice call:</p>
     <ul>
@@ -341,21 +356,18 @@ function errorHandler(evt) {
     </ul>
       
     </dd></dl>
-    <div class="ednote">The alternative is throwing a <code>DOMException</code> with <code>INDEX_SIZE_ERR</code></div>
-    </div>
+<div class="ednote">Now that developers can use slice to specify the content type, should the use of RFC2046 formalism be relaxed?</div>
   </div>
   <div id='file' class='section'>
   <h2>The File Interface</h2>
   <p>
-    This interface describes a single file in a <a href="#dfn-filelist" class="dfnrefs">FileList</a> and exposes its name, media type and a
-    <a href="#dfn-fileURN" class="dfnrefs">URN</a> to access the file. It inherits from <a href="#dfn-Blob" class='dfnrefs'>Blob</a>. 
+    This interface describes a single file in a <a href="#dfn-filelist" class="dfnrefs">FileList</a> and exposes its name. It inherits from <a href="#dfn-Blob" class='dfnrefs'>Blob</a>. 
   </p>
   <x:codeblock language='idl'>
   interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blob</a> {
 
       readonly attribute DOMString <a href="#dfn-name" class="dfnref">name</a>;
-      readonly attribute DOMString <a href="#dfn-type" class="dfnref">type</a>;
-      readonly attribute DOMString <a href="#dfn-urn" class="dfnref">urn</a>;
+      
 };
   </x:codeblock>
   <div id='file-attrs' class="section">
@@ -363,14 +375,9 @@ function errorHandler(evt) {
   <dl>
     <dt id="dfn-name"><code>name</code></dt>
     <dd><p>The name of the file. There are numerous file name variations on different systems; this is merely the name of the file, without path information.</p></dd>
-    <dt id="dfn-type"><code>type</code></dt>
-    <dd><p>The ASCII-encoded string in lower case representing the media type of the file, expressed as an RFC2046 MIME type [<a href="#RFC2046">RFC2046</a>]. User agents SHOULD return the MIME type of the file,
-    if it is known. If implementations cannot determine the media type of the file, they MUST return empty string.  A string is a valid MIME type if it matches the <code>media-type</code>
-    token defined in section 3.7 "Media Types" of RFC 2616 [<a href="#HTTP">HTTP</a>]. </p></dd>
-    <dt id="dfn-urn"><code>urn</code></dt>
-    <dd><p>The <a href="#dfn-fileURN" class="dfnref">URN</a> representing the <a href="#dfn-file" class="dfnref">File</a> object.</p></dd>
+    
     </dl>
-    <div class="ednote">The <code>type</code> attribute section should refer to IANA and RFC4288, and the <code>urn</code> attribute may be renamed. </div>
+    
   </div>
   </div>
   <div id='filereader-interface' class="section">
@@ -1040,69 +1047,18 @@ the most appropriate code from the table below.</p>
     </td></tr></tbody></table>
 </div>
   </div>
-<div id="uri" class="section">
-<h2>A UUID URN for File reference</h2>
+<div id="url" class="section">
+<h2>A URL for Blob and File reference</h2>
 <div class="ednote">
 This section does not enjoy the full consensus of the WG.
-<ul><li>Will reusing the urn:uuid scheme described in RFC4122 [<a href="#UUID">RFC4122</a>] face origin-determination issues?
-</li><li>Are there further security caveats not cited sufficiently here?</li>
-<li>Is using a subset of HTTP response codes acceptable practice, or should we forgo response codes in this specification?</li></ul>
+<ul>
+<li>The proposed URL scheme is filedata: .  Mozilla already ships with moz-filedata:</li>
+<li>Will reusing the url with uuid scheme described in RFC4122 [<a href="#UUID">RFC4122</a>] face origin-determination issues?
+</li><li>Are there further security caveats?</li>
+<li>Is using a subset of HTTP response codes acceptable practice, or should we forgo response codes in this specification?</li>
+<li>Lifetime issues with respect to threads needs to be considered.</li>
+</ul>
 </div>
-<p>
-RFC4122 [<a href="#UUID">RFC4122</a>] describes a UUID URN namespace.  A <dfn id="dfn-fileURN">File URN</dfn> is a UUID URN described in
-RFC4122 [<a href="#UUID">RFC4122</a>] that is used to reference a <a href="#dfn-file"><code>File</code></a> object,
-subject to an <a href="#origin-policy-urn">origin policy</a>, a <a href="#lifetime-stipulation-urn">lifetime stipulation</a>, and a <a href="#processing-model-urn">processing model</a>.
-A valid <a href="#dfn-fileURN">File URN</a> takes the form urn:uuid:UUID where UUID matches the UUID production in Section 3 of RFC4122 [<a href="#UUID">RFC4122</a>], and is
-always a Version 1 UUID as described in Section 4.2.2 of RFC4122 [<a href="#UUID">RFC4122</a>].  Thus
-<code>urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6</code> is a valid <a href="#dfn-fileURN">File URN</a>.  
-</p>
-<div class="section" id="origin-policy">
-<h3>Origin Policy for File URNs</h3>
-<p>
-  The <dfn id="origin-policy-urn">origin</dfn> of <a href="#dfn-fileURN">File URN</a>s MUST be the origin of the script context that spawned the File object on which the urn attribute was called;
-  this is defined as the "first script" in HTML5 [<a href="#HTML5">HTML5</a>]. <a href="#dfn-fileURN">File URN</a> s MUST only be valid within this script context.
-  Retrieving them from within any other script context
-  results in a <code>403 Not Allowed</code> with an additional affiliated message that implementations MAY use (e.g. "Origin Violation"). [<a href="#processing-model-urn">
-  Processing Model for File URNs</a>]
-</p>
-</div>
-  <div id="lifetime" class="section">
-  <h3>Lifetime Stipulation for File URNs</h3>
-  <p>
-    User agents MUST ensure that the <dfn id="lifetime-stipulation-urn">lifetime</dfn> of <a href="#dfn-fileURN">File URN</a>s is the same as the lifetime of the <code>Document</code> [<a href="#HTML5">HTML5</a>] of the
-    origin script which spawned the <a href="#dfn-file"><code>File</code></a> object on which the <a href="#dfn-urn">urn</a> attribute was called.
-    When this <code>Document</code> is destroyed, implementations MUST treat requests for <a href="#dfn-fileURN">File URN</a>s created within this
-     <code>Document</code> as <code>404 Not Found</code>.[<a href="#processing-model-urn">Processing Model</a> for <a href="#dfn-fileURN">File URN</a>s]
-  </p>
-  </div>
-  <div id="processing" class="section">
-  <h3>Processing Model for File URNs</h3>
-  <p>The <dfn id="processing-model-urn">processing model</dfn> for <a href="#dfn-fileURN">File URN</a>s is that they MUST only support requests with
-  GET [<a href="#HTTP">HTTP</a>] and MUST only support a subset of responses [<a href="#HTTP">HTTP</a>], which are:</p>
-  <div id="TwoHundredOK" class='section'>
-  <h4>200 OK</h4>
-
-<p>This response [<a href="#HTTP">HTTP</a>] MUST be used if the request has succeeded, namely the <a href="#dfn-fileURN">File URN</a>  has been requested with a
-GET, satisfies the <a href="#origin-policy-urn">origin requirement</a>, and satisfies the <a href="#lifetime-stipulation-urn">lifetime requirement.</a></p>
-  </div>
-<div id="FourOhThreeNotAllowd" class='section'>
-<h4>403 Not Allowed</h4>
-
-<p>This response [<a href="#HTTP">HTTP</a>] MUST be used if the request violates the <a href="#origin-policy-urn">origin requirement</a>.  Additionally, it MUST be used if
-the underlying file's permission structure has changed (thus preventing access from web content).  User agents MAY accompany this response with a message
-(e.g. "Origin Violation").</p>
-</div>
-<div class='section' id='FourOhFour'>
-<h4>404 Not Found</h4>
-<p>This response [<a href="#HTTP">HTTP</a>] MUST be used if the request violates the <a href="#lifetime-stipulation-urn">lifetime</a> requirement (e.g. if a cached <a href="#dfn-fileURN">File URN</a>
- persists after the specified lifetime of the URN has elapsed). Additionally, it MUST be used if the underlying file has moved.</p>
-</div>
-<div id='FiveHundred' class='section'>
-<h4>500 Internal Server Error</h4>
-
-<p>This response [<a href="#HTTP">HTTP</a>] MAY be used as a generic error condition, including for security errors or access violations.  </p>
-</div>
-  </div>
 </div>
 <div id="security-discussion" class="section">
 <h2>Security Considerations</h2>
@@ -1120,7 +1076,7 @@ the underlying file's permission structure has changed (thus preventing access f
 type="file"/&gt;</code> (in a "must choose" loop that forces selection before the file picker is dismissed) and a user agent may prevent file
 access to any selections by making the  <a href="#dfn-filelist"><code>FileList</code></a> object returned be of size 0.</p></li>
 <li><p><dfn id="sensitive-files">System-sensitive files</dfn> (e.g. files in /usr/bin, password files, other native operating system executables) typically should not
-be exposed to web content, and should not be accessed via <a href="#dfn-urn">URNs</a>.  User agents MAY raise a <a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a>
+be exposed to web content, and should not be accessed via <a href="#dfn-url">URNs</a>.  User agents MAY raise a <a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a>
 if such files are accessed or a <a href="#read-methods">read method</a>
 is called on them.</p></li>
 <li><p><dfn id="post-selection-file-mods">Post-selection file modifications</dfn> occur when a file changes on disk after it has been selected.  In such cases, if a
@@ -1216,6 +1172,8 @@ is called on them.</p></li>
 	<dd><cite><a href="http://www.ietf.org/rfc/rfc3986.txt">Uniform Resource Identifier (URI): Generic Syntax</a></cite></dd>
 	<dt id="RFC1738">RFC1738</dt>
 	<dd><cite><a href="http://tools.ietf.org/html/rfc1738">Uniform Resource Locators (URL)</a></cite></dd>
+        <dt id="TypedArrays">Typed Arrays</dt>
+        <dd><cite><a href="https://cvs.khronos.org/svn/repos/registry/trunk/public/webgl/doc/spec/TypedArray-spec.html">Typed Arrays</a></cite></dd>
 	</dl>
       </div>
     <div id="informative-references" class='section'>
@@ -1235,6 +1193,7 @@ is called on them.</p></li>
     </div>
     </div>
    
+    </div>
     </div>
   </body>
 </html>
