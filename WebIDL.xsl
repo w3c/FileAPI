@@ -514,6 +514,7 @@
             <xsl:when test='@language="es"'>ECMAScript</xsl:when>
             <xsl:when test='@language="java"'>Java</xsl:when>
             <xsl:when test='@language="c"'>C</xsl:when>
+            <xsl:when test='@language="abnf"'>ABNF</xsl:when>
             <xsl:otherwise>@@</xsl:otherwise>
           </xsl:choose>
         </span>
