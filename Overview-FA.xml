@@ -331,7 +331,7 @@ function errorHandler(evt) {
     if it is known. If implementations cannot determine the media type of the Blob, they MUST return the empty string.  A string is a valid MIME type if it matches the <code>media-type</code>
     token defined in section 3.7 "Media Types" of RFC 2616 [<a href="#HTTP">HTTP</a>]. </p></dd>
     <dt id="dfn-url"><code>url</code></dt>
-    <dd><p>The <a href="url" class="dfnref">URL</a> representing the <a href="#dfn-Blob" class="dfnref">Blob</a> object.</p></dd>
+    <dd><p>The <a href="#url" class="dfnref">URL</a> representing the <a href="#dfn-Blob" class="dfnref">Blob</a> object.</p></dd>
     
     
     </dl>
