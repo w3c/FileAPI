@@ -393,7 +393,7 @@ function errorHandler(evt) {
 interface <dfn id="dfn-blobreader">BlobReader</dfn> {
 
   <span class="comment">// async read methods</span>
-  void <a href="#dfn-readAsBinaryArrayBuffer" class="dfnref">readAsArrayBuffer</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>);
+  void <a href="#dfn-readAsArrayBuffer" class="dfnref">readAsArrayBuffer</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>);
   void <a href="#dfn-readAsBinaryStringAsync" class="dfnref">readAsBinaryString</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>);
   void <a href="#dfn-readAsText" class="dfnref">readAsText</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>, [Optional] in DOMString <a href="#dfn-encoding" class="dfnref">encoding</a>);
   void <a href="#dfn-readAsDataURL" class="dfnref">readAsDataURL</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>);
