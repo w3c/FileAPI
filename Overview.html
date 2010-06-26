@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>13 May 2010</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Editor:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2009 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>25 June 2010</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Editor:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2009 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
       <h2>Abstract</h2>
@@ -44,8 +44,8 @@
 	    <li>A <a class="dfnref" href="#dfn-Blob">Blob</a> interface, which represents raw binary data, and allows access to ranges of bytes within the Blob object.</li>
             <li>A <a href="#dfn-file" class="dfnref">File</a> interface, which includes readonly informational attributes about a file
 	        such as its name, its mediatype, and a URL to access its data.</li>
-            <li>A <a href="#dfn-filereader" class="dfnref">FileReader</a> interface, which provides methods to read a
-            <a href="#dfn-file">File</a>, and an event model to obtain the results of these reads.</li>
+            <li>A <a href="#dfn-blobreader" class="dfnref">BlobReader</a> interface, which provides methods to read a
+            <a href="#dfn-file">File</a> or a <a href="#dfn-Blob">Blob</a>, and an event model to obtain the results of these reads.</li>
             <li>A <a href="#dfn-fileerror" class="dfnref">FileError</a> interface and a <a href="#dfn-FileException" class="dfnref">FileException</a> exception
             which define error conditions used by this specification.</li>
 
@@ -57,7 +57,7 @@
     <p>
       This API is designed to be used in conjunction with other APIs and elements on the web platform,
       notably: <a href="#XHR2" class="dfnref">XMLHttpRequest</a> (e.g.  with an overloaded <code>send()</code>
-      method for <a href="#file">File</a> objects), <code>postMessage</code>, <code>DataTransfer</code> (part
+      method for File or Blob objects), <code>postMessage</code>, <code>DataTransfer</code> (part
       of the <em>drag and drop API</em> defined in [<a href="#HTML5">HTML5</a>,]) and
       <a href="#Workers">Web Workers</a>. Additionally, it should be possible to programmatically obtain a list of files from the
       <code>input</code> element when it is
@@ -65,7 +65,7 @@
       These kinds of behaviors are defined in the appropriate affiliated specifications.
     </p>
 
-      <div class="ednote"><div class="ednoteHeader">Editorial note</div><p>This is revision $Id$.</p><p>There are 7 further editorial notes in the document.</p></div>
+      <div class="ednote"><div class="ednoteHeader">Editorial note</div><p>This is revision $Id$.</p><p>There are 3 further editorial notes in the document.</p></div>
     </div>
 
     <div class="section">
@@ -77,7 +77,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 13 May 2010 <b>Editor’s Draft</b> of the
+        This document is the 25 June 2010 <b>Editor’s Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -145,7 +145,7 @@
 
     <div id="toc">
       <h2>Table of Contents</h2>
-      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#terminology">3. Terminology and Algorithms</a></li><li><a href="#filelist-section">4. The FileList Sequence</a></li><li><a href="#blob">5. The Blob Interface</a><ul><li><a href="#attributes-blob">5.1. Attributes</a></li><li><a href="#methodsandparams-blob">5.2. Methods and Parameters</a></li><li><a href="#file">5.3. The File Interface</a><ul><li><a href="#file-attrs">5.3.1. Attributes</a></li></ul></li><li><a href="#filereader-interface">5.4. The FileReader Interface</a><ul><li><a href="#filereader-task-source">5.4.1. The FileReader Task Source</a></li><li><a href="#filereaderConstrctr">5.4.2. Constructors</a></li><li><a href="#event-handler-attributes-section">5.4.3. Event Handler Attributes</a></li><li><a href="#filereader-state">5.4.4. FileReader States</a></li><li><a href="#reading-a-file">5.4.5. Reading a File</a><ul><li><a href="#MultipleReads">5.4.5.1. Multiple Reads</a></li><li><a href="#filedata-attr">5.4.5.2. The result attribute</a></li><li><a href="#readAsBinaryString">5.4.5.3. The readAsBinaryString() method</a></li><li><a href="#readAsDataURL">5.4.5.4. The readAsDataURL() method</a></li><li><a href="#readAsDataText">5.4.5.5. The readAsText() method</a></li><li><a href="#abort">5.4.5.6. The abort() method</a></li><li><a href="#blobAndFileParams">5.4.5.7. Blob and File Parameters</a></li><li><a href="#enctype">5.4.5.8. Determining Encoding</a></li><li><a href="#events">5.4.5.9. Events</a><ul><li><a href="#event-summary">5.4.5.9.1. Event Summary</a></li></ul></li></ul></li></ul></li><li><a href="#readingOnThreads">5.5. Reading on Threads</a><ul><li><a href="#FileReaderSync">5.5.1. The FileReaderSync Interface</a><ul><li><a href="#readAsBinaryStringSyncSection">5.5.1.1. The readAsBinaryString method</a></li><li><a href="#readAsTextSync">5.5.1.2. The readAsText method</a></li><li><a href="#readAsDataURLSync-section">5.5.1.3. The readAsDataURL method</a></li></ul></li></ul></li><li><a href="#ErrorAndException">5.6. Errors and Exceptions</a><ul><li><a href="#FileErrorInterface">5.6.1. The FileError Interface</a></li><li><a href="#FileException">5.6.2. The FileException exception</a></li><li><a href="#ErrorDescriptions">5.6.3. Error Code Descriptions</a></li></ul></li><li><a href="#url">5.7. A URL for Blob and File reference</a></li><li><a href="#security-discussion">5.8. Security Considerations</a></li><li><a href="#requirements">5.9. Requirements and Use Cases</a></li><li><a href="#acknowledgements-section">5.10. Acknowledgements</a></li><li><a href="#references">5.11. References</a><ul><li><a href="#normative-references">5.11.1. Normative references</a></li><li><a href="#informative-references">5.11.2. Informative References</a></li></ul></li></ul></li></ul></div>
+      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#terminology">3. Terminology and Algorithms</a></li><li><a href="#filelist-section">4. The FileList Sequence</a></li><li><a href="#blob">5. The Blob Interface</a><ul><li><a href="#attributes-blob">5.1. Attributes</a></li><li><a href="#methodsandparams-blob">5.2. Methods and Parameters</a></li><li><a href="#file">5.3. The File Interface</a><ul><li><a href="#file-attrs">5.3.1. Attributes</a></li></ul></li><li><a href="#blobreader-interface">5.4. The BlobReader Interface</a><ul><li><a href="#blobreader-task-source">5.4.1. The BlobReader Task Source</a></li><li><a href="#filereaderConstrctr">5.4.2. Constructors</a></li><li><a href="#event-handler-attributes-section">5.4.3. Event Handler Attributes</a></li><li><a href="#blobreader-state">5.4.4. BlobReader States</a></li><li><a href="#reading-a-file">5.4.5. Reading a File or Blob</a><ul><li><a href="#MultipleReads">5.4.5.1. Multiple Reads</a></li><li><a href="#filedata-attr">5.4.5.2. The result attribute</a></li><li><a href="#readAsBinaryString">5.4.5.3. The readAsBinaryString() method</a></li><li><a href="#readAsDataURL">5.4.5.4. The readAsDataURL() method</a></li><li><a href="#readAsDataText">5.4.5.5. The readAsText() method</a></li><li><a href="#readAsArrayBuffer">5.4.5.6. The readAsArrayBuffer() method</a></li><li><a href="#abort">5.4.5.7. The abort() method</a></li><li><a href="#blobAndFileParams">5.4.5.8. Blob Parameters</a></li><li><a href="#enctype">5.4.5.9. Determining Encoding</a></li><li><a href="#events">5.4.5.10. Events</a><ul><li><a href="#event-summary">5.4.5.10.1. Event Summary</a></li></ul></li></ul></li></ul></li><li><a href="#readingOnThreads">5.5. Reading on Threads</a><ul><li><a href="#FileReaderSync">5.5.1. The BlobReaderSync Interface</a><ul><li><a href="#readAsBinaryStringSyncSection">5.5.1.1. The readAsBinaryString method</a></li><li><a href="#readAsTextSync">5.5.1.2. The readAsText method</a></li><li><a href="#readAsDataURLSync-section">5.5.1.3. The readAsDataURL method</a></li><li><a href="#readAsArrayBufferSyncSection">5.5.1.4. The readAsArrayBuffer method</a></li></ul></li></ul></li><li><a href="#ErrorAndException">5.6. Errors and Exceptions</a><ul><li><a href="#FileErrorInterface">5.6.1. The FileError Interface</a></li><li><a href="#FileException">5.6.2. The FileException exception</a></li><li><a href="#ErrorDescriptions">5.6.3. Error Code Descriptions</a></li></ul></li><li><a href="#url">5.7. A URL for Blob and File reference</a><ul><li><a href="#ABNFForBlob">5.7.1. Definition of blob URL Scheme</a></li><li><a href="#originOfBlob">5.7.2. Origin of Blob URLs</a></li><li><a href="#lifeTime">5.7.3. Lifetime of Blob URLs</a></li><li><a href="#processingModel">5.7.4. Processing Model for Blob URLs</a><ul><li><a href="#TwoHundredOK">5.7.4.1. 200 OK</a></li><li><a href="#FourOhThreeNotAllowed">5.7.4.2. 403 Not Allowed</a></li><li><a href="#FourOhFourNotFound">5.7.4.3. 404 Not Found</a></li><li><a href="#FiveHundredInternalServerError">5.7.4.4. 500 Internal Server Error</a></li></ul></li></ul></li><li><a href="#security-discussion">5.8. Security Considerations</a></li><li><a href="#requirements">5.9. Requirements and Use Cases</a></li><li><a href="#acknowledgements-section">5.10. Acknowledgements</a></li><li><a href="#references">5.11. References</a><ul><li><a href="#normative-references">5.11.1. Normative references</a></li><li><a href="#informative-references">5.11.2. Informative References</a></li></ul></li></ul></li></ul></div>
     </div>
 
     <div id="sections">
@@ -164,13 +164,13 @@
       
     </p>
     <p>
-      File reads should happen asynchronously on the main thread, with an optional synchronous API used
+      File or Blob reads should happen asynchronously on the main thread, with an optional synchronous API used
       within threaded web applications.  An asynchronous API for reading files prevents blocking and UI "freezing" on a user
-      agent's main thread.  This specification defines an asynchronous API based on an <em>event model</em> to read and access a file's
+      agent's main thread.  This specification defines an asynchronous API based on an <em>event model</em> to read and access a File or Blob's
       data.  Moreover,
-      this specification defines separate interfaces for <em>files</em> and the objects used to <em>read</em> a file's data.
+      this specification defines separate interfaces for <em>Files and Blobs</em> and the objects used to <em>read</em> a File or Blob's data.
       While a <code>File</code> object provides a reference to a single
-    file that a user has selected from a file picker (typically spawned by the HTML <code>input</code> element), a <code>FileReader</code>
+    file that a user has selected from a file picker (typically spawned by the HTML <code>input</code> element), a <code>BlobReader</code>
     object provides asynchronous read methods to
     access that file's data through event handler attributes and the firing of events.  The use of events and event handlers allows separate code blocks the ability
     to monitor the <em>progress of the read</em> (which is useful for remote drives that appear to be local, but behave slower than local drives), error conditions that may arise,
@@ -189,7 +189,7 @@ function startRead() {
 
 function getAsText(readFile) {
         
-  var reader = new FileReader();
+  var reader = new BlobReader();
   
   <span class="comment">// Read file into memory as UTF-16</span>      
   reader.readAsText(readFile, "UTF-16");
@@ -326,7 +326,6 @@ function errorHandler(evt) {
     interface <dfn id="dfn-Blob">Blob</dfn> {
       
       readonly attribute unsigned long long <a href="#dfn-size" title="size">size</a>;
-      <span class="comment">// readonly attribute ArrayBuffer <a href="#dfn-blobBuffer" title="blobBuffer">blobBuffer</a>; </span>
       readonly attribute DOMString <a href="#dfn-type" class="dfnref">type</a>;
       readonly attribute DOMString <a href="#dfn-url" class="dfnref">url</a>;
       <span class="comment">//slice Blob into byte-ranged chunks</span>
@@ -337,17 +336,16 @@ function errorHandler(evt) {
     
     };
     </code></pre></div></div>
-                 <div class="ednote"><div class="ednoteHeader">Editorial note</div>The initial introduction of an ArrayBuffer property implies synchronous reads, which is a huge mistake and should be fixed. </div>
+                
     <div id="attributes-blob" class="section">
     <h3>5.1. Attributes</h3>
     <dl><dt id="dfn-size"><code>size</code></dt><dd><p>Represents the size of the Blob object in bytes.</p></dd>
-    <span class="comment"> // </span><dt id="dfn-blobBuffer"><code>blobBuffer</code></dt><dd><p>The <code>ArrayBuffer</code> representation of the <a href="#dfn-Blob" class="dfnrefs">Blob</a> object, which can be used with multiple different views of the binary data. [<a href="#TypedArrays">Typed Arrays</a>]</p></dd> 
     <dt id="dfn-type"><code>type</code></dt>
-    <dd><p>The ASCII-encoded string in lower case representing the media type of the file, expressed as an RFC2046 MIME type [<a href="#RFC2046">RFC2046</a>]. User agents SHOULD return the MIME type of the file,
-    if it is known. If implementations cannot determine the media type of the file, they MUST return the empty string.  A string is a valid MIME type if it matches the <code>media-type</code>
+    <dd><p>The ASCII-encoded string in lower case representing the media type of the Blob, expressed as an RFC2046 MIME type [<a href="#RFC2046">RFC2046</a>]. User agents SHOULD return the MIME type of the Blob,
+    if it is known. If implementations cannot determine the media type of the Blob, they MUST return the empty string.  A string is a valid MIME type if it matches the <code>media-type</code>
     token defined in section 3.7 "Media Types" of RFC 2616 [<a href="#HTTP">HTTP</a>]. </p></dd>
     <dt id="dfn-url"><code>url</code></dt>
-    <dd><p>The <a href="#dfn-fileURL" class="dfnref">URL</a> representing the <a href="#dfn-Blob" class="dfnref">Blob</a> object.</p></dd>
+    <dd><p>The <a href="url" class="dfnref">URL</a> representing the <a href="#dfn-Blob" class="dfnref">Blob</a> object.</p></dd>
     
     
     </dl>
@@ -359,8 +357,9 @@ function errorHandler(evt) {
     <p>The <dfn id="dfn-start">start</dfn> parameter is a value for the start point of a <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call.</p>
     <p>The <dfn id="dfn-length">length</dfn> parameter is a value for the end point of a
     <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call as byte offsets from <code>start</code>.</p>
-    <p>The <dfn id="dfn-contentTypeBlob">contentType</dfn> parameter is optional, and can be used to set a content type on a
-    <a href="#dfn-Blob">Blob</a>.</p>
+    <p>The <dfn id="dfn-contentTypeBlob">contentType</dfn> parameter is optional, and can be used to set a value identical to one that is set with the HTTP/1.1 Content-Type header [<a href="#HTTP">HTTP</a>] on
+    the <a href="#dfn-Blob">Blob</a> returned by the <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call.  If this parameter is used, the returned <a href="#dfn-Blob">Blob</a> MUST have a <a href="#dfn-type"><code>type</code></a> attribute that, on getting, returns
+    the string used for this parameter.</p>
     <p>The <a href="#dfn-slice"><code>slice</code></a> method MUST <dfn id="clamp">clamp</dfn> on values of <a href="#dfn-size"><code>size</code></a> if index arithmetic exceeds the bounds of <a href="#dfn-size"><code>size</code></a>.
     In particular, this means that for a given slice call:</p>
     <ul>
@@ -371,7 +370,6 @@ function errorHandler(evt) {
     </ul>
       
     </dd></dl>
-<div class="ednote"><div class="ednoteHeader">Editorial note</div>Now that developers can use slice to specify the content type, should the use of RFC2046 formalism be relaxed?</div>
   </div>
   <div id="file" class="section">
   <h2>5.3. The File Interface</h2>
@@ -395,23 +393,24 @@ function errorHandler(evt) {
     
   </div>
   </div>
-  <div id="filereader-interface" class="section">
-  <h2>5.4. The FileReader Interface</h2>
+  <div id="blobreader-interface" class="section">
+  <h2>5.4. The BlobReader Interface</h2>
   <p>
-    This interface provides methods to read files in memory, and to access the data from those files using progress events and
+    This interface provides methods to read <a href="#dfn-file">Files</a> or <a href="#dfn-Blob">Blobs</a> in memory, and to access the data from those <a href="#dfn-file">Files</a> or <a href="#dfn-Blob">Blobs</a> using progress events and
     <a href="#event-handler-attributes">event handler attributes</a> [<a href="#DOM3Events">DOM3Events</a>].  It is desirable to read
     data from file systems asynchronously in the main thread of user agents.  This interface provides such an asynchronous API, and is specified to be used
-    within the context of the global object (<code>Window</code> [<a href="#HTML5">HTML5</a>]) as well as Web Workers (<code>WorkerUtils</code> [<a href="#Workers">WebWorkers</a>]).
+    with the global object (<code>Window</code> [<a href="#HTML5">HTML5</a>]) as well as Web Workers (<code>WorkerUtils</code> [<a href="#Workers">WebWorkers</a>]).
   </p>
   <div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
 
 [Constructor]
-interface <dfn id="dfn-filereader">FileReader</dfn> {
+interface <dfn id="dfn-blobreader">BlobReader</dfn> {
 
-  <span class="comment">// async read methods</span> 
-  void <a href="#dfn-readAsBinary" class="dfnref">readAsBinaryString</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">fileBlob</a>);
-  void <a href="#dfn-readAsText" class="dfnref">readAsText</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">fileBlob</a>, [Optional] in DOMString <a href="#dfn-encoding" class="dfnref">encoding</a>);
-  void <a href="#dfn-readAsDataURL" class="dfnref">readAsDataURL</a>(in <a href="#dfn-file" class="dfnref">File</a> <a href="#dfn-file-arg" class="dfnref">file</a>);
+  <span class="comment">// async read methods</span>
+  void <a href="#dfn-readAsBinaryArrayBuffer" class="dfnref">readAsArrayBuffer</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>);
+  void <a href="#dfn-readAsBinaryStringAsync" class="dfnref">readAsBinaryString</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>);
+  void <a href="#dfn-readAsText" class="dfnref">readAsText</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>, [Optional] in DOMString <a href="#dfn-encoding" class="dfnref">encoding</a>);
+  void <a href="#dfn-readAsDataURL" class="dfnref">readAsDataURL</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>);
 
   void <a href="#dfn-abort" class="dfnref">abort</a>();
 
@@ -423,8 +422,8 @@ interface <dfn id="dfn-filereader">FileReader</dfn> {
   
   readonly attribute unsigned short <a class="dfnref" href="#dfn-readystate">readyState</a>;
 
-  <span class="comment">// file data</span>
-  readonly attribute DOMString <a href="#dfn-result" class="dfnref">result</a>;
+  <span class="comment">// File or Blob data</span>
+  readonly attribute any <a href="#dfn-result" class="dfnref">result</a>;
   
   readonly attribute <a href="#dfn-fileerror" class="dfnref">FileError</a> <a href="#dfn-error" class="dfnref">error</a>;
 
@@ -437,19 +436,19 @@ interface <dfn id="dfn-filereader">FileReader</dfn> {
   attribute Function <a class="dfnref" href="#dfn-onloadend">onloadend</a>;
 
 };
-FileReader implements EventTarget;
+BlobReader implements EventTarget;
   </code></pre></div></div>
-<div id="filereader-task-source" class="section">
-<h3>5.4.1. The FileReader Task Source</h3>
-<p>The <a href="#dfn-filereader" class="dfnref"><code>FileReader</code></a> interface enables asynchronous reads on individual files by dispatching events to event handler methods.
+<div id="blobreader-task-source" class="section">
+<h3>5.4.1. The BlobReader Task Source</h3>
+<p>The <a href="#dfn-blobreader" class="dfnref"><code>BlobReader</code></a> interface enables asynchronous reads on individual blobs by dispatching events to event handler methods.
 Unless stated otherwise, the
 <a href="#task-source" class="dfnref">task source</a> that is used in this specification is the
-<a href="#dfn-filereader"><code>FileReader</code></a>.  This task source is used for events tasks that are asynchronously dispatched, or for
+<a href="#dfn-blobreader"><code>BlobReader</code></a>.  This task source is used for tasks that are asynchronously dispatched, or for
 event <a href="#queue-a-task" class="dfnref">tasks that are queued</a> for dispatching.</p>
 </div>
 <div id="filereaderConstrctr" class="section">
 <h3>5.4.2. Constructors</h3>
-<p>When the <code>FileReader()</code> constructor is invoked, the user agent MUST return a new <a href="#dfn-filereader"><code>FileReader</code></a> object. </p>
+<p>When the <code>BlobReader()</code> constructor is invoked, the user agent MUST return a new <a href="#dfn-blobreader"><code>BlobReader</code></a> object. </p>
 </div>
 <div id="event-handler-attributes-section" class="section">
 <h3>5.4.3. Event Handler Attributes</h3>
@@ -457,7 +456,7 @@ event <a href="#queue-a-task" class="dfnref">tasks that are queued</a> for dispa
 The following are the <a href="#event-handler-attributes">event
    handler attributes</a> (and their corresponding <a href="#event-handler-event-type" title="event handler event type">event
    handler event types</a>) that user agents MUST support on
-   <code><a href="#dfn-filereader">FileReader</a></code> as
+   <code><a href="#dfn-blobreader">BlobReader</a></code> as
    DOM attributes:  
 </p>
 <table>
@@ -503,33 +502,32 @@ The following are the <a href="#event-handler-attributes">event
 
 
 </div>
-<div id="filereader-state" class="section">
-<h3>5.4.4. FileReader States</h3>
-<p>The <a href="#dfn-filereader" class="dfnref"><code>FileReader</code></a> object can be in one of 3 states.  The
+<div id="blobreader-state" class="section">
+<h3>5.4.4. BlobReader States</h3>
+<p>The <a href="#dfn-blobreader" class="dfnref"><code>BlobReader</code></a> object can be in one of 3 states.  The
 <dfn id="dfn-readystate"><code>readyState</code></dfn> attribute, on getting,
 MUST return the current state, which MUST be one of the following values:</p>
 <dl>
  <dt><dfn id="dfn-empty"><code>EMPTY</code> (numeric value 0)</dfn></dt>
  <dd><p>The object has been constructed, and there are no pending reads.</p></dd>
  <dt><dfn id="dfn-loading"><code>LOADING</code> (numeric value 1)</dfn></dt>
- <dd><p>A file is being read.  One of the <a href="#read-methods">read methods</a> is being processed.</p></dd>
+ <dd><p>A blob is being read.  One of the <a href="#read-methods">read methods</a> is being processed.</p></dd>
  <dt><dfn id="dfn-done"><code>DONE</code> (numeric value 2)</dfn></dt>
- <dd><p>The entire file has been read into memory, or a <a href="#file-error-read">file error occurred during read</a>, or the read was
+ <dd><p>The entire File or Blob has been read into memory, or a <a href="#file-error-read">file error occurred during read</a>, or the read was
  aborted using <a href="#dfn-abort"><code>abort()</code></a>.
- The <a href="#dfn-filereader" class="dfnref">FileReader</a>
-is no longer reading a file.</p></dd>
+ The <a href="#dfn-blobreader" class="dfnref">BlobReader</a>
+is no longer reading a File or Blob.</p></dd>
 </dl>
 </div>
 <div id="reading-a-file" class="section">
-<h3>5.4.5. Reading a File</h3>
+<h3>5.4.5. Reading a File or Blob</h3>
 <div class="section" id="MultipleReads">
 <h4>5.4.5.1. Multiple Reads</h4>
 <p>
- The <a href="#dfn-filereader" class="dfnref">FileReader</a> interface makes available three asynchronous <dfn id="read-methods">read methods</dfn> --
- <a href="#dfn-readAsBinary" class="dfnref"><code>readAsBinaryString</code></a>,
+ The <a href="#dfn-blobreader" class="dfnref">BlobReader</a> interface makes available four asynchronous <dfn id="read-methods">read methods</dfn> --
+<a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer</code></a>, <a href="#dfn-readAsBinaryStringAsync" class="dfnref"><code>readAsBinaryString</code></a>,
  <a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a>, and <a href="#dfn-readAsDataURL" class="dfnref"><code>readAsDataURL</code></a>, which
- <em>read files into memory</em>.  If
- multiple read methods are called on the same <a href="#dfn-filereader" class="dfnref"><code>FileReader</code></a> object, user agents
+ <em>read files into memory</em>.  If multiple read methods are called on the same <a href="#dfn-blobreader" class="dfnref"><code>BlobReader</code></a> object, user agents
  MUST only process the <dfn id="last-call">last call</dfn>
  to a read method, which is the call that occurs <em>last</em> in a script block that has the <a href="#already-started">"already started" flag</a> set
  [<a href="#HTML5">HTML5</a>].
@@ -538,47 +536,55 @@ is no longer reading a file.</p></dd>
 </div>
 <div id="filedata-attr" class="section">
 <h4>5.4.5.2. The <code>result</code> attribute</h4>
-<p>On getting, the <dfn id="dfn-result"><code>result</code></dfn> attribute returns a file's data in string format, or <code>null</code>, 
-depending on the <a href="#read-methods" class="#dfnref">read method</a> that has been called on the <a href="#dfn-filereader" class="dfnref"><code>FileReader</code></a> object, and
+<p>On getting, the <dfn id="dfn-result"><code>result</code></dfn> attribute returns a Blob's data as a <code>DOMString</code>, or as an <code>ArrayBuffer</code>
+[<a href="#TypedArrays">TypedArrays</a>], or <code>null</code>, depending on the <a href="#read-methods" class="#dfnref">read method</a> that has been called on
+the <a href="#dfn-blobreader" class="dfnref"><code>BlobReader</code></a> object, and
 any errors that may have occurred.
-It can also return <em>partial file data</em>.
-<dfn id="partial-file-data">Partial file data</dfn> is the part of the file that has been read into memory <em>currently</em>
-during processing one of the two <a href="#read-methods">read methods</a>,
-<a href="#dfn-readAsBinary" class="dfnref"><code>readAsBinaryString</code></a> and
-<a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a>.  The list below is normative for the <code>result</code> attribute:
+It can also return <em>partial Blob data</em>.
+<dfn id="partial-blob-data">Partial Blob data</dfn> is the part of the File or Blob that has been read into memory <em>currently</em>;
+when processing the <a href="#read-methods">read methods</a>
+<a href="#dfn-readAsBinaryStringAsync" class="dfnref"><code>readAsBinaryString</code></a> or
+<a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a>, partial Blob data is a <code>DOMString</code> that is incremented as more bytes are <code>loaded</code> (a portion of the <code>total</code>) [<a href="#ProgressEvents">ProgressEvents</a>], and
+when processing <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer</code></a> partial Blob data is an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] objects consisting of the bytes <code>loaded</code> so far (a portion of the <code>total</code>)[<a href="#ProgressEvents">ProgressEvents</a>].  
+The list below is normative for the <code>result</code> attribute:
 </p>
 <ul>
   <li><p>On getting, if the <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> is <code>EMPTY</code> (no read method has been called)
   then the <code>result</code> attribute MUST return <code>null</code>.</p></li>
-  <li><p>On getting, if an error in reading the file has occurred (using <em>any</em> <a href="#read-methods"> read method</a>),
+  <li><p>On getting, if an error in reading the File or Blob has occurred (using <em>any</em> <a href="#read-methods"> read method</a>),
   then the <code>result</code> attribute MUST return the <code>null</code>.</p></li>
   <li><p>On getting, if the <a href="#dfn-readAsDataURL" class="#dfnref"><code>readAsDataURL</code></a> <a href="#read-methods">read method</a> is
-  used, the <code>result</code> attribute MUST return a Data URL [<a href="#DataURL">DataURL</a>] encoding of the file's data.</p></li>
-  <li><p>On getting, if the <a href="#dfn-readAsBinary" class="dfnref"><code>readAsBinaryString</code></a> <a href="#read-methods">read method</a> is called
-  (and no error in reading the file has occurred), then the <code>result</code> attribute MUST return a string representing the file's data as a <dfn id="binary-string">binary string</dfn>, in which
+  used, the <code>result</code> attribute MUST return a <code>DOMString</code> that is a Data URL [<a href="#DataURL">DataURL</a>] encoding of the File or Blob's data.</p></li>
+  <li><p>On getting, if the <a href="#dfn-readAsBinaryStringAsync" class="dfnref"><code>readAsBinaryString</code></a> <a href="#read-methods">read method</a> is called
+  (and no error in reading the File or Blob has occurred), then the <code>result</code> attribute MUST return a <code>DOMString</code> representing the File or Blob's data as a <dfn id="binary-string">binary string</dfn>, in which
   every byte is represented by an integer in the range [0..255].  On getting, <em>while processing</em> the
-  <a href="#dfn-readAsBinary"><code>readAsBinaryString</code></a> <a href="#read-methods">read method</a>, the <code>result</code>
-  attribute SHOULD return <a href="#partial-file-data">partial file data</a> in <a href="#binary-string">binary string</a> format.</p></li>
+  <a href="#dfn-readAsBinaryStringAsync"><code>readAsBinaryString</code></a> <a href="#read-methods">read method</a>, the <code>result</code>
+  attribute SHOULD return <a href="#partial-blob-data">partial Blob data</a> in <a href="#binary-string">binary string</a> format as a <code>DOMString</code> that is incremented as more data is read.</p></li>
   <li><p>On getting, if the <a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a> <a href="#read-methods">read method</a> is called
-  (and no error in reading the file has occurred),
-  then the <code>result</code> attribute MUST return a string representing the file's data as a text string, and SHOULD decode the string in memory in the format specified
+  (and no error in reading the File or Blob has occurred),
+  then the <code>result</code> attribute MUST return a string representing the File or Blob's data as a text string, and SHOULD decode the string in memory in the format specified
   by the <a href="#encoding-determination">encoding determination</a>.  On getting, <em>while processing</em> the
-  <a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a> <a href="#read-methods">read method</a>, this attibute SHOULD return
-  <a href="#partial-file-data">partial file data</a> in the format specified by
-  the <a href="#encoding-determination">encoding determination</a>.
+  <a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a> <a href="#rea  d-methods">read method</a>, this attibute SHOULD return
+  <a href="#partial-blob-data">partial Blob data</a> in the format specified by
+  the <a href="#encoding-determination">encoding determination</a> as a <code>DOMString</code> that is incremented as more data is read.
   </p></li>
+  <li><p>On getting, if the <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer</code></a> <a href="#read-methods">read method</a> is called (and no error in reading the File or Blob has occurred),
+  then the <code>result</code> attribute MUST return an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] object. On getting, <em>while processing</em> the
+  <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer</code></a> <a href="#read-methods">read method</a>, the <code>result</code>
+  attribute SHOULD return <a href="#partial-blob-data">partial Blob data</a> as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>]; <em>at least one</em> ArrayBuffer object is
+  returned till the Blob is fully loaded. </p></li>
 </ul>
 </div>
 <div id="readAsBinaryString" class="section">
 <h4>5.4.5.3. The <code>readAsBinaryString()</code> method</h4>
 <p>
-When the <dfn id="dfn-readAsBinary"><code>readAsBinaryString(fileBlob)</code></dfn> method is called, the user agent MUST run the steps below (unless otherwise indicated).
+When the <dfn id="dfn-readAsBinaryStringAsync"><code>readAsBinaryString(blob)</code></dfn> method is called, the user agent MUST run the steps below (unless otherwise indicated).
 </p>
 <ol>
   <li><p>Set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-empty" class="dfnref"><code>EMPTY</code></a>
   and set
   <a href="#dfn-result"><code>result</code></a> to <code>null</code>.</p></li>
-  <li><p>If an <a href="#file-error-read">error occurs during file read</a>, set <a href="#dfn-readystate"><code>readyState</code></a> to
+  <li><p>If an <a href="#file-error-read">error occurs during File or Blob read</a>, set <a href="#dfn-readystate"><code>readyState</code></a> to
   <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
   <ol>
     <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called
@@ -594,26 +600,26 @@ When the <dfn id="dfn-readAsBinary"><code>readAsBinaryString(fileBlob)</code></d
   </li>
   <li><p>If no error has occurred, set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
   <li><p><a href="#queue-a-task">Queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
-  <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  As the bytes from the <a href="#dfn-fileBlob"><code>fileBlob</code></a> argument are read,
+  <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  As the bytes from the <a href="#dfn-fileBlob"><code>blob</code></a> argument are read,
   user agents SHOULD ensure that on getting,
-  the <a href="#dfn-result"><code>result</code></a> attribute returns <a href="#partial-file-data">partial file data</a> representing the number of bytes currently <code>loaded</code>
+  the <a href="#dfn-result"><code>result</code></a> attribute returns <a href="#partial-blob-data">partial Blob data</a> representing the number of bytes currently <code>loaded</code>
   (as a fraction of the <code>total</code>) [<a href="#ProgressEvents">ProgressEvents</a>], as a <a href="#binary-string">binary string</a>.
   </p></li>
-  <li><p>When the file has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
-  <li><p>Set the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute to be <a href="#dfn-fileBlob"><code>fileBlob</code></a>'s data content
+  <li><p>When the File or Blob has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
+  <li><p>Set the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute to be <a href="#dfn-fileBlob"><code>blob</code></a>'s data content
   represented as a <a href="#binary-string">binary string</a>;
-  on getting, the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute returns the (complete) data of <a href="#dfn-fileBlob"><code>fileBlob</code></a>
+  on getting, the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute returns the (complete) data of <a href="#dfn-fileBlob"><code>blob</code></a>
   as a <a href="#binary-string">binary string</a>.</p></li>
   <li><p>Terminate this overall set of steps.</p></li>
 </ol>
 </div>
 <div id="readAsDataURL" class="section">
 <h4>5.4.5.4. The <code>readAsDataURL()</code> method</h4>
-<p>When the <dfn id="dfn-readAsDataURL"><code>readAsDataURL(file)</code></dfn> method is called, the user agent MUST run the steps below (unless otherwise indicated).</p>
+<p>When the <dfn id="dfn-readAsDataURL"><code>readAsDataURL(blob)</code></dfn> method is called, the user agent MUST run the steps below (unless otherwise indicated).</p>
 <ol>
   <li><p>Set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-empty" class="dfnref"><code>EMPTY</code></a> and set
   <a href="#dfn-result"><code>result</code></a> to <code>null</code>.</p></li>
-  <li><p>If an <a href="#file-error-read">error occurs during file read</a>, OR if a user agent's URL length limitations prevent returning data as a Data URL
+  <li><p>If an <a href="#file-error-read">error occurs during File or Blob read</a>, OR if a user agent's URL length limitations prevent returning data as a Data URL
   [<a href="#DataURL">DataURL</a>], 
   set <a href="#dfn-readystate"><code>readyState</code></a> to
   <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
@@ -632,10 +638,10 @@ When the <dfn id="dfn-readAsBinary"><code>readAsBinaryString(fileBlob)</code></d
   <li><p><a href="#queue-a-task">Queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
   <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  
   </p></li>
-  <li><p>When the file has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
-  <li><p>Set the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute to be <a href="#dfn-file-arg"><code>file</code></a>'s data content
+  <li><p>When the File or Blob has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
+  <li><p>Set the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute to be <a href="#dfn-file-arg"><code>File or Blob</code></a>'s data content
   represented as a Data URL [<a href="#DataURL">DataURL</a>];
-  on getting, the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute returns the (complete) data of <a href="#dfn-file-arg"><code>file</code></a> as a
+  on getting, the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute returns the (complete) data of <a href="#dfn-file-arg"><code>File or Blob</code></a> as a
   Data URL [<a href="#DataURL">DataURL</a>]</p></li>
   <li><p>Terminate this overall set of steps.</p></li>
 </ol>
@@ -643,14 +649,14 @@ When the <dfn id="dfn-readAsBinary"><code>readAsBinaryString(fileBlob)</code></d
 <div id="readAsDataText" class="section">
 <h4>5.4.5.5. The <code>readAsText()</code> method</h4>
 <p>
-When the <dfn id="dfn-readAsText"><code>readAsText(fileBlob, encoding)</code></dfn> method is called (the encoding argument is optional),
+When the <dfn id="dfn-readAsText"><code>readAsText(blob, encoding)</code></dfn> method is called (the encoding argument is optional),
 the user agent MUST run the steps below (unless otherwise indicated).
 </p>
 <ol>
   <li><p>Set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-empty" class="dfnref"><code>EMPTY</code></a>
   and set
   <a href="#dfn-result"><code>result</code></a> to <code>null</code>.</p></li>
-  <li><p>If an <a href="#file-error-read">error occurs during file read</a>, 
+  <li><p>If an <a href="#file-error-read">error occurs during File or Blob read</a>, 
   set <a href="#dfn-readystate"><code>readyState</code></a> to
   <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
   <ol>
@@ -667,25 +673,61 @@ the user agent MUST run the steps below (unless otherwise indicated).
   </li>
   <li><p>If no error has occurred, set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
   <li><p><a href="#queue-a-task">Queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
-  <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  As the bytes from the <a href="#dfn-fileBlob"><code>fileBlob</code></a> argument are read,
+  <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  As the bytes from the <a href="#dfn-fileBlob"><code>blob</code></a> argument are read,
   user agents SHOULD ensure that on getting,
-  the <a href="#dfn-result"><code>result</code></a> attribute returns <a href="#partial-file-data">partial file data</a> representing the number of bytes currently <code>loaded</code>
+  the <a href="#dfn-result"><code>result</code></a> attribute returns <a href="#partial-blob-data">partial Blob data</a> representing the number of bytes currently <code>loaded</code>
   (as a fraction of the <code>total</code>) [<a href="#ProgressEvents">ProgressEvents</a>], decoded in memory according to the <a href="#encoding-determination">encoding determination</a>.
   </p></li>
-  <li><p>When the file has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
-  <li><p>Set the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute to be <a href="#dfn-fileBlob"><code>fileBlob</code></a>'s data content
+  <li><p>When the File or Blob has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
+  <li><p>Set the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute to be <a href="#dfn-fileBlob"><code>blob</code></a>'s data content
   represented as a string in a format determined by the <a href="#encoding-determination">encoding determination</a>;
-  on getting, the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute returns the (complete) data of <a href="#dfn-fileBlob"><code>fileBlob</code></a>
+  on getting, the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute returns the (complete) data of <a href="#dfn-fileBlob"><code>blob</code></a>
   as a string, decoded in memory according to the <a href="#encoding-determination">encoding determination</a>.</p></li>
   <li><p>Terminate this overall set of steps.
   </p></li>
 </ol>
-    <div class="ednote"><div class="ednoteHeader">Editorial note</div>Issue: if it is determined that the <a href="#dfn-type"><code>type</code></a> attribute is one of <code>text/html</code>, <code>text/xml</code>,
-  or <code>application/xml</code> then the specification should allow HTML5 [<a href="#HTML5">HTML5</a>] parsing (creation of <code>Document</code>) or XML parsing specified
-  in XML specifications.  Should there be normative text for this? </div>
+</div>
+  <div id="readAsArrayBuffer" class="section">
+<h4>5.4.5.6. The <code>readAsArrayBuffer()</code> method</h4>
+<p>
+When the <dfn id="dfn-readAsArrayBuffer"><code>readAsArrayBuffer(blob)</code></dfn> method is called, the user agent MUST run the steps below (unless otherwise indicated).
+</p>
+<ol>
+  <li><p>Set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-empty" class="dfnref"><code>EMPTY</code></a>
+  and set
+  <a href="#dfn-result"><code>result</code></a> to <code>null</code>.</p></li>
+  <li><p>If an <a href="#file-error-read">error occurs during File or Blob read</a>, set <a href="#dfn-readystate"><code>readyState</code></a> to
+  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
+  <ol>
+    <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called
+    <a href="#dfn-error-event"><code>error</code></a>.  <em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
+    <a href="#dfn-error"><code>error</code></a> attribute MUST be a
+    a <a href="#dfn-fileerror"><code>FileError</code></a> object with a valid <a href="#dfn-error-codes">error code</a> that indicates the kind of
+    <a href="#file-error-read">file error that has occurred</a>.</p>
+    </li>
+    <li><p><a href="#dispatch-a-progress-event">Dispatch a progress event</a> called
+    <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
+    <li><p>Terminate this overall set of steps.</p></li>    
+  </ol>
+  </li>
+  <li><p>If no error has occurred, set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
+  <li><p><a href="#queue-a-task">Queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
+  <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  As the bytes from the <a href="#dfn-fileBlob"><code>blob</code></a> argument are read,
+  user agents SHOULD ensure that on getting,
+  the <a href="#dfn-result"><code>result</code></a> attribute returns <a href="#partial-blob-data">partial Blob data</a> representing the number of bytes currently <code>loaded</code>
+  (as a fraction of the <code>total</code>) [<a href="#ProgressEvents">ProgressEvents</a>], as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>]; user agents SHOULD return
+  at least one such <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] while processing this read method.
+  </p></li>
+  <li><p>When the File or Blob has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
+  <li><p>Set the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute to be <a href="#dfn-fileBlob"><code>blob</code></a>'s data content
+  represented as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>];
+  on getting, the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute returns the (complete) data of <a href="#dfn-fileBlob"><code>blob</code></a>
+  as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>].</p></li>
+  <li><p>Terminate this overall set of steps.</p></li>
+</ol>
 </div>
 <div id="abort" class="section">
-<h4>5.4.5.6. The abort() method</h4>
+<h4>5.4.5.7. The abort() method</h4>
 <p>
   When the <dfn id="dfn-abort"><code>abort()</code></dfn> method is called, the user agent MUST run the steps below:</p>
   <ol>
@@ -702,39 +744,36 @@ the user agent MUST run the steps below (unless otherwise indicated).
 </div>
 
 <div id="blobAndFileParams" class="section">
-<h4>5.4.5.7. Blob and File Parameters</h4>
-<p>Each of the <a href="#read-methods">read methods</a> take mandatory <a href="#dfn-file" class="dfnref"><code>File</code></a> or
+<h4>5.4.5.8. Blob Parameters</h4>
+<p>Each of the <a href="#read-methods">read methods</a> take mandatory
 <a href="#dfn-Blob" class="dfnref"><code>Blob</code></a> parameters.
 </p>
 <dl>
-<dt><dfn id="dfn-file-arg">file</dfn></dt>
-<dd><p>This is a <a href="#dfn-file"><code>File</code></a> object used to invoke the <code>readAsDataURL()</code> method.  It will typically be a reference to a single file in a
-<a href="#dfn-filelist"><code>FileList</code></a></p></dd>
-<dt><dfn id="dfn-fileBlob">fileBlob</dfn></dt>
-<dd><p>This is a <a href="#dfn-Blob"><code>Blob</code></a> object used to invoke the <code>readAsText()</code> and <code>readAsBinaryString()</code> methods.
+<dt><dfn id="dfn-fileBlob"></dfn></dt>
+<dd><p>This is a <a href="#dfn-Blob"><code>Blob</code></a> object used to invoke all four <a href="#read-methods">read methods</a>.
 For the purposes of this specification, it will typically be a reference to a single file in a
 <a href="#dfn-filelist"><code>FileList</code></a></p></dd>
 </dl>
 </div>
 <div id="enctype" class="section">
-<h4>5.4.5.8. Determining Encoding</h4>
+<h4>5.4.5.9. Determining Encoding</h4>
 <p>When reading files using the <a href="#dfn-readAsText"><code>readAsText()</code></a> <a href="#read-methods">read method</a>, the optional <dfn id="dfn-encoding"><code>
 encoding</code></dfn> string parameter MUST be a <em>name</em> or an <em>alias</em> of a character set
 used on the Internet [<a href="#IANACHARSET">IANACHARSET</a>], or else is considered invalid.  If the <code>encoding</code> argument supplied is valid, user agents SHOULD
-decode the <a href="#dfn-fileBlob"><code>fileBlob</code></a> using that encoding.  If the <code>encoding</code> argument is invalid,
+decode the <a href="#dfn-fileBlob"><code>blob</code></a> using that encoding.  If the <code>encoding</code> argument is invalid,
 or the optional <code>encoding</code> argument is not supplied,
-or the user agent cannot decode the <a href="#dfn-fileBlob"><code>fileBlob</code></a> using <code>encoding</code>, the following
+or the user agent cannot decode the <a href="#dfn-fileBlob"><code>blob</code></a> using <code>encoding</code>, the following
 <dfn id="encoding-determination">encoding determination</dfn> algorithm MUST be
 followed:</p>
 <ol>
-<li>User agents SHOULD decode <a href="#dfn-fileBlob"><code>fileBlob</code></a> data using <a href="#dfn-encoding"><code>encoding</code></a>, if it is provided.
+<li>User agents SHOULD decode <a href="#dfn-fileBlob"><code>blob</code></a> data using <a href="#dfn-encoding"><code>encoding</code></a>, if it is provided.
 If the <code>encoding</code> <a href="#dfn-encoding">argument is invalid</a>, or the optional <code>encoding</code> argument is not supplied,
-or the user agent cannot decode the <a href="#dfn-fileBlob"><code>fileBlob</code></a> using <code>encoding</code>, then let <var>charset</var> be null.</li>
+or the user agent cannot decode the <a href="#dfn-fileBlob"><code>blob</code></a> using <code>encoding</code>, then let <var>charset</var> be null.</li>
 <li>
 
     <p>For each of the rows in the
      following table, starting with the first one and going down, if the
-     first bytes of <a href="#dfn-fileBlob"><code>fileBlob</code></a> match the bytes given in the first
+     first bytes of <a href="#dfn-fileBlob"><code>blob</code></a> match the bytes given in the first
      column, then let <var>charset</var> be the encoding given in the cell in
      the second column of that row. If there is no match <var>charset</var>
      remains null.</p>
@@ -781,8 +820,8 @@ or the user agent cannot decode the <a href="#dfn-fileBlob"><code>fileBlob</code
 
    </p></li><li>
 
-    <p>Return the result of decoding the <a href="#dfn-fileBlob"><code>fileBlob</code></a> using
-     <var>charset</var>; on getting, the <a href="#dfn-result"><code>result</code></a> attribute of the <a href="#dfn-filereader"><code>FileReader</code></a>
+    <p>Return the result of decoding the <a href="#dfn-fileBlob"><code>blob</code></a> using
+     <var>charset</var>; on getting, the <a href="#dfn-result"><code>result</code></a> attribute of the <a href="#dfn-blobreader"><code>BlobReader</code></a>
      object returns a string in <var>charset</var> format.  The synchronous
      <a href="#dfn-readAsTextSync"><code>readAsText</code></a> method of the <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object returns a string in <var>charset</var> format.
      Replace bytes or sequences of bytes that are not
@@ -791,7 +830,7 @@ or the user agent cannot decode the <a href="#dfn-fileBlob"><code>fileBlob</code
 </ol>
 </div>
 <div id="events" class="section">
-<h4>5.4.5.9. Events</h4>
+<h4>5.4.5.10. Events</h4>
 <p>When this specification says to <dfn id="make-progress-notifications">make progress notifications </dfn> for a <a href="#read-methods">read method</a>,
 the following steps MUST be followed:</p>
 <ol>
@@ -799,27 +838,27 @@ the following steps MUST be followed:</p>
 While the read method is processing, <a href="#queue-a-task">queue a task</a> to
 <a href="#dispatch-a-progress-event">dispatch a progress event</a> called <a href="#dfn-progress-event"><code>progress</code></a> about every 50ms <em>or</em> for every byte
 read into memory, whichever is least frequent.</p></li>
-<li><p>When the data from the <a href="#dfn-file-arg"><code>file</code></a> or <a href="#dfn-fileBlob"><code>fileBlob</code></a>
+<li><p>When the data from the <a href="#dfn-file-arg"><code>File or Blob</code></a> 
 has been completely read into memory, <a href="#queue-a-task">queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called
 <a href="#dfn-load-event"><code>load</code></a></p></li>
-<li><p>When the data from the <a href="#dfn-file-arg"><code>file</code></a> or <a href="#dfn-fileBlob"><code>fileBlob</code></a>
+<li><p>When the data from the <a href="#dfn-file-arg"><code>File or Blob</code></a> or <a href="#dfn-fileBlob"><code>blob</code></a>
 has been completely read into memory, <a href="#queue-a-task">queue a task</a> to <a href="#dispatch-a-progress-event">dispatch a progress event</a> called
 <a href="#dfn-loadend-event"><code>loadend</code></a></p></li>
 </ol>
 <p>
   When this specification says to <dfn id="dispatch-a-progress-event">dispatch a progress event</dfn> <em>called e</em> (for some
-  <code>ProgressEvent</code> <code>e</code> [<a href="#DOM3Events">DOM3Events</a>] dispatched on a <a href="#dfn-filereader"><code>FileReader</code></a> <code>reader</code>),
+  <code>ProgressEvent</code> <code>e</code> [<a href="#DOM3Events">DOM3Events</a>] dispatched on a <a href="#dfn-blobreader"><code>BlobReader</code></a> <code>reader</code>),
   the following list MUST be followed:</p>
   <ul>
   <li><p>The progress event <code>e</code> does not bubble.  <code>e.bubbles</code> MUST be false [<a href="#DOM3Events">DOM3Events</a>]</p></li>
   <li><p>The progress event <code>e</code> is NOT cancelable. <code>e.cancelable</code> MUST be false [<a href="#DOM3Events">DOM3Events</a>]</p></li>
-  <li><p>The progress event <code>e</code> is dispatched on the <a href="#dfn-filereader" class="dfnref"><code>FileReader</code></a> object
+  <li><p>The progress event <code>e</code> is dispatched on the <a href="#dfn-blobreader" class="dfnref"><code>BlobReader</code></a> object
   (which is the <a href="#task-source">task source</a> in this specification, and the <code>EventTarget</code>).  User agents MUST call
   <code>reader.dispatchEvent(e)</code> [<a href="#DOM3Events">DOM3Events</a>]</p></li>
   </ul>
   <div id="event-summary" class="section">
-  <h5>5.4.5.9.1. Event Summary</h5>
-  <p>The following are the events that are dispatched on <code><a href="#dfn-filereader">FileReader</a></code> objects.</p>
+  <h5>5.4.5.10.1. Event Summary</h5>
+  <p>The following are the events that are dispatched on <code><a href="#dfn-blobreader">BlobReader</a></code> objects.</p>
   <table>
 
    <thead>
@@ -844,7 +883,7 @@ has been completely read into memory, <a href="#queue-a-task">queue a task</a> t
 
      </td><td><code>ProgressEvent</code>
 
-     </td><td>While reading (and decoding) <a href="#dfn-file-arg"><code>file</code></a> or <a href="#dfn-fileBlob"><code>fileBlob</code></a> data, and reporting <a href="#partial-file-data">partial file data</a> (<code>progess.loaded</code>/<code>progress.total</code>)
+     </td><td>While reading (and decoding) <a href="#dfn-file-arg"><code>File or Blob</code></a>, and reporting <a href="#partial-blob-data">partial Blob data</a> (<code>progess.loaded</code>/<code>progress.total</code>)
 
     </td></tr><tr>
      <td><dfn id="dfn-abort-event" title="abort-event"><code>abort</code></dfn>
@@ -883,69 +922,80 @@ has been completely read into memory, <a href="#queue-a-task">queue a task</a> t
 </div>
 <div id="readingOnThreads" class="section">
 <h2>5.5. Reading on Threads</h2>
-<p>Web Workers allow for the use of synchronous file read APIs, since the effect of such read mechanisms on the main thread is mitigated.
+<p>Web Workers allow for the use of synchronous File or Blob read APIs, since the effect of such read mechanisms on the main thread is mitigated.
 This section defines a synchronous API, which can be used within Workers [<a href="#Workers">Web Workers</a>].  Workers can avail of both the asynchronous API (the
-<code><a href="#dfn-filereader">FileReader</a></code>
+<code><a href="#dfn-blobreader">BlobReader</a></code>
 object) <em>and</em> the synchronous API (the <code><a href="#dfn-FileReaderSync">FileReaderSync</a></code> object).</p>
 <div id="FileReaderSync" class="section">
-<h3>5.5.1. The <code>FileReaderSync</code> Interface</h3>
-<p>This interface  provides methods to read files in memory, and to access the data from those files as strings.</p>
+<h3>5.5.1. The <code>BlobReaderSync</code> Interface</h3>
+<p>This interface  provides methods to read files or Blobs in memory, and to access the data of these files or Blobs.</p>
 <div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
 
 [Constructor]
-interface <dfn id="dfn-FileReaderSync">FileReaderSync</dfn> {
+interface <dfn id="dfn-BlobReaderSync">BlobReaderSync</dfn> {
 
   <span class="comment">// Synchronously return strings</span>
   <span class="comment">// All three methods raise FileException</span>
   
-  DOMString <a href="#dfn-readAsBinaryStringSync">readAsBinaryString</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">fileBlob</a>); 
-  DOMString <a href="#dfn-readAsTextSync">readAsText</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">fileBlob</a>, [Optional] in DOMString <a href="#dfn-encoding">encoding</a>);                                                       
-  DOMString <a href="#dfn-readAsDataURLSync">readAsDataURL</a>(in <a href="#dfn-file">File</a> <a href="#dfn-file-arg">file</a>); 
+  ArrayBuffer <a href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
+  DOMString <a href="#dfn-readAsBinaryStringSync">readAsBinaryString</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>); 
+  DOMString <a href="#dfn-readAsTextSync">readAsText</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>, [Optional] in DOMString <a href="#dfn-encoding">encoding</a>);                                                       
+  DOMString <a href="#dfn-readAsDataURLSync">readAsDataURL</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>); 
 };
 </code></pre></div></div>
 <div class="note"><div class="noteHeader">Note</div>
-  <p>The <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object's <dfn id="read-method-sync">read methods</dfn> -- namely 
-  <code><a href="#dfn-readAsBinaryStringSync">readAsBinaryString</a></code>, <code><a href="#dfn-readAsTextSync">readAsText</a></code>, and
-  <code><a href="#dfn-readAsDataURLSync">readAsDataURL</a></code> -- have the same <em>method signatures</em> as the <a href="#read-methods">read methods</a> of the
-  <a href="#dfn-filereader"><code>FileReader</code></a> object, and <em>read files into memory</em>.  The difference is that these are specified to behave <em>synchronously</em>, with string return values.
+  <p>The <a href="#dfn-BlobReaderSync"><code>BlobReaderSync</code></a> object's <dfn id="read-method-sync">read methods</dfn> -- namely 
+  <code><a href="#dfn-readAsBinaryStringSync">readAsBinaryString</a></code>, <code><a href="#dfn-readAsTextSync">readAsText</a></code>, 
+  <code><a href="#dfn-readAsDataURLSync">readAsDataURL</a></code> and <code><a href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</a></code> -- have the same <em>method signatures</em> as the <a href="#read-methods">read methods</a> of the
+  <a href="#dfn-blobreader"><code>BlobReader</code></a> object, and <em>read files into memory</em>.  The difference is that these are specified to behave <em>synchronously</em>, with string return values.
   These methods raise <a href="#dfn-FileException"><code>FileException</code></a>.</p>
 </div>
 
 <div id="readAsBinaryStringSyncSection" class="section">
 <h3>5.5.1.1. The <code>readAsBinaryString</code> method</h3>
-<p>When the <dfn id="dfn-readAsBinaryStringSync"><code>readAsBinaryString(fileBlob)</code></dfn> method is called, the following steps MUST be followed:</p>
+<p>When the <dfn id="dfn-readAsBinaryStringSync"><code>readAsBinaryString(blob)</code></dfn> method is called, the following steps MUST be followed:</p>
 <ol>
-<li><p>If an <a href="#file-error-read">error occurs during file read</a>, throw a
+<li><p>If an <a href="#file-error-read">error occurs during File or Blob read</a>, throw a
 <a href="#dfn-FileException"><code>FileException</code></a> with the <a href="#dfn-error-codes">appropriate error code</a>. Terminate these overall steps.</p></li>
-<li><p>If no error has occurred, read <a href="#dfn-fileBlob"><code>fileBlob</code></a> into memory.  Return the data contents of
-<a href="#dfn-fileBlob"><code>fileBlob</code></a> as a <a href="#binary-string">binary string</a>.</p></li>
+<li><p>If no error has occurred, read <a href="#dfn-fileBlob"><code>blob</code></a> into memory.  Return the data contents of
+<a href="#dfn-fileBlob"><code>blob</code></a> as a <a href="#binary-string">binary string</a>.</p></li>
 </ol>
 </div>
 <div id="readAsTextSync" class="section">
 <h3>5.5.1.2. The <code>readAsText</code> method</h3>
-<p>When the <dfn id="dfn-readAsTextSync"><code>readAsText(fileBlob, encoding)</code></dfn> method is called (the
+<p>When the <dfn id="dfn-readAsTextSync"><code>readAsText(blob, encoding)</code></dfn> method is called (the
 <a href="#dfn-encoding"><code>encoding</code></a> argument is optional), the following steps MUST be followed:</p>
 <ol>
-<li><p>If an <a href="#file-error-read">error occurs during file read</a>, throw a
+<li><p>If an <a href="#file-error-read">error occurs during File or Blob read</a>, throw a
 <a href="#dfn-FileException"><code>FileException</code></a> with the <a href="#dfn-error-codes">appropriate error code</a>. Terminate these overall steps.</p></li>
-<li><p>If no error has occurred, read <a href="#dfn-fileBlob"><code>fileBlob</code></a> into memory.  Return the data contents of <a href="#dfn-fileBlob"><code>fileBlob</code></a>
+<li><p>If no error has occurred, read <a href="#dfn-fileBlob"><code>blob</code></a> into memory.  Return the data contents of <a href="#dfn-fileBlob"><code>blob</code></a>
 using the <a href="#encoding-determination">encoding determination</a> algorithm.</p></li>
 </ol>
 </div>
 <div id="readAsDataURLSync-section" class="section">
 <h3>5.5.1.3. The <code>readAsDataURL</code> method</h3>
 <p>
-  When the <dfn id="dfn-readAsDataURLSync"><code>readAsDataURL(file)</code></dfn> method is called, the following steps MUST be followed:</p>
+  When the <dfn id="dfn-readAsDataURLSync"><code>readAsDataURL(blob)</code></dfn> method is called, the following steps MUST be followed:</p>
 <ol>
 <li><p>If an <a href="#file-error-read">error occurs during file read</a>, throw a
 <a href="#dfn-FileException"><code>FileException</code></a> with the <a href="#dfn-error-codes">appropriate error code</a>. Terminate these overall steps.</p></li>
-<li><p>If no error has occurred, read <a href="#dfn-fileBlob"><code>fileBlob</code></a> into memory. Return the data contents of <a href="#dfn-fileBlob"><code>fileBlob</code></a>
+<li><p>If no error has occurred, read <a href="#dfn-fileBlob"><code>blob</code></a> into memory. Return the data contents of <a href="#dfn-fileBlob"><code>blob</code></a>
 as a Data URL [<a href="#DataURL">DataURL</a>]</p>
 <div class="note"><div class="noteHeader">Note</div><p>URL length limitiations for Data URLs limit the usefulness of this call.  A user agent may throw an <a href="#dfn-ENCODING_ERR"><code>ENCODING_ERR</code></a>
-for <a href="#dfn-file-arg"><code>file</code></a>
+for <a href="#dfn-file-arg"><code>File or Blob</code></a>
 arguments which, when encoded as Data URLs, exceed URL length limitations for that user agent.[<a href="#DataURL">DataURL</a>] </p></div>
 </li>
 </ol> 
+</div>
+<div id="readAsArrayBufferSyncSection" class="section">
+<h3>5.5.1.4. The <code>readAsArrayBuffer</code> method</h3>
+<p>When the <dfn id="dfn-readAsArrayBufferSync"><code>readAsArrayBuffer(blob)</code></dfn> method is called, the following steps MUST be followed:</p>
+<ol>
+<li><p>If an <a href="#file-error-read">error occurs during File or Blob read</a>, throw a
+<a href="#dfn-FileException"><code>FileException</code></a> with the <a href="#dfn-error-codes">appropriate error code</a>. Terminate these overall steps.</p></li>
+<li><p>If no error has occurred, read <a href="#dfn-fileBlob"><code>blob</code></a> into memory.  Return the data contents of
+<a href="#dfn-fileBlob"><code>blob</code></a> as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] </p></li>
+</ol>
 </div>
 </div>
 <div class="ednote"><div class="ednoteHeader">Editorial note</div><p>TODO: Land sample code here</p></div>  
@@ -956,11 +1006,11 @@ arguments which, when encoded as Data URLs, exceed URL length limitations for th
     <dfn id="file-error-read">Error conditions</dfn> can occur when reading files from the underlying filesystem.  The list below of potential error conditions is <em>informative</em>,
     with links to <em>normative</em> descriptions of error codes:</p>
     <ul>
-    <li><p>The file being accessed may not exist at the time one of the asynchronous <a href="#read-methods">read methods</a> or synchronous
+    <li><p>The File or Blob being accessed may not exist at the time one of the asynchronous <a href="#read-methods">read methods</a> or synchronous
     <a href="#read-method-sync">read methods</a>
     are called. This may be due to it having been moved or deleted after a reference to it was acquired (e.g. concurrent modification with another application).  See
 <a href="#dfn-NOT_FOUND_ERR"><code>NOT_FOUND_ERR</code></a></p></li>
-    <li><p>A file may be unreadable.  This may be due to permission problems that occur after a reference to a file has been acquired
+    <li><p>A File or Blob may be unreadable.  This may be due to permission problems that occur after a reference to a File or Blob has been acquired
     (e.g. concurrent lock with another application). See <a href="#dfn-NOT_READABLE_ERR"><code>NOT_READABLE_ERR</code></a></p></li>
     <li><p>User agents MAY determine that some files are unsafe for use within Web applications.  A file may change on disk since the original file selection,
     thus resulting in an invalid read.  Additionally, some file and directory structures may be considered restricted
@@ -968,7 +1018,7 @@ by the underlying filesystem; attempts to read from them may be considered a sec
 See <a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a></p></li>
     <li><p>Files may be too large to return to the data structures of a Web application.  An example might be that URL length limitations imposed by user agents on Data URLs may
 make obtaining large files encoded as Data URLs impossible to return [<a href="#DataURL">DataURL</a>].  See <a href="#dfn-ENCODING_ERR"><code>ENCODING_ERR</code></a></p></li>
-<li><p>During the reading of a file, the Web application may itself wish to abort (see <a href="#dfn-abort"><code>abort()</code></a>) the call to an asynchronous read method. See
+<li><p>During the reading of a File or Blob, the Web application may itself wish to abort (see <a href="#dfn-abort"><code>abort()</code></a>) the call to an asynchronous read method. See
 <a href="#dfn-ABORT_ERR"><code>ABORT_ERR</code></a>
 </p></li>
     
@@ -976,7 +1026,7 @@ make obtaining large files encoded as Data URLs impossible to return [<a href="#
 <div id="FileErrorInterface" class="section">
 <h3>5.6.1. The <code>FileError</code> Interface</h3>
 <p>
-  This interface is used to report errors asynchronously.  The <a href="#dfn-filereader"><code>FileReader</code></a> object's <dfn id="dfn-error">error</dfn> attribute is a
+  This interface is used to report errors asynchronously.  The <a href="#dfn-blobreader"><code>BlobReader</code></a> object's <dfn id="dfn-error">error</dfn> attribute is a
   <a href="#dfn-fileerror"><code>FileError</code></a> object, and is accessed asynchronously through the <a href="#dfn-onerror"><code>onerror</code></a> event handler when
   <a href="#dfn-error-event">error events</a> are generated.
 </p>
@@ -1028,13 +1078,13 @@ the most appropriate code from the table below.</p>
      </th><th>Situation
    </th></tr></thead><tbody><tr><td><dfn id="dfn-NOT_FOUND_ERR" title="dfn-NOT_FOUND_ERR"><code>NOT_FOUND_ERR</code></dfn>
      </td><td><dfn id="dfn-fileerror-code-8" title="dfn-fileerror-code-8">8</dfn>
-     </td><td>User agents MUST use this code if the file resource could not be found at the time the read was processed
+     </td><td>User agents MUST use this code if the File or Blob resource could not be found at the time the read was processed
 
     </td></tr><tr><td><dfn id="dfn-SECURITY_ERR" title="dfn-SECURITY_ERR"><code>SECURITY_ERR</code></dfn>
      </td><td><dfn id="dfn-filerror-code-18" title="dfn-filerror-code-18">18</dfn>
      </td><td>User agents MAY use this code if: <ul>
      <li>it is determined that certain files are unsafe for access within a Web application</li>
-     <li>it is determined that too many read calls are being made on file resources </li>
+     <li>it is determined that too many read calls are being made on File or Blob resources </li>
      <li>it is determined that the file has changed on disk since the user selected it</li>
      </ul>
      <p>This is a security error code to be used in situations not covered by any other error codes.</p>
@@ -1046,14 +1096,14 @@ the most appropriate code from the table below.</p>
             
     </td></tr><tr><td><dfn id="dfn-NOT_READABLE_ERR" title="dfn-NOT_READABLE_ERR"><code>NOT_READABLE_ERR</code></dfn>
      </td><td><dfn id="dfn-fileerror-code-24" title="dfn-fileerror-code-24">24</dfn>
-     </td><td>User agents MUST use this code if the file cannot be read, typically due due to permission problems that occur after a
-     reference to a file has been acquired (e.g. concurrent lock with another application).
+     </td><td>User agents MUST use this code if the File or Blob cannot be read, typically due due to permission problems that occur after a
+     reference to a File or Blob has been acquired (e.g. concurrent lock with another application).
      
      
     </td></tr><tr><td><dfn id="dfn-ENCODING_ERR" title="dfn-ENCODING_ERR"><code>ENCODING_ERR</code></dfn>
      </td><td><dfn id="dfn-filerror-code-26" title="dfn-fileerror-code-26">26</dfn>
 
-     </td><td>User agents MAY use this code if URL length limitations for Data URLs in their implementations place limits on the file data that can be
+     </td><td>User agents MAY use this code if URL length limitations for Data URLs in their implementations place limits on the File or Blob data that can be
      represented as a Data URL [<a href="#DataURL">DataURL</a>].  User agents MUST NOT use this code for the asynchronous <a href="#dfn-readAsText"><code>readAsText()</code></a> call
      and MUST NOT use this code for the synchronous <a href="#dfn-readAsTextSync"><code>readAsText()</code></a> call, since encoding is determined by the
      <a href="#encoding-determination">encoding determination</a> algorithm.
@@ -1063,15 +1113,119 @@ the most appropriate code from the table below.</p>
   </div>
 <div id="url" class="section">
 <h2>5.7. A URL for Blob and File reference</h2>
-<div class="ednote"><div class="ednoteHeader">Editorial note</div>
-This section does not enjoy the full consensus of the WG.
+<p>This section defines a scheme for a unique URL used to refer to Blob objects (Files or Blobs).  Whereas the file URI scheme (defined in [<a href="#RFC1630">RFC1630</a>] and
+[<a href="#RFC1738">RFC1738</a>]) allows user agents to surface local file and directory structures, it cannot be used within web applications owing to origin considerations.  Additionally, the semantics of the file URI scheme does not
+allow use with web APIs and elements that expect HTTP response codes.  The introduction of a scheme to be used with individual File or Blob objects is useful for a number of reasons; the following
+list is informative:
 <ul>
-<li>The proposed URL scheme is filedata: .  Mozilla already ships with moz-filedata:</li>
-<li>Will reusing the url with uuid scheme described in RFC4122 [<a href="#UUID">RFC4122</a>] face origin-determination issues?
-</li><li>Are there further security caveats?</li>
-<li>Is using a subset of HTTP response codes acceptable practice, or should we forgo response codes in this specification?</li>
-<li>Lifetime issues with respect to threads needs to be considered.</li>
+<li><p>This scheme can be used with web APIs such as <code>XMLHttpRequest</code> [<a href="XHR2">XHR2</a>], and with elements that are designed to be used with URLs, such as the
+<code>img</code> element [<a href="#HTML5">HTML5</a>].  In general, this scheme is designed to be used wherever URLs can be used on the web.  This would allow File or Blob data to be
+used within web applications and accessed by URLs.</p></li>
+<li><p>This scheme can be associated with a well-defined subset of HTTP, so that web applications can benefit from use alongside HTTP URLs. [<a href="#HTTP">HTTP</a>].  This differs from
+file URIs, which do not have an affiliated request-response behavior with status codes.  Some user agents silently fail if file URIs are requested insecurely.</p></li>
+<li><p>This scheme can allow for fragment identifiers for well-defined format types.  For example, if the file selected is an SVG file, this scheme should allow for SVG fragment identifiers.  If
+the file selected is an HTML file, this scheme should allow for fragment identifiers within an HTML document.</p></li>
+<li><p>Whereas file URIs are subject to strict same-origin restrictions for security reasons and allow directory browsing, this scheme is applicable only to user-selected files
+(and to Blob objects that web applications generate).  Along with an origin policy and a lifetime stipulation, this scheme can allow safe access to binary data from web applications.</p></li>
 </ul>
+</p>
+<div id="ABNFForBlob" class="section">
+<h3>5.7.1. Definition of blob URL Scheme</h3>
+<p>This section defines a <code>blob:</code> URL scheme using a formal grammar.  A <code>blob:</code> URL consists of the blob: scheme and an opaque string, along with zero or one fragment identifiers.
+In this specification an <dfn id="opaqueString">opaque string</dfn> is a unique string which can be heuristically generated upon demand such that the probability that two are alike is small, and which is hard to guess (e.g.
+the Universally Unique IDentifier (UUID) as defined in [<a href="#UUID">RFC4122</a>] is an opaque string). A <dfn id="fragmentIdentifier">fragment identifier</dfn> is optional, and if used,
+has a distinct interpretation depending on the media type of the Blob or File resource in question [<a href="#RFC2046">RFC2046</a>].</p>
+<p>This section uses the Augmented Backus-Naur Form (ABNF), defined in [<a href="#ABNF">RFC2234</a>]. All <a href="#ABNFForBlob">blob:</a> URLs MUST follow this ABNF.
+</p>
+
+
+<div class="block"><div class="blockTitleDiv"><span class="blockTitle">ABNF</span></div><div class="blockContent"><pre class="code"><code class="abnf-code">
+blob = scheme ":" opaqueString [fragIdentifier]
+
+scheme = "blob"
+
+; scheme is always "blob"
+
+; opaqueString MAY be a UUID in its canonical form
+; UUID is defined in [<a href="#UUID">RFC4122</a>]
+; User agents MAY choose any other values for opaqueString
+; opaqueString arguments MUST be unique
+
+fragIdentifier = "#" fragment
+
+; fragment is defined in [<a href="#RFC3986">RFC3986</a>]
+
+fragment    = *( pchar / "/" / "?" )
+
+
+</code></pre></div></div>
+<p>User agents MAY use a UUID with <a href="#ABNFForBlob">blob:</a> URIs as <a href="#opaqueStrings">opaque strings</a>.  UUIDs are defined in [<a href="#UUID">RFC4122</a>] and are used here without the urn: scheme.
+Below is an ABNF [<a href="#ABNF">RFC2234</a>] for UUID.
+</p>
+<div class="block"><div class="blockTitleDiv"><span class="blockTitle">ABNF</span></div><div class="blockContent"><pre class="code"><code class="abnf-code">
+UUID                   = time-low "-" time-mid "-"
+                         time-high-and-version "-"
+                         clock-seq-and-reserved
+                         clock-seq-low "-" node
+time-low               = 4hexOctet
+time-mid               = 2hexOctet
+time-high-and-version  = 2hexOctet
+clock-seq-and-reserved = hexOctet
+clock-seq-low          = hexOctet
+node                   = 6hexOctet
+hexOctet               = hexDigit hexDigit
+hexDigit =
+         "0" / "1" / "2" / "3" / "4" / "5" / "6" / "7" / "8" / "9" /
+         "a" / "b" / "c" / "d" / "e" / "f" /
+         "A" / "B" / "C" / "D" / "E" / "F"
+
+</code></pre></div></div>
+<p>A valid blob: URL could look like: <code>blob:550e8400-e29b-41d4-a716-446655440000#aboutABBA</code></p>
+</div>
+<div id="originOfBlob" class="section">
+<h3>5.7.2. Origin of Blob URLs</h3>
+<p><dfn id="spawnBlob">Spawning a Blob object</dfn> is defined as obtaining a reference to a <a href="#dfn-File"><code>File</code></a> object or a <a href="#dfn-Blob"><code>Blob</code></a>
+object within script.  This can be done by obtaining a reference to user-selected files
+with the DOM or to a Blob object created programmatically. </p>
+<p>The origin of <a href="#ABNFForBlob">blob:</a> URLs MUST be the  origin of the script that <a href="#spawnBlob">spawned the Blob</a> object on which the
+<a href="#dfn-url"><code>url</code></a> attribute was called [<a href="#HTML5">HTML5</a>].
+<a href="#ABNFForBlob">blob:</a> URLs MUST only be valid within this origin; multiple accesses of the <a href="#dfn-url"><code>url</code></a> property of a <a href="#dfn-Blob">Blob</a> object within the same origin yield the same blob: URL. Retrieving them from within any other origin results in a
+<strong>403 Not Allowed</strong> with an additional affiliated message that implementations MAY use (e.g. "Origin Violation"). [<a href="#processingModel">Processing Model for blob:URLs</a>]</p>
+</div>
+
+<div id="lifeTime" class="section">
+<h3>5.7.3. Lifetime of Blob URLs</h3>
+<p>Implementations MUST ensure that the lifetime of <a href="#ABNFForBlob">blob:</a> URLs is the same as the lifetime of the
+<code>Document</code>[<a href="#HTML5">HTML5</a>] of the origin script which <a href="#spawnBlob">spawned the Blob object</a> on which the <a href="#dfn-url"><code>url</code></a>
+attribute was called.  When this <code>Document</code> is destroyed, implementations MUST treat requests for <a href="#ABNFForBlob">blob:</a> URLs created within this
+<code>Document</code> as <strong>404 Not Found</strong>.[<a href="#processingModel">Processing Model for blob: URLs</a>]</p>
+</div>
+<div id="processingModel" class="section">
+<h3>5.7.4. Processing Model for Blob URLs</h3>
+<p>User agents MUST only support requests with GET [<a href="#HTTP">HTTP</a>] and MUST only support a subset of responses that are equivalent to the following from HTTP [<a href="#HTTP">HTTP</a>]:</p>
+
+<div id="TwoHundredOK" class="section">
+<h4>5.7.4.1. 200 OK</h4>
+<p>This response [<a href="#HTTP">HTTP</a>] MUST be used if the request has succeeded, namely the <a href="#ABNFForBlob">blob:</a> URL has been requested with a GET,
+satisfies the <a href="#originOfBlob">origin requirement</a>, and satisfies the <a href="#lifetime">lifetime requirement.</a>
+</p>
+</div>
+<div id="FourOhThreeNotAllowed" class="section">
+<h4>5.7.4.2. 403 Not Allowed</h4>
+<p>This response [<a href="#HTTP">HTTP</a>] MUST be used if the request violates the <a href="#origin">origin requirement</a>.  Additionally, it MUST be used if the underlying file's permission structure has changed (thus preventing access from web content).  Implementations MAY accompany this response with a message (e.g. "Origin Violation").</p>
+</div>
+<div id="FourOhFourNotFound" class="section">
+<h4>5.7.4.3. 404 Not Found</h4>
+<p>This response [<a href="#HTTP">HTTP</a>] MUST be used if the request violates the <a href="#lifeTime">lifetime</a> requirement (e.g. if a cached <a href="#ABNFForBlob">blob:</a>
+URL persists after the specified lifetime of the URL has elapsed). Additionally, it MUST be used if the underlying file has moved.</p>
+</div>
+<div id="FiveHundredInternalServerError" class="section">
+<h4>5.7.4.4. 500 Internal Server Error</h4>
+<p>
+  This response [<a href="#HTTP">HTTP</a>] MAY be used as a generic error condition, including for security errors or access violations (e.g if the request method is anything other than GET
+  [<a href="#HTTP">HTTP</a>].  Implementations MAY accompany this response with a message (e.g. "Data Access Error"). 
+</p>
+</div>
 </div>
 </div>
 <div id="security-discussion" class="section">
@@ -1083,7 +1237,7 @@ This section does not enjoy the full consensus of the WG.
   This specification allows web content to read files from the underlying file system, as well as provides a means for files to be accessed by unique identifiers,
   and as such is subject to some security considerations.  This specification also assumes that the
   primary user interaction is with the <code>&lt;input type="file"/&gt;</code> element of HTML forms [<a href="#HTML5">HTML5</a>], and that all files that are being read by
-  <a href="#dfn-filereader"><code>FileReader</code></a> objects have first been selected by the user.  Important security considerations include preventing malicious file
+  <a href="#dfn-blobreader"><code>BlobReader</code></a> objects have first been selected by the user.  Important security considerations include preventing malicious file
   selection attacks (selection looping), preventing access to system-sensitive files, and guarding against modifications of files on disk after a selection has taken place.
 </p>
 <ul><li><p><dfn id="selection-looping">Preventing selection looping.</dfn>  During file selection, a user may be bombarded with the file picker associated with <code>&lt;input
@@ -1186,8 +1340,16 @@ is called on them.</p></li>
 	<dd><cite><a href="http://www.ietf.org/rfc/rfc3986.txt">Uniform Resource Identifier (URI): Generic Syntax</a></cite></dd>
 	<dt id="RFC1738">RFC1738</dt>
 	<dd><cite><a href="http://tools.ietf.org/html/rfc1738">Uniform Resource Locators (URL)</a></cite></dd>
+        <dt id="RFC1630">RFC1630</dt>
+        <dd><cite><a href="http://www.ietf.org/rfc/rfc1630.txt">Universal Resource Identifiers in WWW</a></cite></dd>
         <dt id="TypedArrays">Typed Arrays</dt>
         <dd><cite><a href="https://cvs.khronos.org/svn/repos/registry/trunk/public/webgl/doc/spec/TypedArray-spec.html">Typed Arrays</a></cite></dd>
+        <dt id="ABNF">RFC2234</dt>
+        <dd><cite><a href="http://www.ietf.org/rfc/rfc2234.txt">Augmented BNF for Syntax Specifications: ABNF</a></cite></dd>
+        <dt id="UUID">RFC4122</dt>
+        <dd><cite><a href="http://www.ietf.org/rfc/rfc4122.txt">A Universally Unique IDentifier (UUID) URN Namespace</a></cite></dd>
+
+
 	</dl>
       </div>
     <div id="informative-references" class="section">
