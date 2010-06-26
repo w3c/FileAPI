@@ -396,7 +396,7 @@ function errorHandler(evt) {
   <div id="blobreader-interface" class="section">
   <h2>5.4. The BlobReader Interface</h2>
   <p>
-    This interface provides methods to read <a href="#dfn-file">Files</a> or <a href="#dfn-Blob">Blobs</a> in memory, and to access the data from those <a href="#dfn-file">Files</a> or <a href="#dfn-Blob">Blobs</a> using progress events and
+    This interface provides methods to read <a href="#dfn-file">Files</a> or <a href="#dfn-Blob">Blobs</a> into memory, and to access the data from those <a href="#dfn-file">Files</a> or <a href="#dfn-Blob">Blobs</a> using progress events and
     <a href="#event-handler-attributes">event handler attributes</a> [<a href="#DOM3Events">DOM3Events</a>].  It is desirable to read
     data from file systems asynchronously in the main thread of user agents.  This interface provides such an asynchronous API, and is specified to be used
     with the global object (<code>Window</code> [<a href="#HTML5">HTML5</a>]) as well as Web Workers (<code>WorkerUtils</code> [<a href="#Workers">WebWorkers</a>]).
@@ -562,7 +562,7 @@ The list below is normative for the <code>result</code> attribute:
   attribute SHOULD return <a href="#partial-blob-data">partial Blob data</a> in <a href="#binary-string">binary string</a> format as a <code>DOMString</code> that is incremented as more data is read.</p></li>
   <li><p>On getting, if the <a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a> <a href="#read-methods">read method</a> is called
   (and no error in reading the File or Blob has occurred),
-  then the <code>result</code> attribute MUST return a string representing the File or Blob's data as a text string, and SHOULD decode the string in memory in the format specified
+  then the <code>result</code> attribute MUST return a string representing the File or Blob's data as a text string, and SHOULD decode the string into memory in the format specified
   by the <a href="#encoding-determination">encoding determination</a>.  On getting, <em>while processing</em> the
   <a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a> <a href="#rea  d-methods">read method</a>, this attibute SHOULD return
   <a href="#partial-blob-data">partial Blob data</a> in the format specified by
@@ -676,13 +676,13 @@ the user agent MUST run the steps below (unless otherwise indicated).
   <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  As the bytes from the <a href="#dfn-fileBlob"><code>blob</code></a> argument are read,
   user agents SHOULD ensure that on getting,
   the <a href="#dfn-result"><code>result</code></a> attribute returns <a href="#partial-blob-data">partial Blob data</a> representing the number of bytes currently <code>loaded</code>
-  (as a fraction of the <code>total</code>) [<a href="#ProgressEvents">ProgressEvents</a>], decoded in memory according to the <a href="#encoding-determination">encoding determination</a>.
+  (as a fraction of the <code>total</code>) [<a href="#ProgressEvents">ProgressEvents</a>], decoded into memory according to the <a href="#encoding-determination">encoding determination</a>.
   </p></li>
   <li><p>When the File or Blob has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
   <li><p>Set the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute to be <a href="#dfn-fileBlob"><code>blob</code></a>'s data content
   represented as a string in a format determined by the <a href="#encoding-determination">encoding determination</a>;
   on getting, the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute returns the (complete) data of <a href="#dfn-fileBlob"><code>blob</code></a>
-  as a string, decoded in memory according to the <a href="#encoding-determination">encoding determination</a>.</p></li>
+  as a string, decoded into memory according to the <a href="#encoding-determination">encoding determination</a>.</p></li>
   <li><p>Terminate this overall set of steps.
   </p></li>
 </ol>
@@ -928,7 +928,7 @@ This section defines a synchronous API, which can be used within Workers [<a hre
 object) <em>and</em> the synchronous API (the <code><a href="#dfn-FileReaderSync">FileReaderSync</a></code> object).</p>
 <div id="FileReaderSync" class="section">
 <h3>5.5.1. The <code>BlobReaderSync</code> Interface</h3>
-<p>This interface  provides methods to read files or Blobs in memory, and to access the data of these files or Blobs.</p>
+<p>This interface  provides methods to read files or Blobs into memory, and to access the data of these files or Blobs.</p>
 <div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
 
 [Constructor]
@@ -1114,8 +1114,8 @@ the most appropriate code from the table below.</p>
 <div id="url" class="section">
 <h2>5.7. A URL for Blob and File reference</h2>
 <p>This section defines a scheme for a unique URL used to refer to Blob objects (Files or Blobs).  Whereas the file URI scheme (defined in [<a href="#RFC1630">RFC1630</a>] and
-[<a href="#RFC1738">RFC1738</a>]) allows user agents to surface local file and directory structures, it cannot be used within web applications owing to origin considerations.  Additionally, the semantics of the file URI scheme does not
-allow use with web APIs and elements that expect HTTP response codes.  The introduction of a scheme to be used with individual File or Blob objects is useful for a number of reasons; the following
+[<a href="#RFC1738">RFC1738</a>]) allows user agents to surface local file and directory structures, it cannot be used within web applications owing to origin considerations.
+The introduction of a scheme to be used with individual File or Blob objects is useful for a number of reasons. The following
 list is informative:
 <ul>
 <li><p>This scheme can be used with web APIs such as <code>XMLHttpRequest</code> [<a href="XHR2">XHR2</a>], and with elements that are designed to be used with URLs, such as the
