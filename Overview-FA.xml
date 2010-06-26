@@ -1144,7 +1144,14 @@ fragIdentifier = "#" fragment
 
 fragment    = *( pchar / "/" / "?" )
 
+pchar       = unreserved / pct-encoded / sub-delims / ":" / "@"
 
+unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
+
+pct-encoded   = "%" HEXDIG HEXDIG
+
+sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")"
+                 / "*" / "+" / "," / ";" / "="
 </x:codeblock>
 <p>User agents MAY use a UUID with <a href="#ABNFForBlob">blob:</a> URIs as <a href="#opaqueStrings">opaque strings</a>.  UUIDs are defined in [<a href="#UUID">RFC4122</a>] and are used here without the urn: scheme.
 Below is an ABNF [<a href="#ABNF">RFC2234</a>] for UUID.
