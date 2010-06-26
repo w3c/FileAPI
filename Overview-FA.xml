@@ -1108,7 +1108,7 @@ list is informative:
 <li><p>This scheme can be used with web APIs such as <code>XMLHttpRequest</code> [<a href="XHR2">XHR2</a>], and with elements that are designed to be used with URLs, such as the
 <code>img</code> element [<a href="#HTML5">HTML5</a>].  In general, this scheme is designed to be used wherever URLs can be used on the web.  This would allow File or Blob data to be
 used within web applications and accessed by URLs.</p></li>
-<li><p>This scheme can be associated with a well-defined subset of HTTP, so that web applications can benefit from use alongside HTTP URLs. [<a href="#HTTP">HTTP</a>].  This differs from
+<li><p>This scheme can be associated with a well-defined subset of HTTP response codes, so that web applications can benefit from use alongside HTTP URLs. [<a href="#HTTP">HTTP</a>].  This differs from
 file URIs, which do not have an affiliated request-response behavior with status codes.  Some user agents silently fail if file URIs are requested insecurely.</p></li>
 <li><p>This scheme can allow for fragment identifiers for well-defined format types.  For example, if the file selected is an SVG file, this scheme should allow for SVG fragment identifiers.  If
 the file selected is an HTML file, this scheme should allow for fragment identifiers within an HTML document.</p></li>
@@ -1136,7 +1136,7 @@ scheme = "blob"
 ; opaqueString MAY be a UUID in its canonical form
 ; UUID is defined in [<a href="#UUID">RFC4122</a>]
 ; User agents MAY choose any other values for opaqueString
-; opaqueString arguments MUST be unique
+; opaqueString tokens MUST be unique
 
 fragIdentifier = "#" fragment
 
