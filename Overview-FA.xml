@@ -1194,7 +1194,8 @@ attribute was called.  When this <code>Document</code> is destroyed, implementat
 <div id="TwoHundredOK" class="section">
 <h4>200 OK</h4>
 <p>This response [<a href="#HTTP">HTTP</a>] MUST be used if the request has succeeded, namely the <a href="#ABNFForBlob">blob:</a> URL has been requested with a GET,
-satisfies the <a href="#originOfBlob">origin requirement</a>, and satisfies the <a href="#lifetime">lifetime requirement.</a>
+satisfies the <a href="#originOfBlob">origin requirement</a>, and satisfies the <a href="#lifetime">lifetime requirement.</a>  If this response code is used, the user agent MUST also use
+a Content-Type header [<a href="#HTTP">HTTP</a>] with a value equal to the <code><a href="#dfn-Blob">Blob</a></code> object's <code><a href="#dfn-type">type</a></code> attribute.
 </p>
 </div>
 <div id="FourOhThreeNotAllowed" class="section">
