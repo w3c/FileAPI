@@ -1239,7 +1239,7 @@ URL persists after the specified lifetime of the URL has elapsed). Additionally,
 type="file"/&gt;</code> (in a "must choose" loop that forces selection before the file picker is dismissed) and a user agent may prevent file
 access to any selections by making the  <a href="#dfn-filelist"><code>FileList</code></a> object returned be of size 0.</p></li>
 <li><p><dfn id="sensitive-files">System-sensitive files</dfn> (e.g. files in /usr/bin, password files, other native operating system executables) typically should not
-be exposed to web content, and should not be accessed via <a href="#dfn-url">URNs</a>.  User agents MAY raise a <a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a>
+be exposed to web content, and should not be accessed via <a href="#dfn-url">URLs</a>.  User agents MAY raise a <a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a>
 if such files are accessed or a <a href="#read-methods">read method</a>
 is called on them.</p></li>
 <li><p><dfn id="post-selection-file-mods">Post-selection file modifications</dfn> occur when a file changes on disk after it has been selected.  In such cases, if a
