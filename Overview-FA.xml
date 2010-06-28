@@ -744,7 +744,7 @@ For the purposes of this specification, it will typically be a reference to a si
 </div>
 <div id='enctype' class='section'>
 <h4>Determining Encoding</h4>
-<p>When reading files using the <a href="#dfn-readAsText"><code>readAsText()</code></a> <a href="#read-methods">read method</a>, the optional <dfn id="dfn-encoding"><code>
+<p>When reading <code>File</code> or <code>Blob</code> objects using the <a href="#dfn-readAsText"><code>readAsText()</code></a> <a href="#read-methods">read method</a>, the optional <dfn id="dfn-encoding"><code>
 encoding</code></dfn> string parameter MUST be a <em>name</em> or an <em>alias</em> of a character set
 used on the Internet [<a href="#IANACHARSET">IANACHARSET</a>], or else is considered invalid.  If the <code>encoding</code> argument supplied is valid, user agents SHOULD
 decode the <a href="#dfn-fileBlob"><code>blob</code></a> using that encoding.  If the <code>encoding</code> argument is invalid,
@@ -810,7 +810,7 @@ or the user agent cannot decode the <a href="#dfn-fileBlob"><code>blob</code></a
     <p>Return the result of decoding the <a href="#dfn-fileBlob"><code>blob</code></a> using
      <var>charset</var>; on getting, the <a href="#dfn-result"><code>result</code></a> attribute of the <a href="#dfn-blobreader"><code>BlobReader</code></a>
      object returns a string in <var>charset</var> format.  The synchronous
-     <a href="#dfn-readAsTextSync"><code>readAsText</code></a> method of the <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object returns a string in <var>charset</var> format.
+     <a href="#dfn-readAsTextSync"><code>readAsText</code></a> method of the <a href="#dfn-BlobReaderSync"><code>BlobReaderSync</code></a> object returns a string in <var>charset</var> format.
      Replace bytes or sequences of bytes that are not
      valid according to the <var>charset</var> with a single U+FFFD character [<a href="#Unicode">Unicode</a>].
   </p></li>
@@ -912,8 +912,8 @@ has been completely read into memory, <a href="#queue-a-task">queue a task</a> t
 <p>Web Workers allow for the use of synchronous File or Blob read APIs, since the effect of such read mechanisms on the main thread is mitigated.
 This section defines a synchronous API, which can be used within Workers [<a href="#Workers">Web Workers</a>].  Workers can avail of both the asynchronous API (the
 <code><a href="#dfn-blobreader">BlobReader</a></code>
-object) <em>and</em> the synchronous API (the <code><a href="#dfn-FileReaderSync">FileReaderSync</a></code> object).</p>
-<div id="FileReaderSync" class="section">
+object) <em>and</em> the synchronous API (the <code><a href="#dfn-BlobReaderSync">BlobReaderSync</a></code> object).</p>
+<div id="BlobReaderSync" class="section">
 <h3>The <code>BlobReaderSync</code> Interface</h3>
 <p>This interface  provides methods to read files or Blobs into memory, and to access the data of these files or Blobs.</p>
 <x:codeblock language="idl">
