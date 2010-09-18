@@ -811,7 +811,7 @@ or the user agent cannot decode the <a href="#dfn-fileBlob"><code>blob</code></a
     <p>Return the result of decoding the <a href="#dfn-fileBlob"><code>blob</code></a> using
      <var>charset</var>; on getting, the <a href="#dfn-result"><code>result</code></a> attribute of the <a href="#dfn-filereader"><code>FileReader</code></a>
      object returns a string in <var>charset</var> format.  The synchronous
-     <a href="#dfn-readAsTextSync"><code>readAsText</code></a> method of the <a href="#dfn-BlobReaderSync"><code>BlobReaderSync</code></a> object returns a string in <var>charset</var> format.
+     <a href="#dfn-readAsTextSync"><code>readAsText</code></a> method of the <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object returns a string in <var>charset</var> format.
      Replace bytes or sequences of bytes that are not
      valid according to the <var>charset</var> with a single U+FFFD character [<a href="#Unicode">Unicode</a>].
   </p></li>
@@ -913,14 +913,14 @@ has been completely read into memory, <a href="#queue-a-task">queue a task</a> t
 <p>Web Workers allow for the use of synchronous File or Blob read APIs, since the effect of such read mechanisms on the main thread is mitigated.
 This section defines a synchronous API, which can be used within Workers [<a href="#Workers">Web Workers</a>].  Workers can avail of both the asynchronous API (the
 <code><a href="#dfn-filereader">FileReader</a></code>
-object) <em>and</em> the synchronous API (the <code><a href="#dfn-BlobReaderSync">BlobReaderSync</a></code> object).</p>
-<div id="BlobReaderSync" class="section">
-<h3>The <code>BlobReaderSync</code> Interface</h3>
+object) <em>and</em> the synchronous API (the <code><a href="#dfn-FileReaderSync">FileReaderSync</a></code> object).</p>
+<div id="FileReaderSync" class="section">
+<h3>The <code>FileReaderSync</code> Interface</h3>
 <p>This interface  provides methods to read files or Blobs into memory, and to access the data of these files or Blobs.</p>
 <x:codeblock language="idl">
 
 [Constructor]
-interface <dfn id="dfn-BlobReaderSync">BlobReaderSync</dfn> {
+interface <dfn id="dfn-FileReaderSync">FileReaderSync</dfn> {
 
   <span class="comment">// Synchronously return strings</span>
   <span class="comment">// All three methods raise FileException</span>
@@ -932,7 +932,7 @@ interface <dfn id="dfn-BlobReaderSync">BlobReaderSync</dfn> {
 };
 </x:codeblock>
 <div class="note">
-  <p>The <a href="#dfn-BlobReaderSync"><code>BlobReaderSync</code></a> object's <dfn id="read-method-sync">read methods</dfn> -- namely 
+  <p>The <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object's <dfn id="read-method-sync">read methods</dfn> -- namely 
   <code><a href="#dfn-readAsBinaryStringSync">readAsBinaryString</a></code>, <code><a href="#dfn-readAsTextSync">readAsText</a></code>, 
   <code><a href="#dfn-readAsDataURLSync">readAsDataURL</a></code> and <code><a href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</a></code> -- have the same <em>method signatures</em> as the <a href="#read-methods">read methods</a> of the
   <a href="#dfn-filereader"><code>FileReader</code></a> object, and <em>read files into memory</em>.  The difference is that these are specified to behave <em>synchronously</em>, with string return values.
