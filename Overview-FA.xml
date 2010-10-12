@@ -1252,15 +1252,15 @@ URI</a> persists after the specified lifetime of the URI has elapsed). Additiona
 This section describes a supplemental interface that adds these methods in conforming user agents.  </p>
 <x:codeblock language="idl">
 [Supplemental, NoInterfaceObject]
-interface BlobURIMethods {
+interface WindowBlobURIMethods {
 
     DOMString <a href="#dfn-createBlobURL">createBlobURL</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
     void <a href="#dfn-revokeBlobURL">revokeBlobURL</a>(in DOMString <a href="#dfn-urlarg">url</a>);
 };
 </x:codeblock>
 <p>
-<code>Window implements BlobURIMethods;</code></p>
-<p><code>WorkerUtils implements BlobURIMethods;</code></p>
+<code>Window implements WindowBlobURIMethods;</code></p>
+<p><code>WorkerUtils implements WindowBlobURIMethods;</code></p>
 <dl><dt id="dfn-createBlobURL">The <code>createBlobURL</code> method</dt><dd><p>Returns a unique <a href="#url"><code>Blob</code> URI</a> each time it is called on a <dfn id="valid">valid</dfn>
 <a href="#dfn-fileBlob"><code>blob</code></a> argument, which is a non-null <a href="#dfn-Blob"><code>Blob</code></a> in scope of the global object from which this method
 is called.</p>
