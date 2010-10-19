@@ -426,7 +426,6 @@ interface <dfn id="dfn-filereader">FileReader</dfn> {
 };
 FileReader implements EventTarget;
   </x:codeblock>
-  <p><code>Window implements FileReader;</code></p>
 <div id='blobreader-task-source' class='section'>
 <h3>The FileReader Task Source</h3>
 <p>The <a href="#dfn-filereader" class="dfnref"><code>FileReader</code></a> interface enables asynchronous reads on individual blobs by dispatching events to event handler methods.
@@ -438,6 +437,7 @@ event <a href="#queue-a-task" class="dfnref">tasks that are queued</a> for dispa
 <div id='filereaderConstrctr' class='section'>
 <h3>Constructors</h3>
 <p>When the <code>FileReader()</code> constructor is invoked, the user agent MUST return a new <a href="#dfn-filereader"><code>FileReader</code></a> object. </p>
+<p>In environments where the global object is represented by a <code>Window</code> or a <code>WorkerGlobalScope</code> object, the <code>FileReader</code> constructor MUST be available.</p>
 </div>
 <div id='event-handler-attributes-section' class='section'>
 <h3>Event Handler Attributes</h3>
@@ -935,13 +935,18 @@ interface <dfn id="dfn-FileReaderSync">FileReaderSync</dfn> {
   DOMString <a href="#dfn-readAsDataURLSync">readAsDataURL</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>); 
 };
 </x:codeblock>
-<p><code>WorkerUtils implements FileReaderSync;</code> [<a href="#Workers">Web Workers</a>]</p>
 <div class="note">
   <p>The <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object's <dfn id="read-method-sync">read methods</dfn> -- namely 
   <code><a href="#dfn-readAsBinaryStringSync">readAsBinaryString</a></code>, <code><a href="#dfn-readAsTextSync">readAsText</a></code>, 
   <code><a href="#dfn-readAsDataURLSync">readAsDataURL</a></code> and <code><a href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</a></code> -- have the same <em>method signatures</em> as the <a href="#read-methods">read methods</a> of the
   <a href="#dfn-filereader"><code>FileReader</code></a> object, and <em>read files into memory</em>.  The difference is that these are specified to behave <em>synchronously</em>, with string or <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] return values.
   These methods raise <a href="#dfn-FileException"><code>FileException</code></a>.</p>
+</div>
+
+<div id='filereadersyncConstrctr' class='section'>
+<h3>Constructors</h3>
+<p>When the <code>FileReaderSync()</code> constructor is invoked, the user agent MUST return a new <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object.</p>
+<p>In environments where the global object is represented by a <code>WorkerGlobalScope</code> object, the <code>FileReaderSync</code> constructor MUST be available.</p>
 </div>
 
 <div id="readAsBinaryStringSyncSection" class="section">

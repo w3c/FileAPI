@@ -145,7 +145,7 @@
 
     <div id="toc">
       <h2>Table of Contents</h2>
-      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#terminology">3. Terminology and Algorithms</a></li><li><a href="#filelist-section">4. The FileList Sequence</a></li><li><a href="#blob">5. The Blob Interface</a><ul><li><a href="#attributes-blob">5.1. Attributes</a></li><li><a href="#methodsandparams-blob">5.2. Methods and Parameters</a></li><li><a href="#file">5.3. The File Interface</a><ul><li><a href="#file-attrs">5.3.1. Attributes</a></li></ul></li><li><a href="#FileReader-interface">5.4. The FileReader Interface</a><ul><li><a href="#blobreader-task-source">5.4.1. The FileReader Task Source</a></li><li><a href="#filereaderConstrctr">5.4.2. Constructors</a></li><li><a href="#event-handler-attributes-section">5.4.3. Event Handler Attributes</a></li><li><a href="#blobreader-state">5.4.4. FileReader States</a></li><li><a href="#reading-a-file">5.4.5. Reading a File or Blob</a><ul><li><a href="#MultipleReads">5.4.5.1. Multiple Reads</a></li><li><a href="#filedata-attr">5.4.5.2. The result attribute</a></li><li><a href="#readAsBinaryString">5.4.5.3. The readAsBinaryString() method</a></li><li><a href="#readAsDataURL">5.4.5.4. The readAsDataURL() method</a></li><li><a href="#readAsDataText">5.4.5.5. The readAsText() method</a></li><li><a href="#readAsArrayBuffer">5.4.5.6. The readAsArrayBuffer() method</a></li><li><a href="#abort">5.4.5.7. The abort() method</a></li><li><a href="#blobAndFileParams">5.4.5.8. Blob Parameters</a></li><li><a href="#enctype">5.4.5.9. Determining Encoding</a></li><li><a href="#events">5.4.5.10. Events</a><ul><li><a href="#event-summary">5.4.5.10.1. Event Summary</a></li></ul></li></ul></li></ul></li><li><a href="#readingOnThreads">5.5. Reading on Threads</a><ul><li><a href="#FileReaderSync">5.5.1. The FileReaderSync Interface</a><ul><li><a href="#readAsBinaryStringSyncSection">5.5.1.1. The readAsBinaryString method</a></li><li><a href="#readAsTextSync">5.5.1.2. The readAsText method</a></li><li><a href="#readAsDataURLSync-section">5.5.1.3. The readAsDataURL method</a></li><li><a href="#readAsArrayBufferSyncSection">5.5.1.4. The readAsArrayBuffer method</a></li></ul></li></ul></li><li><a href="#ErrorAndException">5.6. Errors and Exceptions</a><ul><li><a href="#FileErrorInterface">5.6.1. The FileError Interface</a></li><li><a href="#FileException">5.6.2. The FileException exception</a></li><li><a href="#ErrorDescriptions">5.6.3. Error Code Descriptions</a></li></ul></li><li><a href="#url">5.7. A URI for Blob and File reference</a><ul><li><a href="#ABNFForBlob">5.7.1. Definition of blob URI Scheme</a></li><li><a href="#originOfBlob">5.7.2. Origin of Blob URIs</a></li><li><a href="#lifeTime">5.7.3. Lifetime of Blob URIs</a></li><li><a href="#processingModel">5.7.4. Dereferencing Model for Blob URIs</a><ul><li><a href="#TwoHundredOK">5.7.4.1. 200 OK</a></li><li><a href="#FourOhThreeNotAllowed">5.7.4.2. 403 Not Allowed</a></li><li><a href="#FourOhFourNotFound">5.7.4.3. 404 Not Found</a></li><li><a href="#FiveHundredInternalServerError">5.7.4.4. 500 Internal Server Error</a></li></ul></li><li><a href="#creating-revoking">5.7.5. Creating and Revoking a Blob URI</a></li></ul></li><li><a href="#security-discussion">5.8. Security Considerations</a></li><li><a href="#requirements">5.9. Requirements and Use Cases</a></li><li><a href="#acknowledgements-section">5.10. Acknowledgements</a></li><li><a href="#references">5.11. References</a><ul><li><a href="#normative-references">5.11.1. Normative references</a></li><li><a href="#informative-references">5.11.2. Informative References</a></li></ul></li></ul></li></ul></div>
+      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#terminology">3. Terminology and Algorithms</a></li><li><a href="#filelist-section">4. The FileList Sequence</a></li><li><a href="#blob">5. The Blob Interface</a><ul><li><a href="#attributes-blob">5.1. Attributes</a></li><li><a href="#methodsandparams-blob">5.2. Methods and Parameters</a></li><li><a href="#file">5.3. The File Interface</a><ul><li><a href="#file-attrs">5.3.1. Attributes</a></li></ul></li><li><a href="#FileReader-interface">5.4. The FileReader Interface</a><ul><li><a href="#blobreader-task-source">5.4.1. The FileReader Task Source</a></li><li><a href="#filereaderConstrctr">5.4.2. Constructors</a></li><li><a href="#event-handler-attributes-section">5.4.3. Event Handler Attributes</a></li><li><a href="#blobreader-state">5.4.4. FileReader States</a></li><li><a href="#reading-a-file">5.4.5. Reading a File or Blob</a><ul><li><a href="#MultipleReads">5.4.5.1. Multiple Reads</a></li><li><a href="#filedata-attr">5.4.5.2. The result attribute</a></li><li><a href="#readAsBinaryString">5.4.5.3. The readAsBinaryString() method</a></li><li><a href="#readAsDataURL">5.4.5.4. The readAsDataURL() method</a></li><li><a href="#readAsDataText">5.4.5.5. The readAsText() method</a></li><li><a href="#readAsArrayBuffer">5.4.5.6. The readAsArrayBuffer() method</a></li><li><a href="#abort">5.4.5.7. The abort() method</a></li><li><a href="#blobAndFileParams">5.4.5.8. Blob Parameters</a></li><li><a href="#enctype">5.4.5.9. Determining Encoding</a></li><li><a href="#events">5.4.5.10. Events</a><ul><li><a href="#event-summary">5.4.5.10.1. Event Summary</a></li></ul></li></ul></li></ul></li><li><a href="#readingOnThreads">5.5. Reading on Threads</a><ul><li><a href="#FileReaderSync">5.5.1. The FileReaderSync Interface</a><ul><li><a href="#filereadersyncConstrctr">5.5.1.1. Constructors</a></li><li><a href="#readAsBinaryStringSyncSection">5.5.1.2. The readAsBinaryString method</a></li><li><a href="#readAsTextSync">5.5.1.3. The readAsText method</a></li><li><a href="#readAsDataURLSync-section">5.5.1.4. The readAsDataURL method</a></li><li><a href="#readAsArrayBufferSyncSection">5.5.1.5. The readAsArrayBuffer method</a></li></ul></li></ul></li><li><a href="#ErrorAndException">5.6. Errors and Exceptions</a><ul><li><a href="#FileErrorInterface">5.6.1. The FileError Interface</a></li><li><a href="#FileException">5.6.2. The FileException exception</a></li><li><a href="#ErrorDescriptions">5.6.3. Error Code Descriptions</a></li></ul></li><li><a href="#url">5.7. A URI for Blob and File reference</a><ul><li><a href="#ABNFForBlob">5.7.1. Definition of blob URI Scheme</a></li><li><a href="#originOfBlob">5.7.2. Origin of Blob URIs</a></li><li><a href="#lifeTime">5.7.3. Lifetime of Blob URIs</a></li><li><a href="#processingModel">5.7.4. Dereferencing Model for Blob URIs</a><ul><li><a href="#TwoHundredOK">5.7.4.1. 200 OK</a></li><li><a href="#FourOhThreeNotAllowed">5.7.4.2. 403 Not Allowed</a></li><li><a href="#FourOhFourNotFound">5.7.4.3. 404 Not Found</a></li><li><a href="#FiveHundredInternalServerError">5.7.4.4. 500 Internal Server Error</a></li></ul></li><li><a href="#creating-revoking">5.7.5. Creating and Revoking a Blob URI</a></li></ul></li><li><a href="#security-discussion">5.8. Security Considerations</a></li><li><a href="#requirements">5.9. Requirements and Use Cases</a></li><li><a href="#acknowledgements-section">5.10. Acknowledgements</a></li><li><a href="#references">5.11. References</a><ul><li><a href="#normative-references">5.11.1. Normative references</a></li><li><a href="#informative-references">5.11.2. Informative References</a></li></ul></li></ul></li></ul></div>
     </div>
 
     <div id="sections">
@@ -436,7 +436,6 @@ interface <dfn id="dfn-filereader">FileReader</dfn> {
 };
 FileReader implements EventTarget;
   </code></pre></div></div>
-  <p><code>Window implements FileReader;</code></p>
 <div id="blobreader-task-source" class="section">
 <h3>5.4.1. The FileReader Task Source</h3>
 <p>The <a href="#dfn-filereader" class="dfnref"><code>FileReader</code></a> interface enables asynchronous reads on individual blobs by dispatching events to event handler methods.
@@ -448,6 +447,7 @@ event <a href="#queue-a-task" class="dfnref">tasks that are queued</a> for dispa
 <div id="filereaderConstrctr" class="section">
 <h3>5.4.2. Constructors</h3>
 <p>When the <code>FileReader()</code> constructor is invoked, the user agent MUST return a new <a href="#dfn-filereader"><code>FileReader</code></a> object. </p>
+<p>In environments where the global object is represented by a <code>Window</code> or a <code>WorkerGlobalScope</code> object, the <code>FileReader</code> constructor MUST be available.</p>
 </div>
 <div id="event-handler-attributes-section" class="section">
 <h3>5.4.3. Event Handler Attributes</h3>
@@ -944,7 +944,6 @@ interface <dfn id="dfn-FileReaderSync">FileReaderSync</dfn> {
   DOMString <a href="#dfn-readAsDataURLSync">readAsDataURL</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>); 
 };
 </code></pre></div></div>
-<p><code>WorkerUtils implements FileReaderSync;</code> [<a href="#Workers">Web Workers</a>]</p>
 <div class="note"><div class="noteHeader">Note</div>
   <p>The <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object's <dfn id="read-method-sync">read methods</dfn> -- namely 
   <code><a href="#dfn-readAsBinaryStringSync">readAsBinaryString</a></code>, <code><a href="#dfn-readAsTextSync">readAsText</a></code>, 
@@ -953,8 +952,14 @@ interface <dfn id="dfn-FileReaderSync">FileReaderSync</dfn> {
   These methods raise <a href="#dfn-FileException"><code>FileException</code></a>.</p>
 </div>
 
+<div id="filereadersyncConstrctr" class="section">
+<h3>5.5.1.1. Constructors</h3>
+<p>When the <code>FileReaderSync()</code> constructor is invoked, the user agent MUST return a new <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object.</p>
+<p>In environments where the global object is represented by a <code>WorkerGlobalScope</code> object, the <code>FileReaderSync</code> constructor MUST be available.</p>
+</div>
+
 <div id="readAsBinaryStringSyncSection" class="section">
-<h3>5.5.1.1. The <code>readAsBinaryString</code> method</h3>
+<h3>5.5.1.2. The <code>readAsBinaryString</code> method</h3>
 <p>When the <dfn id="dfn-readAsBinaryStringSync"><code>readAsBinaryString(blob)</code></dfn> method is called, the following steps MUST be followed:</p>
 <ol>
 <li><p>If an <a href="#file-error-read">error occurs during File or Blob read</a>, throw a
@@ -964,7 +969,7 @@ interface <dfn id="dfn-FileReaderSync">FileReaderSync</dfn> {
 </ol>
 </div>
 <div id="readAsTextSync" class="section">
-<h3>5.5.1.2. The <code>readAsText</code> method</h3>
+<h3>5.5.1.3. The <code>readAsText</code> method</h3>
 <p>When the <dfn id="dfn-readAsTextSync"><code>readAsText(blob, encoding)</code></dfn> method is called (the
 <a href="#dfn-encoding"><code>encoding</code></a> argument is optional), the following steps MUST be followed:</p>
 <ol>
@@ -975,7 +980,7 @@ using the <a href="#encoding-determination">encoding determination</a> algorithm
 </ol>
 </div>
 <div id="readAsDataURLSync-section" class="section">
-<h3>5.5.1.3. The <code>readAsDataURL</code> method</h3>
+<h3>5.5.1.4. The <code>readAsDataURL</code> method</h3>
 <p>
   When the <dfn id="dfn-readAsDataURLSync"><code>readAsDataURL(blob)</code></dfn> method is called, the following steps MUST be followed:</p>
 <ol>
@@ -990,7 +995,7 @@ arguments which, when encoded as Data URLs, exceed URL length limitations for th
 </ol> 
 </div>
 <div id="readAsArrayBufferSyncSection" class="section">
-<h3>5.5.1.4. The <code>readAsArrayBuffer</code> method</h3>
+<h3>5.5.1.5. The <code>readAsArrayBuffer</code> method</h3>
 <p>When the <dfn id="dfn-readAsArrayBufferSync"><code>readAsArrayBuffer(blob)</code></dfn> method is called, the following steps MUST be followed:</p>
 <ol>
 <li><p>If an <a href="#file-error-read">error occurs during File or Blob read</a>, throw a
