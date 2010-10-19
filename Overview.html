@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>8 October 2010</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2009 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>12 October 2010</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2009 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
       <h2>Abstract</h2>
@@ -77,7 +77,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 8 October 2010 <b>Editor’s Draft</b> of the
+        This document is the 12 October 2010 <b>Editor’s Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -377,9 +377,7 @@ function errorHandler(evt) {
   interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blob</a> {
 
       readonly attribute DOMString <a href="#dfn-name" class="dfnref">name</a>;
-      readonly attribute DOMString <a href="#dfn-creationDate" class="dfnref">creationDate</a>;
-      readonly attribute DOMString <a href="#dfn-lastModifiedDate" class="dfnref">lastModifiedDate</a>
-      
+      readonly attribute DOMString <a href="#dfn-lastModifiedDate" class="dfnref">lastModifiedDate</a>;
 };
   </code></pre></div></div>
   <div id="file-attrs" class="section">
@@ -387,9 +385,6 @@ function errorHandler(evt) {
   <dl>
     <dt id="dfn-name"><code>name</code></dt>
     <dd><p>The name of the file. There are numerous file name variations on different systems; this is merely the name of the file, without path information.</p></dd>
-    <dt id="dfn-creationDate"><code>creationDate</code></dt>
-    <dd><p>The creation date of the file; on getting, this returns an HTML5 valid date string [<a href="#HTML5">HTML5</a>].  If user agents cannot make this information
-    available, they MUST return the empty string.</p></dd>
     <dt id="dfn-lastModifiedDate"><code>lastModifiedDate</code></dt>
     <dd><p>The last modified date of the file; on getting, this returns an HTML5 valid date string [<a href="#HTML5">HTML5</a>].  If user agents cannot make this information
     available, they MUST return the emtpy string.</p></dd>
@@ -755,7 +750,7 @@ When the <dfn id="dfn-readAsArrayBuffer"><code>readAsArrayBuffer(blob)</code></d
 <dl>
 <dt><dfn id="dfn-fileBlob"><code>blob</code></dfn></dt>
 <dd><p>This is a <a href="#dfn-Blob"><code>Blob</code></a> argument used to invoke all four <a href="#read-methods">read methods</a> and the
-<a href="#dfn-createBlobURL"><code>createBlobURL</code> method</a> (exposed on the global objects <code>Window</code> [<a href="#HTML5">HTML5</a>] and <code>WorkerGlobalScope</code>
+<a href="#dfn-createObjectURL"><code>createObjectURL</code> method</a> (exposed on the global objects <code>Window</code> [<a href="#HTML5">HTML5</a>] and <code>WorkerGlobalScope</code>
 [<a href="#Workers">Web Workers</a>]).
 For the purposes of this specification, it will typically be a reference to a single file in a
 <a href="#dfn-filelist"><code>FileList</code></a> or a <a href="#dfn-Blob"><code>Blob</code></a> object not obtained from the file system.</p></dd>
@@ -1209,16 +1204,16 @@ hexDigit =
 </div>
 <div id="originOfBlob" class="section">
 <h3>5.7.2. Origin of Blob URIs</h3>
-<p>The origin of a <a href="#url">Blob URI</a> MUST be the  origin of the script that called <a href="dfn-createBlobURL"><code>createBlobURL</code></a>.
+<p>The origin of a <a href="#url">Blob URI</a> MUST be the  origin of the script that called <a href="dfn-createObjectURL"><code>createObjectURL</code></a>.
 <a href="#url">Blob URIs</a> MUST only be valid within this origin.</p>
 </div>
 
 <div id="lifeTime" class="section">
 <h3>5.7.3. Lifetime of Blob URIs</h3>
-<p>The lifetime of a <a href="#url">Blob URI</a> is bound to the lifetime of the global object from which <a href="dfn-createBlobURL"><code>createBlobURL</code></a> was called.
+<p>The lifetime of a <a href="#url">Blob URI</a> is bound to the lifetime of the global object from which <a href="dfn-createObjectURL"><code>createObjectURL</code></a> was called.
 Implementations vary in garbage collection behavior; at a minimum, implementations MUST ensure that a <a href="#url">Blob URI</a> is revoked after
-<a href="dfn-revokeBlobURL"><code>revokeBlobURL</code></a> is called.  Implementations MUST respond with a <a href="#FourOhFourNotFound">404 Not Found</a>
-if a <a href="#url">Blob URI</a> is dereferenced after <a href="dfn-revokeBlobURL"><code>revokeBlobURL</code></a> is called on that paticular URL.
+<a href="dfn-revokeObjectURL"><code>revokeObjectURL</code></a> is called.  Implementations MUST respond with a <a href="#FourOhFourNotFound">404 Not Found</a>
+if a <a href="#url">Blob URI</a> is dereferenced after <a href="dfn-revokeObjectURL"><code>revokeObjectURL</code></a> is called on that paticular URL.
 </p>
 <div class="ednote"><div class="ednoteHeader">Editorial note</div><p>Add spec. text about lifetime under Shared Workers scenario.</p></div>
 </div>
@@ -1263,14 +1258,14 @@ This section describes a supplemental interface that adds these methods in confo
 [Supplemental, NoInterfaceObject]
 interface WindowBlobURIMethods {
 
-    DOMString <a href="#dfn-createBlobURL">createBlobURL</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
-    void <a href="#dfn-revokeBlobURL">revokeBlobURL</a>(in DOMString <a href="#dfn-urlarg">url</a>);
+    DOMString <a href="#dfn-createObjectURL">createObjectURL</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
+    void <a href="#dfn-revokeObjectURL">revokeObjectURL</a>(in DOMString <a href="#dfn-urlarg">url</a>);
 };
 </code></pre></div></div>
 <p>
 <code>Window implements WindowBlobURIMethods;</code></p>
 <p><code>WorkerUtils implements WindowBlobURIMethods;</code></p>
-<dl><dt id="dfn-createBlobURL">The <code>createBlobURL</code> method</dt><dd><p>Returns a unique <a href="#url"><code>Blob</code> URI</a> each time it is called on a <dfn id="valid">valid</dfn>
+<dl><dt id="dfn-createObjectURL">The <code>createObjectURL</code> method</dt><dd><p>Returns a unique <a href="#url"><code>Blob</code> URI</a> each time it is called on a <dfn id="valid">valid</dfn>
 <a href="#dfn-fileBlob"><code>blob</code></a> argument, which is a non-null <a href="#dfn-Blob"><code>Blob</code></a> in scope of the global object from which this method
 is called.</p>
 <ol>
@@ -1279,7 +1274,7 @@ is called.</p>
 a unique <a href="#url"><code>Blob</code> URI</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument.</p></li>
 </ol>
 </dd>
-<dt id="dfn-revokeBlobURL">The <code>revokeBlobURL</code> method</dt><dd><p>Revokes the <a href="#url"><code>Blob</code> URI</a> provided in the <a href="#dfn-urlarg"><code>url</code></a> argument.
+<dt id="dfn-revokeObjectURL">The <code>revokeObjectURL</code> method</dt><dd><p>Revokes the <a href="#url"><code>Blob</code> URI</a> provided in the <a href="#dfn-urlarg"><code>url</code></a> argument.
 </p>
 <ol>
   <li>If the <a href="#dfn-urlarg"><code>url</code></a> refers to a <a href="#valid">valid</a> <a href="#dfn-Blob"><code>Blob</code></a>, then after this method is called,
@@ -1314,7 +1309,7 @@ is called on them.</p></li>
 <li><p><dfn id="post-selection-file-mods">Post-selection file modifications</dfn> occur when a file changes on disk after it has been selected.  In such cases, if a
 <a href="#read-methods">read method</a> is called on a file, user agents MAY raise a <code><a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a></code>.</p></li>
 <li><p><dfn id="cross-origin-requests-on-blobs">Cross-origin requests on Blob URIs</dfn> occur when a <a href="#url">Blob URI</a> is accessed across origins.
-In particular, code of the sort: <p><code>document.location = createBlobURL(myFile);</code></p> is problematic.  User agents should ensure that the
+In particular, code of the sort: <p><code>document.location = createObjectURL(myFile);</code></p> is problematic.  User agents should ensure that the
 <a href="#FourOhThreeNotAllowed">403 Not Allowed</a> response
 is used in cross-origin request contexts.  User agents MAY return <a href="#FourOhThreeNotAllowed">403 Not Allowed</a> at any attempt to set the entire document location to a file or Blob.
 </p></li>
