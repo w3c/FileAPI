@@ -507,7 +507,7 @@ MUST return the current state, which MUST be one of the following values:</p>
  <dt><dfn id="dfn-empty"><code>EMPTY</code> (numeric value 0)</dfn></dt>
  <dd><p>The object has been constructed, and there are no pending reads.</p></dd>
  <dt><dfn id="dfn-loading"><code>LOADING</code> (numeric value 1)</dfn></dt>
- <dd><p>A <a href="#dfn-fileBlob">blob</a> is being read.  One of the <a href="#read-methods">read methods</a> is being processed.</p></dd>
+ <dd><p>A <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> is being read.  One of the <a href="#read-methods">read methods</a> is being processed.</p></dd>
  <dt><dfn id="dfn-done"><code>DONE</code> (numeric value 2)</dfn></dt>
  <dd><p>The entire <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> has been read into memory,
  or a <a href="#file-error-read">file error occurred during read</a>, or the read was
