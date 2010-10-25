@@ -1139,7 +1139,7 @@ Whereas the file URI scheme (defined in [<a href="#RFC1630">RFC1630</a>] and
 [<a href="#RFC1738">RFC1738</a>]) allows user agents to surface local file and directory structures, it cannot be used within web applications owing to origin considerations and
 lack of HTTP [<a href="#HTTP">HTTP</a>] semantics.
 The introduction of a scheme to be used with individual <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> objects is useful for a number of reasons. The following
-list is informative:
+list is informative:</p>
 <ul>
 <li><p>This scheme can be used with web APIs such as <code>XMLHttpRequest</code> [<a href="#XHR2">XHR2</a>], and with elements that are designed to be used with URLs, such as the
 <code>img</code> element [<a href="#HTML5">HTML5</a>].  In general, this scheme is designed to be used wherever URLs can be used on the web.  This would allow <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> data to be
@@ -1151,7 +1151,6 @@ for SVG fragment identifiers.  If the file selected is an HTML file, this scheme
 <li><p>Whereas file URIs are subject to strict same-origin restrictions for security reasons and allow directory browsing, this scheme is applicable only to user-selected files
 (and to <a href="#dfn-Blob"><code>Blob</code></a> objects that web applications generate).  Along with an origin policy and a lifetime stipulation, this scheme can allow safe access to binary data from web applications.</p></li>
 </ul>
-</p>
 <div id="ABNFForBlob" class="section">
 <h3>5.7.1. Definition of blob URI Scheme</h3>
 <p>This section defines a <code>blob:</code> URI scheme using a formal grammar.  A <code>blob:</code> URI consists of the blob: scheme and an opaque string, along with zero or one fragment identifiers.
@@ -1221,24 +1220,24 @@ hexDigit =
 </div>
 <div id="originOfBlob" class="section">
 <h3>5.7.2. Origin of Blob URIs</h3>
-<p>The origin of a <a href="#url">Blob URI</a> MUST be the  origin of the script that called <a href="dfn-createObjectURL"><code>createObjectURL</code></a>.
+<p>The origin of a <a href="#url">Blob URI</a> MUST be the  origin of the script that called <a href="#dfn-createObjectURL"><code>createObjectURL</code></a>.
 <a href="#url">Blob URIs</a> MUST only be valid within this origin.</p>
 </div>
 
 <div id="lifeTime" class="section">
 <h3>5.7.3. Lifetime of Blob URIs</h3>
-<p>The lifetime of a <a href="#url">Blob URI</a> is bound to the lifetime of the global object from which <a href="dfn-createObjectURL"><code>createObjectURL</code></a> was called.
+<p>The lifetime of a <a href="#url">Blob URI</a> is bound to the lifetime of the global object from which <a href="#dfn-createObjectURL"><code>createObjectURL</code></a> was called.
 Implementations vary in garbage collection behavior; at a minimum, implementations MUST ensure that a <a href="#url">Blob URI</a> is revoked after
-<a href="dfn-revokeObjectURL"><code>revokeObjectURL</code></a> is called.  Implementations MUST respond with a <a href="#FourOhFourNotFound">404 Not Found</a>
-if a <a href="#url">Blob URI</a> is dereferenced after <a href="dfn-revokeObjectURL"><code>revokeObjectURL</code></a> is called on that paticular URL.
+<a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> is called.  Implementations MUST respond with a <a href="#FourOhFourNotFound">404 Not Found</a>
+if a <a href="#url">Blob URI</a> is dereferenced after <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> is called on that paticular URL.
 </p>
 </div>
 <div id="processingModel" class="section">
 <h3>5.7.4. Dereferencing Model for Blob URIs</h3>
 <p>User agents MUST only support requests with GET [<a href="#HTTP">HTTP</a>].  If the <a href="#dfn-Blob"><code>Blob</code></a> has a
 <a href="#dfn-type"><code>type</code></a> attribute, or if the <a href="#dfn-Blob"><code>Blob</code></a> has been created with a <a href="#dfn-slice"><code>slice</code></a> call which
-uses a <a href="dfn-contentType"><code>contentType</code></a> argument, responses to derefencing the Blob URI must include the Content-Type header from HTTP [<a href="#HTTP">HTTP</a>] with the value of the <a href="#dfn-type"><code>type</code></a>
-attribute or <a href="#dfn-contentType"><code>contentType</code></a> argument.  Specifically, responses MUST only support a subset of responses that are equivalent to the following from HTTP [<a href="#HTTP">HTTP</a>]:</p>
+uses a <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument, responses to derefencing the Blob URI must include the Content-Type header from HTTP [<a href="#HTTP">HTTP</a>] with the value of the <a href="#dfn-type"><code>type</code></a>
+attribute or <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument.  Specifically, responses MUST only support a subset of responses that are equivalent to the following from HTTP [<a href="#HTTP">HTTP</a>]:</p>
 
 <div id="TwoHundredOK" class="section">
 <h4>5.7.4.1. 200 OK</h4>
@@ -1325,7 +1324,7 @@ is called on them.</p></li>
 <li><p><dfn id="post-selection-file-mods">Post-selection file modifications</dfn> occur when a file changes on disk after it has been selected.  In such cases, if a
 <a href="#read-methods">read method</a> is called on a file, user agents MAY raise a <code><a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a></code>.</p></li>
 <li><p><dfn id="cross-origin-requests-on-blobs">Cross-origin requests on Blob URIs</dfn> occur when a <a href="#url">Blob URI</a> is accessed across origins.
-In particular, code of the sort: <p><code>document.location = createObjectURL(myFile);</code></p> is problematic.  User agents should ensure that the
+In particular, code of the sort: <code>document.location = createObjectURL(myFile);</code> is problematic.  User agents should ensure that the
 <a href="#FourOhThreeNotAllowed">403 Not Allowed</a> response
 is used in cross-origin request contexts.  User agents MAY return <a href="#FourOhThreeNotAllowed">403 Not Allowed</a> at any attempt to set the entire document location to a file or Blob.
 </p></li>
