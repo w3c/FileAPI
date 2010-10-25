@@ -122,14 +122,19 @@
             <dd>
               <a href='{$options/x:versions/x:this/@href}'><xsl:value-of select='$options/x:versions/x:this/@href'/></a>
             </dd>
-            <dt>Latest Version:</dt>
+            <dt>Latest Published Version:</dt>
             <xsl:if test='$options/x:versions/x:latest/@href != ""'>
               <dd><a href='{$options/x:versions/x:latest/@href}'><xsl:value-of select='$options/x:versions/x:latest/@href'/></a></dd>
+            <dt>Latest Editor’s Draft:</dt>
+            <dd>
+              <xsl:variable name='href' select='$options/x:versions/x:cvs/@href'/>
+              <a href='{$href}'><xsl:value-of select='$href'/></a>
+            </dd>  
             </xsl:if>
           </xsl:otherwise>
         </xsl:choose>
         <xsl:if test='$options/x:versions/x:previous[@href!=""]'>
-          <dt>Previous Version<xsl:if test='count($options/x:versions/x:previous[@href!=""]) > 1'>s</xsl:if>:</dt>
+          <dt>Previous Version(s)<xsl:if test='count($options/x:versions/x:previous[@href!=""]) > 1'>s</xsl:if>:</dt>
           <xsl:if test='$options/x:versions/x:previous/@href != ""'>
             <xsl:for-each select='$options/x:versions/x:previous/@href'>
               <dd><a href='{$options/x:versions/x:previous/@href}'><xsl:value-of select='$options/x:versions/x:previous/@href'/></a></dd>
