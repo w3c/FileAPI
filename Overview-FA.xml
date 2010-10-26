@@ -1193,7 +1193,7 @@ would be used to refer to an anchor within the file.  If the user agent does not
 meaningful within the resource, it MUST ignore the fragment identifier.
 </p>
 
-<p>UUID is one potential option available to user agents for use with <a href="#url">Blob URIs</a> as <a href="#opaqueStrings">opaque strings</a>.
+<p>UUID is one potential option available to user agents for use with <a href="#url">Blob URIs</a> as <a href="#opaqueString">opaque strings</a>.
 UUIDs are defined in [<a href="#UUID">RFC4122</a>] and are used here without the urn: scheme.
 Below is an ABNF [<a href="#ABNF">RFC5234</a>] for UUID; this is provided informationally and is not normative.
 </p>
@@ -1241,7 +1241,7 @@ attribute or <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argumen
 <div id="TwoHundredOK" class="section">
 <h4>200 OK</h4>
 <p>This response [<a href="#HTTP">HTTP</a>] MUST be used if the request has succeeded, namely the <a href="#ABNFForBlob">blob:</a> URI has been requested with a GET,
-satisfies the <a href="#originOfBlob">origin requirement</a>, and satisfies the <a href="#lifetime">lifetime requirement.</a>  If this response code is used,
+satisfies the <a href="#originOfBlob">origin requirement</a>, and satisfies the <a href="#lifeTime">lifetime requirement.</a>  If this response code is used,
 the user agent MUST also use a Content-Type header [<a href="#HTTP">HTTP</a>] with a value equal to the <code><a href="#dfn-Blob">Blob</a></code> object's <code><a href="#dfn-type">type</a></code> attribute.
 </p>
 </div>
@@ -1288,7 +1288,8 @@ is called.</p>
 a unique <a href="#url"><code>Blob</code> URI</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument.</p></li>
 </ol>
 </dd>
-<dt id="dfn-revokeObjectURL">The <code>revokeObjectURL</code> method</dt><dd><p>Revokes the <a href="#url"><code>Blob</code> URI</a> provided in the <a href="#dfn-urlarg"><code>url</code></a> argument.
+<dt id="dfn-revokeObjectURL">The <code>revokeObjectURL</code> method</dt>
+<dd><p>Revokes the <a href="#url"><code>Blob</code> URI</a> provided in the <a href="#dfn-urlarg"><code>url</code></a> argument.
 </p>
 <ol>
   <li>If the <a href="#dfn-urlarg"><code>url</code></a> refers to a <a href="#valid">valid</a> <a href="#dfn-Blob"><code>Blob</code></a>, then after this method is called,
@@ -1297,6 +1298,7 @@ user agents MUST return a <a href="#FourOhFourNotFound">404</a> response code wh
 the <a href="#dfn-urlarg"><code>url</code></a> argument is not a valid <a href="#url"><code>Blob</code> URI</a>, this method call does nothing.  User agents MAY display a
 message on the error console.</li>
 </ol>
+<p><dfn id="dfn-urlarg">The <code>url</code> argument</dfn> to the <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> method is a <a href="#url">Blob URI</a> string.</p>
 </dd>
 </dl>
 </div>
@@ -1317,7 +1319,7 @@ message on the error console.</li>
 type="file"/&gt;</code> (in a "must choose" loop that forces selection before the file picker is dismissed) and a user agent may prevent file
 access to any selections by making the  <a href="#dfn-filelist"><code>FileList</code></a> object returned be of size 0.</p></li>
 <li><p><dfn id="sensitive-files">System-sensitive files</dfn> (e.g. files in /usr/bin, password files, other native operating system executables) typically should not
-be exposed to web content, and should not be accessed via <a href="#dfn-url">URLs</a>.  User agents MAY raise a <a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a>
+be exposed to web content, and should not be accessed via <a href="#url">Blob URIs</a>.  User agents MAY raise a <a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a>
 if such files are accessed or a <a href="#read-methods">read method</a>
 is called on them.</p></li>
 <li><p><dfn id="post-selection-file-mods">Post-selection file modifications</dfn> occur when a file changes on disk after it has been selected.  In such cases, if a
