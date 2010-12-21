@@ -264,8 +264,9 @@ function errorHandler(evt) {
       </div>
       <div id='terminology' class='section'>
         <h2>Terminology and Algorithms</h2>
-        <p>The terms and algorithms <dfn id="fragment">&lt;fragment></dfn>, <dfn id="scheme">&lt;scheme></dfn>, <dfn id="document-base-url">document base URL</dfn>,
-        <dfn id="event-handler-attributes">event handler attributes</dfn>, <dfn id="event-handler-event-type">event handler event type</dfn>,
+        <p>The terms and algorithms <dfn id="fragment">&lt;fragment></dfn>, <dfn id="scheme">&lt;scheme></dfn>, <dfn id="document">document</dfn>,
+        <dfn id="document-base-url">document base URL</dfn>, <dfn id="unload-document">unload a document</dfn>,
+        <dfn id="unloading-document-cleanup-steps">unloading document cleanup steps</dfn>, <dfn id="event-handler-attributes">event handler attributes</dfn>, <dfn id="event-handler-event-type">event handler event type</dfn>,
         <dfn id="Function"><code>Function</code></dfn>,
         <dfn id="origin">origin</dfn>, <dfn id="resolve-a-URL">resolve a URL</dfn>, <dfn id="same-origin">same origin</dfn>,
         <dfn id="task">task</dfn>, <dfn id="task-source">task source</dfn>, <dfn id="df-URL">URL</dfn>, <dfn id="URL-character-encoding">URL character encoding</dfn>, the
@@ -379,10 +380,13 @@ function errorHandler(evt) {
   <h3>Attributes</h3>
   <dl>
     <dt id="dfn-name"><code>name</code></dt>
-    <dd><p>The name of the file. There are numerous file name variations on different systems; this is merely the name of the file, without path information.</p></dd>
+    <dd><p>The name of the file; on getting, this MUST return the name of the file as a string. There are numerous file name variations on different systems;
+    this is merely the name of the file, without path information.  On getting, if user agents cannot make this information available, they MUST return the empty string.</p></dd>
     <dt id="dfn-lastModifiedDate"><code>lastModifiedDate</code></dt>
-    <dd><p>The last modified date of the file; on getting, this returns a <code>Date</code> object [<a href="#HTML5">HTML5</a>].  If user agents cannot make this information
-    available, they MUST return null.</p></dd>
+    <dd><p>The last modified date of the file; on getting, this MUST return a <code>Date</code> object [<a href="#HTML5">HTML5</a>] with the last modified date on disk.  On getting,
+    user agents MUST create a new <code>Date</code> object with the last modified date on disk; a different <code>Date</code> object MUST be returned each time.
+    On getting, if user agents cannot make this information available, they MUST return null; on getting, even if the user agent could make this information available on previous gets, if
+    it cannot make this information available on the current access it MUST return null.</p></dd>
     </dl>
   </div>
   </div>
@@ -1220,16 +1224,18 @@ hexDigit =
 </div>
 <div id="originOfBlob" class="section">
 <h3>Origin of Blob URIs</h3>
-<p>The <a href="#origin">origin</a> of a <a href="#url">Blob URI</a> MUST be the  <a href="#origin">origin</a> of the script that called <a href="#dfn-createObjectURL"><code>createObjectURL</code></a>.
+<p>The <a href="#origin">origin</a> of a <a href="#url">Blob URI</a> MUST be the  <a href="#origin">origin</a> of the script that called <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a>.
 <a href="#url">Blob URIs</a> MUST only be valid within this <a href="#origin">origin</a>.</p>
 </div>
 
 <div id="lifeTime" class="section">
 <h3>Lifetime of Blob URIs</h3>
-<p>The lifetime of a <a href="#url">Blob URI</a> is bound to the lifetime of the global object from which <a href="#dfn-createObjectURL"><code>createObjectURL</code></a> was called.
-Implementations vary in garbage collection behavior; at a minimum, implementations MUST ensure that a <a href="#url">Blob URI</a> is revoked after
-<a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> is called.  Implementations MUST respond with a <a href="#FourOhFourNotFound">404 Not Found</a>
-if a <a href="#url">Blob URI</a> is dereferenced after <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> is called on that paticular URL.
+<p>When a user agent <a href="#unload-document">unloads a document</a>, as part of the <a href="#unloading-document-cleanup-steps">unloading document cleanup steps</a>, it
+MUST revoke a <a href="#url">Blob URI</a> which dereferences a <a href="#dfn-Blob"><code>Blob</code></a> object in that <a href="#document">document</a>.
+Implementations MUST ensure that a <a href="#url">Blob URI</a> is revoked after
+<a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called with that <a href="#url">Blob URI</a> as an argument.
+Implementations MUST respond with a <a href="#FourOhFourNotFound">404 Not Found</a>
+if a <a href="#url">Blob URI</a> is dereferenced after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called on that paticular <a href="#url">Blob URI</a>.
 </p>
 </div>
 <div id="processingModel" class="section">
