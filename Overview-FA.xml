@@ -383,10 +383,9 @@ function errorHandler(evt) {
     <dd><p>The name of the file; on getting, this MUST return the name of the file as a string. There are numerous file name variations on different systems;
     this is merely the name of the file, without path information.  On getting, if user agents cannot make this information available, they MUST return the empty string.</p></dd>
     <dt id="dfn-lastModifiedDate"><code>lastModifiedDate</code></dt>
-    <dd><p>The last modified date of the file; on getting, this MUST return a <code>Date</code> object [<a href="#HTML5">HTML5</a>] with the last modified date on disk.  On getting,
-    user agents MUST create a new <code>Date</code> object with the last modified date on disk; a different <code>Date</code> object MUST be returned each time.
-    On getting, if user agents cannot make this information available, they MUST return null; on getting, even if the user agent could make this information available on previous gets, if
-    it cannot make this information available on the current access it MUST return null.</p></dd>
+    <dd><p>The last modified date of the file.  On getting, if user agents can make this information available, this MUST return a new <code>Date</code>[<a href="#HTML5">HTML5</a>] object
+initialized to the last modified date of the file; otherwise, this MUST return null.
+</p></dd>
     </dl>
   </div>
   </div>
@@ -1230,13 +1229,13 @@ hexDigit =
 
 <div id="lifeTime" class="section">
 <h3>Lifetime of Blob URIs</h3>
-<p>When a user agent <a href="#unload-document">unloads a document</a>, as part of the <a href="#unloading-document-cleanup-steps">unloading document cleanup steps</a>, it
-MUST revoke a <a href="#url">Blob URI</a> which dereferences a <a href="#dfn-Blob"><code>Blob</code></a> object in that <a href="#document">document</a>.
-Implementations MUST ensure that a <a href="#url">Blob URI</a> is revoked after
-<a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called with that <a href="#url">Blob URI</a> as an argument.
-Implementations MUST respond with a <a href="#FourOhFourNotFound">404 Not Found</a>
-if a <a href="#url">Blob URI</a> is dereferenced after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called on that paticular <a href="#url">Blob URI</a>.
-</p>
+<p>This specification defines the following lifetime conditions on <a href="#url">Blob URIs</a>: </p>
+<ol><li><p>This specification adds an additional <a href="#unloading-document-cleanup-steps">unloading document cleanup step</a>: User agents MUST revoke any <a href="#url">Blob URIs</a> created with <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> from within that <a href="#document">document</a>.
+If these <a href="#url">Blob URIs</a> are dereferenced, user agents must respond with <a href="#FourOhFourNotFound">404 Not Found</a>.</p></li>
+<li><p>Implementations MUST ensure that any <a href="#url">Blob URIs</a> are revoked after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called with that
+<a href="#url">Blob URI</a> as an argument. Implementations MUST respond with a <a href="#FourOhFourNotFound">404 Not Found</a> if a <a href="#url">Blob URI</a> is
+dereferenced after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called on that particular <a href="#url">Blob URI</a>. </p></li>
+</ol>
 </div>
 <div id="processingModel" class="section">
 <h3>Dereferencing Model for Blob URIs</h3>
