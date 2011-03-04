@@ -303,8 +303,14 @@ function errorHandler(evt) {
     </div>
     <div class="note">
     The <code>HTMLInputElement</code> interface [<a href="#HTML5">HTML5</a>] has a readonly <code>FileList</code> attribute, which is what is
-    being accessed in the above example.  Some conforming user agents support multiple file selections within HTML forms, in which case the
-    <code>FileList</code> object MUST make available all selected files.
+    being accessed in the above example.  Other interfaces with a readonly <code>FileList</code> attribute include the <code>DataTransfer</code> interface [<a href="#HTML5">HTML5</a>].
+    </div>
+    <div id="filelist-normative" class="section">
+    <h3>Conformance Criteria for FileList</h3>
+    <p>Conforming user agents MUST expose the selected file with a <a href="#dfn-filelist"><code>FileList</code></a> object.
+    Some conforming user agents support multiple file selections, in which case the
+    <a href="#dfn-filelist"><code>FileList</code></a> object MUST make available all selected files.  If the IDL object does not apply, or if there are no
+    file selections (e.g. through cancelation) conforming user agents must return <code>null</code> where they would return a <a href="#dfn-filelist"><code>FileList</code></a> object.</p>
     </div>
     </div>
   <div id='blob' class="section">
@@ -331,21 +337,21 @@ function errorHandler(evt) {
                 
     <div id='attributes-blob' class='section'>
     <h3>Attributes</h3>
-    <dl><dt id='dfn-size'><code>size</code></dt><dd><p>Represents the size of the <code>Blob</code> object in bytes.</p></dd>
+    <dl><dt id='dfn-size'><code>size</code></dt><dd><p>Represents the size of the <code>Blob</code> object in bytes.  On getting, conforming user agents MUST return the total number of bytes
+    that a <a href="#dfn-filereader"><code>FileReader</code></a> or <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object can read, or 0 if the Blob has no bytes to be read.</p></dd>
     <dt id="dfn-type"><code>type</code></dt>
     <dd><p>The ASCII-encoded string in lower case representing the media type of the <code>Blob</code>, expressed as an RFC2046 MIME type [<a href="#RFC2046">RFC2046</a>].
-    User agents SHOULD return the MIME type of the <code>Blob</code>,
-    if it is known. If implementations cannot determine the media type of the <code>Blob</code>, they MUST return the empty string.
+    Conforming user agents SHOULD return the MIME type of the <code>Blob</code>,
+    if it is known. If conforming user agents cannot determine the media type of the <code>Blob</code>, they MUST return the empty string.
     A string is a valid MIME type if it matches the <code>media-type</code>
     token defined in section 3.7 "Media Types" of RFC 2616 [<a href="#HTTP">HTTP</a>]. </p></dd>
-    
-    
     </dl>
     </div>
     <div id='methodsandparams-blob' class='section'>
     <h3>Methods and Parameters</h3>
     <dl><dt id='dfn-slice'>The <code>slice</code> method</dt>
-    <dd><p>Returns a new <a href="#dfn-Blob" class="dfnref"><code>Blob</code></a> object between the ranges of bytes specified.</p>
+    <dd><p>Returns a new <a href="#dfn-Blob" class="dfnref"><code>Blob</code></a> object between the ranges of bytes specified.
+    </p>
     <p>The <dfn id='dfn-start'>start</dfn> parameter is a value for the start point of a <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call.</p>
     <p>The <dfn id="dfn-length">length</dfn> parameter is a value for the end point of a
     <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call as byte offsets from <code>start</code>.</p>
@@ -354,11 +360,14 @@ function errorHandler(evt) {
     If this parameter is used, the returned <a href="#dfn-Blob"><code>Blob</code></a> MUST have a <a href="#dfn-type"><code>type</code></a> attribute that, on getting, returns
     the string used for this parameter.</p>
     <p>The <a href="#dfn-slice"><code>slice</code></a> method MUST <dfn id="clamp">clamp</dfn> on values of <a href="#dfn-size"><code>size</code></a> if index arithmetic exceeds the bounds of <a href="#dfn-size"><code>size</code></a>.
-    In particular, this means that for a given slice call:</p>
+    In particular, this means that for a given slice call the following are conformance criteria:</p>
     <ul>
       <li>If <a href="#dfn-start"><code>start</code></a> + <a href="#dfn-length"><code>length</code></a> > <a href="#dfn-size"><code>size</code></a> then a user agent MUST return a <a href="#dfn-Blob"><code>Blob</code></a> object as if
       <a href="#dfn-slice"><code>slice</code></a>(<a href="#dfn-start"><code>start</code></a>, <a href="#dfn-size"><code>size</code></a>-<a href="#dfn-start"><code>start</code></a>) was called.  </li>
       <li>If <a href="#dfn-start"><code>start</code></a> > <a href="#dfn-size"><code>size</code></a> then a user agent MUST return a <a href="#dfn-Blob"><code>Blob</code></a> object of size 0</li>
+      <li>Otherwise, a user agent MUST return a new <a href="#dfn-Blob" class="dfnref"><code>Blob</code></a> object between the ranges of bytes specified, with a <a href="#dfn-type" class="dfnref"><code>type</code></a>
+      that matches the optional <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument, if provided.</li> 
+    
     
     </ul>
       
