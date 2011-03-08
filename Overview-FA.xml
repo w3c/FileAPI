@@ -1084,7 +1084,7 @@ make obtaining large files encoded as Data URLs impossible to return [<a href="#
   This interface is used to report errors asynchronously.  The <a href="#dfn-filereader"><code>FileReader</code></a> object's <dfn id="dfn-error">error</dfn> attribute is a
   <a href="#dfn-fileerror"><code>FileError</code></a> object, and is accessed asynchronously through the <a href="#dfn-onerror"><code>onerror</code></a> event handler when
   <a href="#dfn-error-event">error events</a> are generated.  Conforming user agents that make available the
-  <a href="#filereaderConstrctr"><code>FileReader()</code> constructor</a> on their global objects MUST also make available the <code>FileError</code> error.
+  <a href="#filereaderConstrctr"><code>FileReader()</code> constructor</a> on their global objects MUST also make available the <code>FileError</code> interface object.
 </p>
 <x:codeblock language="idl">
  interface <dfn id="dfn-fileerror">FileError</dfn> {
@@ -1109,7 +1109,7 @@ the most appropriate code from the table below.</p>
 <p>
 Errors in the synchronous <a href="#read-method-sync">read methods</a> for Web Workers [<a href="#Workers">Web Workers</a>] are reported using the
 <a href="#dfn-FileException"><code>FileException</code></a> exception.  Conforming user agents that make available the <a href="#filereadersyncConstrctr"><code>FileReaderSync()</code> constructor</a>
-on <code>WorkerGlobalScope</code> MUST also make available the <code>FileException</code> exception.
+on <code>WorkerGlobalScope</code> MUST also make available the <code>FileException</code> interface object.
 </p>
 <x:codeblock language="idl">
  exception <dfn id="dfn-FileException">FileException</dfn> {
