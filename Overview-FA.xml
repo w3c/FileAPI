@@ -302,17 +302,17 @@ function errorHandler(evt) {
     </x:codeblock>
     </div>
     <div class="note">
-    The <code>HTMLInputElement</code> interface [<a href="#HTML5">HTML5</a>] has a readonly <code>FileList</code> attribute, which is what is
+    The <code>HTMLInputElement</code> interface [<a href="#HTML5">HTML5</a>] has a readonly attribute of type <code>FileList</code>, which is what is
     being accessed in the above example.  Other interfaces with a readonly attribute of type <code>FileList</code> include the <code>DataTransfer</code>
     interface [<a href="#HTML5">HTML5</a>].
     </div>
     <div id="filelist-normative" class="section">
     <h3>Conformance Criteria for FileList</h3>
-    <p>Conforming user agents MUST expose the selected file with a <a href="#dfn-filelist"><code>FileList</code></a> object.
-    Some conforming user agents support multiple file selections, in which case the
+    <p>Conforming user agents MUST expose the selected file(s) with an object of type  <a href="#dfn-filelist"><code>FileList</code></a>, which is a sequenced parametrized type of
+    <a href="#dfn-file"><code>File</code></a> objects.  Some conforming user agents support multiple file selections, in which case the
     <a href="#dfn-filelist"><code>FileList</code></a> object MUST make available all selected files.  If the IDL object does not apply, or if there are no
-    file selections (e.g. through cancelation) conforming user agents MUST return <code>null</code> where they would return a
-    <a href="#dfn-filelist"><code>FileList</code></a> object.</p>
+    file selections (e.g. through cancelation) conforming user agents MUST return <code>null</code> where they would return an object of type
+    <a href="#dfn-filelist"><code>FileList</code></a></p>
     </div>
     </div>
   <div id='blob' class="section">
