@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>8 March 2011</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2009/WD-FileAPI-20091117/">http://www.w3.org/TR/2009/WD-FileAPI-20091117/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2010 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>18 April 2011</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2009/WD-FileAPI-20091117/">http://www.w3.org/TR/2009/WD-FileAPI-20091117/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2010 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
       <h2>Abstract</h2>
@@ -78,7 +78,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 8 March 2011 <b>Editor’s Draft</b> of the
+        This document is the 18 April 2011 <b>Editor’s Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -146,7 +146,7 @@
 
     <div id="toc">
       <h2>Table of Contents</h2>
-      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#terminology">3. Terminology and Algorithms</a></li><li><a href="#filelist-section">4. The FileList Sequence</a><ul><li><a href="#filelist-normative">4.1. Conformance Criteria for FileList</a></li></ul></li><li><a href="#blob">5. The Blob Interface</a><ul><li><a href="#attributes-blob">5.1. Attributes</a></li><li><a href="#methodsandparams-blob">5.2. Methods and Parameters</a></li><li><a href="#file">5.3. The File Interface</a><ul><li><a href="#file-attrs">5.3.1. Attributes</a></li></ul></li><li><a href="#FileReader-interface">5.4. The FileReader Interface</a><ul><li><a href="#blobreader-task-source">5.4.1. The FileReader Task Source</a></li><li><a href="#filereaderConstrctr">5.4.2. Constructors</a></li><li><a href="#event-handler-attributes-section">5.4.3. Event Handler Attributes</a></li><li><a href="#blobreader-state">5.4.4. FileReader States</a></li><li><a href="#reading-a-file">5.4.5. Reading a File or Blob</a><ul><li><a href="#MultipleReads">5.4.5.1. Multiple Reads</a></li><li><a href="#filedata-attr">5.4.5.2. The result attribute</a></li><li><a href="#readAsBinaryString">5.4.5.3. The readAsBinaryString() method</a></li><li><a href="#readAsDataURL">5.4.5.4. The readAsDataURL() method</a></li><li><a href="#readAsDataText">5.4.5.5. The readAsText() method</a></li><li><a href="#readAsArrayBuffer">5.4.5.6. The readAsArrayBuffer() method</a></li><li><a href="#abort">5.4.5.7. The abort() method</a></li><li><a href="#blobAndFileParams">5.4.5.8. Blob Parameters</a></li><li><a href="#enctype">5.4.5.9. Determining Encoding</a></li><li><a href="#events">5.4.5.10. Events</a><ul><li><a href="#event-summary">5.4.5.10.1. Event Summary</a></li></ul></li></ul></li></ul></li><li><a href="#readingOnThreads">5.5. Reading on Threads</a><ul><li><a href="#FileReaderSync">5.5.1. The FileReaderSync Interface</a><ul><li><a href="#filereadersyncConstrctr">5.5.1.1. Constructors</a></li><li><a href="#readAsBinaryStringSyncSection">5.5.1.2. The readAsBinaryString method</a></li><li><a href="#readAsTextSync">5.5.1.3. The readAsText method</a></li><li><a href="#readAsDataURLSync-section">5.5.1.4. The readAsDataURL method</a></li><li><a href="#readAsArrayBufferSyncSection">5.5.1.5. The readAsArrayBuffer method</a></li></ul></li></ul></li><li><a href="#ErrorAndException">5.6. Errors and Exceptions</a><ul><li><a href="#FileErrorInterface">5.6.1. The FileError Interface</a></li><li><a href="#FileException">5.6.2. The FileException exception</a></li><li><a href="#ErrorDescriptions">5.6.3. Error Code Descriptions</a></li></ul></li><li><a href="#url">5.7. A URI for Blob and File reference</a><ul><li><a href="#ABNFForBlob">5.7.1. Definition of blob URI Scheme</a></li><li><a href="#originOfBlob">5.7.2. Origin of Blob URIs</a></li><li><a href="#lifeTime">5.7.3. Lifetime of Blob URIs</a></li><li><a href="#processingModel">5.7.4. Dereferencing Model for Blob URIs</a><ul><li><a href="#TwoHundredOK">5.7.4.1. 200 OK</a></li><li><a href="#FourOhThreeNotAllowed">5.7.4.2. 403 Not Allowed</a></li><li><a href="#FourOhFourNotFound">5.7.4.3. 404 Not Found</a></li><li><a href="#FiveHundredInternalServerError">5.7.4.4. 500 Internal Server Error</a></li></ul></li><li><a href="#creating-revoking">5.7.5. Creating and Revoking a Blob URI</a></li></ul></li><li><a href="#security-discussion">5.8. Security Considerations</a></li><li><a href="#requirements">5.9. Requirements and Use Cases</a></li><li><a href="#acknowledgements-section">5.10. Acknowledgements</a></li><li><a href="#references">5.11. References</a><ul><li><a href="#normative-references">5.11.1. Normative references</a></li><li><a href="#informative-references">5.11.2. Informative References</a></li></ul></li></ul></li></ul></div>
+      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#terminology">3. Terminology and Algorithms</a></li><li><a href="#filelist-section">4. The FileList Interface</a><ul><li><a href="#filelist-normative">4.1. Conformance Criteria for FileList</a></li></ul></li><li><a href="#blob">5. The Blob Interface</a><ul><li><a href="#attributes-blob">5.1. Attributes</a></li><li><a href="#methodsandparams-blob">5.2. Methods and Parameters</a><ul><li><a href="#slice-blob">5.2.1. The slice method</a></li></ul></li><li><a href="#file">5.3. The File Interface</a><ul><li><a href="#file-attrs">5.3.1. Attributes</a></li></ul></li><li><a href="#FileReader-interface">5.4. The FileReader Interface</a><ul><li><a href="#blobreader-task-source">5.4.1. The FileReader Task Source</a></li><li><a href="#filereaderConstrctr">5.4.2. Constructors</a></li><li><a href="#event-handler-attributes-section">5.4.3. Event Handler Attributes</a></li><li><a href="#blobreader-state">5.4.4. FileReader States</a></li><li><a href="#reading-a-file">5.4.5. Reading a File or Blob</a><ul><li><a href="#MultipleReads">5.4.5.1. Multiple Reads</a></li><li><a href="#filedata-attr">5.4.5.2. The result attribute</a></li><li><a href="#readAsBinaryString">5.4.5.3. The readAsBinaryString() method</a></li><li><a href="#readAsDataURL">5.4.5.4. The readAsDataURL() method</a></li><li><a href="#readAsDataText">5.4.5.5. The readAsText() method</a></li><li><a href="#readAsArrayBuffer">5.4.5.6. The readAsArrayBuffer() method</a></li><li><a href="#abort">5.4.5.7. The abort() method</a></li><li><a href="#blobAndFileParams">5.4.5.8. Blob Parameters</a></li><li><a href="#enctype">5.4.5.9. Determining Encoding</a></li><li><a href="#events">5.4.5.10. Events</a><ul><li><a href="#event-summary">5.4.5.10.1. Event Summary</a></li></ul></li></ul></li></ul></li><li><a href="#readingOnThreads">5.5. Reading on Threads</a><ul><li><a href="#FileReaderSync">5.5.1. The FileReaderSync Interface</a><ul><li><a href="#filereadersyncConstrctr">5.5.1.1. Constructors</a></li><li><a href="#readAsBinaryStringSyncSection">5.5.1.2. The readAsBinaryString method</a></li><li><a href="#readAsTextSync">5.5.1.3. The readAsText method</a></li><li><a href="#readAsDataURLSync-section">5.5.1.4. The readAsDataURL method</a></li><li><a href="#readAsArrayBufferSyncSection">5.5.1.5. The readAsArrayBuffer method</a></li></ul></li></ul></li><li><a href="#ErrorAndException">5.6. Errors and Exceptions</a><ul><li><a href="#FileErrorInterface">5.6.1. The FileError Interface</a></li><li><a href="#FileException">5.6.2. The FileException exception</a></li><li><a href="#ErrorDescriptions">5.6.3. Error Code Descriptions</a></li></ul></li><li><a href="#url">5.7. A URI for Blob and File reference</a><ul><li><a href="#ABNFForBlob">5.7.1. Definition of blob URI Scheme</a></li><li><a href="#originOfBlob">5.7.2. Origin of Blob URIs</a></li><li><a href="#lifeTime">5.7.3. Lifetime of Blob URIs</a></li><li><a href="#processingModel">5.7.4. Dereferencing Model for Blob URIs</a><ul><li><a href="#TwoHundredOK">5.7.4.1. 200 OK</a></li><li><a href="#FourOhThreeNotAllowed">5.7.4.2. 403 Not Allowed</a></li><li><a href="#FourOhFourNotFound">5.7.4.3. 404 Not Found</a></li><li><a href="#FiveHundredInternalServerError">5.7.4.4. 500 Internal Server Error</a></li></ul></li><li><a href="#creating-revoking">5.7.5. Creating and Revoking a Blob URI</a></li></ul></li><li><a href="#security-discussion">5.8. Security Considerations</a></li><li><a href="#requirements">5.9. Requirements and Use Cases</a></li><li><a href="#acknowledgements-section">5.10. Acknowledgements</a></li><li><a href="#references">5.11. References</a><ul><li><a href="#normative-references">5.11.1. Normative references</a></li><li><a href="#informative-references">5.11.2. Informative References</a></li></ul></li></ul></li></ul></div>
     </div>
 
     <div id="sections">
@@ -281,19 +281,31 @@ function errorHandler(evt) {
         <dfn id="task">task</dfn>, <dfn id="task-source">task source</dfn>, <dfn id="df-URL">URL</dfn>, <dfn id="URL-character-encoding">URL character encoding</dfn>, the
         <dfn id="already-started">"already started" flag</dfn> for script processing, and
         <dfn id="queue-a-task">queue a task</dfn> are defined by the HTML 5 specification [<a href="#HTML5">HTML5</a>]. </p>
-       <p>This specification includes algorithms (steps) as part of the definition of methods.  Conforming implementations (referred to as "user agents" from here on) MAY use other algorithms in the
+       <p>This specification includes algorithms steps as part of the definition of methods.  Conforming implementations (referred to as "user agents" from here on) MAY use other algorithms in the
        implementation of these methods, provided
-       the end result is the same.</p> 
+       the end result is the same.</p>
+       <p>The algorithms and steps in this specification use the following mathematical operations:</p>
+       <ul>
+       <li><p>max(a,b) returns the maximum of a and b, and is always performed on integers as they are defined in WebIDL [<a href="#WebIDL">WebIDL</a>]; in the case of max(6,4) the result is 6.
+       This operation is also defined in ECMAScript [<a href="#ECMA-262">ECMA-262</a>].</p></li>
+       <li><p>min(a,b) returns the minimum of a and b, and is always performed on integers as they are defined in WebIDL [<a href="#WebIDL">WebIDL</a>]; in the case of min(6,4) the result is 4.
+       This operation is also defined in ECMAScript [<a href="#ECMA-262">ECMA-262</a>].</p></li>
+       <li><p>Mathematical comparisons such as &lt; (less than), &gt; (greater than), &gt;= (greater than or equal to), &lt;= (less than or equal to) are as in ECMAScript
+       [<a href="#ECMA-262">ECMA-262</a>].</p></li>
+       </ul>
       </div>
 
       <div id="filelist-section" class="section">
-        <h2>4. The FileList Sequence</h2>
+        <h2>4. The FileList Interface</h2>
        
        <p>
-          This sequence parameterized type exposes the list of files that have been selected.
+          This interface exposes the list of files that have been selected.
        </p>
     <div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
-    typedef sequence&lt;File&gt; <dfn id="dfn-filelist">FileList</dfn>;
+    interface <dfn id="dfn-filelist">FileList</dfn> {
+      getter File item(unsigned long index);
+      readonly attribute unsigned long length;
+    }
     </code></pre></div></div>
     <div class="example"><div class="exampleHeader">Example</div>
     <p>
@@ -327,7 +339,7 @@ function errorHandler(evt) {
   <div id="blob" class="section">
     <h2>5. The Blob Interface</h2>
     <p>
-      This interface represents raw data.  It provides a method to <a href="#dfn-slice" class="dfnref">slice</a> data objects between ranges of bytes into
+      This interface represents <em>immutable</em> raw data.  It provides a method to <a href="#dfn-slice" class="dfnref">slice</a> data objects between ranges of bytes into
       further chunks of raw data.
       It also provides an attribute representing the size of the chunk of data.
       The <a href="#dfn-file" class="dfnref">File</a> interface inherits from this interface.
@@ -336,12 +348,12 @@ function errorHandler(evt) {
     interface <dfn id="dfn-Blob">Blob</dfn> {
       
       readonly attribute unsigned long long <a href="#dfn-size" title="size">size</a>;
-      readonly attribute DOMString <a href="#dfn-type" class="dfnref">type</a>;
+      readonly attribute DOMing <a href="#dfn-type" class="dfnref">type</a>;
       <span class="comment">//slice Blob into byte-ranged chunks</span>
       
-      Blob <a href="#dfn-slice" title="slice">slice</a>(in unsigned long long <a href="#dfn-start" class="dfnref" title="start">start</a>,
-                 in unsigned long long <a href="#dfn-length" class="dfnref" title="length">length</a>,
-                 optional DOMString <a href="#dfn-contentTypeBlob">contentType</a>); 
+      Blob <a href="#dfn-slice" title="slice">slice</a>(in optional long long <a href="#dfn-start" class="dfnref" title="start">start</a>,
+                 in optional long long <a href="#dfn-end" class="dfnref" title="length">end</a>,
+                 in optional DOMString <a href="#dfn-contentTypeBlob">contentType</a>); 
     
     };
     </code></pre></div></div>
@@ -349,11 +361,11 @@ function errorHandler(evt) {
     <div id="attributes-blob" class="section">
     <h3>5.1. Attributes</h3>
     <dl><dt id="dfn-size"><code>size</code></dt><dd><p>Represents the size of the <code>Blob</code> object in bytes.  On getting, conforming user agents MUST return the total
-    number of bytes that a <a href="#dfn-filereader"><code>FileReader</code></a> or <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object can read, or 0 if the
+    number of bytes that can be read by a <a href="#dfn-filereader"><code>FileReader</code></a> or <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object, or 0 if the
     Blob has no bytes to be read.</p></dd>
     <dt id="dfn-type"><code>type</code></dt>
     <dd><p>The ASCII-encoded string in lower case representing the media type of the <code>Blob</code>, expressed as an RFC2046 MIME type [<a href="#RFC2046">RFC2046</a>].
-    Conforming user agents SHOULD return the MIME type of the <code>Blob</code>,
+    On getting, conforming user agents SHOULD return the MIME type of the <code>Blob</code>,
     if it is known. If conforming user agents cannot determine the media type of the <code>Blob</code>, they MUST return the empty string.
     A string is a valid MIME type if it matches the <code>media-type</code>
     token defined in section 3.7 "Media Types" of RFC 2616 [<a href="#HTTP">HTTP</a>]. </p></dd>
@@ -361,29 +373,75 @@ function errorHandler(evt) {
     </div>
     <div id="methodsandparams-blob" class="section">
     <h3>5.2. Methods and Parameters</h3>
-    <dl><dt id="dfn-slice">The <code>slice</code> method</dt>
-    <dd><p>Returns a new <a href="#dfn-Blob" class="dfnref"><code>Blob</code></a> object between the ranges of bytes specified.
+    <div id="slice-blob" class="section">
+    <h4>5.2.1. The slice method</h4>
+    <dl><dt id="dfn-sliceNonNormative">The <code>slice</code> method</dt>
+    <dd><p>Returns a new <a href="#dfn-Blob" class="dfnref"><code>Blob</code></a> object with bytes ranging from the optional <a href="#dfn-start"><code>start</code></a>
+    parameter upto but not including the optional <a href="#dfn-end"><code>end</code></a> parameter, and with a
+    <a href="#dfn-type" class="dfnref"><code>type</code></a> attribute that is the value of the optional <a href="#dfn-contentTypeBlob"><code>contentType</code></a> parameter.
+    <em>This is informative, and not normative.  Normative requirements on the parameters <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</code></a>,
+    and <a href="#dfn-contentTypeBlob"><code>contentType</code></a> are below, and normative requirements for <a href="#dfn-slice">
+    <code>slice</code></a> are below.</em>
     </p>
-    <p>The <dfn id="dfn-start">start</dfn> parameter is a value for the start point of a <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call.</p>
-    <p>The <dfn id="dfn-length">length</dfn> parameter is a value for the end point of a
-    <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call as byte offsets from <code>start</code>.</p>
-    <p>The <dfn id="dfn-contentTypeBlob">contentType</dfn> parameter is optional, and can be used to set a value identical to one that is set with the HTTP/1.1 Content-Type header [<a href="#HTTP">HTTP</a>] on
-    the <a href="#dfn-Blob"><code>Blob</code></a> returned by the <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call.
-    If this parameter is used, the returned <a href="#dfn-Blob"><code>Blob</code></a> MUST have a <a href="#dfn-type"><code>type</code></a> attribute that, on getting, returns
-    the string used for this parameter.</p>
-    <p>The <a href="#dfn-slice"><code>slice</code></a> method MUST <dfn id="clamp">clamp</dfn> on values of <a href="#dfn-size"><code>size</code></a> if index arithmetic exceeds the bounds of <a href="#dfn-size"><code>size</code></a>.
-    In particular, this means that for a given slice call the following are conformance criteria:</p>
-    <ul>
-      <li>If <a href="#dfn-start"><code>start</code></a> + <a href="#dfn-length"><code>length</code></a> &gt; <a href="#dfn-size"><code>size</code></a> then a user agent MUST return a <a href="#dfn-Blob"><code>Blob</code></a> object as if
-      <a href="#dfn-slice"><code>slice</code></a>(<a href="#dfn-start"><code>start</code></a>, <a href="#dfn-size"><code>size</code></a>-<a href="#dfn-start"><code>start</code></a>) was called.  </li>
-      <li>If <a href="#dfn-start"><code>start</code></a> &gt; <a href="#dfn-size"><code>size</code></a> then a user agent MUST return a <a href="#dfn-Blob"><code>Blob</code></a> object of size 0</li>
-      <li>Otherwise, a user agent MUST return a new <a href="#dfn-Blob" class="dfnref"><code>Blob</code></a> object between the ranges of bytes specified, with a <a href="#dfn-type" class="dfnref"><code>type</code></a>
-      that matches the optional <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument, if it is provided.</li> 
-    
-    
-    </ul>
-      
+    <p>The optional <dfn id="dfn-start"><code>start</code></dfn> parameter is a value for the start point of a <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call as a
+    byte-order position, with the zeroth position representing the first byte.
+    The following requirements are normative for this parameter, and user agents MUST process <a href="dfn-slice"><code>slice</code></a> with
+    <code>start</code> <em>normalized</em> according to the following:</p>
+    <ol>
+    <li><p>If the <code>start</code> parameter is not provided (undefined), let relativeStart be 0.</p></li>
+    <li><p>If <code>start</code> is negative, let relativeStart be <em>max((<a href="#dfn-size"><code>size</code></a> + <code>start</code>), 0))</em>.</p></li>
+    <li><p>Else, let relativeStart be <em>min(start, size)</em>.</p></li>
+    <li><p>User agents MUST process <a href="#dfn-slice"><code>slice</code></a> with <code>start</code> set to relativeStart; <code>start</code> MUST be treated as a byte-order
+    position, where 0 represents the first byte.
+    This defines the normalization of the <code>start</code> parameter.</p></li>
+    </ol>	
+    <p>The optional <dfn id="dfn-end">end</dfn> parameter is a value for the end point of a
+    <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call.  The following requirements
+    are normative for this parameter, and user agents MUST process <a href="dfn-slice"><code>slice</code></a> with <code>end</code> normalized according to the following:</p>
+    <ol>
+    <li><p>If the <code>end</code> parameter is not provided (undefined), let relativeEnd be <a href="#dfn-size"><code>size</code></a>.</p></li>
+    <li><p>If <code>end</code> is negative, let relativeEnd be <em>max((size + end), 0)</em> </p></li>
+    <li><p>Else, let relativeEnd be <em>min(end, size)</em></p></li>
+    <li><p>User agents MUST process <a href="#dfn-slice"><code>slice</code></a> with <code>end</code> set to relativeEnd.
+    This defines the normalization of the <code>end</code> parameter.</p></li>
+    </ol>
+    <p>The optional <dfn id="dfn-contentTypeBlob"><code>contentType</code></dfn> parameter is used to set a value identical to one that is set with the
+    HTTP/1.1 Content-Type header [<a href="#HTTP">HTTP</a>] on
+    the <a href="#dfn-Blob"><code>Blob</code></a> returned by the <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call.  The following requirements are normative for this
+    parameter, and user agents MUST process the <a href="dfn-slice"><code>slice</code></a> with <code>contentType</code> normalized according to the following:
+   </p>
+   <ol>
+   <li><p>If the <code>contentType</code> parameter is not provided (undefined), let relativeContentType be set to the empty string </p></li>
+   <li><p>Else let relativeContentType be set to <code>contentType</code>.</p></li>
+   <li><p>User agents MUST process <a href="#dfn-slice"><code>slice</code></a> with <code>contentType</code> set to relativeContentType.  This defines the normalization of the
+   <code>contentType</code> parameter.</p></li>
+   </ol>
+    <p>The <dfn id="dfn-slice"><code>slice</code></dfn> method MUST act as follows, by either following the steps below or by following different steps that
+    yield an identical result:</p>
+    <ol>
+    <li><p>Let O be the <a href="#dfn-Blob"><code>Blob</code></a> object on which the <code>slice</code> method is being called.</p></li>
+    <li><p>Let A be a new <a href="#dfn-Blob"><code>Blob</code></a> object with no bytes; let <code>A.type</code> be the empty string and <code>A.size</code> be 0. Let j be set to 0.</p></li>
+    <li><p>The <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</code></a>, and <a href="#dfn-contentTypeBlob"><code>contentType</code></a> arguments
+    used for this <code>slice</code> call MUST be normalized according to the steps provided in the defintion of each parameter.  Let <code>A.type</code> be set to the
+    <a href="#dfn-contentType"><code>contentType</code></a> argument.</p></li>
+    <li><p>Let k be set to the <a href="#dfn-start"><code>start</code></a> argument.</p></li>
+    <li><p>Repeat, while (k &lt; end)</p>
+    <ol type="a">
+    <li><p>Let O<sub>k</sub> be the byte at position k and A<sub>j</sub> be the byte at
+    position j.  Let A<sub>j</sub> be set to O<sub>k</sub>.</p></li>
+    <li><p>Increase k by 1.</p></li>
+    <li><p>Increase j by 1.</p></li>
+    </ol>
+    </li>
+    <li><p>Return A.</p></li>
+    </ol>
     </dd></dl>
+    <div class="note"><div class="noteHeader">Note</div>
+    <p>The <code>slice</code> method previously had different semantics, which differed from <code>Array.prototype.slice</code> [<a href="#ECMA-262">ECMA-262</a>].  This difference
+    was an oversight which has been corrected in this edition of the specification.  Some user agents implemented the previous semantics, notably Firefox 4, Chrome 10, and Opera 11.
+    These user agents have agreed to vendor-prefix their <code>slice</code> implementations in subsequent releases.</p>
+    </div>
+    </div>
   </div>
   <div id="file" class="section">
   <h2>5.3. The File Interface</h2>
@@ -1498,6 +1556,10 @@ is used in cross-origin request contexts.  User agents MAY return <a href="#Four
         <dd><cite><a href="http://www.ietf.org/rfc/rfc5234.txt">Augmented BNF for Syntax Specifications: ABNF</a></cite>, D. Crocker, P. Overell. IETF.</dd>
         <dt id="URL-API">URL Specification</dt>
         <dd><cite><a href="https://docs.google.com/document/edit?id=1r_VTFKApVOaNIkocrg0z-t7lZgzisTuGTXkdzAk4gLU&amp;hl=en&amp;pli=1#">URL API</a></cite>, A. Barth. TBD.</dd>
+	<dt id="WebIDL">WebIDL Specification</dt>
+	<dd><cite><a href="http://www.w3.org/TR/WebIDL/">WebIDL</a></cite>, C. McCormack.</dd>
+	<dt id="ECMA-262">ECMAScript</dt>
+	<dd><cite><a href="">ECMAScript 5th Edition</a></cite>, A. Wirfs-Brock, P. Lakshman et al.</dd>
 	</dl>
       </div>
     <div id="informative-references" class="section">
