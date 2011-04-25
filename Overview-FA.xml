@@ -60,10 +60,11 @@
 
     </p>
 	<ul>
-	    <li>A <a class='dfnref' href='#dfn-filelist'>FileList</a> sequence, which represents an array of individually selected files from the underlying system.
+	    <li>A <a class='dfnref' href='#dfn-filelist'>FileList</a> interface, which represents an array of individually selected files from the underlying system.
 		The user interface for selection can be invoked via <code>&lt;input type=&quot;file&quot;&gt;</code>, i.e. when the
 		<code>input</code> element is in the <code>File Upload</code> state [<a href="#HTML5">HTML5</a>] .</li>
-	    <li>A <a class='dfnref' href="#dfn-Blob">Blob</a> interface, which represents raw binary data, and allows access to ranges of bytes within the <a href="#dfn-Blob"><code>Blob</code></a> object.</li>
+	    <li>A <a class='dfnref' href="#dfn-Blob">Blob</a> interface, which represents immutable raw binary data, and allows access to ranges of bytes within the
+	    <a href="#dfn-Blob"><code>Blob</code></a> object as a separate <a class='dfnref' href="#dfn-Blob">Blob</a>.</li>
             <li>A <a href='#dfn-file' class='dfnref'>File</a> interface, which includes readonly informational attributes about a file
 	        such as its name and the date of the last modification (on disk) of the file.</li>
             <li>A <a href='#dfn-filereader' class='dfnref'>FileReader</a> interface, which provides methods to read a
@@ -158,7 +159,7 @@
     </p>
     <p>
       The <a href="#dfn-file"><code>File</code></a> interface represents file data typically obtained from the underlying file system, and the <a href="#dfn-Blob"><code>Blob</code></a> interface
-      ("Binary Large Object" -- a name originally introduced to web APIs in <a href="#Blob-REF">Google Gears</a>) represents raw data.  <a href="#dfn-file"><code>File</code></a> or
+      ("Binary Large Object" -- a name originally introduced to web APIs in <a href="#Blob-REF">Google Gears</a>) represents immutable raw data.  <a href="#dfn-file"><code>File</code></a> or
       <a href="#dfn-Blob"><code>Blob</code></a> reads should happen asynchronously on the main thread, with an optional synchronous API used
       within threaded web applications.  An asynchronous API for reading files prevents blocking and UI "freezing" on a user
       agent's main thread.  This specification defines an asynchronous API based on an <em>event model</em> to read and access a <code>File</code> or <code>Blob</code>'s
@@ -294,8 +295,8 @@ function errorHandler(evt) {
        </p>
     <x:codeblock language='idl'>
     interface <dfn id='dfn-filelist'>FileList</dfn> {
-      getter File item(unsigned long index);
-      readonly attribute unsigned long length;
+      getter <a href="#dfn-file" class="dfnref">File</a> <a href="#dfn-item" class="dfnref">item</a>(unsigned long <a href="#dfn-index" class="dfnref">index</a>);
+      readonly attribute unsigned long <a href="#dfn-length" class="dfnref">length</a>;
     }
     </x:codeblock>
     <div class='example'>
@@ -307,11 +308,33 @@ function errorHandler(evt) {
     <span class='comment'>// fileChooser is input element of type 'file'</span>
     var file = document.forms['uploadData']['fileChooser'].files[0];
     
+    <span class="comment">// alternative syntax can be</span>
+    <span class="comment">// var file = document.forms['uploadData']['fileChooser'].files.item(0);</span>
+    
     if(file)
     {
       <span class='comment'>// Perform file ops</span>
     }  
     </x:codeblock>
+    </div>
+    <div class='section' id='attributes-filelist'>
+    <h3>Attributes</h3>
+    <dl>
+      <dt id="dfn-length"><code>length</code></dt><dd><p>MUST return the number of files selected and that are available on the <a href="#dfn-filelist"><code>FileList</code></a>
+      object, which can be greater than or equal to 1 if multiple file selection is enabled [<a href="#HTML5">HTML5</a>].  If no files have been selected, this attribute MUST return 0.</p></dd>
+    </dl>
+    </div>
+    <div class='section' id='filelist-methods-params'>
+    <h3>Methods and Parameters</h3>
+    <dl>
+      <dt id="dfn-item"><code>item(index)</code></dt><dd><p>MUST return the <em>indexth</em> <a href="#dfn-file"><code>File</code></a> object in
+      the <a href="#dfn-filelist"><code>FileList</code></a>.  If there is no <em>indexth</em> <a href="#dfn-file"><code>File</code></a> object in the
+      <a href="#dfn-filelist"><code>FileList</code></a>, then this method must return <code>null</code>.</p>
+      <p><dfn id="dfn-index" title="index"><code>index</code></dfn> MUST be treated by user agents as value for the position of the selected <a href="#dfn-file"><code>File</code></a>
+      object in the <a href="#dfn-filelist"><code>FileList</code></a>, with 0 representing the first selected file.</p>
+      </dd>
+    
+    </dl>
     </div>
     <div class="note">
     The <code>HTMLInputElement</code> interface [<a href="#HTML5">HTML5</a>] has a readonly attribute of type <code>FileList</code>, which is what is
@@ -320,11 +343,11 @@ function errorHandler(evt) {
     </div>
     <div id="filelist-normative" class="section">
     <h3>Conformance Criteria for FileList</h3>
-    <p>Conforming user agents MUST expose the selected file(s) with an object of type  <a href="#dfn-filelist"><code>FileList</code></a>, which is a sequenced parametrized type of
+    <p>Conforming user agents MUST expose the selected file(s) with an object of type  <a href="#dfn-filelist"><code>FileList</code></a>, which contains the selected files as
     <a href="#dfn-file"><code>File</code></a> objects.  Some conforming user agents support multiple file selections, in which case the
-    <a href="#dfn-filelist"><code>FileList</code></a> object MUST make available all selected files.  If the IDL object does not apply, or if there are no
-    file selections (e.g. through cancelation) conforming user agents MUST return <code>null</code> where they would return an object of type
-    <a href="#dfn-filelist"><code>FileList</code></a></p>
+    <a href="#dfn-filelist"><code>FileList</code></a> object MUST make available all selected files.  If there are no
+    file selections (e.g. through cancelation) conforming user agents MUST return an object of type
+    <a href="#dfn-filelist"><code>FileList</code></a> with <code>null</code> as a return value for any call to the <a href="#dfn-item"><code>item</code></a> method.</p>
     </div>
     </div>
   <div id='blob' class="section">
@@ -338,20 +361,20 @@ function errorHandler(evt) {
     <x:codeblock language = 'idl'>
     interface <dfn id='dfn-Blob'>Blob</dfn> {
       
-      readonly attribute unsigned long long <a href="#dfn-size" title='size'>size</a>;
+      readonly attribute unsigned long long <a href="#dfn-size" title='size' class="dfnref">size</a>;
       readonly attribute DOMing <a href="#dfn-type" class="dfnref">type</a>;
       <span class='comment'>//slice Blob into byte-ranged chunks</span>
       
       Blob <a href="#dfn-slice" title='slice'>slice</a>(in optional long long <a href="#dfn-start" class="dfnref" title='start'>start</a>,
                  in optional long long <a href="#dfn-end" class="dfnref" title='length'>end</a>,
-                 in optional DOMString <a href="#dfn-contentTypeBlob">contentType</a>); 
+                 in [TreatUndefinedAs=EmptyString] optional DOMString <a href="#dfn-contentTypeBlob">contentType</a>); 
     
     };
     </x:codeblock>
                 
     <div id='attributes-blob' class='section'>
     <h3>Attributes</h3>
-    <dl><dt id='dfn-size'><code>size</code></dt><dd><p>Represents the size of the <code>Blob</code> object in bytes.  On getting, conforming user agents MUST return the total
+    <dl><dt id='dfn-size'><code>size</code></dt><dd><p>Returns the size of the <code>Blob</code> object in bytes.  On getting, conforming user agents MUST return the total
     number of bytes that can be read by a <a href="#dfn-filereader"><code>FileReader</code></a> or <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object, or 0 if the
     Blob has no bytes to be read.</p></dd>
     <dt id="dfn-type"><code>type</code></dt>
@@ -374,27 +397,26 @@ function errorHandler(evt) {
     and <a href="#dfn-contentTypeBlob"><code>contentType</code></a> are below, and normative requirements for <a href="#dfn-slice">
     <code>slice</code></a> are below.</em>
     </p>
-    <p>The optional <dfn id='dfn-start'><code>start</code></dfn> parameter is a value for the start point of a <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call as a
-    byte-order position, with the zeroth position representing the first byte.
+    <p>The optional <dfn id='dfn-start'><code>start</code></dfn> parameter is a value for the start point of a <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call, and
+    MUST be treated as a byte-order position, with the zeroth position representing the first byte.
     The following requirements are normative for this parameter, and user agents MUST process <a href="dfn-slice"><code>slice</code></a> with
     <code>start</code> <em>normalized</em> according to the following:</p>
     <ol>
-    <li><p>If the <code>start</code> parameter is not provided (undefined), let relativeStart be 0.</p></li>
+    <li><p>If the optional <code>start</code> parameter is not used as a parameter when making this call, let relativeStart be 0.</p></li>
     <li><p>If <code>start</code> is negative, let relativeStart be <em>max((<a href="#dfn-size"><code>size</code></a> + <code>start</code>), 0))</em>.</p></li>
     <li><p>Else, let relativeStart be <em>min(start, size)</em>.</p></li>
-    <li><p>User agents MUST process <a href="#dfn-slice"><code>slice</code></a> with <code>start</code> set to relativeStart; <code>start</code> MUST be treated as a byte-order
-    position, where 0 represents the first byte.
-    This defines the normalization of the <code>start</code> parameter.</p></li>
+    <li><p>This defines the normalization of the <code>start</code> parameter.  When processing the <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call,
+    user agents must normalize <code>start</code> to relativeStart.</p></li>
     </ol>	
-    <p>The optional <dfn id="dfn-end">end</dfn> parameter is a value for the end point of a
+    <p>The optional <dfn id="dfn-end"><code>end</code></dfn> parameter is a value for the end point of a
     <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call.  The following requirements
     are normative for this parameter, and user agents MUST process <a href="dfn-slice"><code>slice</code></a> with <code>end</code> normalized according to the following:</p>
     <ol>
-    <li><p>If the <code>end</code> parameter is not provided (undefined), let relativeEnd be <a href="#dfn-size"><code>size</code></a>.</p></li>
+    <li><p>If the optional <code>end</code> parameter is not used as a parameter when making this call, let relativeEnd be <a href="#dfn-size"><code>size</code></a>.</p></li>
     <li><p>If <code>end</code> is negative, let relativeEnd be <em>max((size + end), 0)</em> </p></li>
     <li><p>Else, let relativeEnd be <em>min(end, size)</em></p></li>
-    <li><p>User agents MUST process <a href="#dfn-slice"><code>slice</code></a> with <code>end</code> set to relativeEnd.
-    This defines the normalization of the <code>end</code> parameter.</p></li>
+    <li><p>This defines the normalization of the <code>end</code> parameter.  When processing the <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call,
+    user agents must normalize <code>end</code> to relativeEnd.</p></li>
     </ol>
     <p>The optional <dfn id="dfn-contentTypeBlob"><code>contentType</code></dfn> parameter is used to set a value identical to one that is set with the
     HTTP/1.1 Content-Type header [<a href="#HTTP">HTTP</a>] on
@@ -402,37 +424,64 @@ function errorHandler(evt) {
     parameter, and user agents MUST process the <a href="dfn-slice"><code>slice</code></a> with <code>contentType</code> normalized according to the following:
    </p>
    <ol>
-   <li><p>If the <code>contentType</code> parameter is not provided (undefined), let relativeContentType be set to the empty string </p></li>
+   <li><p>If the <code>contentType</code> parameter is not provided, let relativeContentType be set to the empty string .</p></li>
+   <li><p>If the <code>contentType</code> parameter is undefined, let relativeContentType be set to the empty string.</p></li>
    <li><p>Else let relativeContentType be set to <code>contentType</code>.</p></li>
-   <li><p>User agents MUST process <a href="#dfn-slice"><code>slice</code></a> with <code>contentType</code> set to relativeContentType.  This defines the normalization of the
-   <code>contentType</code> parameter.</p></li>
+<li><p>This defines the normalization of the <code>contentType</code> parameter.  When processing the <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call,
+    user agents must normalize <code>contentType</code> to relativeContentType.</p></li>
    </ol>
-    <p>The <dfn id="dfn-slice"><code>slice</code></dfn> method MUST act as follows, by either following the steps below or by following different steps that
-    yield an identical result:</p>
+    <p>The <dfn id="dfn-slice"><code>slice</code></dfn> method MUST act as follows :</p>
     <ol>
     <li><p>Let O be the <a href="#dfn-Blob"><code>Blob</code></a> object on which the <code>slice</code> method is being called.</p></li>
-    <li><p>Let A be a new <a href="#dfn-Blob"><code>Blob</code></a> object with no bytes; let <code>A.type</code> be the empty string and <code>A.size</code> be 0. Let j be set to 0.</p></li>
-    <li><p>The <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</code></a>, and <a href="#dfn-contentTypeBlob"><code>contentType</code></a> arguments
-    used for this <code>slice</code> call MUST be normalized according to the steps provided in the defintion of each parameter.  Let <code>A.type</code> be set to the
-    <a href="#dfn-contentType"><code>contentType</code></a> argument.</p></li>
-    <li><p>Let k be set to the <a href="#dfn-start"><code>start</code></a> argument.</p></li>
-    <li><p>Repeat, while (k &lt; end)</p>
+    <li><p>Let span be <em>max((relativeEnd - relativeStart), 0)</em>.</p></li>
+    <li><p>Return a new <a href="#dfn-Blob"><code>Blob</code></a> object A with the following characteristics:</p>
     <ol type="a">
-    <li><p>Let O<sub>k</sub> be the byte at position k and A<sub>j</sub> be the byte at
-    position j.  Let A<sub>j</sub> be set to O<sub>k</sub>.</p></li>
-    <li><p>Increase k by 1.</p></li>
-    <li><p>Increase j by 1.</p></li>
+    <li><p>A consists of span consecutive bytes from O, beginning with the byte at byte-order position relativeStart.</p></li>
+    <li><p>A.size = span.</p></li>
+    <li><p>A.type = relativeContentType.</p></li>
     </ol>
     </li>
-    <li><p>Return A.</p></li>
     </ol>
     </dd></dl>
     <div class="note">
-    <p>The <code>slice</code> method previously had different semantics, which differed from <code>Array.prototype.slice</code> [<a href="#ECMA-262">ECMA-262</a>].  This difference
+    <p>The <code>slice</code> method previously had different semantics, which differed from both <code>Array.prototype.slice</code> and <code>String.prototype.slice</code> [<a href="#ECMA-262">ECMA-262</a>].  This difference
     was an oversight which has been corrected in this edition of the specification.  Some user agents implemented the previous semantics, notably Firefox 4, Chrome 10, and Opera 11.
     These user agents have agreed to vendor-prefix their <code>slice</code> implementations in subsequent releases.</p>
     </div>
+    <div class="example">
+    <p>
+    The examples below illustrate the different types of <a href="#dfn-slice" class="dfnref"><code>slice</code></a> calls possible. Since the
+    <a href="#dfn-file"><code>File</code></a> interface inherits from the <a href="#dfn-Blob"><code>Blob</code></a> interface, examples are based on the use of the <a href="#dfn-file"><code>File</code></a> interface.
+    </p>
+    <x:codeblock language="es">
+    <span class="comment">// obtain input element through DOM</span>
+    
+    var file = document.getElementById('file').files[0];
+    if(file)
+    {
+      <span class="comment">// create an identical copy of file</span>
+      <span class="comment">// the two calls below are equivalent</span>
+      
+      var fileClone = file.slice(); 
+      var fileClone2 = file.slice(0, file.size);
+      
+      <span class="comment">// slice file into 1/2 chunk starting at middle of file</span>
+      <span class="comment">// Note the use of negative number</span>
+      
+      var fileChunkFromEnd = file.slice(-(Math.round(file.size/2)));
+      
+      <span class="comment">// slice file into 1/2 chunk starting at beginning of file</span>
+      
+      var fileChunkFromStart = file.slice(0, Math.round(file.size/2));
+      
+      <span class="comment">// slice file from beginning till 150 bytes before end</span>
+      
+      var fileNoMetadata = file.slice(0, -150, "application/experimental");      
+    }
+    </x:codeblock>
     </div>
+    </div>
+
   </div>
   <div id='file' class='section'>
   <h2>The File Interface</h2>
