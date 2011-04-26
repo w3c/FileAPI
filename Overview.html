@@ -1095,10 +1095,10 @@ interface <dfn id="dfn-FileReaderSync">FileReaderSync</dfn> {
   <span class="comment">// Synchronously return strings</span>
   <span class="comment">// All three methods raise FileException</span>
   
-  ArrayBuffer <a href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
-  DOMString <a href="#dfn-readAsBinaryStringSync">readAsBinaryString</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>); 
-  DOMString <a href="#dfn-readAsTextSync">readAsText</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>, [Optional] in DOMString <a href="#dfn-encoding">encoding</a>);                                                       
-  DOMString <a href="#dfn-readAsDataURLSync">readAsDataURL</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>); 
+  ArrayBuffer <a href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>) raises (<a href="#dfn-FileException">FileException</a>);
+  DOMString <a href="#dfn-readAsBinaryStringSync">readAsBinaryString</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>) raises (<a href="#dfn-FileException">FileException</a>); 
+  DOMString <a href="#dfn-readAsTextSync">readAsText</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>, [Optional] in DOMString <a href="#dfn-encoding">encoding</a>) raises (<a href="#dfn-FileException">FileException</a>);                                                       
+  DOMString <a href="#dfn-readAsDataURLSync">readAsDataURL</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>) raises (<a href="#dfn-FileException">FileException</a>); 
 };
 </code></pre></div></div>
 <div class="note"><div class="noteHeader">Note</div>
