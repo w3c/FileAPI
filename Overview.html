@@ -1250,7 +1250,7 @@ the most appropriate code from the <a href="#ErrorDescriptions">table below</a>.
 <div id="ErrorDescriptions" class="section">
 <h3>5.6.3. Error Code Descriptions</h3>
   <table><thead><tr><th>Constant
-     </th><th><dfn id="dfn-error-codes">Code</dfn>
+     </th><th><dfn id="dfn-error-codes">Code</dfn>	
      </th><th>Situation
    </th></tr></thead><tbody><tr><td><dfn id="dfn-NOT_FOUND_ERR" title="dfn-NOT_FOUND_ERR"><code>NOT_FOUND_ERR</code></dfn>
      </td><td><dfn id="dfn-fileerror-code-1" title="dfn-fileerror-code-1">1</dfn>
@@ -1332,6 +1332,7 @@ fragIdentifier = "#" fragment
 
 ; Fragment Identifiers depend on the media type of the Blob
 ; fragment is defined in [<a href="#RFC3986">RFC3986</a>]
+; fragment processing is further defined in [<a href="#HTML5">HTML5</a>]
 
 fragment    = *( pchar / "/" / "?" )
 
@@ -1345,10 +1346,11 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")"
                  / "*" / "+" / "," / ";" / "="
 </code></pre></div></div>
 <p>
-The fragment's format and resolution depend on the media type [<a href="#RFC2046">RFC2046</a>] of a potentially retrieved representation, even though such
+The fragment's format, resolution and processing directives depend on the media type [<a href="#RFC2046">RFC2046</a>] of a potentially retrieved representation, even though such
 a retrieval is only performed if the <a href="#url">blob: URI</a> is dereferenced.  For example, in an HTML file [<a href="#HTML5">HTML5</a>] the fragment identifier
-would be used to refer to an anchor within the file.  If the user agent does not recognize the media type of the resource, OR if a fragment identifer is not
-meaningful within the resource, it MUST ignore the fragment identifier.
+could be used to refer to an anchor within the file.  If the user agent does not recognize the media type of the resource, OR if a fragment identifer is not
+meaningful within the resource, it MUST ignore the fragment identifier.  Additionally, user agents MUST honor additional fragment processing directives given in
+the relevant media format specifications; in particular, this includes any modifications to the fragment production given in HTML5 [<a href="#HTML5">HTML5</a>].
 </p>
 
 <p>UUID is one potential option available to user agents for use with <a href="#url">Blob URIs</a> as <a href="#opaqueString">opaque strings</a>.
