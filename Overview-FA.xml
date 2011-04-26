@@ -1206,10 +1206,12 @@ make obtaining large files encoded as Data URLs impossible to return [<a href="#
    const unsigned short <a href="#dfn-ENCODING_ERR">ENCODING_ERR</a> = 5;
  
    readonly attribute unsigned short <a href="#dfn-code">code</a>;
+   readonly attribute DOMString name <a href="#dfn-nameError">name</a>;
 };
 </x:codeblock>
 <p>The <dfn id="dfn-code"><code>code</code></dfn> attribute MUST return one of the constants of the <a href="#dfn-fileerror"><code>FileError</code></a> error, which MUST be
 the most appropriate code from the table below.</p>
+<p>The <dfn id="dfn-nameError"><code>name</code></dfn> attribute MUST return the name of the error constant as a string.</p>
 </div> 
 <div id="FileException" class="section">
 <h3>The <code>FileException</code> exception</h3>
@@ -1229,11 +1231,13 @@ on <code>WorkerGlobalScope</code> MUST also make available the <code>FileExcepti
   const unsigned short <a href="#dfn-ENCODING_ERR">ENCODING_ERR</a> = 5;
  
   unsigned short <a href="#dfn-code-exception">code</a>;
+  DOMString name <a href="#dfn-name-exception">name</a>;
 };
 </x:codeblock>
 <p>The <dfn id="dfn-code-exception"><code>code</code></dfn> attribute MUST return one of the constants of the <a href="#dfn-FileException"><code>FileException</code></a>
 exception, which MUST be
-the most appropriate code from the table below.</p>
+the most appropriate code from the <a href="#ErrorDescriptions">table below</a>.</p>
+<p>The <dfn id="dfn-name-exception"><code>name</code></dfn> exception field MUST the name of the exception constant as a string.</p>
 </div>
 <div id="ErrorDescriptions" class="section">
 <h3>Error Code Descriptions</h3>
