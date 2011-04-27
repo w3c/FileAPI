@@ -371,7 +371,8 @@ function errorHandler(evt) {
     interface <dfn id="dfn-Blob">Blob</dfn> {
       
       readonly attribute unsigned long long <a href="#dfn-size" title="size" class="dfnref">size</a>;
-      readonly attribute DOMing <a href="#dfn-type" class="dfnref">type</a>;
+      readonly attribute DOMString <a href="#dfn-type" class="dfnref">type</a>;
+      
       <span class="comment">//slice Blob into byte-ranged chunks</span>
       
       Blob <a href="#dfn-slice" title="slice">slice</a>(in optional long long <a href="#dfn-start" class="dfnref" title="start">start</a>,
