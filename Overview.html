@@ -11,9 +11,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>File API</title>
-
     <meta name="revision" content="$Id$" />
-
     <link rel="stylesheet" href="FileAPI.css" type="text/css" />
     <script src="section-links.js" type="application/ecmascript"></script>
     <script src="dfn.js" type="application/ecmascript"></script>
@@ -328,7 +326,7 @@ function errorHandler(evt) {
     interface <dfn id="dfn-filelist">FileList</dfn> {
       getter <a href="#dfn-file" class="dfnref">File</a> <a href="#dfn-item" class="dfnref">item</a>(unsigned long <a href="#dfn-index" class="dfnref">index</a>);
       readonly attribute unsigned long <a href="#dfn-length" class="dfnref">length</a>;
-    };
+    }
     </code></pre></div></div>
     <div class="example"><div class="exampleHeader">Example</div>
     <p>
@@ -399,7 +397,7 @@ function errorHandler(evt) {
       
       Blob <a href="#dfn-slice" title="slice">slice</a>(in optional long long <a href="#dfn-start" class="dfnref" title="start">start</a>,
                  in optional long long <a href="#dfn-end" class="dfnref" title="length">end</a>,
-                 [TreatUndefinedAs=EmptyString] in optional DOMString <a href="#dfn-contentTypeBlob">contentType</a>); 
+                 in [TreatUndefinedAs=EmptyString] optional DOMString <a href="#dfn-contentTypeBlob">contentType</a>); 
     
     };
     </code></pre></div></div>
@@ -571,9 +569,8 @@ interface <dfn id="dfn-filereader">FileReader</dfn>: EventTarget {
   <span class="comment">// async read methods</span>
   void <a href="#dfn-readAsArrayBuffer" class="dfnref">readAsArrayBuffer</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
   void <a href="#dfn-readAsBinaryStringAsync" class="dfnref">readAsBinaryString</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
-  void <a href="#dfn-readAsText" class="dfnref">readAsText</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>, in optional DOMString <a href="#dfn-encoding" class="dfnref">encoding</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
+  void <a href="#dfn-readAsText" class="dfnref">readAsText</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>, optional in DOMString <a href="#dfn-encoding" class="dfnref">encoding</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
   void <a href="#dfn-readAsDataURL" class="dfnref">readAsDataURL</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
-
 
   void <a href="#dfn-abort" class="dfnref">abort</a>();
 
@@ -1146,7 +1143,7 @@ interface <dfn id="dfn-FileReaderSync">FileReaderSync</dfn> {
   
   ArrayBuffer <a href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>) raises (<a href="#dfn-FileException">FileException</a>);
   DOMString <a href="#dfn-readAsBinaryStringSync">readAsBinaryString</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>) raises (<a href="#dfn-FileException">FileException</a>); 
-  DOMString <a href="#dfn-readAsTextSync">readAsText</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>, in optional DOMString <a href="#dfn-encoding">encoding</a>) raises (<a href="#dfn-FileException">FileException</a>);
+  DOMString <a href="#dfn-readAsTextSync">readAsText</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>, optional in DOMString <a href="#dfn-encoding">encoding</a>) raises (<a href="#dfn-FileException">FileException</a>);
   DOMString <a href="#dfn-readAsDataURLSync">readAsDataURL</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>) raises (<a href="#dfn-FileException">FileException</a>); 
 };
 </code></pre></div></div>
@@ -1269,7 +1266,7 @@ make obtaining large files encoded as Data URLs impossible to return [<a href="#
    const unsigned short <a href="#dfn-ENCODING_ERR">ENCODING_ERR</a> = 5;
  
    readonly attribute unsigned short <a href="#dfn-code">code</a>;
-   readonly attribute DOMString <a href="#dfn-nameError">name</a>;
+   readonly attribute DOMString name <a href="#dfn-nameError">name</a>;
 };
 </code></pre></div></div>
 <p>The <dfn id="dfn-code"><code>code</code></dfn> attribute MUST return one of the constants of the <a href="#dfn-fileerror"><code>FileError</code></a> error, which MUST be
@@ -1294,7 +1291,7 @@ on <code>WorkerGlobalScope</code> MUST also make available the <code>FileExcepti
   const unsigned short <a href="#dfn-ENCODING_ERR">ENCODING_ERR</a> = 5;
  
   unsigned short <a href="#dfn-code-exception">code</a>;
-  DOMString <a href="#dfn-name-exception">name</a>;
+  DOMString name <a href="#dfn-name-exception">name</a>;
 };
 </code></pre></div></div>
 <p>The <dfn id="dfn-code-exception"><code>code</code></dfn> exception field MUST return one of the constants of the <a href="#dfn-FileException"><code>FileException</code></a>
@@ -1588,6 +1585,9 @@ if such files are accessed or a <a href="#read-methods">read method</a>
 is called on them.</p></li>
 <li><p><dfn id="post-selection-file-mods">Post-selection file modifications</dfn> occur when a file changes on disk after it has been selected.  In such cases, if a
 <a href="#read-methods">read method</a> is called on a file, user agents MAY raise a <code><a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a></code>.</p></li>
+<li><p><dfn id="cross-scheme-reads">Cross-scheme file reads</dfn> occur when a read attempt is made on a file resident on the file:/// scheme by a resource
+dereferenced by http://.  In such cases, if a <a href="#read-methods">read method</a> is called on a file, user agents MAY raise a <code><a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a></code>.
+User agents MAY raise a <a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a> in cases where reads occur from resources derefenced on file:///. </p></li> 
 <li><p><dfn id="cross-origin-requests-on-blobs">Cross-origin requests on Blob URIs</dfn> occur when a <a href="#url">Blob URI</a> is accessed across origins.
 In particular, code of the sort: <code>document.location = window.URL.createObjectURL(myFile);</code> is problematic.  User agents should ensure that the
 <a href="#FourOhThreeNotAllowed">403 Not Allowed</a> response

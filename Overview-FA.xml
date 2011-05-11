@@ -560,7 +560,7 @@ interface <dfn id="dfn-filereader">FileReader</dfn>: EventTarget {
   <span class="comment">// async read methods</span>
   void <a href="#dfn-readAsArrayBuffer" class="dfnref">readAsArrayBuffer</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
   void <a href="#dfn-readAsBinaryStringAsync" class="dfnref">readAsBinaryString</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
-  void <a href="#dfn-readAsText" class="dfnref">readAsText</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>, [Optional] in DOMString <a href="#dfn-encoding" class="dfnref">encoding</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
+  void <a href="#dfn-readAsText" class="dfnref">readAsText</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>, optional in DOMString <a href="#dfn-encoding" class="dfnref">encoding</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
   void <a href="#dfn-readAsDataURL" class="dfnref">readAsDataURL</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
 
   void <a href="#dfn-abort" class="dfnref">abort</a>();
@@ -1135,7 +1135,7 @@ interface <dfn id="dfn-FileReaderSync">FileReaderSync</dfn> {
   
   ArrayBuffer <a href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>) raises (<a href="#dfn-FileException">FileException</a>);
   DOMString <a href="#dfn-readAsBinaryStringSync">readAsBinaryString</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>) raises (<a href="#dfn-FileException">FileException</a>); 
-  DOMString <a href="#dfn-readAsTextSync">readAsText</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>, [Optional] in DOMString <a href="#dfn-encoding">encoding</a>) raises (<a href="#dfn-FileException">FileException</a>);
+  DOMString <a href="#dfn-readAsTextSync">readAsText</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>, optional in DOMString <a href="#dfn-encoding">encoding</a>) raises (<a href="#dfn-FileException">FileException</a>);
   DOMString <a href="#dfn-readAsDataURLSync">readAsDataURL</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>) raises (<a href="#dfn-FileException">FileException</a>); 
 };
 </x:codeblock>
@@ -1577,6 +1577,9 @@ if such files are accessed or a <a href="#read-methods">read method</a>
 is called on them.</p></li>
 <li><p><dfn id="post-selection-file-mods">Post-selection file modifications</dfn> occur when a file changes on disk after it has been selected.  In such cases, if a
 <a href="#read-methods">read method</a> is called on a file, user agents MAY raise a <code><a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a></code>.</p></li>
+<li><p><dfn id="cross-scheme-reads">Cross-scheme file reads</dfn> occur when a read attempt is made on a file resident on the file:/// scheme by a resource
+dereferenced by http://.  In such cases, if a <a href="#read-methods">read method</a> is called on a file, user agents MAY raise a <code><a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a></code>.
+User agents MAY raise a <a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a> in cases where reads occur from resources derefenced on file:///. </p></li> 
 <li><p><dfn id="cross-origin-requests-on-blobs">Cross-origin requests on Blob URIs</dfn> occur when a <a href="#url">Blob URI</a> is accessed across origins.
 In particular, code of the sort: <code>document.location = window.URL.createObjectURL(myFile);</code> is problematic.  User agents should ensure that the
 <a href="#FourOhThreeNotAllowed">403 Not Allowed</a> response
