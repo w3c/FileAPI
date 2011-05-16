@@ -1362,7 +1362,7 @@ The introduction of a scheme to be used with individual <a href="#dfn-file"><cod
 list is informative:</p>
 <ul>
 <li><p>This scheme can be used with web APIs such as <code>XMLHttpRequest</code> [<a href="#XHR2">XHR2</a>], and with elements that are designed to be used with URLs, such as the
-<code>img</code> element [<a href="#HTML">HTML</a>].  In general, this scheme is designed to be used wherever URLs can be used on the web.  This would allow <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> data to be
+<code>img</code> element [<a href="#HTML">HTML</a>].  In general, this scheme is designed to be used wherever URIs can be used on the web.  This would allow <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> data to be
 used within web applications and accessed by URLs.</p></li>
 <li><p>This scheme can be associated with a well-defined subset of HTTP response codes, so that web applications can benefit from use alongside HTTP URLs. [<a href="#HTTP">HTTP</a>].  This differs from
 file URIs, which do not have an affiliated request-response behavior with status codes.  Some user agents silently fail if file URIs are requested insecurely.</p></li>
@@ -1373,7 +1373,7 @@ for SVG fragment identifiers.  If the file selected is an HTML file, this scheme
 </ul>
 <div id="ABNFForBlob" class="section">
 <h3>Definition of blob URI Scheme</h3>
-<p>This section defines a <code>blob:</code> URI scheme using a formal grammar.  A <code>blob:</code> URI consists of the blob: scheme and an opaque string, along with zero or one fragment identifiers.
+<p>This section defines a <code>blob:</code> URI scheme using a formal grammar.  A <code>blob:</code> URI consists of the blob: scheme and an opaque string, along with an optional fragment identifier.
 In this specification an <dfn id="opaqueString">opaque string</dfn> is a unique string which can be heuristically generated upon demand such that the probability that two are alike is small, and which is hard to guess (e.g.
 the Universally Unique IDentifier (UUID) as defined in [<a href="#UUID">RFC4122</a>] is an opaque string). A <dfn id="fragmentIdentifier">fragment identifier</dfn> is optional, and if used,
 has a distinct interpretation depending on the media type of the <a href="#dfn-Blob"><code>Blob</code></a> or <a href="#dfn-file"><code>File</code></a> resource in question [<a href="#RFC2046">RFC2046</a>].</p>
@@ -1389,7 +1389,7 @@ scheme = "blob"
 ; scheme is always "blob"
 
 ; opaqueString could be a UUID in its canonical form
-; opaqueString tokens MUST be unique
+; opaqueString tokens MUST be globally unique
 
 fragIdentifier = "#" fragment
 
