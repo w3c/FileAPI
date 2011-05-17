@@ -901,8 +901,8 @@ When the <dfn id="dfn-readAsArrayBuffer"><code>readAsArrayBuffer(blob)</code></d
   <li><p>If no error has occurred, set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
   <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
   <li><p>While processing the read, as data from the <a href="#dfn-fileBlob"><code>blob</code></a> becomes available, <a href="#queue-a-task">queue tasks</a> to update the
-  <a href="#dfn-result"><code>result</code></a> with <a href="#partial-blob-data">partial Blob data</a> with <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>]
-  objects containing the bytes read until the read is complete.</p></li>
+  <a href="#dfn-result"><code>result</code></a> with <a href="#partial-blob-data">partial Blob data</a> as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>]
+  object containing the bytes read until the read is complete.</p></li>
   <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  As the bytes from the <a href="#dfn-fileBlob"><code>blob</code></a> argument are read,
   user agents SHOULD ensure that on getting,
   the <a href="#dfn-result"><code>result</code></a> attribute returns <a href="#partial-blob-data">partial Blob data</a> representing the number of bytes currently <code>loaded</code>
