@@ -1162,7 +1162,7 @@ interface <dfn id="dfn-FileReaderSync">FileReaderSync</dfn> {
 </ol>
 <div class="note">
  <p>Note: the <code>readAsBinaryString(blob)</code> method should be considered deprecated; user agents should consider supporting the
-  <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer(blob)</code></a> method
+  <a href="#dfn-readAsArrayBufferSync"><code>readAsArrayBuffer(blob)</code></a> method
   instead of <code>readAsBinaryString(blob)</code></p>
 </div>
 										
