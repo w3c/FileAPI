@@ -317,7 +317,7 @@ function errorHandler(evt) {
     interface <dfn id='dfn-filelist'>FileList</dfn> {
       getter <a href="#dfn-file" class="dfnref">File</a> <a href="#dfn-item" class="dfnref">item</a>(unsigned long <a href="#dfn-index" class="dfnref">index</a>);
       readonly attribute unsigned long <a href="#dfn-length" class="dfnref">length</a>;
-    }
+    };
     </x:codeblock>
     <div class='example'>
     <p>
@@ -388,7 +388,7 @@ function errorHandler(evt) {
       
       Blob <a href="#dfn-slice" title='slice'>slice</a>(in optional long long <a href="#dfn-start" class="dfnref" title='start'>start</a>,
                  in optional long long <a href="#dfn-end" class="dfnref" title='length'>end</a>,
-                 in [TreatUndefinedAs=EmptyString] optional DOMString <a href="#dfn-contentTypeBlob">contentType</a>); 
+                 [TreatUndefinedAs=EmptyString] in optional DOMString <a href="#dfn-contentTypeBlob">contentType</a>); 
     
     };
     </x:codeblock>
@@ -560,7 +560,7 @@ interface <dfn id="dfn-filereader">FileReader</dfn>: EventTarget {
   <span class="comment">// async read methods</span>
   void <a href="#dfn-readAsArrayBuffer" class="dfnref">readAsArrayBuffer</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
   void <a href="#dfn-readAsBinaryStringAsync" class="dfnref">readAsBinaryString</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
-  void <a href="#dfn-readAsText" class="dfnref">readAsText</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>, optional in DOMString <a href="#dfn-encoding" class="dfnref">encoding</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
+  void <a href="#dfn-readAsText" class="dfnref">readAsText</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>, in optional DOMString <a href="#dfn-encoding" class="dfnref">encoding</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
   void <a href="#dfn-readAsDataURL" class="dfnref">readAsDataURL</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
 
   void <a href="#dfn-abort" class="dfnref">abort</a>();
@@ -1133,7 +1133,7 @@ interface <dfn id="dfn-FileReaderSync">FileReaderSync</dfn> {
   
   ArrayBuffer <a href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>) raises (<a href="#dfn-FileException">FileException</a>);
   DOMString <a href="#dfn-readAsBinaryStringSync">readAsBinaryString</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>) raises (<a href="#dfn-FileException">FileException</a>); 
-  DOMString <a href="#dfn-readAsTextSync">readAsText</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>, optional in DOMString <a href="#dfn-encoding">encoding</a>) raises (<a href="#dfn-FileException">FileException</a>);
+  DOMString <a href="#dfn-readAsTextSync">readAsText</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>, in optional DOMString <a href="#dfn-encoding">encoding</a>) raises (<a href="#dfn-FileException">FileException</a>);
   DOMString <a href="#dfn-readAsDataURLSync">readAsDataURL</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>) raises (<a href="#dfn-FileException">FileException</a>); 
 };
 </x:codeblock>
@@ -1256,12 +1256,11 @@ make obtaining large files encoded as Data URLs impossible to return [<a href="#
    const unsigned short <a href="#dfn-ENCODING_ERR">ENCODING_ERR</a> = 5;
  
    readonly attribute unsigned short <a href="#dfn-code">code</a>;
-   readonly attribute DOMString name <a href="#dfn-nameError">name</a>;
+
 };
 </x:codeblock>
 <p>The <dfn id="dfn-code"><code>code</code></dfn> attribute MUST return one of the constants of the <a href="#dfn-fileerror"><code>FileError</code></a> error, which MUST be
 the most appropriate code from the <a href="#ErrorDescriptions">table below</a>.</p>
-<p>The <dfn id="dfn-nameError"><code>name</code></dfn> attribute MUST return the name of the error constant as a string.</p>
 </div> 
 <div id="FileException" class="section">
 <h3>The <code>FileException</code> exception</h3>
@@ -1281,13 +1280,12 @@ on <code>WorkerGlobalScope</code> MUST also make available the <code>FileExcepti
   const unsigned short <a href="#dfn-ENCODING_ERR">ENCODING_ERR</a> = 5;
  
   unsigned short <a href="#dfn-code-exception">code</a>;
-  DOMString name <a href="#dfn-name-exception">name</a>;
+  
 };
 </x:codeblock>
 <p>The <dfn id="dfn-code-exception"><code>code</code></dfn> exception field MUST return one of the constants of the <a href="#dfn-FileException"><code>FileException</code></a>
 exception, which MUST be
 the most appropriate code from the <a href="#ErrorDescriptions">table below</a>.</p>
-<p>The <dfn id="dfn-name-exception"><code>name</code></dfn> exception field MUST the name of the exception constant as a string.</p>
 </div>
 <div id="ErrorDescriptions" class="section">
 <h3>Error Code Descriptions</h3>
