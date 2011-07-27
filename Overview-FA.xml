@@ -873,13 +873,11 @@ the user agent MUST run the steps below (unless otherwise indicated).
   till all of the file has been read.  For example:
   </p>
   <p>
-  Suppose a file is in UTF-8, and in hexadecimal the bytes are E3 83 91 E3 83 91, which is effectively 0x30D1 0x30D1.  Suppose the first 5 bytes have been read.
-  The <a href="#dfn-result"><code>result</code></a> returned here MUST be 0x30D1 and have <code>result.length == 1 </code>, and NOT be 0x30D1, 0xFFFD with <code>result.length == 2 </code>.  Even
-  though the trailing E3 83 is not a valid code point in UTF-8 at this point, user agents MUST NOT return a <a href="#dfn-result"><code>result</code></a> with such invalid codepoints replaced with U+FFFD
-  till the entire file has been read into memory.
-  </p>
-  <p>
-  
+  Suppose a file resource is to be read in UTF-8, and in hexadecimal the bytes in this file are E3 83 91 E3 83 91, which is effectively 0x30D1 0x30D1.
+  Suppose the first 5 bytes have been read.  The <a href="#dfn-result"><code>result</code></a> returned here MUST be 0x30D1 and have <code>result.length == 1 </code>,
+  and NOT be 0x30D1 0xFFFD with <code>result.length == 2 </code>.
+  Even though the trailing E3 83 is not a valid code point in UTF-8 at the fifth byte, user agents MUST NOT return a <a href="#dfn-result"><code>result</code></a> with such invalid code points
+  replaced with U+FFFD till the entire file has been read into memory.
   </p>
   </div>
   </li>  

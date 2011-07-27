@@ -881,14 +881,12 @@ the user agent MUST run the steps below (unless otherwise indicated).
   till all of the file has been read.  For example:
   </ns100:p>
   <ns101:p xmlns:ns101="http://www.w3.org/1999/xhtml">
-  Suppose a file is in UTF-8, and in hexadecimal the bytes are E3 83 91 E3 83 91, which is effectively 0x30D1 0x30D1.  Suppose the first 5 bytes have been read.
-  The <ns101:a href="#dfn-result"><ns101:code>result</ns101:code></ns101:a> returned here MUST be 0x30D1 and have <ns101:code>result.length == 1 </ns101:code>, and NOT be 0x30D1, 0xFFFD with <ns101:code>result.length == 2 </ns101:code>.  Even
-  though the trailing E3 83 is not a valid code point in UTF-8 at this point, user agents MUST NOT return a <ns101:a href="#dfn-result"><ns101:code>result</ns101:code></ns101:a> with such invalid codepoints replaced with U+FFFD
-  till the entire file has been read into memory.
+  Suppose a file resource is to be read in UTF-8, and in hexadecimal the bytes in this file are E3 83 91 E3 83 91, which is effectively 0x30D1 0x30D1.
+  Suppose the first 5 bytes have been read.  The <ns101:a href="#dfn-result"><ns101:code>result</ns101:code></ns101:a> returned here MUST be 0x30D1 and have <ns101:code>result.length == 1 </ns101:code>,
+  and NOT be 0x30D1 0xFFFD with <ns101:code>result.length == 2 </ns101:code>.
+  Even though the trailing E3 83 is not a valid code point in UTF-8 at the fifth byte, user agents MUST NOT return a <ns101:a href="#dfn-result"><ns101:code>result</ns101:code></ns101:a> with such invalid code points
+  replaced with U+FFFD till the entire file has been read into memory.
   </ns101:p>
-  <ns102:p xmlns:ns102="http://www.w3.org/1999/xhtml">
-  
-  </ns102:p>
   </div>
   </ns1:li>  
   <ns1:li><ns1:p><ns1:a href="#make-progress-notifications">Make progress notifications</ns1:a>.  As the bytes from the <ns1:a href="#dfn-fileBlob"><ns1:code>blob</ns1:code></ns1:a> argument are read,
@@ -1153,23 +1151,23 @@ object) <ns1:em>and</ns1:em> the synchronous API (the <ns1:code><ns1:a href="#df
 <div xmlns="http://www.w3.org/1999/xhtml" class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
 
 [Constructor]
-interface <ns103:dfn xmlns:ns103="http://www.w3.org/1999/xhtml" id="dfn-FileReaderSync">FileReaderSync</ns103:dfn> {
+interface <ns102:dfn xmlns:ns102="http://www.w3.org/1999/xhtml" id="dfn-FileReaderSync">FileReaderSync</ns102:dfn> {
 
-  <ns104:span xmlns:ns104="http://www.w3.org/1999/xhtml" class="comment">// Synchronously return strings</ns104:span>
-  <ns105:span xmlns:ns105="http://www.w3.org/1999/xhtml" class="comment">// All methods raise FileException</ns105:span>
+  <ns103:span xmlns:ns103="http://www.w3.org/1999/xhtml" class="comment">// Synchronously return strings</ns103:span>
+  <ns104:span xmlns:ns104="http://www.w3.org/1999/xhtml" class="comment">// All methods raise FileException</ns104:span>
   
-  ArrayBuffer <ns106:a xmlns:ns106="http://www.w3.org/1999/xhtml" href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</ns106:a>(in <ns107:a xmlns:ns107="http://www.w3.org/1999/xhtml" href="#dfn-Blob">Blob</ns107:a> <ns108:a xmlns:ns108="http://www.w3.org/1999/xhtml" href="#dfn-fileBlob">blob</ns108:a>) raises (<ns109:a xmlns:ns109="http://www.w3.org/1999/xhtml" href="#dfn-FileException">FileException</ns109:a>);
-  DOMString <ns110:a xmlns:ns110="http://www.w3.org/1999/xhtml" href="#dfn-readAsBinaryStringSync">readAsBinaryString</ns110:a>(in <ns111:a xmlns:ns111="http://www.w3.org/1999/xhtml" href="#dfn-Blob">Blob</ns111:a> <ns112:a xmlns:ns112="http://www.w3.org/1999/xhtml" href="#dfn-fileBlob">blob</ns112:a>) raises (<ns113:a xmlns:ns113="http://www.w3.org/1999/xhtml" href="#dfn-FileException">FileException</ns113:a>); 
-  DOMString <ns114:a xmlns:ns114="http://www.w3.org/1999/xhtml" href="#dfn-readAsTextSync">readAsText</ns114:a>(in <ns115:a xmlns:ns115="http://www.w3.org/1999/xhtml" href="#dfn-Blob">Blob</ns115:a> <ns116:a xmlns:ns116="http://www.w3.org/1999/xhtml" href="#dfn-fileBlob">blob</ns116:a>, in optional DOMString <ns117:a xmlns:ns117="http://www.w3.org/1999/xhtml" href="#dfn-encoding">encoding</ns117:a>) raises (<ns118:a xmlns:ns118="http://www.w3.org/1999/xhtml" href="#dfn-FileException">FileException</ns118:a>);
-  DOMString <ns119:a xmlns:ns119="http://www.w3.org/1999/xhtml" href="#dfn-readAsDataURLSync">readAsDataURL</ns119:a>(in <ns120:a xmlns:ns120="http://www.w3.org/1999/xhtml" href="#dfn-Blob">Blob</ns120:a> <ns121:a xmlns:ns121="http://www.w3.org/1999/xhtml" href="#dfn-fileBlob">blob</ns121:a>) raises (<ns122:a xmlns:ns122="http://www.w3.org/1999/xhtml" href="#dfn-FileException">FileException</ns122:a>); 
+  ArrayBuffer <ns105:a xmlns:ns105="http://www.w3.org/1999/xhtml" href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</ns105:a>(in <ns106:a xmlns:ns106="http://www.w3.org/1999/xhtml" href="#dfn-Blob">Blob</ns106:a> <ns107:a xmlns:ns107="http://www.w3.org/1999/xhtml" href="#dfn-fileBlob">blob</ns107:a>) raises (<ns108:a xmlns:ns108="http://www.w3.org/1999/xhtml" href="#dfn-FileException">FileException</ns108:a>);
+  DOMString <ns109:a xmlns:ns109="http://www.w3.org/1999/xhtml" href="#dfn-readAsBinaryStringSync">readAsBinaryString</ns109:a>(in <ns110:a xmlns:ns110="http://www.w3.org/1999/xhtml" href="#dfn-Blob">Blob</ns110:a> <ns111:a xmlns:ns111="http://www.w3.org/1999/xhtml" href="#dfn-fileBlob">blob</ns111:a>) raises (<ns112:a xmlns:ns112="http://www.w3.org/1999/xhtml" href="#dfn-FileException">FileException</ns112:a>); 
+  DOMString <ns113:a xmlns:ns113="http://www.w3.org/1999/xhtml" href="#dfn-readAsTextSync">readAsText</ns113:a>(in <ns114:a xmlns:ns114="http://www.w3.org/1999/xhtml" href="#dfn-Blob">Blob</ns114:a> <ns115:a xmlns:ns115="http://www.w3.org/1999/xhtml" href="#dfn-fileBlob">blob</ns115:a>, in optional DOMString <ns116:a xmlns:ns116="http://www.w3.org/1999/xhtml" href="#dfn-encoding">encoding</ns116:a>) raises (<ns117:a xmlns:ns117="http://www.w3.org/1999/xhtml" href="#dfn-FileException">FileException</ns117:a>);
+  DOMString <ns118:a xmlns:ns118="http://www.w3.org/1999/xhtml" href="#dfn-readAsDataURLSync">readAsDataURL</ns118:a>(in <ns119:a xmlns:ns119="http://www.w3.org/1999/xhtml" href="#dfn-Blob">Blob</ns119:a> <ns120:a xmlns:ns120="http://www.w3.org/1999/xhtml" href="#dfn-fileBlob">blob</ns120:a>) raises (<ns121:a xmlns:ns121="http://www.w3.org/1999/xhtml" href="#dfn-FileException">FileException</ns121:a>); 
 };
 </code></pre></div></div>
 <div xmlns="http://www.w3.org/1999/xhtml" class="note"><div class="noteHeader">Note</div>
-  <ns123:p xmlns:ns123="http://www.w3.org/1999/xhtml">The <ns123:a href="#dfn-FileReaderSync"><ns123:code>FileReaderSync</ns123:code></ns123:a> object's <ns123:dfn id="read-method-sync">read methods</ns123:dfn> -- namely 
-  <ns123:code><ns123:a href="#dfn-readAsBinaryStringSync">readAsBinaryString</ns123:a></ns123:code>, <ns123:code><ns123:a href="#dfn-readAsTextSync">readAsText</ns123:a></ns123:code>, 
-  <ns123:code><ns123:a href="#dfn-readAsDataURLSync">readAsDataURL</ns123:a></ns123:code> and <ns123:code><ns123:a href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</ns123:a></ns123:code> -- have the same <ns123:em>method signatures</ns123:em> as the <ns123:a href="#read-methods">read methods</ns123:a> of the
-  <ns123:a href="#dfn-filereader"><ns123:code>FileReader</ns123:code></ns123:a> object, and <ns123:em>read files into memory</ns123:em>.  The difference is that these are specified to behave <ns123:em>synchronously</ns123:em>, with string or <ns123:code>ArrayBuffer</ns123:code> [<ns123:a href="#TypedArrays">TypedArrays</ns123:a>] return values.
-  These methods raise <ns123:a href="#dfn-FileException"><ns123:code>FileException</ns123:code></ns123:a>.</ns123:p>
+  <ns122:p xmlns:ns122="http://www.w3.org/1999/xhtml">The <ns122:a href="#dfn-FileReaderSync"><ns122:code>FileReaderSync</ns122:code></ns122:a> object's <ns122:dfn id="read-method-sync">read methods</ns122:dfn> -- namely 
+  <ns122:code><ns122:a href="#dfn-readAsBinaryStringSync">readAsBinaryString</ns122:a></ns122:code>, <ns122:code><ns122:a href="#dfn-readAsTextSync">readAsText</ns122:a></ns122:code>, 
+  <ns122:code><ns122:a href="#dfn-readAsDataURLSync">readAsDataURL</ns122:a></ns122:code> and <ns122:code><ns122:a href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</ns122:a></ns122:code> -- have the same <ns122:em>method signatures</ns122:em> as the <ns122:a href="#read-methods">read methods</ns122:a> of the
+  <ns122:a href="#dfn-filereader"><ns122:code>FileReader</ns122:code></ns122:a> object, and <ns122:em>read files into memory</ns122:em>.  The difference is that these are specified to behave <ns122:em>synchronously</ns122:em>, with string or <ns122:code>ArrayBuffer</ns122:code> [<ns122:a href="#TypedArrays">TypedArrays</ns122:a>] return values.
+  These methods raise <ns122:a href="#dfn-FileException"><ns122:code>FileException</ns122:code></ns122:a>.</ns122:p>
 </div>
 
 <ns1:div id="filereadersyncConstrctr" class="section">
@@ -1188,9 +1186,9 @@ interface <ns103:dfn xmlns:ns103="http://www.w3.org/1999/xhtml" id="dfn-FileRead
 <ns1:a href="#dfn-fileBlob"><ns1:code>blob</ns1:code></ns1:a> as a <ns1:a href="#binary-string">binary string</ns1:a>.</ns1:p></ns1:li>
 </ns1:ol>
 <div xmlns="http://www.w3.org/1999/xhtml" class="note"><div class="noteHeader">Note</div>
- <ns124:p xmlns:ns124="http://www.w3.org/1999/xhtml">Note: the <ns124:code>readAsBinaryString(blob)</ns124:code> method should be considered deprecated; user agents should consider supporting the
-  <ns124:a href="#dfn-readAsArrayBufferSync"><ns124:code>readAsArrayBuffer(blob)</ns124:code></ns124:a> method
-  instead of <ns124:code>readAsBinaryString(blob)</ns124:code></ns124:p>
+ <ns123:p xmlns:ns123="http://www.w3.org/1999/xhtml">Note: the <ns123:code>readAsBinaryString(blob)</ns123:code> method should be considered deprecated; user agents should consider supporting the
+  <ns123:a href="#dfn-readAsArrayBufferSync"><ns123:code>readAsArrayBuffer(blob)</ns123:code></ns123:a> method
+  instead of <ns123:code>readAsBinaryString(blob)</ns123:code></ns123:p>
 </div>
 										
 </ns1:div>
@@ -1220,7 +1218,7 @@ as a Data URL [<ns1:a href="#DataURL">DataURL</ns1:a>]</ns1:p>
   <ns1:li>If the <ns1:a href="#dfn-type"><ns1:code>type</ns1:code></ns1:a> attribute is not available on the <ns1:a href="#dfn-fileBlob"><ns1:code>blob</ns1:code></ns1:a> return a Data URL without a media-type.
   [<ns1:a href="#DataURL">DataURL</ns1:a>].
   <div xmlns="http://www.w3.org/1999/xhtml" class="note"><div class="noteHeader">Note</div>
-  <ns125:p xmlns:ns125="http://www.w3.org/1999/xhtml">Data URLs that do not have media-types [<ns125:a href="#RFC2046">RFC2046</ns125:a>] MUST be treated as plain text by conforming user agents. [<ns125:a href="#DataURL">DataURL</ns125:a>].</ns125:p>
+  <ns124:p xmlns:ns124="http://www.w3.org/1999/xhtml">Data URLs that do not have media-types [<ns124:a href="#RFC2046">RFC2046</ns124:a>] MUST be treated as plain text by conforming user agents. [<ns124:a href="#DataURL">DataURL</ns124:a>].</ns124:p>
   </div>
   </ns1:li>
   </ns1:ul>
@@ -1271,18 +1269,18 @@ make obtaining large files encoded as Data URLs impossible to return [<ns1:a hre
   <ns1:a href="#filereaderConstrctr"><ns1:code>FileReader()</ns1:code> constructor</ns1:a> on their global objects MUST also make available the <ns1:code>FileError</ns1:code> interface object.
 </ns1:p>
 <div xmlns="http://www.w3.org/1999/xhtml" class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
- interface <ns126:dfn xmlns:ns126="http://www.w3.org/1999/xhtml" id="dfn-fileerror">FileError</ns126:dfn> {
-   <ns127:span xmlns:ns127="http://www.w3.org/1999/xhtml" class="comment">// File error codes</ns127:span>
-   <ns128:span xmlns:ns128="http://www.w3.org/1999/xhtml" class="comment">// Found in DOMException</ns128:span>
-   const unsigned short <ns129:a xmlns:ns129="http://www.w3.org/1999/xhtml" href="#dfn-NOT_FOUND_ERR">NOT_FOUND_ERR</ns129:a> = 1;
-   const unsigned short <ns130:a xmlns:ns130="http://www.w3.org/1999/xhtml" href="#dfn-SECURITY_ERR">SECURITY_ERR</ns130:a> = 2;
-   const unsigned short <ns131:a xmlns:ns131="http://www.w3.org/1999/xhtml" href="#dfn-ABORT_ERR">ABORT_ERR</ns131:a> = 3;
+ interface <ns125:dfn xmlns:ns125="http://www.w3.org/1999/xhtml" id="dfn-fileerror">FileError</ns125:dfn> {
+   <ns126:span xmlns:ns126="http://www.w3.org/1999/xhtml" class="comment">// File error codes</ns126:span>
+   <ns127:span xmlns:ns127="http://www.w3.org/1999/xhtml" class="comment">// Found in DOMException</ns127:span>
+   const unsigned short <ns128:a xmlns:ns128="http://www.w3.org/1999/xhtml" href="#dfn-NOT_FOUND_ERR">NOT_FOUND_ERR</ns128:a> = 1;
+   const unsigned short <ns129:a xmlns:ns129="http://www.w3.org/1999/xhtml" href="#dfn-SECURITY_ERR">SECURITY_ERR</ns129:a> = 2;
+   const unsigned short <ns130:a xmlns:ns130="http://www.w3.org/1999/xhtml" href="#dfn-ABORT_ERR">ABORT_ERR</ns130:a> = 3;
    
-   <ns132:span xmlns:ns132="http://www.w3.org/1999/xhtml" class="comment">// Added by this specification</ns132:span>
-   const unsigned short <ns133:a xmlns:ns133="http://www.w3.org/1999/xhtml" href="#dfn-NOT_READABLE_ERR">NOT_READABLE_ERR</ns133:a> = 4;
-   const unsigned short <ns134:a xmlns:ns134="http://www.w3.org/1999/xhtml" href="#dfn-ENCODING_ERR">ENCODING_ERR</ns134:a> = 5;
+   <ns131:span xmlns:ns131="http://www.w3.org/1999/xhtml" class="comment">// Added by this specification</ns131:span>
+   const unsigned short <ns132:a xmlns:ns132="http://www.w3.org/1999/xhtml" href="#dfn-NOT_READABLE_ERR">NOT_READABLE_ERR</ns132:a> = 4;
+   const unsigned short <ns133:a xmlns:ns133="http://www.w3.org/1999/xhtml" href="#dfn-ENCODING_ERR">ENCODING_ERR</ns133:a> = 5;
  
-   readonly attribute unsigned short <ns135:a xmlns:ns135="http://www.w3.org/1999/xhtml" href="#dfn-code">code</ns135:a>;
+   readonly attribute unsigned short <ns134:a xmlns:ns134="http://www.w3.org/1999/xhtml" href="#dfn-code">code</ns134:a>;
 
 };
 </code></pre></div></div>
@@ -1297,16 +1295,16 @@ Errors in the synchronous <ns1:a href="#read-method-sync">read methods</ns1:a> f
 on <ns1:code>WorkerGlobalScope</ns1:code> MUST also make available the <ns1:code>FileException</ns1:code> interface object.
 </ns1:p>
 <div xmlns="http://www.w3.org/1999/xhtml" class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
- exception <ns136:dfn xmlns:ns136="http://www.w3.org/1999/xhtml" id="dfn-FileException">FileException</ns136:dfn> {
+ exception <ns135:dfn xmlns:ns135="http://www.w3.org/1999/xhtml" id="dfn-FileException">FileException</ns135:dfn> {
   
-  const unsigned short <ns137:a xmlns:ns137="http://www.w3.org/1999/xhtml" href="#dfn-NOT_FOUND_ERR">NOT_FOUND_ERR</ns137:a> = 1;
-  const unsigned short <ns138:a xmlns:ns138="http://www.w3.org/1999/xhtml" href="#dfn-SECURITY_ERR">SECURITY_ERR</ns138:a> = 2;
-  const unsigned short <ns139:a xmlns:ns139="http://www.w3.org/1999/xhtml" href="#dfn-ABORT_ERR">ABORT_ERR</ns139:a> = 3;
+  const unsigned short <ns136:a xmlns:ns136="http://www.w3.org/1999/xhtml" href="#dfn-NOT_FOUND_ERR">NOT_FOUND_ERR</ns136:a> = 1;
+  const unsigned short <ns137:a xmlns:ns137="http://www.w3.org/1999/xhtml" href="#dfn-SECURITY_ERR">SECURITY_ERR</ns137:a> = 2;
+  const unsigned short <ns138:a xmlns:ns138="http://www.w3.org/1999/xhtml" href="#dfn-ABORT_ERR">ABORT_ERR</ns138:a> = 3;
   
-  const unsigned short <ns140:a xmlns:ns140="http://www.w3.org/1999/xhtml" href="#dfn-NOT_READABLE_ERR">NOT_READABLE_ERR</ns140:a> = 4;
-  const unsigned short <ns141:a xmlns:ns141="http://www.w3.org/1999/xhtml" href="#dfn-ENCODING_ERR">ENCODING_ERR</ns141:a> = 5;
+  const unsigned short <ns139:a xmlns:ns139="http://www.w3.org/1999/xhtml" href="#dfn-NOT_READABLE_ERR">NOT_READABLE_ERR</ns139:a> = 4;
+  const unsigned short <ns140:a xmlns:ns140="http://www.w3.org/1999/xhtml" href="#dfn-ENCODING_ERR">ENCODING_ERR</ns140:a> = 5;
  
-  unsigned short <ns142:a xmlns:ns142="http://www.w3.org/1999/xhtml" href="#dfn-code-exception">code</ns142:a>;
+  unsigned short <ns141:a xmlns:ns141="http://www.w3.org/1999/xhtml" href="#dfn-code-exception">code</ns141:a>;
   
 };
 </code></pre></div></div>
@@ -1357,11 +1355,11 @@ the most appropriate code from the <ns1:a href="#ErrorDescriptions">table below<
 <ns1:h3>6.6.4. The <ns1:code>OperationNotAllowed</ns1:code> Exception</ns1:h3>
 <ns1:p>The <ns1:code>OperationNotAllowedException</ns1:code> is raised when an operation is explicitly not allowed, and can be reused in other specifications. </ns1:p>
 <div xmlns="http://www.w3.org/1999/xhtml" class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
-  exception <ns143:dfn xmlns:ns143="http://www.w3.org/1999/xhtml" id="dfn-OperationNotAllowedException">OperationNotAllowedException</ns143:dfn> {
+  exception <ns142:dfn xmlns:ns142="http://www.w3.org/1999/xhtml" id="dfn-OperationNotAllowedException">OperationNotAllowedException</ns142:dfn> {
    
-   const unsigned short <ns144:a xmlns:ns144="http://www.w3.org/1999/xhtml" href="#dfn-NOT_ALLOWED_ERR">NOT_ALLOWED_ERR</ns144:a> = 1;
+   const unsigned short <ns143:a xmlns:ns143="http://www.w3.org/1999/xhtml" href="#dfn-NOT_ALLOWED_ERR">NOT_ALLOWED_ERR</ns143:a> = 1;
    
-   unsigned short <ns145:a xmlns:ns145="http://www.w3.org/1999/xhtml" href="#dfn-na-code">code</ns145:a>;
+   unsigned short <ns144:a xmlns:ns144="http://www.w3.org/1999/xhtml" href="#dfn-na-code">code</ns144:a>;
    
   };
 </code></pre></div></div>
@@ -1415,8 +1413,8 @@ scheme = "blob"
 fragIdentifier = "#" fragment
 
 ; Fragment Identifiers depend on the media type of the Blob
-; fragment is defined in [<ns146:a xmlns:ns146="http://www.w3.org/1999/xhtml" href="#RFC3986">RFC3986</ns146:a>]
-; fragment processing is further defined in [<ns147:a xmlns:ns147="http://www.w3.org/1999/xhtml" href="#HTML">HTML</ns147:a>]
+; fragment is defined in [<ns145:a xmlns:ns145="http://www.w3.org/1999/xhtml" href="#RFC3986">RFC3986</ns145:a>]
+; fragment processing is further defined in [<ns146:a xmlns:ns146="http://www.w3.org/1999/xhtml" href="#HTML">HTML</ns146:a>]
 
 fragment    = *( pchar / "/" / "?" )
 
@@ -1517,15 +1515,15 @@ global objects <ns1:code>Window</ns1:code> [<ns1:a href="#HTML">HTML</ns1:a>] an
 This section describes a supplemental interface to the URL specification [<ns1:a href="#URL-API">URL API</ns1:a>] and presents methods for Blob URI creation and revocation.  </ns1:p>
 <div xmlns="http://www.w3.org/1999/xhtml" class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
 [Supplemental]
-interface <ns148:dfn xmlns:ns148="http://www.w3.org/1999/xhtml" id="URL-object">URL</ns148:dfn> {
+interface <ns147:dfn xmlns:ns147="http://www.w3.org/1999/xhtml" id="URL-object">URL</ns147:dfn> {
 
-    static DOMString <ns149:a xmlns:ns149="http://www.w3.org/1999/xhtml" href="#dfn-createObjectURL">createObjectURL</ns149:a>(in <ns150:a xmlns:ns150="http://www.w3.org/1999/xhtml" href="#dfn-Blob">Blob</ns150:a> <ns151:a xmlns:ns151="http://www.w3.org/1999/xhtml" href="#dfn-fileBlob">blob</ns151:a>);
-    static void <ns152:a xmlns:ns152="http://www.w3.org/1999/xhtml" href="#dfn-revokeObjectURL">revokeObjectURL</ns152:a>(in DOMString <ns153:a xmlns:ns153="http://www.w3.org/1999/xhtml" href="#dfn-urlarg">url</ns153:a>);
+    static DOMString <ns148:a xmlns:ns148="http://www.w3.org/1999/xhtml" href="#dfn-createObjectURL">createObjectURL</ns148:a>(in <ns149:a xmlns:ns149="http://www.w3.org/1999/xhtml" href="#dfn-Blob">Blob</ns149:a> <ns150:a xmlns:ns150="http://www.w3.org/1999/xhtml" href="#dfn-fileBlob">blob</ns150:a>);
+    static void <ns151:a xmlns:ns151="http://www.w3.org/1999/xhtml" href="#dfn-revokeObjectURL">revokeObjectURL</ns151:a>(in DOMString <ns152:a xmlns:ns152="http://www.w3.org/1999/xhtml" href="#dfn-urlarg">url</ns152:a>);
 };
 </code></pre></div></div>
-<div xmlns="http://www.w3.org/1999/xhtml" class="note"><div class="noteHeader">Note</div><ns154:p xmlns:ns154="http://www.w3.org/1999/xhtml">ECMAScript user agents of this specification MUST ensure that they do not expose a <ns154:code>prototype</ns154:code> property on the URL interface
-object unless the user agent also implements the URL [<ns154:a href="#URL-API">URL API</ns154:a>] specification. In other words, <ns154:code>URL.prototype</ns154:code> MUST
-evaluate to true if the user agent implements the URL [<ns154:a href="#URL-API">URL API</ns154:a>] specification, and MUST NOT evaluate to true otherwise.</ns154:p></div>
+<div xmlns="http://www.w3.org/1999/xhtml" class="note"><div class="noteHeader">Note</div><ns153:p xmlns:ns153="http://www.w3.org/1999/xhtml">ECMAScript user agents of this specification MUST ensure that they do not expose a <ns153:code>prototype</ns153:code> property on the URL interface
+object unless the user agent also implements the URL [<ns153:a href="#URL-API">URL API</ns153:a>] specification. In other words, <ns153:code>URL.prototype</ns153:code> MUST
+evaluate to true if the user agent implements the URL [<ns153:a href="#URL-API">URL API</ns153:a>] specification, and MUST NOT evaluate to true otherwise.</ns153:p></div>
 
 <ns1:p><ns1:code>// Window implements URL;</ns1:code></ns1:p>
 <ns1:p><ns1:code>// WorkerUtils implements URL;</ns1:code></ns1:p>
@@ -1538,7 +1536,7 @@ object's <ns1:a href="#URL-object"><ns1:code>URL</ns1:code></ns1:a> property fro
 a unique <ns1:a href="#url"><ns1:code>Blob</ns1:code> URI</ns1:a> that can be used to dereference the <ns1:a href="#dfn-fileBlob"><ns1:code>blob</ns1:code></ns1:a> argument.</ns1:p></ns1:li>
 </ns1:ol>
 <div xmlns="http://www.w3.org/1999/xhtml" class="example"><div class="exampleHeader">Example</div>
-<ns155:p xmlns:ns155="http://www.w3.org/1999/xhtml">In the example below, after obaining a reference to a Blob object, the static method <ns155:code>URL.createObjectURL</ns155:code> is called on that Blob object.</ns155:p>
+<ns154:p xmlns:ns154="http://www.w3.org/1999/xhtml">In the example below, after obaining a reference to a Blob object, the static method <ns154:code>URL.createObjectURL</ns154:code> is called on that Blob object.</ns154:p>
 <div class="block"><div class="blockTitleDiv"><span class="blockTitle">ECMAScript</span></div><div class="blockContent"><pre class="code"><code class="es-code">
 var file = document.getElementById('file').files[0];
 if(file){
@@ -1562,14 +1560,14 @@ this method call does nothing.  User agents MAY display a message on the error c
 </ns1:ol>
 <ns1:p><ns1:dfn id="dfn-urlarg">The <ns1:code>url</ns1:code> argument</ns1:dfn> to the <ns1:a href="#dfn-revokeObjectURL"><ns1:code>revokeObjectURL</ns1:code></ns1:a> method is a <ns1:a href="#url">Blob URI</ns1:a> string.</ns1:p>
 <div xmlns="http://www.w3.org/1999/xhtml" class="example"><div class="exampleHeader">Example</div>
-<ns156:p xmlns:ns156="http://www.w3.org/1999/xhtml">In the example below, <ns156:code>window1</ns156:code> and <ns156:code>window2</ns156:code> are separate, but in the <ns156:a href="#same-origin">same origin</ns156:a>; <ns156:code>window2</ns156:code> could be an <ns156:code>iframe</ns156:code>
-[<ns156:a href="#HTML">HTML</ns156:a>] inside <ns156:code>window1</ns156:code>.</ns156:p>
+<ns155:p xmlns:ns155="http://www.w3.org/1999/xhtml">In the example below, <ns155:code>window1</ns155:code> and <ns155:code>window2</ns155:code> are separate, but in the <ns155:a href="#same-origin">same origin</ns155:a>; <ns155:code>window2</ns155:code> could be an <ns155:code>iframe</ns155:code>
+[<ns155:a href="#HTML">HTML</ns155:a>] inside <ns155:code>window1</ns155:code>.</ns155:p>
 <div class="block"><div class="blockTitleDiv"><span class="blockTitle">ECMAScript</span></div><div class="blockContent"><pre class="code"><code class="es-code">
 myurl = window1.URL.createObjectURL(myblob);
 window2.URL.revokeObjectURL(myurl);
 </code></pre></div></div>
-<ns157:p xmlns:ns157="http://www.w3.org/1999/xhtml">Since <ns157:code>window1</ns157:code> and <ns157:code>window2</ns157:code> are in the <ns157:a href="#same-origin">same origin</ns157:a>, the
-<ns157:code>URL.revokeObjectURL</ns157:code> call ensures that subsequent dereferencing of <ns157:code>myurl</ns157:code> results in a <ns157:a href="#FourOhFourNotFound">404 Not Found</ns157:a> response.</ns157:p>
+<ns156:p xmlns:ns156="http://www.w3.org/1999/xhtml">Since <ns156:code>window1</ns156:code> and <ns156:code>window2</ns156:code> are in the <ns156:a href="#same-origin">same origin</ns156:a>, the
+<ns156:code>URL.revokeObjectURL</ns156:code> call ensures that subsequent dereferencing of <ns156:code>myurl</ns156:code> results in a <ns156:a href="#FourOhFourNotFound">404 Not Found</ns156:a> response.</ns156:p>
 </div>
 </ns1:dd>
 </ns1:dl>
@@ -1605,7 +1603,7 @@ In particular, code of the sort: <ns1:code>document.location = window.URL.create
 is used in cross-origin request contexts.  User agents MAY return <ns1:a href="#FourOhThreeNotAllowed">403 Not Allowed</ns1:a> at any attempt to set the entire document location to a file or Blob.
 </ns1:p></ns1:li>
 </ns1:ul>
-<div xmlns="http://www.w3.org/1999/xhtml" class="ednote"><div class="ednoteHeader">Editorial note</div><ns158:p xmlns:ns158="http://www.w3.org/1999/xhtml">This section is provisional; more security data may supplement this in subsequent drafts.</ns158:p></div>
+<div xmlns="http://www.w3.org/1999/xhtml" class="ednote"><div class="ednoteHeader">Editorial note</div><ns157:p xmlns:ns157="http://www.w3.org/1999/xhtml">This section is provisional; more security data may supplement this in subsequent drafts.</ns157:p></div>
 </ns1:div>
   <ns1:div id="requirements" class="section">
     <ns1:h2>6.9. Requirements and Use Cases</ns1:h2>
