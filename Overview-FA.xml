@@ -734,7 +734,8 @@ The list below is normative for the <code>result</code> attribute and are the co
   <a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a> <a href="#read-methods">read method</a>, this attibute SHOULD return
   <a href="#partial-blob-data">partial Blob data</a> in the format specified by
   the <a href="#encoding-determination">encoding determination</a> as a <code>DOMString</code> that is incremented as more data is read.
-  User agents MUST return at least one such <code>result</code>, with the final <code>result</code> returned at completion of the read.
+  User agents MUST return at least one such <code>result</code>, with the final <code>result</code> returned at completion of the read.  See the <a href="#partial-encoding-caveat">caveat about
+  <a href="#partial-blob-data">partial Blob data</a> being valid within a giving encoding.</a>
   </p></li>
   <li><p>On getting, if the <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer</code></a> <a href="#read-methods">read method</a> is called
   and no error in reading the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> has occurred,
@@ -863,7 +864,25 @@ the user agent MUST run the steps below (unless otherwise indicated).
   <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
   <li><p>While processing the read, as data from the <a href="#dfn-fileBlob"><code>blob</code></a> becomes available, <a href="#queue-a-task">queue tasks</a> to update the
   <a href="#dfn-result"><code>result</code></a> with <a href="#partial-blob-data">partial Blob data</a> represented as a string in a format determined by the
-  <a href="#encoding-determination">encoding determination</a> until the read is complete.</p></li>  
+  <a href="#encoding-determination">encoding determination</a> until the read is complete.</p>
+  <div class="note" id="partial-encoding-caveat">
+  <p>
+  <em>This note is normative.</em>  <a href="#partial-blob-data">Partial Blob data</a> MUST be returned such that where possible, the bytes read thus far should be valid code points
+  within the <a href="#dfn-encoding"><code>encoding</code></a>; in particular, when executing the <a href="#encoding-determination">encoding determination</a> for
+  <a href="#partial-blob-data">Partial Blob data</a>, user agents MUST NOT return the U+FFFD character for bytes that are invalid within an <a href="#dfn-encoding"><code>encoding</code></a>
+  till all of the file has been read.  For example:
+  </p>
+  <p>
+  Suppose a file is in UTF-8, and in hexadecimal the bytes are E3 83 91 E3 83 91, which is effectively 0x30D1 0x30D1.  Suppose the first 5 bytes have been read.
+  The <a href="#dfn-result"><code>result</code></a> returned here MUST be 0x30D1 and have <code>result.length == 1 </code>, and NOT be 0x30D1, 0xFFFD with <code>result.length == 2 </code>.  Even
+  though the trailing E3 83 is not a valid code point in UTF-8 at this point, user agents MUST NOT return a <a href="#dfn-result"><code>result</code></a> with such invalid codepoints replaced with U+FFFD
+  till the entire file has been read into memory.
+  </p>
+  <p>
+  
+  </p>
+  </div>
+  </li>  
   <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  As the bytes from the <a href="#dfn-fileBlob"><code>blob</code></a> argument are read,
   user agents SHOULD ensure that on getting, the <a href="#dfn-result"><code>result</code></a> attribute returns <a href="#partial-blob-data">partial Blob data</a>
   representing the number of bytes currently <code>loaded</code> (as a fraction of the <code>total</code>) [<a href="#ProgressEvents">ProgressEvents</a>], decoded into
@@ -1336,14 +1355,10 @@ the most appropriate code from the <a href="#ErrorDescriptions">table below</a>.
    
    unsigned short <a href="#dfn-na-code">code</a>;
    
-   DOMString <a href="#dfn-na-name">name</a>;
-   
   };
 </x:codeblock>
 <p>The <dfn id="dfn-na-code" title="code exception field in OperationNotAllowedException"><code>code</code></dfn> exception field MUST return the most appropriate constant in
 <a href="#dfn-OperationNotAllowedException"><code>OperationNotAllowedException</code></a>, which is <a href="#dfn_NOT_ALLOWED_ERR"><code>NOT_ALLOWED_ERR</code></a>.</p>
-<p>The <dfn id="dfn-na-name" title="name exception field in OperationNotAllowedException"><code>name</code></dfn> exception field MUST return the name of the constant in
-<a href="#dfn-OperationNotAllowedException"><code>OperationNotAllowedException</code></a> as a string.</p>
 <p><dfn id="dfn-NOT_ALLOWED_ERR"><code>NOT_ALLOWED_ERR</code></dfn> is used when an operation, such as an invalid usage of any of the
 <a href="#read-methods">read methods</a>, is specified to raise the <code>OperationNotAllowedException</code>.  This is the exception code to be used.</p>
 </div>
