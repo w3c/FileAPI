@@ -1,4 +1,4 @@
-<?xml version='1.0'?>
+﻿<?xml version='1.0'?>
 
 <!--
   Overview.xml
@@ -865,13 +865,12 @@ the user agent MUST run the steps below (unless otherwise indicated).
   <li><p>While processing the read, as data from the <a href="#dfn-fileBlob"><code>blob</code></a> becomes available, <a href="#queue-a-task">queue tasks</a> to update the
   <a href="#dfn-result"><code>result</code></a> with <a href="#partial-blob-data">partial Blob data</a> represented as a string in a format determined by the
   <a href="#encoding-determination">encoding determination</a> until the read is complete.</p>
-  <div class="note" id="partial-encoding-caveat">
+  <div class="note">
   <p>
   <em>This note is normative.</em>  <a href="#partial-blob-data">Partial Blob data</a> MUST be returned such that where possible, the bytes read thus far should be valid code points
   within the <a href="#dfn-encoding"><code>encoding</code></a>; in particular, when executing the <a href="#encoding-determination">encoding determination</a> for
   <a href="#partial-blob-data">Partial Blob data</a>, user agents MUST NOT return the U+FFFD character for bytes that are invalid within an <a href="#dfn-encoding"><code>encoding</code></a>
-  till all of the file has been read.  For example:
-  </p>
+  till all of the file has been read.  For example:</p>
   <p>
   Suppose a file resource is to be read in UTF-8, and in hexadecimal the bytes in this file are E3 83 91 E3 83 91, which is effectively 0x30D1 0x30D1.
   Suppose the first 5 bytes have been read.  The <a href="#dfn-result"><code>result</code></a> returned here MUST be 0x30D1 and have <code>result.length == 1 </code>,
