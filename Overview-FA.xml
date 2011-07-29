@@ -1505,7 +1505,7 @@ URI</a> persists after the specified lifetime of the URI has elapsed). Additiona
 global objects <code>Window</code> [<a href="#HTML">HTML</a>] and <code>WorkerGlobalScope</code> [<a href="#Workers">Web Workers</a>].
 This section describes a supplemental interface to the URL specification [<a href="#URL-API">URL API</a>] and presents methods for Blob URI creation and revocation.  </p>
 <x:codeblock language="idl">
-[Supplemental]
+partial
 interface <dfn id="URL-object">URL</dfn> {
 
     static DOMString <a href="#dfn-createObjectURL">createObjectURL</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
