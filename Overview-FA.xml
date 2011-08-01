@@ -862,7 +862,7 @@ the user agent MUST run the steps below (unless otherwise indicated).
   </li>
   <li><p>If no error has occurred, set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
   <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
-  <li><p>While processing the read, as data from the <a href="#dfn-fileBlob"><code>blob</code></a> becomes available, <a href="#queue-a-task">queue tasks</a> to update the
+  <li><p>While processing the read, as data from the <a href="#dfn-fileBlob"><code>blob</code></a> becomes available, user agents SHOULD <a href="#queue-a-task">queue tasks</a> to update the
   <a href="#dfn-result"><code>result</code></a> with <a href="#partial-blob-data">partial Blob data</a> represented as a string in a format determined by the
   <a href="#encoding-determination">encoding determination</a> until the read is complete.</p>
   <div class="note">
@@ -870,7 +870,7 @@ the user agent MUST run the steps below (unless otherwise indicated).
   <em>This note is normative.</em>  <a href="#partial-blob-data">Partial Blob data</a> MUST be returned such that where possible, the bytes read thus far should be valid code points
   within the <a href="#dfn-encoding"><code>encoding</code></a>; in particular, when executing the <a href="#encoding-determination">encoding determination</a> for
   <a href="#partial-blob-data">Partial Blob data</a>, user agents MUST NOT return the U+FFFD character for bytes that are invalid within an <a href="#dfn-encoding"><code>encoding</code></a>
-  till all of the file has been read.  For example:</p>
+  till ALL of the file has been read.  For example:</p>
   <p>
   Suppose a file resource is to be read in UTF-8, and in hexadecimal the bytes in this file are E3 83 91 E3 83 91, which is effectively 0x30D1 0x30D1.
   Suppose the first 5 bytes have been read.  The <a href="#dfn-result"><code>result</code></a> returned here MUST be 0x30D1 and have <code>result.length == 1 </code>,
@@ -1401,30 +1401,7 @@ scheme = "blob"
 ; opaqueString could be a UUID in its canonical form
 ; opaqueString tokens MUST be globally unique
 
-fragIdentifier = "#" fragment
-
-; Fragment Identifiers depend on the media type of the Blob
-; fragment is defined in [<a href="#RFC3986">RFC3986</a>]
-; fragment processing is further defined in [<a href="#HTML">HTML</a>]
-
-fragment    = *( pchar / "/" / "?" )
-
-pchar       = unreserved / pct-encoded / sub-delims / ":" / "@"
-
-unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
-
-pct-encoded   = "%" HEXDIG HEXDIG
-
-sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")"
-                 / "*" / "+" / "," / ";" / "="
 </x:codeblock>
-<p>
-The fragment's format, resolution and processing directives depend on the media type [<a href="#RFC2046">RFC2046</a>] of a potentially retrieved representation, even though such
-a retrieval is only performed if the <a href="#url">blob: URI</a> is dereferenced.  For example, in an HTML file [<a href="#HTML">HTML</a>] the fragment identifier
-could be used to refer to an anchor within the file.  If the user agent does not recognize the media type of the resource, OR if a fragment identifer is not
-meaningful within the resource, it MUST ignore the fragment identifier.  Additionally, user agents MUST honor additional fragment processing directives given in
-the relevant media format specifications; in particular, this includes any modifications to the fragment production given in HTML [<a href="#HTML">HTML</a>].
-</p>
 
 <p>UUID is one potential option available to user agents for use with <a href="#url">Blob URIs</a> as <a href="#opaqueString">opaque strings</a>.
 UUIDs are defined in [<a href="#UUID">RFC4122</a>] and are used here without the urn: scheme.
@@ -1448,6 +1425,35 @@ hexDigit =
          "A" / "B" / "C" / "D" / "E" / "F"
 
 </x:codeblock>
+</div>
+<div class="section" id="fragmentDiscussion">
+<h3>Discussion of Fragment Identifier</h3>
+<p>
+The fragment's format, resolution and processing directives depend on the media type [<a href="#RFC2046">RFC2046</a>] of a potentially retrieved representation, even though such
+a retrieval is only performed if the <a href="#url">blob: URI</a> is dereferenced.  For example, in an HTML file [<a href="#HTML">HTML</a>] the fragment identifier
+could be used to refer to an anchor within the file.  If the user agent does not recognize the media type of the resource, OR if a fragment identifer is not
+meaningful within the resource, it MUST ignore the fragment identifier.  Additionally, user agents MUST honor additional fragment processing directives given in
+the relevant media format specifications; in particular, this includes any modifications to the fragment production given in HTML [<a href="#HTML">HTML</a>].
+</p>
+<x:codeblock language="abnf">
+fragIdentifier = "#" fragment
+
+; Fragment Identifiers depend on the media type of the Blob
+; fragment is defined in [<a href="#RFC3986">RFC3986</a>]
+; fragment processing is further defined in [<a href="#HTML">HTML</a>]
+
+fragment    = *( pchar / "/" / "?" )
+
+pchar       = unreserved / pct-encoded / sub-delims / ":" / "@"
+
+unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
+
+pct-encoded   = "%" HEXDIG HEXDIG
+
+sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")"
+                 / "*" / "+" / "," / ";" / "="
+</x:codeblock>
+
 <p>A valid Blob URI reference could look like: <code>blob:550e8400-e29b-41d4-a716-446655440000#aboutABBA</code></p>
 </div>
 <div id="originOfBlob" class="section">
@@ -1505,8 +1511,7 @@ URI</a> persists after the specified lifetime of the URI has elapsed). Additiona
 global objects <code>Window</code> [<a href="#HTML">HTML</a>] and <code>WorkerGlobalScope</code> [<a href="#Workers">Web Workers</a>].
 This section describes a supplemental interface to the URL specification [<a href="#URL-API">URL API</a>] and presents methods for Blob URI creation and revocation.  </p>
 <x:codeblock language="idl">
-partial
-interface <dfn id="URL-object">URL</dfn> {
+partial interface <dfn id="URL-object">URL</dfn> {
 
     static DOMString <a href="#dfn-createObjectURL">createObjectURL</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
     static void <a href="#dfn-revokeObjectURL">revokeObjectURL</a>(in DOMString <a href="#dfn-urlarg">url</a>);
@@ -1677,8 +1682,6 @@ is used in cross-origin request contexts.  User agents MAY return <a href="#Four
         <dd><cite><a href="http://www.iana.org/assignments/character-sets">Official Names for Character Sets on the Internet</a></cite>, K. Simonsen, W.Choi, et al. IANA.</dd>
 	<dt id="RFC3986">RFC3986</dt>
 	<dd><cite><a href="http://www.ietf.org/rfc/rfc3986.txt">Uniform Resource Identifier (URI): Generic Syntax</a></cite>, T. Berners-Lee, R. Fielding, L. Masinter. IETF.</dd>
-	<dt id="RFC1738">RFC1738</dt>
-	<dd><cite><a href="http://tools.ietf.org/html/rfc1738">Uniform Resource Locators (URL)</a></cite>, T. Berners-Lee, L. Masinter, M. McCahill. IETF.</dd>
         <dt id="RFC1630">RFC1630</dt>
         <dd><cite><a href="http://www.ietf.org/rfc/rfc1630.txt">Universal Resource Identifiers in WWW</a></cite>, T. Berners-Lee. IETF.</dd>
         <dt id="TypedArrays">Typed Arrays</dt>
@@ -1708,6 +1711,8 @@ is used in cross-origin request contexts.  User agents MAY return <a href="#Four
     <dd><cite><a href="http://code.google.com/apis/gears/api_blob.html">Google Gears Blob API (deprecated)</a></cite></dd>
     <dt id="UUID">RFC4122</dt>
     <dd><cite><a href="http://www.ietf.org/rfc/rfc4122.txt">A Universally Unique IDentifier (UUID) URN Namespace</a></cite>, P. Leach, M. Mealling, R. Salz. IETF.</dd>
+    <dt id="RFC1738">RFC1738</dt>
+    <dd><cite><a href="http://tools.ietf.org/html/rfc1738">Uniform Resource Locators (URL)</a></cite>, T. Berners-Lee, L. Masinter, M. McCahill. IETF.</dd>
     </dl>
     </div>
     </div>
