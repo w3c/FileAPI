@@ -1381,9 +1381,7 @@ This section provides some use cases and is an informative, and not normative, d
 <li><p>This scheme should have an <a href="#origin">origin</a> policy and a
 <a href="#lifetime">lifetime</a> stipulation, to allow safe access to binary data from web applications.  </p></li>
 <li><p>This scheme should be used as a "finite life" reference to "in-memory" <a href="#dfn-Blob">Blobs</a>, and also be re-used elsewhere on the platform to refer to binary
-resources that are unique (e.g. the
-<a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/video-conferencing-and-peer-to-peer-communication.html#blob-url">Stream API</a> reuses it in the
-context of video-conferencing).   URIs in this scheme are designed for impermanence, since they will be typically used to access "in memory" resources.</p></li>
+resources that are unique (e.g. for video-conferencing [<a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/video-conferencing-and-peer-to-peer-communication.html#blob-url">Stream API</a>]).   URIs in this scheme are designed for impermanence, since they will be typically used to access "in memory" resources.</p></li>
 <li><p>Developers should have the ability to revoke URIs in this scheme, so that they no longer refer to <a href="#dfn-Blob"><code>Blob</code></a> objects.  This includes scenarios
 where file references are no longer needed by a program, but also other uses of <a href="#dfn-Blob"><code>Blob</code></a> objects.
 Consider a scenario where a <a href="#dfn-Blob"><code>Blob</code></a> object can be exported from a drawing program which uses the canvas element and API [<a href="#HTML">HTML</a>].  A snapshot of the drawing can be created by
@@ -1409,8 +1407,7 @@ practice. </p></li>
 <li><p>The reuse of file URIs would involve changes to file URI use today, such as adding response codes.  While they are used inconsistently in web applications,
 the structure of the URIs would change, and request-response behavior would have to be superimposed on what already works in a more-or-less ad-hoc manner.  Modifying this for the use cases cited above is imprudent, given
 legacy usage.  Additionally, the use cases for a Blob URI scheme call for use cases beyond the file system.</p></li>
-<li><p>A scheme of the sort urn:uuid could be used, though use of this scheme is unprecedented in HTML and JavaScript web applications.  Attributes on objects are called ".URL"
-(e.g. <code>document.URL</code>[<a href="#HTML">HTML</a>]) and refer to URLs that can be used with HTML elements, typically for retrieving a resource that can be displayed; the URN is not a familiar concept.
+<li><p>A scheme of the sort urn:uuid could be used, though use of this scheme is unprecedented in HTML and JavaScript web applications.  The urn:uuid scheme is very generically repurposable.
 URIs in the scheme urn:uuid have the disadvantage of unfamiliarity and inconsistency across the web platform.  A new scheme has the advantage of being explicit about what is being referenced.
 In theory, URIs make no guarantee about what sort of resource is obtained when they are dereferenced; that is left to
 content labeling and media type.  But in practice, the name of the scheme creates an expectation about the resource.
@@ -1443,8 +1440,8 @@ scheme = "blob"
 </x:codeblock>
 <div id="OpaqueStringDiscussion" class="section">
 <h4>The Opaque String</h4>
-<p><a href="#opaqueString">Opaque strings</a> SHOULD NOT include any reserved characters from [<a href="#RFC3986">RFC3986</a>].
-<a href="#opaqueString">Opaque strings</a> MUST be at least unique within the scope of the browsing context [<a href="#HTML">HTML</a>], and ideally SHOULD be globally unique.
+<p><a href="#opaqueString">Opaque strings</a> MUST NOT include any reserved characters from [<a href="#RFC3986">RFC3986</a>].
+<a href="#opaqueString">Opaque strings</a> MUST be globally unique.
 UUID is one potential option available to user agents for use with <a href="#url">Blob URIs</a> as <a href="#opaqueString">opaque strings</a>, and their use is strongly encouraged.
 UUIDs are defined in [<a href="#UUID">RFC4122</a>] and are used here without the urn: scheme.
 Below is an ABNF [<a href="#ABNF">RFC5234</a>] for UUID; this is provided informationally and is not normative.
@@ -1759,6 +1756,8 @@ is used in cross-origin request contexts.  User agents MAY return <a href="#Four
     <dd><cite><a href="http://www.ietf.org/rfc/rfc4122.txt">A Universally Unique IDentifier (UUID) URN Namespace</a></cite>, P. Leach, M. Mealling, R. Salz. IETF.</dd>
     <dt id="RFC1738">RFC1738</dt>
     <dd><cite><a href="http://tools.ietf.org/html/rfc1738">Uniform Resource Locators (URL)</a></cite>, T. Berners-Lee, L. Masinter, M. McCahill. IETF.</dd>
+    <dt id="StreamAPI">Stream API</dt>
+    <dd><cite><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/video-conferencing-and-peer-to-peer-communication.html">The Stream API</a></cite>, I. Hickson. WHATWG.</dd>
     </dl>
     </div>
     </div>
