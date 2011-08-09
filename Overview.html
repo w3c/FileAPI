@@ -1371,15 +1371,12 @@ the most appropriate code from the <a href="#ErrorDescriptions">table below</a>.
 
 <div id="url" class="section">  
 <h2>6.7. A URI for Blob and File reference</h2>
-<p>This section defines a scheme for a URI used to refer to <a href="#dfn-Blob"><code>Blob</code></a> objects (and <a href="#dfn-file"><code>File</code></a> objects).
-Whereas the file URI scheme (defined in [<a href="#RFC1630">RFC1630</a>] and
-[<a href="#RFC1738">RFC1738</a>]) allows user agents to surface local file and directory structures, it cannot be consistently or safely used within web applications owing to
-<a href="#origin">origin</a> considerations and lack of HTTP retrieval [<a href="#HTTP">HTTP</a>] semantics.  
+<p>This section defines a scheme for a URI used to refer to <a href="#dfn-Blob"><code>Blob</code></a> objects (and <a href="#dfn-file"><code>File</code></a> objects). 
 </p>
 <div id="use-cases-scheme" class="section">
 <h3>6.7.1. Use Cases for a New Scheme</h3>
 <p>This specification defines a scheme with URIs of the sort: <code>blob:550e8400-e29b-41d4-a716-446655440000#aboutABBA</code>.
-This section provides some use cases and is an informative, and not normative, discussion.</p>
+This section provides some use cases and is an informative discussion.</p>
 <ul>
 <li><p>This scheme should be able to be used with web APIs such as <code>XMLHttpRequest</code> [<a href="#XHR2">XHR2</a>], and with elements that are designed to be used with HTTP URIs, such as the
 <code>img</code> element [<a href="#HTML">HTML</a>].  In general, this scheme should be designed to be used wherever URIs can be used on the web.  </p>
@@ -1399,12 +1396,12 @@ if the user deletes the snapshot, any reference to the snapshot in memory via a 
 <div id="alternative-schemas" class="section">
 <h3>6.7.2. Discussion of Existing Schemes</h3>
 <p>
-This section is an informative discussion of existing schemes that may have been repurposed or reused for the use cases above, and justification for why they were not considered.  These
-schemes include HTTP [<a href="#HTTP">HTTP</a>], file [<a href="#RFC1630">RFC1630</a>][<a href="#RFC1738">RFC1738</a>], and a scheme such as
+This section is an informative discussion of existing schemes that may have been repurposed or reused for the use cases above, and justification for why a new scheme is considered preferable.
+These schemes include HTTP [<a href="#HTTP">HTTP</a>], file [<a href="#RFC1630">RFC1630</a>][<a href="#RFC1738">RFC1738</a>], and a scheme such as
 urn:uuid [<a href="#RFC4122">RFC4122</a>].  One broad consideration in determining what scheme to use is providing something with intuitive appeal to web developers.
 </p>
 <ul>
-<li><p>In theory, HTTP can be repurposed for the use cases mentioned above; it already comes with well-defined request-response semantics that are already used by web applications.
+<li><p>HTTP could be repurposed for the use cases mentioned above; it already comes with well-defined request-response semantics that are already used by web applications.
 But <a href="#dfn-Blob"><code>Blob</code></a> resources are typically "in-memory"
 resident (e.g. after a file has been read into memory), and are thus unlike "traditional" HTTP resources that are dereferenced via DNS.  While some user agents automatically
 "proxy" the underlying file system on the local machine via an HTTP server (e.g. with URLs of the sort http://localhost), HTTP is not traditionally used with local resources.
@@ -1412,14 +1409,14 @@ Moreover, an important use case for these URIs are that they can be revoked with
 (and that are certainly not chiefly memory-resident, such as files that a web application can read).  Reusing the HTTP scheme might be confusing for web developers owing to well-established
 practice. </p></li>
 <li><p>The reuse of file URIs would involve changes to file URI use today, such as adding response codes.  While they are used inconsistently in web applications,
-the structure of the URIs would change, and request-response behavior would have to be superimposed on what already works in a more-or-less ad-hoc manner.  Modifying this for the use cases cited above is imprudent, given
-legacy usage.  Additionally, the use cases for a Blob URI scheme call for use cases beyond the file system.</p></li>
+the structure of the URIs would change, and request-response behavior would have to be superimposed on what already works in a more-or-less ad-hoc manner.  Modifying this for the use cases
+cited above is imprudent, given legacy usage.  Additionally, the use cases for a Blob URI scheme call for uses beyond the file system.</p></li>
 <li><p>A scheme of the sort urn:uuid could be used, though use of this scheme is unprecedented in HTML and JavaScript web applications.  The urn:uuid scheme is very generically repurposable.
 URIs in the scheme urn:uuid have the disadvantage of unfamiliarity and inconsistency across the web platform.  A new scheme has the advantage of being explicit about what is being referenced.
 In theory, URIs make no guarantee about what sort of resource is obtained when they are dereferenced; that is left to
 content labeling and media type.  But in practice, the name of the scheme creates an expectation about the resource.
-Choosing a name that clarifies the primary use case -- namely, access to memory-resident <a href="#dfn-Blob"><code>Blob</code></a> resources -- is a worthwhile compromise, and favors clarity, familiarity, and consistency
-across the web platform.
+Choosing a name that clarifies the primary use case -- namely, access to memory-resident <a href="#dfn-Blob"><code>Blob</code></a> resources -- is a worthwhile compromise, and favors clarity,
+familiarity, and consistency across the web platform.
 </p></li>
 </ul>
 </div>
