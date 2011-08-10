@@ -1375,9 +1375,11 @@ This section provides some use cases and is an informative discussion.</p>
 <p>This scheme should have defined response codes, so that web applications can respond to scenarios where the resource is not found, or raises an error, etc.
 </p></li>
 <li><p>This scheme should have an <a href="#origin">origin</a> policy and a
-<a href="#lifetime">lifetime</a> stipulation, to allow safe access to binary data from web applications.  </p></li>
-<li><p>This scheme should be used as a "finite life" reference to "in-memory" <a href="#dfn-Blob">Blobs</a>, and also be re-used elsewhere on the platform to refer to binary
-resources that are unique (e.g. for video-conferencing [<a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/video-conferencing-and-peer-to-peer-communication.html#blob-url">Stream API</a>]).   URIs in this scheme are designed for impermanence, since they will be typically used to access "in memory" resources.</p></li>
+<a href="#lifetime">lifetime</a> stipulation, to allow safe access to binary data from web applications.  </p>
+<p>URIs in this scheme should be used as a references to "in-memory" <a href="#dfn-Blob">Blobs</a>, and also be re-used elsewhere on the platform to refer to binary
+resources (e.g. for video-conferencing
+[<a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/video-conferencing-and-peer-to-peer-communication.html#blob-url">Stream API</a>]).
+URIs in this scheme are designed for impermanence, since they will be typically used to access "in memory" resources.</p></li>
 <li><p>Developers should have the ability to revoke URIs in this scheme, so that they no longer refer to <a href="#dfn-Blob"><code>Blob</code></a> objects.  This includes scenarios
 where file references are no longer needed by a program, but also other uses of <a href="#dfn-Blob"><code>Blob</code></a> objects.
 Consider a scenario where a <a href="#dfn-Blob"><code>Blob</code></a> object can be exported from a drawing program which uses the canvas element and API [<a href="#HTML">HTML</a>].  A snapshot of the drawing can be created by
@@ -1388,8 +1390,8 @@ if the user deletes the snapshot, any reference to the snapshot in memory via a 
 <div id="alternative-schemas" class="section">
 <h3>Discussion of Existing Schemes</h3>
 <p>
-This section is an informative discussion of existing schemes that may have been repurposed or reused for the use cases above, and justification for why a new scheme is considered preferable.
-These schemes include HTTP [<a href="#HTTP">HTTP</a>], file [<a href="#RFC1630">RFC1630</a>][<a href="#RFC1738">RFC1738</a>], and a scheme such as
+This section is an informative discussion of existing schemes that may have been repurposed or reused for the use cases for URIs above, and justification for why a new scheme
+is considered preferable.  These schemes include HTTP [<a href="#HTTP">HTTP</a>], file [<a href="#RFC1630">RFC1630</a>][<a href="#RFC1738">RFC1738</a>], and a scheme such as
 urn:uuid [<a href="#RFC4122">RFC4122</a>].  One broad consideration in determining what scheme to use is providing something with intuitive appeal to web developers.
 </p>
 <ul>
@@ -1406,7 +1408,7 @@ cited above is imprudent, given legacy usage.  Additionally, the use cases for a
 <li><p>A scheme of the sort urn:uuid could be used, though use of this scheme is unprecedented in HTML and JavaScript web applications.  The urn:uuid scheme is very generically repurposable.
 URIs in the scheme urn:uuid have the disadvantage of unfamiliarity and inconsistency across the web platform.  A new scheme has the advantage of being explicit about what is being referenced.
 In theory, URIs make no guarantee about what sort of resource is obtained when they are dereferenced; that is left to
-content labeling and media type.  But in practice, the name of the scheme creates an expectation about the resource.
+content labeling and media type.  But in practice, the name of the scheme creates an expectation about both the resource and the protocol of the request-response transaction.
 Choosing a name that clarifies the primary use case -- namely, access to memory-resident <a href="#dfn-Blob"><code>Blob</code></a> resources -- is a worthwhile compromise, and favors clarity,
 familiarity, and consistency across the web platform.
 </p></li>
@@ -1430,7 +1432,7 @@ scheme = "blob"
 
 ; scheme is always "blob"
 
-; opaqueString tokens MUST be unique and ideally SHOULD be globally unique
+; opaqueString tokens MUST be globally unique
 ; opaqueString could be a UUID in its canonical form
 
 </x:codeblock>
@@ -1506,8 +1508,8 @@ element with an id attribute of "aboutABBA".</p>
 <p>This specification defines the following lifetime conditions on <a href="#url">Blob URIs</a>: </p>
 <ol><li><p>This specification adds an additional <a href="#unloading-document-cleanup-steps">unloading document cleanup step</a>: User agents MUST revoke any <a href="#url">Blob URIs</a> created with <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> from within that <a href="#document">document</a>.
 If these <a href="#url">Blob URIs</a> are dereferenced, user agents must respond with <a href="#FourOhFourNotFound">404 Not Found</a>.</p></li>
-<li><p>user agents MUST ensure that any <a href="#url">Blob URIs</a> are revoked after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called with that
-<a href="#url">Blob URI</a> as an argument. user agents MUST respond with a <a href="#FourOhFourNotFound">404 Not Found</a> if a <a href="#url">Blob URI</a> is
+<li><p>User agents MUST ensure that any <a href="#url">Blob URIs</a> are revoked after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called with that
+<a href="#url">Blob URI</a> as an argument. User agents MUST respond with a <a href="#FourOhFourNotFound">404 Not Found</a> if a <a href="#url">Blob URI</a> is
 dereferenced after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called on that particular <a href="#url">Blob URI</a>. </p></li>
 </ol>
 </div>
@@ -1528,7 +1530,7 @@ the user agent MUST also use a Content-Type header [<a href="#HTTP">HTTP</a>] wi
 <div id="FourOhThreeNotAllowed" class="section">
 <h4>403 Not Allowed</h4>
 <p>This response [<a href="#HTTP">HTTP</a>] MUST be used if the request violates the <a href="#originOfBlob">origin requirement</a>.  Additionally, it MUST be used if the
-underlying file's permission structure has changed (thus preventing access from web content).  user agents MAY accompany this response with a message (e.g. "Origin Violation").</p>
+underlying file's permission structure has changed (thus preventing access from web content).  User agents MAY accompany this response with a message (e.g. "Origin Violation").</p>
 </div>
 <div id="FourOhFourNotFound" class="section">
 <h4>404 Not Found</h4>
@@ -1540,7 +1542,7 @@ URI</a> persists after the specified lifetime of the URI has elapsed). Additiona
 <h4>500 Internal Server Error</h4>
 <p>
   This response [<a href="#HTTP">HTTP</a>] MAY be used as a generic error condition, including for security errors or access violations (e.g if the request method is anything other than GET
-  [<a href="#HTTP">HTTP</a>].  user agents MAY accompany this response with a message (e.g. "Data Access Error"). 
+  [<a href="#HTTP">HTTP</a>].  User agents MAY accompany this response with a message (e.g. "Data Access Error"). 
 </p>
 </div>
 </div>
