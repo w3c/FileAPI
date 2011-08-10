@@ -1386,7 +1386,7 @@ This section provides some use cases and is an informative discussion.</p>
 <a href="#lifetime">lifetime</a> stipulation, to allow safe access to binary data from web applications.  </p>
 <p>URIs in this scheme should be used as a references to "in-memory" <a href="#dfn-Blob">Blobs</a>, and also be re-used elsewhere on the platform to refer to binary
 resources (e.g. for video-conferencing
-[<a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/video-conferencing-and-peer-to-peer-communication.html#blob-url">Stream API</a>]).
+[<a href="#StreamAPI">Stream API</a>]).
 URIs in this scheme are designed for impermanence, since they will be typically used to access "in memory" resources.</p></li>
 <li><p>Developers should have the ability to revoke URIs in this scheme, so that they no longer refer to <a href="#dfn-Blob"><code>Blob</code></a> objects.  This includes scenarios
 where file references are no longer needed by a program, but also other uses of <a href="#dfn-Blob"><code>Blob</code></a> objects.
@@ -1730,10 +1730,6 @@ is used in cross-origin request contexts.  User agents MAY return <a href="#Four
 	<dd><cite><a href="http://www.ietf.org/rfc/rfc2046.txt">Multipurpose Internet Mail Extensions (MIME) Part Two: Media Extensions</a></cite>, N. Freed, N. Borenstein. IETF.</dd>
         <dt id="IANACHARSET">IANA Charsets</dt>
         <dd><cite><a href="http://www.iana.org/assignments/character-sets">Official Names for Character Sets on the Internet</a></cite>, K. Simonsen, W.Choi, et al. IANA.</dd>
-	<dt id="RFC3986">RFC3986</dt>
-	<dd><cite><a href="http://www.ietf.org/rfc/rfc3986.txt">Uniform Resource Identifier (URI): Generic Syntax</a></cite>, T. Berners-Lee, R. Fielding, L. Masinter. IETF.</dd>
-        <dt id="RFC1630">RFC1630</dt>
-        <dd><cite><a href="http://www.ietf.org/rfc/rfc1630.txt">Universal Resource Identifiers in WWW</a></cite>, T. Berners-Lee. IETF.</dd>
         <dt id="TypedArrays">Typed Arrays</dt>
         <dd><cite><a href="https://cvs.khronos.org/svn/repos/registry/trunk/public/webgl/doc/spec/TypedArray-spec.html">Typed Arrays (work in progress)</a></cite>, V. Vukicevic, K. Russell. Khronos Group.</dd>
         <dt id="ABNF">RFC5234</dt>
@@ -1761,6 +1757,10 @@ is used in cross-origin request contexts.  User agents MAY return <a href="#Four
     <dd><cite><a href="http://code.google.com/apis/gears/api_blob.html">Google Gears Blob API (deprecated)</a></cite></dd>
     <dt id="UUID">RFC4122</dt>
     <dd><cite><a href="http://www.ietf.org/rfc/rfc4122.txt">A Universally Unique IDentifier (UUID) URN Namespace</a></cite>, P. Leach, M. Mealling, R. Salz. IETF.</dd>
+    <dt id="RFC3986">RFC3986</dt>
+    <dd><cite><a href="http://www.ietf.org/rfc/rfc3986.txt">Uniform Resource Identifier (URI): Generic Syntax</a></cite>, T. Berners-Lee, R. Fielding, L. Masinter. IETF.</dd>
+    <dt id="RFC1630">RFC1630</dt>
+    <dd><cite><a href="http://www.ietf.org/rfc/rfc1630.txt">Universal Resource Identifiers in WWW</a></cite>, T. Berners-Lee. IETF.</dd>
     <dt id="RFC1738">RFC1738</dt>
     <dd><cite><a href="http://tools.ietf.org/html/rfc1738">Uniform Resource Locators (URL)</a></cite>, T. Berners-Lee, L. Masinter, M. McCahill. IETF.</dd>
     <dt id="StreamAPI">Stream API</dt>
