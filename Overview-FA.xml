@@ -934,11 +934,10 @@ When the <dfn id="dfn-readAsArrayBuffer"><code>readAsArrayBuffer(blob)</code></d
 <p>
   When the <dfn id="dfn-abort"><code>abort()</code></dfn> method is called, the user agent MUST run the steps below:</p>
   <ol>
-  <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-empty"><code>EMPTY</code></a> terminate this overall set of steps without doing anything else.</p></li>
-  <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a> and <a href="#dfn-result"><code>result</code></a>
-  to <code>null</code>.</p></li>
-  <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="dfn-done"><code>DONE</code></a> set <a href="#dfn-result"><code>result</code></a>
-  to <code>null</code>.</p></li>
+  <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-empty"><code>EMPTY</code></a> or if <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-done"><code>DONE</code></a> set <a href="#dfn-result"><code>result</code></a> to <code>null</code>
+  and terminate this overall set of steps without doing anything else.</p></li>
+  <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> set <a href="#dfn-readystate"><code>readyState</code></a> to
+  <a href="#dfn-done"><code>DONE</code></a> and <a href="#dfn-result"><code>result</code></a> to <code>null</code>.</p></li>
   <li><p>If there are any <a href="#dfn-task">tasks</a> from the object's <a href="#blobreader-task-source"><code>FileReader</code> task source</a> in one of the
   <a href="#queue-a-task">task queues</a>, then remove those <a href="#dfn-task">tasks</a>.</p></li>
   <li><p>Terminate any steps while processing a <a href="#read-methods">read method</a>.   </p></li>
