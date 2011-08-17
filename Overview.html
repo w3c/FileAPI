@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>11 August 2011</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2009/WD-FileAPI-20091117/">http://www.w3.org/TR/2009/WD-FileAPI-20091117/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2010 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>17 August 2011</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2009/WD-FileAPI-20091117/">http://www.w3.org/TR/2009/WD-FileAPI-20091117/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2010 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
       <h2>Abstract</h2>
@@ -79,7 +79,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 11 August 2011 <b>Editor’s Draft</b> of the
+        This document is the 17 August 2011 <b>Editor’s Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -287,23 +287,22 @@ function errorHandler(evt) {
       <dd><p>A <a href="#dfn-conforming-implementation">conforming user agent</a> MUST support the Progress Events specification. Data access on read operations is enabled via Progress Events.[<a href="#ProgressEvents">ProgressEvents</a>] </p></dd>
       <dt>HTML</dt>
       <dd><p>A <a href="#dfn-conforming-implementation">conforming user agent</a> MUST support at least the subset of the functionality defined in HTML that this specification relies upon;
-      in particular, it must support <a href="#event-loops">event loops</a>. [<a href="#HTML">HTML</a>]</p></dd>
+      in particular, it must support <a href="#event-loops">event loops</a> and <a href="#event-handler-attributes">event handler attributes</a>. [<a href="#HTML">HTML</a>]</p></dd>
       <dt>Web IDL</dt>
       <dd><p>A <a href="#dfn-conforming-implementation">conforming user agent</a> must also be a conforming implementation of the IDL fragments in this specification,
-      as described in the Web IDL specification. [<a href="#WebIDL">WebIDL</a>] </p></dd></dl>
+      as described in the Web IDL specification. [<a href="#WebIDL">WebIDL</a>] </p></dd>
+      <dt>Typed Arrays</dt>
+      <dd><p>A <a href="#dfn-conforming-implementation">conforming user agent</a> must support the Typed Arrays specification [<a href="#TypedArrays">TypedArrays</a>].</p></dd></dl>
       <p>Parts of this specification rely on the Web Workers specification; for those parts of this specification, the Web Workers specification is a normative dependency.
       [<a href="#Workers">Workers</a>]</p>
-      <p>Parts of this specification rely on the Typed Arrays specification put forth by the <a href="http://www.khronos.org/webgl/">WebGL Working Group</a>; for those parts of this specification, the Typed Arrays specification is a normative dependency [<a href="#TypedArrays">TypedArrays</a>].</p>
       </div>      
       <div id="terminology" class="section">
         <h2>4. Terminology and Algorithms</h2>
         <p>The terms and algorithms <dfn id="fragment">&lt;fragment&gt;</dfn>, <dfn id="scheme">&lt;scheme&gt;</dfn>, <dfn id="document">document</dfn>,
-        <dfn id="document-base-url">document base URL</dfn>, <dfn id="unload-document">unload a document</dfn>,
-        <dfn id="unloading-document-cleanup-steps">unloading document cleanup steps</dfn>, <dfn id="event-handler-attributes">event handler attributes</dfn>, <dfn id="event-handler-event-type">event handler event type</dfn>,
-        <dfn id="Function"><code>Function</code></dfn>,
-        <dfn id="origin">origin</dfn>, <dfn id="resolve-a-URL">resolve a URL</dfn>, <dfn id="same-origin">same origin</dfn>, <dfn id="event-loops">event loops</dfn>
-        <dfn id="task">task</dfn>, <dfn id="task-source">task source</dfn>, <dfn id="df-URL">URL</dfn>, <dfn id="URL-character-encoding">URL character encoding</dfn>, the
-        <dfn id="already-started">"already started" flag</dfn> for script processing, and
+        <dfn id="unloading-document-cleanup-steps">unloading document cleanup steps</dfn>, <dfn id="event-handler-attributes">event handler attributes</dfn>,
+        <dfn id="event-handler-event-type">event handler event type</dfn>,
+        <dfn id="origin">origin</dfn>, <dfn id="same-origin">same origin</dfn>, <dfn id="event-loops">event loops</dfn>,
+        <dfn id="task">task</dfn>, <dfn id="task-source">task source</dfn>, <dfn id="df-URL">URL</dfn>, and
         <dfn id="queue-a-task">queue a task</dfn> are defined by the HTML 5 specification [<a href="#HTML">HTML</a>]. </p>
        <p>The algorithms and steps in this specification use the following mathematical operations:</p>
        <ul>
@@ -556,7 +555,7 @@ initialized to the last modified date of the file; otherwise, this MUST return n
   <p>
     This interface provides methods to read <a href="#dfn-file"><code>File</code></a> objects or <a href="#dfn-Blob"><code>Blob</code></a> objects into memory, and to access the data from those
     <a href="#dfn-file">Files</a> or <a href="#dfn-Blob">Blobs</a> using progress events and
-    <a href="#event-handler-attributes">event handler attributes</a>; it inherits from <code>EventTarget</code> [<a href="#DOM3Events">DOM3Events</a>][<a href="#DOMCore">DOMCore</a>][<a href="#ProgressEvents">ProgressEvents</a>].
+    <a href="#event-handler-attributes">event handler attributes</a>; it inherits from <code>EventTarget</code> [<a href="#DOMCore">DOMCore</a>].
     It is desirable to read data from file systems asynchronously in the main thread of user agents.  This interface provides such an asynchronous API, and is specified to be used
     with the global object (<code>Window</code> [<a href="#HTML">HTML</a>]).
   </p>
@@ -1065,15 +1064,15 @@ has been completely read into memory, <a href="#queue-a-task">queue a task</a> t
   <code>ProgressEvent</code> <code>e</code> at a <a href="#dfn-filereader"><code>FileReader</code></a> <code>reader</code>),
   the following are normative:</p>
   <ul>
-  <li><p>The progress event <code>e</code> does not bubble.  <code>e.bubbles</code> MUST be false [<a href="#DOM3Events">DOM3Events</a>]</p></li>
-  <li><p>The progress event <code>e</code> is NOT cancelable. <code>e.cancelable</code> MUST be false [<a href="#DOM3Events">DOM3Events</a>]</p></li>
-  <li><p>The term <dfn id="fire-an-event">"fire an event"</dfn> is defined in Web DOM Core [<a href="#DOMCore">DOMCore</a>].  Progress Events are defined in Progress Events
+  <li><p>The progress event <code>e</code> does not bubble.  <code>e.bubbles</code> MUST be false [<a href="#DOMCore">DOMCore</a>]</p></li>
+  <li><p>The progress event <code>e</code> is NOT cancelable. <code>e.cancelable</code> MUST be false [<a href="#DOMCore">DOMCore</a>]</p></li>
+  <li><p>The term <dfn id="fire-an-event">"fire an event"</dfn> is defined in DOM Core [<a href="#DOMCore">DOMCore</a>].  Progress Events are defined in Progress Events
   [<a href="#ProgressEvents">ProgressEvents</a>].</p></li> 
   </ul>
   <div id="event-summary" class="section">
   <h5>6.4.5.10.1. Event Summary</h5>
   <p>The following are the events that are fired at <code><a href="#dfn-filereader">FileReader</a></code> objects; <a href="#fire-a-progress-event">firing events</a> is defined in
-  Web DOM Core [<a href="#DOMCore">DOMCore</a>], and the table below is normative for the events in this specification.</p>
+  DOM Core [<a href="#DOMCore">DOMCore</a>], and the table below is normative for the events in this specification.</p>
   <table id="event-summary-table">
 
    <thead>
@@ -1268,12 +1267,10 @@ make obtaining large files encoded as Data URLs impossible to return [<a href="#
 <div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
  interface <dfn id="dfn-fileerror">FileError</dfn> {
    <span class="comment">// File error codes</span>
-   <span class="comment">// Found in DOMException</span>
+   
    const unsigned short <a href="#dfn-NOT_FOUND_ERR">NOT_FOUND_ERR</a> = 1;
    const unsigned short <a href="#dfn-SECURITY_ERR">SECURITY_ERR</a> = 2;
    const unsigned short <a href="#dfn-ABORT_ERR">ABORT_ERR</a> = 3;
-   
-   <span class="comment">// Added by this specification</span>
    const unsigned short <a href="#dfn-NOT_READABLE_ERR">NOT_READABLE_ERR</a> = 4;
    const unsigned short <a href="#dfn-ENCODING_ERR">ENCODING_ERR</a> = 5;
  
@@ -1708,31 +1705,29 @@ is used in cross-origin request contexts.  User agents MAY return <a href="#Four
         <h3>6.11.1. Normative references</h3>
 	<dl class="bibliography">
 	<dt id="RFC2119">RFC2119</dt>
-	<dd><cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, S. Bradner. IETF.</dd>
+	<dd><cite><a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, S. Bradner. IETF.</dd>
 	<dt id="HTML">HTML</dt>
 	<dd><cite><a href="http://dev.w3.org/html5/spec/Overview.html">HTML 5: A vocabulary and associated APIs for HTML and XHTML (work in progress)</a></cite>, I. Hickson. W3C.</dd>
         <dt id="ProgressEvents">ProgressEvents 1.0</dt>
         <dd><cite><a href="http://www.w3.org/TR/2010/WD-progress-events-20101019/">Progress Events (work in progress)</a></cite>, A. van Kesteren, C. McCathieNevile. W3C.</dd>
 	<dt id="DataURL">RFC2397</dt>
-	<dd><cite><a href="http://www.ietf.org/rfc/rfc2397.txt">The "data" URL Scheme</a></cite>, L. Masinter. IETF.</dd>
+	<dd><cite><a href="http://tools.ietf.org/html/rfc2397">The "data" URL Scheme</a></cite>, L. Masinter. IETF.</dd>
 	<dt id="Workers">Web Workers</dt>
 	<dd><cite><a href="http://dev.w3.org/html5/workers/">Web Workers (work in progress)</a></cite>, I. Hickson. W3C.</dd>
-	<dt id="DOMCore">Web DOM Core</dt>
-	<dd><cite><a href="http://www.w3.org/TR/domcore/">Web DOM Core (work in progress)</a></cite>, A. van Kesteren. W3C.</dd>
-        <dt id="DOM3Events">DOM 3 Events</dt>
-        <dd><cite><a href="http://www.w3.org/TR/DOM-Level-3-Events/">DOM 3 Events (work in progress)</a></cite>, D. Schepers, B. Höhrmann, P. Le Hégaret, T. Pixley. W3C.</dd>
+	<dt id="DOMCore">DOM Core</dt>
+	<dd><cite><a href="http://www.w3.org/TR/domcore/">DOM Core (work in progress)</a></cite>, A. van Kesteren, Ms2ger. W3C.</dd>
 	<dt id="Unicode">Unicode</dt>
 	<dd><cite><a href="http://www.unicode.org/versions/Unicode5.2.0/">The Unicode Standard, Version 5.2.0.</a></cite>, J. D. Allen, D. Anderson, et al. Unicode Consortium.</dd>  	
 	<dt id="HTTP">RFC2616</dt>
-	<dd><cite><a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html">Hypertext Transfer Protocol -- HTTP/1.1</a></cite>, R. Fielding, J. Gettys, J. Mogul, H. Frystyk, L. Masinter, P. Leach, T. Berners-Lee. IETF.</dd>
+	<dd><cite><a href="http://tools.ietf.org/html/rfc2616">Hypertext Transfer Protocol -- HTTP/1.1</a></cite>, R. Fielding, J. Gettys, J. Mogul, H. Frystyk, L. Masinter, P. Leach, T. Berners-Lee. IETF.</dd>
 	<dt id="RFC2046">RFC2046</dt>
-	<dd><cite><a href="http://www.ietf.org/rfc/rfc2046.txt">Multipurpose Internet Mail Extensions (MIME) Part Two: Media Extensions</a></cite>, N. Freed, N. Borenstein. IETF.</dd>
+	<dd><cite><a href="http://tools.ietf.org/html/rfc2046">Multipurpose Internet Mail Extensions (MIME) Part Two: Media Extensions</a></cite>, N. Freed, N. Borenstein. IETF.</dd>
         <dt id="IANACHARSET">IANA Charsets</dt>
         <dd><cite><a href="http://www.iana.org/assignments/character-sets">Official Names for Character Sets on the Internet</a></cite>, K. Simonsen, W.Choi, et al. IANA.</dd>
         <dt id="TypedArrays">Typed Arrays</dt>
         <dd><cite><a href="https://cvs.khronos.org/svn/repos/registry/trunk/public/webgl/doc/spec/TypedArray-spec.html">Typed Arrays (work in progress)</a></cite>, V. Vukicevic, K. Russell. Khronos Group.</dd>
         <dt id="ABNF">RFC5234</dt>
-        <dd><cite><a href="http://www.ietf.org/rfc/rfc5234.txt">Augmented BNF for Syntax Specifications: ABNF</a></cite>, D. Crocker, P. Overell. IETF.</dd>
+        <dd><cite><a href="http://tools.ietf.org/html/rfc5234">Augmented BNF for Syntax Specifications: ABNF</a></cite>, D. Crocker, P. Overell. IETF.</dd>
         <dt id="URL-API">URL Specification</dt>
         <dd><cite><a href="https://docs.google.com/document/edit?id=1r_VTFKApVOaNIkocrg0z-t7lZgzisTuGTXkdzAk4gLU&amp;hl=en&amp;pli=1#">URL API (work in progress)</a></cite>, A. Barth. TBD.</dd>
 	<dt id="WebIDL">WebIDL Specification</dt>
@@ -1746,20 +1741,14 @@ is used in cross-origin request contexts.  User agents MAY return <a href="#Four
     <dl>
     <dt id="XHR2">XMLHttpRequest</dt>
     <dd><cite><a href="http://www.w3.org/TR/XMLHttpRequest2/">XMLHttpRequest Level 2 (work in progress)</a></cite>, A. van Kesteren. W3C.</dd>
-    <dt id="FileUpload">File Upload State of the input element</dt>
-    <dd><cite><a href="http://dev.w3.org/html5/spec/Overview.html#file-upload-state">File Upload State of the HTML <code>input</code> Element (work in progress)</a></cite>, I. Hickson. W3C.</dd>
-    <dt id="RFC4648">RFC4648</dt>
-    <dd><cite><a href="http://tools.ietf.org/html/rfc4648">The Base16, Base32, and Base64 Data Encodings</a></cite>, S. Josefsson. IETF.</dd>
-    <dt id="DOMException">DOMException Extensions Defined in HTML</dt>
-    <dd><cite><a href="http://dev.w3.org/html5/spec/Overview.html#exceptions">DOM 3 Core DOMException Extensions Defined in HTML (work in progress)</a></cite>, I. Hickson. W3C.</dd>
     <dt id="Blob-REF">Google Gears Blob API</dt>
     <dd><cite><a href="http://code.google.com/apis/gears/api_blob.html">Google Gears Blob API (deprecated)</a></cite></dd>
     <dt id="UUID">RFC4122</dt>
-    <dd><cite><a href="http://www.ietf.org/rfc/rfc4122.txt">A Universally Unique IDentifier (UUID) URN Namespace</a></cite>, P. Leach, M. Mealling, R. Salz. IETF.</dd>
+    <dd><cite><a href="http://tools.ietf.org/html/rfc4122">A Universally Unique IDentifier (UUID) URN Namespace</a></cite>, P. Leach, M. Mealling, R. Salz. IETF.</dd>
     <dt id="RFC3986">RFC3986</dt>
-    <dd><cite><a href="http://www.ietf.org/rfc/rfc3986.txt">Uniform Resource Identifier (URI): Generic Syntax</a></cite>, T. Berners-Lee, R. Fielding, L. Masinter. IETF.</dd>
+    <dd><cite><a href="http://tools.ietf.org/html/rfc3986">Uniform Resource Identifier (URI): Generic Syntax</a></cite>, T. Berners-Lee, R. Fielding, L. Masinter. IETF.</dd>
     <dt id="RFC1630">RFC1630</dt>
-    <dd><cite><a href="http://www.ietf.org/rfc/rfc1630.txt">Universal Resource Identifiers in WWW</a></cite>, T. Berners-Lee. IETF.</dd>
+    <dd><cite><a href="http://tools.ietf.org/html/rfc1630">Universal Resource Identifiers in WWW</a></cite>, T. Berners-Lee. IETF.</dd>
     <dt id="RFC1738">RFC1738</dt>
     <dd><cite><a href="http://tools.ietf.org/html/rfc1738">Uniform Resource Locators (URL)</a></cite>, T. Berners-Lee, L. Masinter, M. McCahill. IETF.</dd>
     <dt id="StreamAPI">Stream API</dt>
