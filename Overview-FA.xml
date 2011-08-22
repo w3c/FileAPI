@@ -349,7 +349,8 @@ function errorHandler(evt) {
       the <a href="#dfn-filelist"><code>FileList</code></a>.  If there is no <em>indexth</em> <a href="#dfn-file"><code>File</code></a> object in the
       <a href="#dfn-filelist"><code>FileList</code></a>, then this method must return <code>null</code>.</p>
       <p><dfn id="dfn-index" title="index"><code>index</code></dfn> MUST be treated by user agents as value for the position of the selected <a href="#dfn-file"><code>File</code></a>
-      object in the <a href="#dfn-filelist"><code>FileList</code></a>, with 0 representing the first selected file.</p>
+      object in the <a href="#dfn-filelist"><code>FileList</code></a>, with 0 representing the first selected file.  Supported property indices are any unsigned long argument beginning with
+      0, upto one less than the total number of files selected. </p>
       </dd>
     
     </dl>
