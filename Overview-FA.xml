@@ -309,11 +309,11 @@ function errorHandler(evt) {
         <h2>The FileList Interface</h2>
        
        <p>
-          This interface exposes the list of files that have been selected.
+          This interface is a <strong>collection</strong> [<a href="#DOMCore">DOMCore</a>] of user-selected <a href="dfn-File"><code>File</code></a> objects.
        </p>
     <x:codeblock language='idl'>
     interface <dfn id='dfn-filelist'>FileList</dfn> {
-      getter <a href="#dfn-file" class="dfnref">File</a> <a href="#dfn-item" class="dfnref">item</a>(unsigned long <a href="#dfn-index" class="dfnref">index</a>);
+      getter <a href="#dfn-file" class="dfnref">File</a>? <a href="#dfn-item" class="dfnref">item</a>(unsigned long <a href="#dfn-index" class="dfnref">index</a>);
       readonly attribute unsigned long <a href="#dfn-length" class="dfnref">length</a>;
     };
     </x:codeblock>
@@ -338,8 +338,7 @@ function errorHandler(evt) {
     <div class='section' id='attributes-filelist'>
     <h3>Attributes</h3>
     <dl>
-      <dt id="dfn-length"><code>length</code></dt><dd><p>MUST return the number of files selected and that are available on the <a href="#dfn-filelist"><code>FileList</code></a>
-      object, which can be greater than or equal to 1 if multiple file selection is enabled [<a href="#HTML">HTML</a>].  If no files have been selected, this attribute MUST return 0.</p></dd>
+      <dt id="dfn-length"><code>length</code></dt><dd><p>MUST return the number of user-selected files in the <a href="#dfn-filelist"><code>FileList</code></a> collection.  If there are no files in the collection, this attribute MUST return 0.</p></dd>
     </dl>
     </div>
     <div class='section' id='filelist-methods-params'>
@@ -349,8 +348,8 @@ function errorHandler(evt) {
       the <a href="#dfn-filelist"><code>FileList</code></a>.  If there is no <em>indexth</em> <a href="#dfn-file"><code>File</code></a> object in the
       <a href="#dfn-filelist"><code>FileList</code></a>, then this method must return <code>null</code>.</p>
       <p><dfn id="dfn-index" title="index"><code>index</code></dfn> MUST be treated by user agents as value for the position of the selected <a href="#dfn-file"><code>File</code></a>
-      object in the <a href="#dfn-filelist"><code>FileList</code></a>, with 0 representing the first selected file.  Supported property indices are any unsigned long argument beginning with
-      0, upto one less than the total number of files selected. </p>
+      object in the <a href="#dfn-filelist"><code>FileList</code></a>, with 0 representing the first selected file.  <strong>Supported property indices</strong> [<a href="#WebIDL">WebIDL</a>] are the numbers in the range zero to one less than the number of user-selected <a href="#dfn-File"><code>File</code></a> objects represented by the collection [<a href="#DOMCore">DOMCore</a>].  
+If there are no such <a href="#dfn-File"><code>File</code></a> objects, then there are no supported property indices [<a href="#WebIDL">WebIDL</a>]. </p>
       </dd>
     
     </dl>
@@ -365,7 +364,7 @@ function errorHandler(evt) {
     <p>Conforming user agents MUST expose the selected file(s) with an object of type  <a href="#dfn-filelist"><code>FileList</code></a>, which contains the selected files as
     <a href="#dfn-file"><code>File</code></a> objects.  Some conforming user agents support multiple file selections, in which case the
     <a href="#dfn-filelist"><code>FileList</code></a> object MUST make available all selected files.  If there are no
-    file selections (e.g. through cancelation) conforming user agents MUST return an object of type
+    file selections (e.g. through cancelation of a file picker or through canceling a file drag operation) conforming user agents MUST return an object of type
     <a href="#dfn-filelist"><code>FileList</code></a> with <code>null</code> as a return value for any call to the <a href="#dfn-item"><code>item</code></a> method.</p>
     </div>
     </div>
