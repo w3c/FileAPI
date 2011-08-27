@@ -294,7 +294,8 @@ function errorHandler(evt) {
         <dfn id="event-handler-event-type">event handler event type</dfn>,
         <dfn id="origin">origin</dfn>, <dfn id="same-origin">same origin</dfn>, <dfn id="event-loops">event loops</dfn>,
         <dfn id="task">task</dfn>, <dfn id="task-source">task source</dfn>, <dfn id="df-URL">URL</dfn>, and
-        <dfn id="queue-a-task">queue a task</dfn> are defined by the HTML 5 specification [<a href="#HTML">HTML</a>]. </p>
+        <dfn id="queue-a-task">queue a task</dfn> are defined by the HTML specification [<a href="#HTML">HTML</a>]. </p>
+ <p>When this specification says to <dfn id="terminate-an-algorithm">terminate an algorithm</dfn> the user agent must terminate the algorithm after finishing the step it is on.  Asynchronous <a href="#read-methods">read methods</a> defined in this specification may return before the algorithm in question is terminated, and can be terminated by an <a href="#dfn-abort"><code>abort()</code></a> call.</p>
        <p>The algorithms and steps in this specification use the following mathematical operations:</p>
        <ul>
        <li><p>max(a,b) returns the maximum of a and b, and is always performed on integers as they are defined in WebIDL [<a href="#WebIDL">WebIDL</a>]; in the case of max(6,4) the result is 6.
@@ -755,8 +756,11 @@ When the <dfn id="dfn-readAsBinaryStringAsync"><code>readAsBinaryString(blob)</c
 </p>
 <ol>
   <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> raise a
-  <a href="#dfn-NOT_ALLOWED_ERR"><code>NOT_ALLOWED_ERR</code> exception</a> and terminate these steps.
-  </p></li>
+  <a href="#dfn-NOT_ALLOWED_ERR"><code>NOT_ALLOWED_ERR</code> exception</a> and <a href="#terminate-an-algorithm">terminate this algorithm</a>.
+  </p>
+
+<p><strong>Note:</strong> The <a href="#dfn-readAsBinaryStringAsync"><code>readAsBinaryString()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
+</li>
   <li><p>If an <a href="#file-error-read">error occurs during reading of the <code>blob</code> parameter</a>, set <a href="#dfn-readystate"><code>readyState</code></a> to
   <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
   <ol>
@@ -768,11 +772,14 @@ When the <dfn id="dfn-readAsBinaryStringAsync"><code>readAsBinaryString(blob)</c
     </li>
     <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
     <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
-    <li><p>Terminate this overall set of steps.</p></li>    
+    <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p>
+<p><strong>Note:</strong> The <a href="#dfn-readAsBinaryStringAsync"><code>readAsBinaryString()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
+</li>    
   </ol>
   </li>
   <li><p>If no error has occurred, set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
   <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
+<li><p>Return the <code>readAsBinaryString()</code> method, but continue processing the other steps in this algorithm.</p></li>
   <li><p>While processing the read, as data from <a href="#dfn-fileBlob"><code>blob</code></a> becomes available, <a href="#queue-a-task">queue tasks</a> to update the
   <a href="#dfn-result"><code>result</code></a> with <a href="#partial-blob-data">partial Blob data</a> represented as a <a href="#binary-string">binary string</a> until the read is complete.</p></li>
   <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  As the bytes from the <a href="#dfn-fileBlob"><code>blob</code></a> argument are read,
@@ -781,7 +788,7 @@ When the <dfn id="dfn-readAsBinaryStringAsync"><code>readAsBinaryString(blob)</c
   such <a href="#dfn-result"><code>result</code></a> while processing this read method, with the last returned value at completion of the read.
   </p></li>
   <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
-  <li><p>Terminate this overall set of steps.</p></li>
+  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p></li>
 </ol>
 <div class="note">
   <p>Note: the <code>readAsBinaryString(blob)</code> method should be considered deprecated; user agents should consider supporting the
@@ -794,8 +801,10 @@ When the <dfn id="dfn-readAsBinaryStringAsync"><code>readAsBinaryString(blob)</c
 <p>When the <dfn id="dfn-readAsDataURL"><code>readAsDataURL(blob)</code></dfn> method is called, the user agent MUST run the steps below (unless otherwise indicated).</p>
 <ol>
 <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> raise a
-  <a href="#dfn-NOT_ALLOWED_ERR"><code>NOT_ALLOWED_ERR</code> exception</a> and terminate these steps.
-  </p></li> 
+  <a href="#dfn-NOT_ALLOWED_ERR"><code>NOT_ALLOWED_ERR</code> exception</a> and <a href="#terminate-an-algorithm">terminate this algorithm</a>.
+  </p>
+<p><strong>Note:</strong> The <a href="#dfn-readAsDataURL"><code>readAsDataURL()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
+</li> 
   <li><p>If an <a href="#file-error-read">error occurs during reading of the <code>blob</code> parameter</a>, OR if a user agent's URL length limitations prevent returning
   data as a Data URL [<a href="#DataURL">DataURL</a>], set <a href="#dfn-readystate"><code>readyState</code></a> to
   <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
@@ -807,11 +816,15 @@ When the <dfn id="dfn-readAsBinaryStringAsync"><code>readAsBinaryString(blob)</c
     <a href="#file-error-read">file error that has occurred</a>.</p></li>
     <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
     <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
-    <li><p>Terminate this overall set of steps.</p></li>    
+    <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p>
+
+	<p><strong>Note:</strong> The <a href="#dfn-readAsDataURL"><code>readAsDataURL()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p> 
+</li>    
   </ol>
   </li>
   <li><p>If no error has occurred, set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
   <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
+<li><p>Return the <code>readAsDataURL()</code> method, but continue to process the steps in this algorithm. </p></li>
   <li><p><a href="#queue-a-task">Queue a task</a> to update the <a href="#dfn-result"><code>result</code></a> attribute with the <a href="#dfn-fileBlob"><code>blob</code></a> as a
   DataURL [<a href="#DataURL">DataURL</a>] after it has been fully read into memory; on getting, the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute returns the (complete) data of <a href="#dfn-fileBlob"><code>blob</code></a> as a
   Data URL [<a href="#DataURL">DataURL</a>].</p>
@@ -830,7 +843,7 @@ When the <dfn id="dfn-readAsBinaryStringAsync"><code>readAsBinaryString(blob)</c
   <a href="#dfn-done"><code>DONE</code></a></p></li>
   <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-load-event"><code>load</code></a>.</p></li>
   <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a>.</p></li>
-  <li><p>Terminate this overall set of steps.</p></li>
+  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p></li>
 </ol>
 </div>
 <div id='readAsDataText' class='section'>
@@ -842,7 +855,10 @@ the user agent MUST run the steps below (unless otherwise indicated).
 <ol>
 <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> raise a
   <a href="#dfn-NOT_ALLOWED_ERR"><code>NOT_ALLOWED_ERR</code> exception</a> and terminate these steps.
-  </p></li>
+  </p>
+
+<p><strong>Note:</strong> The <a href="#dfn-readAsText"><code>readAsText()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
+</li>
   <li><p>If an <a href="#file-error-read">error occurs during reading the <code>blob</code> parameter</a>, 
   set <a href="#dfn-readystate"><code>readyState</code></a> to
   <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
@@ -855,15 +871,19 @@ the user agent MUST run the steps below (unless otherwise indicated).
     </li>
     <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
     <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
-    <li><p>Terminate this overall set of steps.</p></li>    
+    <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p>
+
+	<p><strong>Note:</strong> The <a href="#dfn-readAsText"><code>readAsText()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
+</li>    
   </ol>
   </li>
   <li><p>If no error has occurred, set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
   <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
+<li><p>Return the <code>readAsText()</code> method, but continue to process the steps in this algorithm</p></li>
   <li><p>While processing the read, as data from the <a href="#dfn-fileBlob"><code>blob</code></a> becomes available, user agents SHOULD <a href="#queue-a-task">queue tasks</a> to update the
   <a href="#dfn-result"><code>result</code></a> with <a href="#partial-blob-data">partial Blob data</a> represented as a string in a format determined by the
   <a href="#encoding-determination">encoding determination</a> until the read is complete.</p>
-  <div class="note">
+  <div class="note" id="encodingCaveat">
   <p>
   <em>This note is normative.</em>  <a href="#partial-blob-data">Partial Blob data</a> MUST be returned such that where possible, the bytes read thus far should be valid code points
   within the <a href="#dfn-encoding"><code>encoding</code></a>; in particular, when executing the <a href="#encoding-determination">encoding determination</a> for
@@ -885,7 +905,7 @@ the user agent MUST run the steps below (unless otherwise indicated).
   while processing this read method, with the last returned value at completion of the read.
 </p></li>
   <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
-  <li><p>Terminate this overall set of steps.
+  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.
   </p></li>
 </ol>
 </div>
@@ -897,7 +917,10 @@ When the <dfn id="dfn-readAsArrayBuffer"><code>readAsArrayBuffer(blob)</code></d
 <ol>
  <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> raise a
   <a href="#dfn-NOT_ALLOWED_ERR"><code>NOT_ALLOWED_ERR</code> exception</a> and terminate these steps.
-  </p></li>
+  </p>
+
+<p><strong>Note:</strong> The <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
+</li>
   <li><p>If an <a href="#file-error-read">error occurs during reading the <code>blob</code> parameter</a>, set <a href="#dfn-readystate"><code>readyState</code></a> to
   <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
   <ol>
@@ -909,11 +932,14 @@ When the <dfn id="dfn-readAsArrayBuffer"><code>readAsArrayBuffer(blob)</code></d
     </li>
     <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
     <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
-    <li><p>Terminate this overall set of steps.</p></li>    
+    <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p>
+<p><strong>Note:</strong> The <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
+</li>    
   </ol>
   </li>
   <li><p>If no error has occurred, set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
   <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
+<li><p>Return the <code>readAsArrayBuffer()</code> method, but continue to process the steps in this algorithm.</p></li>
   <li><p>While processing the read, as data from the <a href="#dfn-fileBlob"><code>blob</code></a> becomes available, <a href="#queue-a-task">queue tasks</a> to update the
   <a href="#dfn-result"><code>result</code></a> with <a href="#partial-blob-data">partial Blob data</a> as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>]
   object containing the bytes read until the read is complete.</p></li>
@@ -925,7 +951,7 @@ When the <dfn id="dfn-readAsArrayBuffer"><code>readAsArrayBuffer(blob)</code></d
   the read.
   </p></li>
   <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
-  <li><p>Terminate this overall set of steps.</p></li>
+  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p></li>
 </ol>
 </div>
 <div id='abort' class='section'>
@@ -965,16 +991,10 @@ method call was made.</p></dd>
 <h4>Determining Encoding</h4>
 <p>When reading <a href="#dfn-fileBlob"><code>blob</code></a> objects using the <a href="#dfn-readAsText"><code>readAsText()</code></a> <a href="#read-methods">read method</a>, the optional <dfn id="dfn-encoding"><code>
 encoding</code></dfn> string parameter MUST be a <em>name</em> or an <em>alias</em> of a character set
-used on the Internet [<a href="#IANACHARSET">IANACHARSET</a>], or else is considered invalid.  If the <code>encoding</code> argument supplied is valid, user agents SHOULD
-decode the <a href="#dfn-fileBlob"><code>blob</code></a> using that encoding.  If the <code>encoding</code> argument is invalid,
-or the optional <code>encoding</code> argument is not supplied,
-or the user agent cannot decode the <a href="#dfn-fileBlob"><code>blob</code></a> using <code>encoding</code>, the following
-<dfn id="encoding-determination">encoding determination</dfn> algorithm MUST be
-followed:</p>
+used on the Internet [<a href="#IANACHARSET">IANACHARSET</a>], or else is considered invalid.  The following <dfn id="encoding-determination">encoding determination</dfn> steps MUST be followed:</p>
 <ol>
-<li>User agents SHOULD decode <a href="#dfn-fileBlob"><code>blob</code></a> data using <a href="#dfn-encoding"><code>encoding</code></a>, if it is provided.
-If the <code>encoding</code> <a href="#dfn-encoding">argument is invalid</a>, or the optional <code>encoding</code> argument is not supplied,
-or the user agent cannot decode the <a href="#dfn-fileBlob"><code>blob</code></a> using <code>encoding</code>, then let <var>charset</var> be null.</li>
+<li>Decode the <a href="#dfn-fileBlob"><code>blob</code></a> using the <a href="#dfn-encoding"><code>encoding</code></a> parameter, if provided and if valid, and terminate this set of steps.  If invalid, or if not provided, or if the user agent cannot determine the encoding, go to the next step.</li>
+<li>Let <var>charset</var> be null.</li>
 <li>
 
     <p>For each of the rows in the
@@ -1031,7 +1051,8 @@ or the user agent cannot decode the <a href="#dfn-fileBlob"><code>blob</code></a
      object returns a string in <var>charset</var> format.  The synchronous
      <a href="#dfn-readAsTextSync"><code>readAsText</code></a> method of the <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object returns a string in <var>charset</var> format.
      Replace bytes or sequences of bytes that are not
-     valid according to the <var>charset</var> with a single U+FFFD character [<a href="#Unicode">Unicode</a>].
+     valid according to the <var>charset</var> with a single U+FFFD character [<a href="#Unicode">Unicode</a>].  See also the <a href="#encodingCaveat">encoding caveat</a> 
+     for <a href="#partial-blob-data">Partial Blob Data</a>.
   </p></li>
 </ol>
 </div>
@@ -1248,6 +1269,10 @@ make obtaining large files encoded as Data URLs impossible to return [<a href="#
 </p></li>
     
     </ul>
+<div class="ednote">
+	<p>Exceptions and errors in this specification are likely to change, depending on the outcome of ongoing discussions of exceptions and errors on the web platform. </p>
+	
+</div>
 <div id="FileErrorInterface" class="section">
 <h3>The <code>FileError</code> Interface</h3>
 <p>
@@ -1437,28 +1462,11 @@ scheme = "blob"
 <p><a href="#opaqueString">Opaque strings</a> MUST NOT include any reserved characters from [<a href="#RFC3986">RFC3986</a>]; these MUST be percent-encoded.
 <a href="#opaqueString">Opaque strings</a> MUST be globally unique.  Such strings SHOULD only use characters in the ranges U+002A to U+002B, U+002D to U+002E, U+0030 to U+0039,
 U+0041 to U+005A, U+005E to U+007E [<a href="#Unicode">Unicode</a>], and MUST be at least 36 characters long.
-UUID is one potential option available to user agents for use with <a href="#url">Blob URIs</a> as <a href="#opaqueString">opaque strings</a>, and their use is strongly encouraged.
-UUIDs are defined in [<a href="#UUID">RFC4122</a>] and are used here without the urn: scheme.
-Below is an ABNF [<a href="#ABNF">RFC5234</a>] for UUID; this is provided informationally and is not normative.
-</p>
-<x:codeblock language="abnf">
-UUID                   = time-low "-" time-mid "-"
-                         time-high-and-version "-"
-                         clock-seq-and-reserved
-                         clock-seq-low "-" node
-time-low               = 4hexOctet
-time-mid               = 2hexOctet
-time-high-and-version  = 2hexOctet
-clock-seq-and-reserved = hexOctet
-clock-seq-low          = hexOctet
-node                   = 6hexOctet
-hexOctet               = hexDigit hexDigit
-hexDigit =
-         "0" / "1" / "2" / "3" / "4" / "5" / "6" / "7" / "8" / "9" /
-         "a" / "b" / "c" / "d" / "e" / "f" /
-         "A" / "B" / "C" / "D" / "E" / "F"
+UUID is one potential option available to user agents for use with <a href="#url">Blob URIs</a> as <a href="#opaqueString">opaque strings</a>, and their use is <em>strongly encouraged</em>.
+UUIDs are defined in [<a href="#UUID">RFC4122</a>].  For an ABNF of UUID, see <a href="#AppendixA">Appendix A</a>.
 
-</x:codeblock>
+</p>
+
 </div>
 </div>
 <div class="section" id="fragmentDiscussion">
@@ -1682,6 +1690,33 @@ is used in cross-origin request contexts.  User agents MAY return <a href="#Four
 		  
 	  </ul>
   </div>
+<div id="AppendixA" class="section">
+<h2>Appendix A</h2>
+<p>This section is informative and not normative.</p>
+<div id="ABNFUUID" class="section">
+<h3>An ABNF for UUID</h3>
+<p>The following is an informative ABNF [<a href="#ABNF">ABNF</a>] for UUID, which is a <em>strongly encouraged</em> choice for the
+<a href="#opaqueString">opaqueString</a> production of <a href="#url">Blob URIs</a>.</p> 
+<x:codeblock language="abnf">
+UUID                   = time-low "-" time-mid "-"
+                         time-high-and-version "-"
+                         clock-seq-and-reserved
+                         clock-seq-low "-" node
+time-low               = 4hexOctet
+time-mid               = 2hexOctet
+time-high-and-version  = 2hexOctet
+clock-seq-and-reserved = hexOctet
+clock-seq-low          = hexOctet
+node                   = 6hexOctet
+hexOctet               = hexDigit hexDigit
+hexDigit =
+         "0" / "1" / "2" / "3" / "4" / "5" / "6" / "7" / "8" / "9" /
+         "a" / "b" / "c" / "d" / "e" / "f" /
+         "A" / "B" / "C" / "D" / "E" / "F"
+
+</x:codeblock>
+</div>
+</div>
    <div id="acknowledgements-section" class="section">
     <h2>Acknowledgements</h2>
     

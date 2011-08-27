@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>23 August 2011</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2009/WD-FileAPI-20091117/">http://www.w3.org/TR/2009/WD-FileAPI-20091117/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2010 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>26 August 2011</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2009/WD-FileAPI-20091117/">http://www.w3.org/TR/2009/WD-FileAPI-20091117/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2010 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
       <h2>Abstract</h2>
@@ -67,7 +67,7 @@
       These kinds of behaviors are defined in the appropriate affiliated specifications.
     </p>
 
-      <div class="ednote"><div class="ednoteHeader">Editorial note</div><p>This is revision $Id$.</p><p>There are 1 further editorial notes in the document.</p></div>
+      <div class="ednote"><div class="ednoteHeader">Editorial note</div><p>This is revision $Id$.</p><p>There are 2 further editorial notes in the document.</p></div>
     </div>
 
     <div class="section">
@@ -79,7 +79,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 23 August 2011 <b>Editor’s Draft</b> of the
+        This document is the 26 August 2011 <b>Editor’s Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -147,7 +147,7 @@
 
     <div id="toc">
       <h2>Table of Contents</h2>
-      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#dependencies">3. Dependencies</a></li><li><a href="#terminology">4. Terminology and Algorithms</a></li><li><a href="#filelist-section">5. The FileList Interface</a><ul><li><a href="#attributes-filelist">5.1. Attributes</a></li><li><a href="#filelist-methods-params">5.2. Methods and Parameters</a></li><li><a href="#filelist-normative">5.3. Conformance Criteria for FileList</a></li></ul></li><li><a href="#blob">6. The Blob Interface</a><ul><li><a href="#attributes-blob">6.1. Attributes</a></li><li><a href="#methodsandparams-blob">6.2. Methods and Parameters</a><ul><li><a href="#slice-blob">6.2.1. The slice method</a></li></ul></li><li><a href="#file">6.3. The File Interface</a><ul><li><a href="#file-attrs">6.3.1. Attributes</a></li></ul></li><li><a href="#FileReader-interface">6.4. The FileReader Interface</a><ul><li><a href="#blobreader-task-source">6.4.1. The FileReader Task Source</a></li><li><a href="#filereaderConstrctr">6.4.2. Constructors</a></li><li><a href="#event-handler-attributes-section">6.4.3. Event Handler Attributes</a></li><li><a href="#blobreader-state">6.4.4. FileReader States</a></li><li><a href="#reading-a-file">6.4.5. Reading a File or Blob</a><ul><li><a href="#MultipleReads">6.4.5.1. Multiple Reads</a></li><li><a href="#filedata-attr">6.4.5.2. The result attribute</a></li><li><a href="#readAsBinaryString">6.4.5.3. The readAsBinaryString(blob) method</a></li><li><a href="#readAsDataURL">6.4.5.4. The readAsDataURL(blob) method</a></li><li><a href="#readAsDataText">6.4.5.5. The readAsText(blob, encoding) method</a></li><li><a href="#readAsArrayBuffer">6.4.5.6. The readAsArrayBuffer(blob) method</a></li><li><a href="#abort">6.4.5.7. The abort() method</a></li><li><a href="#blobAndFileParams">6.4.5.8. Blob Parameters</a></li><li><a href="#enctype">6.4.5.9. Determining Encoding</a></li><li><a href="#events">6.4.5.10. Events</a><ul><li><a href="#event-summary">6.4.5.10.1. Event Summary</a></li></ul></li></ul></li></ul></li><li><a href="#readingOnThreads">6.5. Reading on Threads</a><ul><li><a href="#FileReaderSync">6.5.1. The FileReaderSync Interface</a><ul><li><a href="#filereadersyncConstrctr">6.5.1.1. Constructors</a></li><li><a href="#readAsBinaryStringSyncSection">6.5.1.2. The readAsBinaryString method</a></li><li><a href="#readAsTextSync">6.5.1.3. The readAsText method</a></li><li><a href="#readAsDataURLSync-section">6.5.1.4. The readAsDataURL method</a></li><li><a href="#readAsArrayBufferSyncSection">6.5.1.5. The readAsArrayBuffer method</a></li></ul></li></ul></li><li><a href="#ErrorAndException">6.6. Errors and Exceptions</a><ul><li><a href="#FileErrorInterface">6.6.1. The FileError Interface</a></li><li><a href="#FileException">6.6.2. The FileException exception</a></li><li><a href="#ErrorDescriptions">6.6.3. Error Code Descriptions</a></li><li><a href="#not-allowed-error">6.6.4. The OperationNotAllowed Exception</a></li></ul></li><li><a href="#url">6.7. A URI for Blob and File reference</a><ul><li><a href="#use-cases-scheme">6.7.1. Use Cases for a New Scheme</a></li><li><a href="#alternative-schemas">6.7.2. Discussion of Existing Schemes</a></li><li><a href="#ABNFForBlob">6.7.3. Definition of blob URI Scheme</a><ul><li><a href="#OpaqueStringDiscussion">6.7.3.1. The Opaque String</a></li></ul></li><li><a href="#fragmentDiscussion">6.7.4. Discussion of Fragment Identifier</a></li><li><a href="#originOfBlob">6.7.5. Origin of Blob URIs</a></li><li><a href="#lifeTime">6.7.6. Lifetime of Blob URIs</a></li><li><a href="#processingModel">6.7.7. Dereferencing Model for Blob URIs</a><ul><li><a href="#TwoHundredOK">6.7.7.1. 200 OK</a></li><li><a href="#FourOhThreeNotAllowed">6.7.7.2. 403 Not Allowed</a></li><li><a href="#FourOhFourNotFound">6.7.7.3. 404 Not Found</a></li><li><a href="#FiveHundredInternalServerError">6.7.7.4. 500 Internal Server Error</a></li></ul></li><li><a href="#creating-revoking">6.7.8. Creating and Revoking a Blob URI</a></li></ul></li><li><a href="#security-discussion">6.8. Security Considerations</a></li><li><a href="#requirements">6.9. Requirements and Use Cases</a></li><li><a href="#acknowledgements-section">6.10. Acknowledgements</a></li><li><a href="#references">6.11. References</a><ul><li><a href="#normative-references">6.11.1. Normative references</a></li><li><a href="#informative-references">6.11.2. Informative References</a></li></ul></li></ul></li></ul></div>
+      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#dependencies">3. Dependencies</a></li><li><a href="#terminology">4. Terminology and Algorithms</a></li><li><a href="#filelist-section">5. The FileList Interface</a><ul><li><a href="#attributes-filelist">5.1. Attributes</a></li><li><a href="#filelist-methods-params">5.2. Methods and Parameters</a></li><li><a href="#filelist-normative">5.3. Conformance Criteria for FileList</a></li></ul></li><li><a href="#blob">6. The Blob Interface</a><ul><li><a href="#attributes-blob">6.1. Attributes</a></li><li><a href="#methodsandparams-blob">6.2. Methods and Parameters</a><ul><li><a href="#slice-blob">6.2.1. The slice method</a></li></ul></li><li><a href="#file">6.3. The File Interface</a><ul><li><a href="#file-attrs">6.3.1. Attributes</a></li></ul></li><li><a href="#FileReader-interface">6.4. The FileReader Interface</a><ul><li><a href="#blobreader-task-source">6.4.1. The FileReader Task Source</a></li><li><a href="#filereaderConstrctr">6.4.2. Constructors</a></li><li><a href="#event-handler-attributes-section">6.4.3. Event Handler Attributes</a></li><li><a href="#blobreader-state">6.4.4. FileReader States</a></li><li><a href="#reading-a-file">6.4.5. Reading a File or Blob</a><ul><li><a href="#MultipleReads">6.4.5.1. Multiple Reads</a></li><li><a href="#filedata-attr">6.4.5.2. The result attribute</a></li><li><a href="#readAsBinaryString">6.4.5.3. The readAsBinaryString(blob) method</a></li><li><a href="#readAsDataURL">6.4.5.4. The readAsDataURL(blob) method</a></li><li><a href="#readAsDataText">6.4.5.5. The readAsText(blob, encoding) method</a></li><li><a href="#readAsArrayBuffer">6.4.5.6. The readAsArrayBuffer(blob) method</a></li><li><a href="#abort">6.4.5.7. The abort() method</a></li><li><a href="#blobAndFileParams">6.4.5.8. Blob Parameters</a></li><li><a href="#enctype">6.4.5.9. Determining Encoding</a></li><li><a href="#events">6.4.5.10. Events</a><ul><li><a href="#event-summary">6.4.5.10.1. Event Summary</a></li></ul></li></ul></li></ul></li><li><a href="#readingOnThreads">6.5. Reading on Threads</a><ul><li><a href="#FileReaderSync">6.5.1. The FileReaderSync Interface</a><ul><li><a href="#filereadersyncConstrctr">6.5.1.1. Constructors</a></li><li><a href="#readAsBinaryStringSyncSection">6.5.1.2. The readAsBinaryString method</a></li><li><a href="#readAsTextSync">6.5.1.3. The readAsText method</a></li><li><a href="#readAsDataURLSync-section">6.5.1.4. The readAsDataURL method</a></li><li><a href="#readAsArrayBufferSyncSection">6.5.1.5. The readAsArrayBuffer method</a></li></ul></li></ul></li><li><a href="#ErrorAndException">6.6. Errors and Exceptions</a><ul><li><a href="#FileErrorInterface">6.6.1. The FileError Interface</a></li><li><a href="#FileException">6.6.2. The FileException exception</a></li><li><a href="#ErrorDescriptions">6.6.3. Error Code Descriptions</a></li><li><a href="#not-allowed-error">6.6.4. The OperationNotAllowed Exception</a></li></ul></li><li><a href="#url">6.7. A URI for Blob and File reference</a><ul><li><a href="#use-cases-scheme">6.7.1. Use Cases for a New Scheme</a></li><li><a href="#alternative-schemas">6.7.2. Discussion of Existing Schemes</a></li><li><a href="#ABNFForBlob">6.7.3. Definition of blob URI Scheme</a><ul><li><a href="#OpaqueStringDiscussion">6.7.3.1. The Opaque String</a></li></ul></li><li><a href="#fragmentDiscussion">6.7.4. Discussion of Fragment Identifier</a></li><li><a href="#originOfBlob">6.7.5. Origin of Blob URIs</a></li><li><a href="#lifeTime">6.7.6. Lifetime of Blob URIs</a></li><li><a href="#processingModel">6.7.7. Dereferencing Model for Blob URIs</a><ul><li><a href="#TwoHundredOK">6.7.7.1. 200 OK</a></li><li><a href="#FourOhThreeNotAllowed">6.7.7.2. 403 Not Allowed</a></li><li><a href="#FourOhFourNotFound">6.7.7.3. 404 Not Found</a></li><li><a href="#FiveHundredInternalServerError">6.7.7.4. 500 Internal Server Error</a></li></ul></li><li><a href="#creating-revoking">6.7.8. Creating and Revoking a Blob URI</a></li></ul></li><li><a href="#security-discussion">6.8. Security Considerations</a></li><li><a href="#requirements">6.9. Requirements and Use Cases</a></li><li><a href="#AppendixA">6.10. Appendix A</a><ul><li><a href="#ABNFUUID">6.10.1. An ABNF for UUID</a></li></ul></li><li><a href="#acknowledgements-section">6.11. Acknowledgements</a></li><li><a href="#references">6.12. References</a><ul><li><a href="#normative-references">6.12.1. Normative references</a></li><li><a href="#informative-references">6.12.2. Informative References</a></li></ul></li></ul></li></ul></div>
     </div>
 
     <div id="sections">
@@ -303,7 +303,8 @@ function errorHandler(evt) {
         <dfn id="event-handler-event-type">event handler event type</dfn>,
         <dfn id="origin">origin</dfn>, <dfn id="same-origin">same origin</dfn>, <dfn id="event-loops">event loops</dfn>,
         <dfn id="task">task</dfn>, <dfn id="task-source">task source</dfn>, <dfn id="df-URL">URL</dfn>, and
-        <dfn id="queue-a-task">queue a task</dfn> are defined by the HTML 5 specification [<a href="#HTML">HTML</a>]. </p>
+        <dfn id="queue-a-task">queue a task</dfn> are defined by the HTML specification [<a href="#HTML">HTML</a>]. </p>
+ <p>When this specification says to <dfn id="terminate-an-algorithm">terminate an algorithm</dfn> the user agent must terminate the algorithm after finishing the step it is on.  Asynchronous <a href="#read-methods">read methods</a> defined in this specification may return before the algorithm in question is terminated, and can be terminated by an <a href="#dfn-abort"><code>abort()</code></a> call.</p>
        <p>The algorithms and steps in this specification use the following mathematical operations:</p>
        <ul>
        <li><p>max(a,b) returns the maximum of a and b, and is always performed on integers as they are defined in WebIDL [<a href="#WebIDL">WebIDL</a>]; in the case of max(6,4) the result is 6.
@@ -763,8 +764,11 @@ When the <dfn id="dfn-readAsBinaryStringAsync"><code>readAsBinaryString(blob)</c
 </p>
 <ol>
   <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> raise a
-  <a href="#dfn-NOT_ALLOWED_ERR"><code>NOT_ALLOWED_ERR</code> exception</a> and terminate these steps.
-  </p></li>
+  <a href="#dfn-NOT_ALLOWED_ERR"><code>NOT_ALLOWED_ERR</code> exception</a> and <a href="#terminate-an-algorithm">terminate this algorithm</a>.
+  </p>
+
+<p><strong>Note:</strong> The <a href="#dfn-readAsBinaryStringAsync"><code>readAsBinaryString()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
+</li>
   <li><p>If an <a href="#file-error-read">error occurs during reading of the <code>blob</code> parameter</a>, set <a href="#dfn-readystate"><code>readyState</code></a> to
   <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
   <ol>
@@ -776,11 +780,14 @@ When the <dfn id="dfn-readAsBinaryStringAsync"><code>readAsBinaryString(blob)</c
     </li>
     <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
     <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
-    <li><p>Terminate this overall set of steps.</p></li>    
+    <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p>
+<p><strong>Note:</strong> The <a href="#dfn-readAsBinaryStringAsync"><code>readAsBinaryString()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
+</li>    
   </ol>
   </li>
   <li><p>If no error has occurred, set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
   <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
+<li><p>Return the <code>readAsBinaryString()</code> method, but continue processing the other steps in this algorithm.</p></li>
   <li><p>While processing the read, as data from <a href="#dfn-fileBlob"><code>blob</code></a> becomes available, <a href="#queue-a-task">queue tasks</a> to update the
   <a href="#dfn-result"><code>result</code></a> with <a href="#partial-blob-data">partial Blob data</a> represented as a <a href="#binary-string">binary string</a> until the read is complete.</p></li>
   <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  As the bytes from the <a href="#dfn-fileBlob"><code>blob</code></a> argument are read,
@@ -789,7 +796,7 @@ When the <dfn id="dfn-readAsBinaryStringAsync"><code>readAsBinaryString(blob)</c
   such <a href="#dfn-result"><code>result</code></a> while processing this read method, with the last returned value at completion of the read.
   </p></li>
   <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
-  <li><p>Terminate this overall set of steps.</p></li>
+  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p></li>
 </ol>
 <div class="note"><div class="noteHeader">Note</div>
   <p>Note: the <code>readAsBinaryString(blob)</code> method should be considered deprecated; user agents should consider supporting the
@@ -802,8 +809,10 @@ When the <dfn id="dfn-readAsBinaryStringAsync"><code>readAsBinaryString(blob)</c
 <p>When the <dfn id="dfn-readAsDataURL"><code>readAsDataURL(blob)</code></dfn> method is called, the user agent MUST run the steps below (unless otherwise indicated).</p>
 <ol>
 <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> raise a
-  <a href="#dfn-NOT_ALLOWED_ERR"><code>NOT_ALLOWED_ERR</code> exception</a> and terminate these steps.
-  </p></li> 
+  <a href="#dfn-NOT_ALLOWED_ERR"><code>NOT_ALLOWED_ERR</code> exception</a> and <a href="#terminate-an-algorithm">terminate this algorithm</a>.
+  </p>
+<p><strong>Note:</strong> The <a href="#dfn-readAsDataURL"><code>readAsDataURL()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
+</li> 
   <li><p>If an <a href="#file-error-read">error occurs during reading of the <code>blob</code> parameter</a>, OR if a user agent's URL length limitations prevent returning
   data as a Data URL [<a href="#DataURL">DataURL</a>], set <a href="#dfn-readystate"><code>readyState</code></a> to
   <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
@@ -815,11 +824,15 @@ When the <dfn id="dfn-readAsBinaryStringAsync"><code>readAsBinaryString(blob)</c
     <a href="#file-error-read">file error that has occurred</a>.</p></li>
     <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
     <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
-    <li><p>Terminate this overall set of steps.</p></li>    
+    <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p>
+
+	<p><strong>Note:</strong> The <a href="#dfn-readAsDataURL"><code>readAsDataURL()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p> 
+</li>    
   </ol>
   </li>
   <li><p>If no error has occurred, set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
   <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
+<li><p>Return the <code>readAsDataURL()</code> method, but continue to process the steps in this algorithm. </p></li>
   <li><p><a href="#queue-a-task">Queue a task</a> to update the <a href="#dfn-result"><code>result</code></a> attribute with the <a href="#dfn-fileBlob"><code>blob</code></a> as a
   DataURL [<a href="#DataURL">DataURL</a>] after it has been fully read into memory; on getting, the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute returns the (complete) data of <a href="#dfn-fileBlob"><code>blob</code></a> as a
   Data URL [<a href="#DataURL">DataURL</a>].</p>
@@ -838,7 +851,7 @@ When the <dfn id="dfn-readAsBinaryStringAsync"><code>readAsBinaryString(blob)</c
   <a href="#dfn-done"><code>DONE</code></a></p></li>
   <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-load-event"><code>load</code></a>.</p></li>
   <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a>.</p></li>
-  <li><p>Terminate this overall set of steps.</p></li>
+  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p></li>
 </ol>
 </div>
 <div id="readAsDataText" class="section">
@@ -850,7 +863,10 @@ the user agent MUST run the steps below (unless otherwise indicated).
 <ol>
 <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> raise a
   <a href="#dfn-NOT_ALLOWED_ERR"><code>NOT_ALLOWED_ERR</code> exception</a> and terminate these steps.
-  </p></li>
+  </p>
+
+<p><strong>Note:</strong> The <a href="#dfn-readAsText"><code>readAsText()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
+</li>
   <li><p>If an <a href="#file-error-read">error occurs during reading the <code>blob</code> parameter</a>, 
   set <a href="#dfn-readystate"><code>readyState</code></a> to
   <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
@@ -863,15 +879,19 @@ the user agent MUST run the steps below (unless otherwise indicated).
     </li>
     <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
     <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
-    <li><p>Terminate this overall set of steps.</p></li>    
+    <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p>
+
+	<p><strong>Note:</strong> The <a href="#dfn-readAsText"><code>readAsText()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
+</li>    
   </ol>
   </li>
   <li><p>If no error has occurred, set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
   <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
+<li><p>Return the <code>readAsText()</code> method, but continue to process the steps in this algorithm</p></li>
   <li><p>While processing the read, as data from the <a href="#dfn-fileBlob"><code>blob</code></a> becomes available, user agents SHOULD <a href="#queue-a-task">queue tasks</a> to update the
   <a href="#dfn-result"><code>result</code></a> with <a href="#partial-blob-data">partial Blob data</a> represented as a string in a format determined by the
   <a href="#encoding-determination">encoding determination</a> until the read is complete.</p>
-  <div class="note"><div class="noteHeader">Note</div>
+  <div class="note" id="encodingCaveat"><div class="noteHeader">Note</div>
   <p>
   <em>This note is normative.</em>  <a href="#partial-blob-data">Partial Blob data</a> MUST be returned such that where possible, the bytes read thus far should be valid code points
   within the <a href="#dfn-encoding"><code>encoding</code></a>; in particular, when executing the <a href="#encoding-determination">encoding determination</a> for
@@ -893,7 +913,7 @@ the user agent MUST run the steps below (unless otherwise indicated).
   while processing this read method, with the last returned value at completion of the read.
 </p></li>
   <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
-  <li><p>Terminate this overall set of steps.
+  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.
   </p></li>
 </ol>
 </div>
@@ -905,7 +925,10 @@ When the <dfn id="dfn-readAsArrayBuffer"><code>readAsArrayBuffer(blob)</code></d
 <ol>
  <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> raise a
   <a href="#dfn-NOT_ALLOWED_ERR"><code>NOT_ALLOWED_ERR</code> exception</a> and terminate these steps.
-  </p></li>
+  </p>
+
+<p><strong>Note:</strong> The <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
+</li>
   <li><p>If an <a href="#file-error-read">error occurs during reading the <code>blob</code> parameter</a>, set <a href="#dfn-readystate"><code>readyState</code></a> to
   <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
   <ol>
@@ -917,11 +940,14 @@ When the <dfn id="dfn-readAsArrayBuffer"><code>readAsArrayBuffer(blob)</code></d
     </li>
     <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
     <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
-    <li><p>Terminate this overall set of steps.</p></li>    
+    <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p>
+<p><strong>Note:</strong> The <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
+</li>    
   </ol>
   </li>
   <li><p>If no error has occurred, set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
   <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
+<li><p>Return the <code>readAsArrayBuffer()</code> method, but continue to process the steps in this algorithm.</p></li>
   <li><p>While processing the read, as data from the <a href="#dfn-fileBlob"><code>blob</code></a> becomes available, <a href="#queue-a-task">queue tasks</a> to update the
   <a href="#dfn-result"><code>result</code></a> with <a href="#partial-blob-data">partial Blob data</a> as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>]
   object containing the bytes read until the read is complete.</p></li>
@@ -933,7 +959,7 @@ When the <dfn id="dfn-readAsArrayBuffer"><code>readAsArrayBuffer(blob)</code></d
   the read.
   </p></li>
   <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
-  <li><p>Terminate this overall set of steps.</p></li>
+  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p></li>
 </ol>
 </div>
 <div id="abort" class="section">
@@ -973,16 +999,10 @@ method call was made.</p></dd>
 <h4>6.4.5.9. Determining Encoding</h4>
 <p>When reading <a href="#dfn-fileBlob"><code>blob</code></a> objects using the <a href="#dfn-readAsText"><code>readAsText()</code></a> <a href="#read-methods">read method</a>, the optional <dfn id="dfn-encoding"><code>
 encoding</code></dfn> string parameter MUST be a <em>name</em> or an <em>alias</em> of a character set
-used on the Internet [<a href="#IANACHARSET">IANACHARSET</a>], or else is considered invalid.  If the <code>encoding</code> argument supplied is valid, user agents SHOULD
-decode the <a href="#dfn-fileBlob"><code>blob</code></a> using that encoding.  If the <code>encoding</code> argument is invalid,
-or the optional <code>encoding</code> argument is not supplied,
-or the user agent cannot decode the <a href="#dfn-fileBlob"><code>blob</code></a> using <code>encoding</code>, the following
-<dfn id="encoding-determination">encoding determination</dfn> algorithm MUST be
-followed:</p>
+used on the Internet [<a href="#IANACHARSET">IANACHARSET</a>], or else is considered invalid.  The following <dfn id="encoding-determination">encoding determination</dfn> steps MUST be followed:</p>
 <ol>
-<li>User agents SHOULD decode <a href="#dfn-fileBlob"><code>blob</code></a> data using <a href="#dfn-encoding"><code>encoding</code></a>, if it is provided.
-If the <code>encoding</code> <a href="#dfn-encoding">argument is invalid</a>, or the optional <code>encoding</code> argument is not supplied,
-or the user agent cannot decode the <a href="#dfn-fileBlob"><code>blob</code></a> using <code>encoding</code>, then let <var>charset</var> be null.</li>
+<li>Decode the <a href="#dfn-fileBlob"><code>blob</code></a> using the <a href="#dfn-encoding"><code>encoding</code></a> parameter, if provided and if valid, and terminate this set of steps.  If invalid, or if not provided, or if the user agent cannot determine the encoding, go to the next step.</li>
+<li>Let <var>charset</var> be null.</li>
 <li>
 
     <p>For each of the rows in the
@@ -1039,7 +1059,8 @@ or the user agent cannot decode the <a href="#dfn-fileBlob"><code>blob</code></a
      object returns a string in <var>charset</var> format.  The synchronous
      <a href="#dfn-readAsTextSync"><code>readAsText</code></a> method of the <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object returns a string in <var>charset</var> format.
      Replace bytes or sequences of bytes that are not
-     valid according to the <var>charset</var> with a single U+FFFD character [<a href="#Unicode">Unicode</a>].
+     valid according to the <var>charset</var> with a single U+FFFD character [<a href="#Unicode">Unicode</a>].  See also the <a href="#encodingCaveat">encoding caveat</a> 
+     for <a href="#partial-blob-data">Partial Blob Data</a>.
   </p></li>
 </ol>
 </div>
@@ -1256,6 +1277,10 @@ make obtaining large files encoded as Data URLs impossible to return [<a href="#
 </p></li>
     
     </ul>
+<div class="ednote"><div class="ednoteHeader">Editorial note</div>
+	<p>Exceptions and errors in this specification are likely to change, depending on the outcome of ongoing discussions of exceptions and errors on the web platform. </p>
+	
+</div>
 <div id="FileErrorInterface" class="section">
 <h3>6.6.1. The <code>FileError</code> Interface</h3>
 <p>
@@ -1445,28 +1470,11 @@ scheme = "blob"
 <p><a href="#opaqueString">Opaque strings</a> MUST NOT include any reserved characters from [<a href="#RFC3986">RFC3986</a>]; these MUST be percent-encoded.
 <a href="#opaqueString">Opaque strings</a> MUST be globally unique.  Such strings SHOULD only use characters in the ranges U+002A to U+002B, U+002D to U+002E, U+0030 to U+0039,
 U+0041 to U+005A, U+005E to U+007E [<a href="#Unicode">Unicode</a>], and MUST be at least 36 characters long.
-UUID is one potential option available to user agents for use with <a href="#url">Blob URIs</a> as <a href="#opaqueString">opaque strings</a>, and their use is strongly encouraged.
-UUIDs are defined in [<a href="#UUID">RFC4122</a>] and are used here without the urn: scheme.
-Below is an ABNF [<a href="#ABNF">RFC5234</a>] for UUID; this is provided informationally and is not normative.
-</p>
-<div class="block"><div class="blockTitleDiv"><span class="blockTitle">ABNF</span></div><div class="blockContent"><pre class="code"><code class="abnf-code">
-UUID                   = time-low "-" time-mid "-"
-                         time-high-and-version "-"
-                         clock-seq-and-reserved
-                         clock-seq-low "-" node
-time-low               = 4hexOctet
-time-mid               = 2hexOctet
-time-high-and-version  = 2hexOctet
-clock-seq-and-reserved = hexOctet
-clock-seq-low          = hexOctet
-node                   = 6hexOctet
-hexOctet               = hexDigit hexDigit
-hexDigit =
-         "0" / "1" / "2" / "3" / "4" / "5" / "6" / "7" / "8" / "9" /
-         "a" / "b" / "c" / "d" / "e" / "f" /
-         "A" / "B" / "C" / "D" / "E" / "F"
+UUID is one potential option available to user agents for use with <a href="#url">Blob URIs</a> as <a href="#opaqueString">opaque strings</a>, and their use is <em>strongly encouraged</em>.
+UUIDs are defined in [<a href="#UUID">RFC4122</a>].  For an ABNF of UUID, see <a href="#AppendixA">Appendix A</a>.
 
-</code></pre></div></div>
+</p>
+
 </div>
 </div>
 <div class="section" id="fragmentDiscussion">
@@ -1690,8 +1698,35 @@ is used in cross-origin request contexts.  User agents MAY return <a href="#Four
 		  
 	  </ul>
   </div>
+<div id="AppendixA" class="section">
+<h2>6.10. Appendix A</h2>
+<p>This section is informative and not normative.</p>
+<div id="ABNFUUID" class="section">
+<h3>6.10.1. An ABNF for UUID</h3>
+<p>The following is an informative ABNF [<a href="#ABNF">ABNF</a>] for UUID, which is a <em>strongly encouraged</em> choice for the
+<a href="#opaqueString">opaqueString</a> production of <a href="#url">Blob URIs</a>.</p> 
+<div class="block"><div class="blockTitleDiv"><span class="blockTitle">ABNF</span></div><div class="blockContent"><pre class="code"><code class="abnf-code">
+UUID                   = time-low "-" time-mid "-"
+                         time-high-and-version "-"
+                         clock-seq-and-reserved
+                         clock-seq-low "-" node
+time-low               = 4hexOctet
+time-mid               = 2hexOctet
+time-high-and-version  = 2hexOctet
+clock-seq-and-reserved = hexOctet
+clock-seq-low          = hexOctet
+node                   = 6hexOctet
+hexOctet               = hexDigit hexDigit
+hexDigit =
+         "0" / "1" / "2" / "3" / "4" / "5" / "6" / "7" / "8" / "9" /
+         "a" / "b" / "c" / "d" / "e" / "f" /
+         "A" / "B" / "C" / "D" / "E" / "F"
+
+</code></pre></div></div>
+</div>
+</div>
    <div id="acknowledgements-section" class="section">
-    <h2>6.10. Acknowledgements</h2>
+    <h2>6.11. Acknowledgements</h2>
     
     <p>
       This specification was originally developed by the SVG Working Group. Many thanks to Mark Baker and Anne van Kesteren for their feedback.</p>
@@ -1700,9 +1735,9 @@ is used in cross-origin request contexts.  User agents MAY return <a href="#Four
     <p>Thanks to the W3C WebApps WG, and to participants on the public-webapps@w3.org listserv</p>
   </div>
   <div id="references" class="section">
-    <h2>6.11. References</h2>
+    <h2>6.12. References</h2>
       <div id="normative-references" class="section">
-        <h3>6.11.1. Normative references</h3>
+        <h3>6.12.1. Normative references</h3>
 	<dl class="bibliography">
 	<dt id="RFC2119">RFC2119</dt>
 	<dd><cite><a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, S. Bradner. IETF.</dd>
@@ -1737,7 +1772,7 @@ is used in cross-origin request contexts.  User agents MAY return <a href="#Four
 	</dl>
       </div>
     <div id="informative-references" class="section">
-    <h3>6.11.2. Informative References</h3>
+    <h3>6.12.2. Informative References</h3>
     <dl>
     <dt id="XHR2">XMLHttpRequest</dt>
     <dd><cite><a href="http://www.w3.org/TR/XMLHttpRequest2/">XMLHttpRequest Level 2 (work in progress)</a></cite>, A. van Kesteren. W3C.</dd>
