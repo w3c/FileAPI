@@ -1560,7 +1560,7 @@ This section describes a supplemental interface to the URL specification [<a hre
 partial interface <dfn id="URL-object">URL</dfn> {
 
     static DOMString <a href="#dfn-createObjectURL">createObjectURL</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
-    static void <a href="#dfn-revokeObjectURL">revokeObjectURL</a>(in DOMString <a href="#dfn-urlarg">url</a>);
+    static void <a href="#dfn-revokeObjectURL">revokeObjectURL</a>(DOMString <a href="#dfn-urlarg">url</a>);
 };
 </x:codeblock>
 <div class="note"><p>ECMAScript user agents of this specification MUST ensure that they do not expose a <code>prototype</code> property on the URL interface
