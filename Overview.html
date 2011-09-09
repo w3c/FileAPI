@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>26 August 2011</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2009/WD-FileAPI-20091117/">http://www.w3.org/TR/2009/WD-FileAPI-20091117/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2010 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>27 August 2011</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2009/WD-FileAPI-20091117/">http://www.w3.org/TR/2009/WD-FileAPI-20091117/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2010 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
       <h2>Abstract</h2>
@@ -79,7 +79,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 26 August 2011 <b>Editor’s Draft</b> of the
+        This document is the 27 August 2011 <b>Editor’s Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -394,9 +394,9 @@ If there are no such <a href="#dfn-File"><code>File</code></a> objects, then the
       
       <span class="comment">//slice Blob into byte-ranged chunks</span>
       
-      Blob <a href="#dfn-slice" title="slice">slice</a>(in optional long long <a href="#dfn-start" class="dfnref" title="start">start</a>,
-                 in optional long long <a href="#dfn-end" class="dfnref" title="length">end</a>,
-                 [TreatUndefinedAs=EmptyString] in optional DOMString <a href="#dfn-contentTypeBlob">contentType</a>); 
+      Blob <a href="#dfn-slice" title="slice">slice</a>(optional long long <a href="#dfn-start" class="dfnref" title="start">start</a>,
+                 optional long long <a href="#dfn-end" class="dfnref" title="length">end</a>,
+                 [TreatUndefinedAs=EmptyString] optional DOMString <a href="#dfn-contentTypeBlob">contentType</a>); 
     
     };
     </code></pre></div></div>
@@ -566,10 +566,10 @@ initialized to the last modified date of the file; otherwise, this MUST return n
 interface <dfn id="dfn-filereader">FileReader</dfn>: EventTarget {
 
   <span class="comment">// async read methods</span>
-  void <a href="#dfn-readAsArrayBuffer" class="dfnref">readAsArrayBuffer</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
-  void <a href="#dfn-readAsBinaryStringAsync" class="dfnref">readAsBinaryString</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
-  void <a href="#dfn-readAsText" class="dfnref">readAsText</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>, in optional DOMString <a href="#dfn-encoding" class="dfnref">encoding</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
-  void <a href="#dfn-readAsDataURL" class="dfnref">readAsDataURL</a>(in <a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
+  void <a href="#dfn-readAsArrayBuffer" class="dfnref">readAsArrayBuffer</a>(<a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
+  void <a href="#dfn-readAsBinaryStringAsync" class="dfnref">readAsBinaryString</a>(<a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
+  void <a href="#dfn-readAsText" class="dfnref">readAsText</a>(<a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>, optional DOMString <a href="#dfn-encoding" class="dfnref">encoding</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
+  void <a href="#dfn-readAsDataURL" class="dfnref">readAsDataURL</a>(<a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
 
   void <a href="#dfn-abort" class="dfnref">abort</a>();
 
@@ -1173,10 +1173,10 @@ interface <dfn id="dfn-FileReaderSync">FileReaderSync</dfn> {
   <span class="comment">// Synchronously return strings</span>
   <span class="comment">// All methods raise FileException</span>
   
-  ArrayBuffer <a href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>) raises (<a href="#dfn-FileException">FileException</a>);
-  DOMString <a href="#dfn-readAsBinaryStringSync">readAsBinaryString</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>) raises (<a href="#dfn-FileException">FileException</a>); 
-  DOMString <a href="#dfn-readAsTextSync">readAsText</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>, in optional DOMString <a href="#dfn-encoding">encoding</a>) raises (<a href="#dfn-FileException">FileException</a>);
-  DOMString <a href="#dfn-readAsDataURLSync">readAsDataURL</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>) raises (<a href="#dfn-FileException">FileException</a>); 
+  ArrayBuffer <a href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>) raises (<a href="#dfn-FileException">FileException</a>);
+  DOMString <a href="#dfn-readAsBinaryStringSync">readAsBinaryString</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>) raises (<a href="#dfn-FileException">FileException</a>); 
+  DOMString <a href="#dfn-readAsTextSync">readAsText</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>, optional DOMString <a href="#dfn-encoding">encoding</a>) raises (<a href="#dfn-FileException">FileException</a>);
+  DOMString <a href="#dfn-readAsDataURLSync">readAsDataURL</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>) raises (<a href="#dfn-FileException">FileException</a>); 
 };
 </code></pre></div></div>
 <div class="note"><div class="noteHeader">Note</div>
@@ -1567,7 +1567,7 @@ This section describes a supplemental interface to the URL specification [<a hre
 <div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
 partial interface <dfn id="URL-object">URL</dfn> {
 
-    static DOMString <a href="#dfn-createObjectURL">createObjectURL</a>(in <a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
+    static DOMString <a href="#dfn-createObjectURL">createObjectURL</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
     static void <a href="#dfn-revokeObjectURL">revokeObjectURL</a>(in DOMString <a href="#dfn-urlarg">url</a>);
 };
 </code></pre></div></div>
