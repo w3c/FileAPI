@@ -310,7 +310,7 @@ function errorHandler(evt) {
         <h2>The FileList Interface</h2>
        
        <p>
-          This interface is a <strong>collection</strong> [<a href="#DOMCore">DOMCore</a>] of user-selected <a href="dfn-File"><code>File</code></a> objects.
+          This interface is a <strong>collection</strong> [<a href="#DOMCore">DOMCore</a>] of <a href="dfn-File"><code>File</code></a> objects.
        </p>
     <x:codeblock language='idl'>
     interface <dfn id='dfn-filelist'>FileList</dfn> {
@@ -339,7 +339,7 @@ function errorHandler(evt) {
     <div class='section' id='attributes-filelist'>
     <h3>Attributes</h3>
     <dl>
-      <dt id="dfn-length"><code>length</code></dt><dd><p>MUST return the number of user-selected files in the <a href="#dfn-filelist"><code>FileList</code></a> collection.  If there are no files in the collection, this attribute MUST return 0.</p></dd>
+      <dt id="dfn-length"><code>length</code></dt><dd><p>MUST return the number of files in the <a href="#dfn-filelist"><code>FileList</code></a> collection.  If there are no files in the collection, this attribute MUST return 0.</p></dd>
     </dl>
     </div>
     <div class='section' id='filelist-methods-params'>
@@ -348,8 +348,8 @@ function errorHandler(evt) {
       <dt id="dfn-item"><code>item(index)</code></dt><dd><p>MUST return the <em>indexth</em> <a href="#dfn-file"><code>File</code></a> object in
       the <a href="#dfn-filelist"><code>FileList</code></a>.  If there is no <em>indexth</em> <a href="#dfn-file"><code>File</code></a> object in the
       <a href="#dfn-filelist"><code>FileList</code></a>, then this method must return <code>null</code>.</p>
-      <p><dfn id="dfn-index" title="index"><code>index</code></dfn> MUST be treated by user agents as value for the position of the selected <a href="#dfn-file"><code>File</code></a>
-      object in the <a href="#dfn-filelist"><code>FileList</code></a>, with 0 representing the first selected file.  <strong>Supported property indices</strong> [<a href="#WebIDL">WebIDL</a>] are the numbers in the range zero to one less than the number of user-selected <a href="#dfn-File"><code>File</code></a> objects represented by the collection [<a href="#DOMCore">DOMCore</a>].  
+      <p><dfn id="dfn-index" title="index"><code>index</code></dfn> MUST be treated by user agents as value for the position of a <a href="#dfn-file"><code>File</code></a>
+      object in the <a href="#dfn-filelist"><code>FileList</code></a> collection, with 0 representing the first file in the collection.  <strong>Supported property indices</strong> [<a href="#WebIDL">WebIDL</a>] are the numbers in the range zero to one less than the number of <a href="#dfn-File"><code>File</code></a> objects represented by the collection [<a href="#DOMCore">DOMCore</a>].  
 If there are no such <a href="#dfn-File"><code>File</code></a> objects, then there are no supported property indices [<a href="#WebIDL">WebIDL</a>]. </p>
       </dd>
     
@@ -359,14 +359,6 @@ If there are no such <a href="#dfn-File"><code>File</code></a> objects, then the
     The <code>HTMLInputElement</code> interface [<a href="#HTML">HTML</a>] has a readonly attribute of type <code>FileList</code>, which is what is
     being accessed in the above example.  Other interfaces with a readonly attribute of type <code>FileList</code> include the <code>DataTransfer</code>
     interface [<a href="#HTML">HTML</a>].
-    </div>
-    <div id="filelist-normative" class="section">
-    <h3>Conformance Criteria for FileList</h3>
-    <p>Conforming user agents MUST expose the selected file(s) with an object of type  <a href="#dfn-filelist"><code>FileList</code></a>, which contains the selected files as
-    <a href="#dfn-file"><code>File</code></a> objects.  Some conforming user agents support multiple file selections, in which case the
-    <a href="#dfn-filelist"><code>FileList</code></a> object MUST make available all selected files.  If there are no
-    file selections (e.g. through cancelation of a file picker or through canceling a file drag operation) conforming user agents MUST return an object of type
-    <a href="#dfn-filelist"><code>FileList</code></a> with <code>null</code> as a return value for any call to the <a href="#dfn-item"><code>item</code></a> method.</p>
     </div>
     </div>
   <div id='blob' class="section">
@@ -1387,7 +1379,7 @@ the most appropriate code from the <a href="#ErrorDescriptions">table below</a>.
 <p>This section defines a scheme for a URI used to refer to <a href="#dfn-Blob"><code>Blob</code></a> objects (and <a href="#dfn-file"><code>File</code></a> objects). 
 </p>
 <div id="use-cases-scheme" class="section">
-<h3>Use Cases for a New Scheme</h3>
+<h3>Requirements for a New Scheme</h3>
 <p>This specification defines a scheme with URIs of the sort: <code>blob:550e8400-e29b-41d4-a716-446655440000#aboutABBA</code>.
 This section provides some use cases and is an informative discussion.</p>
 <ul>
@@ -1521,7 +1513,7 @@ dereferenced after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</cod
 <h3>Dereferencing Model for Blob URIs</h3>
 <p>User agents MUST only support requests with GET [<a href="#HTTP">HTTP</a>].  If the <a href="#dfn-Blob"><code>Blob</code></a> has a
 <a href="#dfn-type"><code>type</code></a> attribute, or if the <a href="#dfn-Blob"><code>Blob</code></a> has been created with a <a href="#dfn-slice"><code>slice</code></a> call which
-uses a <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument, responses to derefencing the Blob URI must include the Content-Type header from HTTP [<a href="#HTTP">HTTP</a>] with the value of the <a href="#dfn-type"><code>type</code></a>
+uses a <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument, responses to dereferencing the Blob URI must include the Content-Type header from HTTP [<a href="#HTTP">HTTP</a>] with the value of the <a href="#dfn-type"><code>type</code></a>
 attribute or <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument.  Specifically, responses MUST only support a subset of responses that are equivalent to the following from HTTP [<a href="#HTTP">HTTP</a>]:</p>
 
 <div id="TwoHundredOK" class="section">
@@ -1531,23 +1523,25 @@ satisfies the <a href="#originOfBlob">origin requirement</a>, and satisfies the 
 the user agent MUST also use a Content-Type header [<a href="#HTTP">HTTP</a>] with a value equal to the <code><a href="#dfn-Blob">Blob</a></code> object's <code><a href="#dfn-type">type</a></code> attribute.
 </p>
 </div>
-<div id="FourOhThreeNotAllowed" class="section">
-<h4>403 Not Allowed</h4>
-<p>This response [<a href="#HTTP">HTTP</a>] MUST be used if the request violates the <a href="#originOfBlob">origin requirement</a>.  Additionally, it MUST be used if the
-underlying file's permission structure has changed (thus preventing access from web content).  User agents MAY accompany this response with a message (e.g. "Origin Violation").</p>
-</div>
-<div id="FourOhFourNotFound" class="section">
-<h4>404 Not Found</h4>
-<p>This response [<a href="#HTTP">HTTP</a>] MUST be used if the request violates the <a href="#lifeTime">lifetime</a> requirement
-(e.g. if a cached <a href="#url">Blob
-URI</a> persists after the specified lifetime of the URI has elapsed). Additionally, it MUST be used if the underlying file has moved.</p>
-</div>
 <div id="FiveHundredInternalServerError" class="section">
 <h4>500 Internal Server Error</h4>
 <p>
-  This response [<a href="#HTTP">HTTP</a>] MAY be used as a generic error condition, including for security errors or access violations (e.g if the request method is anything other than GET
-  [<a href="#HTTP">HTTP</a>].  User agents MAY accompany this response with a message (e.g. "Data Access Error"). 
+  This response [<a href="#HTTP">HTTP</a>] MUST be used if:
 </p>
+<ul>
+	<li><p>Any request method other than GET is used to dereference the URL.</p></li>
+	<li><p>The request violates the <a href="#originOfBlob">origin requirement</a>.</p></li>
+	<li><p>The request does not satisfy the <a href="#lifetime">lifetime requirement</a>.</p></li>
+	<li><p>The underlying resource has changed, moved, been deleted or has become invalid.</p></li>
+	<li><p>The permissions surrounding the underlying resource do not permit access.</p></li>
+	<li><p>A security error has occurred; in particulary, if trying to set <code>document.location = window.URL.createObjectURL(myFile)</code>.</p></li>
+</ul>
+<p>This response MAY be accompanied by messages indicating why the <a href="#dfn-Blob"><code>Blob</code></a> resource could not be served.</p>
+</div>
+<div id="HeaderSummary" class="section">
+<h4>Request and Response Headers</h4>
+<p>This section is an informative discussion of requests for Blob URIs and responses when Blob URIs are dereferenced, with examples.</p>
+
 </div>
 </div>
 <div id="creating-revoking" class="section">
@@ -1638,11 +1632,11 @@ is called on them.</p></li>
 <a href="#read-methods">read method</a> is called on a file, user agents MAY raise a <code><a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a></code>.</p></li>
 <li><p><dfn id="cross-scheme-reads">Cross-scheme file reads</dfn> occur when a read attempt is made on a file resident on the file:/// scheme by a resource
 dereferenced by http://.  In such cases, if a <a href="#read-methods">read method</a> is called on a file, user agents MAY raise a <code><a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a></code>.
-User agents MAY raise a <a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a> in cases where reads occur from resources derefenced on file:///. </p></li> 
+User agents MAY raise a <a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a> in cases where reads occur from resources dereferenced on file:///. </p></li> 
 <li><p><dfn id="cross-origin-requests-on-blobs">Cross-origin requests on Blob URIs</dfn> occur when a <a href="#url">Blob URI</a> is accessed across origins.
 In particular, code of the sort: <code>document.location = window.URL.createObjectURL(myFile);</code> is problematic.  User agents should ensure that the
-<a href="#FourOhThreeNotAllowed">403 Not Allowed</a> response
-is used in cross-origin request contexts.  User agents MAY return <a href="#FourOhThreeNotAllowed">403 Not Allowed</a> at any attempt to set the entire document location to a file or Blob.
+<a href="#FiveHundredInternalServerError">500 Internal Server Error</a> response
+is used in cross-origin request contexts.  User agents MUST return <a href="#FiveHundredInternalServerError">500 Internal Server Error</a> at any attempt to set the entire document location to a file or Blob.
 </p></li>
 </ul>
 <div class="ednote"><p>This section is provisional; more security data may supplement this in subsequent drafts.</p></div>

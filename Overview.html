@@ -11,6 +11,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>File API</title>
+
     <meta name="revision" content="$Id$" />
     <link rel="stylesheet" href="FileAPI.css" type="text/css" />
     <script src="section-links.js" type="application/ecmascript"></script>
@@ -28,7 +29,9 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>9 September 2011</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2009/WD-FileAPI-20091117/">http://www.w3.org/TR/2009/WD-FileAPI-20091117/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2010 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
+
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>28 September 2011</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2009/WD-FileAPI-20091117/">http://www.w3.org/TR/2009/WD-FileAPI-20091117/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2010 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
+
 
     <div class="section">
       <h2>Abstract</h2>
@@ -67,6 +70,7 @@
       These kinds of behaviors are defined in the appropriate affiliated specifications.
     </p>
 
+
       <div class="ednote"><div class="ednoteHeader">Editorial note</div><p>This is revision $Id$.</p><p>There are 2 further editorial notes in the document.</p></div>
     </div>
 
@@ -79,7 +83,9 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 9 September 2011 <b>Editor’s Draft</b> of the
+
+        This document is the 28 September 2011 <b>Editor’s Draft</b> of the
+
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -147,7 +153,7 @@
 
     <div id="toc">
       <h2>Table of Contents</h2>
-      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#dependencies">3. Dependencies</a></li><li><a href="#terminology">4. Terminology and Algorithms</a></li><li><a href="#filelist-section">5. The FileList Interface</a><ul><li><a href="#attributes-filelist">5.1. Attributes</a></li><li><a href="#filelist-methods-params">5.2. Methods and Parameters</a></li><li><a href="#filelist-normative">5.3. Conformance Criteria for FileList</a></li></ul></li><li><a href="#blob">6. The Blob Interface</a><ul><li><a href="#attributes-blob">6.1. Attributes</a></li><li><a href="#methodsandparams-blob">6.2. Methods and Parameters</a><ul><li><a href="#slice-blob">6.2.1. The slice method</a></li></ul></li><li><a href="#file">6.3. The File Interface</a><ul><li><a href="#file-attrs">6.3.1. Attributes</a></li></ul></li><li><a href="#FileReader-interface">6.4. The FileReader Interface</a><ul><li><a href="#blobreader-task-source">6.4.1. The FileReader Task Source</a></li><li><a href="#filereaderConstrctr">6.4.2. Constructors</a></li><li><a href="#event-handler-attributes-section">6.4.3. Event Handler Attributes</a></li><li><a href="#blobreader-state">6.4.4. FileReader States</a></li><li><a href="#reading-a-file">6.4.5. Reading a File or Blob</a><ul><li><a href="#MultipleReads">6.4.5.1. Multiple Reads</a></li><li><a href="#filedata-attr">6.4.5.2. The result attribute</a></li><li><a href="#readAsBinaryString">6.4.5.3. The readAsBinaryString(blob) method</a></li><li><a href="#readAsDataURL">6.4.5.4. The readAsDataURL(blob) method</a></li><li><a href="#readAsDataText">6.4.5.5. The readAsText(blob, encoding) method</a></li><li><a href="#readAsArrayBuffer">6.4.5.6. The readAsArrayBuffer(blob) method</a></li><li><a href="#abort">6.4.5.7. The abort() method</a></li><li><a href="#blobAndFileParams">6.4.5.8. Blob Parameters</a></li><li><a href="#enctype">6.4.5.9. Determining Encoding</a></li><li><a href="#events">6.4.5.10. Events</a><ul><li><a href="#event-summary">6.4.5.10.1. Event Summary</a></li></ul></li></ul></li></ul></li><li><a href="#readingOnThreads">6.5. Reading on Threads</a><ul><li><a href="#FileReaderSync">6.5.1. The FileReaderSync Interface</a><ul><li><a href="#filereadersyncConstrctr">6.5.1.1. Constructors</a></li><li><a href="#readAsBinaryStringSyncSection">6.5.1.2. The readAsBinaryString method</a></li><li><a href="#readAsTextSync">6.5.1.3. The readAsText method</a></li><li><a href="#readAsDataURLSync-section">6.5.1.4. The readAsDataURL method</a></li><li><a href="#readAsArrayBufferSyncSection">6.5.1.5. The readAsArrayBuffer method</a></li></ul></li></ul></li><li><a href="#ErrorAndException">6.6. Errors and Exceptions</a><ul><li><a href="#FileErrorInterface">6.6.1. The FileError Interface</a></li><li><a href="#FileException">6.6.2. The FileException exception</a></li><li><a href="#ErrorDescriptions">6.6.3. Error Code Descriptions</a></li><li><a href="#not-allowed-error">6.6.4. The OperationNotAllowed Exception</a></li></ul></li><li><a href="#url">6.7. A URI for Blob and File reference</a><ul><li><a href="#use-cases-scheme">6.7.1. Use Cases for a New Scheme</a></li><li><a href="#alternative-schemas">6.7.2. Discussion of Existing Schemes</a></li><li><a href="#ABNFForBlob">6.7.3. Definition of blob URI Scheme</a><ul><li><a href="#OpaqueStringDiscussion">6.7.3.1. The Opaque String</a></li></ul></li><li><a href="#fragmentDiscussion">6.7.4. Discussion of Fragment Identifier</a></li><li><a href="#originOfBlob">6.7.5. Origin of Blob URIs</a></li><li><a href="#lifeTime">6.7.6. Lifetime of Blob URIs</a></li><li><a href="#processingModel">6.7.7. Dereferencing Model for Blob URIs</a><ul><li><a href="#TwoHundredOK">6.7.7.1. 200 OK</a></li><li><a href="#FourOhThreeNotAllowed">6.7.7.2. 403 Not Allowed</a></li><li><a href="#FourOhFourNotFound">6.7.7.3. 404 Not Found</a></li><li><a href="#FiveHundredInternalServerError">6.7.7.4. 500 Internal Server Error</a></li></ul></li><li><a href="#creating-revoking">6.7.8. Creating and Revoking a Blob URI</a></li></ul></li><li><a href="#security-discussion">6.8. Security Considerations</a></li><li><a href="#requirements">6.9. Requirements and Use Cases</a></li><li><a href="#AppendixA">6.10. Appendix A</a><ul><li><a href="#ABNFUUID">6.10.1. An ABNF for UUID</a></li></ul></li><li><a href="#acknowledgements-section">6.11. Acknowledgements</a></li><li><a href="#references">6.12. References</a><ul><li><a href="#normative-references">6.12.1. Normative references</a></li><li><a href="#informative-references">6.12.2. Informative References</a></li></ul></li></ul></li></ul></div>
+      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#dependencies">3. Dependencies</a></li><li><a href="#terminology">4. Terminology and Algorithms</a></li><li><a href="#filelist-section">5. The FileList Interface</a><ul><li><a href="#attributes-filelist">5.1. Attributes</a></li><li><a href="#filelist-methods-params">5.2. Methods and Parameters</a></li></ul></li><li><a href="#blob">6. The Blob Interface</a><ul><li><a href="#attributes-blob">6.1. Attributes</a></li><li><a href="#methodsandparams-blob">6.2. Methods and Parameters</a><ul><li><a href="#slice-blob">6.2.1. The slice method</a></li></ul></li><li><a href="#file">6.3. The File Interface</a><ul><li><a href="#file-attrs">6.3.1. Attributes</a></li></ul></li><li><a href="#FileReader-interface">6.4. The FileReader Interface</a><ul><li><a href="#blobreader-task-source">6.4.1. The FileReader Task Source</a></li><li><a href="#filereaderConstrctr">6.4.2. Constructors</a></li><li><a href="#event-handler-attributes-section">6.4.3. Event Handler Attributes</a></li><li><a href="#blobreader-state">6.4.4. FileReader States</a></li><li><a href="#reading-a-file">6.4.5. Reading a File or Blob</a><ul><li><a href="#MultipleReads">6.4.5.1. Multiple Reads</a></li><li><a href="#filedata-attr">6.4.5.2. The result attribute</a></li><li><a href="#readAsBinaryString">6.4.5.3. The readAsBinaryString(blob) method</a></li><li><a href="#readAsDataURL">6.4.5.4. The readAsDataURL(blob) method</a></li><li><a href="#readAsDataText">6.4.5.5. The readAsText(blob, encoding) method</a></li><li><a href="#readAsArrayBuffer">6.4.5.6. The readAsArrayBuffer(blob) method</a></li><li><a href="#abort">6.4.5.7. The abort() method</a></li><li><a href="#blobAndFileParams">6.4.5.8. Blob Parameters</a></li><li><a href="#enctype">6.4.5.9. Determining Encoding</a></li><li><a href="#events">6.4.5.10. Events</a><ul><li><a href="#event-summary">6.4.5.10.1. Event Summary</a></li></ul></li></ul></li></ul></li><li><a href="#readingOnThreads">6.5. Reading on Threads</a><ul><li><a href="#FileReaderSync">6.5.1. The FileReaderSync Interface</a><ul><li><a href="#filereadersyncConstrctr">6.5.1.1. Constructors</a></li><li><a href="#readAsBinaryStringSyncSection">6.5.1.2. The readAsBinaryString method</a></li><li><a href="#readAsTextSync">6.5.1.3. The readAsText method</a></li><li><a href="#readAsDataURLSync-section">6.5.1.4. The readAsDataURL method</a></li><li><a href="#readAsArrayBufferSyncSection">6.5.1.5. The readAsArrayBuffer method</a></li></ul></li></ul></li><li><a href="#ErrorAndException">6.6. Errors and Exceptions</a><ul><li><a href="#FileErrorInterface">6.6.1. The FileError Interface</a></li><li><a href="#FileException">6.6.2. The FileException exception</a></li><li><a href="#ErrorDescriptions">6.6.3. Error Code Descriptions</a></li><li><a href="#not-allowed-error">6.6.4. The OperationNotAllowed Exception</a></li></ul></li><li><a href="#url">6.7. A URI for Blob and File reference</a><ul><li><a href="#use-cases-scheme">6.7.1. Requirements for a New Scheme</a></li><li><a href="#alternative-schemas">6.7.2. Discussion of Existing Schemes</a></li><li><a href="#ABNFForBlob">6.7.3. Definition of blob URI Scheme</a><ul><li><a href="#OpaqueStringDiscussion">6.7.3.1. The Opaque String</a></li></ul></li><li><a href="#fragmentDiscussion">6.7.4. Discussion of Fragment Identifier</a></li><li><a href="#originOfBlob">6.7.5. Origin of Blob URIs</a></li><li><a href="#lifeTime">6.7.6. Lifetime of Blob URIs</a></li><li><a href="#processingModel">6.7.7. Dereferencing Model for Blob URIs</a><ul><li><a href="#TwoHundredOK">6.7.7.1. 200 OK</a></li><li><a href="#FiveHundredInternalServerError">6.7.7.2. 500 Internal Server Error</a></li><li><a href="#HeaderSummary">6.7.7.3. Request and Response Headers</a></li></ul></li><li><a href="#creating-revoking">6.7.8. Creating and Revoking a Blob URI</a></li></ul></li><li><a href="#security-discussion">6.8. Security Considerations</a></li><li><a href="#requirements">6.9. Requirements and Use Cases</a></li><li><a href="#AppendixA">6.10. Appendix A</a><ul><li><a href="#ABNFUUID">6.10.1. An ABNF for UUID</a></li></ul></li><li><a href="#acknowledgements-section">6.11. Acknowledgements</a></li><li><a href="#references">6.12. References</a><ul><li><a href="#normative-references">6.12.1. Normative references</a></li><li><a href="#informative-references">6.12.2. Informative References</a></li></ul></li></ul></li></ul></div>
     </div>
 
     <div id="sections">
@@ -319,7 +325,7 @@ function errorHandler(evt) {
         <h2>5. The FileList Interface</h2>
        
        <p>
-          This interface is a <strong>collection</strong> [<a href="#DOMCore">DOMCore</a>] of user-selected <a href="dfn-File"><code>File</code></a> objects.
+          This interface is a <strong>collection</strong> [<a href="#DOMCore">DOMCore</a>] of <a href="dfn-File"><code>File</code></a> objects.
        </p>
     <div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
     interface <dfn id="dfn-filelist">FileList</dfn> {
@@ -348,7 +354,7 @@ function errorHandler(evt) {
     <div class="section" id="attributes-filelist">
     <h3>5.1. Attributes</h3>
     <dl>
-      <dt id="dfn-length"><code>length</code></dt><dd><p>MUST return the number of user-selected files in the <a href="#dfn-filelist"><code>FileList</code></a> collection.  If there are no files in the collection, this attribute MUST return 0.</p></dd>
+      <dt id="dfn-length"><code>length</code></dt><dd><p>MUST return the number of files in the <a href="#dfn-filelist"><code>FileList</code></a> collection.  If there are no files in the collection, this attribute MUST return 0.</p></dd>
     </dl>
     </div>
     <div class="section" id="filelist-methods-params">
@@ -357,8 +363,8 @@ function errorHandler(evt) {
       <dt id="dfn-item"><code>item(index)</code></dt><dd><p>MUST return the <em>indexth</em> <a href="#dfn-file"><code>File</code></a> object in
       the <a href="#dfn-filelist"><code>FileList</code></a>.  If there is no <em>indexth</em> <a href="#dfn-file"><code>File</code></a> object in the
       <a href="#dfn-filelist"><code>FileList</code></a>, then this method must return <code>null</code>.</p>
-      <p><dfn id="dfn-index" title="index"><code>index</code></dfn> MUST be treated by user agents as value for the position of the selected <a href="#dfn-file"><code>File</code></a>
-      object in the <a href="#dfn-filelist"><code>FileList</code></a>, with 0 representing the first selected file.  <strong>Supported property indices</strong> [<a href="#WebIDL">WebIDL</a>] are the numbers in the range zero to one less than the number of user-selected <a href="#dfn-File"><code>File</code></a> objects represented by the collection [<a href="#DOMCore">DOMCore</a>].  
+      <p><dfn id="dfn-index" title="index"><code>index</code></dfn> MUST be treated by user agents as value for the position of a <a href="#dfn-file"><code>File</code></a>
+      object in the <a href="#dfn-filelist"><code>FileList</code></a> collection, with 0 representing the first file in the collection.  <strong>Supported property indices</strong> [<a href="#WebIDL">WebIDL</a>] are the numbers in the range zero to one less than the number of <a href="#dfn-File"><code>File</code></a> objects represented by the collection [<a href="#DOMCore">DOMCore</a>].  
 If there are no such <a href="#dfn-File"><code>File</code></a> objects, then there are no supported property indices [<a href="#WebIDL">WebIDL</a>]. </p>
       </dd>
     
@@ -368,14 +374,6 @@ If there are no such <a href="#dfn-File"><code>File</code></a> objects, then the
     The <code>HTMLInputElement</code> interface [<a href="#HTML">HTML</a>] has a readonly attribute of type <code>FileList</code>, which is what is
     being accessed in the above example.  Other interfaces with a readonly attribute of type <code>FileList</code> include the <code>DataTransfer</code>
     interface [<a href="#HTML">HTML</a>].
-    </div>
-    <div id="filelist-normative" class="section">
-    <h3>5.3. Conformance Criteria for FileList</h3>
-    <p>Conforming user agents MUST expose the selected file(s) with an object of type  <a href="#dfn-filelist"><code>FileList</code></a>, which contains the selected files as
-    <a href="#dfn-file"><code>File</code></a> objects.  Some conforming user agents support multiple file selections, in which case the
-    <a href="#dfn-filelist"><code>FileList</code></a> object MUST make available all selected files.  If there are no
-    file selections (e.g. through cancelation of a file picker or through canceling a file drag operation) conforming user agents MUST return an object of type
-    <a href="#dfn-filelist"><code>FileList</code></a> with <code>null</code> as a return value for any call to the <a href="#dfn-item"><code>item</code></a> method.</p>
     </div>
     </div>
   <div id="blob" class="section">
@@ -1395,7 +1393,7 @@ the most appropriate code from the <a href="#ErrorDescriptions">table below</a>.
 <p>This section defines a scheme for a URI used to refer to <a href="#dfn-Blob"><code>Blob</code></a> objects (and <a href="#dfn-file"><code>File</code></a> objects). 
 </p>
 <div id="use-cases-scheme" class="section">
-<h3>6.7.1. Use Cases for a New Scheme</h3>
+<h3>6.7.1. Requirements for a New Scheme</h3>
 <p>This specification defines a scheme with URIs of the sort: <code>blob:550e8400-e29b-41d4-a716-446655440000#aboutABBA</code>.
 This section provides some use cases and is an informative discussion.</p>
 <ul>
@@ -1529,7 +1527,7 @@ dereferenced after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</cod
 <h3>6.7.7. Dereferencing Model for Blob URIs</h3>
 <p>User agents MUST only support requests with GET [<a href="#HTTP">HTTP</a>].  If the <a href="#dfn-Blob"><code>Blob</code></a> has a
 <a href="#dfn-type"><code>type</code></a> attribute, or if the <a href="#dfn-Blob"><code>Blob</code></a> has been created with a <a href="#dfn-slice"><code>slice</code></a> call which
-uses a <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument, responses to derefencing the Blob URI must include the Content-Type header from HTTP [<a href="#HTTP">HTTP</a>] with the value of the <a href="#dfn-type"><code>type</code></a>
+uses a <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument, responses to dereferencing the Blob URI must include the Content-Type header from HTTP [<a href="#HTTP">HTTP</a>] with the value of the <a href="#dfn-type"><code>type</code></a>
 attribute or <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument.  Specifically, responses MUST only support a subset of responses that are equivalent to the following from HTTP [<a href="#HTTP">HTTP</a>]:</p>
 
 <div id="TwoHundredOK" class="section">
@@ -1539,23 +1537,25 @@ satisfies the <a href="#originOfBlob">origin requirement</a>, and satisfies the 
 the user agent MUST also use a Content-Type header [<a href="#HTTP">HTTP</a>] with a value equal to the <code><a href="#dfn-Blob">Blob</a></code> object's <code><a href="#dfn-type">type</a></code> attribute.
 </p>
 </div>
-<div id="FourOhThreeNotAllowed" class="section">
-<h4>6.7.7.2. 403 Not Allowed</h4>
-<p>This response [<a href="#HTTP">HTTP</a>] MUST be used if the request violates the <a href="#originOfBlob">origin requirement</a>.  Additionally, it MUST be used if the
-underlying file's permission structure has changed (thus preventing access from web content).  User agents MAY accompany this response with a message (e.g. "Origin Violation").</p>
-</div>
-<div id="FourOhFourNotFound" class="section">
-<h4>6.7.7.3. 404 Not Found</h4>
-<p>This response [<a href="#HTTP">HTTP</a>] MUST be used if the request violates the <a href="#lifeTime">lifetime</a> requirement
-(e.g. if a cached <a href="#url">Blob
-URI</a> persists after the specified lifetime of the URI has elapsed). Additionally, it MUST be used if the underlying file has moved.</p>
-</div>
 <div id="FiveHundredInternalServerError" class="section">
-<h4>6.7.7.4. 500 Internal Server Error</h4>
+<h4>6.7.7.2. 500 Internal Server Error</h4>
 <p>
-  This response [<a href="#HTTP">HTTP</a>] MAY be used as a generic error condition, including for security errors or access violations (e.g if the request method is anything other than GET
-  [<a href="#HTTP">HTTP</a>].  User agents MAY accompany this response with a message (e.g. "Data Access Error"). 
+  This response [<a href="#HTTP">HTTP</a>] MUST be used if:
 </p>
+<ul>
+	<li><p>Any request method other than GET is used to dereference the URL.</p></li>
+	<li><p>The request violates the <a href="#originOfBlob">origin requirement</a>.</p></li>
+	<li><p>The request does not satisfy the <a href="#lifetime">lifetime requirement</a>.</p></li>
+	<li><p>The underlying resource has changed, moved, been deleted or has become invalid.</p></li>
+	<li><p>The permissions surrounding the underlying resource do not permit access.</p></li>
+	<li><p>A security error has occurred; in particulary, if trying to set <code>document.location = window.URL.createObjectURL(myFile)</code>.</p></li>
+</ul>
+<p>This response MAY be accompanied by messages indicating why the <a href="#dfn-Blob"><code>Blob</code></a> resource could not be served.</p>
+</div>
+<div id="HeaderSummary" class="section">
+<h4>6.7.7.3. Request and Response Headers</h4>
+<p>This section is an informative discussion of requests for Blob URIs and responses when Blob URIs are dereferenced, with examples.</p>
+
 </div>
 </div>
 <div id="creating-revoking" class="section">
@@ -1646,11 +1646,11 @@ is called on them.</p></li>
 <a href="#read-methods">read method</a> is called on a file, user agents MAY raise a <code><a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a></code>.</p></li>
 <li><p><dfn id="cross-scheme-reads">Cross-scheme file reads</dfn> occur when a read attempt is made on a file resident on the file:/// scheme by a resource
 dereferenced by http://.  In such cases, if a <a href="#read-methods">read method</a> is called on a file, user agents MAY raise a <code><a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a></code>.
-User agents MAY raise a <a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a> in cases where reads occur from resources derefenced on file:///. </p></li> 
+User agents MAY raise a <a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a> in cases where reads occur from resources dereferenced on file:///. </p></li> 
 <li><p><dfn id="cross-origin-requests-on-blobs">Cross-origin requests on Blob URIs</dfn> occur when a <a href="#url">Blob URI</a> is accessed across origins.
 In particular, code of the sort: <code>document.location = window.URL.createObjectURL(myFile);</code> is problematic.  User agents should ensure that the
-<a href="#FourOhThreeNotAllowed">403 Not Allowed</a> response
-is used in cross-origin request contexts.  User agents MAY return <a href="#FourOhThreeNotAllowed">403 Not Allowed</a> at any attempt to set the entire document location to a file or Blob.
+<a href="#FiveHundredInternalServerError">500 Internal Server Error</a> response
+is used in cross-origin request contexts.  User agents MUST return <a href="#FiveHundredInternalServerError">500 Internal Server Error</a> at any attempt to set the entire document location to a file or Blob.
 </p></li>
 </ul>
 <div class="ednote"><div class="ednoteHeader">Editorial note</div><p>This section is provisional; more security data may supplement this in subsequent drafts.</p></div>
