@@ -405,7 +405,7 @@ If there are no such <a href="#dfn-File"><code>File</code></a> objects, then the
     <div id='slice-blob' class='section'>
     
 <div id='normalization-of-params' class='section'>
-<h4>Parameter Normalization</h4>
+<h4>Parameters to slice</h4>
 <p>When this specification says to <dfn id="normalize-params">normalize parameters</dfn> for the <code>slice</code> call, the following steps MUST be followed for 
 the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</code></a>, and <a href="#dfn-contentTypeBlob"><code>contentType</code></a> parameters, which are defined below.</p>	
     <p>The optional <dfn id='dfn-start'><code>start</code></dfn> parameter is a value for the start point of a <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call, and
