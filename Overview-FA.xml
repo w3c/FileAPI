@@ -570,12 +570,12 @@ interface <dfn id="dfn-filereader">FileReader</dfn>: EventTarget {
   readonly attribute <a href="#dfn-fileerror" class="dfnref">FileError</a> <a href="#dfn-error" class="dfnref">error</a>;
 
   <span class="comment">// event handler attributes</span>
-  attribute Function <a href="#dfn-onloadstart" class="dfnref">onloadstart</a>;
-  attribute Function <a href="#dfn-onprogress" class="dfnref">onprogress</a>;
-  attribute Function <a class="dfnref" href="#dfn-onload">onload</a>;
-  attribute Function <a class="dfnref" href="#dfn-onabort">onabort</a>;
-  attribute Function <a class="dfnref" href="#dfn-onerror">onerror</a>;
-  attribute Function <a class="dfnref" href="#dfn-onloadend">onloadend</a>;
+  attribute [TreatNonCallableAsNull] Function? <a href="#dfn-onloadstart" class="dfnref">onloadstart</a>;
+  attribute [TreatNonCallableAsNull] Function? <a href="#dfn-onprogress" class="dfnref">onprogress</a>;
+  attribute [TreatNonCallableAsNull] Function? <a class="dfnref" href="#dfn-onload">onload</a>;
+  attribute [TreatNonCallableAsNull] Function? <a class="dfnref" href="#dfn-onabort">onabort</a>;
+  attribute [TreatNonCallableAsNull] Function? <a class="dfnref" href="#dfn-onerror">onerror</a>;
+  attribute [TreatNonCallableAsNull] Function? <a class="dfnref" href="#dfn-onloadend">onloadend</a>;
 
 };
   </x:codeblock>
