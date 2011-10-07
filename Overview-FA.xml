@@ -69,8 +69,6 @@
 	        such as its name and the date of the last modification (on disk) of the file.</li>
             <li>A <a href='#dfn-filereader' class='dfnref'>FileReader</a> interface, which provides methods to read a
             <a href="#dfn-file">File</a> or a <a href="#dfn-Blob">Blob</a>, and an event model to obtain the results of these reads.</li>
-            <li>A <a href='#dfn-fileerror' class='dfnref'>FileError</a> interface and a <a href="#dfn-FileException" class="dfnref">FileException</a> exception
-            which define error conditions used by this specification.</li>
             <li>A <a href="#url" class="dfnref">URI scheme</a> for use with binary data such as files, so that they can be referenced within web applications.</li>
 
 
@@ -296,6 +294,7 @@ function errorHandler(evt) {
         <dfn id="task">task</dfn>, <dfn id="task-source">task source</dfn>, <dfn id="df-URL">URL</dfn>, and
         <dfn id="queue-a-task">queue a task</dfn> are defined by the HTML specification [<a href="#HTML">HTML</a>]. </p>
  <p>When this specification says to <dfn id="terminate-an-algorithm">terminate an algorithm</dfn> the user agent must terminate the algorithm after finishing the step it is on.  Asynchronous <a href="#read-methods">read methods</a> defined in this specification may return before the algorithm in question is terminated, and can be terminated by an <a href="#dfn-abort"><code>abort()</code></a> call.</p>
+<p>The term <dfn id="throw-an-exception">throw</dfn> in this specification, as it pertains to exceptions, is used as defined in the DOMCore specification [<a href="#DOMCore">DOMCore</a>].</p>
        <p>The algorithms and steps in this specification use the following mathematical operations:</p>
        <ul>
        <li><p>max(a,b) returns the maximum of a and b, and is always performed on integers as they are defined in WebIDL [<a href="#WebIDL">WebIDL</a>]; in the case of max(6,4) the result is 6.
@@ -549,10 +548,10 @@ initialized to the last modified date of the file; otherwise, this MUST return n
 interface <dfn id="dfn-filereader">FileReader</dfn>: EventTarget {
 
   <span class="comment">// async read methods</span>
-  void <a href="#dfn-readAsArrayBuffer" class="dfnref">readAsArrayBuffer</a>(<a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
-  void <a href="#dfn-readAsBinaryStringAsync" class="dfnref">readAsBinaryString</a>(<a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
-  void <a href="#dfn-readAsText" class="dfnref">readAsText</a>(<a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>, optional DOMString <a href="#dfn-encoding" class="dfnref">encoding</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
-  void <a href="#dfn-readAsDataURL" class="dfnref">readAsDataURL</a>(<a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>) raises (<a href="#dfn-OperationNotAllowedException" class="dfnref">OperationNotAllowedException</a>);
+  void <a href="#dfn-readAsArrayBuffer" class="dfnref">readAsArrayBuffer</a>(<a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>);
+  void <a href="#dfn-readAsBinaryStringAsync" class="dfnref">readAsBinaryString</a>(<a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>);
+  void <a href="#dfn-readAsText" class="dfnref">readAsText</a>(<a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>, optional DOMString <a href="#dfn-encoding" class="dfnref">encoding</a>);
+  void <a href="#dfn-readAsDataURL" class="dfnref">readAsDataURL</a>(<a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>);
 
   void <a href="#dfn-abort" class="dfnref">abort</a>();
 
@@ -567,7 +566,7 @@ interface <dfn id="dfn-filereader">FileReader</dfn>: EventTarget {
   <span class="comment">// File or Blob data</span>
   readonly attribute any <a href="#dfn-result" class="dfnref">result</a>;
   
-  readonly attribute <a href="#dfn-fileerror" class="dfnref">FileError</a> <a href="#dfn-error" class="dfnref">error</a>;
+  readonly attribute <a href="#dfn-domerror" class="dfnref">DOMError</a> <a href="#dfn-error" class="dfnref">error</a>;
 
   <span class="comment">// event handler attributes</span>
   attribute [TreatNonCallableAsNull] Function? <a href="#dfn-onloadstart" class="dfnref">onloadstart</a>;
@@ -677,8 +676,7 @@ at least one of the <a href="#read-methods">read methods</a> have been called on
 <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer</code></a>, <a href="#dfn-readAsBinaryStringAsync" class="dfnref"><code>readAsBinaryString</code></a>,
  <a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a>, and <a href="#dfn-readAsDataURL" class="dfnref"><code>readAsDataURL</code></a>, which
  <em>read files into memory</em>.  If multiple concurrent read methods are called on the same <a href="#dfn-filereader" class="dfnref"><code>FileReader</code></a> object, user agents
- MUST throw an <a href="#dfn-OperationNotAllowedException" class="dfnrefs"><code>OperationNotAllowedException</code></a> with the
- <a href="#dfn-NOT_ALLOWED_ERR" class="dfnrefs"><code>NOT_ALLOWED_ERR</code></a> status code on any of the read methods that occur when
+ MUST throw an <code>InvalidStateError</code> [<a href="#DOMCore">DOMCore</a>] on any of the read methods that occur when
  <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a>.
 
 </p>
@@ -747,8 +745,7 @@ the <code>result</code> attribute as <a href="#dfn-Blob"><code>Blob</code></a> d
 When the <dfn id="dfn-readAsBinaryStringAsync"><code>readAsBinaryString(blob)</code></dfn> method is called, the user agent MUST run the steps below (unless otherwise indicated).
 </p>
 <ol>
-  <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> raise a
-  <a href="#dfn-NOT_ALLOWED_ERR"><code>NOT_ALLOWED_ERR</code> exception</a> and <a href="#terminate-an-algorithm">terminate this algorithm</a>.
+  <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> throw an <code>InvalidStateError</code> exception [<a href="#DOMCore">DOMCore</a>] and <a href="#terminate-an-algorithm">terminate this algorithm</a>.
   </p>
 
 <p><strong>Note:</strong> The <a href="#dfn-readAsBinaryStringAsync"><code>readAsBinaryString()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
@@ -759,7 +756,7 @@ When the <dfn id="dfn-readAsBinaryStringAsync"><code>readAsBinaryString(blob)</c
     <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
     <a href="#dfn-error-event"><code>error</code></a>.  <em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
     <a href="#dfn-error"><code>error</code></a> attribute MUST be a
-    a <a href="#dfn-fileerror"><code>FileError</code></a> object with a valid <a href="#dfn-error-codes">error code</a> that indicates the kind of
+    a <a href="#dfn-domerror"><code>DOMError</code></a> object with a <a href="#dfn-error-codes"><code>name</code></a> attribute that indicates the kind of
     <a href="#file-error-read">file error that has occurred</a>.</p>
     </li>
     <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
@@ -792,8 +789,7 @@ When the <dfn id="dfn-readAsBinaryStringAsync"><code>readAsBinaryString(blob)</c
 <h4>The <code>readAsDataURL(blob)</code> method</h4>
 <p>When the <dfn id="dfn-readAsDataURL"><code>readAsDataURL(blob)</code></dfn> method is called, the user agent MUST run the steps below (unless otherwise indicated).</p>
 <ol>
-<li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> raise a
-  <a href="#dfn-NOT_ALLOWED_ERR"><code>NOT_ALLOWED_ERR</code> exception</a> and <a href="#terminate-an-algorithm">terminate this algorithm</a>.
+<li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> throw an <code>InvalidStateError</code> exception [<a href="#DOMCore">DOMCore</a>] and <a href="#terminate-an-algorithm">terminate this algorithm</a>.
   </p>
 <p><strong>Note:</strong> The <a href="#dfn-readAsDataURL"><code>readAsDataURL()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
 </li> 
@@ -804,7 +800,7 @@ When the <dfn id="dfn-readAsBinaryStringAsync"><code>readAsBinaryString(blob)</c
     <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
     <a href="#dfn-error-event"><code>error</code></a>.  <em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
     <a href="#dfn-error"><code>error</code></a> attribute MUST be a
-    a <a href="#dfn-fileerror"><code>FileError</code></a> object with a valid <a href="#dfn-error-codes">error code</a> that indicates the kind of
+    a <a href="#dfn-domerror"><code>DOMError</code></a> object with a <a href="#dfn-error-codes"><code>name</code></a> attribute that indicates the kind of
     <a href="#file-error-read">file error that has occurred</a>.</p></li>
     <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
     <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
@@ -845,8 +841,7 @@ When the <dfn id="dfn-readAsText"><code>readAsText(blob, encoding)</code></dfn> 
 the user agent MUST run the steps below (unless otherwise indicated).
 </p>
 <ol>
-<li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> raise a
-  <a href="#dfn-NOT_ALLOWED_ERR"><code>NOT_ALLOWED_ERR</code> exception</a> and terminate these steps.
+<li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> throw an <code>InvalidStateError</code> [<a href="#DOMCore">DOMCore</a>] and terminate these steps.
   </p>
 
 <p><strong>Note:</strong> The <a href="#dfn-readAsText"><code>readAsText()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
@@ -858,7 +853,7 @@ the user agent MUST run the steps below (unless otherwise indicated).
     <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
     <a href="#dfn-error-event"><code>error</code></a>.  <em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
     <a href="#dfn-error"><code>error</code></a> attribute MUST be a
-    a <a href="#dfn-fileerror"><code>FileError</code></a> object with a valid <a href="#dfn-error-codes">error code</a> that indicates the kind of
+    a <a href="#dfn-domerror"><code>DOMError</code></a> object with a <a href="#dfn-error-codes"><code>name</code></a> attribute that indicates the kind of
     <a href="#file-error-read">file error that has occurred</a>.</p>
     </li>
     <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
@@ -907,8 +902,7 @@ the user agent MUST run the steps below (unless otherwise indicated).
 When the <dfn id="dfn-readAsArrayBuffer"><code>readAsArrayBuffer(blob)</code></dfn> method is called, the user agent MUST run the steps below (unless otherwise indicated).
 </p>
 <ol>
- <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> raise a
-  <a href="#dfn-NOT_ALLOWED_ERR"><code>NOT_ALLOWED_ERR</code> exception</a> and terminate these steps.
+ <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> throw an <code>InvalidStateError</code> exception [<a href="#DOMCore">DOMCore</a>] and terminate these steps.
   </p>
 
 <p><strong>Note:</strong> The <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
@@ -919,7 +913,7 @@ When the <dfn id="dfn-readAsArrayBuffer"><code>readAsArrayBuffer(blob)</code></d
     <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
     <a href="#dfn-error-event"><code>error</code></a>.  <em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
     <a href="#dfn-error"><code>error</code></a> attribute MUST be a
-    a <a href="#dfn-fileerror"><code>FileError</code></a> object with a valid <a href="#dfn-error-codes">error code</a> that indicates the kind of
+    a <a href="#dfn-domerror"><code>DOMError</code></a> object with a <a href="#dfn-error-codes"><code>name</code></a> attribute that indicates the kind of
     <a href="#file-error-read">file error that has occurred</a>.</p>
     </li>
     <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
@@ -1181,8 +1175,8 @@ interface <dfn id="dfn-FileReaderSync">FileReaderSync</dfn> {
 <h3>The <code>readAsBinaryString</code> method</h3>
 <p>When the <dfn id="dfn-readAsBinaryStringSync"><code>readAsBinaryString(blob)</code></dfn> method is called, the following steps MUST be followed:</p>
 <ol>
-<li><p>If an <a href="#file-error-read">error occurs during reading the <code>blob</code> parameter</a>, throw a
-<a href="#dfn-FileException"><code>FileException</code></a> with the <a href="#dfn-error-codes">appropriate error code</a>. Terminate these overall steps.</p></li>
+<li><p>If an <a href="#file-error-read">error occurs during reading the <code>blob</code> parameter</a>, throw the <a href="#dfn-error-codes">appropriate 
+exception</a>. Terminate these overall steps.</p></li>
 <li><p>If no error has occurred, read <a href="#dfn-fileBlob"><code>blob</code></a> into memory.  Return the data contents of
 <a href="#dfn-fileBlob"><code>blob</code></a> as a <a href="#binary-string">binary string</a>.</p></li>
 </ol>
@@ -1198,8 +1192,8 @@ interface <dfn id="dfn-FileReaderSync">FileReaderSync</dfn> {
 <p>When the <dfn id="dfn-readAsTextSync"><code>readAsText(blob, encoding)</code></dfn> method is called (the
 <a href="#dfn-encoding"><code>encoding</code></a> argument is optional), the following steps MUST be followed:</p>
 <ol>
-<li><p>If an <a href="#file-error-read">error occurs during reading of the <code>blob</code> parameter</a>, throw a
-<a href="#dfn-FileException"><code>FileException</code></a> with the <a href="#dfn-error-codes">appropriate error code</a>. Terminate these overall steps.</p></li>
+<li><p>If an <a href="#file-error-read">error occurs during reading of the <code>blob</code> parameter</a>, throw the <a href="#dfn-error-codes">appropriate 
+	exception</a>. Terminate these overall steps.</p></li>
 <li><p>If no error has occurred, read <a href="#dfn-fileBlob"><code>blob</code></a> into memory.  Return the data contents of <a href="#dfn-fileBlob"><code>blob</code></a>
 using the <a href="#encoding-determination">encoding determination</a> algorithm.</p></li>
 </ol>
@@ -1209,8 +1203,7 @@ using the <a href="#encoding-determination">encoding determination</a> algorithm
 <p>
   When the <dfn id="dfn-readAsDataURLSync"><code>readAsDataURL(blob)</code></dfn> method is called, the following steps MUST be followed:</p>
 <ol>
-<li><p>If an <a href="#file-error-read">error occurs during reading of the <code>blob</code> parameter</a>, throw a
-<a href="#dfn-FileException"><code>FileException</code></a> with the <a href="#dfn-error-codes">appropriate error code</a>. Terminate these overall steps.</p></li>
+<li><p>If an <a href="#file-error-read">error occurs during reading of the <code>blob</code> parameter</a>, throw the <a href="#dfn-error-codes">appropriate  exception</a>. Terminate these overall steps.</p></li>
 <li><p>If no error has occurred, read <a href="#dfn-fileBlob"><code>blob</code></a> into memory. Return the data contents of <a href="#dfn-fileBlob"><code>blob</code></a>
 as a Data URL [<a href="#DataURL">DataURL</a>]</p>
 <ul>
@@ -1230,8 +1223,8 @@ as a Data URL [<a href="#DataURL">DataURL</a>]</p>
 <h3>The <code>readAsArrayBuffer</code> method</h3>
 <p>When the <dfn id="dfn-readAsArrayBufferSync"><code>readAsArrayBuffer(blob)</code></dfn> method is called, the following steps MUST be followed:</p>
 <ol>
-<li><p>If an <a href="#file-error-read">error occurs during reading the <code>blob</code> parameter</a>, throw a
-<a href="#dfn-FileException"><code>FileException</code></a> with the <a href="#dfn-error-codes">appropriate error code</a>. Terminate these overall steps.</p></li>
+<li><p>If an <a href="#file-error-read">error occurs during reading the <code>blob</code> parameter</a>, throw the <a href="#dfn-error-codes">appropriate 
+exception</a>. Terminate these overall steps.</p></li>
 <li><p>If no error has occurred, read <a href="#dfn-fileBlob"><code>blob</code></a> into memory.  Return the data contents of
 <a href="#dfn-fileBlob"><code>blob</code></a> as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] </p></li>
 </ol>
@@ -1240,138 +1233,55 @@ as a Data URL [<a href="#DataURL">DataURL</a>]</p>
 </div>
 <div id="ErrorAndException" class="section">
   <h2>Errors and Exceptions</h2>
-  <p>
-    <dfn id="file-error-read">Error conditions</dfn> can occur when reading files from the underlying filesystem.  The list below of potential error conditions is <em>informative</em>,
-    with links to <em>normative</em> descriptions of error codes:</p>
+    <p><dfn id="file-error-read">Error conditions</dfn> can occur when reading files from the underlying filesystem.  The list below of potential error conditions is <em>informative</em>.</p>
     <ul>
     <li><p>The <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> being accessed may not exist at the time one of the asynchronous <a href="#read-methods">read methods</a> or synchronous
     <a href="#read-method-sync">read methods</a>
     are called. This may be due to it having been moved or deleted after a reference to it was acquired (e.g. concurrent modification with another application).  See
-<a href="#dfn-NOT_FOUND_ERR"><code>NOT_FOUND_ERR</code></a></p></li>
+<a href="#dfn-NotFoundError"><code>NotFoundError</code></a></p></li>
     <li><p>A <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> may be unreadable.  This may be due to permission problems that occur after a reference to a <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> has been acquired
-    (e.g. concurrent lock with another application). See <a href="#dfn-NOT_READABLE_ERR"><code>NOT_READABLE_ERR</code></a></p></li>
+    (e.g. concurrent lock with another application). See <a href="#dfn-NotReadableError"><code>NotReadableError</code></a></p></li>
     <li><p>User agents MAY determine that some files are unsafe for use within Web applications.  A file may change on disk since the original file selection,
     thus resulting in an invalid read.  Additionally, some file and directory structures may be considered restricted
 by the underlying filesystem; attempts to read from them may be considered a security violation.  See the <a href="#security-discussion">security considerations</a>.
-See <a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a></p></li>
+See <a href="#dfn-SecurityError"><code>SecurityError</code></a></p></li>
     <li><p>Files may be too large to return to the data structures of a Web application.  An example might be that URL length limitations imposed by user agents on Data URLs may
-make obtaining large files encoded as Data URLs impossible to return [<a href="#DataURL">DataURL</a>].  See <a href="#dfn-ENCODING_ERR"><code>ENCODING_ERR</code></a></p></li>
-<li><p>During the reading of a <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a>, the Web application may itself wish to abort (see <a href="#dfn-abort"><code>abort()</code></a>) the call to an asynchronous read method. See
-<a href="#dfn-ABORT_ERR"><code>ABORT_ERR</code></a>
-</p></li>
-    
+make obtaining large files encoded as Data URLs impossible to return [<a href="#DataURL">DataURL</a>].  See <a href="#dfn-EncodingError"><code>EncodingError</code></a></p></li>
     </ul>
-<div class="ednote">
-	<p>Exceptions and errors in this specification are likely to change, depending on the outcome of ongoing discussions of exceptions and errors on the web platform. </p>
-	
-</div>
-<div id="FileErrorInterface" class="section">
-<h3>The <code>FileError</code> Interface</h3>
-<p>
-  This interface is used to report errors asynchronously.  The <a href="#dfn-filereader"><code>FileReader</code></a> object's <dfn id="dfn-error">error</dfn> attribute is a
-  <a href="#dfn-fileerror"><code>FileError</code></a> object, and is accessed asynchronously through the <a href="#dfn-onerror"><code>onerror</code></a> event handler when
-  <a href="#dfn-error-event">error events</a> are generated.  Conforming user agents that make available the
-  <a href="#filereaderConstrctr"><code>FileReader()</code> constructor</a> on their global objects MUST also make available the <code>FileError</code> interface object.
-</p>
-<x:codeblock language="idl">
- interface <dfn id="dfn-fileerror">FileError</dfn> {
-   <span class="comment">// File error codes</span>
-   
-   const unsigned short <a href="#dfn-NOT_FOUND_ERR">NOT_FOUND_ERR</a> = 1;
-   const unsigned short <a href="#dfn-SECURITY_ERR">SECURITY_ERR</a> = 2;
-   const unsigned short <a href="#dfn-ABORT_ERR">ABORT_ERR</a> = 3;
-   const unsigned short <a href="#dfn-NOT_READABLE_ERR">NOT_READABLE_ERR</a> = 4;
-   const unsigned short <a href="#dfn-ENCODING_ERR">ENCODING_ERR</a> = 5;
- 
-   readonly attribute unsigned short <a href="#dfn-code">code</a>;
+<div id="dfn-error-codes" class="section">
+<h3>Throwing an Exception or Returning an Error</h3>
+<p>This section is normative.  Error conditions can arise when reading a file.</p>
+<p>Synchronous read methods <a href="#throw-an-exception">throw</a> exceptions of the type in the table below if there has been an error with reading or .</p>
 
-};
-</x:codeblock>
-<p>The <dfn id="dfn-code"><code>code</code></dfn> attribute MUST return one of the constants of the <a href="#dfn-fileerror"><code>FileError</code></a> error, which MUST be
-the most appropriate code from the <a href="#ErrorDescriptions">table below</a>.</p>
-</div> 
-<div id="FileException" class="section">
-<h3>The <code>FileException</code> exception</h3>
-<p>
-Errors in the synchronous <a href="#read-method-sync">read methods</a> for Web Workers [<a href="#Workers">Web Workers</a>] are reported using the
-<a href="#dfn-FileException"><code>FileException</code></a> exception.  Conforming user agents that make available the <a href="#filereadersyncConstrctr"><code>FileReaderSync()</code> constructor</a>
-on <code>WorkerGlobalScope</code> MUST also make available the <code>FileException</code> interface object.
-</p>
-<x:codeblock language="idl">
- exception <dfn id="dfn-FileException">FileException</dfn> {
-  
-  const unsigned short <a href="#dfn-NOT_FOUND_ERR">NOT_FOUND_ERR</a> = 1;
-  const unsigned short <a href="#dfn-SECURITY_ERR">SECURITY_ERR</a> = 2;
-  const unsigned short <a href="#dfn-ABORT_ERR">ABORT_ERR</a> = 3;
-  
-  const unsigned short <a href="#dfn-NOT_READABLE_ERR">NOT_READABLE_ERR</a> = 4;
-  const unsigned short <a href="#dfn-ENCODING_ERR">ENCODING_ERR</a> = 5;
- 
-  unsigned short <a href="#dfn-code-exception">code</a>;
-  
-};
-</x:codeblock>
-<p>The <dfn id="dfn-code-exception"><code>code</code></dfn> exception field MUST return one of the constants of the <a href="#dfn-FileException"><code>FileException</code></a>
-exception, which MUST be
-the most appropriate code from the <a href="#ErrorDescriptions">table below</a>.</p>
-</div>
-<div id="ErrorDescriptions" class="section">
-<h3>Error Code Descriptions</h3>
-  <table><thead><tr><th>Constant
-     </th><th><dfn id="dfn-error-codes">Code</dfn>	
-     </th><th>Situation
-   </th></tr></thead><tbody><tr><td><dfn id="dfn-NOT_FOUND_ERR" title="dfn-NOT_FOUND_ERR"><code>NOT_FOUND_ERR</code></dfn>
-     </td><td><dfn id="dfn-fileerror-code-1" title="dfn-fileerror-code-1">1</dfn>
-     </td><td>User agents MUST use this code if the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> resource could not be found at the time the read was processed
+<p>The <dfn id="dfn-error"><code>error</code></dfn> attribute of the <a href="#dfn-filereader"><code>FileReader</code></a> object MUST return a <dfn id="dfn-domerror">DOMError</dfn> object [<a href="#DOMCore">DOMCore</a>] of the most appropriate type from the table below if there has been an error, and otherwise returns null.</p>
 
-    </td></tr><tr><td><dfn id="dfn-SECURITY_ERR" title="dfn-SECURITY_ERR"><code>SECURITY_ERR</code></dfn>
-     </td><td><dfn id="dfn-filerror-code-2" title="dfn-filerror-code-2">2</dfn>
-     </td><td>User agents MAY use this code if: <ul>
+<table><thead><tr><th>Type
+     </th><th>Description
+   </th></tr></thead><tbody><tr><td><dfn id="dfn-NotFoundError" title="NotFoundError"><code>NotFoundError</code></dfn>
+     </td><td>If the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> resource could not be found at the time the read was processed, then for asynchronous read methods the <a href="#dfn-error"><code>error</code></a> attribute MUST return a "<code>NotFoundError</code>" <a href="#dfn-domerror"><code>DOMError</code></a> and synchronous read methods MUST <a href="#throw-an-exception">throw</a> a <code>NotFoundError</code> exception.
+
+    </td></tr><tr><td><dfn id="dfn-SecurityError" title="SecurityError"><code>SecurityError</code></dfn>
+     </td><td>If: <ul>
      <li>it is determined that certain files are unsafe for access within a Web application</li>
      <li>it is determined that too many read calls are being made on <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> resources </li>
      <li>it is determined that the file has changed on disk since the user selected it</li>
      </ul>
-     <p>This is a security error code to be used in situations not covered by any other error codes.</p>
+     <p>then for asynchronous read methods the <a href="#dfn-error"><code>error</code></a> attribute MAY return a "<code>SecurityError</code>" <a href="#dfn-domerror"><code>DOMError</code></a> and synchronous read methods MAY <a href="#throw-an-exception">throw</a> a <code>SecurityError</code> exception.</p>
+     <p>This is a security error to be used in situations not covered by any other exception type.</p>
 
-    </td></tr><tr><td><dfn id="dfn-ABORT_ERR" title="dfn-ABORT_ERR"><code>ABORT_ERR</code></dfn>
-
-     </td><td><dfn id="dfn-fileerror-code-3" title="dfn-fileerror-code-3">3</dfn>
-     </td><td>User agents MUST use this code if the read operation was aborted, typically with a call to <a href="#dfn-abort"><code>abort()</code></a>
-            
-    </td></tr><tr><td><dfn id="dfn-NOT_READABLE_ERR" title="dfn-NOT_READABLE_ERR"><code>NOT_READABLE_ERR</code></dfn>
-     </td><td><dfn id="dfn-fileerror-code-4" title="dfn-fileerror-code-4">4</dfn>
-     </td><td>User agents MUST use this code if the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> cannot be read, typically due due to permission problems that occur after a
-     reference to a <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> has been acquired (e.g. concurrent lock with another application).
-     
-     
-    </td></tr><tr><td><dfn id="dfn-ENCODING_ERR" title="dfn-ENCODING_ERR"><code>ENCODING_ERR</code></dfn>
-     </td><td><dfn id="dfn-filerror-code-5" title="dfn-fileerror-code-5">5</dfn>
-
-     </td><td>User agents MAY use this code if URL length limitations for Data URLs in their implementations place limits on the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> data that can be
-     represented as a Data URL [<a href="#DataURL">DataURL</a>].  User agents MUST NOT use this code for the asynchronous <a href="#dfn-readAsText"><code>readAsText()</code></a> call
-     and MUST NOT use this code for the synchronous <a href="#dfn-readAsTextSync"><code>readAsText()</code></a> call, since encoding is determined by the
+    </td></tr><tr><td><dfn id="dfn-NotReadableError" title="NotReadableError"><code>NotReadableError</code></dfn>
+     </td><td>If the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> cannot be read, typically due due to permission problems that occur after a
+     reference to a <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> has been acquired (e.g. concurrent lock with another application) then for asynchronous read methods the  <a href="#dfn-error"><code>error</code></a> attribute MUST return a "<code>NotFoundError</code>" <a href="#dfn-domerror"><code>DOMError</code></a> and synchronous read methods MUST <a href="#throw-an-exception">throw</a> a <code>NotFoundError</code> exception.
+    </td></tr><tr><td><dfn id="dfn-EncodingError" title="EncodingError"><code>EncodingError</code></dfn>
+     </td><td>If URL length limitations for Data URLs in implementations place limits on the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> data that can be
+     represented as a Data URL [<a href="#DataURL">DataURL</a>] then for asynchronous read methods the  <a href="#dfn-error"><code>error</code></a> attribute MUST
+return a "<code>EncodingError</code>" <a href="#dfn-domerror"><code>DOMError</code></a>, and synchronous read methods MUST <a href="#throw-an-exception">throw</a> a <code>EncodingError</code> exception.  User agents MUST NOT use this for the asynchronous <a href="#dfn-readAsText"><code>readAsText()</code></a> call
+     and MUST NOT use this for the synchronous <a href="#dfn-readAsTextSync"><code>readAsText()</code></a> call, since encoding is determined by the
      <a href="#encoding-determination">encoding determination</a> algorithm.
 
     </td></tr></tbody></table>
+</div> 
 </div>
-<div id="not-allowed-error" class="section">
-<h3>The <code>OperationNotAllowed</code> Exception</h3>
-<p>The <code>OperationNotAllowedException</code> is raised when an operation is explicitly not allowed, and can be reused in other specifications. </p>
-<x:codeblock language="idl">
-  exception <dfn id ="dfn-OperationNotAllowedException">OperationNotAllowedException</dfn> {
-   
-   const unsigned short <a href="#dfn-NOT_ALLOWED_ERR">NOT_ALLOWED_ERR</a> = 1;
-   
-   unsigned short <a href="#dfn-na-code">code</a>;
-   
-  };
-</x:codeblock>
-<p>The <dfn id="dfn-na-code" title="code exception field in OperationNotAllowedException"><code>code</code></dfn> exception field MUST return the most appropriate constant in
-<a href="#dfn-OperationNotAllowedException"><code>OperationNotAllowedException</code></a>, which is <a href="#dfn_NOT_ALLOWED_ERR"><code>NOT_ALLOWED_ERR</code></a>.</p>
-<p><dfn id="dfn-NOT_ALLOWED_ERR"><code>NOT_ALLOWED_ERR</code></dfn> is used when an operation, such as an invalid usage of any of the
-<a href="#read-methods">read methods</a>, is specified to raise the <code>OperationNotAllowedException</code>.  This is the exception code to be used.</p>
-</div>
-  </div>
     
 
 <div id="url" class="section">  
@@ -1381,7 +1291,7 @@ the most appropriate code from the <a href="#ErrorDescriptions">table below</a>.
 <div id="use-cases-scheme" class="section">
 <h3>Requirements for a New Scheme</h3>
 <p>This specification defines a scheme with URIs of the sort: <code>blob:550e8400-e29b-41d4-a716-446655440000#aboutABBA</code>.
-This section provides some use cases and is an informative discussion.</p>
+This section provides some requirements and is an informative discussion.</p>
 <ul>
 <li><p>This scheme should be able to be used with web APIs such as <code>XMLHttpRequest</code> [<a href="#XHR2">XHR2</a>], and with elements that are designed to be used with HTTP URIs, such as the
 <code>img</code> element [<a href="#HTML">HTML</a>].  In general, this scheme should be designed to be used wherever URIs can be used on the web.  </p>
@@ -1451,7 +1361,7 @@ scheme = "blob"
 </x:codeblock>
 <div id="OpaqueStringDiscussion" class="section">
 <h4>The Opaque String</h4>
-<p><a href="#opaqueString">Opaque strings</a> MUST NOT include any reserved characters from [<a href="#RFC3986">RFC3986</a>]; these MUST be percent-encoded.
+<p><a href="#opaqueString">Opaque strings</a> MUST NOT include any reserved characters from [<a href="#RFC3986">RFC3986</a>] without percent-encoding them; these characters MUST be percent-encoded.
 <a href="#opaqueString">Opaque strings</a> MUST be globally unique.  Such strings SHOULD only use characters in the ranges U+002A to U+002B, U+002D to U+002E, U+0030 to U+0039,
 U+0041 to U+005A, U+005E to U+007E [<a href="#Unicode">Unicode</a>], and MUST be at least 36 characters long.
 UUID is one potential option available to user agents for use with <a href="#url">Blob URIs</a> as <a href="#opaqueString">opaque strings</a>, and their use is <em>strongly encouraged</em>.
@@ -1624,15 +1534,11 @@ window2.URL.revokeObjectURL(myurl);
 <ul><li><p><dfn id="selection-looping">Preventing selection looping.</dfn>  During file selection, a user may be bombarded with the file picker associated with <code>&lt;input
 type="file"/&gt;</code> (in a "must choose" loop that forces selection before the file picker is dismissed) and a user agent may prevent file
 access to any selections by making the  <a href="#dfn-filelist"><code>FileList</code></a> object returned be of size 0.</p></li>
-<li><p><dfn id="sensitive-files">System-sensitive files</dfn> (e.g. files in /usr/bin, password files, other native operating system executables) typically should not
-be exposed to web content, and should not be accessed via <a href="#url">Blob URIs</a>.  User agents MAY raise a <a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a>
-if such files are accessed or a <a href="#read-methods">read method</a>
-is called on them.</p></li>
-<li><p><dfn id="post-selection-file-mods">Post-selection file modifications</dfn> occur when a file changes on disk after it has been selected.  In such cases, if a
-<a href="#read-methods">read method</a> is called on a file, user agents MAY raise a <code><a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a></code>.</p></li>
+<li><p><dfn id="sensitive-files">System-sensitive files</dfn> (e.g. files in /usr/bin, password files, and other native operating system executables) typically should not
+be exposed to web content, and should not be accessed via <a href="#url">Blob URIs</a>.  User agents MAY throw a <a href="#dfn-SecurityError"><code>SecurityError</code></a> exception for synchronous read methods, or return a <a href="#dfn-SecurityError"><code>SecurityError</code></a> <a href="#dfn-domerror"><code>DOMError</code></a> for asynchronous reads.</p></li>
+<li><p><dfn id="post-selection-file-mods">Post-selection file modifications</dfn> occur when a file changes on disk after it has been selected.  In such cases, user agents MAY throw a <code><a href="#dfn-SecurityError"><code>SecurityError</code></a></code> for synchronous read methods, or return a <a href="#dfn-SecurityError"><code>SecurityError</code></a> <a href="#dfn-domerror"><code>DOMError</code></a> for asynchronous reads.</p></li>
 <li><p><dfn id="cross-scheme-reads">Cross-scheme file reads</dfn> occur when a read attempt is made on a file resident on the file:/// scheme by a resource
-dereferenced by http://.  In such cases, if a <a href="#read-methods">read method</a> is called on a file, user agents MAY raise a <code><a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a></code>.
-User agents MAY raise a <a href="#dfn-SECURITY_ERR"><code>SECURITY_ERR</code></a> in cases where reads occur from resources dereferenced on file:///. </p></li> 
+dereferenced by http://.  In such cases, user agents MAY throw a <code><a href="#dfn-SecurityError"><code>SecurityError</code></a></code> exception for synchronous read methods, or return a <a href="#dfn-SecurityError"><code>SecurityError</code></a> <a href="#dfn-domerror"><code>DOMError</code></a> for asynchronous reads. </p></li> 
 <li><p><dfn id="cross-origin-requests-on-blobs">Cross-origin requests on Blob URIs</dfn> occur when a <a href="#url">Blob URI</a> is accessed across origins.
 In particular, code of the sort: <code>document.location = window.URL.createObjectURL(myFile);</code> is problematic.  User agents should ensure that the
 <a href="#FiveHundredInternalServerError">500 Internal Server Error</a> response
