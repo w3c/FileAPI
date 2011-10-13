@@ -311,7 +311,7 @@ function errorHandler(evt) {
         <h2>5. The FileList Interface</h2>
        
        <p>
-          This interface is a <strong>collection</strong> [<a href="#DOMCore">DOMCore</a>] of <a href="dfn-File"><code>File</code></a> objects.
+          This interface is a <strong>collection</strong> [<a href="#DOMCore">DOMCore</a>] of <a href="#dfn-file"><code>File</code></a> objects.
        </p>
     <div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
     interface <dfn id="dfn-filelist">FileList</dfn> {
@@ -350,8 +350,8 @@ function errorHandler(evt) {
       the <a href="#dfn-filelist"><code>FileList</code></a>.  If there is no <em>indexth</em> <a href="#dfn-file"><code>File</code></a> object in the
       <a href="#dfn-filelist"><code>FileList</code></a>, then this method must return <code>null</code>.</p>
       <p><dfn id="dfn-index" title="index"><code>index</code></dfn> MUST be treated by user agents as value for the position of a <a href="#dfn-file"><code>File</code></a>
-      object in the <a href="#dfn-filelist"><code>FileList</code></a> collection, with 0 representing the first file in the collection.  <strong>Supported property indices</strong> [<a href="#WebIDL">WebIDL</a>] are the numbers in the range zero to one less than the number of <a href="#dfn-File"><code>File</code></a> objects represented by the collection [<a href="#DOMCore">DOMCore</a>].  
-If there are no such <a href="#dfn-File"><code>File</code></a> objects, then there are no supported property indices [<a href="#WebIDL">WebIDL</a>]. </p>
+      object in the <a href="#dfn-filelist"><code>FileList</code></a> collection, with 0 representing the first file in the collection.  <strong>Supported property indices</strong> [<a href="#WebIDL">WebIDL</a>] are the numbers in the range zero to one less than the number of <a href="#dfn-file"><code>File</code></a> objects represented by the collection [<a href="#DOMCore">DOMCore</a>].  
+If there are no such <a href="#dfn-file"><code>File</code></a> objects, then there are no supported property indices [<a href="#WebIDL">WebIDL</a>]. </p>
       </dd>
     
     </dl>
@@ -408,7 +408,7 @@ If there are no such <a href="#dfn-File"><code>File</code></a> objects, then the
 the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</code></a>, and <a href="#dfn-contentTypeBlob"><code>contentType</code></a> parameters, which are defined below.</p>	
     <p>The optional <dfn id="dfn-start"><code>start</code></dfn> parameter is a value for the start point of a <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call, and
     MUST be treated as a byte-order position, with the zeroth position representing the first byte.
-    The following requirements are normative for this parameter, and user agents MUST process <a href="dfn-slice"><code>slice</code></a> with
+    The following requirements are normative for this parameter, and user agents MUST process <a href="#dfn-slice"><code>slice</code></a> with
     <code>start</code> <em>normalized</em> according to the following:</p>
     <ol>
     <li><p>If the optional <code>start</code> parameter is not used as a parameter when making this call, let relativeStart be 0.</p></li>
@@ -419,7 +419,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
     </ol>	
     <p>The optional <dfn id="dfn-end"><code>end</code></dfn> parameter is a value for the end point of a
     <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call.  The following requirements
-    are normative for this parameter, and user agents MUST process <a href="dfn-slice"><code>slice</code></a> with <code>end</code> normalized according to the following:</p>
+    are normative for this parameter, and user agents MUST process <a href="#dfn-slice"><code>slice</code></a> with <code>end</code> normalized according to the following:</p>
     <ol>
     <li><p>If the optional <code>end</code> parameter is not used as a parameter when making this call, let relativeEnd be <a href="#dfn-size"><code>size</code></a>.</p></li>
     <li><p>If <code>end</code> is negative, let relativeEnd be <em>max((size + end), 0)</em> </p></li>
@@ -430,7 +430,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
     <p>The optional <dfn id="dfn-contentTypeBlob"><code>contentType</code></dfn> parameter is used to set a value identical to one that is set with the
     HTTP/1.1 Content-Type header [<a href="#HTTP">HTTP</a>] on
     the <a href="#dfn-Blob"><code>Blob</code></a> returned by the <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call.  The following requirements are normative for this
-    parameter, and user agents MUST process the <a href="dfn-slice"><code>slice</code></a> with <code>contentType</code> normalized according to the following:
+    parameter, and user agents MUST process the <a href="#dfn-slice"><code>slice</code></a> with <code>contentType</code> normalized according to the following:
    </p>
    <ol>
    <li><p>If the <code>contentType</code> parameter is not provided, let relativeContentType be set to the empty string .</p></li>
@@ -808,7 +808,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  <li><p>If no error has occurred, set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
 	  <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
 	<li><p>Return the <code>readAsDataURL()</code> method, but continue to process the steps in this algorithm. </p></li>
-	<li><p><a href="fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-progress-event"><code>progress</code></a> at completion of the read.</p></li>
+	<li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-progress-event"><code>progress</code></a> at completion of the read.</p></li>
 	  <li><p><a href="#queue-a-task">Queue a task</a> to update the <a href="#dfn-result"><code>result</code></a> attribute with the <a href="#dfn-fileBlob"><code>blob</code></a> as a
 	  DataURL [<a href="#DataURL">DataURL</a>] after it has been fully read into memory; on getting, the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute returns the (complete) data of <a href="#dfn-fileBlob"><code>blob</code></a> as a
 	  Data URL [<a href="#DataURL">DataURL</a>].</p>
@@ -1045,17 +1045,17 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<li><p>
 	While the read method is processing, <a href="#queue-a-task">queue a task</a> to
 	<a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-progress-event"><code>progress</code></a> at the
-	<a href="#dfn-FileReader"><code>FileReader</code></a> object about every 50ms <em>or</em> for every byte read into memory, whichever is least frequent.  <em>At least one</em> event called <a href="#dfn-progress-event"><code>progress</code></a> MUST fire before <a href="#dfn-load-event"><code>load</code></a> is fired, and at 100% completion of the read operation; if 100% of <a href="#dfn-fileBlob"><code>blob</code></a> can be read into memory in <em>less than</em> 50ms, user agents MUST <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-progress-event"><code>progress</code></a> at completion. </p>
+	<a href="#dfn-filereader"><code>FileReader</code></a> object about every 50ms <em>or</em> for every byte read into memory, whichever is least frequent.  <em>At least one</em> event called <a href="#dfn-progress-event"><code>progress</code></a> MUST fire before <a href="#dfn-load-event"><code>load</code></a> is fired, and at 100% completion of the read operation; if 100% of <a href="#dfn-fileBlob"><code>blob</code></a> can be read into memory in <em>less than</em> 50ms, user agents MUST <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-progress-event"><code>progress</code></a> at completion. </p>
 	<div class="example"><div class="exampleHeader">Example</div>
 	<p>If a given implementation uses buffers of size 65536 bytes to read files, and thus limits reading operations to that size, and a <a href="#read-method">read method</a> is called on a file that is 65537 bytes, then that implementation MUST fire one <a href="#dfn-progress-event"><code>progress</code></a> event for the 65536 first bytes, one <a href="#dfn-progress-event"><code>progress</code></a> event for the 65537th byte (which is at completion of read), one <a href="#dfn-load-event"><code>load</code></a> event and one <a href="#dfn-loadend-event"><code>loadend</code></a> event.</p>
 	</div>	
 		</li>
 	<li><p>When the data from the <a href="#dfn-fileBlob"><code>blob</code></a> 
 	has been completely read into memory, <a href="#queue-a-task">queue a task</a> to <a href="#fire-a-progress-event">fire a progress event</a> called
-	<a href="#dfn-load-event"><code>load</code></a> at the <a href="#dfn-FileReader"><code>FileReader</code></a> object.</p></li>
+	<a href="#dfn-load-event"><code>load</code></a> at the <a href="#dfn-filereader"><code>FileReader</code></a> object.</p></li>
 	<li><p>When the data from the <a href="#dfn-fileBlob"><code>blob</code></a>
 	has been completely read into memory, <a href="#queue-a-task">queue a task</a> to <a href="#fire-a-progress-event">fire a progress event</a> called
-	<a href="#dfn-loadend-event"><code>loadend</code></a> at the <a href="#dfn-FileReader"><code>FileReader</code></a> object.</p></li>
+	<a href="#dfn-loadend-event"><code>loadend</code></a> at the <a href="#dfn-filereader"><code>FileReader</code></a> object.</p></li>
 	</ol>
 	<p>
 	  When this specification says to <dfn id="fire-a-progress-event">fire a progress event</dfn> <em>called e</em> (for some
