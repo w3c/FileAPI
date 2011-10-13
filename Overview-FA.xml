@@ -399,7 +399,6 @@ If there are no such <a href="#dfn-File"><code>File</code></a> objects, then the
     </div>
     <div id='methodsandparams-blob' class='section'>
     <h3>Methods and Parameters</h3>
-    <div id='slice-blob' class='section'>
     
 <div id='normalization-of-params' class='section'>
 <h4>Parameters to slice</h4>
@@ -439,7 +438,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
     user agents must normalize <code>contentType</code> to relativeContentType.</p></li>
    </ol>
 </div>
-<div id='slice-algorithm' class='section'>
+<div class="section" id="slide-method-algo">
 <h4>The slice method</h4>	
     <p>The <dfn id="dfn-slice"><code>slice</code></dfn> method returns a new <a href="#dfn-Blob" class="dfnref"><code>Blob</code></a> object with bytes ranging from the optional <a href="#dfn-start"><code>start</code></a>
 	parameter upto but not including the optional <a href="#dfn-end"><code>end</code></a> parameter, and with a
@@ -456,7 +455,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
     </ol>
     </li>
     </ol>
-</div>
+
     <div class="note">
     <p><em>This note is informative.</em>  The <code>slice</code> method previously had different semantics, which differed from both <code>Array.prototype.slice</code> and <code>String.prototype.slice</code> [<a href="#ECMA-262">ECMA-262</a>].  This difference
     was an oversight which has been corrected in this edition of the specification.  Some user agents implemented the previous semantics, notably Firefox 4, Chrome 10, and Opera 11.
@@ -494,8 +493,8 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
       var fileNoMetadata = file.slice(0, -150, "application/experimental");      
     }
     </x:codeblock>
-    </div>
-    </div>
+    </div>    
+</div>
 
   </div>
   
@@ -529,8 +528,8 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  <p>The <code>File</code> interface is available on objects that expose an attribute of type <a href="#dfn-filelist"><code>FileList</code></a>; these objects are defined in
 	  HTML [<a href="#HTML">HTML</a>].  The <code>File</code> interface, which inherits from <a href="#dfn-Blob"><code>Blob</code></a>, is immutable, and thus represents file data that can be
 	  read into memory at the time a <a href="#read-methods">read operation</a> is initiated.  User agents MUST process reads on files that no longer exist at the time of read as
-	  <a href="#file-error-read">errors</a>, raising a <a href="#dfn-NOT_FOUND_ERR"><code>NOT_FOUND_ERR</code></a> if using a <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> on a Web Worker [<a href="#Workers">Workers</a>] or firing an <a href="#dfn-error-event"><code>error</code></a> event with the <a href="#dfn-error"><code>error</code></a>
-	  attribute of the <a href="#dfn-filereader"><code>FileReader</code></a> set to the <a href="#dfn-error-codes">error code</a> <a href="#dfn-NOT_FOUND_ERR"><code>NOT_FOUND_ERR</code></a>.</p>
+	  <a href="#file-error-read">errors</a>, throwing a <a href="#dfn-NotFoundError"><code>NotFoundError</code></a> exception if using a <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> on a Web Worker [<a href="#Workers">Workers</a>] or firing an <a href="#dfn-error-event"><code>error</code></a> event with the <a href="#dfn-error"><code>error</code></a>
+	  attribute returning a <a href="#dfn-NotFoundError"><code>NotFoundError</code></a> <a href="#dfn-domerror"><code>DOMError</code></a>.</p>
 	  </div>
 	  </div>
 	  <div id='FileReader-interface' class="section">
@@ -696,7 +695,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	when processing <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer</code></a> partial Blob data is an
 	<code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] object consisting of the bytes <code>loaded</code> so far (a portion of the
 	<code>total</code>)[<a href="#ProgressEvents">ProgressEvents</a>].  
-	The list below is normative for the <code>result</code> attribute and are the conformance criteria for this attribute:
+	The list below is normative for the <code>result</code> attribute and is the conformance criteria for this attribute:
 	</p>
 	<ul>
 	  <li><p>On getting, if the <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> is <code>EMPTY</code> (no read method has been called)
@@ -923,7 +922,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  object containing the bytes read until the read is complete, to accompany the <a href="#fire-a-progress-event">firing</a> of <a href='#dfn-progress-event'><code>progress</code></a> events.  On getting,
 	  the <a href="#dfn-result"><code>result</code></a> attribute returns <a href="#partial-blob-data">partial Blob data</a> representing the number of bytes currently <code>loaded</code>
 	  (as a fraction of the <code>total</code>) [<a href="#ProgressEvents">ProgressEvents</a>], as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] object;
-	  user agents MUST return at least one such <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] while processing this read method.  The last returned value at completion of
+	  user agents MUST return at least one such <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] while processing this read method.  The last returned value is at completion of
 	  the read.</p></li>
 	  <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
 	  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p></li>
@@ -958,7 +957,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	on <a href="#dfn-filereader"><code>FileReader</code></a> and all four <a href="#read-method-sync">synchronous read methods</a> on
 	<a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a>; it is also used to call the
 	<a href="#dfn-createObjectURL"><code>createObjectURL</code> method</a>.
-	For the purposes of this specification, it will typically be a reference to a single <a href="#dfn-file"><code>File</code></a> in a
+	This argument MUST be a reference to a single <a href="#dfn-file"><code>File</code></a> in a
 	<a href="#dfn-filelist"><code>FileList</code></a> or a <a href="#dfn-Blob"><code>Blob</code></a> object not obtained from the file system that is in scope of the global object from which the
 	method call was made.</p></dd>
 	</dl>
@@ -1055,7 +1054,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<a href="#dfn-load-event"><code>load</code></a> at the <a href="#dfn-FileReader"><code>FileReader</code></a> object.</p></li>
 	<li><p>When the data from the <a href="#dfn-fileBlob"><code>blob</code></a>
 	has been completely read into memory, <a href="#queue-a-task">queue a task</a> to <a href="#fire-a-progress-event">fire a progress event</a> called
-	<a href="#dfn-loadend-event"><code>loadend</code></a> <a href="#dfn-FileReader"><code>FileReader</code></a> object.</p></li>
+	<a href="#dfn-loadend-event"><code>loadend</code></a> at the <a href="#dfn-FileReader"><code>FileReader</code></a> object.</p></li>
 	</ol>
 	<p>
 	  When this specification says to <dfn id="fire-a-progress-event">fire a progress event</dfn> <em>called e</em> (for some
@@ -1158,14 +1157,13 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	object) <em>and</em> the synchronous API (the <code><a href="#dfn-FileReaderSync">FileReaderSync</a></code> object).</p>
 	<div id="FileReaderSync" class="section">
 	<h3>The <code>FileReaderSync</code> Interface</h3>
-	<p>This interface  provides methods to read files or Blobs into memory, and to access the data of these files or Blobs.</p>
+	<p>This interface  provides methods to synchronously read <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> objects into memory.</p>
 	<x:codeblock language="idl">
 
 	[Constructor]
 	interface <dfn id="dfn-FileReaderSync">FileReaderSync</dfn> {
 
 	  <span class="comment">// Synchronously return strings</span>
-	  <span class="comment">// All methods raise FileException</span>
 
 	  ArrayBuffer <a href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
 	  DOMString <a href="#dfn-readAsBinaryStringSync">readAsBinaryString</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>); 
@@ -1173,13 +1171,6 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  DOMString <a href="#dfn-readAsDataURLSync">readAsDataURL</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
 	};
 	</x:codeblock>
-	<div class="note">
-	  <p>The <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object's <dfn id="read-method-sync">read methods</dfn> -- namely 
-	  <code><a href="#dfn-readAsBinaryStringSync">readAsBinaryString</a></code>, <code><a href="#dfn-readAsTextSync">readAsText</a></code>, 
-	  <code><a href="#dfn-readAsDataURLSync">readAsDataURL</a></code> and <code><a href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</a></code> -- have the same <em>method signatures</em> as the <a href="#read-methods">read methods</a> of the
-	  <a href="#dfn-filereader"><code>FileReader</code></a> object, and <em>read files into memory</em>.  The difference is that these are specified to behave <em>synchronously</em>, with string or <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] return values.
-	  These methods raise <a href="#dfn-FileException"><code>FileException</code></a>.</p>
-	</div>
 
 	<div id='filereadersyncConstrctr' class='section'>
 	<h3>Constructors</h3>
@@ -1428,7 +1419,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<div id="lifeTime" class="section">
 	<h3>Lifetime of Blob URIs</h3>
 	<p>This specification defines the following lifetime conditions on <a href="#url">Blob URIs</a>: </p>
-	<ol><li><p>This specification adds an additional <a href="#unloading-document-cleanup-steps">unloading document cleanup step</a>: User agents MUST revoke any <a href="#url">Blob URIs</a> created with <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> from within that <a href="#document">document</a>.
+	<ol><li><p>This specification adds an additional <a href="#unloading-document-cleanup-steps">unloading document cleanup step</a>: user agents MUST revoke any <a href="#url">Blob URIs</a> created with <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> from within that <a href="#document">document</a>.
 	If these <a href="#url">Blob URIs</a> are dereferenced, user agents must respond with <a href="#FiveHundredInternalServerError">500 Internal Server Error</a>.</p></li>
 	<li><p>User agents MUST ensure that any <a href="#url">Blob URIs</a> are revoked after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called with that
 	<a href="#url">Blob URI</a> as an argument. User agents MUST respond with a <a href="#FiveHundredInternalServerError">500 Internal Server Error</a> if a <a href="#url">Blob URI</a> is
@@ -1472,7 +1463,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	</div>
 	<div id="ProtocolExamples" class="section">
 	<h4>Request and Response Headers</h4>
-	<p>This section provides sample exchanges between web applications and user agents using the <a href="#processingModel">blob: protocol</a>.  A request can be triggered using HTML markup of the sort <code>&lt;img src="blob:550e8400-e29b-41d4-a716-446655440000"&gt;</code>, after a web application calls <a href="#dfn-createObjectURL"><code>createObjectURL</code></a> on a given <a href="#dfn-fileBlob"><code>blob</code></a>, which returns <code>blob:550e8400-e29b-41d4-a716-446655440000 </code> to dereference that <a href="#dfn-fileBlob"><code>blob</code></a>.  </p>
+	<p>This section provides sample exchanges between web applications and user agents using the <a href="#processingModel">blob: protocol</a>.  A request can be triggered using HTML markup of the sort <code>&lt;img src="blob:550e8400-e29b-41d4-a716-446655440000"&gt;</code>, after a web application calls <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> on a given <a href="#dfn-fileBlob"><code>blob</code></a>, which returns <code>blob:550e8400-e29b-41d4-a716-446655440000 </code> to dereference that <a href="#dfn-fileBlob"><code>blob</code></a>.  </p>
 	<div class="example">
 	<p>Requests could look like this:</p>
 	<x:codeblock language="headers">
@@ -1561,7 +1552,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	window2.URL.revokeObjectURL(myurl);
 	</x:codeblock>
 	<p>Since <code>window1</code> and <code>window2</code> are in the <a href="#same-origin">same origin</a>, the
-	<code>URL.revokeObjectURL</code> call ensures that subsequent dereferencing of <code>myurl</code> results in a <a href="#FourOhFourNotFound">404 Not Found</a> response.</p>
+	<code>URL.revokeObjectURL</code> call ensures that subsequent dereferencing of <code>myurl</code> results in a <a href="#FiveHundredInternalServerError">500 Internal Server Error</a> response.</p>
 	</div>
 	</dd>
 	</dl>
