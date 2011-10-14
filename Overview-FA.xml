@@ -1420,9 +1420,9 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<h3>Lifetime of Blob URIs</h3>
 	<p>This specification defines the following lifetime conditions on <a href="#url">Blob URIs</a>: </p>
 	<ol><li><p>This specification adds an additional <a href="#unloading-document-cleanup-steps">unloading document cleanup step</a>: user agents MUST revoke any <a href="#url">Blob URIs</a> created with <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> from within that <a href="#document">document</a>.
-	If these <a href="#url">Blob URIs</a> are dereferenced, user agents must respond with <a href="#FiveHundredInternalServerError">500 Internal Server Error</a>.</p></li>
+	If these <a href="#url">Blob URIs</a> are dereferenced, user agents must respond with <a href="#FiveHundredInternalServerError">500 Error Condition</a>.</p></li>
 	<li><p>User agents MUST ensure that any <a href="#url">Blob URIs</a> are revoked after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called with that
-	<a href="#url">Blob URI</a> as an argument. User agents MUST respond with a <a href="#FiveHundredInternalServerError">500 Internal Server Error</a> if a <a href="#url">Blob URI</a> is
+	<a href="#url">Blob URI</a> as an argument. User agents MUST respond with a <a href="#FiveHundredInternalServerError">500 Error Condition</a> if a <a href="#url">Blob URI</a> is
 	dereferenced after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called on that particular <a href="#url">Blob URI</a>. </p></li>
 	</ol>
 	</div>
@@ -1447,23 +1447,26 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	</p>
 	</div>
 	<div id="FiveHundredInternalServerError" class="section">
-	<h4>500 Internal Server Error</h4>
+	<h4>500 Error Condition</h4>
 	<p>
 	  This response [<a href="#HTTP">HTTP</a>] MUST be used if:
 	</p>
 	<ul>
 		<li><p>Any request method other than GET is used to dereference the URL.</p></li>
-		<li><p>The request violates the <a href="#originOfBlob">origin requirement</a>.</p></li>
-		<li><p>The request does not satisfy the <a href="#lifetime">lifetime requirement</a>.</p></li>
-		<li><p>The underlying resource has changed, moved, been deleted or has become invalid.</p></li>
-		<li><p>The permissions surrounding the underlying resource do not permit access.</p></li>
-		<li><p>A security error has occurred; in particularly, if trying to set <code>document.location = window.URL.createObjectURL(myFile)</code>.</p></li>
+		<li><p>The request violates the <a href="#originOfBlob">origin requirement</a>.  In this case, the response SHOULD be accompanied by clarifying text alongside the 500 response, e.g. "500 Origin Violation."</p></li>
+		<li><p>The request does not satisfy the <a href="#lifetime">lifetime requirement</a>.  In this case, the response SHOULD be accompanied by clarifying text alongside the 500 response, e.g. "500 Expired URI."</p></li>
+		<li><p>The underlying resource has changed, moved, been deleted or has become invalid.  In this case, the response SHOULD be accompanied by clarifying text alongside the 500 response, e.g. "500 Invalid Resource."</p></li>
+		<li><p>The permissions surrounding the underlying resource do not permit access.  In this case, the response SHOULD be accompanied by clarifying text alongside the 500 response, e.g. "500 Access Violation."</p></li>
+		<li><p>A security error has occurred.  In this case, the response SHOULD be accompanied by clarifying text alongside the 500 response, e.g. "500 Security Violation."  </p></li>
 	</ul>
-	<p>This response MAY be accompanied by messages indicating why the <a href="#dfn-Blob"><code>Blob</code></a> resource could not be served.  See <a href="#ProtocolExamples">blob: protocol examples</a>.</p>
+	<p>This response MAY be accompanied by additional messages in the response indicating why the <a href="#dfn-Blob"><code>Blob</code></a> resource could not be served.  See <a href="#ProtocolExamples">blob: protocol examples</a>.</p>
+	<div class="note">
+		<p>The 500 Error Condition provides a response code, but not a fixed status.  User agents MAY leave it as simply "500 Error Condition" or supply additional status information (e.g. "500 Origin Violation").  Implementers are strongly encouraged to provide messages to developers along with the response code.</p>
+	</div>
 	</div>
 	<div id="ProtocolExamples" class="section">
 	<h4>Request and Response Headers</h4>
-	<p>This section provides sample exchanges between web applications and user agents using the <a href="#processingModel">blob: protocol</a>.  A request can be triggered using HTML markup of the sort <code>&lt;img src="blob:550e8400-e29b-41d4-a716-446655440000"&gt;</code>, after a web application calls <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> on a given <a href="#dfn-fileBlob"><code>blob</code></a>, which returns <code>blob:550e8400-e29b-41d4-a716-446655440000 </code> to dereference that <a href="#dfn-fileBlob"><code>blob</code></a>.  </p>
+	<p>This section provides sample exchanges between web applications and user agents using the <a href="#processingModel">blob: protocol</a>.  A request can be triggered using HTML markup of the sort <code>&lt;img src="blob:550e8400-e29b-41d4-a716-446655440000"&gt;</code>, after a web application calls <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> on a given <a href="#dfn-fileBlob"><code>blob</code></a>, which returns <code>blob:550e8400-e29b-41d4-a716-446655440000 </code> to dereference that <a href="#dfn-fileBlob"><code>blob</code></a>.  These examples merely illustrate the protocol; web developers are not likely to interact with all the headers, but the <code>getAllResponseHeaders()</code> method of <code>XMLHttpRequest</code>, if used, will show relevant response headers [<a href="#XHR2">XHR2</a>].  </p>
 	<div class="example">
 	<p>Requests could look like this:</p>
 	<x:codeblock language="headers">
@@ -1476,9 +1479,9 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 
 	....
 	</x:codeblock>
-	<p>If there is a <a href="#file-error-read">file error</a> or any other kind of error associated with the <a href="#dfn-fileBlob"><code>blob</code></a>, then a user agent can respond with a <a href="#FiveHundredInternalServerError">500 Internal Server Error</a> as the response message.  This should also be used if any method other than GET is used to make the request.</p>
+	<p>If there is a <a href="#file-error-read">file error</a> or any other kind of error associated with the <a href="#dfn-fileBlob"><code>blob</code></a>, then a user agent can respond with a <a href="#FiveHundredInternalServerError">500 Error Condition</a> as the response message.  This should also be used if any method other than GET is used to make the request.</p>
 	<x:codeblock language="headers">
-	blob/1.0 500 Internal Server Error
+	blob/1.0 500 Error Condition
 
 	This file cannot be read.
 	</x:codeblock>
@@ -1552,7 +1555,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	window2.URL.revokeObjectURL(myurl);
 	</x:codeblock>
 	<p>Since <code>window1</code> and <code>window2</code> are in the <a href="#same-origin">same origin</a>, the
-	<code>URL.revokeObjectURL</code> call ensures that subsequent dereferencing of <code>myurl</code> results in a <a href="#FiveHundredInternalServerError">500 Internal Server Error</a> response.</p>
+	<code>URL.revokeObjectURL</code> call ensures that subsequent dereferencing of <code>myurl</code> results in a <a href="#FiveHundredInternalServerError">500 Error Condition</a> response.</p>
 	</div>
 	</dd>
 	</dl>
@@ -1578,10 +1581,9 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<li><p><dfn id="post-selection-file-mods">Post-selection file modifications</dfn> occur when a file changes on disk after it has been selected.  In such cases, user agents MAY throw a <code><a href="#dfn-SecurityError"><code>SecurityError</code></a></code> for synchronous read methods, or return a <a href="#dfn-SecurityError"><code>SecurityError</code></a> <a href="#dfn-domerror"><code>DOMError</code></a> for asynchronous reads.</p></li>
 	<li><p><dfn id="cross-scheme-reads">Cross-scheme file reads</dfn> occur when a read attempt is made on a file resident on the file:/// scheme by a resource
 	dereferenced by http://.  In such cases, user agents MAY throw a <code><a href="#dfn-SecurityError"><code>SecurityError</code></a></code> exception for synchronous read methods, or return a <a href="#dfn-SecurityError"><code>SecurityError</code></a> <a href="#dfn-domerror"><code>DOMError</code></a> for asynchronous reads. </p></li> 
-	<li><p><dfn id="cross-origin-requests-on-blobs">Cross-origin requests on Blob URIs</dfn> occur when a <a href="#url">Blob URI</a> is accessed across origins.
-	In particular, code of the sort: <code>document.location = window.URL.createObjectURL(myFile);</code> is problematic.  User agents should ensure that the
-	<a href="#FiveHundredInternalServerError">500 Internal Server Error</a> response
-	is used in cross-origin request contexts.  User agents MUST return <a href="#FiveHundredInternalServerError">500 Internal Server Error</a> at any attempt to set the entire document location to a file or Blob.
+	<li><p><dfn id="cross-origin-requests-on-blobs">Cross-origin requests on Blob URIs</dfn> occur when a <a href="#url">Blob URI</a> is accessed across origins.    User agents should ensure that the
+	<a href="#FiveHundredInternalServerError">500 Error Condition</a> response
+	is used in cross-origin request contexts.  User agents MUST return <a href="#FiveHundredInternalServerError">500 Error Condition</a> at any attempt to set the entire document location to a file or Blob.
 	</p></li>
 	</ul>
 	<div class="ednote"><p>This section is provisional; more security data may supplement this in subsequent drafts.</p></div>
