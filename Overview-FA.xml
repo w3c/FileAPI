@@ -31,7 +31,7 @@
     <options xmlns='http://mcc.id.au/ns/local'>
       <versions>
         <cvs href='http://dev.w3.org/2006/webapi/FileAPI/'/>
-        <this href='http://www.w3.org/TR/2011/WD-FileAPI-20111012/' />
+        <this href='http://www.w3.org/TR/2011/WD-FileAPI-20111020/' />
         <previous href='http://www.w3.org/TR/2010/WD-FileAPI-20101026/' />
         <latest href='http://www.w3.org/TR/FileAPI/' />
       </versions>
@@ -1583,7 +1583,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	dereferenced by http://.  In such cases, user agents MAY throw a <code><a href="#dfn-SecurityError"><code>SecurityError</code></a></code> exception for synchronous read methods, or return a <a href="#dfn-SecurityError"><code>SecurityError</code></a> <a href="#dfn-domerror"><code>DOMError</code></a> for asynchronous reads. </p></li> 
 	<li><p><dfn id="cross-origin-requests-on-blobs">Cross-origin requests on Blob URIs</dfn> occur when a <a href="#url">Blob URI</a> is accessed across origins.    User agents should ensure that the
 	<a href="#FiveHundredInternalServerError">500 Error Condition</a> response
-	is used in cross-origin request contexts.  User agents MUST return <a href="#FiveHundredInternalServerError">500 Error Condition</a> at any attempt to set the entire document location to a file or Blob.
+	is used in cross-origin request contexts.  
 	</p></li>
 	</ul>
 	<div class="ednote"><p>This section is provisional; more security data may supplement this in subsequent drafts.</p></div>
