@@ -293,7 +293,7 @@ function errorHandler(evt) {
         <dfn id="unloading-document-cleanup-steps">unloading document cleanup steps</dfn>, <dfn id="event-handler-attributes">event handler attributes</dfn>,
         <dfn id="event-handler-event-type">event handler event type</dfn>,
         <dfn id="origin">origin</dfn>, <dfn id="same-origin">same origin</dfn>, <dfn id="event-loops">event loops</dfn>,
-        <dfn id="task">task</dfn>, <dfn id="task-source">task source</dfn>, <dfn id="df-URL">URL</dfn>, and
+        <dfn id="dfn-task">task</dfn>, <dfn id="task-source">task source</dfn>, <dfn id="df-URL">URL</dfn>, and
         <dfn id="queue-a-task">queue a task</dfn> are defined by the HTML specification [<a href="#HTML">HTML</a>]. </p>
  <p>When this specification says to <dfn id="terminate-an-algorithm">terminate an algorithm</dfn> the user agent must terminate the algorithm after finishing the step it is on.  Asynchronous <a href="#read-methods">read methods</a> defined in this specification may return before the algorithm in question is terminated, and can be terminated by an <a href="#dfn-abort"><code>abort()</code></a> call.</p>
 <p>The term <dfn id="throw-an-exception">throw</dfn> in this specification, as it pertains to exceptions, is used as defined in the DOMCore specification [<a href="#DOMCore">DOMCore</a>].</p>
@@ -562,7 +562,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  const unsigned short <a href="#dfn-done" class="dfnref">DONE</a> = 2;
 
 
-	  readonly attribute unsigned short <a class="dfnref" href="#dfn-readystate">readyState</a>;
+	  readonly attribute unsigned short <a class="dfnref" href="#dfn-readyState">readyState</a>;
 
 	  <span class="comment">// File or Blob data</span>
 	  readonly attribute any <a href="#dfn-result" class="dfnref">result</a>;
@@ -649,7 +649,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<div id="blobreader-state" class="section">
 	<h3>8.4. FileReader States</h3>
 	<p>The <a href="#dfn-filereader" class="dfnref"><code>FileReader</code></a> object can be in one of 3 states.  The
-	<dfn id="dfn-readystate"><code>readyState</code></dfn> attribute, on getting,
+	<dfn id="dfn-readyState"><code>readyState</code></dfn> attribute, on getting,
 	MUST return the current state, which MUST be one of the following values:</p>
 	<dl>
 	 <dt><dfn id="dfn-empty"><code>EMPTY</code> (numeric value 0)</dfn></dt>
@@ -699,7 +699,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	The list below is normative for the <code>result</code> attribute and is the conformance criteria for this attribute:
 	</p>
 	<ul>
-	  <li><p>On getting, if the <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> is <code>EMPTY</code> (no read method has been called)
+	  <li><p>On getting, if the <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> is <code>EMPTY</code> (no read method has been called)
 	  then the <code>result</code> attribute MUST return <code>null</code>.</p></li>
 	  <li><p>On getting, if an error in reading the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> has
 	  occurred (using <em>any</em> <a href="#read-methods"> read method</a>),
@@ -723,7 +723,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  <a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a> <a href="#read-methods">read method</a>, this attibute SHOULD return
 	  <a href="#partial-blob-data">partial Blob data</a> in the format specified by
 	  the <a href="#encoding-determination">encoding determination</a> as a <code>DOMString</code> that is incremented as more data is read.
-	  User agents MUST return at least one such <code>result</code>, with the final <code>result</code> returned at completion of the read.  See the <a href="#partial-encoding-caveat">caveat about</a>
+	  User agents MUST return at least one such <code>result</code>, with the final <code>result</code> returned at completion of the read.  See the <a href="#encodingCaveat">caveat about</a>
 	  <a href="#partial-blob-data">partial Blob data</a> being valid within a giving encoding.
 	  </p></li>
 	  <li><p>On getting, if the <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer</code></a> <a href="#read-methods">read method</a> is called
@@ -750,7 +750,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 
 	<p><strong>Note:</strong> The <a href="#dfn-readAsBinaryStringAsync"><code>readAsBinaryString()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
 	</li>
-	  <li><p>If an <a href="#file-error-read">error occurs during reading of the <code>blob</code> parameter</a>, set <a href="#dfn-readystate"><code>readyState</code></a> to
+	  <li><p>If an <a href="#file-error-read">error occurs during reading of the <code>blob</code> parameter</a>, set <a href="#dfn-readyState"><code>readyState</code></a> to
 	  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
 	  <ol>
 	    <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
@@ -766,12 +766,12 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	</li>    
 	  </ol>
 	  </li>
-	  <li><p>If no error has occurred, set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
+	  <li><p>If no error has occurred, set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
 	  <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
 	<li><p>Return the <code>readAsBinaryString()</code> method, but continue processing the other steps in this algorithm.</p></li>
 	  <li><p><a href="#make-progress-notifications">Make progress notifications</a>. </p></li>
 	 <li><p>While processing the read, as data from <a href="#dfn-fileBlob"><code>blob</code></a> becomes available, user agents SHOULD <a href="#queue-a-task">queue tasks</a> to update the <a href="#dfn-result"><code>result</code></a> with <a href="#partial-blob-data">partial Blob data</a> represented as a <a href="#binary-string">binary string</a> to accompany the <a href="#fire-a-progress-event">firing</a> of <a href="#dfn-progress-event"><code>progress</code></a> events until the read is complete.  On getting, the <a href="#dfn-result"><code>result</code></a> attribute returns <a href="#partial-blob-data">partial Blob data</a> representing the number of bytes currently <code>loaded</code> (as a fraction of the <code>total</code>) [<a href="#ProgressEvents">ProgressEvents</a>], as a <a href="#binary-string">binary string</a>; user agents MUST return at least one such <a href="#dfn-result"><code>result</code></a> while processing this read method.  The last returned value is at completion of the read.</p></li>
-	  <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
+	  <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
 	  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p></li>
 	</ol>
 	<div class="note"><div class="noteHeader">Note</div>
@@ -789,7 +789,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<p><strong>Note:</strong> The <a href="#dfn-readAsDataURL"><code>readAsDataURL()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
 	</li> 
 	  <li><p>If an <a href="#file-error-read">error occurs during reading of the <code>blob</code> parameter</a>, OR if a user agent's URL length limitations prevent returning
-	  data as a Data URL [<a href="#DataURL">DataURL</a>], set <a href="#dfn-readystate"><code>readyState</code></a> to
+	  data as a Data URL [<a href="#DataURL">DataURL</a>], set <a href="#dfn-readyState"><code>readyState</code></a> to
 	  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
 	  <ol>   
 	    <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
@@ -805,7 +805,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	</li>    
 	  </ol>
 	  </li>
-	  <li><p>If no error has occurred, set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
+	  <li><p>If no error has occurred, set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
 	  <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
 	<li><p>Return the <code>readAsDataURL()</code> method, but continue to process the steps in this algorithm. </p></li>
 	<li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-progress-event"><code>progress</code></a> at completion of the read.</p></li>
@@ -823,7 +823,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  </li>
 	  </ul>
 	  </li>
-	  <li><p>Set <a href="#dfn-readystate"><code>readyState</code></a> to
+	  <li><p>Set <a href="#dfn-readyState"><code>readyState</code></a> to
 	  <a href="#dfn-done"><code>DONE</code></a></p></li>
 	  <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-load-event"><code>load</code></a>.</p></li>
 	  <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a>.</p></li>
@@ -843,7 +843,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<p><strong>Note:</strong> The <a href="#dfn-readAsText"><code>readAsText()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
 	</li>
 	  <li><p>If an <a href="#file-error-read">error occurs during reading the <code>blob</code> parameter</a>, 
-	  set <a href="#dfn-readystate"><code>readyState</code></a> to
+	  set <a href="#dfn-readyState"><code>readyState</code></a> to
 	  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
 	  <ol>
 	    <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
@@ -860,7 +860,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	</li>    
 	  </ol>
 	  </li>
-	  <li><p>If no error has occurred, set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
+	  <li><p>If no error has occurred, set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
 	  <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
 	<li><p>Return the <code>readAsText()</code> method, but continue to process the steps in this algorithm</p></li>
 	    <li><p><a href="#make-progress-notifications">Make progress notifications</a>.</p></li>
@@ -881,7 +881,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	</p>
 	</div>
 	</li>
-	  <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
+	  <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
 	  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.
 	  </p></li>
 	</ol>
@@ -897,7 +897,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 
 	<p><strong>Note:</strong> The <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
 	</li>
-	  <li><p>If an <a href="#file-error-read">error occurs during reading the <code>blob</code> parameter</a>, set <a href="#dfn-readystate"><code>readyState</code></a> to
+	  <li><p>If an <a href="#file-error-read">error occurs during reading the <code>blob</code> parameter</a>, set <a href="#dfn-readyState"><code>readyState</code></a> to
 	  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
 	  <ol>
 	    <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
@@ -913,7 +913,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	</li>    
 	  </ol>
 	  </li>
-	  <li><p>If no error has occurred, set <a href="#dfn-readystate" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
+	  <li><p>If no error has occurred, set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
 	  <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
 	<li><p>Return the <code>readAsArrayBuffer()</code> method, but continue to process the steps in this algorithm.</p></li>
 	  <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  
@@ -925,7 +925,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  (as a fraction of the <code>total</code>) [<a href="#ProgressEvents">ProgressEvents</a>], as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] object;
 	  user agents MUST return at least one such <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] while processing this read method.  The last returned value is at completion of
 	  the read.</p></li>
-	  <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, set <a href="#dfn-readystate"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
+	  <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
 	  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p></li>
 	</ol>
 	</div>
@@ -936,7 +936,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  <ol>
 	  <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-empty"><code>EMPTY</code></a> or if <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-done"><code>DONE</code></a> set <a href="#dfn-result"><code>result</code></a> to <code>null</code>
 	  and terminate this overall set of steps without doing anything else.</p></li>
-	  <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> set <a href="#dfn-readystate"><code>readyState</code></a> to
+	  <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> set <a href="#dfn-readyState"><code>readyState</code></a> to
 	  <a href="#dfn-done"><code>DONE</code></a> and <a href="#dfn-result"><code>result</code></a> to <code>null</code>.</p></li>
 	  <li><p>If there are any <a href="#dfn-task">tasks</a> from the object's <a href="#blobreader-task-source"><code>FileReader</code> task source</a> in one of the
 	  <a href="#queue-a-task">task queues</a>, then remove those <a href="#dfn-task">tasks</a>.</p></li>
@@ -1047,7 +1047,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-progress-event"><code>progress</code></a> at the
 	<a href="#dfn-filereader"><code>FileReader</code></a> object about every 50ms <em>or</em> for every byte read into memory, whichever is least frequent.  <em>At least one</em> event called <a href="#dfn-progress-event"><code>progress</code></a> MUST fire before <a href="#dfn-load-event"><code>load</code></a> is fired, and at 100% completion of the read operation; if 100% of <a href="#dfn-fileBlob"><code>blob</code></a> can be read into memory in <em>less than</em> 50ms, user agents MUST <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-progress-event"><code>progress</code></a> at completion. </p>
 	<div class="example"><div class="exampleHeader">Example</div>
-	<p>If a given implementation uses buffers of size 65536 bytes to read files, and thus limits reading operations to that size, and a <a href="#read-method">read method</a> is called on a file that is 65537 bytes, then that implementation MUST fire one <a href="#dfn-progress-event"><code>progress</code></a> event for the 65536 first bytes, one <a href="#dfn-progress-event"><code>progress</code></a> event for the 65537th byte (which is at completion of read), one <a href="#dfn-load-event"><code>load</code></a> event and one <a href="#dfn-loadend-event"><code>loadend</code></a> event.</p>
+	<p>If a given implementation uses buffers of size 65536 bytes to read files, and thus limits reading operations to that size, and a <a href="#read-methods">read method</a> is called on a file that is 65537 bytes, then that implementation MUST fire one <a href="#dfn-progress-event"><code>progress</code></a> event for the 65536 first bytes, one <a href="#dfn-progress-event"><code>progress</code></a> event for the 65537th byte (which is at completion of read), one <a href="#dfn-load-event"><code>load</code></a> event and one <a href="#dfn-loadend-event"><code>loadend</code></a> event.</p>
 	</div>	
 		</li>
 	<li><p>When the data from the <a href="#dfn-fileBlob"><code>blob</code></a> 
@@ -1132,12 +1132,12 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<div id="eventInvariants" class="section">
 	<h5>8.5.10.2. Summary of Event Invariants</h5>
 	<p>
-	The following are normative invariants applicable to <a href="#fire-an-event">event firing</a> for a given asynchronous <a href="#read-method">read method</a> in this specification:
+	The following are normative invariants applicable to <a href="#fire-an-event">event firing</a> for a given asynchronous <a href="#read-methods">read method</a> in this specification:
 	</p>
 	<ol> 
-		<li><p>Once a <a href="#dfn-loadstart-event"><code>loadstart</code></a> has been fired, a corresponding <a href="#dfn-loadened-event"><code>loadend</code></a> fires at completion of the read, EXCEPT if the <a href="#read-method">read method</a> has been cancelled using <a href="#dfn-abort"><code>abort()</code></a> and a new <a href="#read-method">read method</a> has been invoked.</p>
+		<li><p>Once a <a href="#dfn-loadstart-event"><code>loadstart</code></a> has been fired, a corresponding <a href="#dfn-loadend-event"><code>loadend</code></a> fires at completion of the read, EXCEPT if the <a href="#read-methods">read method</a> has been cancelled using <a href="#dfn-abort"><code>abort()</code></a> and a new <a href="#read-methods">read method</a> has been invoked.</p>
 	<div class="note"><div class="noteHeader">Note</div>
-	The events <a href="#dfn-loadstart-event"><code>loadstart</code></a> and <a href="#dfn-loadened-event"><code>loadend</code></a> are not coupled in a one-to-one manner. 	
+	The events <a href="#dfn-loadstart-event"><code>loadstart</code></a> and <a href="#dfn-loadend-event"><code>loadend</code></a> are not coupled in a one-to-one manner. 	
 	</div>	
 		</li>
 		<li><p>One <a href="#dfn-progress-event"><code>progress</code></a> event will fire when <a href="#dfn-fileBlob"><code>blob</code></a> has been completely read into memory.  </p></li>
@@ -1158,7 +1158,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	object) <em>and</em> the synchronous API (the <code><a href="#dfn-FileReaderSync">FileReaderSync</a></code> object).</p>
 	<div id="FileReaderSync" class="section">
 	<h3>9.1. The <code>FileReaderSync</code> Interface</h3>
-	<p>This interface  provides methods to synchronously read <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> objects into memory.</p>
+	<p>This interface  provides methods to <dfn id="read-method-sync">synchronously read</dfn> <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> objects into memory.</p>
 	<div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
 
 	[Constructor]
@@ -1306,7 +1306,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<p>This scheme should have defined response codes, so that web applications can respond to scenarios where the resource is not found, or raises an error, etc.
 	</p></li>
 	<li><p>This scheme should have an <a href="#origin">origin</a> policy and a
-	<a href="#lifetime">lifetime</a> stipulation, to allow safe access to binary data from web applications.  </p>
+	<a href="#lifeTime">lifetime</a> stipulation, to allow safe access to binary data from web applications.  </p>
 	<p>URIs in this scheme should be used as a references to "in-memory" <a href="#dfn-Blob">Blobs</a>, and also be re-used elsewhere on the platform to refer to binary
 	resources (e.g. for video-conferencing
 	[<a href="#StreamAPI">Stream API</a>]).
@@ -1323,7 +1323,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<p>
 	This section is an informative discussion of existing schemes that may have been repurposed or reused for the use cases for URIs above, and justification for why a new scheme
 	is considered preferable.  These schemes include HTTP [<a href="#HTTP">HTTP</a>], file [<a href="#RFC1630">RFC1630</a>][<a href="#RFC1738">RFC1738</a>], and a scheme such as
-	urn:uuid [<a href="#RFC4122">RFC4122</a>].  One broad consideration in determining what scheme to use is providing something with intuitive appeal to web developers.
+	urn:uuid [<a href="#UUID">RFC4122</a>].  One broad consideration in determining what scheme to use is providing something with intuitive appeal to web developers.
 	</p>
 	<ul>
 	<li><p>HTTP could be repurposed for the use cases mentioned above; it already comes with well-defined request-response semantics that are already used by web applications.
@@ -1455,7 +1455,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<ul>
 		<li><p>Any request method other than GET is used to dereference the URL.</p></li>
 		<li><p>The request violates the <a href="#originOfBlob">origin requirement</a>.  In this case, the response SHOULD be accompanied by clarifying text alongside the 500 response, e.g. "500 Origin Violation."</p></li>
-		<li><p>The request does not satisfy the <a href="#lifetime">lifetime requirement</a>.  In this case, the response SHOULD be accompanied by clarifying text alongside the 500 response, e.g. "500 Expired URI."</p></li>
+		<li><p>The request does not satisfy the <a href="#lifeTime">lifetime requirement</a>.  In this case, the response SHOULD be accompanied by clarifying text alongside the 500 response, e.g. "500 Expired URI."</p></li>
 		<li><p>The underlying resource has changed, moved, been deleted or has become invalid.  In this case, the response SHOULD be accompanied by clarifying text alongside the 500 response, e.g. "500 Invalid Resource."</p></li>
 		<li><p>The permissions surrounding the underlying resource do not permit access.  In this case, the response SHOULD be accompanied by clarifying text alongside the 500 response, e.g. "500 Access Violation."</p></li>
 		<li><p>A security error has occurred.  In this case, the response SHOULD be accompanied by clarifying text alongside the 500 response, e.g. "500 Security Violation."  </p></li>
@@ -1540,7 +1540,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	</p>
 	<ol>
 	  <li>If the <a href="#dfn-urlarg"><code>url</code></a> refers to a <a href="#dfn-Blob"><code>Blob</code></a> that is both <a href="#valid">valid</a> and in the
-	  <a href="#same-origin">same origin</a> of the global object's <a href="#URL-obect">URL</a> property on which this static method was called,
+	  <a href="#same-origin">same origin</a> of the global object's <a href="#URL-object">URL</a> property on which this static method was called,
 	user agents MUST return a <a href="#FiveHundredInternalServerError">500</a> response code when the <a href="#dfn-urlarg"><code>url</code></a> is dereferenced.</li>
 	<li>If the <a href="#dfn-urlarg"><code>url</code></a> refers to a <a href="#dfn-Blob"><code>Blob</code></a> that is NOT <a href="#valid">valid</a> OR if the value provided for
 	the <a href="#dfn-urlarg"><code>url</code></a> argument is not a <a href="#url"><code>Blob</code> URI</a> OR if the <a href="#dfn-urlarg"><code>url</code></a> argument
