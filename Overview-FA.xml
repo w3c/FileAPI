@@ -568,12 +568,12 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  readonly attribute <a href="#dfn-domerror" class="dfnref">DOMError</a> <a href="#dfn-error" class="dfnref">error</a>;
 
 	  <span class="comment">// event handler attributes</span>
-	  attribute [TreatNonCallableAsNull] Function? <a href="#dfn-onloadstart" class="dfnref">onloadstart</a>;
-	  attribute [TreatNonCallableAsNull] Function? <a href="#dfn-onprogress" class="dfnref">onprogress</a>;
-	  attribute [TreatNonCallableAsNull] Function? <a class="dfnref" href="#dfn-onload">onload</a>;
-	  attribute [TreatNonCallableAsNull] Function? <a class="dfnref" href="#dfn-onabort">onabort</a>;
-	  attribute [TreatNonCallableAsNull] Function? <a class="dfnref" href="#dfn-onerror">onerror</a>;
-	  attribute [TreatNonCallableAsNull] Function? <a class="dfnref" href="#dfn-onloadend">onloadend</a>;
+	  [TreatNonCallableAsNull] attribute Function? <a href="#dfn-onloadstart" class="dfnref">onloadstart</a>;
+	  [TreatNonCallableAsNull] attribute Function? <a href="#dfn-onprogress" class="dfnref">onprogress</a>;
+	  [TreatNonCallableAsNull] attribute Function? <a class="dfnref" href="#dfn-onload">onload</a>;
+	  [TreatNonCallableAsNull] attribute Function? <a class="dfnref" href="#dfn-onabort">onabort</a>;
+	  [TreatNonCallableAsNull] attribute Function? <a class="dfnref" href="#dfn-onerror">onerror</a>;
+	  [TreatNonCallableAsNull] attribute Function? <a class="dfnref" href="#dfn-onloadend">onloadend</a>;
 
 	};
 	  </x:codeblock>
