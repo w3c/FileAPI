@@ -15,7 +15,9 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
     <title>File API</title>
+
     <meta name='revision' content='$Id$'/>
+
     <link rel='stylesheet' href='FileAPI.css' type='text/css'/>
     <script src='section-links.js' type='application/ecmascript'/>
     <script src='dfn.js' type='application/ecmascript'/>
@@ -45,7 +47,7 @@
             <affiliation>Mozilla Corporation</affiliation>
         </person>
       </editors>
-      <maturity>WD</maturity>
+      <maturity>ED</maturity>
     </options>
   </head>
 
@@ -109,7 +111,7 @@
       A list of current <acronym title="World Wide Web Consortium">W3C</acronym>
       publications and the latest revision of this technical report can be found in the 
       <a href="http://www.w3.org/TR/"><acronym title="World Wide Web Consortium">W3C</acronym>
-      technical reports index</a> at http://www.w3.org/TR/.</em>
+      technical reports index</a> at <a href="http://www.w3.org/TR/">http://www.w3.org/TR/</a>.</em>
       </p>
 
     <p>
@@ -964,20 +966,17 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	</div>
 	<div id='enctype' class='section'>
 	<h4>Determining Encoding</h4>
-	<p>When reading <a href="#dfn-fileBlob"><code>blob</code></a> objects using the <a href="#dfn-readAsText"><code>readAsText()</code></a> <a href="#read-methods">read method</a>, the optional <dfn id="dfn-encoding"><code>
-	encoding</code></dfn> string parameter MUST be a <em>name</em> or an <em>alias</em> of a character set
-	used on the Internet [<a href="#IANACHARSET">IANACHARSET</a>], or else is considered invalid.  The following <dfn id="encoding-determination">encoding determination</dfn> steps MUST be followed:</p>
+	<p>When reading <a href="#dfn-fileBlob"><code>blob</code></a> objects using the <a href="#dfn-readAsText"><code>readAsText()</code></a> <a href="#read-methods">read method</a>, the following <dfn id="encoding-determination">encoding determination</dfn> steps MUST be followed:</p>
 	<ol>
-	<li><p>Decode the <a href="#dfn-fileBlob"><code>blob</code></a> using the <a href="#dfn-encoding"><code>encoding</code></a> parameter, if provided and if valid, and terminate this set of steps.  If invalid, or if not provided, or if the user agent cannot determine the encoding, go to the next step.</p></li>
-	<li><p>Decode the <a href="#dfn-fileBlob"><code>blob</code></a> using the Charset Parameter [<a href="#RFC2046">RFC2046</a>] of the <a href="#dfn-fileBlob"><code>blob</code></a> argument's <a href="#dfn-type"><code>type</code></a> attribute, if it has one.  If it does not have one, or if the one provided is not a character set used on the Internet [<a href="#IANACHARSET">IANACHARSET</a>], go to the next step.</p>
+	<li><p>Let <var>charset</var> be null</p></li>
+	<li><p>If the <a href="#dfn-encoding"><code>encoding</code></a> argument is present, and is the name or alias of a character set used on the Internet 
+	[<a href="#IANACHARSET">IANACHARSET</a>], let <var>charset</var> be set to the value of the <a href="#dfn-encoding"><code>encoding</code></a> parameter. </p></li>
+	<li><p>If charset is null, and the <a href="#dfn-fileBlob"><code>blob</code></a> argument's <a href="#dfn-type"><code>type</code></a> attribute is present, and its Charset Parameter [<a href="#RFC2046">RFC2046</a>] is the name or alias of a character set used on the Internet [<a href="#IANACHARSET">IANACHARSET</a>], let <var>charset</var> be set to its Charset Parameter.</p>
 	<div class="example">
-	<p>If a given <a href="#dfn-fileBlob"><code>blob</code></a> has a <a href="#dfn-type"><code>type</code></a> attribute of <code>text/plain;charset=UTF-8</code> then decode the <a href="#dfn-fileBlob"><code>blob</code></a> using UTF-8.</p>
+	<p>If <a href="#dfn-fileBlob"><code>blob</code></a> has a <a href="#dfn-type"><code>type</code></a> attribute of <code>text/plain;charset=UTF-8</code> then <var>charset</var> is UTF-8.</p>
 	</div>
 	</li>
-	<li><p>Let <var>charset</var> be null.</p></li>
-	<li>
-
-	    <p>For each of the rows in the
+	<li><p>If <var>charset</var> is null, then for each of the rows in the
 	     following table, starting with the first one and going down, if the
 	     first bytes of <a href="#dfn-fileBlob"><code>blob</code></a> match the bytes given in the first
 	     column, then let <var>charset</var> be the encoding given in the cell in
@@ -1021,12 +1020,12 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 
 	    </td></tr></tbody></table>
 
-	   </li><li>
-	    <p>If <var>charset</var> is null let <var>charset</var> be UTF-8.
+	   </li>
+	    <li><p>If <var>charset</var> is null let <var>charset</var> be UTF-8.
 
-	   </p></li><li>
+	   </p></li>
 
-	    <p>Return the result of decoding the <a href="#dfn-fileBlob"><code>blob</code></a> using
+	    <li><p>Return the result of decoding the <a href="#dfn-fileBlob"><code>blob</code></a> using
 	     <var>charset</var>; on getting, the <a href="#dfn-result"><code>result</code></a> attribute of the <a href="#dfn-filereader"><code>FileReader</code></a>
 	     object returns a string in <var>charset</var> format.  The synchronous
 	     <a href="#dfn-readAsTextSync"><code>readAsText</code></a> method of the <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object returns a string in <var>charset</var> format.
