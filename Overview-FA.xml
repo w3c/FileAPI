@@ -369,6 +369,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
       The <a href="#dfn-file" class="dfnref"><code>File</code></a> interface inherits from this interface.
     </p>
     <x:codeblock language = 'idl'>
+    [Constructor, Constructor(any[] <a href="#dfn-blobParts" title="blobParts" class="dfnref">blobParts</a>, optional <a href="#dfn-BlobPropertyBag" title="BlobPropertyBag" class="dfnref">BlobPropertyBag</a> <a href="#dfn-options" title="options" class="dfnref">options</a>)] 
     interface <dfn id='dfn-Blob'>Blob</dfn> {
       
       readonly attribute unsigned long long <a href="#dfn-size" title='size' class="dfnref">size</a>;
@@ -381,8 +382,88 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
                  optional DOMString <a href="#dfn-contentTypeBlob">contentType</a>); 
     
     };
+
+    dictionary <dfn id="dfn-BlobPropertyBag">BlobPropertyBag</dfn> {
+		
+      DOMString <a href="#dfn-BPtype" title="BPtype">type</a>;
+      DOMString <a href="#dfn-endings" title="BPendings">endings</a> = "transparent";
+	
+    };
     </x:codeblock>
-                
+    <div id="constructorBlob" class="section">
+		<h3>Constructors</h3>
+		<p>The <code>Blob()</code> constructor can be invoked with or without parameters.</p>
+
+		<p>
+		When the <code>Blob()</code> constructor is invoked, the user agent MUST return a new <a href="#dfn-Blob"><code>Blob</code></a> object.
+		</p>
+		<div id="constructorParams" class="section">
+		<h4>Constructor Parameters</h4>
+		<p>The <code>Blob()</code> constructor can also be invoked with the parameters below:</p>
+		<dl>
+			<dt id="dfn-blobParts">A <code>blobParts</code> <code>Array</code> [<a href="#ECMA-262">ECMA-262, 5th Edition</a>]</dt> 
+			<dd>which MUST take any number of the following types of members, and in any order:
+				<ul>
+				<li><p><code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] members</p></li>
+				<li><p><a href="#dfn-Blob"><code>Blob</code></a> members</p></li>
+				<li><p><code>DOMString</code> [<a href="#WebIDL">WebIDL</a>] members</p></li>
+				</ul>
+			<p>When the constructor is invoked with a <a href="#dfn-blobParts"><code>blobParts</code></a> argument, a user agent MUST return a <a href="#dfn-Blob"><code>Blob</code></a> that appends all of the <a href="#dfn-blobParts"><code>blobParts</code></a> members.  If the optional <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> is not used, a user agent MUST treat appended <code>DOMString</code> members as if they have <a href="#dfn-transparent">"transparent"</a> line endings.  If a type that is not one of <code>DOMString</code> [<a href="#WebIDL">WebIDL</a>], <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>], or <a href="#dfn-Blob"><code>Blob</code></a> is used as a <a href="#dfn-blobParts"><code>blobParts</code></a> member, the constructor must return <code>null</code>.</p>
+			</dd>
+			<dt>An <em>optional</em> <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a></dt>
+			<dd>which takes two <code>DOMString</code> [<a href="#WebIDL">WebIDL</a>] members:
+			<ul>
+				<li><dfn id="dfn-BPtype"><code>type</code></dfn> which corresponds to the <a href="#dfn-Blob"><code>Blob</code></a> object's <a href="#dfn-type"><code>type</code></a> attribute.  If used, a user agent MUST return a new <a href="#dfn-Blob"><code>Blob</code></a> object with a <a href="#dfn-type"><code>type</code></a> attribute corresponding to the value of this argument within the  <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a>.</li>
+				<li><p><dfn id="dfn-endings"><code>endings</code></dfn>, a <code>DOMString</code> which can take the values <a href="#dfn-transparent">"transparent"</a> or <a href="#dfn-native">"native"</a>.  If omitted from the <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a>, a user agent MUST treat this as having a default value of "transparent".  A description of both is given in the table below.</p>
+				<table><thead><tr><th>Value</th><th>Description</th></tr>
+				                <tr>
+				                  <td><dfn id="dfn-transparent" class="dfnrefs">"transparent"</dfn></td>
+				                  <td>
+				                    Code points from the string arguments <em>MUST</em> remain unchanged.
+				                  </td>
+
+				                </tr></thead>
+				<tbody>
+				                <tr>
+				                  <td><dfn id="dfn-native" class="dfnrefs">"native"</dfn></td>
+				                  <td>
+				                    Newlines <em>MUST</em> be transformed to the default line-ending
+				                    representation of the underlying host operating system.  For
+				                    example, if the underlying OS is Windows, newlines will be
+				                    transformed into <code>\r\n</code> pairs as the text is
+				                    appended to the newly minted <a href="#dfn-Blob"><code>Blob</code></a> object.
+				                  </td>
+				                </tr>
+
+				              </tbody></table>			
+				</li>
+			</ul>
+		</dd></dl>
+	</div>
+<div class="example">
+<p>Examples of constructor usage follow.</p>
+<x:codeblock language="es">
+var a = new Blob();
+
+// Assume library utility that returns files as ArrayBuffers
+var arraybuffer = getAsArrayBuffer(file);
+
+// b has line endings of type "transparent" by default
+var b = new Blob({"foobarbazetcetc", "birdiebirdieboo"}, {type: "text/plain;charset=UTF-8"});
+
+// c appends b and arraybuffer and has line endings of type "transparent"
+var c = new Blob({b, arraybuffer});
+
+// a now has native endings depending on platform
+var a = new Blob({b, c, arraybuffer}, {type: "multipart/mixed", endings: "native"});
+
+// x is null
+var x = new Blob(12);
+</x:codeblock>
+
+</div>				
+	</div>    
+ 
     <div id='attributes-blob' class='section'>
     <h3>Attributes</h3>
     <dl><dt id='dfn-size'><code>size</code></dt><dd><p>Returns the size of the <code>Blob</code> object in bytes.  On getting, conforming user agents MUST return the total
