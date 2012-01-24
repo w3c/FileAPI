@@ -1585,7 +1585,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<x:codeblock language="idl">
 	partial interface <dfn id="URL-object">URL</dfn> {
 
-	    static DOMString <a href="#dfn-createObjectURL">createObjectURL</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
+	    static DOMString <a href="#dfn-createObjectURL">createObjectURL</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>, optional boolean <a href="#dfn-oneTimeOnly">oneTimeOnly</a>);
 	    static void <a href="#dfn-revokeObjectURL">revokeObjectURL</a>(DOMString <a href="#dfn-urlarg">url</a>);
 	};
 	</x:codeblock>
@@ -1603,15 +1603,26 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<li><p>If this method is called with a <a href="#valid">valid</a> <a href="#dfn-Blob"><code>Blob</code></a> argument, user agents MUST return
 	a unique <a href="#url"><code>Blob</code> URI</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument.</p></li>
 	</ol>
+<p>The optional <dfn id="dfn-oneTimeOnly"><code>oneTimeOnly</code></dfn> boolean argument defaults to <code>false</code>.  If set to <code>true</code>, then the first time the <a href="#url"><code>Blob</code> URI</a> is dereferenced, user agents MUST automatically revoke that <a href="#url"><code>Blob</code> URI</a> without needing a call to <code>revokeBlobURL()</code>.</p>
 	<div class="example">
-	<p>In the example below, after obaining a reference to a Blob object, the static method <code>URL.createObjectURL</code> is called on that Blob object.</p>
+	<p>In the example below, after obaining a reference to a <a href="#dfn-Blob"><code>Blob</code></a> object, the static method <code>URL.createObjectURL</code> is called on that <a href="#dfn-Blob"><code>Blob</code></a> object.</p>
 	<x:codeblock language="es">
 	var file = document.getElementById('file').files[0];
 	if(file){
 	  blobURLref = window.URL.createObjectURL(file);
 	  myimg.src = blobURLref;
+	
+	//...
 	}
 	</x:codeblock>
+	<p>In the example below, there is no need to call <code>revokeBlobURL()</code> since the <a href="#dfn-oneTimeOnly"><code>oneTimeOnly</code></a> boolean has been set to true.</p>
+<x:codeblock language="es">
+	var file = document.getElementById('file').files[0];
+	if(file){
+	  blobURLref = window.URL.createObjectURL(file, true);
+	  myimg.src = blobURLref;
+	}
+</x:codeblock>	 
 	</div>
 	</dd>
 	<dt id="dfn-revokeObjectURL">The <code>revokeObjectURL</code> method</dt>
