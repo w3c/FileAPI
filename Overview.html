@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>23 January 2012</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2010/WD-FileAPI-20101026/">http://www.w3.org/TR/2010/WD-FileAPI-20101026/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2011 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>24 January 2012</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2010/WD-FileAPI-20101026/">http://www.w3.org/TR/2010/WD-FileAPI-20101026/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2011 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
       <h2>Abstract</h2>
@@ -79,7 +79,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 23 January 2012 <b>Editor’s Draft</b> of the
+        This document is the 24 January 2012 <b>Editor’s Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -147,7 +147,7 @@
 
     <div id="toc">
       <h2>Table of Contents</h2>
-      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#dependencies">3. Dependencies</a></li><li><a href="#terminology">4. Terminology and Algorithms</a></li><li><a href="#filelist-section">5. The FileList Interface</a><ul><li><a href="#attributes-filelist">5.1. Attributes</a></li><li><a href="#filelist-methods-params">5.2. Methods and Parameters</a></li></ul></li><li><a href="#blob">6. The Blob Interface</a><ul><li><a href="#constructorBlob">6.1. Constructors</a><ul><li><a href="#constructorParams">6.1.1. Constructor Parameters</a></li></ul></li><li><a href="#attributes-blob">6.2. Attributes</a></li><li><a href="#methodsandparams-blob">6.3. Methods and Parameters</a><ul><li><a href="#normalization-of-params">6.3.1. Parameters to slice</a></li><li><a href="#slide-method-algo">6.3.2. The slice method</a></li></ul></li></ul></li><li><a href="#file">7. The File Interface</a><ul><li><a href="#file-attrs">7.1. Attributes</a></li></ul></li><li><a href="#FileReader-interface">8. The FileReader Interface</a><ul><li><a href="#blobreader-task-source">8.1. The FileReader Task Source</a></li><li><a href="#filereaderConstrctr">8.2. Constructors</a></li><li><a href="#event-handler-attributes-section">8.3. Event Handler Attributes</a></li><li><a href="#blobreader-state">8.4. FileReader States</a></li><li><a href="#reading-a-file">8.5. Reading a File or Blob</a><ul><li><a href="#MultipleReads">8.5.1. Multiple Reads</a></li><li><a href="#filedata-attr">8.5.2. The result attribute</a></li><li><a href="#readAsBinaryString">8.5.3. The readAsBinaryString(blob) method</a></li><li><a href="#readAsDataURL">8.5.4. The readAsDataURL(blob) method</a></li><li><a href="#readAsDataText">8.5.5. The readAsText(blob, encoding) method</a></li><li><a href="#readAsArrayBuffer">8.5.6. The readAsArrayBuffer(blob) method</a></li><li><a href="#abort">8.5.7. The abort() method</a></li><li><a href="#blobAndFileParams">8.5.8. Blob Parameters</a></li><li><a href="#enctype">8.5.9. Determining Encoding</a></li><li><a href="#events">8.5.10. Events</a><ul><li><a href="#event-summary">8.5.10.1. Event Summary</a></li><li><a href="#eventInvariants">8.5.10.2. Summary of Event Invariants</a></li></ul></li></ul></li></ul></li><li><a href="#readingOnThreads">9. Reading on Threads</a><ul><li><a href="#FileReaderSync">9.1. The FileReaderSync Interface</a><ul><li><a href="#filereadersyncConstrctr">9.1.1. Constructors</a></li><li><a href="#readAsBinaryStringSyncSection">9.1.2. The readAsBinaryString method</a></li><li><a href="#readAsTextSync">9.1.3. The readAsText method</a></li><li><a href="#readAsDataURLSync-section">9.1.4. The readAsDataURL method</a></li><li><a href="#readAsArrayBufferSyncSection">9.1.5. The readAsArrayBuffer method</a></li></ul></li></ul></li><li><a href="#ErrorAndException">10. Errors and Exceptions</a><ul><li><a href="#dfn-error-codes">10.1. Throwing an Exception or Returning an Error</a></li></ul></li><li><a href="#url">11. A URI for Blob and File reference</a><ul><li><a href="#use-cases-scheme">11.1. Requirements for a New Scheme</a></li><li><a href="#alternative-schemas">11.2. Discussion of Existing Schemes</a></li><li><a href="#ABNFForBlob">11.3. Definition of blob URI Scheme</a><ul><li><a href="#OpaqueStringDiscussion">11.3.1. The Opaque String</a></li></ul></li><li><a href="#fragmentDiscussion">11.4. Discussion of Fragment Identifier</a></li><li><a href="#originOfBlob">11.5. Origin of Blob URIs</a></li><li><a href="#lifeTime">11.6. Lifetime of Blob URIs</a></li><li><a href="#processingModel">11.7. Dereferencing Model for Blob URIs</a><ul><li><a href="#ProtocolName">11.7.1. Blob Protocol Version</a></li><li><a href="#TwoHundredOK">11.7.2. 200 OK</a></li><li><a href="#FiveHundredInternalServerError">11.7.3. 500 Error Condition</a></li><li><a href="#ProtocolExamples">11.7.4. Request and Response Headers</a><ul><li><a href="#processing-media-types">11.7.4.1. Processing Media Types</a></li></ul></li></ul></li><li><a href="#creating-revoking">11.8. Creating and Revoking a Blob URI</a></li></ul></li><li><a href="#security-discussion">12. Security Considerations</a></li><li><a href="#requirements">13. Requirements and Use Cases</a></li><li><a href="#AppendixA">14. Appendix A</a><ul><li><a href="#ABNFUUID">14.1. An ABNF for UUID</a></li></ul></li><li><a href="#acknowledgements-section">15. Acknowledgements</a></li><li><a href="#references">16. References</a><ul><li><a href="#normative-references">16.1. Normative references</a></li><li><a href="#informative-references">16.2. Informative References</a></li></ul></li></ul></div>
+      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#dependencies">3. Dependencies</a></li><li><a href="#terminology">4. Terminology and Algorithms</a></li><li><a href="#filelist-section">5. The FileList Interface</a><ul><li><a href="#attributes-filelist">5.1. Attributes</a></li><li><a href="#filelist-methods-params">5.2. Methods and Parameters</a></li></ul></li><li><a href="#blob">6. The Blob Interface</a><ul><li><a href="#constructorBlob">6.1. Constructors</a><ul><li><a href="#constructorParams">6.1.1. Constructor Parameters</a></li></ul></li><li><a href="#attributes-blob">6.2. Attributes</a></li><li><a href="#methodsandparams-blob">6.3. Methods and Parameters</a><ul><li><a href="#normalization-of-params">6.3.1. Parameters to slice</a></li><li><a href="#slide-method-algo">6.3.2. The slice method</a></li></ul></li></ul></li><li><a href="#file">7. The File Interface</a><ul><li><a href="#file-attrs">7.1. Attributes</a></li></ul></li><li><a href="#FileReader-interface">8. The FileReader Interface</a><ul><li><a href="#blobreader-task-source">8.1. The FileReader Task Source</a></li><li><a href="#filereaderConstrctr">8.2. Constructors</a></li><li><a href="#event-handler-attributes-section">8.3. Event Handler Attributes</a></li><li><a href="#blobreader-state">8.4. FileReader States</a></li><li><a href="#reading-a-file">8.5. Reading a File or Blob</a><ul><li><a href="#MultipleReads">8.5.1. Multiple Reads</a></li><li><a href="#filedata-attr">8.5.2. The result attribute</a></li><li><a href="#readAsBinaryString">8.5.3. The readAsBinaryString(blob) method</a></li><li><a href="#readAsDataURL">8.5.4. The readAsDataURL(blob) method</a></li><li><a href="#readAsDataText">8.5.5. The readAsText(blob, encoding) method</a></li><li><a href="#readAsArrayBuffer">8.5.6. The readAsArrayBuffer(blob) method</a></li><li><a href="#abort">8.5.7. The abort() method</a></li><li><a href="#blobAndFileParams">8.5.8. Blob Parameters</a></li><li><a href="#enctype">8.5.9. Determining Encoding</a></li><li><a href="#events">8.5.10. Events</a><ul><li><a href="#event-summary">8.5.10.1. Event Summary</a></li><li><a href="#eventInvariants">8.5.10.2. Summary of Event Invariants</a></li></ul></li></ul></li></ul></li><li><a href="#readingOnThreads">9. Reading on Threads</a><ul><li><a href="#FileReaderSync">9.1. The FileReaderSync Interface</a><ul><li><a href="#filereadersyncConstrctr">9.1.1. Constructors</a></li><li><a href="#readAsBinaryStringSyncSection">9.1.2. The readAsBinaryString method</a></li><li><a href="#readAsTextSync">9.1.3. The readAsText method</a></li><li><a href="#readAsDataURLSync-section">9.1.4. The readAsDataURL method</a></li><li><a href="#readAsArrayBufferSyncSection">9.1.5. The readAsArrayBuffer method</a></li></ul></li></ul></li><li><a href="#ErrorAndException">10. Errors and Exceptions</a><ul><li><a href="#dfn-error-codes">10.1. Throwing an Exception or Returning an Error</a></li></ul></li><li><a href="#url">11. A URI for Blob and File reference</a><ul><li><a href="#use-cases-scheme">11.1. Requirements for a New Scheme</a></li><li><a href="#alternative-schemas">11.2. Discussion of Existing Schemes</a></li><li><a href="#ABNFForBlob">11.3. Definition of blob URI Scheme</a><ul><li><a href="#OpaqueStringDiscussion">11.3.1. The Opaque String</a></li></ul></li><li><a href="#fragmentDiscussion">11.4. Discussion of Fragment Identifier</a></li><li><a href="#originOfBlob">11.5. Origin of Blob URIs</a></li><li><a href="#lifeTime">11.6. Lifetime of Blob URIs</a></li><li><a href="#processingModel">11.7. Dereferencing Model for Blob URIs</a><ul><li><a href="#TwoHundredOK">11.7.1. 200 OK</a></li><li><a href="#FiveHundredInternalServerError">11.7.2. 500 Error Condition</a></li><li><a href="#ProtocolExamples">11.7.3. Request and Response Headers</a><ul><li><a href="#processing-media-types">11.7.3.1. Processing Media Types</a></li></ul></li></ul></li><li><a href="#creating-revoking">11.8. Creating and Revoking a Blob URI</a></li></ul></li><li><a href="#security-discussion">12. Security Considerations</a></li><li><a href="#requirements">13. Requirements and Use Cases</a></li><li><a href="#AppendixA">14. Appendix A</a><ul><li><a href="#ABNFUUID">14.1. An ABNF for UUID</a></li></ul></li><li><a href="#acknowledgements-section">15. Acknowledgements</a></li><li><a href="#references">16. References</a><ul><li><a href="#normative-references">16.1. Normative references</a></li><li><a href="#informative-references">16.2. Informative References</a></li></ul></li></ul></div>
     </div>
 
     <div id="sections">
@@ -417,7 +417,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 				<li><p><a href="#dfn-Blob"><code>Blob</code></a> members</p></li>
 				<li><p><code>DOMString</code> [<a href="#WebIDL">WebIDL</a>] members</p></li>
 				</ul>
-			<p>When the constructor is invoked with a <a href="#dfn-blobParts"><code>blobParts</code></a> argument, a user agent MUST return a <a href="#dfn-Blob"><code>Blob</code></a> that appends all of the <a href="#dfn-blobParts"><code>blobParts</code></a> members.  If the optional <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> is not used, a user agent MUST treat appended <code>DOMString</code> members as if they have <a href="#dfn-transparent">"transparent"</a> line endings.  If a type that is not one of <code>DOMString</code> [<a href="#WebIDL">WebIDL</a>], <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>], or <a href="#dfn-Blob"><code>Blob</code></a> is used as a <a href="#dfn-blobParts"><code>blobParts</code></a> member, the constructor must return <code>null</code>.</p>
+			<p>When the constructor is invoked with a <a href="#dfn-blobParts"><code>blobParts</code></a> argument, a user agent MUST return a <a href="#dfn-Blob"><code>Blob</code></a> that appends all of the <a href="#dfn-blobParts"><code>blobParts</code></a> members.  If the optional <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> is not used, a user agent MUST treat appended <code>DOMString</code> members as if they have <a href="#dfn-transparent">"transparent"</a> line endings.  If a type that is not one of <code>DOMString</code> [<a href="#WebIDL">WebIDL</a>], <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>], or <a href="#dfn-Blob"><code>Blob</code></a> is used as a <a href="#dfn-blobParts"><code>blobParts</code></a> member, the user agent MUST throw an <code>InvalidStateError</code>.</p>
 			</dd>
 			<dt>An <em>optional</em> <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a></dt>
 			<dd>which takes two <code>DOMString</code> [<a href="#WebIDL">WebIDL</a>] members:
@@ -466,8 +466,11 @@ var c = new Blob({b, arraybuffer});
 // a now has native endings depending on platform
 var a = new Blob({b, c, arraybuffer}, {type: "multipart/mixed", endings: "native"});
 
-// x is null
+// Simply create a new Blob object
 var x = new Blob(12);
+
+// Throw an InvalidStateError
+var yg = new Blob({12});
 </code></pre></div></div>
 
 </div>				
@@ -619,7 +622,8 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  <div class="note"><div class="noteHeader">Note</div>
 	  <p>The <code>File</code> interface is available on objects that expose an attribute of type <a href="#dfn-filelist"><code>FileList</code></a>; these objects are defined in
 	  HTML [<a href="#HTML">HTML</a>].  The <code>File</code> interface, which inherits from <a href="#dfn-Blob"><code>Blob</code></a>, is immutable, and thus represents file data that can be
-	  read into memory at the time a <a href="#read-methods">read operation</a> is initiated.  User agents MUST process reads on files that no longer exist at the time of read as
+	  read into memory at the time a <a href="#read-methods">read operation</a> is initiated.  For synchronous reads on a Web Worker [<a href="#Workers">Workers</a>], if the file has been modified on disk since the <code>File</code> object reference is created, user agents MUST throw a <a href="#dfn-NotReadableError"><code>NotReadableError</code></a>; for asynchronous reads, user agents must fire an <a href="#dfn-error-event"><code>error</code></a> event with the <a href="#dfn-error"><code>error</code></a>
+	  attribute returning a <a href="#dfn-NotReadableError"><code>NotReadableError</code></a> <a href="#dfn-domerror"><code>DOMError</code></a>. User agents MUST process reads on files that no longer exist at the time of read as
 	  <a href="#file-error-read">errors</a>, throwing a <a href="#dfn-NotFoundError"><code>NotFoundError</code></a> exception if using a <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> on a Web Worker [<a href="#Workers">Workers</a>] or firing an <a href="#dfn-error-event"><code>error</code></a> event with the <a href="#dfn-error"><code>error</code></a>
 	  attribute returning a <a href="#dfn-NotFoundError"><code>NotFoundError</code></a> <a href="#dfn-domerror"><code>DOMError</code></a>.</p>
 	  </div>
@@ -1229,7 +1233,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 		</li>
 		<li><p>One <a href="#dfn-progress-event"><code>progress</code></a> event will fire when <a href="#dfn-fileBlob"><code>blob</code></a> has been completely read into memory.  </p></li>
 		<li><p>No <a href="#dfn-progress-event"><code>progress</code></a> event fires before <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
-		<li><p>No <a href="#dfn-progress-event"><code>progress</code></a> event fires after <a href="#dfn-abort-event"><code>abort</code></a>, <a href="#dfn-load-event"><code>load</code></a>, and <a href="#dfn-loadend-event"><code>loadend</code></a> have fired.</p></li>
+		<li><p>No <a href="#dfn-progress-event"><code>progress</code></a> event fires after any one of <a href="#dfn-abort-event"><code>abort</code></a>, <a href="#dfn-load-event"><code>load</code></a>, and <a href="#dfn-error-event"><code>error</code></a> have fired.  At most one of <a href="#dfn-abort-event"><code>abort</code></a>, <a href="#dfn-load-event"><code>load</code></a>, and <a href="#dfn-error-event"><code>error</code></a> fire for a given read.</p></li>
 		<li><p>No <a href="#dfn-abort-event"><code>abort</code></a>, <a href="#dfn-load-event"><code>load</code></a>, or <a href="#dfn-error-event"><code>error</code></a> event fires after <a href="#dfn-loadend-event"><code>loadend</code></a>.</p></li> 
 	</ol>
 	</div>
@@ -1522,20 +1526,15 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<a href="#dfn-type"><code>type</code></a> attribute, or if the <a href="#dfn-Blob"><code>Blob</code></a> has been created with a <a href="#dfn-slice"><code>slice</code></a> call which
 	uses a <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument, responses to dereferencing the Blob URI must include the Content-Type header from HTTP [<a href="#HTTP">HTTP</a>] with the value of the <a href="#dfn-type"><code>type</code></a>
 	attribute or <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument.  Specifically, responses MUST only support a subset of responses that are equivalent to the following from HTTP [<a href="#HTTP">HTTP</a>]:</p>
-	<div id="ProtocolName" class="section">
-	<h4>11.7.1. Blob Protocol Version</h4>
-	<p>The version of the blob: protocol request and response messages is indicated by the <dfn id="blobprotocolversion">"blob/1.0"</dfn> string, which MUST be used in request messages and in response messages, and must be used just as the HTTP version in HTTP messages is used [<a href="#HTTP">HTTP</a>].  See <a href="#ProtocolExamples">blob: protocol examples</a>.</p> 
-	</div>
-
 	<div id="TwoHundredOK" class="section">
-	<h4>11.7.2. 200 OK</h4>
+	<h4>11.7.1. 200 OK</h4>
 	<p>This response [<a href="#HTTP">HTTP</a>] MUST be used if the request has succeeded, namely the <a href="#ABNFForBlob">blob:</a> URI has been requested with a GET,
 	satisfies the <a href="#originOfBlob">origin requirement</a>, and satisfies the <a href="#lifeTime">lifetime requirement.</a>  If this response code is used,
 	the user agent MUST also use a Content-Type header [<a href="#HTTP">HTTP</a>] with a value equal to the <code><a href="#dfn-Blob">Blob</a></code> object's <code><a href="#dfn-type">type</a></code> attribute.  See <a href="#ProtocolExamples">blob: protocol examples</a>.
 	</p>
 	</div>
 	<div id="FiveHundredInternalServerError" class="section">
-	<h4>11.7.3. 500 Error Condition</h4>
+	<h4>11.7.2. 500 Error Condition</h4>
 	<p>
 	  This response [<a href="#HTTP">HTTP</a>] MUST be used if:
 	</p>
@@ -1553,7 +1552,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	</div>
 	</div>
 	<div id="ProtocolExamples" class="section">
-	<h4>11.7.4. Request and Response Headers</h4>
+	<h4>11.7.3. Request and Response Headers</h4>
 	<p>This section provides sample exchanges between web applications and user agents using the <a href="#processingModel">blob: protocol</a>.  A request can be triggered using HTML markup of the sort <code>&lt;img src="blob:550e8400-e29b-41d4-a716-446655440000"&gt;</code>, after a web application calls <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> on a given <a href="#dfn-fileBlob"><code>blob</code></a>, which returns <code>blob:550e8400-e29b-41d4-a716-446655440000 </code> to dereference that <a href="#dfn-fileBlob"><code>blob</code></a>.  These examples merely illustrate the protocol; web developers are not likely to interact with all the headers, but the <code>getAllResponseHeaders()</code> method of <code>XMLHttpRequest</code>, if used, will show relevant response headers [<a href="#XHR2">XHR2</a>].  </p>
 	<div class="example"><div class="exampleHeader">Example</div>
 	<p>Requests could look like this:</p>
@@ -1562,20 +1561,20 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	</code></pre></div></div>
 	<p>If the <a href="#dfn-fileBlob"><code>blob</code></a> has an affiliated media type [<a href="#RFC2046">RFC2046</a>] represented by its <a href="#dfn-type"><code>type</code></a> attribute, then the response message should include the Content-Type header from HTTP [<a href="#HTTP">HTTP</a>].  See <a href="#processing-media-types">processing media types</a>. </p>
 	<div class="block"><div class="blockTitleDiv"><span class="blockTitle">HEADERS</span></div><div class="blockContent"><pre class="code"><code class="headers-code">
-	blob/1.0 200 OK
+	200 OK
 	Content-Type: image/jpeg
 
 	....
 	</code></pre></div></div>
 	<p>If there is a <a href="#file-error-read">file error</a> or any other kind of error associated with the <a href="#dfn-fileBlob"><code>blob</code></a>, then a user agent can respond with a <a href="#FiveHundredInternalServerError">500 Error Condition</a> as the response message.  This should also be used if any method other than GET is used to make the request.</p>
 	<div class="block"><div class="blockTitleDiv"><span class="blockTitle">HEADERS</span></div><div class="blockContent"><pre class="code"><code class="headers-code">
-	blob/1.0 500 Error Condition
+	500 Error Condition
 
 	This file cannot be read.
 	</code></pre></div></div>
 	</div>
 	<div id="processing-media-types" class="section">
-	<h4>11.7.4.1. Processing Media Types</h4>
+	<h4>11.7.3.1. Processing Media Types</h4>
 	<p>
 	If a Content-Type header [<a href="#HTTP">HTTP</a>] is provided (e.g. if the <a href="#dfn-fileBlob"><code>blob</code></a> has an affiliated <a href="#dfn-type"><code>type</code></a> attribute), then user agents SHOULD obtain and process that media type in a manner consistent with the Media Type Sniffing specification [<a href="#MIMESNIFF">MIMESNIFF</a>].  
 	</p>

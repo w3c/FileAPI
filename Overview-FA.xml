@@ -408,7 +408,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 				<li><p><a href="#dfn-Blob"><code>Blob</code></a> members</p></li>
 				<li><p><code>DOMString</code> [<a href="#WebIDL">WebIDL</a>] members</p></li>
 				</ul>
-			<p>When the constructor is invoked with a <a href="#dfn-blobParts"><code>blobParts</code></a> argument, a user agent MUST return a <a href="#dfn-Blob"><code>Blob</code></a> that appends all of the <a href="#dfn-blobParts"><code>blobParts</code></a> members.  If the optional <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> is not used, a user agent MUST treat appended <code>DOMString</code> members as if they have <a href="#dfn-transparent">"transparent"</a> line endings.  If a type that is not one of <code>DOMString</code> [<a href="#WebIDL">WebIDL</a>], <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>], or <a href="#dfn-Blob"><code>Blob</code></a> is used as a <a href="#dfn-blobParts"><code>blobParts</code></a> member, the constructor must return <code>null</code>.</p>
+			<p>When the constructor is invoked with a <a href="#dfn-blobParts"><code>blobParts</code></a> argument, a user agent MUST return a <a href="#dfn-Blob"><code>Blob</code></a> that appends all of the <a href="#dfn-blobParts"><code>blobParts</code></a> members.  If the optional <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> is not used, a user agent MUST treat appended <code>DOMString</code> members as if they have <a href="#dfn-transparent">"transparent"</a> line endings.  If a type that is not one of <code>DOMString</code> [<a href="#WebIDL">WebIDL</a>], <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>], or <a href="#dfn-Blob"><code>Blob</code></a> is used as a <a href="#dfn-blobParts"><code>blobParts</code></a> member, the user agent MUST throw an <code>InvalidStateError</code>.</p>
 			</dd>
 			<dt>An <em>optional</em> <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a></dt>
 			<dd>which takes two <code>DOMString</code> [<a href="#WebIDL">WebIDL</a>] members:
@@ -457,8 +457,11 @@ var c = new Blob({b, arraybuffer});
 // a now has native endings depending on platform
 var a = new Blob({b, c, arraybuffer}, {type: "multipart/mixed", endings: "native"});
 
-// x is null
+// Simply create a new Blob object
 var x = new Blob(12);
+
+// Throw an InvalidStateError
+var yg = new Blob({12});
 </x:codeblock>
 
 </div>				
@@ -610,7 +613,8 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  <div class="note">
 	  <p>The <code>File</code> interface is available on objects that expose an attribute of type <a href="#dfn-filelist"><code>FileList</code></a>; these objects are defined in
 	  HTML [<a href="#HTML">HTML</a>].  The <code>File</code> interface, which inherits from <a href="#dfn-Blob"><code>Blob</code></a>, is immutable, and thus represents file data that can be
-	  read into memory at the time a <a href="#read-methods">read operation</a> is initiated.  User agents MUST process reads on files that no longer exist at the time of read as
+	  read into memory at the time a <a href="#read-methods">read operation</a> is initiated.  For synchronous reads on a Web Worker [<a href="#Workers">Workers</a>], if the file has been modified on disk since the <code>File</code> object reference is created, user agents MUST throw a <a href="#dfn-NotReadableError"><code>NotReadableError</code></a>; for asynchronous reads, user agents must fire an <a href="#dfn-error-event"><code>error</code></a> event with the <a href="#dfn-error"><code>error</code></a>
+	  attribute returning a <a href="#dfn-NotReadableError"><code>NotReadableError</code></a> <a href="#dfn-domerror"><code>DOMError</code></a>. User agents MUST process reads on files that no longer exist at the time of read as
 	  <a href="#file-error-read">errors</a>, throwing a <a href="#dfn-NotFoundError"><code>NotFoundError</code></a> exception if using a <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> on a Web Worker [<a href="#Workers">Workers</a>] or firing an <a href="#dfn-error-event"><code>error</code></a> event with the <a href="#dfn-error"><code>error</code></a>
 	  attribute returning a <a href="#dfn-NotFoundError"><code>NotFoundError</code></a> <a href="#dfn-domerror"><code>DOMError</code></a>.</p>
 	  </div>
@@ -1221,7 +1225,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 		</li>
 		<li><p>One <a href="#dfn-progress-event"><code>progress</code></a> event will fire when <a href="#dfn-fileBlob"><code>blob</code></a> has been completely read into memory.  </p></li>
 		<li><p>No <a href="#dfn-progress-event"><code>progress</code></a> event fires before <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
-		<li><p>No <a href="#dfn-progress-event"><code>progress</code></a> event fires after <a href="#dfn-abort-event"><code>abort</code></a>, <a href="#dfn-load-event"><code>load</code></a>, and <a href="#dfn-loadend-event"><code>loadend</code></a> have fired.</p></li>
+		<li><p>No <a href="#dfn-progress-event"><code>progress</code></a> event fires after any one of <a href="#dfn-abort-event"><code>abort</code></a>, <a href="#dfn-load-event"><code>load</code></a>, and <a href="#dfn-error-event"><code>error</code></a> have fired.  At most one of <a href="#dfn-abort-event"><code>abort</code></a>, <a href="#dfn-load-event"><code>load</code></a>, and <a href="#dfn-error-event"><code>error</code></a> fire for a given read.</p></li>
 		<li><p>No <a href="#dfn-abort-event"><code>abort</code></a>, <a href="#dfn-load-event"><code>load</code></a>, or <a href="#dfn-error-event"><code>error</code></a> event fires after <a href="#dfn-loadend-event"><code>loadend</code></a>.</p></li> 
 	</ol>
 	</div>
@@ -1514,11 +1518,6 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<a href="#dfn-type"><code>type</code></a> attribute, or if the <a href="#dfn-Blob"><code>Blob</code></a> has been created with a <a href="#dfn-slice"><code>slice</code></a> call which
 	uses a <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument, responses to dereferencing the Blob URI must include the Content-Type header from HTTP [<a href="#HTTP">HTTP</a>] with the value of the <a href="#dfn-type"><code>type</code></a>
 	attribute or <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument.  Specifically, responses MUST only support a subset of responses that are equivalent to the following from HTTP [<a href="#HTTP">HTTP</a>]:</p>
-	<div id="ProtocolName" class="section">
-	<h4>Blob Protocol Version</h4>
-	<p>The version of the blob: protocol request and response messages is indicated by the <dfn id="blobprotocolversion">"blob/1.0"</dfn> string, which MUST be used in request messages and in response messages, and must be used just as the HTTP version in HTTP messages is used [<a href="#HTTP">HTTP</a>].  See <a href="#ProtocolExamples">blob: protocol examples</a>.</p> 
-	</div>
-
 	<div id="TwoHundredOK" class="section">
 	<h4>200 OK</h4>
 	<p>This response [<a href="#HTTP">HTTP</a>] MUST be used if the request has succeeded, namely the <a href="#ABNFForBlob">blob:</a> URI has been requested with a GET,
@@ -1554,14 +1553,14 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	</x:codeblock>
 	<p>If the <a href="#dfn-fileBlob"><code>blob</code></a> has an affiliated media type [<a href="#RFC2046">RFC2046</a>] represented by its <a href="#dfn-type"><code>type</code></a> attribute, then the response message should include the Content-Type header from HTTP [<a href="#HTTP">HTTP</a>].  See <a href="#processing-media-types">processing media types</a>. </p>
 	<x:codeblock language="headers">
-	blob/1.0 200 OK
+	200 OK
 	Content-Type: image/jpeg
 
 	....
 	</x:codeblock>
 	<p>If there is a <a href="#file-error-read">file error</a> or any other kind of error associated with the <a href="#dfn-fileBlob"><code>blob</code></a>, then a user agent can respond with a <a href="#FiveHundredInternalServerError">500 Error Condition</a> as the response message.  This should also be used if any method other than GET is used to make the request.</p>
 	<x:codeblock language="headers">
-	blob/1.0 500 Error Condition
+	500 Error Condition
 
 	This file cannot be read.
 	</x:codeblock>
