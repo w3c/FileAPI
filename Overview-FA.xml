@@ -445,8 +445,10 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 <x:codeblock language="es">
 var a = new Blob();
 
-// Assume library utility that returns files as ArrayBuffers
-var arraybuffer = getAsArrayBuffer(file);
+// Create a simple 8-byte ArrayBuffer
+// arraybuffer could also come from reading a File
+
+var arraybuffer = new ArrayBuffer(8);
 
 // b has line endings of type "transparent" by default
 var b = new Blob({"foobarbazetcetc", "birdiebirdieboo"}, {type: "text/plain;charset=UTF-8"});
@@ -454,7 +456,7 @@ var b = new Blob({"foobarbazetcetc", "birdiebirdieboo"}, {type: "text/plain;char
 // c appends b and arraybuffer and has line endings of type "transparent"
 var c = new Blob({b, arraybuffer});
 
-// a now has native endings depending on platform
+// a has native endings depending on platform
 var a = new Blob({b, c, arraybuffer}, {type: "multipart/mixed", endings: "native"});
 
 // Simply create a new Blob object
