@@ -1549,7 +1549,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<div class="example">
 	<p>Requests could look like this:</p>
 	<x:codeblock language="headers">
-	GET 550e8400-e29b-41d4-a716-446655440000 blob/1.0
+	GET 550e8400-e29b-41d4-a716-446655440000
 	</x:codeblock>
 	<p>If the <a href="#dfn-fileBlob"><code>blob</code></a> has an affiliated media type [<a href="#RFC2046">RFC2046</a>] represented by its <a href="#dfn-type"><code>type</code></a> attribute, then the response message should include the Content-Type header from HTTP [<a href="#HTTP">HTTP</a>].  See <a href="#processing-media-types">processing media types</a>. </p>
 	<x:codeblock language="headers">
@@ -1668,9 +1668,6 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	access to any selections by making the  <a href="#dfn-filelist"><code>FileList</code></a> object returned be of size 0.</p></li>
 	<li><p><dfn id="sensitive-files">System-sensitive files</dfn> (e.g. files in /usr/bin, password files, and other native operating system executables) typically should not
 	be exposed to web content, and should not be accessed via <a href="#url">Blob URIs</a>.  User agents MAY throw a <a href="#dfn-SecurityError"><code>SecurityError</code></a> exception for synchronous read methods, or return a <a href="#dfn-SecurityError"><code>SecurityError</code></a> <a href="#dfn-domerror"><code>DOMError</code></a> for asynchronous reads.</p></li>
-	<li><p><dfn id="post-selection-file-mods">Post-selection file modifications</dfn> occur when a file changes on disk after it has been selected.  In such cases, user agents MAY throw a <code><a href="#dfn-SecurityError"><code>SecurityError</code></a></code> for synchronous read methods, or return a <a href="#dfn-SecurityError"><code>SecurityError</code></a> <a href="#dfn-domerror"><code>DOMError</code></a> for asynchronous reads.</p></li>
-	<li><p><dfn id="cross-scheme-reads">Cross-scheme file reads</dfn> occur when a read attempt is made on a file resident on the file:/// scheme by a resource
-	dereferenced by http://.  In such cases, user agents MAY throw a <code><a href="#dfn-SecurityError"><code>SecurityError</code></a></code> exception for synchronous read methods, or return a <a href="#dfn-SecurityError"><code>SecurityError</code></a> <a href="#dfn-domerror"><code>DOMError</code></a> for asynchronous reads. </p></li> 
 	<li><p><dfn id="cross-origin-requests-on-blobs">Cross-origin requests on Blob URIs</dfn> occur when a <a href="#url">Blob URI</a> is accessed across origins.    User agents should ensure that the
 	<a href="#FiveHundredInternalServerError">500 Error Condition</a> response
 	is used in cross-origin request contexts.  
