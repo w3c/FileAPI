@@ -642,7 +642,6 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 
 	  <span class="comment">// async read methods</span>
 	  void <a href="#dfn-readAsArrayBuffer" class="dfnref">readAsArrayBuffer</a>(<a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>);
-	  void <a href="#dfn-readAsBinaryStringAsync" class="dfnref">readAsBinaryString</a>(<a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>);
 	  void <a href="#dfn-readAsText" class="dfnref">readAsText</a>(<a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>, optional DOMString <a href="#dfn-encoding" class="dfnref">encoding</a>);
 	  void <a href="#dfn-readAsDataURL" class="dfnref">readAsDataURL</a>(<a href="#dfn-Blob" class="dfnref">Blob</a> <a href="#dfn-fileBlob" class="dfnref">blob</a>);
 
@@ -782,8 +781,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	It can also return <em>partial Blob data</em>.
 	<dfn id="partial-blob-data">Partial Blob data</dfn> is the part of the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a>
 	that has been read into memory <em>currently</em>;
-	when processing the <a href="#read-methods">read methods</a>
-	<a href="#dfn-readAsBinaryStringAsync" class="dfnref"><code>readAsBinaryString</code></a> or
+	when processing the <a href="#read-methods">read method</a>
 	<a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a>, partial Blob data is a <code>DOMString</code> that is incremented as more bytes
 	are <code>loaded</code> (a portion of the <code>total</code>) [<a href="#ProgressEvents">ProgressEvents</a>], and
 	when processing <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer</code></a> partial Blob data is an
@@ -800,14 +798,6 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  <li><p>On getting, if the <a href="#dfn-readAsDataURL" class="#dfnref"><code>readAsDataURL</code></a> <a href="#read-methods">read method</a> is
 	  used, the <code>result</code> attribute MUST return a <code>DOMString</code> that is a Data URL [<a href="#DataURL">DataURL</a>] encoding of the
 	  <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a>'s data.</p></li>
-	  <li><p>On getting, if the <a href="#dfn-readAsBinaryStringAsync" class="dfnref"><code>readAsBinaryString</code></a> <a href="#read-methods">read method</a> is called
-	  and no error in reading the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> has occurred,
-	  then the <code>result</code> attribute MUST return a <code>DOMString</code> representing the <a href="#dfn-file"><code>File</code></a> or
-	  <a href="#dfn-Blob"><code>Blob</code></a>'s data as a <dfn id="binary-string">binary string</dfn>, in which
-	  every byte is represented by an integer in the range [0..255].  On getting, <em>while processing</em> the
-	  <a href="#dfn-readAsBinaryStringAsync"><code>readAsBinaryString</code></a> <a href="#read-methods">read method</a>, the <code>result</code>
-	  attribute SHOULD return <a href="#partial-blob-data">partial Blob data</a> in <a href="#binary-string">binary string</a> format
-	  as a <code>DOMString</code> that is incremented as more data is read.  User agents MUST return at least one such <code>result</code>, with the final <code>result</code> returned at completion of the read.</p></li>
 	  <li><p>On getting, if the <a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a> <a href="#read-methods">read method</a> is called
 	  and no error in reading the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> has occurred,
 	  then the <code>result</code> attribute MUST return a string representing the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a>'s
@@ -830,47 +820,6 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<p>If a read is successful, the <code>result</code> attribute MUST return a non-null value only after a <a href="#event-summary-table">progress event</a> (see also [<a href="#ProgressEvents">ProgressEvents</a>]) has fired,
 	since all the <a href="#read-methods">read methods</a> access <a href="#dfn-Blob"><code>Blob</code></a> data asynchronously.  <a href="#queue-a-task">Tasks are queued</a> to update
 	the <code>result</code> attribute as <a href="#dfn-Blob"><code>Blob</code></a> data is made available.</p>
-	</div>
-	</div>
-	<div id='readAsBinaryString' class="section">
-	<h4>The <code>readAsBinaryString(blob)</code> method</h4>
-	<p>
-	When the <dfn id="dfn-readAsBinaryStringAsync"><code>readAsBinaryString(blob)</code></dfn> method is called, the user agent MUST run the steps below (unless otherwise indicated).
-	</p>
-	<ol>
-	  <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> throw an <code>InvalidStateError</code> exception [<a href="#DOMCore">DOMCore</a>] and <a href="#terminate-an-algorithm">terminate this algorithm</a>.
-	  </p>
-
-	<p><strong>Note:</strong> The <a href="#dfn-readAsBinaryStringAsync"><code>readAsBinaryString()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
-	</li>
-	  <li><p>If an <a href="#file-error-read">error occurs during reading of the <code>blob</code> parameter</a>, set <a href="#dfn-readyState"><code>readyState</code></a> to
-	  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
-	  <ol>
-	    <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
-	    <a href="#dfn-error-event"><code>error</code></a>.  <em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
-	    <a href="#dfn-error"><code>error</code></a> attribute MUST be a
-	    a <a href="#dfn-domerror"><code>DOMError</code></a> object that indicates the kind of
-	    <a href="#file-error-read">file error that has occurred</a>.</p>
-	    </li>
-	    <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
-	    <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
-	    <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p>
-	<p><strong>Note:</strong> The <a href="#dfn-readAsBinaryStringAsync"><code>readAsBinaryString()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
-	</li>    
-	  </ol>
-	  </li>
-	  <li><p>If no error has occurred, set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
-	  <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
-	<li><p>Return the <code>readAsBinaryString()</code> method, but continue processing the other steps in this algorithm.</p></li>
-	  <li><p><a href="#make-progress-notifications">Make progress notifications</a>. </p></li>
-	 <li><p>While processing the read, as data from <a href="#dfn-fileBlob"><code>blob</code></a> becomes available, user agents SHOULD <a href="#queue-a-task">queue tasks</a> to update the <a href="#dfn-result"><code>result</code></a> with <a href="#partial-blob-data">partial Blob data</a> represented as a <a href="#binary-string">binary string</a> to accompany the <a href="#fire-a-progress-event">firing</a> of <a href='#dfn-progress-event'><code>progress</code></a> events until the read is complete.  On getting, the <a href="#dfn-result"><code>result</code></a> attribute returns <a href="#partial-blob-data">partial Blob data</a> representing the number of bytes currently <code>loaded</code> (as a fraction of the <code>total</code>) [<a href="#ProgressEvents">ProgressEvents</a>], as a <a href="#binary-string">binary string</a>; user agents MUST return at least one such <a href="#dfn-result"><code>result</code></a> while processing this read method.  The last returned value is at completion of the read.</p></li>
-	  <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
-	  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p></li>
-	</ol>
-	<div class="note">
-	  <p>Note: the <code>readAsBinaryString(blob)</code> method should be considered deprecated; user agents should consider supporting the
-	  <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer(blob)</code></a> method
-	  instead of <code>readAsBinaryString(blob)</code>.</p>
 	</div>
 	</div>
 	<div id='readAsDataURL' class="section">
@@ -1256,8 +1205,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 
 	  <span class="comment">// Synchronously return strings</span>
 
-	  ArrayBuffer <a href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
-	  DOMString <a href="#dfn-readAsBinaryStringSync">readAsBinaryString</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>); 
+	  ArrayBuffer <a href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>); 
 	  DOMString <a href="#dfn-readAsTextSync">readAsText</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>, optional DOMString <a href="#dfn-encoding">encoding</a>);
 	  DOMString <a href="#dfn-readAsDataURLSync">readAsDataURL</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
 	};
@@ -1267,23 +1215,6 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<h3>Constructors</h3>
 	<p>When the <code>FileReaderSync()</code> constructor is invoked, the user agent MUST return a new <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object.</p>
 	<p>In environments where the global object is represented by a <code>WorkerGlobalScope</code> object, the <code>FileReaderSync</code> constructor MUST be available.</p>
-	</div>
-
-	<div id="readAsBinaryStringSyncSection" class="section">
-	<h3>The <code>readAsBinaryString</code> method</h3>
-	<p>When the <dfn id="dfn-readAsBinaryStringSync"><code>readAsBinaryString(blob)</code></dfn> method is called, the following steps MUST be followed:</p>
-	<ol>
-	<li><p>If an <a href="#file-error-read">error occurs during reading the <code>blob</code> parameter</a>, throw the <a href="#dfn-error-codes">appropriate 
-	exception</a>. Terminate these overall steps.</p></li>
-	<li><p>If no error has occurred, read <a href="#dfn-fileBlob"><code>blob</code></a> into memory.  Return the data contents of
-	<a href="#dfn-fileBlob"><code>blob</code></a> as a <a href="#binary-string">binary string</a>.</p></li>
-	</ol>
-	<div class="note">
-	 <p>Note: the <code>readAsBinaryString(blob)</code> method should be considered deprecated; user agents should consider supporting the
-	  <a href="#dfn-readAsArrayBufferSync"><code>readAsArrayBuffer(blob)</code></a> method
-	  instead of <code>readAsBinaryString(blob)</code></p>
-	</div>
-
 	</div>
 	<div id="readAsTextSync" class="section">
 	<h3>The <code>readAsText</code> method</h3>
