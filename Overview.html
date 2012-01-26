@@ -460,18 +460,23 @@ var a = new Blob();
 var arraybuffer = new ArrayBuffer(8);
 
 // b has line endings of type "transparent" by default
+
 var b = new Blob({"foobarbazetcetc", "birdiebirdieboo"}, {type: "text/plain;charset=UTF-8"});
 
 // c appends b and arraybuffer and has line endings of type "transparent"
+
 var c = new Blob({b, arraybuffer});
 
 // a has native endings depending on platform
+
 var a = new Blob({b, c, arraybuffer}, {type: "multipart/mixed", endings: "native"});
 
 // Simply create a new Blob object
+
 var x = new Blob(12);
 
 // Throw an InvalidStateError
+
 var yg = new Blob({12});
 </code></pre></div></div>
 
