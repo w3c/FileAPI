@@ -1469,7 +1469,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<h4>11.3.1. The Opaque String</h4>
 	<p><a href="#opaqueString">Opaque strings</a> MUST NOT include any reserved characters from [<a href="#RFC3986">RFC3986</a>] without percent-encoding them; these characters MUST be percent-encoded.
 	<a href="#opaqueString">Opaque strings</a> MUST be globally unique.  Such strings SHOULD only use characters in the ranges U+002A to U+002B, U+002D to U+002E, U+0030 to U+0039,
-	U+0041 to U+005A, U+005E to U+007E [<a href="#Unicode">Unicode</a>], and MUST be at least 36 characters long.
+	U+0041 to U+005A, U+005E to U+007E [<a href="#Unicode">Unicode</a>], and SHOULD be at least 36 characters long.
 	UUID is one potential option available to user agents for use with <a href="#url">Blob URIs</a> as <a href="#opaqueString">opaque strings</a>, and their use is <em>strongly encouraged</em>.
 	UUIDs are defined in [<a href="#UUID">RFC4122</a>].  For an ABNF of UUID, see <a href="#AppendixA">Appendix A</a>.
 
