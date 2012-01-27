@@ -438,11 +438,16 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 				              </tbody></table>			
 				</li>
 			</ul>
-		</dd></dl>
+		<p>If an invalid key is used or if the dictionary argument is invalid, user agents MUST throw an <code>InvalidStateError</code>.</p>
+		</dd>
+		
+		</dl>
 	</div>
 <div class="example">
 <p>Examples of constructor usage follow.</p>
 <x:codeblock language="es">
+// Create a new Blob object
+
 var a = new Blob();
 
 // Create a simple 8-byte ArrayBuffer
@@ -452,23 +457,19 @@ var arraybuffer = new ArrayBuffer(8);
 
 // b has line endings of type "transparent" by default
 
-var b = new Blob({"foobarbazetcetc", "birdiebirdieboo"}, {type: "text/plain;charset=UTF-8"});
+var b = new Blob(["foobarbazetcetc", "birdiebirdieboo"], {type: "text/plain;charset=UTF-8"});
 
 // c appends b and arraybuffer and has line endings of type "transparent"
 
-var c = new Blob({b, arraybuffer});
+var c = new Blob([b, arraybuffer]);
 
 // a has native endings depending on platform
 
-var a = new Blob({b, c, arraybuffer}, {type: "multipart/mixed", endings: "native"});
-
-// Simply create a new Blob object
-
-var x = new Blob(12);
+var a = new Blob([b, c, arraybuffer], {type: "multipart/mixed", endings: "native"});
 
 // Throw an InvalidStateError
 
-var yg = new Blob({12});
+var yg = new Blob([12]);
 </x:codeblock>
 
 </div>				
