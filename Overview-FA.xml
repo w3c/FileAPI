@@ -1521,11 +1521,18 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	decouples the <a href="#url"><code>Blob</code> URI</a> from the resource it refers to, and if it is dereferenced after it is revoked, user agents MUST return a <a href="#FiveHundredInternalServerError">500</a> response.
 	This section describes a supplemental interface to the URL specification [<a href="#URL-API">URL API</a>] and presents methods for Blob URI creation and revocation.  </p>
 	<x:codeblock language="idl">
-	partial interface <dfn id="URL-object">URL</dfn> {
+	partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
 
-	    static DOMString <a href="#dfn-createObjectURL">createObjectURL</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>, optional boolean <a href="#dfn-oneTimeOnly">oneTimeOnly</a>);
+	    static DOMString <a href="#dfn-createObjectURL">createObjectURL</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>, optional <a href="#dfn-objectURLOptions">objectURLOptions</a> <a href="#dfn-options-objectURL">options</a>);
 	    static void <a href="#dfn-revokeObjectURL">revokeObjectURL</a>(DOMString <a href="#dfn-urlarg">url</a>);
 	};
+	
+	dictionary <dfn id="dfn=objectURLOptions" class="dfnrefs">objectURLOptions</dfn>
+	{
+		boolean <a href="#dfn-oneTimeOnly">oneTimeOnly</a> = false;
+
+	};
+	
 	</x:codeblock>
 	<div class="note"><p>ECMAScript user agents of this specification MUST ensure that they do not expose a <code>prototype</code> property on the URL interface
 	object unless the user agent also implements the URL [<a href="#URL-API">URL API</a>] specification. In other words, <code>URL.prototype</code> MUST
@@ -1533,6 +1540,9 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 
 	<p><code>// Window implements URL;</code></p>
 	<p><code>// WorkerUtils implements URL;</code></p>
+	
+<div id="createRevokeMethodsParams" class="section">
+<h3>Methods and Parameters</h3>		
 	<dl><dt id="dfn-createObjectURL">The <code>createObjectURL</code> method</dt><dd><p>Returns a unique <a href="#url"><code>Blob</code> URI</a> each time it is called on a
 	<dfn id="valid">valid</dfn> <a href="#dfn-fileBlob"><code>blob</code></a> argument, which is a non-null <a href="#dfn-Blob"><code>Blob</code></a> in scope of the global
 	object's <a href="#URL-object"><code>URL</code></a> property from which this static method is called.</p>
@@ -1541,7 +1551,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<li><p>If this method is called with a <a href="#valid">valid</a> <a href="#dfn-Blob"><code>Blob</code></a> argument, user agents MUST return
 	a unique <a href="#url"><code>Blob</code> URI</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument.</p></li>
 	</ol>
-<p>The optional <dfn id="dfn-oneTimeOnly"><code>oneTimeOnly</code></dfn> boolean argument defaults to <code>false</code>.  If set to <code>true</code>, then the first time the <a href="#url"><code>Blob</code> URI</a> is dereferenced, user agents MUST automatically revoke that <a href="#url"><code>Blob</code> URI</a> without needing a call to <code>revokeBlobURL()</code>.</p>
+<p>The optional <dfn id="dfn-options-objectURL"><code>options</code></dfn> dictionary argument contains a key, <dfn id="dfn-oneTimeOnly"><code>oneTimeOnly</code></dfn> that defaults to <code>false</code>.  If set to <code>true</code>, then the first time the <a href="#url"><code>Blob</code> URI</a> is dereferenced, user agents MUST automatically revoke that <a href="#url"><code>Blob</code> URI</a> without needing a call to <code>revokeBlobURL()</code>.</p>
 	<div class="example">
 	<p>In the example below, after obaining a reference to a <a href="#dfn-Blob"><code>Blob</code></a> object, the static method <code>URL.createObjectURL</code> is called on that <a href="#dfn-Blob"><code>Blob</code></a> object.</p>
 	<x:codeblock language="es">
@@ -1550,15 +1560,17 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  blobURLref = window.URL.createObjectURL(file);
 	  myimg.src = blobURLref;
 	
-	//...
+	// bobURLref persists till explicitly revoked by calling revokeObjectURL()
 	}
 	</x:codeblock>
 	<p>In the example below, there is no need to call <code>revokeBlobURL()</code> since the <a href="#dfn-oneTimeOnly"><code>oneTimeOnly</code></a> boolean has been set to true.</p>
 <x:codeblock language="es">
 	var file = document.getElementById('file').files[0];
 	if(file){
-	  blobURLref = window.URL.createObjectURL(file, true);
+	  blobURLref = window.URL.createObjectURL(file, {oneTimeOnly: true});
 	  myimg.src = blobURLref;
+	
+	// The above automatically culls blobURLref making subsequent refs return a 500 error
 	}
 </x:codeblock>	 
 	</div>
@@ -1590,6 +1602,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	</dl>
 	</div>
 	</div>
+</div>
 	<div id="security-discussion" class="section">
 	<h2>Security Considerations</h2>
 	<p>
