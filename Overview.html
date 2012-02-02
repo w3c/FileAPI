@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>27 January 2012</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2010/WD-FileAPI-20101026/">http://www.w3.org/TR/2010/WD-FileAPI-20101026/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2011 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>31 January 2012</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2010/WD-FileAPI-20101026/">http://www.w3.org/TR/2010/WD-FileAPI-20101026/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2011 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
       <h2>Abstract</h2>
@@ -79,7 +79,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 27 January 2012 <b>Editor’s Draft</b> of the
+        This document is the 31 January 2012 <b>Editor’s Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -147,7 +147,7 @@
 
     <div id="toc">
       <h2>Table of Contents</h2>
-      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#dependencies">3. Dependencies</a></li><li><a href="#terminology">4. Terminology and Algorithms</a></li><li><a href="#filelist-section">5. The FileList Interface</a><ul><li><a href="#attributes-filelist">5.1. Attributes</a></li><li><a href="#filelist-methods-params">5.2. Methods and Parameters</a></li></ul></li><li><a href="#blob">6. The Blob Interface</a><ul><li><a href="#constructorBlob">6.1. Constructors</a><ul><li><a href="#constructorParams">6.1.1. Constructor Parameters</a></li></ul></li><li><a href="#attributes-blob">6.2. Attributes</a></li><li><a href="#methodsandparams-blob">6.3. Methods and Parameters</a><ul><li><a href="#normalization-of-params">6.3.1. Parameters to slice</a></li><li><a href="#slide-method-algo">6.3.2. The slice method</a></li></ul></li></ul></li><li><a href="#file">7. The File Interface</a><ul><li><a href="#file-attrs">7.1. Attributes</a></li></ul></li><li><a href="#FileReader-interface">8. The FileReader Interface</a><ul><li><a href="#blobreader-task-source">8.1. The FileReader Task Source</a></li><li><a href="#filereaderConstrctr">8.2. Constructors</a></li><li><a href="#event-handler-attributes-section">8.3. Event Handler Attributes</a></li><li><a href="#blobreader-state">8.4. FileReader States</a></li><li><a href="#reading-a-file">8.5. Reading a File or Blob</a><ul><li><a href="#MultipleReads">8.5.1. Multiple Reads</a></li><li><a href="#filedata-attr">8.5.2. The result attribute</a></li><li><a href="#readAsDataURL">8.5.3. The readAsDataURL(blob) method</a></li><li><a href="#readAsDataText">8.5.4. The readAsText(blob, encoding) method</a></li><li><a href="#readAsArrayBuffer">8.5.5. The readAsArrayBuffer(blob) method</a></li><li><a href="#abort">8.5.6. The abort() method</a></li><li><a href="#blobAndFileParams">8.5.7. Blob Parameters</a></li><li><a href="#enctype">8.5.8. Determining Encoding</a></li><li><a href="#events">8.5.9. Events</a><ul><li><a href="#event-summary">8.5.9.1. Event Summary</a></li><li><a href="#eventInvariants">8.5.9.2. Summary of Event Invariants</a></li></ul></li></ul></li></ul></li><li><a href="#readingOnThreads">9. Reading on Threads</a><ul><li><a href="#FileReaderSync">9.1. The FileReaderSync Interface</a><ul><li><a href="#filereadersyncConstrctr">9.1.1. Constructors</a></li><li><a href="#readAsTextSync">9.1.2. The readAsText method</a></li><li><a href="#readAsDataURLSync-section">9.1.3. The readAsDataURL method</a></li><li><a href="#readAsArrayBufferSyncSection">9.1.4. The readAsArrayBuffer method</a></li></ul></li></ul></li><li><a href="#ErrorAndException">10. Errors and Exceptions</a><ul><li><a href="#dfn-error-codes">10.1. Throwing an Exception or Returning an Error</a></li></ul></li><li><a href="#url">11. A URI for Blob and File reference</a><ul><li><a href="#use-cases-scheme">11.1. Requirements for a New Scheme</a></li><li><a href="#alternative-schemas">11.2. Discussion of Existing Schemes</a></li><li><a href="#ABNFForBlob">11.3. Definition of blob URI Scheme</a><ul><li><a href="#OpaqueStringDiscussion">11.3.1. The Opaque String</a></li></ul></li><li><a href="#fragmentDiscussion">11.4. Discussion of Fragment Identifier</a></li><li><a href="#originOfBlob">11.5. Origin of Blob URIs</a></li><li><a href="#lifeTime">11.6. Lifetime of Blob URIs</a></li><li><a href="#processingModel">11.7. Dereferencing Model for Blob URIs</a><ul><li><a href="#TwoHundredOK">11.7.1. 200 OK</a></li><li><a href="#FiveHundredInternalServerError">11.7.2. 500 Error Condition</a></li><li><a href="#ProtocolExamples">11.7.3. Request and Response Headers</a><ul><li><a href="#processing-media-types">11.7.3.1. Processing Media Types</a></li></ul></li></ul></li><li><a href="#creating-revoking">11.8. Creating and Revoking a Blob URI</a><ul><li><a href="#createRevokeMethodsParams">11.8.1. Methods and Parameters</a></li></ul></li></ul></li><li><a href="#security-discussion">12. Security Considerations</a></li><li><a href="#requirements">13. Requirements and Use Cases</a></li><li><a href="#AppendixA">14. Appendix A</a><ul><li><a href="#ABNFUUID">14.1. An ABNF for UUID</a></li></ul></li><li><a href="#acknowledgements-section">15. Acknowledgements</a></li><li><a href="#references">16. References</a><ul><li><a href="#normative-references">16.1. Normative references</a></li><li><a href="#informative-references">16.2. Informative References</a></li></ul></li></ul></div>
+      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#dependencies">3. Dependencies</a></li><li><a href="#terminology">4. Terminology and Algorithms</a></li><li><a href="#filelist-section">5. The FileList Interface</a><ul><li><a href="#attributes-filelist">5.1. Attributes</a></li><li><a href="#filelist-methods-params">5.2. Methods and Parameters</a></li></ul></li><li><a href="#blob">6. The Blob Interface</a><ul><li><a href="#constructorBlob">6.1. Constructors</a><ul><li><a href="#constructorParams">6.1.1. Constructor Parameters</a></li></ul></li><li><a href="#attributes-blob">6.2. Attributes</a></li><li><a href="#methodsandparams-blob">6.3. Methods and Parameters</a><ul><li><a href="#normalization-of-params">6.3.1. Parameters to slice</a></li><li><a href="#slide-method-algo">6.3.2. The slice method</a></li></ul></li></ul></li><li><a href="#file">7. The File Interface</a><ul><li><a href="#file-attrs">7.1. Attributes</a></li></ul></li><li><a href="#FileReader-interface">8. The FileReader Interface</a><ul><li><a href="#blobreader-task-source">8.1. The FileReader Task Source</a></li><li><a href="#filereaderConstrctr">8.2. Constructors</a></li><li><a href="#event-handler-attributes-section">8.3. Event Handler Attributes</a></li><li><a href="#blobreader-state">8.4. FileReader States</a></li><li><a href="#reading-a-file">8.5. Reading a File or Blob</a><ul><li><a href="#MultipleReads">8.5.1. Multiple Reads</a></li><li><a href="#filedata-attr">8.5.2. The result attribute</a></li><li><a href="#readAsDataURL">8.5.3. The readAsDataURL(blob) method</a></li><li><a href="#readAsDataText">8.5.4. The readAsText(blob, encoding) method</a></li><li><a href="#readAsArrayBuffer">8.5.5. The readAsArrayBuffer(blob) method</a></li><li><a href="#abort">8.5.6. The abort() method</a></li><li><a href="#blobAndFileParams">8.5.7. Blob Parameters</a></li><li><a href="#enctype">8.5.8. Determining Encoding</a></li><li><a href="#events">8.5.9. Events</a><ul><li><a href="#event-summary">8.5.9.1. Event Summary</a></li><li><a href="#eventInvariants">8.5.9.2. Summary of Event Invariants</a></li></ul></li></ul></li></ul></li><li><a href="#readingOnThreads">9. Reading on Threads</a><ul><li><a href="#FileReaderSync">9.1. The FileReaderSync Interface</a><ul><li><a href="#filereadersyncConstrctr">9.1.1. Constructors</a></li><li><a href="#readAsTextSync">9.1.2. The readAsText method</a></li><li><a href="#readAsDataURLSync-section">9.1.3. The readAsDataURL method</a></li><li><a href="#readAsArrayBufferSyncSection">9.1.4. The readAsArrayBuffer method</a></li></ul></li></ul></li><li><a href="#ErrorAndException">10. Errors and Exceptions</a><ul><li><a href="#dfn-error-codes">10.1. Throwing an Exception or Returning an Error</a></li></ul></li><li><a href="#url">11. A URI for Blob and File reference</a><ul><li><a href="#use-cases-scheme">11.1. Requirements for a New Scheme</a></li><li><a href="#alternative-schemas">11.2. Discussion of Existing Schemes</a></li><li><a href="#ABNFForBlob">11.3. Definition of blob URI Scheme</a><ul><li><a href="#OpaqueStringDiscussion">11.3.1. The Opaque String</a></li></ul></li><li><a href="#fragmentDiscussion">11.4. Discussion of Fragment Identifier</a></li><li><a href="#originOfBlob">11.5. Origin of Blob URIs</a></li><li><a href="#lifeTime">11.6. Lifetime of Blob URIs</a></li><li><a href="#processingModel">11.7. Dereferencing Model for Blob URIs</a><ul><li><a href="#TwoHundredOK">11.7.1. 200 OK</a></li><li><a href="#FiveHundredInternalServerError">11.7.2. 500 Error Condition</a></li><li><a href="#ProtocolExamples">11.7.3. Request and Response Headers</a><ul><li><a href="#processing-media-types">11.7.3.1. Processing Media Types</a></li></ul></li></ul></li><li><a href="#creating-revoking">11.8. Creating and Revoking a Blob URI</a><ul><li><a href="#createRevokeMethodsParams">11.8.1. Methods and Parameters</a></li></ul></li><li><a href="#examplesOfCreationRevocation">11.9. Examples of Blob URI Creation and Revocation</a></li></ul></li><li><a href="#security-discussion">12. Security Considerations</a></li><li><a href="#requirements">13. Requirements and Use Cases</a></li><li><a href="#AppendixA">14. Appendix A</a><ul><li><a href="#ABNFUUID">14.1. An ABNF for UUID</a></li></ul></li><li><a href="#acknowledgements-section">15. Acknowledgements</a></li><li><a href="#references">16. References</a><ul><li><a href="#normative-references">16.1. Normative references</a></li><li><a href="#informative-references">16.2. Informative References</a></li></ul></li></ul></div>
     </div>
 
     <div id="sections">
@@ -1559,7 +1559,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<li><p>If this method is called with a <a href="#valid">valid</a> <a href="#dfn-Blob"><code>Blob</code></a> argument, user agents MUST return
 	a unique <a href="#url"><code>Blob</code> URI</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument.</p></li>
 	</ol>
-<p>The optional <dfn id="dfn-options-objectURL"><code>options</code></dfn> dictionary argument contains a key, <dfn id="dfn-oneTimeOnly"><code>oneTimeOnly</code></dfn> that defaults to <code>false</code>.  If set to <code>true</code>, then the first time the <a href="#url"><code>Blob</code> URI</a> is dereferenced, user agents MUST automatically revoke that <a href="#url"><code>Blob</code> URI</a> without needing a call to <code>revokeBlobURL()</code>.</p>
+<p>The optional <dfn id="dfn-options-objectURL"><code>options</code></dfn> dictionary argument contains a key, <dfn id="dfn-oneTimeOnly"><code>oneTimeOnly</code></dfn> that defaults to <code>false</code>.  If set to <code>true</code>, then the first time the <a href="#url"><code>Blob</code> URI</a> is dereferenced, user agents MUST automatically revoke that <a href="#url"><code>Blob</code> URI</a> without needing a call to <code>revokeBlobURL()</code> on the <a href="#url"><code>Blob</code> URI</a>.</p>
 	<div class="example"><div class="exampleHeader">Example</div>
 	<p>In the example below, after obaining a reference to a <a href="#dfn-Blob"><code>Blob</code></a> object, the static method <code>URL.createObjectURL</code> is called on that <a href="#dfn-Blob"><code>Blob</code></a> object.</p>
 	<div class="block"><div class="blockTitleDiv"><span class="blockTitle">ECMAScript</span></div><div class="blockContent"><pre class="code"><code class="es-code">
@@ -1568,7 +1568,10 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  blobURLref = window.URL.createObjectURL(file);
 	  myimg.src = blobURLref;
 	
-	// bobURLref persists till explicitly revoked by calling revokeObjectURL()
+	// blobURLref persists till explicitly revoked 
+	// by calling revokeObjectURL() OR when
+	// containing document is GC'd
+
 	}
 	</code></pre></div></div>
 	<p>In the example below, there is no need to call <code>revokeBlobURL()</code> since the <a href="#dfn-oneTimeOnly"><code>oneTimeOnly</code></a> boolean has been set to true.</p>
@@ -1578,7 +1581,9 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  blobURLref = window.URL.createObjectURL(file, {oneTimeOnly: true});
 	  myimg.src = blobURLref;
 	
-	// The above automatically culls blobURLref making subsequent refs return a 500 error
+	// The above automatically culls blobURLref 
+	// Subsequent refs to blobURLref return a 500 error response
+
 	}
 </code></pre></div></div>	 
 	</div>
@@ -1610,6 +1615,67 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	</dl>
 	</div>
 	</div>
+<div id="examplesOfCreationRevocation" class="section">
+<h3>11.9. Examples of Blob URI Creation and Revocation</h3>
+<p><a href="#url">Blob URI</a>s are strings that dereference <code>Blob</code> objects, and can persist for as long as the <code>document</code> from which they were minted using <a href="#dfn-createObjectURL"><code>URL.createObjectURL()</code></a> -- see <a href="#lifetime">Lifetime of Blob URIs</a>.  To revoke them before the <a href="#unloading-document-cleanup-steps">unloading document cleanup steps</a>, web developers must explicitly revoke them with <a href="#dfn-revokeObjectURL"><code>revokeObjectURL()</code></a>. </p>
+
+<p>This section gives sample usage of creation and revocation of <a href="#url">Blob URI</a>s with explanations.</p>
+<div class="example"><div class="exampleHeader">Example</div>
+<p>In the example below, two <code>Image</code> elements [<a href="#HTML">HTML</a>] refer to the same Blob URI, which was minted for one-time use only using the <code>boolean</code> key in the optional dictionary argument:</p>
+<div class="block"><div class="blockTitleDiv"><span class="blockTitle">ECMAScript</span></div><div class="blockContent"><pre class="code"><code class="es-code">
+var file = document.getElementById('filePicker').files[0];
+
+var blobURLref = URL.createObjectURL(file, {oneTimeOnly: true});
+
+img1 = new Image();
+img2 = new Image();
+
+// Only one of the assignments below will work
+// One will generate a 500 response when dereferenced
+
+
+img1.src = blobURLref;
+img2.src = blobURLref;
+
+</code></pre></div></div>
+<p>In the example above, this is equivalent to calling <a href="#dfn-revokeObjectURL"><code>revokeObjectURL()</code></a> from the <code>onload</code> event handler for each of the images, but use of the <code>boolean</code> key <code>oneTimeOnly</code> reduces boilerplate code.  Multiple references to a <a href="#url">Blob URI</a> explicitly marked for <code>oneTimeOnly</code> use should be strongly discouraged.</p>
+<div class="note"><div class="noteHeader">Note</div><p>In the usage above, if the user toggles images on and off, any assignment to a Blob URI with <a href="#dfn-oneTimeOnly"><code>oneTimeOnly</code></a> set to <code>true</code> would break that image.  Additionally, the image element cannot be cloned, nor can the image's <code>src</code> attribute be read after assignment. </p></div>
+<p>
+In the example below,  <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is explicitly called.
+</p>
+<div class="block"><div class="blockTitleDiv"><span class="blockTitle">ECMAScript</span></div><div class="blockContent"><pre class="code"><code class="es-code">
+var blobURLref = URL.createObjectURL(file);
+img1 = new Image();
+img2 = new Image();
+
+// Both assignments below work as expected
+
+img1.src = blobURLref;
+img2.src = blobURLref;
+
+// ... Following body load
+// Check if both images have loaded
+
+
+if(img1.complete &amp;&amp; img2.complete)
+{
+	// Ensure that subsequent refs return a 500
+	
+	URL.revokeObjectURL(blobURLref);
+}
+else {
+
+	msg("Images cannot be previewed!");
+	
+	// revoke the string-based reference
+	
+	URL.revokeObjectURL(blobURLref);
+
+}
+</code></pre></div></div>
+<p>The example above allows multiple references to a single Blob URI, but revokes the Blob URI string after both image objects have been loaded.  While not restricting number of uses of the Blob URI offers more flexibility, it creates the potential for strings that linger after they are useful.</p>
+</div>  
+</div>
 </div>
 	<div id="security-discussion" class="section">
 	<h2>12. Security Considerations</h2>

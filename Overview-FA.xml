@@ -1551,7 +1551,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<li><p>If this method is called with a <a href="#valid">valid</a> <a href="#dfn-Blob"><code>Blob</code></a> argument, user agents MUST return
 	a unique <a href="#url"><code>Blob</code> URI</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument.</p></li>
 	</ol>
-<p>The optional <dfn id="dfn-options-objectURL"><code>options</code></dfn> dictionary argument contains a key, <dfn id="dfn-oneTimeOnly"><code>oneTimeOnly</code></dfn> that defaults to <code>false</code>.  If set to <code>true</code>, then the first time the <a href="#url"><code>Blob</code> URI</a> is dereferenced, user agents MUST automatically revoke that <a href="#url"><code>Blob</code> URI</a> without needing a call to <code>revokeBlobURL()</code>.</p>
+<p>The optional <dfn id="dfn-options-objectURL"><code>options</code></dfn> dictionary argument contains a key, <dfn id="dfn-oneTimeOnly"><code>oneTimeOnly</code></dfn> that defaults to <code>false</code>.  If set to <code>true</code>, then the first time the <a href="#url"><code>Blob</code> URI</a> is dereferenced, user agents MUST automatically revoke that <a href="#url"><code>Blob</code> URI</a> without needing a call to <code>revokeBlobURL()</code> on the <a href="#url"><code>Blob</code> URI</a>.</p>
 	<div class="example">
 	<p>In the example below, after obaining a reference to a <a href="#dfn-Blob"><code>Blob</code></a> object, the static method <code>URL.createObjectURL</code> is called on that <a href="#dfn-Blob"><code>Blob</code></a> object.</p>
 	<x:codeblock language="es">
@@ -1560,7 +1560,10 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  blobURLref = window.URL.createObjectURL(file);
 	  myimg.src = blobURLref;
 	
-	// bobURLref persists till explicitly revoked by calling revokeObjectURL()
+	// blobURLref persists till explicitly revoked 
+	// by calling revokeObjectURL() OR when
+	// containing document is GC'd
+
 	}
 	</x:codeblock>
 	<p>In the example below, there is no need to call <code>revokeBlobURL()</code> since the <a href="#dfn-oneTimeOnly"><code>oneTimeOnly</code></a> boolean has been set to true.</p>
@@ -1570,7 +1573,9 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  blobURLref = window.URL.createObjectURL(file, {oneTimeOnly: true});
 	  myimg.src = blobURLref;
 	
-	// The above automatically culls blobURLref making subsequent refs return a 500 error
+	// The above automatically culls blobURLref 
+	// Subsequent refs to blobURLref return a 500 error response
+
 	}
 </x:codeblock>	 
 	</div>
@@ -1602,6 +1607,67 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	</dl>
 	</div>
 	</div>
+<div id="examplesOfCreationRevocation" class="section">
+<h3>Examples of Blob URI Creation and Revocation</h3>
+<p><a href="#url">Blob URI</a>s are strings that dereference <code>Blob</code> objects, and can persist for as long as the <code>document</code> from which they were minted using <a href="#dfn-createObjectURL"><code>URL.createObjectURL()</code></a> -- see <a href="#lifetime">Lifetime of Blob URIs</a>.  To revoke them before the <a href="#unloading-document-cleanup-steps">unloading document cleanup steps</a>, web developers must explicitly revoke them with <a href="#dfn-revokeObjectURL"><code>revokeObjectURL()</code></a>. </p>
+
+<p>This section gives sample usage of creation and revocation of <a href="#url">Blob URI</a>s with explanations.</p>
+<div class="example">
+<p>In the example below, two <code>Image</code> elements [<a href="#HTML">HTML</a>] refer to the same Blob URI, which was minted for one-time use only using the <code>boolean</code> key in the optional dictionary argument:</p>
+<x:codeblock language="es">
+var file = document.getElementById('filePicker').files[0];
+
+var blobURLref = URL.createObjectURL(file, {oneTimeOnly: true});
+
+img1 = new Image();
+img2 = new Image();
+
+// Only one of the assignments below will work
+// One will generate a 500 response when dereferenced
+
+
+img1.src = blobURLref;
+img2.src = blobURLref;
+
+</x:codeblock>
+<p>In the example above, this is equivalent to calling <a href="#dfn-revokeObjectURL"><code>revokeObjectURL()</code></a> from the <code>onload</code> event handler for each of the images, but use of the <code>boolean</code> key <code>oneTimeOnly</code> reduces boilerplate code.  Multiple references to a <a href="#url">Blob URI</a> explicitly marked for <code>oneTimeOnly</code> use should be strongly discouraged.</p>
+<div class="note"><p>In the usage above, if the user toggles images on and off, any assignment to a Blob URI with <a href="#dfn-oneTimeOnly"><code>oneTimeOnly</code></a> set to <code>true</code> would break that image.  Additionally, the image element cannot be cloned, nor can the image's <code>src</code> attribute be read after assignment. </p></div>
+<p>
+In the example below,  <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is explicitly called.
+</p>
+<x:codeblock language="es">
+var blobURLref = URL.createObjectURL(file);
+img1 = new Image();
+img2 = new Image();
+
+// Both assignments below work as expected
+
+img1.src = blobURLref;
+img2.src = blobURLref;
+
+// ... Following body load
+// Check if both images have loaded
+
+
+if(img1.complete &amp;&amp; img2.complete)
+{
+	// Ensure that subsequent refs return a 500
+	
+	URL.revokeObjectURL(blobURLref);
+}
+else {
+
+	msg("Images cannot be previewed!");
+	
+	// revoke the string-based reference
+	
+	URL.revokeObjectURL(blobURLref);
+
+}
+</x:codeblock>
+<p>The example above allows multiple references to a single Blob URI, but revokes the Blob URI string after both image objects have been loaded.  While not restricting number of uses of the Blob URI offers more flexibility, it creates the potential for strings that linger after they are useful.</p>
+</div>  
+</div>
 </div>
 	<div id="security-discussion" class="section">
 	<h2>Security Considerations</h2>
