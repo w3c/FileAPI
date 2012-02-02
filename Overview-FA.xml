@@ -1633,7 +1633,7 @@ img2.src = blobURLref;
 <p>In the example above, this is equivalent to calling <a href="#dfn-revokeObjectURL"><code>revokeObjectURL()</code></a> from the <code>onload</code> event handler for each of the images, but use of the <code>boolean</code> key <code>oneTimeOnly</code> reduces boilerplate code.  Multiple references to a <a href="#url">Blob URI</a> explicitly marked for <code>oneTimeOnly</code> use should be strongly discouraged.</p>
 <div class="note"><p>In the usage above, if the user toggles images on and off, any assignment to a Blob URI with <a href="#dfn-oneTimeOnly"><code>oneTimeOnly</code></a> set to <code>true</code> would break that image.  Additionally, the image element cannot be cloned, nor can the image's <code>src</code> attribute be read after assignment. </p></div>
 <p>
-In the example below,  <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is explicitly called.
+In the example below,  <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL()</code></a> is explicitly called.
 </p>
 <x:codeblock language="es">
 var blobURLref = URL.createObjectURL(file);
@@ -1665,7 +1665,7 @@ else {
 
 }
 </x:codeblock>
-<p>The example above allows multiple references to a single Blob URI, but revokes the Blob URI string after both image objects have been loaded.  While not restricting number of uses of the Blob URI offers more flexibility, it creates the potential for strings that linger after they are useful.</p>
+<p>The example above allows multiple references to a single <a href="#url">Blob URI</a>, but revokes the <a href="#url">Blob URI</a> string after both image objects have been loaded.  While not restricting number of uses of the <a href="#url">Blob URI</a> offers more flexibility, it creates the potential for strings that linger after they are useful.</p>
 </div>  
 </div>
 </div>
