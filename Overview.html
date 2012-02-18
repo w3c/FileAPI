@@ -1009,12 +1009,15 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	<p>If <a href="#dfn-fileBlob"><code>blob</code></a> has a <a href="#dfn-type"><code>type</code></a> attribute of <code>text/plain;charset=UTF-8</code> then <var>charset</var> is UTF-8.</p>
 	</div>
 	</li>
-	<li><p>If <var>charset</var> is null <strong>or</strong> if <var>charset</var> has been set in the preceding step to the Charset Parameter of the<a href="#dfn-fileBlob"><code>blob</code></a> argument's <a href="#dfn-type"><code>type</code></a> attribute, then for each of the rows in the
+	<li><p>If <var>charset</var> is null <strong>or</strong> if <var>charset</var> has been set in the preceding step to the Charset Parameter of the <a href="#dfn-fileBlob"><code>blob</code></a> argument's <a href="#dfn-type"><code>type</code></a> attribute, then for each of the rows in the
 	     following table, starting with the first one and going down, if the
 	     first bytes of <a href="#dfn-fileBlob"><code>blob</code></a> match the bytes given in the first
 	     column, then let <var>charset</var> be the encoding given in the cell in
-	     the second column of that row. If there is no match <var>charset</var>
-	     remains null.</p>
+	     the second column of that row. If there is no match then <var>charset</var>
+	     remains null (or is reset to null).</p>
+	<div class="note"><div class="noteHeader">Note</div>
+	<p>Byte Order Mark considerations override the Charset Parameter of the <a href="#dfn-fileBlob"><code>blob</code></a> argument's <a href="#dfn-type"><code>type</code></a> attribute.</p>
+	</div>
 
 	    <table>
 	     <thead>
