@@ -159,10 +159,10 @@
     </p>
     <p>
       The <a href="#dfn-file"><code>File</code></a> interface represents file data typically obtained from the underlying file system, and the <a href="#dfn-Blob"><code>Blob</code></a> interface
-      ("Binary Large Object" -- a name originally introduced to web APIs in <a href="#Blob-REF">Google Gears</a>) represents immutable raw data.  <a href="#dfn-file"><code>File</code></a> or
+      ("Binary Large Object" - a name originally introduced to web APIs in <a href="#Blob-REF">Google Gears</a>) represents immutable raw data.  <a href="#dfn-file"><code>File</code></a> or
       <a href="#dfn-Blob"><code>Blob</code></a> reads should happen asynchronously on the main thread, with an optional synchronous API used
       within threaded web applications.  An asynchronous API for reading files prevents blocking and UI "freezing" on a user
-      agent's main thread.  This specification defines an asynchronous API based on an <em>event model</em> to read and access a <code>File</code> or <code>Blob</code>'s
+      agent's main thread.  This specification defines an asynchronous API based on an <em>event model</em> to read and access a <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a>'s
       data.  A <a href="#dfn-filereader"><code>FileReader</code></a>
     object provides asynchronous read methods to
     access that file's data through event handler attributes and the firing of events.  The use of events and event handlers allows separate code blocks the ability
@@ -218,7 +218,7 @@ function loaded(evt) {
 }
 
 function errorHandler(evt) {
-  if(evt.target.error.name == "NOT_READABLE_ERR") {
+  if(evt.target.error.name == "NotReadableErr") {
     <span class="comment">// The file could not be read</span>
   }
 }
@@ -272,8 +272,8 @@ function errorHandler(evt) {
       <h3>Dependencies</h3>
       <p>This specification relies on underlying specifications.</p>
       <dl><dt>DOM</dt>
-      <dd><p>A <a href="#dfn-conforming-implementation">conforming user agent</a> MUST support at least the subset of the functionality defined in DOM Core that this specification relies upon; in particular,
-      it must support <code>EventTarget</code>. [<a href="#DOMCore">DOMCore</a>] </p></dd>
+      <dd><p>A <a href="#dfn-conforming-implementation">conforming user agent</a> MUST support at least the subset of the functionality defined in DOM4 that this specification relies upon; in particular,
+      it must support <code>EventTarget</code>. [<a href="#DOM4">DOM4</a>] </p></dd>
       <dt>Progress Events</dt>
       <dd><p>A <a href="#dfn-conforming-implementation">conforming user agent</a> MUST support the Progress Events specification. Data access on read operations is enabled via Progress Events.[<a href="#ProgressEvents">ProgressEvents</a>] </p></dd>
       <dt>HTML</dt>
@@ -296,14 +296,14 @@ function errorHandler(evt) {
         <dfn id="dfn-task">task</dfn>, <dfn id="task-source">task source</dfn>, <dfn id="df-URL">URL</dfn>, and
         <dfn id="queue-a-task">queue a task</dfn> are defined by the HTML specification [<a href="#HTML">HTML</a>]. </p>
  <p>When this specification says to <dfn id="terminate-an-algorithm">terminate an algorithm</dfn> the user agent must terminate the algorithm after finishing the step it is on.  Asynchronous <a href="#read-methods">read methods</a> defined in this specification may return before the algorithm in question is terminated, and can be terminated by an <a href="#dfn-abort"><code>abort()</code></a> call.</p>
-<p>The term <dfn id="throw-an-exception">throw</dfn> in this specification, as it pertains to exceptions, is used as defined in the DOMCore specification [<a href="#DOMCore">DOMCore</a>].</p>
+<p>The term <dfn id="throw-an-exception">throw</dfn> in this specification, as it pertains to exceptions, is used as defined in the DOM4 specification [<a href="#DOM4">DOM4</a>].</p>
        <p>The algorithms and steps in this specification use the following mathematical operations:</p>
        <ul>
        <li><p>max(a,b) returns the maximum of a and b, and is always performed on integers as they are defined in WebIDL [<a href="#WebIDL">WebIDL</a>]; in the case of max(6,4) the result is 6.
        This operation is also defined in ECMAScript [<a href="#ECMA-262">ECMA-262</a>].</p></li>
        <li><p>min(a,b) returns the minimum of a and b, and is always performed on integers as they are defined in WebIDL [<a href="#WebIDL">WebIDL</a>]; in the case of min(6,4) the result is 4.
        This operation is also defined in ECMAScript [<a href="#ECMA-262">ECMA-262</a>].</p></li>
-       <li><p>Mathematical comparisons such as &lt; (less than), &gt; (greater than), &gt;= (greater than or equal to), &lt;= (less than or equal to) are as in ECMAScript
+       <li><p>Mathematical comparisons such as &lt; (less than) and &gt; (greater than)  are as in ECMAScript
        [<a href="#ECMA-262">ECMA-262</a>].</p></li>
        </ul>
       </div>
@@ -311,7 +311,7 @@ function errorHandler(evt) {
         <h2>The FileList Interface</h2>
        
        <p>
-          This interface is a <strong>collection</strong> [<a href="#DOMCore">DOMCore</a>] of <a href="#dfn-file"><code>File</code></a> objects.
+          This interface is a <strong>collection</strong> [<a href="#DOM4">DOM4</a>] of <a href="#dfn-file"><code>File</code></a> objects.
        </p>
     <x:codeblock language='idl'>
     interface <dfn id='dfn-filelist'>FileList</dfn> {
@@ -350,7 +350,7 @@ function errorHandler(evt) {
       the <a href="#dfn-filelist"><code>FileList</code></a>.  If there is no <em>indexth</em> <a href="#dfn-file"><code>File</code></a> object in the
       <a href="#dfn-filelist"><code>FileList</code></a>, then this method must return <code>null</code>.</p>
       <p><dfn id="dfn-index" title="index"><code>index</code></dfn> MUST be treated by user agents as value for the position of a <a href="#dfn-file"><code>File</code></a>
-      object in the <a href="#dfn-filelist"><code>FileList</code></a> collection, with 0 representing the first file in the collection.  <strong>Supported property indices</strong> [<a href="#WebIDL">WebIDL</a>] are the numbers in the range zero to one less than the number of <a href="#dfn-file"><code>File</code></a> objects represented by the collection [<a href="#DOMCore">DOMCore</a>].  
+      object in the <a href="#dfn-filelist"><code>FileList</code></a> collection, with 0 representing the first file in the collection.  <strong>Supported property indices</strong> [<a href="#WebIDL">WebIDL</a>] are the numbers in the range zero to one less than the number of <a href="#dfn-file"><code>File</code></a> objects represented by the collection [<a href="#DOM4">DOM4</a>].  
 If there are no such <a href="#dfn-file"><code>File</code></a> objects, then there are no supported property indices [<a href="#WebIDL">WebIDL</a>]. </p>
       </dd>
     
@@ -369,7 +369,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
       The <a href="#dfn-file" class="dfnref"><code>File</code></a> interface inherits from this interface.
     </p>
     <x:codeblock language = 'idl'>
-    [Constructor, Constructor(any[] <a href="#dfn-blobParts" title="blobParts" class="dfnref">blobParts</a>, optional <a href="#dfn-BlobPropertyBag" title="BlobPropertyBag" class="dfnref">BlobPropertyBag</a> <a href="#dfn-options" title="options" class="dfnref">options</a>)] 
+    [Constructor, Constructor((ArrayBuffer or Blob or DOMString)[] <a href="#dfn-blobParts" title="blobParts" class="dfnref">blobParts</a>, optional <a href="#dfn-BlobPropertyBag" title="BlobPropertyBag" class="dfnref">BlobPropertyBag</a> <a href="#dfn-options" title="options" class="dfnref">options</a>)] 
     interface <dfn id='dfn-Blob'>Blob</dfn> {
       
       readonly attribute unsigned long long <a href="#dfn-size" title='size' class="dfnref">size</a>;
@@ -401,7 +401,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 		<h4>Constructor Parameters</h4>
 		<p>The <code>Blob()</code> constructor can also be invoked with the parameters below:</p>
 		<dl>
-			<dt id="dfn-blobParts">A <code>blobParts</code> <code>Array</code> [<a href="#ECMA-262">ECMA-262, 5th Edition</a>]</dt> 
+			<dt id="dfn-blobParts">A <code>blobParts</code> <code>Array</code></dt> 
 			<dd>which MUST take any number of the following types of members, and in any order:
 				<ul>
 				<li><p><code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] members</p></li>
@@ -482,7 +482,7 @@ var yg = new Blob([12]);
     Blob has no bytes to be read.</p></dd>
     <dt id="dfn-type"><code>type</code></dt>
     <dd><p>The ASCII-encoded string in lower case representing the media type of the <code>Blob</code>, expressed as an RFC2046 MIME type [<a href="#RFC2046">RFC2046</a>].
-    On getting, conforming user agents SHOULD return the MIME type of the <code>Blob</code>,
+    On getting, conforming user agents MUST return the MIME type of the <code>Blob</code>,
     if it is known. If conforming user agents cannot determine the media type of the <code>Blob</code>, they MUST return the empty string.
     A string is a valid MIME type if it matches the <code>media-type</code>
     token defined in section 3.7 "Media Types" of RFC 2616 [<a href="#HTTP">HTTP</a>]. </p></dd>
@@ -526,7 +526,6 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
    </p>
    <ol>
    <li><p>If the <code>contentType</code> parameter is not provided, let relativeContentType be set to the empty string .</p></li>
-   <li><p>If the <code>contentType</code> parameter is undefined, let relativeContentType be set to the empty string.</p></li>
    <li><p>Else let relativeContentType be set to <code>contentType</code>.</p></li>
 <li><p>This defines the normalization of the <code>contentType</code> parameter.  When processing the <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call,
     user agents must normalize <code>contentType</code> to relativeContentType.</p></li>
@@ -551,7 +550,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
     </ol>
 
     <div class="note">
-    <p><em>This note is informative.</em>  The <code>slice</code> method previously had different semantics, which differed from both <code>Array.prototype.slice</code> and <code>String.prototype.slice</code> [<a href="#ECMA-262">ECMA-262</a>].  This difference
+    <p>The <code>slice</code> method previously had different semantics, which differed from both <code>Array.prototype.slice</code> and <code>String.prototype.slice</code> [<a href="#ECMA-262">ECMA-262</a>].  This difference
     was an oversight which has been corrected in this edition of the specification.  Some user agents implemented the previous semantics, notably Firefox 4, Chrome 10, and Opera 11.
     These user agents have agreed to vendor-prefix their <code>slice</code> implementations in subsequent releases.  A <code>Blob</code> <code>slice</code> operation occurs
     synchronously.</p>
@@ -599,12 +598,13 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	    This interface describes a single file in a <a href="#dfn-filelist" class="dfnrefs">FileList</a> and exposes its name.
 	    It inherits from <a href="#dfn-Blob" class='dfnrefs'>Blob</a>.
 	  </p>
-	  <x:codeblock language='idl'>
-	  interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blob</a> {
+<x:codeblock language='idl'>
+interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blob</a> {
 
-	      readonly attribute DOMString <a href="#dfn-name" class="dfnref">name</a>;
-	      readonly attribute Date <a href="#dfn-lastModifiedDate" class="dfnref">lastModifiedDate</a>;
-	};
+  readonly attribute DOMString <a href="#dfn-name" class="dfnref">name</a>;
+  readonly attribute Date? <a href="#dfn-lastModifiedDate" class="dfnref">lastModifiedDate</a>;
+
+};
 	  </x:codeblock>
 	  <div id='file-attrs' class="section">
 	  <h3>Attributes</h3>
@@ -618,7 +618,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	</p></dd>
 	    </dl>
 	  </div>
-	  <div class="note">
+
 	  <p>The <code>File</code> interface is available on objects that expose an attribute of type <a href="#dfn-filelist"><code>FileList</code></a>; these objects are defined in
 	  HTML [<a href="#HTML">HTML</a>].  The <code>File</code> interface, which inherits from <a href="#dfn-Blob"><code>Blob</code></a>, is immutable, and thus represents file data that can be
 	  read into memory at the time a <a href="#read-methods">read operation</a> is initiated.  For synchronous reads on a Web Worker [<a href="#Workers">Workers</a>], if the file has been modified on disk since the <code>File</code> object reference is created, user agents MUST throw a <a href="#dfn-NotReadableError"><code>NotReadableError</code></a>; for asynchronous reads, user agents must fire an <a href="#dfn-error-event"><code>error</code></a> event with the <a href="#dfn-error"><code>error</code></a>
@@ -626,13 +626,12 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  <a href="#file-error-read">errors</a>, throwing a <a href="#dfn-NotFoundError"><code>NotFoundError</code></a> exception if using a <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> on a Web Worker [<a href="#Workers">Workers</a>] or firing an <a href="#dfn-error-event"><code>error</code></a> event with the <a href="#dfn-error"><code>error</code></a>
 	  attribute returning a <a href="#dfn-NotFoundError"><code>NotFoundError</code></a> <a href="#dfn-domerror"><code>DOMError</code></a>.</p>
 	  </div>
-	  </div>
 	  <div id='FileReader-interface' class="section">
 	  <h2>The FileReader Interface</h2>
 	  <p>
 	    This interface provides methods to read <a href="#dfn-file"><code>File</code></a> objects or <a href="#dfn-Blob"><code>Blob</code></a> objects into memory, and to access the data from those
 	    <a href="#dfn-file">Files</a> or <a href="#dfn-Blob">Blobs</a> using progress events and
-	    <a href="#event-handler-attributes">event handler attributes</a>; it inherits from <code>EventTarget</code> [<a href="#DOMCore">DOMCore</a>].
+	    <a href="#event-handler-attributes">event handler attributes</a>; it inherits from <code>EventTarget</code> [<a href="#DOM4">DOM4</a>].
 	    It is desirable to read data from file systems asynchronously in the main thread of user agents.  This interface provides such an asynchronous API, and is specified to be used
 	    with the global object (<code>Window</code> [<a href="#HTML">HTML</a>]).
 	  </p>
@@ -657,7 +656,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  readonly attribute unsigned short <a class="dfnref" href="#dfn-readyState">readyState</a>;
 
 	  <span class="comment">// File or Blob data</span>
-	  readonly attribute any <a href="#dfn-result" class="dfnref">result</a>;
+	  readonly attribute (DOMString or ArrayBuffer)? <a href="#dfn-result" class="dfnref">result</a>;
 
 	  readonly attribute <a href="#dfn-domerror" class="dfnref">DOMError</a> <a href="#dfn-error" class="dfnref">error</a>;
 
@@ -674,7 +673,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<div id='blobreader-task-source' class='section'>
 	<h3>The FileReader Task Source</h3>
 	<p>The <a href="#dfn-filereader" class="dfnref"><code>FileReader</code></a> interface enables asynchronous reads on individual <a href="#dfn-Blob"><code>Blob</code></a> objects by
-	<a href="#fire-a-progress-event">firing progress events</a> as the read occurs to event handler methods on the <code>FileReader</code>, which is an <code>EventTarget</code> [<a href="#DOMCore">DOMCore</a>].
+	<a href="#fire-a-progress-event">firing progress events</a> as the read occurs. 
 	Unless stated otherwise, the <a href="#task-source" class="dfnref">task source</a> that is used in this specification is the
 	<a href="#dfn-filereader"><code>FileReader</code></a>.  This task source is used for events that are asynchronously fired, and for
 	event <a href="#queue-a-task" class="dfnref">tasks that are queued</a> for firing, and for the <a href="#read-methods">read methods</a>, which <a href="#queue-a-task">queue tasks</a>
@@ -765,13 +764,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<div class='section' id='MultipleReads'>
 	<h4>Multiple Reads</h4>
 	<p>
-	 The <a href="#dfn-filereader" class="dfnref"><code>FileReader</code></a> interface makes available four asynchronous <dfn id="read-methods">read methods</dfn> --
-	<a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer</code></a>, <a href="#dfn-readAsBinaryStringAsync" class="dfnref"><code>readAsBinaryString</code></a>,
-	 <a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a>, and <a href="#dfn-readAsDataURL" class="dfnref"><code>readAsDataURL</code></a>, which
-	 <em>read files into memory</em>.  If multiple concurrent read methods are called on the same <a href="#dfn-filereader" class="dfnref"><code>FileReader</code></a> object, user agents
-	 MUST throw an <code>InvalidStateError</code> [<a href="#DOMCore">DOMCore</a>] on any of the read methods that occur when
-	 <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a>.
-
+	 The <a href="#dfn-filereader" class="dfnref"><code>FileReader</code></a> interface makes available three asynchronous <dfn id="read-methods">read methods</dfn> - <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer</code></a>, <a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a>, and <a href="#dfn-readAsDataURL" class="dfnref"><code>readAsDataURL</code></a>, which <em>read files into memory</em>.  If multiple concurrent read methods are called on the same <a href="#dfn-filereader" class="dfnref"><code>FileReader</code></a> object, user agents MUST throw an <code>InvalidStateError</code> [<a href="#DOM4">DOM4</a>] on any of the read methods that occur when <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a>.
 	</p>
 	</div>
 	<div id='filedata-attr' class="section">
@@ -817,17 +810,15 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  attribute SHOULD return <a href="#partial-blob-data">partial Blob data</a> as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>].  User agents MUST return at least one such <code>result</code>,
 	  with the final <code>result</code> returned at completion of the read.</p></li>
 	</ul>
-	<div class="note">
 	<p>If a read is successful, the <code>result</code> attribute MUST return a non-null value only after a <a href="#event-summary-table">progress event</a> (see also [<a href="#ProgressEvents">ProgressEvents</a>]) has fired,
 	since all the <a href="#read-methods">read methods</a> access <a href="#dfn-Blob"><code>Blob</code></a> data asynchronously.  <a href="#queue-a-task">Tasks are queued</a> to update
 	the <code>result</code> attribute as <a href="#dfn-Blob"><code>Blob</code></a> data is made available.</p>
-	</div>
 	</div>
 	<div id='readAsDataURL' class="section">
 	<h4>The <code>readAsDataURL(blob)</code> method</h4>
 	<p>When the <dfn id="dfn-readAsDataURL"><code>readAsDataURL(blob)</code></dfn> method is called, the user agent MUST run the steps below (unless otherwise indicated).</p>
 	<ol>
-	<li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> throw an <code>InvalidStateError</code> exception [<a href="#DOMCore">DOMCore</a>] and <a href="#terminate-an-algorithm">terminate this algorithm</a>.
+	<li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> throw an <code>InvalidStateError</code> exception [<a href="#DOM4">DOM4</a>] and <a href="#terminate-an-algorithm">terminate this algorithm</a>.
 	  </p>
 	<p><strong>Note:</strong> The <a href="#dfn-readAsDataURL"><code>readAsDataURL()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
 	</li> 
@@ -860,9 +851,8 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  attribute as part of the Data URL if it is available in keeping with the Data URL specification [<a href="#DataURL">DataURL</a>] .</li>
 	  <li>If the <a href="#dfn-type"><code>type</code></a> attribute is not available on the <a href="#dfn-fileBlob"><code>blob</code></a> return a Data URL without a media-type.
 	  [<a href="#DataURL">DataURL</a>].
-	  <div class="note">
 	  <p>Data URLs that do not have media-types [<a href="#RFC2046">RFC2046</a>] MUST be treated as plain text by conforming user agents. [<a href="#DataURL">DataURL</a>].</p>
-	  </div>
+
 	  </li>
 	  </ul>
 	  </li>
@@ -880,7 +870,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	the user agent MUST run the steps below (unless otherwise indicated).
 	</p>
 	<ol>
-	<li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> throw an <code>InvalidStateError</code> [<a href="#DOMCore">DOMCore</a>] and terminate these steps.
+	<li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> throw an <code>InvalidStateError</code> [<a href="#DOM4">DOM4</a>] and terminate these steps.
 	  </p>
 
 	<p><strong>Note:</strong> The <a href="#dfn-readAsText"><code>readAsText()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
@@ -909,7 +899,6 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	    <li><p><a href="#make-progress-notifications">Make progress notifications</a>.</p></li>
 	<li><p>While processing the read, as data from the <a href="#dfn-fileBlob"><code>blob</code></a> becomes available, user agents SHOULD <a href="#queue-a-task">queue tasks</a> to update the <a href="#dfn-result"><code>result</code></a> with <a href="#partial-blob-data">partial Blob data</a> represented as a string in a format determined by the <a href="#encoding-determination">encoding determination</a> until the read is complete, to accompany the <a href="#fire-a-progress-event">firing</a> of <a href='#dfn-progress-event'><code>progress</code></a> events.  On getting, the <a href="#dfn-result"><code>result</code></a> attribute returns <a href="#partial-blob-data">partial Blob data</a> representing the number of bytes currently <code>loaded</code> (as a fraction of the <code>total</code>) [<a href="#ProgressEvents">ProgressEvents</a>], decoded into
 	  memory according to the <a href="#encoding-determination">encoding determination</a>; user agents MUST return at least one such <a href="#dfn-result"><code>result</code></a> while processing this read method.  The last returned value is at completion of the read.</p>
-	<div class="note" id="encodingCaveat">
 	<p>
 	<a href="#partial-blob-data">Partial Blob data</a> MUST be returned such that where possible, the bytes read thus far should be valid code points
 	within the <a href="#dfn-encoding"><code>encoding</code></a>; in particular, when executing the <a href="#encoding-determination">encoding determination</a> for
@@ -922,7 +911,6 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	Even though the trailing E3 83 is not a valid code point in UTF-8 at the fifth byte, user agents MUST NOT return a <a href="#dfn-result"><code>result</code></a> with such invalid code points
 	replaced with U+FFFD till it can be determined definitively that the codepoint is invalid.
 	</p>
-	</div>
 	</li>
 	  <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
 	  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.
@@ -935,7 +923,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	When the <dfn id="dfn-readAsArrayBuffer"><code>readAsArrayBuffer(blob)</code></dfn> method is called, the user agent MUST run the steps below (unless otherwise indicated).
 	</p>
 	<ol>
-	 <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> throw an <code>InvalidStateError</code> exception [<a href="#DOMCore">DOMCore</a>] and terminate these steps.
+	 <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> throw an <code>InvalidStateError</code> exception [<a href="#DOM4">DOM4</a>] and terminate these steps.
 	  </p>
 
 	<p><strong>Note:</strong> The <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
@@ -992,18 +980,13 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 
 	<div id='blobAndFileParams' class="section">
 	<h4>Blob Parameters</h4>
-	<p>Many methods in this specification take mandatory
-	<a href="#dfn-Blob" class="dfnref"><code>Blob</code></a> parameters.
+	<p>The three <a href="#read-methods">asynchronous read methods</a>, the three <a href="#read-method-sync">synchronous read methods</a>, and <a href="dfn-createObjectURL"><code>createObjectURL</code></a> take a mandatory
+	<a href="#dfn-Blob" class="dfnref"><code>Blob</code></a> parameter.  This section defines this parameter.
 	</p>
 	<dl>
 	<dt><dfn id="dfn-fileBlob"><code>blob</code></dfn></dt>
-	<dd><p>This is a <a href="#dfn-Blob"><code>Blob</code></a> argument used to call all four <a href="#read-methods">asynchronous read methods</a>
-	on <a href="#dfn-filereader"><code>FileReader</code></a> and all four <a href="#read-method-sync">synchronous read methods</a> on
-	<a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a>; it is also used to call the
-	<a href="#dfn-createObjectURL"><code>createObjectURL</code> method</a>.
-	This argument MUST be a reference to a single <a href="#dfn-file"><code>File</code></a> in a
-	<a href="#dfn-filelist"><code>FileList</code></a> or a <a href="#dfn-Blob"><code>Blob</code></a> object not obtained from the file system that is in scope of the global object from which the
-	method call was made.</p></dd>
+	<dd><p>This is a <a href="#dfn-Blob"><code>Blob</code></a> argument and MUST be a reference to a single <a href="#dfn-file"><code>File</code></a> in a
+	<a href="#dfn-filelist"><code>FileList</code></a> or a <a href="#dfn-Blob"><code>Blob</code></a> object not obtained from the file system that is in scope of the global object from which the method call was made.</p></dd>
 	</dl>
 	</div>
 	<div id='enctype' class='section'>
@@ -1018,7 +1001,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<p>If <a href="#dfn-fileBlob"><code>blob</code></a> has a <a href="#dfn-type"><code>type</code></a> attribute of <code>text/plain;charset=UTF-8</code> then <var>charset</var> is UTF-8.</p>
 	</div>
 	</li>
-	<li><p>If <var>charset</var> is null, then for each of the rows in the
+	<li><p>If <var>charset</var> is null <strong>or</strong> if <var>charset</var> has been set in the preceding step to the Charset Parameter of the<a href="#dfn-fileBlob"><code>blob</code></a> argument's <a href="#dfn-type"><code>type</code></a> attribute, then for each of the rows in the
 	     following table, starting with the first one and going down, if the
 	     first bytes of <a href="#dfn-fileBlob"><code>blob</code></a> match the bytes given in the first
 	     column, then let <var>charset</var> be the encoding given in the cell in
@@ -1102,15 +1085,15 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  <code>ProgressEvent</code> <code>e</code> at a <a href="#dfn-filereader"><code>FileReader</code></a> <code>reader</code>),
 	  the following are normative:</p>
 	  <ul>
-	  <li><p>The progress event <code>e</code> does not bubble.  <code>e.bubbles</code> MUST be false [<a href="#DOMCore">DOMCore</a>]</p></li>
-	  <li><p>The progress event <code>e</code> is NOT cancelable. <code>e.cancelable</code> MUST be false [<a href="#DOMCore">DOMCore</a>]</p></li>
-	  <li><p>The term <dfn id="fire-an-event">"fire an event"</dfn> is defined in DOM Core [<a href="#DOMCore">DOMCore</a>].  Progress Events are defined in Progress Events
+	  <li><p>The progress event <code>e</code> does not bubble.  <code>e.bubbles</code> MUST be false [<a href="#DOM4">DOM4</a>]</p></li>
+	  <li><p>The progress event <code>e</code> is NOT cancelable. <code>e.cancelable</code> MUST be false [<a href="#DOM4">DOM4</a>]</p></li>
+	  <li><p>The term <dfn id="fire-an-event">"fire an event"</dfn> is defined in DOM Core [<a href="#DOM4">DOM4</a>].  Progress Events are defined in Progress Events
 	  [<a href="#ProgressEvents">ProgressEvents</a>].</p></li> 
 	  </ul>
 	  <div id='event-summary' class='section'>
 	  <h5>Event Summary</h5>
 	  <p>The following are the events that are fired at <code><a href="#dfn-filereader">FileReader</a></code> objects; <a href="#fire-a-progress-event">firing events</a> is defined in
-	  DOM Core [<a href="#DOMCore">DOMCore</a>], and the table below is normative for the events in this specification.</p>
+	  DOM Core [<a href="#DOM4">DOM4</a>].</p>
 	  <table id="event-summary-table">
 
 	   <thead>
@@ -1172,7 +1155,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<div id="eventInvariants" class="section">
 	<h5>Summary of Event Invariants</h5>
 	<p>
-	The following are normative invariants applicable to <a href="#fire-an-event">event firing</a> for a given asynchronous <a href="#read-methods">read method</a> in this specification:
+	This section is informative.  The following are invariants applicable to <a href="#fire-an-event">event firing</a> for a given asynchronous <a href="#read-methods">read method</a> in this specification:
 	</p>
 	<ol> 
 		<li><p>Once a <a href="#dfn-loadstart-event"><code>loadstart</code></a> has been fired, a corresponding <a href="#dfn-loadend-event"><code>loadend</code></a> fires at completion of the read, EXCEPT if the <a href="#read-methods">read method</a> has been cancelled using <a href="#dfn-abort"><code>abort()</code></a> and a new <a href="#read-methods">read method</a> has been invoked.</p>
@@ -1241,9 +1224,8 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	  attribute as part of the Data URL if it is available in keeping with the Data URL specification [<a href="#DataURL">DataURL</a>] .</li>
 	  <li>If the <a href="#dfn-type"><code>type</code></a> attribute is not available on the <a href="#dfn-fileBlob"><code>blob</code></a> return a Data URL without a media-type.
 	  [<a href="#DataURL">DataURL</a>].
-	  <div class="note">
 	  <p>Data URLs that do not have media-types [<a href="#RFC2046">RFC2046</a>] MUST be treated as plain text by conforming user agents. [<a href="#DataURL">DataURL</a>].</p>
-	  </div>
+	  
 	  </li>
 	  </ul>
 	</li>
@@ -1281,9 +1263,9 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<div id="dfn-error-codes" class="section">
 	<h3>Throwing an Exception or Returning an Error</h3>
 	<p>This section is normative.  Error conditions can arise when reading a file.</p>
-	<p>Synchronous read methods <a href="#throw-an-exception">throw</a> exceptions of the type in the table below if there has been an error with reading or .</p>
+	<p>Synchronous read methods <a href="#throw-an-exception">throw</a> exceptions of the type in the table below if there has been an error with reading.</p>
 
-	<p>The <dfn id="dfn-error"><code>error</code></dfn> attribute of the <a href="#dfn-filereader"><code>FileReader</code></a> object MUST return a <dfn id="dfn-domerror">DOMError</dfn> object [<a href="#DOMCore">DOMCore</a>] of the most appropriate type from the table below if there has been an error, and otherwise returns null.</p>
+	<p>The <dfn id="dfn-error"><code>error</code></dfn> attribute of the <a href="#dfn-filereader"><code>FileReader</code></a> object MUST return a <dfn id="dfn-domerror">DOMError</dfn> object [<a href="#DOM4">DOM4</a>] of the most appropriate type from the table below if there has been an error, and otherwise returns null.</p>
 
 	<table><thead><tr><th>Type
 	     </th><th>Description
@@ -1303,17 +1285,10 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	     </td><td>If the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> cannot be read, typically due due to permission problems that occur after a
 	     reference to a <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> has been acquired (e.g. concurrent lock with another application) then for asynchronous read methods the  <a href="#dfn-error"><code>error</code></a> attribute MUST return a "<code>NotFoundError</code>" <a href="#dfn-domerror"><code>DOMError</code></a> and synchronous read methods MUST <a href="#throw-an-exception">throw</a> a <code>NotFoundError</code> exception.
 	    </td></tr><tr><td><dfn id="dfn-EncodingError" title="EncodingError"><code>EncodingError</code></dfn>
-	     </td><td>If URL length limitations for Data URLs in implementations place limits on the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> data that can be
-	     represented as a Data URL [<a href="#DataURL">DataURL</a>] then for asynchronous read methods the  <a href="#dfn-error"><code>error</code></a> attribute MUST
-	return a "<code>EncodingError</code>" <a href="#dfn-domerror"><code>DOMError</code></a>, and synchronous read methods MUST <a href="#throw-an-exception">throw</a> a <code>EncodingError</code> exception.  User agents MUST NOT use this for the asynchronous <a href="#dfn-readAsText"><code>readAsText()</code></a> call
-	     and MUST NOT use this for the synchronous <a href="#dfn-readAsTextSync"><code>readAsText()</code></a> call, since encoding is determined by the
-	     <a href="#encoding-determination">encoding determination</a> algorithm.
-
-	    </td></tr></tbody></table>
+	     </td><td>If the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> cannot be encoded as Base64 for a Data URL [<a href="#DataURL">DataURL</a>] owing to URL length limitations in implementations, then for asynchronous read methods the  <a href="#dfn-error"><code>error</code></a> attribute MUST return a "<code>EncodingError</code>" <a href="#dfn-domerror"><code>DOMError</code></a>, and synchronous read methods MUST <a href="#throw-an-exception">throw</a> an <code>EncodingError</code> exception.
+</td></tr></tbody></table>
 	</div> 
 	</div>
-
-
 	<div id="url" class="section">  
 	<h2>A URI for Blob and File reference</h2>
 	<p>This section defines a scheme for a URI used to refer to <a href="#dfn-Blob"><code>Blob</code></a> objects (and <a href="#dfn-file"><code>File</code></a> objects). 
@@ -1336,7 +1311,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<li><p>Developers should have the ability to revoke URIs in this scheme, so that they no longer refer to <a href="#dfn-Blob"><code>Blob</code></a> objects.  This includes scenarios
 	where file references are no longer needed by a program, but also other uses of <a href="#dfn-Blob"><code>Blob</code></a> objects.
 	Consider a scenario where a <a href="#dfn-Blob"><code>Blob</code></a> object can be exported from a drawing program which uses the canvas element and API [<a href="#HTML">HTML</a>].  A snapshot of the drawing can be created by
-	exporting a <a href="#dfn-Blob"><code>Blob</code></a>.  This scheme can be used with the &lt;img&gt; [<a href="#HTML">HTML</a>] element to display the snapshot;
+	exporting a <a href="#dfn-Blob"><code>Blob</code></a>.  This scheme can be used with the <code>img</code> [<a href="#HTML">HTML</a>] element to display the snapshot;
 	if the user deletes the snapshot, any reference to the snapshot in memory via a URI should be invalid, and hence the need to be able to revoke such a URI.  </p></li>
 	</ul>
 	</div>
@@ -1358,12 +1333,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<li><p>The reuse of file URIs would involve changes to file URI use today, such as adding response codes.  While they are used inconsistently in web applications,
 	the structure of the URIs would change, and request-response behavior would have to be superimposed on what already works in a more-or-less ad-hoc manner.  Modifying this for the use cases
 	cited above is imprudent, given legacy usage.  Additionally, the use cases for a Blob URI scheme call for uses beyond the file system.</p></li>
-	<li><p>A scheme of the sort urn:uuid could be used, though use of this scheme is unprecedented in HTML and JavaScript web applications.  The urn:uuid scheme is very generically repurposable.
-	URIs in the scheme urn:uuid have the disadvantage of unfamiliarity and inconsistency across the web platform.  A new scheme has the advantage of being explicit about what is being referenced.
-	In theory, URIs make no guarantee about what sort of resource is obtained when they are dereferenced; that is left to
-	content labeling and media type.  But in practice, the name of the scheme creates an expectation about both the resource and the protocol of the request-response transaction.
-	Choosing a name that clarifies the primary use case -- namely, access to memory-resident <a href="#dfn-Blob"><code>Blob</code></a> resources -- is a worthwhile compromise, and favors clarity,
-	familiarity, and consistency across the web platform.
+	<li><p>A scheme of the sort urn:uuid could be used, though use of this scheme is unprecedented in HTML and JavaScript web applications.  The urn:uuid scheme is very generic.  URIs in the scheme urn:uuid have the disadvantage of unfamiliarity and inconsistency across the web platform.  A new scheme has the advantage of being explicit about what is being referenced.  In theory, URIs make no guarantee about what sort of resource is obtained when they are dereferenced; that is left to content labeling and media type.  But in practice, the name of the scheme creates an expectation about both the resource and the protocol of the request-response transaction.  Choosing a name that clarifies the primary use case - namely, access to memory-resident <a href="#dfn-Blob"><code>Blob</code></a> resources - is a worthwhile compromise, and favors clarity, familiarity, and consistency across the web platform.
 	</p></li>
 	</ul>
 	</div>
@@ -1391,7 +1361,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	</x:codeblock>
 	<div id="OpaqueStringDiscussion" class="section">
 	<h4>The Opaque String</h4>
-	<p><a href="#opaqueString">Opaque strings</a> MUST NOT include any reserved characters from [<a href="#RFC3986">RFC3986</a>] without percent-encoding them; these characters MUST be percent-encoded.
+	<p><a href="#opaqueString">Opaque strings</a> MUST NOT include any reserved characters from [<a href="#RFC3986">RFC3986</a>] without percent-encoding them.
 	<a href="#opaqueString">Opaque strings</a> MUST be globally unique.  Such strings SHOULD only use characters in the ranges U+002A to U+002B, U+002D to U+002E, U+0030 to U+0039,
 	U+0041 to U+005A, U+005E to U+007E [<a href="#Unicode">Unicode</a>], and SHOULD be at least 36 characters long.
 	UUID is one potential option available to user agents for use with <a href="#url">Blob URIs</a> as <a href="#opaqueString">opaque strings</a>, and their use is <em>strongly encouraged</em>.
@@ -1444,6 +1414,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<p>This specification defines the following lifetime conditions on <a href="#url">Blob URIs</a>: </p>
 	<ol><li><p>This specification adds an additional <a href="#unloading-document-cleanup-steps">unloading document cleanup step</a>: user agents MUST revoke any <a href="#url">Blob URIs</a> created with <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> from within that <a href="#document">document</a>.
 	If these <a href="#url">Blob URIs</a> are dereferenced, user agents must respond with <a href="#FiveHundredInternalServerError">500 Error Condition</a>.</p></li>
+		<li><p>A <a href="#url">Blob URI</a> created with <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> using the optional <a href="#dfn-options-objectURL"><code>options</code></a> parameter with <a href="#dfn-oneTimeOnly"><code>oneTimeOnly</code></a> set to <code>true</code> MUST be revoked after its first use; subsequent attempts to dereference that Blob URI must return a <a href="#FiveHundredInternalServerError">500 Error Condition. </a></p></li>
 	<li><p>User agents MUST ensure that any <a href="#url">Blob URIs</a> are revoked after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called with that
 	<a href="#url">Blob URI</a> as an argument. User agents MUST respond with a <a href="#FiveHundredInternalServerError">500 Error Condition</a> if a <a href="#url">Blob URI</a> is
 	dereferenced after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called on that particular <a href="#url">Blob URI</a>. </p></li>
@@ -1478,9 +1449,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 		<li><p>A security error has occurred.  In this case, the response SHOULD be accompanied by clarifying text alongside the 500 response, e.g. "500 Security Violation."  </p></li>
 	</ul>
 	<p>This response MAY be accompanied by additional messages in the response indicating why the <a href="#dfn-Blob"><code>Blob</code></a> resource could not be served.  See <a href="#ProtocolExamples">blob: protocol examples</a>.</p>
-	<div class="note">
 		<p>The 500 Error Condition provides a response code, but not a fixed status.  User agents MAY leave it as simply "500 Error Condition" or supply additional status information (e.g. "500 Origin Violation").  Implementers are strongly encouraged to provide messages to developers along with the response code.</p>
-	</div>
 	</div>
 	<div id="ProtocolExamples" class="section">
 	<h4>Request and Response Headers</h4>
@@ -1534,12 +1503,9 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	};
 	
 	</x:codeblock>
-	<div class="note"><p>ECMAScript user agents of this specification MUST ensure that they do not expose a <code>prototype</code> property on the URL interface
+	<p>ECMAScript user agents of this specification MUST ensure that they do not expose a <code>prototype</code> property on the URL interface
 	object unless the user agent also implements the URL [<a href="#URL-API">URL API</a>] specification. In other words, <code>URL.prototype</code> MUST
-	evaluate to true if the user agent implements the URL [<a href="#URL-API">URL API</a>] specification, and MUST NOT evaluate to true otherwise.</p></div>
-
-	<p><code>// Window implements URL;</code></p>
-	<p><code>// WorkerUtils implements URL;</code></p>
+	evaluate to true if the user agent implements the URL [<a href="#URL-API">URL API</a>] specification, and MUST NOT evaluate to true otherwise.</p>
 	
 <div id="createRevokeMethodsParams" class="section">
 <h3>Methods and Parameters</h3>		
@@ -1551,7 +1517,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	<li><p>If this method is called with a <a href="#valid">valid</a> <a href="#dfn-Blob"><code>Blob</code></a> argument, user agents MUST return
 	a unique <a href="#url"><code>Blob</code> URI</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument.</p></li>
 	</ol>
-<p>The optional <dfn id="dfn-options-objectURL"><code>options</code></dfn> dictionary argument contains a key, <dfn id="dfn-oneTimeOnly"><code>oneTimeOnly</code></dfn> that defaults to <code>false</code>.  If set to <code>true</code>, then the first time the <a href="#url"><code>Blob</code> URI</a> is dereferenced, user agents MUST automatically revoke that <a href="#url"><code>Blob</code> URI</a> without needing a call to <code>revokeBlobURL()</code> on the <a href="#url"><code>Blob</code> URI</a>.</p>
+<p>The optional <dfn id="dfn-options-objectURL"><code>options</code></dfn> dictionary argument contains a key, <dfn id="dfn-oneTimeOnly"><code>oneTimeOnly</code></dfn> that defaults to <code>false</code>.  If set to <code>true</code>, then the first time the <a href="#url"><code>Blob</code> URI</a> is dereferenced, user agents MUST automatically revoke that <a href="#url"><code>Blob</code> URI</a> without needing a call to <code>revokeObjectURL()</code> on the <a href="#url"><code>Blob</code> URI</a>.</p>
 	<div class="example">
 	<p>In the example below, after obtaining a reference to a <a href="#dfn-Blob"><code>Blob</code></a> object (in this case, a user-selected <a href="#dfn-file"><code>File</code></a> from the underlying file system), the static method <code>URL.createObjectURL()</code> is called on that <a href="#dfn-Blob"><code>Blob</code></a> object.</p>
 	<x:codeblock language="es">
@@ -1567,7 +1533,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	
 	}
 	</x:codeblock>
-	<p>In the example below, there is no need to call <code>URL.revokeBlobURL()</code> since the <a href="#dfn-oneTimeOnly"><code>oneTimeOnly</code></a> boolean has been set to true.</p>
+	<p>In the example below, there is no need to call <code>URL.revokeObjectURL()</code> since the <a href="#dfn-oneTimeOnly"><code>oneTimeOnly</code></a> boolean has been set to true.</p>
 <x:codeblock language="es">
 	var file = document.getElementById('file').files[0];
 	if(file){
@@ -1610,11 +1576,11 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 	</div>
 <div id="examplesOfCreationRevocation" class="section">
 <h3>Examples of Blob URI Creation and Revocation</h3>
-<p><a href="#url">Blob URI</a>s are strings that dereference <code>Blob</code> objects, and can persist for as long as the <code>document</code> from which they were minted using <a href="#dfn-createObjectURL"><code>URL.createObjectURL()</code></a> -- see <a href="#lifetime">Lifetime of Blob URIs</a>.  To revoke them before the <a href="#unloading-document-cleanup-steps">unloading document cleanup steps</a>, web developers must explicitly revoke them with <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL()</code></a>, OR create them for one time only usage, using the <a href="#dfn-oneTimeOnly"><code>oneTimeOnly</code></a> key in the options dictionary. </p>
+<p><a href="#url">Blob URI</a>s are strings that dereference <code>Blob</code> objects, and can persist for as long as the <code>document</code> from which they were minted using <a href="#dfn-createObjectURL"><code>URL.createObjectURL()</code></a> - see <a href="#lifeTime">Lifetime of Blob URIs</a>.  To revoke them before the <a href="#unloading-document-cleanup-steps">unloading document cleanup steps</a>, web developers must explicitly revoke them with <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL()</code></a>, OR create them for one time only usage, using the <a href="#dfn-oneTimeOnly"><code>oneTimeOnly</code></a> key in the <a href="#dfn-options-objectURL"><code>options</code></a> dictionary. </p>
 
 <p>This section gives sample usage of creation and revocation of <a href="#url">Blob URI</a>s with explanations.</p>
 <div class="example">
-<p>In the example below, two <code>Image</code> elements [<a href="#HTML">HTML</a>] refer to the same <a href="#url">Blob URI</a>, which was minted for one-time use only using the <code>boolean</code> key in the optional dictionary argument:</p>
+<p>In the example below, two <code>img</code> elements [<a href="#HTML">HTML</a>] refer to the same <a href="#url">Blob URI</a>, which was minted for one-time use only using the <code>boolean</code> key in the optional dictionary argument:</p>
 <x:codeblock language="es">
 var file = document.getElementById('filePicker').files[0];
 
@@ -1788,8 +1754,8 @@ else {
 		<dd><cite><a href="http://tools.ietf.org/html/rfc2397">The "data" URL Scheme</a></cite>, L. Masinter. IETF.</dd>
 		<dt id="Workers">Web Workers</dt>
 		<dd><cite><a href="http://dev.w3.org/html5/workers/">Web Workers (work in progress)</a></cite>, I. Hickson. W3C.</dd>
-		<dt id="DOMCore">DOM Core</dt>
-		<dd><cite><a href="http://www.w3.org/TR/domcore/">DOM Core (work in progress)</a></cite>, A. van Kesteren, Ms2ger. W3C.</dd>
+		<dt id="DOM4">DOM4</dt>
+		<dd><cite><a href="http://www.w3.org/TR/domcore/">DOM4 (work in progress)</a></cite>, A. Gregor, A. van Kesteren, Ms2ger. W3C.</dd>
 		<dt id="Unicode">Unicode</dt>
 		<dd><cite><a href="http://www.unicode.org/versions/Unicode5.2.0/">The Unicode Standard, Version 5.2.0.</a></cite>, J. D. Allen, D. Anderson, et al. Unicode Consortium.</dd>  	
 		<dt id="HTTP">RFC2616</dt>
@@ -1802,8 +1768,8 @@ else {
 	        <dd><cite><a href="https://cvs.khronos.org/svn/repos/registry/trunk/public/webgl/doc/spec/TypedArray-spec.html">Typed Arrays (work in progress)</a></cite>, V. Vukicevic, K. Russell. Khronos Group.</dd>
 	        <dt id="ABNF">RFC5234</dt>
 	        <dd><cite><a href="http://tools.ietf.org/html/rfc5234">Augmented BNF for Syntax Specifications: ABNF</a></cite>, D. Crocker, P. Overell. IETF.</dd>
-	        <dt id="URL-API">URL Specification</dt>
-	        <dd><cite><a href="https://docs.google.com/document/edit?id=1r_VTFKApVOaNIkocrg0z-t7lZgzisTuGTXkdzAk4gLU&amp;hl=en&amp;pli=1#">URL API (work in progress)</a></cite>, A. Barth. TBD.</dd>
+	        <dt id="URL-API">URL API Specification</dt>
+	        <dd><cite><a href="http://dvcs.w3.org/hg/url/raw-file/tip/Overview.html">URL API (work in progress)</a></cite>, A. Barth. W3C.</dd>
 		<dt id="WebIDL">WebIDL Specification</dt>
 		<dd><cite><a href="http://www.w3.org/TR/WebIDL/">WebIDL (work in progress)</a></cite>, C. McCormack.</dd>
 		<dt id="ECMA-262">ECMAScript</dt>
@@ -1828,7 +1794,7 @@ else {
 	    <dt id="RFC1738">RFC1738</dt>
 	    <dd><cite><a href="http://tools.ietf.org/html/rfc1738">Uniform Resource Locators (URL)</a></cite>, T. Berners-Lee, L. Masinter, M. McCahill. IETF.</dd>
 	    <dt id="StreamAPI">Stream API</dt>
-	    <dd><cite><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/video-conferencing-and-peer-to-peer-communication.html">The Stream API</a></cite>, I. Hickson. WHATWG.</dd>
+	    <dd><cite><a href="http://dev.w3.org/2011/webrtc/editor/webrtc.html#stream-api">The Stream API</a></cite>, A. Bergkvist, D. Burnett, C. Jennings, A. Narayanan. W3C.</dd>
 	    </dl>
 	    </div>
 	    </div>
