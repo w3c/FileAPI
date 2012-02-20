@@ -1040,15 +1040,13 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	    </td></tr></tbody></table>
 
 	   </li>
-	    <li><p>If <var>charset</var> is null let <var>charset</var> be UTF-8.
-
-	   </p></li>
-	
 	<li><p>If charset is null, and the <a href="#dfn-fileBlob"><code>blob</code></a> argument's <a href="#dfn-type"><code>type</code></a> attribute is present, and its Charset Parameter [<a href="#RFC2046">RFC2046</a>] is the name or alias of a character set used on the Internet [<a href="#IANACHARSET">IANACHARSET</a>], let <var>charset</var> be set to its Charset Parameter.</p>
 	<div class="example">
 	<p>If <a href="#dfn-fileBlob"><code>blob</code></a> has a <a href="#dfn-type"><code>type</code></a> attribute of <code>text/plain;charset=UTF-8</code> then <var>charset</var> is UTF-8.</p>
 	</div>
 	</li>
+	<li><p>If <var>charset</var> is null let <var>charset</var> be UTF-8.
+</p></li>
 	
 	    <li><p>Return the result of decoding the <a href="#dfn-fileBlob"><code>blob</code></a> using
 	     <var>charset</var>; on getting, the <a href="#dfn-result"><code>result</code></a> attribute of the <a href="#dfn-filereader"><code>FileReader</code></a>
