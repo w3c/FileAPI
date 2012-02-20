@@ -1004,21 +1004,12 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	<li><p>Let <var>charset</var> be null</p></li>
 	<li><p>If the <a href="#dfn-encoding"><code>encoding</code></a> argument is present, and is the name or alias of a character set used on the Internet 
 	[<a href="#IANACHARSET">IANACHARSET</a>], let <var>charset</var> be set to the value of the <a href="#dfn-encoding"><code>encoding</code></a> parameter. </p></li>
-	<li><p>If charset is null, and the <a href="#dfn-fileBlob"><code>blob</code></a> argument's <a href="#dfn-type"><code>type</code></a> attribute is present, and its Charset Parameter [<a href="#RFC2046">RFC2046</a>] is the name or alias of a character set used on the Internet [<a href="#IANACHARSET">IANACHARSET</a>], let <var>charset</var> be set to its Charset Parameter.</p>
-	<div class="example"><div class="exampleHeader">Example</div>
-	<p>If <a href="#dfn-fileBlob"><code>blob</code></a> has a <a href="#dfn-type"><code>type</code></a> attribute of <code>text/plain;charset=UTF-8</code> then <var>charset</var> is UTF-8.</p>
-	</div>
-	</li>
-	<li><p>If <var>charset</var> is null <strong>or</strong> if <var>charset</var> has been set in the preceding step to the Charset Parameter of the <a href="#dfn-fileBlob"><code>blob</code></a> argument's <a href="#dfn-type"><code>type</code></a> attribute, then for each of the rows in the
+	<li><p>If <var>charset</var> is null, then for each of the rows in the
 	     following table, starting with the first one and going down, if the
 	     first bytes of <a href="#dfn-fileBlob"><code>blob</code></a> match the bytes given in the first
 	     column, then let <var>charset</var> be the encoding given in the cell in
 	     the second column of that row. If there is no match then <var>charset</var>
-	     remains null (or is reset to null).</p>
-	<div class="note"><div class="noteHeader">Note</div>
-	<p>Byte Order Mark considerations override the Charset Parameter of the <a href="#dfn-fileBlob"><code>blob</code></a> argument's <a href="#dfn-type"><code>type</code></a> attribute.</p>
-	</div>
-
+	     remains null.</p>
 	    <table>
 	     <thead>
 	      <tr>
@@ -1060,7 +1051,13 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	    <li><p>If <var>charset</var> is null let <var>charset</var> be UTF-8.
 
 	   </p></li>
-
+	
+	<li><p>If charset is null, and the <a href="#dfn-fileBlob"><code>blob</code></a> argument's <a href="#dfn-type"><code>type</code></a> attribute is present, and its Charset Parameter [<a href="#RFC2046">RFC2046</a>] is the name or alias of a character set used on the Internet [<a href="#IANACHARSET">IANACHARSET</a>], let <var>charset</var> be set to its Charset Parameter.</p>
+	<div class="example"><div class="exampleHeader">Example</div>
+	<p>If <a href="#dfn-fileBlob"><code>blob</code></a> has a <a href="#dfn-type"><code>type</code></a> attribute of <code>text/plain;charset=UTF-8</code> then <var>charset</var> is UTF-8.</p>
+	</div>
+	</li>
+	
 	    <li><p>Return the result of decoding the <a href="#dfn-fileBlob"><code>blob</code></a> using
 	     <var>charset</var>; on getting, the <a href="#dfn-result"><code>result</code></a> attribute of the <a href="#dfn-filereader"><code>FileReader</code></a>
 	     object returns a string in <var>charset</var> format.  The synchronous
