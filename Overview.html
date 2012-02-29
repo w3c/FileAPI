@@ -417,8 +417,8 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 				<li><p><a href="#dfn-Blob"><code>Blob</code></a> members</p></li>
 				<li><p><code>DOMString</code> [<a href="#WebIDL">WebIDL</a>] members</p></li>
 				</ul>
-			<p>When the constructor is invoked with a <a href="#dfn-blobParts"><code>blobParts</code></a> argument, a user agent MUST return a <a href="#dfn-Blob"><code>Blob</code></a> that appends all of the <a href="#dfn-blobParts"><code>blobParts</code></a> members.  If the optional <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> is not used, a user agent MUST treat appended <code>DOMString</code> members as if they have <a href="#dfn-transparent">"transparent"</a> line endings.   The <code>DOMString</code>  must be converted to a sequence of Unicode characters [<a href="#Unicode">Unicode</a>] using the algorithm for doing so in WebIDL [<a href="#WebIDL">WebIDL</a>] or use another algorithm with an identical result, and be decoded as UTF-8.  </p>
-<div class="note"><div class="noteHeader">Note</div><p>The algorithm from WebIDL [<a href="#WebIDL">WebIDL</a>] replaces unmatched surrogates in an invalid UTF-16 string with U+FFFD replacement characters when decoded as UTF-8. Scenarios exist when the <a href="#dfn-Blob"><code>Blob</code></a> constructor may result in some data loss due to lost or scrambled character sequences. </p></div>			
+			<p>When the constructor is invoked with a <a href="#dfn-blobParts"><code>blobParts</code></a> argument, a user agent MUST return a <a href="#dfn-Blob"><code>Blob</code></a> that appends all of the <a href="#dfn-blobParts"><code>blobParts</code></a> members.  If the optional <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> is not used, a user agent MUST treat appended <code>DOMString</code> members as if they have <a href="#dfn-transparent">"transparent"</a> line endings.   The <code>DOMString</code>  must be converted to a sequence of Unicode characters [<a href="#Unicode">Unicode</a>] using the algorithm for doing so in WebIDL [<a href="#WebIDL">WebIDL</a>], and be encoded as UTF-8.  </p>
+<div class="note"><div class="noteHeader">Note</div><p>The algorithm from WebIDL [<a href="#WebIDL">WebIDL</a>] replaces unmatched surrogates in an invalid UTF-16 string with U+FFFD replacement characters when encoded as UTF-8. Scenarios exist when the <a href="#dfn-Blob"><code>Blob</code></a> constructor may result in some data loss due to lost or scrambled character sequences. </p></div>			
 <p>If a type that is not one of <code>DOMString</code> [<a href="#WebIDL">WebIDL</a>], <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>], or <a href="#dfn-Blob"><code>Blob</code></a> is used as a <a href="#dfn-blobParts"><code>blobParts</code></a> member, the user agent MUST throw an <code>InvalidStateError</code>.</p>
 			</dd>
 			<dt>An <em>optional</em> <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a></dt>
@@ -981,10 +981,9 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	  <a href="#dfn-done"><code>DONE</code></a> and <a href="#dfn-result"><code>result</code></a> to <code>null</code>.</p></li>
 	  <li><p>If there are any <a href="#dfn-task">tasks</a> from the object's <a href="#blobreader-task-source"><code>FileReader</code> task source</a> in one of the
 	  <a href="#queue-a-task">task queues</a>, then remove those <a href="#dfn-task">tasks</a>.</p></li>
-	  <li><p>Terminate any steps while processing a <a href="#read-methods">read method</a>.   </p></li>
+	  <li><p><a href="#terminate-an-algorithm">Terminate the algorithm</a> for the <a href="#read-methods">read method</a> being processed.   </p></li>
 	  <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-abort-event"><code>abort</code></a></p></li>
 	  <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a></p></li>
-	  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p></li>
 	  </ol>
 	</div>
 
