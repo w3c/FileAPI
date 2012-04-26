@@ -384,10 +384,12 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
     
     };
 
+    enum <dfn id="dfn-EndingTypes">EndingTypes</dfn>{"transparent", "native"};
+
     dictionary <dfn id="dfn-BlobPropertyBag">BlobPropertyBag</dfn> {
 		
       DOMString <a href="#dfn-BPtype" title="BPtype">type</a>;
-      DOMString <a href="#dfn-endings" title="BPendings">endings</a> = "transparent";
+      EndingTypes <a href="#dfn-endings" title="endings">endings</a> = "<a href="#dfn-transparent">transparent"</a>;
 	
     };
     </x:codeblock>
@@ -417,7 +419,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 			<dd>which takes two <code>DOMString</code> [<a href="#WebIDL">WebIDL</a>] members:
 			<ul>
 				<li><dfn id="dfn-BPtype"><code>type</code></dfn> which corresponds to the <a href="#dfn-Blob"><code>Blob</code></a> object's <a href="#dfn-type"><code>type</code></a> attribute.  If used, a user agent MUST return a new <a href="#dfn-Blob"><code>Blob</code></a> object with a <a href="#dfn-type"><code>type</code></a> attribute corresponding to the value of this argument within the  <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a>.</li>
-				<li><p><dfn id="dfn-endings"><code>endings</code></dfn>, a <code>DOMString</code> which can take the values <a href="#dfn-transparent">"transparent"</a> or <a href="#dfn-native">"native"</a>.  If omitted from the <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a>, a user agent MUST treat this as having a default value of "transparent".  A description of both is given in the table below.</p>
+				<li><p><dfn id="dfn-endings"><code>endings</code></dfn>, an <code>enum</code> which can take the values <a href="#dfn-transparent">"transparent"</a> or <a href="#dfn-native">"native"</a>.  If omitted from the <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a>, a user agent MUST treat this as having a default value of "transparent".  A description of both is given in the table below.</p>
 				<table><thead><tr><th>Value</th><th>Description</th></tr>
 				                <tr>
 				                  <td><dfn id="dfn-transparent" class="dfnrefs">"transparent"</dfn></td>
