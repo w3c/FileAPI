@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>26 April 2012</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2010/WD-FileAPI-20101026/">http://www.w3.org/TR/2010/WD-FileAPI-20101026/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>7 May 2012</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2010/WD-FileAPI-20101026/">http://www.w3.org/TR/2010/WD-FileAPI-20101026/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2011 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -80,7 +80,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 26 April 2012 <b>Editor’s Draft</b> of the
+        This document is the 7 May 2012 <b>Editor’s Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -427,7 +427,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 
         </ol>
         </li>
-        <li><p>Return a <code>Blob</code> object consisting of all the appended bytes of <var>a</var>, and with a <code>size</code> attribute representing the total number of bytes.  If the constructor has been invoked without the optional <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> dictionary or if the <a href="#dfn=BPtype"><code>type</code></a> member <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> dictionary has not been set then let this <code>Blob</code> object's<code>type</code> attribute be set to the empty string; otherwise, set this <code>Blob</code> object's <a href="#dfn-type"><code>type</code></a> to <var>s</var>.</p></li>
+        <li><p>Return a <code>Blob</code> object consisting of all the appended bytes of <var>a</var>, and with this <code>Blob</code> object's <code>size</code> attribute representing the total number of bytes.  If the constructor has been invoked without the optional <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> dictionary or if the <a href="#dfn=BPtype"><code>type</code></a> member <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> dictionary has not been set then let this <code>Blob</code> object's <code>type</code> attribute be set to the empty string; otherwise, set this <code>Blob</code> object's <a href="#dfn-type"><code>type</code></a> to <var>s</var>.</p></li>
       </ol>
 
     </li>
@@ -539,21 +539,21 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
     The following requirements are normative for this parameter, and user agents MUST process <a href="#dfn-slice"><code>slice</code></a> with
     <code>start</code> <em>normalized</em> according to the following:</p>
     <ol>
-    <li><p>If the optional <code>start</code> parameter is not used as a parameter when making this call, let relativeStart be 0.</p></li>
-    <li><p>If <code>start</code> is negative, let relativeStart be <em>max((<a href="#dfn-size"><code>size</code></a> + <code>start</code>), 0))</em>.</p></li>
-    <li><p>Else, let relativeStart be <em>min(start, size)</em>.</p></li>
+    <li><p>If the optional <code>start</code> parameter is not used as a parameter when making this call, let <var>relativeStart</var> be 0.</p></li>
+    <li><p>If <code>start</code> is negative, let <var>relativeStart</var> be <em>max((<a href="#dfn-size"><code>size</code></a> + <code>start</code>), 0))</em>.</p></li>
+    <li><p>Else, let <var>relativeStart</var> be <em>min(start, size)</em>.</p></li>
     <li><p>This defines the normalization of the <code>start</code> parameter.  When processing the <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call,
-    user agents must normalize <code>start</code> to relativeStart.</p></li>
+    user agents must normalize <code>start</code> to <var>relativeStart</var>.</p></li>
     </ol>	
     <p>The optional <dfn id="dfn-end"><code>end</code></dfn> parameter is a value for the end point of a
     <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call.  The following requirements
     are normative for this parameter, and user agents MUST process <a href="#dfn-slice"><code>slice</code></a> with <code>end</code> normalized according to the following:</p>
     <ol>
-    <li><p>If the optional <code>end</code> parameter is not used as a parameter when making this call, let relativeEnd be <a href="#dfn-size"><code>size</code></a>.</p></li>
-    <li><p>If <code>end</code> is negative, let relativeEnd be <em>max((size + end), 0)</em> </p></li>
-    <li><p>Else, let relativeEnd be <em>min(end, size)</em></p></li>
+    <li><p>If the optional <code>end</code> parameter is not used as a parameter when making this call, let <var>relativeEnd</var> be <a href="#dfn-size"><code>size</code></a>.</p></li>
+    <li><p>If <code>end</code> is negative, let <var>relativeEnd</var> be <em>max((size + end), 0)</em> </p></li>
+    <li><p>Else, let <var>relativeEnd</var> be <em>min(end, size)</em></p></li>
     <li><p>This defines the normalization of the <code>end</code> parameter.  When processing the <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call,
-    user agents must normalize <code>end</code> to relativeEnd.</p></li>
+    user agents must normalize <code>end</code> to <var>relativeEnd</var>.</p></li>
     </ol>
     <p>The optional <dfn id="dfn-contentTypeBlob"><code>contentType</code></dfn> parameter is used to set a value identical to one that is set with the
     HTTP/1.1 Content-Type header [<a href="#HTTP">HTTP</a>] on
@@ -561,17 +561,17 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
     parameter, and user agents MUST process the <a href="#dfn-slice"><code>slice</code></a> with <code>contentType</code> normalized according to the following:
    </p>
    <ol>
-   <li><p>If the <code>contentType</code> parameter is not provided, let relativeContentType be set to the empty string .</p></li>
-   <li><p>Else let relativeContentType be set to <code>contentType</code> and run the following substeps:</p>
+   <li><p>If the <code>contentType</code> parameter is not provided, let <var>relativeContentType</var> be set to the empty string .</p></li>
+   <li><p>Else let <var>relativeContentType</var> be set to <code>contentType</code> and run the following substeps:</p>
 <ol>
-  <li><p>If relativeContentType consists of any non-ASCII characters, throw an <code>InvalidStateError</code> (per [<a href="#RFC2616">RFC2616</a>]) and return from this algorithm.</p></li>
-          <li><p>Convert every character in relativeContentType to lower case.</p></li>
-          <li><p>Parse relativeContentType as an RFC2616 media-type, tokenizing it according to the ABNF for media-type [<a href="#RFC2616">RFC2616</a>] with the ASCII "/" character separating tokens representing the type and subtype productions.  If relativeContentType cannot be tokenized according to the ABNF for media-type [<a href="#RFC2616">RFC2616</a>], throw an <code>InvalidStateError</code> and return from this algorithm.  </p></li>
+  <li><p>If <var>relativeContentType</var> consists of any non-ASCII characters, throw an <code>InvalidStateError</code> (per [<a href="#RFC2616">RFC2616</a>]) and return from this algorithm.</p></li>
+          <li><p>Convert every character in <var>relativeContentType</var> to lower case.</p></li>
+          <li><p>Parse <var>relativeContentType</var> as an RFC2616 media-type, tokenizing it according to the ABNF for media-type [<a href="#RFC2616">RFC2616</a>] with the ASCII "/" character separating tokens representing the type and subtype productions.  If <var>relativeContentType</var>e cannot be tokenized according to the ABNF for media-type [<a href="#RFC2616">RFC2616</a>], throw an <code>InvalidStateError</code> and return from this algorithm.  </p></li>
           <li><p>If the type and subtype tokens consist of any CTLs or separators, throw an <code>InvalidStateError</code> and return from this algorithm (per [<a href="#RFC2616">RFC2616</a>].</p></li>
 </ol>
  </li>
 <li><p>This defines the normalization of the <code>contentType</code> parameter.  When processing the <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call,
-    user agents must normalize <code>contentType</code> to relativeContentType.</p></li>
+    user agents must normalize <code>contentType</code> to <var>relativeContentType</var>.</p></li>
    </ol>
 </div>
 <div class="section" id="slide-method-algo">
