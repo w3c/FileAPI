@@ -370,7 +370,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
       The <a href="#dfn-file" class="dfnref"><code>File</code></a> interface inherits from this interface.
     </p>
     <x:codeblock language = 'idl'>
-    [Constructor, Constructor((ArrayBuffer or Blob or DOMString)[] <a href="#dfn-blobParts" title="blobParts" class="dfnref">blobParts</a>, optional <a href="#dfn-BlobPropertyBag" title="BlobPropertyBag" class="dfnref">BlobPropertyBag</a> <a href="#dfn-options" title="options" class="dfnref">options</a>)] 
+    [Constructor, Constructor((ArrayBufferView or Blob or DOMString)?[] <a href="#dfn-blobParts" title="blobParts" class="dfnref">blobParts</a>, optional <a href="#dfn-BlobPropertyBag" title="BlobPropertyBag" class="dfnref">BlobPropertyBag</a> <a href="#dfn-options" title="options" class="dfnref">options</a>)] 
     interface <dfn id='dfn-Blob'>Blob</dfn> {
       
       readonly attribute unsigned long long <a href="#dfn-size" title='size' class="dfnref">size</a>;
@@ -384,42 +384,64 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
     
     };
 
-    enum <dfn id="dfn-EndingTypes">EndingTypes</dfn>{"transparent", "native"};
+    enum <dfn id="dfn-EndingTypes">EndingTypes</dfn>{"<a href="#dfn-transparent">transparent</a>", "<a href="#dfn-native">native</a>"};
 
     dictionary <dfn id="dfn-BlobPropertyBag">BlobPropertyBag</dfn> {
 		
-      DOMString <a href="#dfn-BPtype" title="BPtype">type</a>;
+      DOMString <a href="#dfn-BPtype" title="BPtype">type</a> = "";
       EndingTypes <a href="#dfn-endings" title="endings">endings</a> = "<a href="#dfn-transparent">transparent"</a>;
 	
     };
     </x:codeblock>
     <div id="constructorBlob" class="section">
 		<h3>Constructors</h3>
-		<p>The <code>Blob()</code> constructor can be invoked with or without parameters.</p>
+		<p>The <code>Blob()</code> constructor can be invoked with zero, one, or two parameters.  When the <code>Blob()</code> constructor is invoked, user agents MUST run the following steps:</p>
+    <ol>
+      <li><p>If invoked with zero parameters, return a new <code>Blob</code> object consisting of 0 bytes, with <a href="#dfn-size"><code>size</code></a> set to 0, and with <a href="#dfn-type"><code>type</code></a> set to the empty string.</p></li>
+      <li><p>If invoked with a <a href="#dfn-blobParts"><code>blobParts</code></a> array, user agents must run the following substeps:</p>
+      <ol>
+        <li><p>Let <var>a</var> be the <a href="#dfn-blobParts"><code>blobParts</code></a> array.  If <var>a</var> consists of <code>DOMString</code> members, each such member must be converted to a sequence of Unicode characters [<a href="#Unicode">Unicode</a>] using the algorithm for doing so in WebIDL [<a href="#WebIDL">WebIDL</a>], and be encoded as <a href="#dfn-UTF-8" class="dfnrefs">UTF-8</a>.</p>
+        <div class="note">
+          <p>The algorithm from WebIDL [<a href="#WebIDL">WebIDL</a>] replaces unmatched surrogates in an invalid <a href="#dfn-UTF-16" class="dfnrefs">UTF-16</a> string with U+FFFD replacement characters when encoded as <a href="#dfn-UTF-8" class="dfnrefs">UTF-8</a>. Scenarios exist when the <a href="#dfn-Blob"><code>Blob</code></a> constructor may result in some data loss due to lost or scrambled character sequences. </p>
+        </div></li>
+         <li><p>If the optional <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> dictionary is not used to invoke the constructor, each <code>DOMString</code> MUST have <a href="#dfn-transparent">transparent</a> line endings.  If the optional <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> dictionary is used, and the <a href="#dfn-endings"><code>endings</code></a> dictionary member is set to <a href="#dfn-native">"<code>native</code>"</a> each <code>DOMString</code> must have <a href="#dfn-native">native</a> line endings. </p>
+        </li>
+        <li><p>If <var>a</var> consists of <code>ArrayBufferView</code> [<a href="#TypedArrays">TypedArray</a>] members, each such member MUST be converted to a sequence of <code>byteLength</code> bytes from the underlying <code>ArrayBuffer</code>, starting at the <code>byteOffset</code> of the <code>ArrayBufferView</code> [<a href="#TypedArrays">TypedArrays</a>].</p></li>
+        <li><p>If <var>a</var> consists of <code>Blob</code> members, each such member must be converted to a sequence of <var>n</var> bytes, where n is the <a href="#dfn-size"><code>size</code></a> of the <code>Blob</code> object.  The <a href="#dfn-type"><code>type</code></a> of the <code>Blob</code> member is ignored.</p></li>
+        <li><p>For 0 &lt; <var>i</var> &lt; a.length, append every member a[i] to the next array member as a sequence of bytes.  The result is a sequence of bytes consisting of all the bytes of the members of <var>a</var> in a byte order corresponding to the member order of <var>a</var>.</p></li>
+        <li><p>If the optional <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> dictionary is used to invoke the constructor and has a <a href="#dfn-BPtype"><code>type</code></a> member, then user agents MUST run the following substeps:</p>
+        <ol>
+          <li><p>Let <var>s</var> be the <a href="#dfn-BPtype"><code>type</code></a> dictionary member.  If <var>s</var> consists of any non-ASCII characters, throw an <code>InvalidStateError</code> (per [<a href="#RFC2616">RFC2616</a>]) and return from this algorithm.</p></li>
+          <li><p>Convert every character in <var>s</var> to lower case.</p></li>
+          <li><p>Parse <var>s</var> as an RFC2616 media-type, tokenizing it according to the ABNF for media-type [<a href="#RFC2616">RFC2616</a>] with the ASCII "/" character separating tokens representing the type and subtype productions.  If <var>s</var> cannot be tokenized according to the ABNF for media-type [<a href="#RFC2616">RFC2616</a>], throw an <code>InvalidStateError</code> and return from this algorithm.  </p></li>
+          <li><p>If the type and subtype tokens consist of any CTLs or separators, throw an <code>InvalidStateError</code> and return from this algorithm (per [<a href="#RFC2616">RFC2616</a>].</p></li>
 
-		<p>
-		When the <code>Blob()</code> constructor is invoked, the user agent MUST return a new <a href="#dfn-Blob"><code>Blob</code></a> object.
-		</p>
+        </ol>
+        </li>
+        <li><p>Return a <code>Blob</code> object consisting of all the appended bytes of <var>a</var>, and with a <code>size</code> attribute representing the total number of bytes.  If the constructor has been invoked without the optional <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> dictionary or if the <a href="#dfn=BPtype"><code>type</code></a> member <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> dictionary has not been set then let this <code>Blob</code> object's<code>type</code> attribute be set to the empty string; otherwise, set this <code>Blob</code> object's <a href="#dfn-type"><code>type</code></a> to <var>s</var>.</p></li>
+      </ol>
+
+    </li>
+    </ol>
+
+
 		<div id="constructorParams" class="section">
 		<h4>Constructor Parameters</h4>
-		<p>The <code>Blob()</code> constructor can also be invoked with the parameters below:</p>
+		<p>The <code>Blob()</code> constructor can be invoked with the parameters below:</p>
 		<dl>
 			<dt id="dfn-blobParts">A <code>blobParts</code> <code>Array</code></dt> 
 			<dd>which takes any number of the following types of array elements, and in any order:
 				<ul>
-				<li><p><code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] members</p></li>
+				<li><p><code>ArrayBufferView</code> [<a href="#TypedArrays">TypedArrays</a>] members</p></li>
 				<li><p><a href="#dfn-Blob"><code>Blob</code></a> members</p></li>
 				<li><p><code>DOMString</code> [<a href="#WebIDL">WebIDL</a>] members</p></li>
-				</ul>
-			<p>When the constructor is invoked with a <a href="#dfn-blobParts"><code>blobParts</code></a> argument, a user agent MUST return a <a href="#dfn-Blob"><code>Blob</code></a> that appends all of the <a href="#dfn-blobParts"><code>blobParts</code></a> members.  If the optional <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> is not used, a user agent MUST treat appended <code>DOMString</code> members as if they have <a href="#dfn-transparent">"transparent"</a> line endings.   The <code>DOMString</code>  must be converted to a sequence of Unicode characters [<a href="#Unicode">Unicode</a>] using the algorithm for doing so in WebIDL [<a href="#WebIDL">WebIDL</a>], and be encoded as <a href="#dfn-UTF-8" class="dfnrefs">UTF-8</a>.  </p>
-<div class="note"><p>The algorithm from WebIDL [<a href="#WebIDL">WebIDL</a>] replaces unmatched surrogates in an invalid <a href="#dfn-UTF-16" class="dfnrefs">UTF-16</a> string with U+FFFD replacement characters when encoded as <a href="#dfn-UTF-8" class="dfnrefs">UTF-8</a>. Scenarios exist when the <a href="#dfn-Blob"><code>Blob</code></a> constructor may result in some data loss due to lost or scrambled character sequences. </p></div>			
-<p>If a type that is not one of <code>DOMString</code> [<a href="#WebIDL">WebIDL</a>], <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>], or <a href="#dfn-Blob"><code>Blob</code></a> is used as a <a href="#dfn-blobParts"><code>blobParts</code></a> member, the user agent MUST throw an <code>InvalidStateError</code>.</p>
+				</ul>		
 			</dd>
 			<dt>An <em>optional</em> <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a></dt>
-			<dd>which takes two <code>DOMString</code> [<a href="#WebIDL">WebIDL</a>] members:
+			<dd>which takes two members:
 			<ul>
-				<li><dfn id="dfn-BPtype"><code>type</code></dfn> which corresponds to the <a href="#dfn-Blob"><code>Blob</code></a> object's <a href="#dfn-type"><code>type</code></a> attribute.  If used, a user agent MUST return a new <a href="#dfn-Blob"><code>Blob</code></a> object with a <a href="#dfn-type"><code>type</code></a> attribute corresponding to the value of this argument within the  <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a>.</li>
-				<li><p><dfn id="dfn-endings"><code>endings</code></dfn>, an <code>enum</code> which can take the values <a href="#dfn-transparent">"transparent"</a> or <a href="#dfn-native">"native"</a>.  If omitted from the <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a>, a user agent MUST treat this as having a default value of "transparent".  A description of both is given in the table below.</p>
+				<li><dfn id="dfn-BPtype"><code>type</code></dfn>, a <code>DOMString</code> which corresponds to the <a href="#dfn-Blob"><code>Blob</code></a> object's <a href="#dfn-type"><code>type</code></a> attribute.  </li>
+				<li><p><dfn id="dfn-endings"><code>endings</code></dfn>, an <code>enum</code> which can take the values <a href="#dfn-transparent">"transparent"</a> which is set by default, or <a href="#dfn-native">"native"</a>.  A description of both is given in the table below.</p>
 				<table><thead><tr><th>Value</th><th>Description</th></tr>
 				                <tr>
 				                  <td><dfn id="dfn-transparent" class="dfnrefs">"transparent"</dfn></td>
@@ -453,26 +475,28 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 
 var a = new Blob();
 
-// Create a simple 8-byte ArrayBuffer
-// arraybuffer could also come from reading a File
+// Create a 1024-byte ArrayBuffer
+// buffer could also come from reading a File
 
-var arraybuffer = new ArrayBuffer(8);
+var buffer = new ArrayBuffer(1024);
+
+// Create ArrayBufferView objects based on buffer
+
+var shorts = new Uint16Array(buffer, 512, 128);
+var bytes = new Uint8Array(buffer, shorts.byteOffset + shorts.byteLength);
 
 // b has line endings of type "transparent" by default
 
 var b = new Blob(["foobarbazetcetc", "birdiebirdieboo"], {type: "text/plain;charset=UTF-8"});
 
-// c appends b and arraybuffer and has line endings of type "transparent"
+// c appends b and shorts and has line endings of type "transparent"
 
-var c = new Blob([b, arraybuffer]);
+var c = new Blob([b, shorts]);
 
 // a has native endings depending on platform
 
-var a = new Blob([b, c, arraybuffer], {type: "multipart/mixed", endings: "native"});
+var a = new Blob([b, c, bytes], {endings: "native"});
 
-// Throw an InvalidStateError
-
-var yg = new Blob([12]);
 </x:codeblock>
 
 </div>				
@@ -529,7 +553,14 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
    </p>
    <ol>
    <li><p>If the <code>contentType</code> parameter is not provided, let relativeContentType be set to the empty string .</p></li>
-   <li><p>Else let relativeContentType be set to <code>contentType</code>.</p></li>
+   <li><p>Else let relativeContentType be set to <code>contentType</code> and run the following substeps:</p>
+<ol>
+  <li><p>If relativeContentType consists of any non-ASCII characters, throw an <code>InvalidStateError</code> (per [<a href="#RFC2616">RFC2616</a>]) and return from this algorithm.</p></li>
+          <li><p>Convert every character in relativeContentType to lower case.</p></li>
+          <li><p>Parse relativeContentType as an RFC2616 media-type, tokenizing it according to the ABNF for media-type [<a href="#RFC2616">RFC2616</a>] with the ASCII "/" character separating tokens representing the type and subtype productions.  If relativeContentType cannot be tokenized according to the ABNF for media-type [<a href="#RFC2616">RFC2616</a>], throw an <code>InvalidStateError</code> and return from this algorithm.  </p></li>
+          <li><p>If the type and subtype tokens consist of any CTLs or separators, throw an <code>InvalidStateError</code> and return from this algorithm (per [<a href="#RFC2616">RFC2616</a>].</p></li>
+</ol>
+ </li>
 <li><p>This defines the normalization of the <code>contentType</code> parameter.  When processing the <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call,
     user agents must normalize <code>contentType</code> to relativeContentType.</p></li>
    </ol>
