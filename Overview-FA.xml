@@ -618,7 +618,7 @@ the <a href="#dfn-start"><code>start</code></a>, <a href="#dfn-end"><code>end</c
 </div>
 <div id='close-method' class='section'>
 <h4>The close method</h4>
-<p>Calling the <dfn id="close"><code>close</code></dfn> method must permanently <a href="#dfn-neuter">neuter</a> the original <a href="#dfn-Blob"><code>Blob</code></a> object. This is an irreversible and non-idempotent operation; once a <a href="#dfn-Blob"><code>Blob</code></a> has been neutered, it cannot be used again.  This must not affect any ongoing read operation via any asynchronous <a href="#read-methods">read methods</a> or any synchronous <a href="#read-method-sync">read methods</a>.  This must not affect any <a href="#dfn-Blob"><code>Blob</code></a> objects created by a <a href="#dfn-slice"><code>slice</code></a> call on the <a href="#dfn-Blob"><code>Blob</code></a> object on which <a href="#dfn-close"><code>close</code></a> has been called.</p>
+<p>Calling the <dfn id="dfn-close"><code>close</code></dfn> method must permanently <a href="#dfn-neuter">neuter</a> the original <a href="#dfn-Blob"><code>Blob</code></a> object. This is an irreversible and non-idempotent operation; once a <a href="#dfn-Blob"><code>Blob</code></a> has been neutered, it cannot be used again.  This must not affect any ongoing read operation via any asynchronous <a href="#read-methods">read methods</a> or any synchronous <a href="#read-method-sync">read methods</a>.  This must not affect any <a href="#dfn-Blob"><code>Blob</code></a> objects created by a <a href="#dfn-slice"><code>slice</code></a> call on the <a href="#dfn-Blob"><code>Blob</code></a> object on which <a href="#dfn-close"><code>close</code></a> has been called.</p>
 </div>
   </div>
   
