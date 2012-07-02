@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>26 June 2012</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2010/WD-FileAPI-20101026/">http://www.w3.org/TR/2010/WD-FileAPI-20101026/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>29 June 2012</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2010/WD-FileAPI-20101026/">http://www.w3.org/TR/2010/WD-FileAPI-20101026/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2011 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -80,7 +80,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 26 June 2012 <b>Editor’s Draft</b> of the
+        This document is the 29 June 2012 <b>Editor’s Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -313,7 +313,7 @@ function errorHandler(evt) {
        This operation is also defined in ECMAScript [<a href="#ECMA-262">ECMA-262</a>].</p></li>
        <li><p>min(a,b) returns the minimum of a and b, and is always performed on integers as they are defined in WebIDL [<a href="#WebIDL">WebIDL</a>]; in the case of min(6,4) the result is 4.
        This operation is also defined in ECMAScript [<a href="#ECMA-262">ECMA-262</a>].</p></li>
-       <li><p>Mathematical comparisons such as &lt; (less than) and &gt; (greater than)  are as in ECMAScript
+       <li><p>Mathematical comparisons such as &lt; (less than), ≤ (less than or equal to) and &gt; (greater than)  are as in ECMAScript
        [<a href="#ECMA-262">ECMA-262</a>].</p></li>
        </ul>
       </div>
@@ -408,31 +408,35 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 		<p>The <code>Blob()</code> constructor can be invoked with zero, one, or two parameters.  When the <code>Blob()</code> constructor is invoked, user agents must run the following steps:</p>
     <ol>
       <li><p>If invoked with zero parameters, return a new <code>Blob</code> object consisting of 0 bytes, with <a href="#dfn-size"><code>size</code></a> set to 0, and with <a href="#dfn-type"><code>type</code></a> set to the empty string.</p></li>
-      <li><p>If invoked with a <a href="#dfn-blobParts"><code>blobParts</code></a> array, user agents must run the following substeps:</p>
+      <li><p>Otherwise, the constructor is invoked with a <a href="#dfn-blobParts"><code>blobParts</code></a> array.  Let <var>a</var> be that array.</p></li>
+     <li><p>Let <var>bytes</var> be an empty sequence of bytes.</p></li>
+      <li><p>Let <var>length</var> be <var>a</var>'s length.  For 0 ≤ <var>i</var> &lt; <var>length</var>, repeat the following steps:</p>
       <ol>
-        <li><p>Let <var>a</var> be the <a href="#dfn-blobParts"><code>blobParts</code></a> array.  If <var>a</var> consists of <code>DOMString</code> array elements, each such array element must be converted to a sequence of Unicode characters [<a href="#Unicode">Unicode</a>] using the algorithm for doing so in WebIDL [<a href="#WebIDL">WebIDL</a>], and be encoded as <a href="#dfn-UTF-8" class="dfnrefs">UTF-8</a>.</p>
-        <div class="note"><div class="noteHeader">Note</div>
-          <p>The algorithm from WebIDL [<a href="#WebIDL">WebIDL</a>] replaces unmatched surrogates in an invalid <a href="#dfn-UTF-16" class="dfnrefs">UTF-16</a> string with U+FFFD replacement characters when encoded as <a href="#dfn-UTF-8" class="dfnrefs">UTF-8</a>. Scenarios exist when the <a href="#dfn-Blob"><code>Blob</code></a> constructor may result in some data loss due to lost or scrambled character sequences. </p>
-        </div></li>
-         <li><p>If the optional <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> dictionary is not used to invoke the constructor, each <code>DOMString</code> must have <a href="#dfn-transparent">transparent</a> line endings.  If the optional <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> dictionary is used, and the <a href="#dfn-endings"><code>endings</code></a> dictionary member is set to <a href="#dfn-native">"<code>native</code>"</a> each <code>DOMString</code> must have <a href="#dfn-native">native</a> line endings. </p>
-        </li>
-        <li><p>If <var>a</var> consists of <code>ArrayBufferView</code> [<a href="#TypedArrays">TypedArray</a>] array elements, each such array element must be converted to a sequence of <code>byteLength</code> bytes from the underlying <code>ArrayBuffer</code>, starting at the <code>byteOffset</code> of the <code>ArrayBufferView</code> [<a href="#TypedArrays">TypedArrays</a>].</p></li>
-        <li><p>If <var>a</var> consists of <code>Blob</code> array elements, each such array element must be converted to a sequence of <var>n</var> bytes, where n is the <a href="#dfn-size"><code>size</code></a> of the <code>Blob</code> object.  The <a href="#dfn-type"><code>type</code></a> of the <code>Blob</code> array element is ignored.</p></li>
-        <li><p>For 0 &lt;= <var>i</var> &lt; a.length, append every array element <var>a[i]</var> to the next array element as a sequence of bytes.  The result is a sequence of bytes consisting of all the bytes of the array elements of <var>a</var> in a byte order corresponding to the array element order of <var>a</var>.</p></li>
-        <li><p>If the optional <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> dictionary is used to invoke the constructor and has a <a href="#dfn-BPtype"><code>type</code></a> member, then user agents must run the following substeps:</p>
+        <li><p>Let <var>element</var> be the <var>i</var>th element of <var>a</var>.</p></li>
+        <li><p>If <var>element</var> is a <code>DOMString</code>, run the following substeps:</p>
         <ol>
-          <li><p>Let <var>s</var> be the <a href="#dfn-BPtype"><code>type</code></a> dictionary member.  If <var>s</var> consists of any non-ASCII characters, throw a <code>SyntaxError</code> (per [<a href="#RFC2616">RFC2616</a>]) and return from this algorithm.</p></li>
-          <li><p>Convert every character in <var>s</var> to lower case.</p></li>
-          <li><p>Parse <var>s</var> as an RFC2616 media-type, tokenizing it according to the ABNF for media-type [<a href="#RFC2616">RFC2616</a>] with the ASCII "/" character separating tokens representing the <var>type</var> and <var>subtype</var> productions.  If <var>s</var> cannot be tokenized according to the ABNF for media-type [<a href="#RFC2616">RFC2616</a>], throw a <code>SyntaxError</code> and return from this algorithm.  </p></li>
-          <li><p>If the <var>type</var> and <var>subtype</var> tokens consist of any CTLs or separators, throw a <code>SyntaxError</code> and return from this algorithm (per [<a href="#RFC2616">RFC2616</a>]).</p></li>
-
-        </ol>
-        </li>
-        <li><p>Return a <code>Blob</code> object consisting of all the appended bytes of <var>a</var>, and with this <code>Blob</code> object's <a href="#dfn-size"><code>size</code></a> attribute representing the total number of bytes.  If the constructor has been invoked without the optional <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> dictionary or if the <a href="#dfn=BPtype"><code>type</code></a> member <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> dictionary has not been set then let this <code>Blob</code> object's <a href="#dfn-type"><code>type</code></a> attribute be set to the empty string; otherwise, set this <code>Blob</code> object's <a href="#dfn-type"><code>type</code></a> to <var>s</var>.</p></li>
-      </ol>
-
-    </li>
+          <li><p>Let <var>s</var> be the result of converting <var>element</var> to a sequence of Unicode characters [<a href="#Unicode">Unicode</a>] using the algorithm for doing so in WebIDL [<a href="#WebIDL">WebIDL</a>].</p></li>
+         <li><p>If the <a href="#dfn-endings"><code>endings</code></a> dictionary member of the <var>options</var> argument is set to <a href="#dfn-native">"<code>native</code>"</a>, transform all newlines in <var>s</var> to the default line-ending representation of the underlying host operating system.</p></li>
+         <li><p>Encode <var>s</var> as <a href="#dfn-UTF-8" class="dfnrefs">UTF-8</a> and append the resulting bytes to <var>bytes</var>.</p></li>
+       </ol>
+       <div class="note"><div class="noteHeader">Note</div>
+         <p>The algorithm from WebIDL [<a href="#WebIDL">WebIDL</a>] replaces unmatched surrogates in an invalid <a href="#dfn-UTF-16" class="dfnrefs">UTF-16</a> string with U+FFFD replacement characters. Scenarios exist when the <a href="#dfn-Blob"><code>Blob</code></a> constructor may result in some data loss due to lost or scrambled character sequences. </p>
+       </div>
+     </li>
+     <li><p>If <var>element</var> is an <code>ArrayBufferView</code> [<a href="#TypedArrays">TypedArrays</a>], convert it to a sequence of <code>byteLength</code> bytes from the underlying <code>ArrayBuffer</code>, starting at the <code>byteOffset</code> of the <code>ArrayBufferView</code> [<a href="#TypedArrays">TypedArrays</a>], and append those bytes to <var>bytes</var>.</p></li>
+     <li><p>If <var>element</var> is a <code>Blob</code>, append the bytes it represents to <var>bytes</var>.  The <a href="#dfn-type"><code>type</code></a> of the <code>Blob</code> array element is ignored.</p></li>
     </ol>
+  </li>
+  <li><p>If the <a href="#dfn-BPtype"><code>type</code></a> member of the <var>options</var> argument is not the empty string, run the following substeps:</p>
+      <ol>
+        <li><p>Let <var>s</var> be the <a href="#dfn-BPtype"><code>type</code></a> dictionary member.  If <var>s</var> contains any non-ASCII characters, throw a <code>SyntaxError</code> (per [<a href="#RFC2616">RFC2616</a>]) and return from this algorithm.</p></li>
+        <li><p>Convert every character in <var>s</var> to lower case.</p></li>
+        <li><p>Parse <var>s</var> as an RFC2616 media-type, tokenizing it according to the ABNF for media-type [<a href="#RFC2616">RFC2616</a>] with the ASCII "/" character separating tokens representing the <var>type</var> and <var>subtype</var> productions.  If <var>s</var> cannot be tokenized according to the ABNF for media-type [<a href="#RFC2616">RFC2616</a>], throw a <code>SyntaxError</code> and return from this algorithm.  </p></li>
+        <li><p>If the <var>type</var> and <var>subtype</var> tokens consist of any CTLs or separators, throw a <code>SyntaxError</code> and return from this algorithm (per [<a href="#RFC2616">RFC2616</a>]).</p></li>
+      </ol>
+</li>
+<li><p>Return a <code>Blob</code> object consisting of <var>bytes</var>, with its <a href="#dfn-size"><code>size</code></a> set to the length of <var>bytes</var>, and its <a href="#dfn-type"><code>type</code></a> set to the <a href="#dfn-BPtype"><code>type</code></a> member of the <var>options</var> argument.</p></li>
+</ol>
 
 
 		<div id="constructorParams" class="section">
