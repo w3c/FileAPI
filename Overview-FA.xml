@@ -370,7 +370,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
       The <a href="#dfn-file" class="dfnref"><code>File</code></a> interface inherits from this interface.
     </p>
     <x:codeblock language = 'idl'>
-    <dfn id='dfn-Blob'>[Constructor, Constructor((ArrayBufferView or Blob or DOMString)?[] <a href="#dfn-blobParts" title="blobParts" class="dfnref">blobParts</a>, optional <a href="#dfn-BlobPropertyBag" title="BlobPropertyBag" class="dfnref">BlobPropertyBag</a> <a href="#dfn-options" title="options" class="dfnref">options</a>)] 
+    <dfn id='dfn-Blob'>[Constructor, Constructor((ArrayBufferView or Blob or DOMString)[] <a href="#dfn-blobParts" title="blobParts" class="dfnref">blobParts</a>, optional <a href="#dfn-BlobPropertyBag" title="BlobPropertyBag" class="dfnref">BlobPropertyBag</a> <a href="#dfn-options" title="options" class="dfnref">options</a>)] 
     interface Blob</dfn> {
       
       readonly attribute unsigned long long <a href="#dfn-size" title='size' class="dfnref">size</a>;
