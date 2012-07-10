@@ -513,7 +513,7 @@ var a = new Blob([b, c, bytes], {endings: "native"});
     <h3>6.2. Attributes</h3>
     <dl><dt id="dfn-size"><code>size</code></dt><dd><p>Returns the size of the <code>Blob</code> object in bytes.  On getting, conforming user agents must return the total
     number of bytes that can be read by a <a href="#dfn-filereader"><code>FileReader</code></a> or <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object, or 0 if the
-    Blob has no bytes to be read.</p></dd>
+    Blob has no bytes to be read.  If the <code>Blob</code> has been neutered with <a href="#dfn-close"><code>close</code></a> called on it, then <code>size</code> must return 0.</p></dd>
     <dt id="dfn-type"><code>type</code></dt>
     <dd><p>The ASCII-encoded string in lower case representing the media type of the <code>Blob</code>, expressed as an RFC2046 MIME type [<a href="#RFC2046">RFC2046</a>].
     On getting, conforming user agents must return the MIME type of the <code>Blob</code>,
@@ -620,7 +620,10 @@ var a = new Blob([b, c, bytes], {endings: "native"});
 </div>
 <div id="close-method" class="section">
 <h4>6.3.2. The close method</h4>
-<p>Calling the <dfn id="dfn-close"><code>close</code></dfn> method must permanently <a href="#dfn-neuter">neuter</a> the original <a href="#dfn-Blob"><code>Blob</code></a> object. This is an irreversible and non-idempotent operation; once a <a href="#dfn-Blob"><code>Blob</code></a> has been neutered, it cannot be used again; dereferencing a Blob URI bound to a Blob object on which close has been called results in a <a href="#FiveHundredInternalServerError">500 Error</a>.  This must not affect any ongoing read operation via any asynchronous <a href="#read-methods">read methods</a> or any synchronous <a href="#read-method-sync">read methods</a>.  This must not affect any <a href="#dfn-Blob"><code>Blob</code></a> objects created by a <a href="#dfn-slice"><code>slice</code></a> call on the <a href="#dfn-Blob"><code>Blob</code></a> object on which <a href="#dfn-close"><code>close</code></a> has been called.</p>
+<p>Calling the <dfn id="dfn-close"><code>close</code></dfn> method must permanently <a href="#dfn-neuter">neuter</a> the original <a href="#dfn-Blob"><code>Blob</code></a> object. This is an irreversible and non-idempotent operation; once a <a href="#dfn-Blob"><code>Blob</code></a> has been neutered, it cannot be used again; dereferencing a Blob URI bound to a Blob object on which close has been called results in a <a href="#FiveHundredInternalServerError">500 Error</a>.  A neutered <a href="#dfn-Blob"><code>Blob</code></a> must have a <a href="#dfn-size"><code>size</code></a> of 0.</p>  
+
+<div class="note"><div class="noteHeader">Note</div><p>Calling <a href="#dfn-close"><code>close</code></a> must not affect an <em>ongoing</em> read operation via any asynchronous <a href="#read-methods">read methods</a> .  Calling <a href="#dfn-close"><code>close</code></a> must not affect any <a href="#dfn-Blob"><code>Blob</code></a> objects created by a <a href="#dfn-slice"><code>slice</code></a> call on the <a href="#dfn-Blob"><code>Blob</code></a> object on which <a href="#dfn-close"><code>close</code></a> has been called.</p>
+</div>
 </div>
   </div>
   
@@ -854,6 +857,9 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	  </p>
 	<p><strong>Note:</strong> The <a href="#dfn-readAsDataURL"><code>readAsDataURL()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
 	</li> 
+  <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> has been neutered through the <a href="#dfn-close"><code>close</code></a> method, throw an <code>InvalidStateError</code> exception [<a href="#DOM4">DOM4</a>] and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p>
+  <p><strong>Note:</strong> The <a href="#dfn-readAsDataURL"><code>readAsDataURL()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
+  </li> 
 	  <li><p>If an <a href="#file-error-read">error occurs during reading of the <code>blob</code> parameter</a>, OR if a user agent's URL length limitations prevent returning
 	  data as a Data URL [<a href="#DataURL">DataURL</a>], set <a href="#dfn-readyState"><code>readyState</code></a> to
 	  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
@@ -907,6 +913,9 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 
 	<p><strong>Note:</strong> The <a href="#dfn-readAsText"><code>readAsText()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
 	</li>
+  <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> has been neutered through the <a href="#dfn-close"><code>close</code></a> method, throw an <code>InvalidStateError</code> exception [<a href="#DOM4">DOM4</a>] and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p>
+  <p><strong>Note:</strong> The <a href="#dfn-readAsText"><code>readAsText()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
+  </li> 
 	  <li><p>If an <a href="#file-error-read">error occurs during reading the <code>blob</code> parameter</a>, 
 	  set <a href="#dfn-readyState"><code>readyState</code></a> to
 	  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
@@ -960,6 +969,9 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 
 	<p><strong>Note:</strong> The <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
 	</li>
+  <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> has been neutered through the <a href="#dfn-close"><code>close</code></a> method, throw an <code>InvalidStateError</code> exception [<a href="#DOM4">DOM4</a>] and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p>
+  <p><strong>Note:</strong> The <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
+  </li> 
 	  <li><p>If an <a href="#file-error-read">error occurs during reading the <code>blob</code> parameter</a>, set <a href="#dfn-readyState"><code>readyState</code></a> to
 	  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
 	  <ol>
@@ -1447,6 +1459,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	<li><p>User agents must ensure that any <a href="#url">Blob URIs</a> are revoked after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called with that
 	<a href="#url">Blob URI</a> as an argument. User agents must respond with a <a href="#FiveHundredInternalServerError">500 Error Condition</a> if a <a href="#url">Blob URI</a> is
 	dereferenced after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called on that particular <a href="#url">Blob URI</a>. </p></li>
+  <li><p>User agents must ensure that any <a href="#url">Blob URIs</a> used to dereference <a href="#dfn-Blob"><code>Blob</code></a> objects that have been neutered with the <a href="#dfn-close"><code>close</code></a> method return a <a href="#FiveHundredInternalServerError">500 Error Condition. </a></p></li>
 	</ol>
 	</div>
 	<div id="processingModel" class="section">
