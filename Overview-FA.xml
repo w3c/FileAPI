@@ -294,7 +294,7 @@ function errorHandler(evt) {
         <dfn id="unloading-document-cleanup-steps">unloading document cleanup steps</dfn>, <dfn id="event-handler-attributes">event handler attributes</dfn>,
         <dfn id="event-handler-event-type">event handler event type</dfn>,
         <dfn id="origin">origin</dfn>, <dfn id="same-origin">same origin</dfn>, <dfn id="event-loops">event loops</dfn>,
-        <dfn id="dfn-task">task</dfn>, <dfn id="task-source">task source</dfn>, <dfn id="df-URL">URL</dfn>,
+        <dfn id="dfn-task">task</dfn>, <dfn id="task-source">task source</dfn>, <dfn id="df-URL">URL</dfn>, <dfn id="provide-a-stable-state">provide a stable state</dfn>,
         <dfn id="queue-a-task">queue a task</dfn>, <dfn id="dfn-neuter">neuter</dfn>, <dfn id="dfn-UTF-8">UTF-8</dfn>, and <dfn id="dfn-UTF-16">UTF-16</dfn> are as defined by the HTML specification [<a href="#HTML">HTML</a>]. </p>
  <p>When this specification says to <dfn id="terminate-an-algorithm">terminate an algorithm</dfn> the user agent must terminate the algorithm after finishing the step it is on.  Asynchronous <a href="#read-methods">read methods</a> defined in this specification may return before the algorithm in question is terminated, and can be terminated by an <a href="#dfn-abort"><code>abort()</code></a> call.</p>
 <p>The term <dfn id="throw-an-exception">throw</dfn> in this specification, as it pertains to exceptions, is used as defined in the DOM4 specification [<a href="#DOM4">DOM4</a>].</p>
@@ -1454,7 +1454,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	<p>This specification defines the following lifetime conditions on <a href="#url">Blob URIs</a>: </p>
 	<ol><li><p>This specification adds an additional <a href="#unloading-document-cleanup-steps">unloading document cleanup step</a>: user agents must revoke any <a href="#url">Blob URIs</a> created with <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> from within that <a href="#document">document</a>.
 	If these <a href="#url">Blob URIs</a> are dereferenced, user agents must respond with <a href="#FiveHundredInternalServerError">500 Error Condition</a>.</p></li>
-		<li><p>A <a href="#url">Blob URI</a> created with <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> using the optional <a href="#dfn-options-objectURL"><code>options</code></a> parameter with <a href="#dfn-oneTimeOnly"><code>oneTimeOnly</code></a> set to <code>true</code> must be revoked after its first use; subsequent attempts to dereference that Blob URI must return a <a href="#FiveHundredInternalServerError">500 Error Condition. </a></p></li>
+		<li><p>A <a href="#url">Blob URI</a> created with <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> using the optional <a href="#dfn-options-objectURL"><code>options</code></a> parameter with <a href="#dfn-autoRevoke"><code>autoRevoke</code></a> set to <code>true</code> must be revoked after the user agent <a href="#provide-a-stable-state">provides a stable state</a>; subsequent attempts to dereference that Blob URI must return a <a href="#FiveHundredInternalServerError">500 Error Condition. </a></p></li>
 	<li><p>User agents must ensure that any <a href="#url">Blob URIs</a> are revoked after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called with that
 	<a href="#url">Blob URI</a> as an argument. User agents must respond with a <a href="#FiveHundredInternalServerError">500 Error Condition</a> if a <a href="#url">Blob URI</a> is
 	dereferenced after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called on that particular <a href="#url">Blob URI</a>. </p></li>
@@ -1539,7 +1539,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	
 	dictionary <dfn id="dfn-objectURLOptions" class="dfnrefs">objectURLOptions</dfn>
 	{
-		boolean <a href="#dfn-oneTimeOnly">oneTimeOnly</a> = false;
+		boolean <a href="#dfn-autoRevoke">autoRevoke</a> = true;
 
 	};
 	
@@ -1555,10 +1555,23 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	object's <a href="#URL-object"><code>URL</code></a> property from which this static method is called.</p>
 	<ol>
 	<li><p>If this method is called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that is NOT <a href="#valid">valid</a>, then user agents must return <code>null</code>.</p></li>
-	<li><p>If this method is called with a <a href="#valid">valid</a> <a href="#dfn-Blob"><code>Blob</code></a> argument, user agents must return
-	a unique <a href="#url"><code>Blob</code> URI</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument.</p></li>
+	<li><p>If this method is called with a <a href="#valid">valid</a> <a href="#dfn-Blob"><code>Blob</code></a> argument, user agents must run the following steps:</p>
+  <ol type="A">
+    <li>The optional <dfn id="dfn-objectURLOptions"><code>objectURLOptions</code></dfn> dictionary argument has a boolean member <dfn id="dfn-autoRevoke"><code>autoRevoke</code></dfn> that defaults to <code>true</code>; if called without using the optional dictionary, or if called with <code>autoRevoke</code> set to <code>true</code>, execute the following sub-steps:
+    <ol type="a">
+      <li>Return a unique <a href="#url"><code>Blob</code> URI</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument, and run the rest of this algorithm asynchronously.</li>
+      <li><a href="#provide-a-stable-state">Provide a stable state</a></li>
+      <li>Revoke the <a href="#url"><code>Blob</code> URI</a> by calling <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> on it and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</li>
+    </ol>
+    </li>
+   <li><p>If this method is called with the <code>autoRevoke</code> dictionary member set to <code>false</code>, return a unique <a href="#url"><code>Blob</code> URI</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument. </p>
+<div class="note">This <a href="#url"><code>Blob</code> URI</a> must persist till a call to <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> is made, or till the  <a href="#unloading-document-cleanup-steps">unloading document cleanup steps</a> are executed.</div>
+ </li>
+</ol>
+</li>
 	</ol>
-<p>The optional <dfn id="dfn-options-objectURL"><code>options</code></dfn> dictionary argument contains a key, <dfn id="dfn-oneTimeOnly"><code>oneTimeOnly</code></dfn> that defaults to <code>false</code>.  If set to <code>true</code>, then the first time the <a href="#url"><code>Blob</code> URI</a> is dereferenced, user agents must automatically revoke that <a href="#url"><code>Blob</code> URI</a> without needing a call to <code>revokeObjectURL()</code> on the <a href="#url"><code>Blob</code> URI</a>.</p>
+
+
 	<div class="example">
 	<p>In the example below, after obtaining a reference to a <a href="#dfn-Blob"><code>Blob</code></a> object (in this case, a user-selected <a href="#dfn-file"><code>File</code></a> from the underlying file system), the static method <code>URL.createObjectURL()</code> is called on that <a href="#dfn-Blob"><code>Blob</code></a> object.</p>
 	<x:codeblock language="es">
@@ -1566,26 +1579,9 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	if(file){
 	  blobURLref = window.URL.createObjectURL(file);
 	  myimg.src = blobURLref;
-	
-	// blobURLref persists till explicitly revoked
-	// using a URL.revokeObjectURL() call
-	// Otherwise it will persist with the document
-	  
-	
-	}
-	</x:codeblock>
-	<p>In the example below, there is no need to call <code>URL.revokeObjectURL()</code> since the <a href="#dfn-oneTimeOnly"><code>oneTimeOnly</code></a> boolean has been set to true.</p>
-<x:codeblock language="es">
-	var file = document.getElementById('file').files[0];
-	if(file){
-	  blobURLref = window.URL.createObjectURL(file, {oneTimeOnly: true});
-	  myimg.src = blobURLref;
-	
-	// The above automatically revokes blobURLref after first use 
-	// Subsequent refs to blobURLref return a 500 error response
 
 	}
-</x:codeblock>	 
+	</x:codeblock>
 	</div>
 	</dd>
 	<dt id="dfn-revokeObjectURL">The <code>revokeObjectURL</code> static method</dt>
@@ -1617,34 +1613,21 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	</div>
 <div id="examplesOfCreationRevocation" class="section">
 <h3>Examples of Blob URI Creation and Revocation</h3>
-<p><a href="#url">Blob URI</a>s are strings that dereference <code>Blob</code> objects, and can persist for as long as the <code>document</code> from which they were minted using <a href="#dfn-createObjectURL"><code>URL.createObjectURL()</code></a> - see <a href="#lifeTime">Lifetime of Blob URIs</a>.  To revoke them before the <a href="#unloading-document-cleanup-steps">unloading document cleanup steps</a>, web developers must explicitly revoke them with <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL()</code></a>, OR create them for one time only usage, using the <a href="#dfn-oneTimeOnly"><code>oneTimeOnly</code></a> key in the <a href="#dfn-options-objectURL"><code>options</code></a> dictionary. </p>
+<p><a href="#url">Blob URI</a>s are strings that dereference <code>Blob</code> objects, and can persist for as long as the <code>document</code> from which they were minted using <a href="#dfn-createObjectURL"><code>URL.createObjectURL()</code></a> - see <a href="#lifeTime">Lifetime of Blob URIs</a>.  To revoke them before the <a href="#unloading-document-cleanup-steps">unloading document cleanup steps</a>, web developers must explicitly revoke them with <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL()</code></a>, OR create them for one time only usage, using the <a href="#dfn-autoRevoke"><code>autoRevoke</code></a> key in the <a href="#dfn-options-objectURL"><code>options</code></a> dictionary. </p>
 
 <p>This section gives sample usage of creation and revocation of <a href="#url">Blob URI</a>s with explanations.</p>
 <div class="example">
 <p>In the example below, two <code>img</code> elements [<a href="#HTML">HTML</a>] refer to the same <a href="#url">Blob URI</a>, which was minted for one-time use only using the <code>boolean</code> key in the optional dictionary argument:</p>
 <x:codeblock language="es">
-var file = document.getElementById('filePicker').files[0];
-
-var blobURLref = URL.createObjectURL(file, {oneTimeOnly: true});
-
-img1 = new Image();
-img2 = new Image();
-
-// Only one of the assignments below will work
-// One will generate a 500 response when dereferenced
-
-
-img1.src = blobURLref;
-img2.src = blobURLref;
-
+&lt;script&gt;url = URL.createObjectURL(blob); &lt;/script&gt;&lt;script&gt; img2.src=url;&lt;/script&gt;
 </x:codeblock>
-<p>In the example above, this is equivalent to calling <a href="#dfn-revokeObjectURL"><code>revokeObjectURL()</code></a> from the <code>onload</code> event handler for each of the images, but use of the <code>boolean</code> key <code>oneTimeOnly</code> reduces boilerplate code.  Multiple references to a <a href="#url">Blob URI</a> explicitly marked for <code>oneTimeOnly</code> use should be strongly discouraged.</p>
-<div class="note"><p>In the usage above, if the user toggles images on and off, any assignment to a <a href="#url">Blob URI</a> with <a href="#dfn-oneTimeOnly"><code>oneTimeOnly</code></a> set to <code>true</code> would break that image.  Additionally, the image element cannot be cloned, nor can the image's <code>src</code> attribute be read after assignment. </p></div>
+<p>In the example above, the assignment in the second script element fails, since <a href="#dfn-autoRevoke"><code>autoRevoke</code></a> is <code>true</code>.</p>
+
 <p>
 In the example below,  <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL()</code></a> is explicitly called.
 </p>
 <x:codeblock language="es">
-var blobURLref = URL.createObjectURL(file);
+var blobURLref = URL.createObjectURL(file, {autoRevoke:false});
 img1 = new Image();
 img2 = new Image();
 
@@ -1673,7 +1656,7 @@ else {
 
 }
 </x:codeblock>
-<p>The example above allows multiple references to a single <a href="#url">Blob URI</a>, but revokes the <a href="#url">Blob URI</a> string after both image objects have been loaded.  While not restricting number of uses of the <a href="#url">Blob URI</a> offers more flexibility, it creates the potential for strings that linger after they are useful, especially in web applications where the <code>document</code> may persist for a while.</p>
+<p>The example above allows multiple references to a single <a href="#url">Blob URI</a>, but revokes the <a href="#url">Blob URI</a> string after both image objects have been loaded.  While not restricting number of uses of the <a href="#url">Blob URI</a> offers more flexibility, it creates the potential for strings that linger after they are useful, especially in web applications where the <code>document</code> may persist for a while.  Developers must explicitly set the <a href="#dfn-autoRevoke"><code>autoRevoke</code></a> dictionary member to <code>false</code> in order to enable this usage.</p>
 </div>  
 </div>
 </div>
