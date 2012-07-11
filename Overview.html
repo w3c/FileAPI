@@ -1558,7 +1558,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	<li><p>If this method is called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that is NOT <a href="#valid">valid</a>, then user agents must return <code>null</code>.</p></li>
 	<li><p>If this method is called with a <a href="#valid">valid</a> <a href="#dfn-Blob"><code>Blob</code></a> argument, user agents must run the following steps:</p>
   <ol type="A">
-    <li>The optional <dfn id="dfn-objectURLOptions"><code>objectURLOptions</code></dfn> dictionary argument called <dfn id="dfn-options-objectURL"><code>options</code></dfn> has a boolean member <dfn id="dfn-autoRevoke"><code>autoRevoke</code></dfn> that defaults to <code>true</code>; if called without using the optional dictionary, or if called with <code>autoRevoke</code> set to <code>true</code>, execute the following sub-steps:
+    <li>The optional <a href="#dfn-objectURLOptions"><code>objectURLOptions</code></a> dictionary argument called <dfn id="dfn-options-objectURL"><code>options</code></dfn> has a boolean member <dfn id="dfn-autoRevoke"><code>autoRevoke</code></dfn> that defaults to <code>true</code>; if called without using the optional dictionary, or if called with <code>autoRevoke</code> set to <code>true</code>, execute the following sub-steps:
     <ol type="a">
       <li>Return a unique <a href="#url"><code>Blob</code> URI</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument, and run the rest of this algorithm asynchronously.</li>
       <li><a href="#provide-a-stable-state">Provide a stable state</a></li>
