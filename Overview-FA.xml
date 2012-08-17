@@ -636,7 +636,7 @@ var a = new Blob([b, c, bytes], {endings: "native"});
 interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blob</a> {
 
   readonly attribute DOMString <a href="#dfn-name" class="dfnref">name</a>;
-  readonly attribute Date? <a href="#dfn-lastModifiedDate" class="dfnref">lastModifiedDate</a>;
+  readonly attribute Date <a href="#dfn-lastModifiedDate" class="dfnref">lastModifiedDate</a>;
 
 };
 	  </x:codeblock>
@@ -648,7 +648,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	    this is merely the name of the file, without path information.  On getting, if user agents cannot make this information available, they must return the empty string.</p></dd>
 	    <dt id="dfn-lastModifiedDate"><code>lastModifiedDate</code></dt>
 	    <dd><p>The last modified date of the file.  On getting, if user agents can make this information available, this must return a new <code>Date</code>[<a href="#HTML">HTML</a>] object
-	initialized to the last modified date of the file; otherwise, this must return null.
+	initialized to the last modified date of the file.  If the last modification date and time are not known, the attribute must return the current date and time as a <code>Date</code> object.
 	</p></dd>
 	    </dl>
 	  </div>
