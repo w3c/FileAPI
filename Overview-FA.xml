@@ -438,9 +438,10 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 			<dt id="dfn-blobParts">A <code>blobParts</code> <code>Array</code></dt> 
 			<dd>which takes any number of the following types of array elements, and in any order:
 				<ul>
-				<li><p><code>ArrayBufferView</code> [<a href="#TypedArrays">TypedArrays</a>] array elements</p></li>
-				<li><p><a href="#dfn-Blob"><code>Blob</code></a> array elements</p></li>
-				<li><p><code>DOMString</code> [<a href="#WebIDL">WebIDL</a>] array elements</p></li>
+        <li><p><code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] array elements.</p></li>
+				<li><p><code>ArrayBufferView</code> [<a href="#TypedArrays">TypedArrays</a>] array elements.</p></li>
+				<li><p><a href="#dfn-Blob"><code>Blob</code></a> array elements.</p></li>
+				<li><p><code>DOMString</code> [<a href="#WebIDL">WebIDL</a>] array elements.</p></li>
 				</ul>		
 			</dd>
 			<dt>An <em>optional</em> <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a></dt>
