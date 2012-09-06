@@ -370,7 +370,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
       The <a href="#dfn-file" class="dfnref"><code>File</code></a> interface inherits from this interface.
     </p>
     <x:codeblock language = 'idl'>
-    <dfn id='dfn-Blob'>[Constructor, Constructor((ArrayBufferView or Blob or DOMString)[] <a href="#dfn-blobParts" title="blobParts" class="dfnref">blobParts</a>, optional <a href="#dfn-BlobPropertyBag" title="BlobPropertyBag" class="dfnref">BlobPropertyBag</a> options)] 
+    <dfn id='dfn-Blob'>[Constructor, Constructor((ArrayBuffer or ArrayBufferView or Blob or DOMString)[] <a href="#dfn-blobParts" title="blobParts" class="dfnref">blobParts</a>, optional <a href="#dfn-BlobPropertyBag" title="BlobPropertyBag" class="dfnref">BlobPropertyBag</a> options)] 
     interface Blob</dfn> {
       
       readonly attribute unsigned long long <a href="#dfn-size" title='size' class="dfnref">size</a>;
@@ -396,7 +396,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
     </x:codeblock>
     <div id="constructorBlob" class="section">
 		<h3>Constructors</h3>
-		<p>The <code>Blob()</code> constructor can be invoked with zero, one, or two parameters.  When the <code>Blob()</code> constructor is invoked, user agents must run the following steps:</p>
+		<p>The <code>Blob()</code> constructor can be invoked with zero, one, two or three parameters.  When the <code>Blob()</code> constructor is invoked, user agents must run the following steps:</p>
     <ol>
       <li><p>If invoked with zero parameters, return a new <code>Blob</code> object consisting of 0 bytes, with <a href="#dfn-size"><code>size</code></a> set to 0, and with <a href="#dfn-type"><code>type</code></a> set to the empty string.</p></li>
       <li><p>Otherwise, the constructor is invoked with a <a href="#dfn-blobParts"><code>blobParts</code></a> array.  Let <var>a</var> be that array.</p></li>
@@ -415,6 +415,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
        </div>
      </li>
      <li><p>If <var>element</var> is an <code>ArrayBufferView</code> [<a href="#TypedArrays">TypedArrays</a>], convert it to a sequence of <code>byteLength</code> bytes from the underlying <code>ArrayBuffer</code>, starting at the <code>byteOffset</code> of the <code>ArrayBufferView</code> [<a href="#TypedArrays">TypedArrays</a>], and append those bytes to <var>bytes</var>.</p></li>
+     <li><p>If <var>element</var> is an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>], convert it to a sequence of <code>byteLength</code> bytes, and append those bytes to <var>bytes</var>.</p></li>
      <li><p>If <var>element</var> is a <code>Blob</code>, append the bytes it represents to <var>bytes</var>.  The <a href="#dfn-type"><code>type</code></a> of the <code>Blob</code> array element is ignored.</p></li>
     </ol>
   </li>
@@ -501,6 +502,10 @@ var c = new Blob([b, shorts]);
 // a has native endings depending on platform
 
 var a = new Blob([b, c, bytes], {endings: "native"});
+
+// d has transparent endings by default
+
+var d = new Blob([buffer, b, c, bytes]);
 
 </x:codeblock>
 
