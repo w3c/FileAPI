@@ -421,6 +421,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
     </ol>
   </li>
   <li><p>If the <a href="#dfn-BPtype"><code>type</code></a> member of the <var>options</var> argument is not the empty string, run the following substeps:</p>
+  <div class="ednote"><p>We may eliminate these steps and merely treat <code>type</code> as an opaque string.</p></div>
       <ol>
         <li><p>Let <var>s</var> be the <a href="#dfn-BPtype"><code>type</code></a> dictionary member.  If <var>s</var> contains any non-ASCII characters, throw a <code>SyntaxError</code> (per [<a href="#RFC2616">RFC2616</a>]) and return from this algorithm.</p></li>
         <li><p>Convert every character in <var>s</var> to lower case.</p></li>
@@ -578,6 +579,7 @@ var d = new Blob([buffer, b, c, bytes]);
    <ol type="A">
    <li><p>If the <code>contentType</code> parameter is not provided, let <var>relativeContentType</var> be set to the empty string .</p></li>
    <li><p>Else let <var>relativeContentType</var> be set to <code>contentType</code> and run the following substeps:</p>
+   <div class="ednote"><p>We may eliminate these steps and merely treat <code>type</code> as an opaque string.</p></div>
 <ol type="a">
   <li><p>If <var>relativeContentType</var> consists of any non-ASCII characters, throw a <code>SyntaxError</code> (per [<a href="#RFC2616">RFC2616</a>]) and return from this algorithm.</p></li>
           <li><p>Convert every character in <var>relativeContentType</var> to lower case.</p></li>
