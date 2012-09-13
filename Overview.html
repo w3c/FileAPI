@@ -321,7 +321,7 @@ function errorHandler(evt) {
         <h2>5. The FileList Interface</h2>
        
        <p>
-          This interface is a <strong>collection</strong> [<a href="#DOM4">DOM4</a>] of <a href="#dfn-file"><code>File</code></a> objects.
+          This interface is a list of <a href="#dfn-file"><code>File</code></a> objects.
        </p>
     <div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
     interface <dfn id="dfn-filelist">FileList</dfn> {
@@ -350,7 +350,7 @@ function errorHandler(evt) {
     <div class="section" id="attributes-filelist">
     <h3>5.1. Attributes</h3>
     <dl>
-      <dt id="dfn-length"><code>length</code></dt><dd><p>must return the number of files in the <a href="#dfn-filelist"><code>FileList</code></a> collection.  If there are no files in the collection, this attribute must return 0.</p></dd>
+      <dt id="dfn-length"><code>length</code></dt><dd><p>must return the number of files in the <a href="#dfn-filelist"><code>FileList</code></a> object.  If there are no files, this attribute must return 0.</p></dd>
     </dl>
     </div>
     <div class="section" id="filelist-methods-params">
@@ -360,8 +360,9 @@ function errorHandler(evt) {
       the <a href="#dfn-filelist"><code>FileList</code></a>.  If there is no <em>indexth</em> <a href="#dfn-file"><code>File</code></a> object in the
       <a href="#dfn-filelist"><code>FileList</code></a>, then this method must return <code>null</code>.</p>
       <p><dfn id="dfn-index" title="index"><code>index</code></dfn> must be treated by user agents as value for the position of a <a href="#dfn-file"><code>File</code></a>
-      object in the <a href="#dfn-filelist"><code>FileList</code></a> collection, with 0 representing the first file in the collection.  <strong>Supported property indices</strong> [<a href="#WebIDL">WebIDL</a>] are the numbers in the range zero to one less than the number of <a href="#dfn-file"><code>File</code></a> objects represented by the collection [<a href="#DOM4">DOM4</a>].  
-If there are no such <a href="#dfn-file"><code>File</code></a> objects, then there are no supported property indices [<a href="#WebIDL">WebIDL</a>]. </p>
+      object in the <a href="#dfn-filelist"><code>FileList</code></a>, with 0 representing the first file.  <strong>Supported property indices</strong> [<a href="#WebIDL">WebIDL</a>] are the numbers in the range zero to one less than the number of <a href="#dfn-file"><code>File</code></a> objects represented by the <code>FileList</code> object.  
+If there are no such <a href="#dfn-file"><code>File</code></a> objects, then there are no supported property indices [<a href="#WebIDL">WebIDL</a>]. 
+</p>
       </dd>
     
     </dl>
@@ -379,7 +380,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
       The <a href="#dfn-file" class="dfnref"><code>File</code></a> interface inherits from this interface.
     </p>
     <div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
-    <dfn id="dfn-Blob">[Constructor, Constructor((ArrayBuffer or ArrayBufferView or Blob or DOMString)[] <a href="#dfn-blobParts" title="blobParts" class="dfnref">blobParts</a>, optional <a href="#dfn-BlobPropertyBag" title="BlobPropertyBag" class="dfnref">BlobPropertyBag</a> options)] 
+    <dfn id="dfn-Blob">[Constructor, Constructor(sequence&lt;(ArrayBuffer or ArrayBufferView or Blob or DOMString)&gt;) <a href="#dfn-blobParts" title="blobParts" class="dfnref">blobParts</a>, optional <a href="#dfn-BlobPropertyBag" title="BlobPropertyBag" class="dfnref">BlobPropertyBag</a> options)] 
     interface Blob</dfn> {
       
       readonly attribute unsigned long long <a href="#dfn-size" title="size" class="dfnref">size</a>;
@@ -408,7 +409,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 		<p>The <code>Blob()</code> constructor can be invoked with zero, one, two or three parameters.  When the <code>Blob()</code> constructor is invoked, user agents must run the following steps:</p>
     <ol>
       <li><p>If invoked with zero parameters, return a new <code>Blob</code> object consisting of 0 bytes, with <a href="#dfn-size"><code>size</code></a> set to 0, and with <a href="#dfn-type"><code>type</code></a> set to the empty string.</p></li>
-      <li><p>Otherwise, the constructor is invoked with a <a href="#dfn-blobParts"><code>blobParts</code></a> array.  Let <var>a</var> be that array.</p></li>
+      <li><p>Otherwise, the constructor is invoked with a <a href="#dfn-blobParts"><code>blobParts</code></a> sequence.  Let <var>a</var> be that sequence.</p></li>
      <li><p>Let <var>bytes</var> be an empty sequence of bytes.</p></li>
       <li><p>Let <var>length</var> be <var>a</var>'s length.  For 0 ≤ <var>i</var> &lt; <var>length</var>, repeat the following steps:</p>
       <ol>
@@ -444,13 +445,13 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 		<h4>6.1.1. Constructor Parameters</h4>
 		<p>The <code>Blob()</code> constructor can be invoked with the parameters below:</p>
 		<dl>
-			<dt id="dfn-blobParts">A <code>blobParts</code> <code>Array</code></dt> 
-			<dd>which takes any number of the following types of array elements, and in any order:
+			<dt id="dfn-blobParts">A <code>blobParts</code> <code>sequence</code></dt> 
+			<dd>which takes any number of the following types of elements, and in any order:
 				<ul>
-        <li><p><code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] array elements.</p></li>
-				<li><p><code>ArrayBufferView</code> [<a href="#TypedArrays">TypedArrays</a>] array elements.</p></li>
-				<li><p><a href="#dfn-Blob"><code>Blob</code></a> array elements.</p></li>
-				<li><p><code>DOMString</code> [<a href="#WebIDL">WebIDL</a>] array elements.</p></li>
+        <li><p><code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] elements.</p></li>
+				<li><p><code>ArrayBufferView</code> [<a href="#TypedArrays">TypedArrays</a>] elements.</p></li>
+				<li><p><a href="#dfn-Blob"><code>Blob</code></a> elements.</p></li>
+				<li><p><code>DOMString</code> [<a href="#WebIDL">WebIDL</a>] elements.</p></li>
 				</ul>		
 			</dd>
 			<dt>An <em>optional</em> <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a></dt>
