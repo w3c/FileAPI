@@ -386,8 +386,6 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
     
     };
 
-    enum <dfn id="dfn-EndingTypes">EndingTypes</dfn>{"<a href="#dfn-transparent">transparent</a>", "<a href="#dfn-native">native</a>"};
-
     dictionary <dfn id="dfn-BlobPropertyBag">BlobPropertyBag</dfn> {
 		
       DOMString <a href="#dfn-BPtype" title="BPtype">type</a> = "";
