@@ -1523,8 +1523,8 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
   200 OK
   Content-Type: image/jpeg
   Content-Length: 21897
-
-	....
+  
+  ....
 	</x:codeblock>
 	<p>If there is a <a href="#file-error-read">file error</a> or any other kind of error associated with the <a href="#dfn-fileBlob"><code>blob</code></a>, then a user agent can respond with a <a href="#FiveHundredInternalServerError">500 Error Condition</a> as the response message.  This should also be used if any method other than GET is used to make the request.</p>
 	<x:codeblock language="headers">
