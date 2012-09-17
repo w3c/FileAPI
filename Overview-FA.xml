@@ -1485,7 +1485,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	<p>User agents must only support requests with GET [<a href="#RFC2616">RFC2616</a>].  If the <a href="#dfn-Blob"><code>Blob</code></a> has a
 	<a href="#dfn-type"><code>type</code></a> attribute, or if the <a href="#dfn-Blob"><code>Blob</code></a> has been created with a <a href="#dfn-slice"><code>slice</code></a> call which
 	uses a <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument, responses to dereferencing the Blob URI must include the Content-Type header from HTTP [<a href="#RFC2616">RFC2616</a>] with the value of the <a href="#dfn-type"><code>type</code></a>
-	attribute or <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument.  Specifically, responses must only support a subset of responses that are equivalent to the following from HTTP [<a href="#RFC2616">RFC2616</a>]:</p>
+	attribute or <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument.  Responses to dereferencing the Blob URI must include the Content-Length header from HTTP [<a href="#RFC2616">RFC2616</a>] with the value of the <a href="#dfn-size"><code>size</code></a> attribute.  Specifically, responses must only support a subset of responses that are equivalent to the following from HTTP [<a href="#RFC2616">RFC2616</a>]:</p>
 	<div id="TwoHundredOK" class="section">
 	<h4>200 OK</h4>
 	<p>This response [<a href="#RFC2616">RFC2616</a>] must be used if the request has succeeded, namely the <a href="#ABNFForBlob">blob:</a> URI has been requested with a GET,
@@ -1519,8 +1519,10 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	</x:codeblock>
 	<p>If the <a href="#dfn-fileBlob"><code>blob</code></a> has an affiliated media type [<a href="#RFC2046">RFC2046</a>] represented by its <a href="#dfn-type"><code>type</code></a> attribute, then the response message should include the Content-Type header from RFC2616 [<a href="#RFC2616">RFC2616</a>].  See <a href="#processing-media-types">processing media types</a>. </p>
 	<x:codeblock language="headers">
-	200 OK
-	Content-Type: image/jpeg
+  
+  200 OK
+  Content-Type: image/jpeg
+  Content-Length: 21897
 
 	....
 	</x:codeblock>
