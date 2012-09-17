@@ -395,12 +395,9 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
     
     };
 
-    enum <dfn id="dfn-EndingTypes">EndingTypes</dfn>{"<a href="#dfn-transparent">transparent</a>", "<a href="#dfn-native">native</a>"};
-
     dictionary <dfn id="dfn-BlobPropertyBag">BlobPropertyBag</dfn> {
 		
       DOMString <a href="#dfn-BPtype" title="BPtype">type</a> = "";
-      EndingTypes <a href="#dfn-endings" title="endings">endings</a> = "<a href="#dfn-transparent">transparent"</a>;
 	
     };
     </code></pre></div></div>
@@ -417,7 +414,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
         <li><p>If <var>element</var> is a <code>DOMString</code>, run the following substeps:</p>
         <ol>
           <li><p>Let <var>s</var> be the result of converting <var>element</var> to a sequence of Unicode characters [<a href="#Unicode">Unicode</a>] using the algorithm for doing so in WebIDL [<a href="#WebIDL">WebIDL</a>].</p></li>
-         <li><p>If the <a href="#dfn-endings"><code>endings</code></a> dictionary member of the <var>options</var> argument is set to <a href="#dfn-native">"<code>native</code>"</a>, transform all newlines in <var>s</var> to the default line-ending representation of the underlying host operating system.</p></li>
+         
          <li><p>Encode <var>s</var> as <a href="#dfn-UTF-8" class="dfnrefs">UTF-8</a> and append the resulting bytes to <var>bytes</var>.</p></li>
        </ol>
        <div class="note"><div class="noteHeader">Note</div>
@@ -456,32 +453,9 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 				</ul>		
 			</dd>
 			<dt>An <em>optional</em> <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a></dt>
-			<dd>which takes two members:
+			<dd>which takes one member:
 			<ul>
 				<li><dfn id="dfn-BPtype"><code>type</code></dfn>, a <code>DOMString</code> which corresponds to the <a href="#dfn-Blob"><code>Blob</code></a> object's <a href="#dfn-type"><code>type</code></a> attribute.  </li>
-				<li><p><dfn id="dfn-endings"><code>endings</code></dfn>, an <code>enum</code> which can take the values <a href="#dfn-transparent">"transparent"</a> which is set by default, or <a href="#dfn-native">"native"</a>.  A description of both is given in the table below.</p>
-				<table><thead><tr><th>Value</th><th>Description</th></tr>
-				                <tr>
-				                  <td><dfn id="dfn-transparent" class="dfnrefs">transparent</dfn></td>
-				                  <td>
-				                    Code points from the string arguments <em>must</em> remain unchanged.
-				                  </td>
-
-				                </tr></thead>
-				<tbody>
-				                <tr>
-				                  <td><dfn id="dfn-native" class="dfnrefs">native</dfn></td>
-				                  <td>
-				                    Newlines <em>must</em> be transformed to the default line-ending
-				                    representation of the underlying host operating system.  For
-				                    example, if the underlying OS is Windows, newlines will be
-				                    transformed into <code>\r\n</code> pairs as the text is
-				                    appended to the newly minted <a href="#dfn-Blob"><code>Blob</code></a> object.
-				                  </td>
-				                </tr>
-
-				              </tbody></table>			
-				</li>
 			</ul>
 		</dd>
 		</dl>
@@ -503,19 +477,11 @@ var buffer = new ArrayBuffer(1024);
 var shorts = new Uint16Array(buffer, 512, 128);
 var bytes = new Uint8Array(buffer, shorts.byteOffset + shorts.byteLength);
 
-// b has line endings of type "transparent" by default
-
 var b = new Blob(["foobarbazetcetc", "birdiebirdieboo"], {type: "text/plain;charset=UTF-8"});
-
-// c appends b and shorts and has line endings of type "transparent"
 
 var c = new Blob([b, shorts]);
 
-// a has native endings depending on platform
-
-var a = new Blob([b, c, bytes], {endings: "native"});
-
-// d has transparent endings by default
+var a = new Blob([b, c, bytes]);
 
 var d = new Blob([buffer, b, c, bytes]);
 
