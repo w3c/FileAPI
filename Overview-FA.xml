@@ -364,6 +364,18 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
     interface [<a href="#HTML">HTML</a>].
     </div>
     </div>
+  <div id='convenienceAPI' class="section">
+  <h2>Line Endings</h2>
+  <p>Web applications will need to manipulate data across platforms with different character representations for line endings.  Unix platforms use LF (e.g. "/n" or U+000A in Unicode) whereas other platforms like Windows use CR+LF (e.g. "/r/n" or U+000D followed by U+000A in Unicode).  While particularly useful for <code>DOMString</code> types and textfiles, a consideration of line endings is also important when creating binary data within the web application.  </p>
+  <p>This interface provides a convenience API to always convert line endings to the appropriate type, depending on the underlying platform.</p>
+  <x:codeblock language='idl'>
+  [NoInterfaceObject] interface LineEndings {
+
+      DOMString <a href="#dfn-toNativeLineEndings" title="toNativeLineEndings">toNativeLineEndings</a>(DOMString <a href="#dfn-stringArg" title="stringArg">string</a>);
+  };
+  </x:codeblock>
+  
+  </div>  
   <div id='blob' class="section">
     <h2>The Blob Interface</h2>
     <p>
@@ -1518,7 +1530,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	<x:codeblock language="idl">
 	partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
 
-	    static DOMString <a href="#dfn-createObjectURL">createObjectURL</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>, optional <a href="#dfn-objectURLOptions">objectURLOptions</a> <a href="#dfn-options-objectURL">options</a>);
+	    static DOMString? <a href="#dfn-createObjectURL">createObjectURL</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>, optional <a href="#dfn-objectURLOptions">objectURLOptions</a> <a href="#dfn-options-objectURL">options</a>);
 	    static void <a href="#dfn-revokeObjectURL">revokeObjectURL</a>(DOMString <a href="#dfn-urlarg">url</a>);
 	};
 	
