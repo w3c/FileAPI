@@ -366,7 +366,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
     </div>
   <div id='convenienceAPI' class="section">
   <h2>Line Endings</h2>
-  <p>Web applications will need to manipulate data across platforms with different character representations for line endings.  Unix platforms use LF (e.g. "/n" or U+000A in Unicode) whereas other platforms like Windows use CR+LF (e.g. "/r/n" or U+000D followed by U+000A in Unicode).  While particularly useful for <code>DOMString</code> types and textfiles, a consideration of line endings is also important when creating binary data within the web application.  </p>
+  <p>Web applications will need to manipulate data across platforms with different character representations for line endings.  Unix platforms use LF (e.g. "\n" or U+000A in Unicode) whereas other platforms like Windows use CR+LF (e.g. "\r\n" or U+000D followed by U+000A in Unicode).  While particularly useful for <code>DOMString</code> types and text files, a consideration of line endings is also important when creating binary data within the web application.  </p>
   <p>This interface provides a convenience API to always convert line endings to the appropriate type, depending on the underlying platform.</p>
   <x:codeblock language='idl'>
   [NoInterfaceObject] interface LineEndings {
@@ -374,7 +374,31 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
       DOMString <a href="#dfn-toNativeLineEndings" title="toNativeLineEndings">toNativeLineEndings</a>(DOMString <a href="#dfn-stringArg" title="stringArg">string</a>);
   };
   </x:codeblock>
-  
+  <div id="methodsOnLineEndings" class="section">
+    <h3>Methods and Parameters</h3>
+    <dl><dt id="#dfn-toNativeLineEndings"><code>toNativeLineEndings</code></dt><dd><p>Returns a new <code>DOMString</code> with line endings appended to the input parameter <dfn id="#dfn-stringArg"><code>string</code></dfn> as expected by the underlying platform.  This method must behave as follows:</p>
+    <ol>
+    <li><p>If the input parameter already has a line ending expected by the underlying platform, return a new <code>DOMString</code> identical to the input parameter.</p></li>
+    <li><p>If the input parameter has a line ending that is NOT expected by the underlying platform, strip the line ending, and return a new <code>DOMString</code> that contains all of the characters of the input parameter and a line ending expected by the underlying platform appended to the end.</p></li> 
+    <li><p>If the input parameter does not have a line ending, return a new <code>DOMString</code> consisting of all of the characters of the input parameter, with a line ending expected by the underlying platform appended to the end.</p></li>
+  </ol>
+  <p>In environments where the global object is represented by a <code>Window</code> or <code>WorkerGlobalScope</code> object, the <code>toNativeLineEndings</code> method should be available.</p>
+</dd>
+</dl>
+<div class="example">
+<p>These examples assume that the <code>toNativeLineEndings</code> function is available on the global object.</p>
+<x:codeblock language='es'>
+
+var s = "This is a sentence.";
+s += "\n";
+
+sl = toNativeLineEndings(s);
+<span class='comment'>// On Windows sl = 'This is a sentence.\r\n'</span>
+<span class='comment'>// On Mac OS X sl = 'This is a sentence.\n'</span>
+</x:codeblock>
+</div>
+
+  </div>
   </div>  
   <div id='blob' class="section">
     <h2>The Blob Interface</h2>
@@ -466,21 +490,21 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 <div class="example">
 <p>Examples of constructor usage follow.</p>
 <x:codeblock language="es">
-// Create a new Blob object
+<span class="comment">// Create a new Blob object</span>
 
 var a = new Blob();
 
-// Create a 1024-byte ArrayBuffer
-// buffer could also come from reading a File
+<span class="comment">// Create a 1024-byte ArrayBuffer</span>
+<span class="comment">// buffer could also come from reading a File</span>
 
 var buffer = new ArrayBuffer(1024);
 
-// Create ArrayBufferView objects based on buffer
+<span class="comment">// Create ArrayBufferView objects based on buffer</span>
 
 var shorts = new Uint16Array(buffer, 512, 128);
 var bytes = new Uint8Array(buffer, shorts.byteOffset + shorts.byteLength);
 
-var b = new Blob(["foobarbazetcetc", "birdiebirdieboo"], {type: "text/plain;charset=UTF-8"});
+var b = new Blob([toNativeLineEndings("foobarbazetcetc" + "birdiebirdieboo")], {type: "text/plain;charset=UTF-8"});
 
 var c = new Blob([b, shorts]);
 
