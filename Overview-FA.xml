@@ -367,7 +367,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   <div id='convenienceAPI' class="section">
   <h2>Line Endings</h2>
   <p>Web applications will need to manipulate data across platforms with different character representations for line endings.  Unix platforms use LF (e.g. "\n" or U+000A in Unicode) whereas other platforms like Windows use CR+LF (e.g. "\r\n" or U+000D followed by U+000A in Unicode).  While particularly useful for <code>DOMString</code> types and text files, a consideration of line endings is also important when creating binary data within the web application.  </p>
-  <p>This interface provides a convenience API to always convert line endings to the appropriate type, depending on the underlying platform.</p>
+  <p>This interface provides an API to always convert line endings to the appropriate type, depending on the underlying platform.</p>
   <x:codeblock language='idl'>
   [NoInterfaceObject] interface LineEndings {
 
