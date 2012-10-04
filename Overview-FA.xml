@@ -367,7 +367,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   <div id='convenienceAPI' class="section">
   <h2>Line Endings</h2>
   <p>Web applications will need to manipulate data across platforms with different character representations for <dfn id="EOL">line endings</dfn>, also known as newline, line break or end-of-line (EOL) markers signifying the end of a line of text.  Unix platforms use LF (e.g. "\n" or U+000A in Unicode) whereas other platforms like Windows use CR+LF (e.g. "\r\n" or U+000D followed by U+000A in Unicode).  While particularly useful for <code>DOMString</code> types and text files, a consideration of line endings is also important when creating binary data within the web application that can be consumed by the underlying platform, which could be Unix-based or Windows-based.  </p>
-  <p>This interface provides an API to always convert line endings to the appropriate type, depending on the underlying platform.</p>
+  <p>This interface provides an API to always convert line endings to the appropriate type, depending on the underlying platform.  ISSUE: should this focus on "\n" and "\r\n" or allow for other characters, including LS and PS?</p>
   <x:codeblock language='idl'>
   [NoInterfaceObject] interface LineEndings {
 
