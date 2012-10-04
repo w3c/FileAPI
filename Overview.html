@@ -68,7 +68,7 @@
       These kinds of behaviors are defined in the appropriate affiliated specifications.
     </p>
 
-      <div class="ednote"><div class="ednoteHeader">Editorial note</div><p>This is revision $Id$.</p><p>There are 1 further editorial notes in the document.</p></div>
+      <div class="ednote"><div class="ednoteHeader">Editorial note</div><p>This is revision $Id$.</p><p>There are 2 further editorial notes in the document.</p></div>
     </div>
 
     <div class="section">
@@ -375,7 +375,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
     </div>
   <div id="convenienceAPI" class="section">
   <h2>6. Line Endings</h2>
-  <p>Web applications will need to manipulate data across platforms with different character representations for line endings.  Unix platforms use LF (e.g. "\n" or U+000A in Unicode) whereas other platforms like Windows use CR+LF (e.g. "\r\n" or U+000D followed by U+000A in Unicode).  While particularly useful for <code>DOMString</code> types and text files, a consideration of line endings is also important when creating binary data within the web application.  </p>
+  <p>Web applications will need to manipulate data across platforms with different character representations for <dfn id="EOL">line endings</dfn>, also known as newline, line break or end-of-line (EOL) markers signifying the end of a line of text.  Unix platforms use LF (e.g. "\n" or U+000A in Unicode) whereas other platforms like Windows use CR+LF (e.g. "\r\n" or U+000D followed by U+000A in Unicode).  While particularly useful for <code>DOMString</code> types and text files, a consideration of line endings is also important when creating binary data within the web application that can be consumed by the underlying platform, which could be Unix-based or Windows-based.  </p>
   <p>This interface provides an API to always convert line endings to the appropriate type, depending on the underlying platform.</p>
   <div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
   [NoInterfaceObject] interface LineEndings {
@@ -385,12 +385,10 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   </code></pre></div></div>
   <div id="methodsOnLineEndings" class="section">
     <h3>6.1. Methods and Parameters</h3>
-    <dl><dt id="#dfn-toNativeLineEndings"><code>toNativeLineEndings</code></dt><dd><p>Returns a new <code>DOMString</code> with line endings appended to the input parameter <dfn id="#dfn-stringArg"><code>string</code></dfn> as expected by the underlying platform.  This method must behave as follows:</p>
-    <ol>
-    <li><p>If the input parameter already has a line ending expected by the underlying platform, return a new <code>DOMString</code> identical to the input parameter.</p></li>
-    <li><p>If the input parameter has a line ending that is NOT expected by the underlying platform, strip the line ending, and return a new <code>DOMString</code> that contains all of the characters of the input parameter and a line ending expected by the underlying platform appended to the end.</p></li> 
-    <li><p>If the input parameter does not have a line ending, return a new <code>DOMString</code> consisting of all of the characters of the input parameter, with a line ending expected by the underlying platform appended to the end.</p></li>
-  </ol>
+    <dl><dt id="#dfn-toNativeLineEndings"><code>toNativeLineEndings</code></dt><dd><p>Returns a new <code>DOMString</code> with line endings expected by the underlying platform, and must behave as below:</p>
+    <div class="ednote"><div class="ednoteHeader">Editorial note</div>
+      <p>Add a comprehensive algorithm that takes into account ECMAScript's notion of line endings.</p>
+    </div>
   <p>In environments where the global object is represented by a <code>Window</code> or <code>WorkerGlobalScope</code> object, the <code>toNativeLineEndings</code> method should be available.</p>
 </dd>
 </dl>
