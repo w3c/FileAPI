@@ -417,7 +417,8 @@ sl = toNativeLineEndings(s);
       The <a href="#dfn-file" class="dfnref"><code>File</code></a> interface inherits from this interface.
     </p>
     <x:codeblock language = 'idl'>
-    <dfn id='dfn-Blob'>[Constructor, Constructor(sequence&lt;(ArrayBuffer or ArrayBufferView or Blob or DOMString)&gt; blobParts, BlobPropertyBag options) <a href="#dfn-blobParts" title="blobParts" class="dfnref">blobParts</a>, optional <a href="#dfn-BlobPropertyBag" title="BlobPropertyBag" class="dfnref">BlobPropertyBag</a> options)] 
+    <dfn id='dfn-Blob'>[Constructor, 
+     Constructor(sequence&lt;(ArrayBuffer or ArrayBufferView or Blob or DOMString)&gt; <a href="#dfn-blobParts" title="blobParts" class="dfnref">blobParts</a>, optional <a href="#dfn-BlobPropertyBag" title="BlobPropertyBag" class="dfnref">BlobPropertyBag</a> options)] 
     interface Blob</dfn> {
       
       readonly attribute unsigned long long <a href="#dfn-size" title='size' class="dfnref">size</a>;
