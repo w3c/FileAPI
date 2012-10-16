@@ -20,7 +20,7 @@
     <![endif]-->
 
     
-  <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-LC" type="text/css" /></head>
+  <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-WD" type="text/css" /></head>
 
   <body>
     <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Working Draft <em>18 October 2012</em></h2><dl><dt>This Version:</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121018/">http://www.w3.org/TR/2012/WD-FileAPI-20121018/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20120712/">http://www.w3.org/TR/2012/WD-FileAPI-20120712/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
@@ -382,7 +382,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   </code></pre></div></div>
   <div id="methodsOnLineEndings" class="section">
     <h3>6.1. Methods and Parameters</h3>
-    <dl><dt id="#dfn-toNativeLineEndings"><code>toNativeLineEndings</code></dt><dd><p>Returns a new <code>DOMString</code> based on the <dfn id="#dfn-stringArg"><code>string</code></dfn> input parameter, with line endings expected by the underlying platform, and must behave as below:</p>
+    <dl><dt id="#dfn-toNativeLineEndings"><code>toNativeLineEndings</code></dt><dd><p>Returns a new <code>DOMString</code> based on the <dfn id="#dfn-stringArg"><code>string</code></dfn> input parameter, with <a href="#EOLChar">EOL</a> Markers expected by the underlying platform, and must behave as below:</p>
     <ol>
       <li><p>Let <var>input</var> be set to <a href="#dfn-stringArg"><code>string</code></a>.</p></li>
       <li><p>Let <var>position</var> be a pointer into <var>input</var>, initially pointing to the start of the string.</p></li>
