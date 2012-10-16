@@ -33,8 +33,8 @@
     <options xmlns='http://mcc.id.au/ns/local'>
       <versions>
         <cvs href='http://dev.w3.org/2006/webapi/FileAPI/'/>
-        <this href='http://www.w3.org/TR/2012/WD-FileAPI-20120712/' />
-        <previous href='http://www.w3.org/TR/2011/WD-FileAPI-20111020/' />
+        <this href='http://www.w3.org/TR/2012/WD-FileAPI-20121018/' />
+        <previous href='http://www.w3.org/TR/2012/WD-FileAPI-20120712/' />
         <latest href='http://www.w3.org/TR/FileAPI/' />
       </versions>
       <editors>
@@ -47,7 +47,7 @@
             <affiliation>Mozilla Corporation</affiliation>
         </person>
       </editors>
-      <maturity>ED</maturity>
+      <maturity>LC</maturity>
       <participate qual="STND"></participate>  
     </options>
   </head>
@@ -295,7 +295,7 @@ function errorHandler(evt) {
         <dfn id="event-handler-event-type">event handler event type</dfn>,
         <dfn id="origin">origin</dfn>, <dfn id="same-origin">same origin</dfn>, <dfn id="event-loops">event loops</dfn>,
         <dfn id="dfn-task">task</dfn>, <dfn id="task-source">task source</dfn>, <dfn id="df-URL">URL</dfn>, <dfn id="provide-a-stable-state">provide a stable state</dfn>,
-        <dfn id="queue-a-task">queue a task</dfn>, <dfn id="dfn-neuter">neuter</dfn>, <dfn id="dfn-UTF-8">UTF-8</dfn>, <dfn id="dfn-UTF-16">UTF-16</dfn> and <dfn id="structured-clone">structured clone</dfn> are as defined by the HTML specification [<a href="#HTML">HTML</a>]. </p>
+        <dfn id="queue-a-task">queue a task</dfn>, <dfn id="dfn-neuter">neuter</dfn>, <dfn id="dfn-UTF-8">UTF-8</dfn>, <dfn id="dfn-UTF-16">UTF-16</dfn>. <dfn id="structured-clone">structured clone</dfn> and <dfn id="collect-a-sequence-of-characters">collect a sequence of characters</dfn> are as defined by the HTML specification [<a href="#HTML">HTML</a>]. </p>
  <p>When this specification says to <dfn id="terminate-an-algorithm">terminate an algorithm</dfn> the user agent must terminate the algorithm after finishing the step it is on.  Asynchronous <a href="#read-methods">read methods</a> defined in this specification may return before the algorithm in question is terminated, and can be terminated by an <a href="#dfn-abort"><code>abort()</code></a> call.</p>
 <p>The term <dfn id="throw-an-exception">throw</dfn> in this specification, as it pertains to exceptions, is used as defined in the DOM4 specification [<a href="#DOM4">DOM4</a>].</p>
        <p>The algorithms and steps in this specification use the following mathematical operations:</p>
@@ -366,21 +366,33 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
     </div>
   <div id='convenienceAPI' class="section">
   <h2>Line Endings</h2>
-  <p>Web applications will need to manipulate data across platforms with different character representations for <dfn id="EOL">line endings</dfn>, also known as newline, line break or end-of-line (EOL) markers signifying the end of a line of text.  Unix platforms use LF (e.g. "\n" or U+000A in Unicode) whereas other platforms like Windows use CR+LF (e.g. "\r\n" or U+000D followed by U+000A in Unicode).  While particularly useful for <code>DOMString</code> types and text files, a consideration of line endings is also important when creating binary data within the web application that can be consumed by the underlying platform, which could be Unix-based or Windows-based.  </p>
-  <p>This interface provides an API to always convert line endings to the appropriate type, depending on the underlying platform.  ISSUE: should this focus on "\n" and "\r\n" or allow for other characters, including LS and PS?</p>
+  <p>Web applications will need to manipulate data across platforms with different character representations for <dfn id="EOL">line endings</dfn>, also known as newline, line break or end-of-line (EOL) markers signifying the end of a line of text.  Unix platforms use LF (e.g. "\n" or U+000A in Unicode) whereas other platforms like Windows use CR+LF (e.g. "\r\n" or U+000D followed by U+000A in Unicode).  An <dfn id="EOLChar">EOL Marker</dfn> in this specification is either U+00A or U+00D followed by the character U+00A. </p>
+  <p>While particularly useful for <code>DOMString</code> types and text files, a consideration of <a href="#EOL">line endings</a> is also important when creating binary data within the web application that can be consumed by the underlying platform, which could be Unix-based or Windows-based.  This interface provides an API to always convert line endings to the appropriate type, depending on the underlying platform.  </p>
   <x:codeblock language='idl'>
   [NoInterfaceObject] interface LineEndings {
 
       DOMString <a href="#dfn-toNativeLineEndings" title="toNativeLineEndings">toNativeLineEndings</a>(DOMString <a href="#dfn-stringArg" title="stringArg">string</a>);
   };
+
+  Window implements LineEndings;
+  WorkerGlobalScope implements LineEndings;
+
   </x:codeblock>
   <div id="methodsOnLineEndings" class="section">
     <h3>Methods and Parameters</h3>
-    <dl><dt id="#dfn-toNativeLineEndings"><code>toNativeLineEndings</code></dt><dd><p>Returns a new <code>DOMString</code> with line endings expected by the underlying platform, and must behave as below:</p>
-    <div class="ednote">
-      <p>Add a comprehensive algorithm that takes into account ECMAScript's notion of line endings.</p>
-    </div>
-  <p>In environments where the global object is represented by a <code>Window</code> or <code>WorkerGlobalScope</code> object, the <code>toNativeLineEndings</code> method should be available.</p>
+    <dl><dt id="#dfn-toNativeLineEndings"><code>toNativeLineEndings</code></dt><dd><p>Returns a new <code>DOMString</code> based on the <dfn id="#dfn-stringArg"><code>string</code></dfn> input parameter, with line endings expected by the underlying platform, and must behave as below:</p>
+    <ol>
+      <li><p>Let <var>input</var> be set to <a href="#dfn-stringArg"><code>string</code></a>.</p></li>
+      <li><p>Let <var>position</var> be a pointer into <var>input</var>, initially pointing to the start of the string.</p></li>
+      <li><p>Let <var>result</var> be the empty string.</p></li>
+      <li><p>Let <var>native line ending</var> be be the character U+000A, or the character U+000D followed by the character U+000A, as determined by the underlying platform's conventions.  While <var>position</var> is not past the end of <var>input</var>, run the following sub-steps:</p>
+      <ol>
+        <li><p><a href="#collect-a-sequence-of-characters">Collect a sequence of characters</a> that are <em>not</em> U+00A or U+00D.</p></li>
+        <li><p>Add the string collected in the previous step to <var>result</var>.  If <var>position</var> is past the end of <var>input</var> return <var>result</var> and exit this algorithm.</p></li>
+        <li><p>If the character at <var>position</var> is U+00D, and the character at <var>position</var>+1 is U+00A, advance <var>position</var> by two characters, and add <var>native line ending</var> to <var>result</var>.</p></li>
+        <li><p>If the character at <var>position</var> is U+00A, add <var>native line ending</var> to <var>result</var> and advance <var>position</var> by one character.</p></li>
+      </ol></li>
+    </ol>
 </dd>
 </dl>
 <div class="example">
@@ -405,7 +417,7 @@ sl = toNativeLineEndings(s);
       The <a href="#dfn-file" class="dfnref"><code>File</code></a> interface inherits from this interface.
     </p>
     <x:codeblock language = 'idl'>
-    <dfn id='dfn-Blob'>[Constructor, Constructor(sequence&lt;(ArrayBuffer or ArrayBufferView or Blob or DOMString)&gt;) <a href="#dfn-blobParts" title="blobParts" class="dfnref">blobParts</a>, optional <a href="#dfn-BlobPropertyBag" title="BlobPropertyBag" class="dfnref">BlobPropertyBag</a> options)] 
+    <dfn id='dfn-Blob'>[Constructor, Constructor(sequence&lt;(ArrayBuffer or ArrayBufferView or Blob or DOMString)&gt; blobParts, BlobPropertyBag options) <a href="#dfn-blobParts" title="blobParts" class="dfnref">blobParts</a>, optional <a href="#dfn-BlobPropertyBag" title="BlobPropertyBag" class="dfnref">BlobPropertyBag</a> options)] 
     interface Blob</dfn> {
       
       readonly attribute unsigned long long <a href="#dfn-size" title='size' class="dfnref">size</a>;
@@ -1565,7 +1577,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
     <ol type="a">
       <li>Return a unique <a href="#url"><code>Blob</code> URI</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument, and run the rest of this algorithm asynchronously.</li>
       <li><a href="#provide-a-stable-state">Provide a stable state</a></li>
-      <li>Revoke the <a href="#url"><code>Blob</code> URI</a> by calling <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> on it and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</li>
+      <li>Revoke the <a href="#url"><code>Blob</code> URI</a>, which is equivalent to calling <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> on it, and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</li>
     </ol>
     </li>
    <li><p>If this method is called with the <code>autoRevoke</code> dictionary member set to <code>false</code>, return a unique <a href="#url"><code>Blob</code> URI</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument. </p>

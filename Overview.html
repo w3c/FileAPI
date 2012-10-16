@@ -1,12 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<!--
-  Overview.html
-  Web IDL
-
-  Note: This file is generated from Overview.xml.  Run "make" to regenerate it.
-  -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -27,10 +20,10 @@
     <![endif]-->
 
     
-  <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
+  <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-LC" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>4 October 2012</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2011/WD-FileAPI-20111020/">http://www.w3.org/TR/2011/WD-FileAPI-20111020/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor’s Draft <em>18 October 2012</em></h2><dl><dt>This Version:</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121018/">http://www.w3.org/TR/2012/WD-FileAPI-20121018/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20120712/">http://www.w3.org/TR/2012/WD-FileAPI-20120712/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="http://sicking.cc/">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2012 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -68,7 +61,7 @@
       These kinds of behaviors are defined in the appropriate affiliated specifications.
     </p>
 
-      <div class="ednote"><div class="ednoteHeader">Editorial note</div><p>This is revision $Id$.</p><p>There are 2 further editorial notes in the document.</p></div>
+      
     </div>
 
     <div class="section">
@@ -80,7 +73,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 4 October 2012 <b>Editor’s Draft</b> of the
+        This document is the 18 October 2012 <b>Editor’s Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -304,7 +297,7 @@ function errorHandler(evt) {
         <dfn id="event-handler-event-type">event handler event type</dfn>,
         <dfn id="origin">origin</dfn>, <dfn id="same-origin">same origin</dfn>, <dfn id="event-loops">event loops</dfn>,
         <dfn id="dfn-task">task</dfn>, <dfn id="task-source">task source</dfn>, <dfn id="df-URL">URL</dfn>, <dfn id="provide-a-stable-state">provide a stable state</dfn>,
-        <dfn id="queue-a-task">queue a task</dfn>, <dfn id="dfn-neuter">neuter</dfn>, <dfn id="dfn-UTF-8">UTF-8</dfn>, <dfn id="dfn-UTF-16">UTF-16</dfn> and <dfn id="structured-clone">structured clone</dfn> are as defined by the HTML specification [<a href="#HTML">HTML</a>]. </p>
+        <dfn id="queue-a-task">queue a task</dfn>, <dfn id="dfn-neuter">neuter</dfn>, <dfn id="dfn-UTF-8">UTF-8</dfn>, <dfn id="dfn-UTF-16">UTF-16</dfn>. <dfn id="structured-clone">structured clone</dfn> and <dfn id="collect-a-sequence-of-characters">collect a sequence of characters</dfn> are as defined by the HTML specification [<a href="#HTML">HTML</a>]. </p>
  <p>When this specification says to <dfn id="terminate-an-algorithm">terminate an algorithm</dfn> the user agent must terminate the algorithm after finishing the step it is on.  Asynchronous <a href="#read-methods">read methods</a> defined in this specification may return before the algorithm in question is terminated, and can be terminated by an <a href="#dfn-abort"><code>abort()</code></a> call.</p>
 <p>The term <dfn id="throw-an-exception">throw</dfn> in this specification, as it pertains to exceptions, is used as defined in the DOM4 specification [<a href="#DOM4">DOM4</a>].</p>
        <p>The algorithms and steps in this specification use the following mathematical operations:</p>
@@ -375,21 +368,33 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
     </div>
   <div id="convenienceAPI" class="section">
   <h2>6. Line Endings</h2>
-  <p>Web applications will need to manipulate data across platforms with different character representations for <dfn id="EOL">line endings</dfn>, also known as newline, line break or end-of-line (EOL) markers signifying the end of a line of text.  Unix platforms use LF (e.g. "\n" or U+000A in Unicode) whereas other platforms like Windows use CR+LF (e.g. "\r\n" or U+000D followed by U+000A in Unicode).  While particularly useful for <code>DOMString</code> types and text files, a consideration of line endings is also important when creating binary data within the web application that can be consumed by the underlying platform, which could be Unix-based or Windows-based.  </p>
-  <p>This interface provides an API to always convert line endings to the appropriate type, depending on the underlying platform.  ISSUE: should this focus on "\n" and "\r\n" or allow for other characters, including LS and PS?</p>
+  <p>Web applications will need to manipulate data across platforms with different character representations for <dfn id="EOL">line endings</dfn>, also known as newline, line break or end-of-line (EOL) markers signifying the end of a line of text.  Unix platforms use LF (e.g. "\n" or U+000A in Unicode) whereas other platforms like Windows use CR+LF (e.g. "\r\n" or U+000D followed by U+000A in Unicode).  An <dfn id="EOLChar">EOL Marker</dfn> in this specification is either U+00A or U+00D followed by the character U+00A. </p>
+  <p>While particularly useful for <code>DOMString</code> types and text files, a consideration of <a href="#EOL">line endings</a> is also important when creating binary data within the web application that can be consumed by the underlying platform, which could be Unix-based or Windows-based.  This interface provides an API to always convert line endings to the appropriate type, depending on the underlying platform.  </p>
   <div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
   [NoInterfaceObject] interface LineEndings {
 
       DOMString <a href="#dfn-toNativeLineEndings" title="toNativeLineEndings">toNativeLineEndings</a>(DOMString <a href="#dfn-stringArg" title="stringArg">string</a>);
   };
+
+  Window implements LineEndings;
+  WorkerGlobalScope implements LineEndings;
+
   </code></pre></div></div>
   <div id="methodsOnLineEndings" class="section">
     <h3>6.1. Methods and Parameters</h3>
-    <dl><dt id="#dfn-toNativeLineEndings"><code>toNativeLineEndings</code></dt><dd><p>Returns a new <code>DOMString</code> with line endings expected by the underlying platform, and must behave as below:</p>
-    <div class="ednote"><div class="ednoteHeader">Editorial note</div>
-      <p>Add a comprehensive algorithm that takes into account ECMAScript's notion of line endings.</p>
-    </div>
-  <p>In environments where the global object is represented by a <code>Window</code> or <code>WorkerGlobalScope</code> object, the <code>toNativeLineEndings</code> method should be available.</p>
+    <dl><dt id="#dfn-toNativeLineEndings"><code>toNativeLineEndings</code></dt><dd><p>Returns a new <code>DOMString</code> based on the <dfn id="#dfn-stringArg"><code>string</code></dfn> input parameter, with line endings expected by the underlying platform, and must behave as below:</p>
+    <ol>
+      <li><p>Let <var>input</var> be set to <a href="#dfn-stringArg"><code>string</code></a>.</p></li>
+      <li><p>Let <var>position</var> be a pointer into <var>input</var>, initially pointing to the start of the string.</p></li>
+      <li><p>Let <var>result</var> be the empty string.</p></li>
+      <li><p>Let <var>native line ending</var> be be the character U+000A, or the character U+000D followed by the character U+000A, as determined by the underlying platform's conventions.  While <var>position</var> is not past the end of <var>input</var>, run the following sub-steps:</p>
+      <ol>
+        <li><p><a href="#collect-a-sequence-of-characters">Collect a sequence of characters</a> that are <em>not</em> U+00A or U+00D.</p></li>
+        <li><p>Add the string collected in the previous step to <var>result</var>.  If <var>position</var> is past the end of <var>input</var> return <var>result</var> and exit this algorithm.</p></li>
+        <li><p>If the character at <var>position</var> is U+00D, and the character at <var>position</var>+1 is U+00A, advance <var>position</var> by two characters, and add <var>native line ending</var> to <var>result</var>.</p></li>
+        <li><p>If the character at <var>position</var> is U+00A, add <var>native line ending</var> to <var>result</var> and advance <var>position</var> by one character.</p></li>
+      </ol></li>
+    </ol>
 </dd>
 </dl>
 <div class="example"><div class="exampleHeader">Example</div>
@@ -414,7 +419,7 @@ sl = toNativeLineEndings(s);
       The <a href="#dfn-file" class="dfnref"><code>File</code></a> interface inherits from this interface.
     </p>
     <div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
-    <dfn id="dfn-Blob">[Constructor, Constructor(sequence&lt;(ArrayBuffer or ArrayBufferView or Blob or DOMString)&gt;) <a href="#dfn-blobParts" title="blobParts" class="dfnref">blobParts</a>, optional <a href="#dfn-BlobPropertyBag" title="BlobPropertyBag" class="dfnref">BlobPropertyBag</a> options)] 
+    <dfn id="dfn-Blob">[Constructor, Constructor(sequence&lt;(ArrayBuffer or ArrayBufferView or Blob or DOMString)&gt; blobParts, BlobPropertyBag options) <a href="#dfn-blobParts" title="blobParts" class="dfnref">blobParts</a>, optional <a href="#dfn-BlobPropertyBag" title="BlobPropertyBag" class="dfnref">BlobPropertyBag</a> options)] 
     interface Blob</dfn> {
       
       readonly attribute unsigned long long <a href="#dfn-size" title="size" class="dfnref">size</a>;
@@ -1573,7 +1578,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
     <ol type="a">
       <li>Return a unique <a href="#url"><code>Blob</code> URI</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument, and run the rest of this algorithm asynchronously.</li>
       <li><a href="#provide-a-stable-state">Provide a stable state</a></li>
-      <li>Revoke the <a href="#url"><code>Blob</code> URI</a> by calling <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> on it and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</li>
+      <li>Revoke the <a href="#url"><code>Blob</code> URI</a>, which is equivalent to calling <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> on it, and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</li>
     </ol>
     </li>
    <li><p>If this method is called with the <code>autoRevoke</code> dictionary member set to <code>false</code>, return a unique <a href="#url"><code>Blob</code> URI</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument. </p>
