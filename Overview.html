@@ -368,7 +368,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
     </div>
   <div id="convenienceAPI" class="section">
   <h2>6. Line Endings</h2>
-  <p>Web applications will need to manipulate data across platforms with different character representations for <dfn id="EOL">line endings</dfn>, also known as newline, line break or end-of-line (EOL) markers signifying the end of a line of text.  Unix platforms use LF (e.g. "\n" or U+000A in Unicode) whereas other platforms like Windows use CR+LF (e.g. "\r\n" or U+000D followed by U+000A in Unicode).  An <dfn id="EOLChar">EOL Marker</dfn> in this specification is either U+00A or U+00D followed by the character U+00A. </p>
+  <p>Web applications will need to manipulate data across platforms with different character representations for <dfn id="EOL">line endings</dfn>, also known as newline, line break or end-of-line (EOL) markers signifying the end of a line of text.  Unix platforms use LF (e.g. "\n" or U+000A in Unicode) whereas other platforms like Windows use CR+LF (e.g. "\r\n" or U+000D followed by U+000A in Unicode).  An <dfn id="EOLChar">EOL Marker</dfn> in this specification is either U+000A or U+000D followed by the character U+000A. </p>
   <p>While particularly useful for <code>DOMString</code> types and text files, a consideration of <a href="#EOL">line endings</a> is also important when creating binary data within the web application that can be consumed by the underlying platform, which could be Unix-based or Windows-based.  This interface provides an API to always convert line endings to the appropriate type, depending on the underlying platform.  </p>
   <div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
   [NoInterfaceObject] interface LineEndings {
@@ -382,17 +382,17 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   </code></pre></div></div>
   <div id="methodsOnLineEndings" class="section">
     <h3>6.1. Methods and Parameters</h3>
-    <dl><dt id="dfn-toNativeLineEndings"><code>toNativeLineEndings</code></dt><dd><p>Returns a new <code>DOMString</code> based on the <dfn id="dfn-stringArg"><code>string</code></dfn> input parameter, with <a href="#EOLChar">EOL</a> Markers expected by the underlying platform, and must behave as below:</p>
+    <dl><dt id="dfn-toNativeLineEndings"><code>toNativeLineEndings</code></dt><dd><p>Returns a new <code>DOMString</code> based on the <dfn id="dfn-stringArg"><code>string</code></dfn> input parameter, with <a href="#EOLChar">EOL Markers</a> expected by the underlying platform, and must behave as below:</p>
     <ol>
       <li><p>Let <var>input</var> be set to <a href="#dfn-stringArg"><code>string</code></a>.</p></li>
       <li><p>Let <var>position</var> be a pointer into <var>input</var>, initially pointing to the start of the string.</p></li>
       <li><p>Let <var>result</var> be the empty string.</p></li>
       <li><p>Let <var>native line ending</var> be be the character U+000A, or the character U+000D followed by the character U+000A, as determined by the underlying platform's conventions.  While <var>position</var> is not past the end of <var>input</var>, run the following sub-steps:</p>
       <ol>
-        <li><p><a href="#collect-a-sequence-of-characters">Collect a sequence of characters</a> that are <em>not</em> U+00A or U+00D.</p></li>
+        <li><p><a href="#collect-a-sequence-of-characters">Collect a sequence of characters</a> that are <em>not</em> U+000A or U+000D.</p></li>
         <li><p>Add the string collected in the previous step to <var>result</var>.  If <var>position</var> is past the end of <var>input</var> return <var>result</var> and exit this algorithm.</p></li>
-        <li><p>If the character at <var>position</var> is U+00D, and the character at <var>position</var>+1 is U+00A, advance <var>position</var> by two characters, and add <var>native line ending</var> to <var>result</var>.</p></li>
-        <li><p>If the character at <var>position</var> is U+00A, add <var>native line ending</var> to <var>result</var> and advance <var>position</var> by one character.</p></li>
+        <li><p>If the character at <var>position</var> is U+000D, and the character at <var>position</var>+1 is U+000A, advance <var>position</var> by two characters, and add <var>native line ending</var> to <var>result</var>.</p></li>
+        <li><p>If the character at <var>position</var> is U+000A, add <var>native line ending</var> to <var>result</var> and advance <var>position</var> by one character.</p></li>
       </ol></li>
     </ol>
 </dd>
