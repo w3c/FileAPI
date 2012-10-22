@@ -33,7 +33,7 @@
     <options xmlns='http://mcc.id.au/ns/local'>
       <versions>
         <cvs href='http://dev.w3.org/2006/webapi/FileAPI/'/>
-        <this href='http://www.w3.org/TR/2012/WD-FileAPI-20121018/' />
+        <this href='http://www.w3.org/TR/2012/WD-FileAPI-20121025/' />
         <previous href='http://www.w3.org/TR/2012/WD-FileAPI-20120712/' />
         <latest href='http://www.w3.org/TR/FileAPI/' />
       </versions>
@@ -42,7 +42,7 @@
           <name>Arun Ranganathan</name>
           <affiliation>Mozilla Corporation</affiliation>
         </person>
-         <person homepage='http://sicking.cc/' email='jonas@sicking.cc'>
+         <person homepage='https://mozillians.org/en-US/sicking' email='jonas@sicking.cc'>
             <name>Jonas Sicking</name>
             <affiliation>Mozilla Corporation</affiliation>
         </person>
@@ -1577,7 +1577,9 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
     <li>The optional <a href="#dfn-objectURLOptions"><code>objectURLOptions</code></a> dictionary argument called <dfn id="dfn-options-objectURL"><code>options</code></dfn> has a boolean member <dfn id="dfn-autoRevoke"><code>autoRevoke</code></dfn> that defaults to <code>true</code>; if called without using the optional dictionary, or if called with <code>autoRevoke</code> set to <code>true</code>, execute the following sub-steps:
     <ol type="a">
       <li>Return a unique <a href="#url"><code>Blob</code> URI</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument, and run the rest of this algorithm asynchronously.</li>
-      <li><a href="#provide-a-stable-state">Provide a stable state</a></li>
+      <li><p><a href="#provide-a-stable-state">Provide a stable state</a></p>
+     <div class="ednote">Note: <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=19554">Bug 19544</a> will determine this algorithmic step.  What is marked here is provisional and therefore unreliable; final <code>autoRevoke</code> behavior will be determined by the solution to that bug. </div>
+    </li>
       <li>Revoke the <a href="#url"><code>Blob</code> URI</a>, which is equivalent to calling <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> on it, and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</li>
     </ol>
     </li>
