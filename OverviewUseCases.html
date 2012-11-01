@@ -113,7 +113,7 @@
 
     <div id="toc">
       <h2>Table of Contents</h2>
-      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#requirements">2. Requirements</a></li><li><a href="#scenarios">3. Use Case Scenarios</a><ul><li><a href="#banking-korea">3.1. Banking Transactions</a></li><li><a href="#video-service">3.2. Dr. What: Video Service</a></li><li><a href="#data-integrity">3.3. Bandwidth Saver</a></li><li><a href="#encrypt">3.4. Mitch Turns 21: Encrypted Communications</a></li><li><a href="#realtime-messaging">3.5. Off The Record Real Time Messaging</a></li><li><a href="#savemystuff">3.6. In the Cloud</a></li></ul></li></ul></div>
+      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#requirements">2. Requirements</a></li><li><a href="#scenarios">3. Use Case Scenarios</a><ul><li><a href="#banking-korea">3.1. Banking Transactions</a></li><li><a href="#video-service">3.2. Dr. What: Video Service</a></li><li><a href="#data-integrity">3.3. Safe Bandwidth Saver</a></li><li><a href="#encrypt">3.4. Mitch Turns 21: Encrypted Communications</a></li><li><a href="#realtime-messaging">3.5. Off The Record Real Time Messaging</a></li><li><a href="#savemystuff">3.6. Documents In the Cloud</a></li></ul></li></ul></div>
     </div>
 
     <div id="sections">
@@ -157,29 +157,44 @@
       <h3>3.2. Dr. What: Video Service</h3>
       <p>Virginie connects to her favorite video service to watch an episode of a show she is interested in using her entertainment device, which connects to the biggest screen in her living room.  The video service collects a monthly subscription fee and allows the watching of five streaming movies a month at that fee, and streams high definition content over an Internet connection.  Virginie does the following:</p>
       <ol>
-        <li><p>She sets her device up to interact with the service.  During this process, the entertainment device generates the keys it will use and exchanges them safely with the video service [<a href="#derive">DERIVE</a> | <a href="#derive-pki">DERIVE-PKI</a> | <a href="#keys-dh">KEYEX-DH</a>].</p></li>
+        <li><p>She sets her device up to interact with the service.  Her device runs a user agent that meets the conformance criteria for the Web Cryptography API specification.  During the set up process, the entertainment device generates the keys it will use and exchanges them safely with the video service [<a href="#derive">DERIVE</a> | <a href="#derive-pki">DERIVE-PKI</a> | <a href="#keys-dh">KEYEX-DH</a>].</p></li>
         <li><p>Subsequent access to the video service from her device is seamless, and it identifies her as Virginie, loading her preferences and her watch queue. [<a href="#keycall">KEYCALL</a> | <a href="#decrypt-pki">DECRYPT-PKI</a> | <a href="#sign">??SIGN</a>].  She can access the service and browse videos to watch.</p></li> 
         <li><p>She selects her favorite show -- Dr. What -- and picks an episode that she has not yet seen.  The service then determines that she is authorized to watch that video, and streams that video. [???] </p></li>
         <li><p>Virginie rates the video so that the service understands her preferences.  Along with personalized data about Virginie, the device sends usage statistics and metrics back to the service [<a href="#mac">MAC</a> | <a href="#encrypt-sym">ENCRYPT-SYM</a> | <a href="#encrypt-pki">ENCRYPT-PKI</a>].</p></li>
       </ol>
     </div>
     <div id="data-integrity" class="section">
-      <h3>3.3. Bandwidth Saver</h3>
+      <h3>3.3. Safe Bandwidth Saver</h3>
       <p>A major social networking site wishes to optimize website performance by storing JavaScript and other resources in local storage, preventing a needless server roundrip.  The social network site wishes to verify that these resources have not been tampered with.  [<a href="#hash">HASH</a> | <a href="#keycall">KEYCALL</a> |  <a href="#verify">VERIFY</a>]</p>
   </div>
    <div id="encrypt" class="section">
     <h3>3.4. Mitch Turns 21: Encrypted Communications</h3>
-    <p>Mark wishes to post pictures of Mitch's 21st birthday party to a social network that allows confidential communication between members, but wishes to ensure that these pictures are safe from prying eyes.  He only wants Mitch to be able to view these pictures.  Mark can do the following: </p>
+    <p>Mark wishes to post pictures of Mitch's 21st birthday party to a social network that allows confidential and encrypted communication between members, but wishes to ensure that these pictures are safe from prying eyes -- more importantly, he wants them to be undecipherable digital data for everyone except Mitch.  Mark can do the following: </p>
     <ol>
-      <li><p>He can encrypt the photos with a key he generates for the occasion. [DERIVE | ENCRYPT]</p></li>
-      <li><p>He can communicate with others on the network about the key and share the encrypted photos. [KEYEX | ENCRYPT-PKI] ?? WRAPPED KEYS ??</p></li>
+      <li><p>He can encrypt the photos with a key he generates for the occasion. [<a href="#derive">DERIVE</a> | <a href="#encrypt">ENCRYPT</a>]</p></li>
+      <li><p>He can communicate with others on the network about the key and share the encrypted photos. [<a href="#keyex">KEYEX</a> | <a href="#encrypt-pki">ENCRYPT-PKI</a>] </p></li>
+      <li><p>He can receive confidential communication from Mitch about the pictures via encrypted messages that are virtually impossible to read by any other entity than Mark. [<a href="#verify">VERIFY</a> | <a href="#decrypt-pki">DECRYPT-PKI</a>]</p></li>
     </ol>
    </div>
   <div id="realtime-messaging" class="section">
     <h3>3.5. Off The Record Real Time Messaging</h3>
+    <p>David and Nadim wish to have an "Off The Record" chat in real time, completely between them, and in text, including the ability to share digital data such as photographs.  They log on to a chat server that serves up web content, and connect to each other's machines directly.  The server merely serves up the chat client necessary, and does not log their conversation (and in fact cannot).  David and Nadim need to:</p>
+    <ul>
+      <li><p>Be assured that they are who they claim they are. [DECRYPT | DECRYPT-PKI | ENCRYPT | ENCRYPT-PKI] </p></li>
+      <li><p>Be assured that during a conversation, messages sent back and forth are unmodified. [RANDOM | ENCRYPT | DECRYPT] </p></li>
+      <li><p>Be assured that after the conversation, the contents of the conversation cannot be determined. [???] </p></li>
+    </ul>
+
   </div>
   <div id="savemystuff" class="section">
-    <h3>3.6. In the Cloud</h3>
+    <h3>3.6. Documents In the Cloud</h3>
+    <p>Vijay wishes to confidentially store certain documents, including photos, music, pages from the novel he is working on, and notes about his employer using a web service that he pays a monthly subscription to for such confidential storage.  He can drag and drop content from his laptop onto a web page of the service, and it automatically stores it in an encrypted manner.  Vijay can do the following:</p>
+    <ol>
+      <li><p>Log on to the service using his credentials; after the service determines that Vijay is using his primary browser, which he will use to access the service subsequently, it generates encryption keys. [DERIVE | DERIVE-PKI] </p></li>
+      <li><p>Drag over content from his underlying file system that he wishes to store. [ENCRYPT-PKI] </p></li>
+      <li><p>Store that content on the server, with the assurance that it is stored there in a way that is virtually undecipherable to third-parties, including employees of the service in question.</p></li>
+      <li><p>Later, Vijay can retrieve the content, and save it back to his local file system. [DECRYPT-PKI] </p></li>
+    </ol>
   </div>
  </div>
 </div>
