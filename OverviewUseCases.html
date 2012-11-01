@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+  Overview.html
+  Web IDL
+
+  Note: This file is generated from Overview.xml.  Run "make" to regenerate it.
+  -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Web Cryptography API Use Cases</title>
+
+    <meta name="revision" content="$Id$" />
+
+    <link rel="stylesheet" href="FileAPI.css" type="text/css" />
+    <script src="section-links.js" type="application/ecmascript"></script>
+    <script src="dfn.js" type="application/ecmascript"></script>
+    <!--[if IE]>
+    <style type='text/css'>
+      .ignore {
+        -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+        filter: alpha(opacity=50);
+      }
+    </style>
+    <![endif]-->
+
+    
+  <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
+
+  <body>
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>Web Cryptography API Use Cases</h1><h2>W3C Editor’s Draft <em>22 October 2012</em></h2><dl><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20120712/">http://www.w3.org/TR/2012/WD-FileAPI-20120712/</a></dd><dt>Editor:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dt>Participate:</dt><dd></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2012 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
+
+    <div class="section">
+      <h2>Abstract</h2>
+     <p>
+      This document collates the target use cases for the Web Cryptography API.  These use cases, described as <em>scenarios</em>, represent the set of expected functionality that may be achieved by the Web Cryptography API .  A set of "secondary" functionality may also be documented here as scenarios.
+    </p>
+
+
+      <div class="ednote"><div class="ednoteHeader">Editorial note</div><p>This is revision $Id$.</p></div>
+    </div>
+
+    <div class="section">
+      <h2>Status of this Document</h2>
+      <p><em>
+        This section describes the status of this document at the time of
+        its publication.  Other documents may supersede this document. A list
+        of current W3C publications and the latest revision of this technical
+        report can be found in the <a href="http://www.w3.org/TR/">W3C technical
+          reports index</a> at http://www.w3.org/TR/.
+      </em></p><p>
+        This document is the 22 October 2012 <b>Editor’s Draft</b> of the
+        <cite>Web Cryptography API Use Cases</cite> specification.
+      
+      Please send comments about this document to
+      <a href="mailto:public-webcrypto@w3.org">public-webcrypto@w3.org</a>
+      (<a href="http://lists.w3.org/Archives/Public/public-webcrypto/">archived</a>).
+    </p>
+      <p>
+         Ongoing discussion of this document will be on the <a href="mailto:public-webcrypto@w3.org">public-webcrypto@w3.org</a>
+        mailing list.
+      </p>
+      
+      <p>
+      <em>This section describes the status of this document at the time of its publication.
+      Other documents may supersede this document, since it is only an editor's draft.
+      A list of current <acronym title="World Wide Web Consortium">W3C</acronym>
+      publications and the latest revision of this technical report can be found in the 
+      <a href="http://www.w3.org/TR/"><acronym title="World Wide Web Consortium">W3C</acronym>
+      technical reports index</a> at <a href="http://www.w3.org/TR/">http://www.w3.org/TR/</a>.</em>
+      </p>
+
+    <p>
+      This document is produced by the <a href="http://www.w3.org/2012/webcrypto/">Web <acronym title="Cryptography">Cryptography</acronym>
+      <acronym title="Working Group">WG</acronym></a> in the <acronym title="World Wide Web Consortium">W3C</acronym>
+      <a href="http://www.w3.org/Interaction/">Interaction Domain</a>.
+    </p>
+    <p>
+      Web content and browser developers are encouraged to review this draft. Please send comments to
+      <a href="mailto:public-webcrypto@w3.org">public-webcrypto@w3.org</a>, the <acronym title="World Wide Web Consortium">W3C</acronym>'s
+      public email list for issues related to Web <acronym title="Application Programming Interface">API</acronym>s.
+      <a href="http://lists.w3.org/Archives/Public/public-webcrypto/">Archives</a> of the
+      list are available.
+    </p>
+    <p>
+        This document is produced by the <a href="http://www.w3.org/2012/webcrypto/">Web Cryptography Working Group</a>, within
+        the W3C <a href="http://www.w3.org/Interaction/">Interaction Domain</a>.
+        Changes made to this document can be found in the
+        <a href="http://dev.w3.org/cvsweb/2006/webapi/FileAPI/Overview-UseCases.xml">W3C public CVS server</a>.
+    </p>
+      <p>
+          Publication as an Editor’s Draft does not imply endorsement by the
+          W3C Membership.  This is a draft document and may be updated, replaced
+          or obsoleted by other documents at any time. It is inappropriate to cite
+          this document as other than work in progress.
+        </p><p>
+      This document was produced by a group operating under the
+      <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February
+        2004 W3C Patent Policy</a>. W3C maintains a
+      <a href="http://www.w3.org/2004/01/pp-impl/42538/status">public list of
+        any patent disclosures</a> made in connection with the deliverables of
+      the group; that page also includes instructions for disclosing a patent.
+      An individual who has actual knowledge of a patent which the individual
+      believes contains
+      <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
+        Claim(s)</a> must disclose the information in accordance with
+      <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
+        6 of the W3C Patent Policy</a>.
+    </p>
+    </div>
+
+    <div id="toc">
+      <h2>Table of Contents</h2>
+      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#requirements">2. Requirements</a></li><li><a href="#scenarios">3. Use Case Scenarios</a><ul><li><a href="#banking-korea">3.1. Banking Transactions</a></li><li><a href="#video-service">3.2. Dr. What: Video Service</a></li><li><a href="#data-integrity">3.3. Bandwidth Saver</a></li><li><a href="#encrypt">3.4. Mitch Turns 21: Encrypted Communications</a></li><li><a href="#realtime-messaging">3.5. Off The Record Real Time Messaging</a></li><li><a href="#savemystuff">3.6. In the Cloud</a></li></ul></li></ul></div>
+    </div>
+
+    <div id="sections">
+    <div id="introduction" class="section">
+    <h2>1. Introduction</h2>
+      <p>The Web Cryptography API describes a JavaScript API for basic cryptographic operations, including: hashing, signature generation and verification, encryption and decryption.  Additionally, it describes an API for applications to generate and/or manage the keying material necessary to perform these operations.  This document presents use cases in the form of scenarios, with each scenario describing a potential web application using the API.</p>
+    </div>
+    <div id="requirements" class="section">
+    <h2>2. Requirements</h2>
+    <p>This section presents required features of the Web Cryptography API; in many cases, the Web Cryptography API encompasses more than one algorithm and more than one mechanism to accomplish each of these features.  The section presents code names for each of the features.</p>
+    <ul>
+      <li><p><dfn id="hash">HASH</dfn>, the ability to perform a cryptographic hash, where an algorithm that takes an arbitrary block of data returns a fixed-size bit sequence, called the <dfn id="hash-value">hash value</dfn>, such that any change to the block of data changes the hash value.</p></li>
+      <li><p><dfn id="mac">MAC</dfn>, the ability to generate a <em>message authentication code</em>, using an algorithm</p></li>
+      <li><p><dfn id="sign">SIGN</dfn>, the ability to digitally sign a document, such that upon verification of the signature, the document's authenticity can be determined.  The term document in this context can refer to any kind of data used in web applications.</p></li>
+      <li><p><dfn id="verify">VERIFY</dfn>, the ability to verify a digitally signed document, as well as verify a MAC.</p></li>
+      <li><p><dfn id="encrypt">ENCRYPT</dfn>, the ability to encode a document using an encryption algorithm.  <dfn id="encrypt-pki">ENCRYPT-PKI</dfn> is a specific type of encryption involving PKI, and <dfn id="encrypt-sym">ENCRYPT-SYM</dfn> is a specific type of encryption using symmetric keys.</p></li> 
+      <li><p><dfn id="decrypt">DECRYPT</dfn>, the ability to decrypt a digitally signed document.  <dfn id="decrypt-pki">DECRYPT-PKI</dfn> is a specific type of decryption using PKI, and <dfn id="decrypt-sym">DECRYPT-SYM</dfn> is a specific type of decryption using symmetric keys.</p></li>
+      <li><p><dfn id="derive">DERIVE</dfn>, the ability to derive a key or keys used in cryptographic operations; <dfn id="derive-pki">DERIVE-PKI</dfn> is the ability to derive keys usable in PKI operations.</p></li>
+      <li><p><dfn id="keyexchange">KEYEX</dfn>, the ability for two entities to exchange key(s) without interception by a third party, with <dfn id="keyex-dh">KEYEX-DH</dfn> representing Diffie-Hellman key exchange, a particularly common application of safe key exchange.</p></li>
+      <li><p><dfn id="keycall">KEYCALL</dfn>, the ability to call a particular key from a web application that either generated the key or that is in the same domain as the key.</p></li>
+      <li><p><dfn id="PKI">-PKI</dfn>, an acronym for <dfn id="pki">Public Key Infrastructure</dfn> used in this document as a suffix to other features.</p></li>
+      <li><p><dfn id="SYM">-SYM</dfn>, an acronym for <dfn id="sym">Symmetric Key</dfn> operations, used in this document as a suffix to other features.</p></li>
+      <li><p><dfn id="random">RANDOM</dfn>, the ability to generate a random cryptographically secure number.</p></li>
+
+    </ul>  
+    </div>
+    <div id="scenarios" class="section">
+      <h2>3. Use Case Scenarios</h2>
+      <p>This section collates use case scenarios based on the requirements.</p>
+      <div id="banking-korea" class="section">
+      <h3>3.1. Banking Transactions</h3>
+      <p>Park Jae-sang opens up a bank account with Gangnam Bank (GB), and wishes to log-in and engage in online transactions, including account balance checking, online payments (with some automated scheduled payments), and account transfers between domestic and investment accounts.  The first time Park logs in to the GB website with a temporary verification code sent to his cell phone, the bank asks him to ascertain if the browser he is using is not at a kiosk; moreover, he is asked if it is a web browser and machine configuration he will use often.</p>
+      <p>He confirms that it is.  The GB web site then asks him to generate a public key/private key pair, along with a digital certificate.  Park consents, and the web page creates the key pair, storing his private key in the browser's designated key store, along with a one-time key escrow by the bank. [<a href="#derive">DERIVE</a> | <a href="#keyex-dh">KEYEX-DH</a>].</p>
+      <p>Subsequent access to the GB website is triggered via presentation of the key that Park generated when he first accessed the website [<a href="#keycall">KEYCALL</a> | <a href="#decrypt-pki">DECRYPT-PKI</a> | <a href="#sign">??SIGN</a>].  His browser presents this key every time he accesses the website and enters his password, which effectively binds his username and password to the generated private key and certificate.  Additionally, Park can digitally sign online checks, authorize payments, and sign tax forms that he submits to the bank site using this generated key [<a href="#sign">SIGN</a>]. Park can also perform the following tasks:</p>
+      <ol>
+        <li><p>Park can receive documents from GB that only he can read.  These include his private bank statements and tax documents. [<a href="#decrypt-pki">DECRYPT-PKI</a> | <a href="#decrypt">DECRYPT</a>]</p></li>
+        <li><p>Park can submit documents to GB that only GB can read, with the assurance that these have come from Park.  Such documents include confidential financial information. [<a href="#encrypt-pki">ENCRYPT-PKI</a>]</p></li> 
+      </ol>
+    </div>
+    <div id="video-service" class="section">    
+      <h3>3.2. Dr. What: Video Service</h3>
+      <p>Virginie connects to her favorite video service to watch an episode of a show she is interested in using her entertainment device, which connects to the biggest screen in her living room.  The video service collects a monthly subscription fee and allows the watching of five streaming movies a month at that fee, and streams high definition content over an Internet connection.  Virginie does the following:</p>
+      <ol>
+        <li><p>She sets her device up to interact with the service.  During this process, the entertainment device generates the keys it will use and exchanges them safely with the video service [<a href="#derive">DERIVE</a> | <a href="#derive-pki">DERIVE-PKI</a> | <a href="#keys-dh">KEYEX-DH</a>].</p></li>
+        <li><p>Subsequent access to the video service from her device is seamless, and it identifies her as Virginie, loading her preferences and her watch queue. [<a href="#keycall">KEYCALL</a> | <a href="#decrypt-pki">DECRYPT-PKI</a> | <a href="#sign">??SIGN</a>].  She can access the service and browse videos to watch.</p></li> 
+        <li><p>She selects her favorite show -- Dr. What -- and picks an episode that she has not yet seen.  The service then determines that she is authorized to watch that video, and streams that video. [???] </p></li>
+        <li><p>Virginie rates the video so that the service understands her preferences.  Along with personalized data about Virginie, the device sends usage statistics and metrics back to the service [<a href="#mac">MAC</a> | <a href="#encrypt-sym">ENCRYPT-SYM</a> | <a href="#encrypt-pki">ENCRYPT-PKI</a>].</p></li>
+      </ol>
+    </div>
+    <div id="data-integrity" class="section">
+      <h3>3.3. Bandwidth Saver</h3>
+      <p>A major social networking site wishes to optimize website performance by storing JavaScript and other resources in local storage, preventing a needless server roundrip.  The social network site wishes to verify that these resources have not been tampered with.  [<a href="#hash">HASH</a> | <a href="#keycall">KEYCALL</a> |  <a href="#verify">VERIFY</a>]</p>
+  </div>
+   <div id="encrypt" class="section">
+    <h3>3.4. Mitch Turns 21: Encrypted Communications</h3>
+    <p>Mark wishes to post pictures of Mitch's 21st birthday party to a social network that allows confidential communication between members, but wishes to ensure that these pictures are safe from prying eyes.  He only wants Mitch to be able to view these pictures.  Mark can do the following: </p>
+    <ol>
+      <li><p>He can encrypt the photos with a key he generates for the occasion. [DERIVE | ENCRYPT]</p></li>
+      <li><p>He can communicate with others on the network about the key and share the encrypted photos. [KEYEX | ENCRYPT-PKI] ?? WRAPPED KEYS ??</p></li>
+    </ol>
+   </div>
+  <div id="realtime-messaging" class="section">
+    <h3>3.5. Off The Record Real Time Messaging</h3>
+  </div>
+  <div id="savemystuff" class="section">
+    <h3>3.6. In the Cloud</h3>
+  </div>
+ </div>
+</div>
+  
+</body>
+</html>
