@@ -169,7 +169,7 @@
   </div>
    <div id="encrypt" class="section">
     <h3>3.4. Mitch Turns 21: Encrypted Communications</h3>
-    <p>Mark wishes to post pictures of Mitch's 21st birthday party to a social network that allows confidential and encrypted communication between members, but wishes to ensure that these pictures are safe from prying eyes -- more importantly, he wants them to be undecipherable digital data for everyone except Mitch.  Mark can do the following: </p>
+    <p>Mark wishes to post pictures of Mitch's 21st birthday party to a social network that allows confidential and encrypted communication between members, but wishes to ensure that these pictures are safe from prying eyes -- more importantly, he wants them to be indecipherable digital data for everyone except Mitch.  Mark can do the following: </p>
     <ol>
       <li><p>He can encrypt the photos with a key he generates for the occasion. [<a href="#derive">DERIVE</a> | <a href="#encrypt">ENCRYPT</a>]</p></li>
       <li><p>He can communicate with others on the network about the key and share the encrypted photos. [<a href="#keyex">KEYEX</a> | <a href="#encrypt-pki">ENCRYPT-PKI</a>] </p></li>
@@ -180,8 +180,8 @@
     <h3>3.5. Off The Record Real Time Messaging</h3>
     <p>David and Nadim wish to have an "Off The Record" chat in real time, completely between them, and in text, including the ability to share digital data such as photographs.  They log on to a chat server that serves up web content, and connect to each other's machines directly.  The server merely serves up the chat client necessary, and does not log their conversation (and in fact cannot).  David and Nadim need to:</p>
     <ul>
-      <li><p>Be assured that they are who they claim they are. [DECRYPT | DECRYPT-PKI | ENCRYPT | ENCRYPT-PKI] </p></li>
-      <li><p>Be assured that during a conversation, messages sent back and forth are unmodified. [RANDOM | ENCRYPT | DECRYPT] </p></li>
+      <li><p>Be assured that they are who they claim they are. [<a href="#decrypt">DECRYPT</a> | <a href="#decrypt-pki">DECRYPT-PKI</a> | <a href="#encrypt">ENCRYPT</a> | <a href="#encrypt-pki">ENCRYPT-PKI</a>] </p></li>
+      <li><p>Be assured that during a conversation, messages sent back and forth are unmodified. [<a href="#random">RANDOM</a> | <a href="#encrypt">ENCRYPT</a> | <a href="#decrypt">DECRYPT</a>] </p></li>
       <li><p>Be assured that after the conversation, the contents of the conversation cannot be determined. [???] </p></li>
     </ul>
 
@@ -190,10 +190,10 @@
     <h3>3.6. Documents In the Cloud</h3>
     <p>Vijay wishes to confidentially store certain documents, including photos, music, pages from the novel he is working on, and notes about his employer using a web service that he pays a monthly subscription to for such confidential storage.  He can drag and drop content from his laptop onto a web page of the service, and it automatically stores it in an encrypted manner.  Vijay can do the following:</p>
     <ol>
-      <li><p>Log on to the service using his credentials; after the service determines that Vijay is using his primary browser, which he will use to access the service subsequently, it generates encryption keys. [DERIVE | DERIVE-PKI] </p></li>
-      <li><p>Drag over content from his underlying file system that he wishes to store. [ENCRYPT-PKI] </p></li>
+      <li><p>Log on to the service using his credentials; after the service determines that Vijay is using his primary browser, which he will use to access the service subsequently, it generates encryption keys. [<a href="#derive">DERIVE</a> | <a href="#derive-pki">DERIVE-PKI</a>] </p></li>
+      <li><p>Drag over content from his underlying file system that he wishes to store. [<a href="#encrypt-pki">ENCRYPT-PKI</a>] </p></li>
       <li><p>Store that content on the server, with the assurance that it is stored there in a way that is virtually undecipherable to third-parties, including employees of the service in question.</p></li>
-      <li><p>Later, Vijay can retrieve the content, and save it back to his local file system. [DECRYPT-PKI] </p></li>
+      <li><p>Later, Vijay can retrieve the content, and save it back to his local file system. [<a href="#decrypt-pki">DECRYPT-PKI</a>] </p></li>
     </ol>
   </div>
  </div>
