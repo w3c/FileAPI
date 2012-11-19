@@ -113,7 +113,7 @@
 
     <div id="toc">
       <h2>Table of Contents</h2>
-      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#requirements">2. Requirements</a></li><li><a href="#scenarios">3. Use Case Scenarios</a><ul><li><a href="#banking-korea">3.1. Banking Transactions</a></li><li><a href="#video-service">3.2. Dr. What: Video Service</a></li><li><a href="#data-integrity">3.3. Safe Bandwidth Saver</a></li><li><a href="#encrypt">3.4. Mitch Turns 21: Encrypted Communications</a></li><li><a href="#realtime-messaging">3.5. Off The Record Real Time Messaging</a></li><li><a href="#savemystuff">3.6. Documents In the Cloud</a></li></ul></li></ul></div>
+      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#requirements">2. Requirements</a></li><li><a href="#scenarios">3. Use Case Scenarios</a><ul><li><a href="#banking-korea">3.1. Banking Transactions</a></li><li><a href="#video-service">3.2. Dr. What: Video Service</a></li><li><a href="#data-integrity">3.3. Code Sanctity and Bandwidth Saver</a></li><li><a href="#encrypt">3.4. Mitch Turns 21: Encrypted Communications</a></li><li><a href="#realtime-messaging">3.5. Off The Record Real Time Messaging</a></li><li><a href="#savemystuff">3.6. Documents In the Cloud</a></li></ul></li></ul></div>
     </div>
 
     <div id="sections">
@@ -164,8 +164,52 @@
       </ol>
     </div>
     <div id="data-integrity" class="section">
-      <h3>3.3. Safe Bandwidth Saver</h3>
-      <p>A major social networking site wishes to optimize website performance by storing JavaScript and other resources in local storage, preventing a needless server roundrip.  The social network site wishes to verify that these resources have not been tampered with.  [<a href="#hash">HASH</a> | <a href="#keycall">KEYCALL</a> |  <a href="#verify">VERIFY</a>]</p>
+      <h3>3.3. Code Sanctity and Bandwidth Saver</h3>
+      <p>A major social networking site wishes to optimize website performance by storing JavaScript and other resources in local storage, preventing a needless server roundrip.  The social network site wishes to verify that these resources have not been tampered with; the service uses <a href="#localStorage"><code>localStorage</code></a> and <a href="#IndexedDB"><code>IndexedDB</code></a> to store assets for their web pages, notably JavaScript.  Their threat model is such that the social networking site implicitly trusts the HTTP connection (which uses TLS), the browser, and the HTTP cache, but cannot vouch for localStorage or IndexedDB.  Let us take the case of a couple who have gone from being "In a Relationship" to "It's Complicated."  John Doe uses the social networking site often, while Jane Doe, a JavaScript programmer, packs her bags to move out of the apartment.
+      <div class="example"><div class="exampleHeader">Example</div>
+      <p>This illustrates a worst case scenario, in which <code>localStorage</code> is compromised by a malicious user.  Normally, the social networking site deploys code of the sort below, which John Doe's browser runs everytime he logs into the social networking site.</p>
+      <div class="block"><div class="blockTitleDiv"><span class="blockTitle">ECMAScript</span></div><div class="blockContent"><pre class="code"><code class="es-code">
+      function init() {
+      var src = window.localStorage.getItem('src');
+      <span class="comment">// up until now env is safe</span>
+      if (src) {
+      <span class="comment">  // now whatever code was in src will be executed</span>
+        eval(src);
+      } else {
+        <span class="comment">// fetch the code using xhr, populate localStorage</span>
+        <span class="comment">// with it. Execute it.</span>
+      }
+    }
+      </code></pre></div></div>
+      <p>But at some point in time, a malicious user -- Jane Doe -- with access to the JavaScript console of John Doe's browser does something of the sort:</p>
+      <div class="block"><div class="blockTitleDiv"><span class="blockTitle">ECMAScript</span></div><div class="blockContent"><pre class="code"><code class="es-code"> 
+      window.localStorage.setItem('src', evil_code);
+      <span class="comment">// evil_code sends photos to Jane Doe's personal server.</span>
+      </code></pre></div></div>
+      <p>John Doe's use of the social network is thus compromised by Jane Doe's script injection, since the next time he logs in, and <code>init()</code> is called, <code>evil_code</code> is run, which may upload his private photos to Jane Doe's server.  To mitigate against situations like this, the social networking site might do something like this:</p>
+      <div class="block"><div class="blockTitleDiv"><span class="blockTitle">ECMAScript</span></div><div class="blockContent"><pre class="code"><code class="es-code">
+      <span class="comment">// Synchronously retrieve an MD5 hash of the pristine version of the code</span>
+      <span class="comment">// This is retrieved from the server</span>
+        var src_hash = getHashFromServer();
+        function init()
+        {
+          var src = window.localStorage.getItem('src');
+
+          <span class="comment">// validateSrc is an utility function that wraps the Crypto API</span>
+
+          validateSrc(src, src_hash, success, failFetch);
+
+          function success(){eval(src)};
+          function failFetch(){<span class="comment">//Fetch the code using XHR, and populate localStorage with it</span>};
+
+        }
+
+      </code></pre></div></div>
+      <p>In this case, <code>getHashFromServer()</code> is guaranteed to be untampered with, since it connects to the server or the HTTP cache, which are above suspicion.
+    </p>
+      </div>
+
+          [<a href="#hash">HASH</a> | <a href="#keycall">KEYCALL</a> |  <a href="#verify">VERIFY</a>]</p>
   </div>
    <div id="encrypt" class="section">
     <h3>3.4. Mitch Turns 21: Encrypted Communications</h3>
