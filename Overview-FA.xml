@@ -825,10 +825,10 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	<dfn id="partial-blob-data">Partial Blob data</dfn> is the part of the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a>
 	that has been read into memory <em>currently</em>;
 	when processing the <a href="#read-methods">read method</a>
-	<a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a>, partial Blob data is a <code>DOMString</code> that is incremented as more bytes
-	are <code>loaded</code> (a portion of the <code>total</code>) [<a href="#ProgressEvents">ProgressEvents</a>], and
+	<a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a>, partial Blob data is a <code>DOMString</code> return type for <a href="#dfn-result"><code>result</code></a> that consists of the bytes that 
+	are <code>loaded</code> at that point (as a portion of the <code>total</code>) [<a href="#ProgressEvents">ProgressEvents</a>], and
 	when processing <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer</code></a> partial Blob data is an
-	<code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] object consisting of the bytes <code>loaded</code> so far (a portion of the
+	<code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] return type for <a href="#dfn-result"><code>result</code></a> consisting of the bytes <code>loaded</code> at that point (as a portion of the
 	<code>total</code>)[<a href="#ProgressEvents">ProgressEvents</a>].  
 	The list below is normative for the <code>result</code> attribute and is the conformance criteria for this attribute:
 	</p>
@@ -848,7 +848,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	  by the <a href="#encoding-determination">encoding determination</a>.  On getting, <em>while processing</em> the
 	  <a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a> <a href="#read-methods">read method</a>, this attibute should return
 	  <a href="#partial-blob-data">partial Blob data</a> in the format specified by
-	  the <a href="#encoding-determination">encoding determination</a> as a <code>DOMString</code> that is incremented as more data is read.
+	  the <a href="#encoding-determination">encoding determination</a> as a <code>DOMString</code>.
 	  User agents must return at least one such <code>result</code>, with the final <code>result</code> returned at completion of the read.  See the <a href="#encodingCaveat">caveat about</a>
 	  <a href="#partial-blob-data">partial Blob data</a> being valid within a giving encoding.
 	  </p></li>
@@ -903,7 +903,8 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	  attribute as part of the Data URL if it is available in keeping with the Data URL specification [<a href="#DataURL">DataURL</a>] .</li>
 	  <li>If the <a href="#dfn-type"><code>type</code></a> attribute is not available on the <a href="#dfn-fileBlob"><code>blob</code></a> return a Data URL without a media-type.
 	  [<a href="#DataURL">DataURL</a>].
-	  <p>Data URLs that do not have media-types [<a href="#RFC2046">RFC2046</a>] must be treated as plain text by conforming user agents. [<a href="#DataURL">DataURL</a>].</p>
+	  <p>Data URLs that do not have media-types [<a href="#RFC2046">RFC2046</a>] must be treated as plain text by conforming user agents. [<a href="#DataURL">DataURL</a>].
+  </p>
 
 	  </li>
 	  </ul>
