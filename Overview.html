@@ -1579,7 +1579,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
     <li>The optional <a href="#dfn-objectURLOptions"><code>objectURLOptions</code></a> dictionary argument called <dfn id="dfn-options-objectURL"><code>options</code></dfn> has a boolean member <dfn id="dfn-autoRevoke"><code>autoRevoke</code></dfn> that defaults to <code>true</code>; if called without using the optional dictionary, or if called with <code>autoRevoke</code> set to <code>true</code>, execute the following <dfn id="autoRevoke"><code>autoRevoke</code> sub-steps</dfn>:
     <ol type="a">
       <li>Return a unique <a href="#url"><code>Blob</code> URI</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument.</li>
-      <li><p>Add revoking the <a href-"#url"><code>Blob</code> URI</a> to the <a href="#global-script-cleanup-jobs-list">global script clean-up jobs list</a>.  When user agents process the <a href="#global-script-cleanup-jobs">global script clean-up jobs</a>, they must treat revoking a <a href-"#url"><code>Blob</code> URI</a> as equivalent to calling <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> on it.</p>
+      <li><p>Add revoking the <a href="#url"><code>Blob</code> URI</a> to the <a href="#global-script-cleanup-jobs-list">global script clean-up jobs list</a>.  When user agents process the <a href="#global-script-cleanup-jobs">global script clean-up jobs</a>, they must treat revoking a <a href="#url"><code>Blob</code> URI</a> as equivalent to calling <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> on it.</p>
     </li>
     <li><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</li>
     </ol>
