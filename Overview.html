@@ -895,7 +895,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	  <li><p>If no error has occurred, set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
 	  <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
 	<li><p>Return the <code>readAsDataURL()</code> method, but continue to process the steps in this algorithm. </p></li>
-	<li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-progress-event"><code>progress</code></a> at completion of the read.</p></li>
+	<li><p><a href="#make-progress-notifications">Make progress notifications.</a> There must be no <a href="#partial-blob-data">partial Blob data</a> associated with this <a href="#read-methods">read method</a>; while processing the read, <a href="#dfn-result"><code>result</code></a> returns <code>null</code> until the read is complete.</p></li>
 	  <li><p><a href="#queue-a-task">Queue a task</a> to update the <a href="#dfn-result"><code>result</code></a> attribute with the <a href="#dfn-fileBlob"><code>blob</code></a> as a
 	  DataURL [<a href="#DataURL">DataURL</a>] after it has been fully read into memory; on getting, the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute returns the (complete) data of <a href="#dfn-fileBlob"><code>blob</code></a> as a
 	  Data URL [<a href="#DataURL">DataURL</a>].</p>
@@ -910,10 +910,8 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	  </li>
 	  </ul>
 	  </li>
-	  <li><p>Set <a href="#dfn-readyState"><code>readyState</code></a> to
+	  <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, set <a href="#dfn-readyState"><code>readyState</code></a> to
 	  <a href="#dfn-done"><code>DONE</code></a></p></li>
-	  <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-load-event"><code>load</code></a>.</p></li>
-	  <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a>.</p></li>
 	  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p></li>
 	</ol>
 	</div>
