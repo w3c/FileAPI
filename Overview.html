@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor's Draft <em>February 22 2013</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI">http://dev.w3.org/2006/webapi/FileAPI</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="https://mozillians.org/en-US/sicking">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor's Draft <em>March 7 2013</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI">http://dev.w3.org/2006/webapi/FileAPI</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="https://mozillians.org/en-US/sicking">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2013 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -43,7 +43,7 @@
 	        such as its name and the date of the last modification (on disk) of the file.</li>
             <li>A <a href="#dfn-filereader" class="dfnref">FileReader</a> interface, which provides methods to read a
             <a href="#dfn-file">File</a> or a <a href="#dfn-Blob">Blob</a>, and an event model to obtain the results of these reads.</li>
-            <li>A <a href="#url" class="dfnref">URI scheme</a> for use with binary data such as files, so that they can be referenced within web applications.</li>
+            <li>A <a href="#url" class="dfnref">URL scheme</a> for use with binary data such as files, so that they can be referenced within web applications.</li>
 
 
         </ul>
@@ -73,7 +73,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the February 22 2013 <b>Editor's Draft</b> of the
+        This document is the March 7 2013 <b>Editor's Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -141,7 +141,7 @@
 
     <div id="toc">
       <h2>Table of Contents</h2>
-      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#dependencies">3. Dependencies</a></li><li><a href="#terminology">4. Terminology and Algorithms</a></li><li><a href="#filelist-section">5. The FileList Interface</a><ul><li><a href="#attributes-filelist">5.1. Attributes</a></li><li><a href="#filelist-methods-params">5.2. Methods and Parameters</a></li></ul></li></li><li><a href="#blob">6. The Blob Interface</a><ul><li><a href="#constructorBlob">6.1. Constructors</a><ul><li><a href="#constructorParams">6.1.1. Constructor Parameters</a></li></ul></li><li><a href="#snapshot-state-section">6.2. Snapshot State</a></li><li><a href="#attributes-blob">6.3. Attributes</a></li><li><a href="#methodsandparams-blob">6.4. Methods and Parameters</a><ul><li><a href="#slide-method-algo">6.4.1. The slice method</a></li><li><a href="#close-method">6.4.2. The close method</a></li></ul></li></ul></li><li><a href="#file">7. The File Interface</a><ul><li><a href="#file-attrs">7.1. Attributes</a></li></ul></li><li><a href="#FileReader-interface">8. The FileReader Interface</a><ul><li><a href="#blobreader-task-source">8.1. The FileReader Task Source</a></li><li><a href="#filereaderConstrctr">8.2. Constructors</a></li><li><a href="#event-handler-attributes-section">8.3. Event Handler Attributes</a></li><li><a href="#blobreader-state">8.4. FileReader States</a></li><li><a href="#reading-a-file">8.5. Reading a File or Blob</a><ul><li><a href="#MultipleReads">8.5.1. Multiple Reads</a></li><li><a href="#filedata-attr">8.5.2. The result attribute</a></li><li><a href="#readAsDataURL">8.5.3. The readAsDataURL(blob) method</a></li><li><a href="#readAsDataText">8.5.4. The readAsText(blob, encoding) method</a></li><li><a href="#readAsArrayBuffer">8.5.5. The readAsArrayBuffer(blob) method</a></li><li><a href="#abort">8.5.6. The abort() method</a></li><li><a href="#blobAndFileParams">8.5.7. Blob Parameters</a></li><li><a href="#enctype">8.5.8. Determining Encoding</a></li><li><a href="#events">8.5.9. Events</a><ul><li><a href="#event-summary">8.5.9.1. Event Summary</a></li><li><a href="#eventInvariants">8.5.9.2. Summary of Event Invariants</a></li></ul></li></ul></li></ul></li><li><a href="#readingOnThreads">9. Reading on Threads</a><ul><li><a href="#FileReaderSync">9.1. The FileReaderSync Interface</a><ul><li><a href="#filereadersyncConstrctr">9.1.1. Constructors</a></li><li><a href="#readAsTextSync">9.1.2. The readAsText method</a></li><li><a href="#readAsDataURLSync-section">9.1.3. The readAsDataURL method</a></li><li><a href="#readAsArrayBufferSyncSection">9.1.4. The readAsArrayBuffer method</a></li></ul></li></ul></li><li><a href="#ErrorAndException">10. Errors and Exceptions</a><ul><li><a href="#dfn-error-codes">10.1. Throwing an Exception or Returning an Error</a></li></ul></li><li><a href="#url">11. A URI for Blob and File reference</a><ul><li><a href="#use-cases-scheme">11.1. Requirements for a New Scheme</a></li><li><a href="#alternative-schemas">11.2. Discussion of Existing Schemes</a></li><li><a href="#ABNFForBlob">11.3. Definition of blob URI Scheme</a><ul><li><a href="#OpaqueStringDiscussion">11.3.1. The Opaque String</a></li></ul></li><li><a href="#fragmentDiscussion">11.4. Discussion of Fragment Identifier</a></li><li><a href="#originOfBlob">11.5. Origin of Blob URIs</a></li><li><a href="#lifeTime">11.6. Lifetime of Blob URIs</a></li><li><a href="#processingModel">11.7. Dereferencing Model for Blob URIs</a><ul><li><a href="#TwoHundredOK">11.7.1. 200 OK</a></li><li><a href="#FiveHundredInternalServerError">11.7.2. 500 Error Condition</a></li><li><a href="#ProtocolExamples">11.7.3. Request and Response Headers</a><ul><li><a href="#processing-media-types">11.7.3.1. Processing Media Types</a></li></ul></li></ul></li><li><a href="#creating-revoking">11.8. Creating and Revoking a Blob URI</a><ul><li><a href="#createRevokeMethodsParams">11.8.1. Methods and Parameters</a></li></ul></li><li><a href="#examplesOfCreationRevocation">11.9. Examples of Blob URI Creation and Revocation</a></li></ul></li><li><a href="#security-discussion">12. Security Considerations</a></li><li><a href="#requirements">13. Requirements and Use Cases</a></li><li><a href="#AppendixA">14. Appendix A</a><ul><li><a href="#ABNFUUID">14.1. An ABNF for UUID</a></li></ul></li><li><a href="#acknowledgements-section">15. Acknowledgements</a></li><li><a href="#references">16. References</a><ul><li><a href="#normative-references">16.1. Normative references</a></li><li><a href="#informative-references">16.2. Informative References</a></li></ul></li></ul></div>
+      <div class="toc"><ul><li><a href="#introduction">1. Introduction</a></li><li><a href="#conformance">2. Conformance</a></li><li><a href="#dependencies">3. Dependencies</a></li><li><a href="#terminology">4. Terminology and Algorithms</a></li><li><a href="#filelist-section">5. The FileList Interface</a><ul><li><a href="#attributes-filelist">5.1. Attributes</a></li><li><a href="#filelist-methods-params">5.2. Methods and Parameters</a></li></ul></li></li><li><a href="#blob">6. The Blob Interface</a><ul><li><a href="#constructorBlob">6.1. Constructors</a><ul><li><a href="#constructorParams">6.1.1. Constructor Parameters</a></li></ul></li><li><a href="#snapshot-state-section">6.2. Snapshot State</a></li><li><a href="#attributes-blob">6.3. Attributes</a></li><li><a href="#methodsandparams-blob">6.4. Methods and Parameters</a><ul><li><a href="#slide-method-algo">6.4.1. The slice method</a></li><li><a href="#close-method">6.4.2. The close method</a></li></ul></li></ul></li><li><a href="#file">7. The File Interface</a><ul><li><a href="#file-attrs">7.1. Attributes</a></li></ul></li><li><a href="#FileReader-interface">8. The FileReader Interface</a><ul><li><a href="#blobreader-task-source">8.1. The FileReader Task Source</a></li><li><a href="#filereaderConstrctr">8.2. Constructors</a></li><li><a href="#event-handler-attributes-section">8.3. Event Handler Attributes</a></li><li><a href="#blobreader-state">8.4. FileReader States</a></li><li><a href="#reading-a-file">8.5. Reading a File or Blob</a><ul><li><a href="#MultipleReads">8.5.1. Multiple Reads</a></li><li><a href="#filedata-attr">8.5.2. The result attribute</a></li><li><a href="#readAsDataURL">8.5.3. The readAsDataURL(blob) method</a></li><li><a href="#readAsDataText">8.5.4. The readAsText(blob, encoding) method</a></li><li><a href="#readAsArrayBuffer">8.5.5. The readAsArrayBuffer(blob) method</a></li><li><a href="#abort">8.5.6. The abort() method</a></li><li><a href="#blobAndFileParams">8.5.7. Blob Parameters</a></li><li><a href="#enctype">8.5.8. Determining Encoding</a></li><li><a href="#events">8.5.9. Events</a><ul><li><a href="#event-summary">8.5.9.1. Event Summary</a></li><li><a href="#eventInvariants">8.5.9.2. Summary of Event Invariants</a></li></ul></li></ul></li></ul></li><li><a href="#readingOnThreads">9. Reading on Threads</a><ul><li><a href="#FileReaderSync">9.1. The FileReaderSync Interface</a><ul><li><a href="#filereadersyncConstrctr">9.1.1. Constructors</a></li><li><a href="#readAsTextSync">9.1.2. The readAsText method</a></li><li><a href="#readAsDataURLSync-section">9.1.3. The readAsDataURL method</a></li><li><a href="#readAsArrayBufferSyncSection">9.1.4. The readAsArrayBuffer method</a></li></ul></li></ul></li><li><a href="#ErrorAndException">10. Errors and Exceptions</a><ul><li><a href="#dfn-error-codes">10.1. Throwing an Exception or Returning an Error</a></li></ul></li><li><a href="#url">11. A URL for Blob and File reference</a><ul><li><a href="#use-cases-scheme">11.1. Requirements for a New Scheme</a></li><li><a href="#alternative-schemas">11.2. Discussion of Existing Schemes</a></li><li><a href="#ABNFForBlob">11.3. Definition of blob URL Scheme</a><ul><li><a href="#OpaqueStringDiscussion">11.3.1. The Opaque String</a></li></ul></li><li><a href="#fragmentDiscussion">11.4. Discussion of Fragment Identifier</a></li><li><a href="#originOfBlob">11.5. Origin of Blob URLs</a></li><li><a href="#lifeTime">11.6. Lifetime of Blob URLs</a></li><li><a href="#processingModel">11.7. Dereferencing Model for Blob URLs</a><ul><li><a href="#TwoHundredOK">11.7.1. 200 OK</a></li><li><a href="#FiveHundredInternalServerError">11.7.2. 500 Error Condition</a></li><li><a href="#ProtocolExamples">11.7.3. Request and Response Headers</a><ul><li><a href="#processing-media-types">11.7.3.1. Processing Media Types</a></li></ul></li></ul></li><li><a href="#creating-revoking">11.8. Creating and Revoking a Blob URL</a><ul><li><a href="#createRevokeMethodsParams">11.8.1. Methods and Parameters</a></li></ul></li><li><a href="#examplesOfCreationRevocation">11.9. Examples of Blob URL Creation and Revocation</a></li></ul></li><li><a href="#security-discussion">12. Security Considerations</a></li><li><a href="#requirements">13. Requirements and Use Cases</a></li><li><a href="#AppendixA">14. Appendix A</a><ul><li><a href="#ABNFUUID">14.1. An ABNF for UUID</a></li></ul></li><li><a href="#acknowledgements-section">15. Acknowledgements</a></li><li><a href="#references">16. References</a><ul><li><a href="#normative-references">16.1. Normative references</a></li><li><a href="#informative-references">16.2. Informative References</a></li></ul></li></ul></div>
     </div>
 
     <div id="sections">
@@ -459,7 +459,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 			<dt>An <em>optional</em> <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a></dt>
 			<dd>which takes one member:
 			<ul>
-				<li><dfn id="dfn-BPtype"><code>type</code></dfn>, a <code>DOMString</code> which corresponds to the <a href="#dfn-Blob"><code>Blob</code></a> object's <a href="#dfn-type"><code>type</code></a> attribute.  If not the empty string, user agents must treat it as an RFC2616 media-type [<a href="#RFC2616">RFC2616</a>], and as an opaque string that can be ignored if it is an invalid media-type.  This value must be used as the Content-Type header when dereferencing a <a href="#url">Blob URI</a>. </li>
+				<li><dfn id="dfn-BPtype"><code>type</code></dfn>, a <code>DOMString</code> which corresponds to the <a href="#dfn-Blob"><code>Blob</code></a> object's <a href="#dfn-type"><code>type</code></a> attribute.  If not the empty string, user agents must treat it as an RFC2616 media-type [<a href="#RFC2616">RFC2616</a>], and as an opaque string that can be ignored if it is an invalid media-type.  This value must be used as the Content-Type header when dereferencing a <a href="#url">Blob URL</a>. </li>
 			</ul>
 		</dd>
 		</dl>
@@ -512,10 +512,10 @@ var d = new Blob([buffer, b, c, bytes]);
     On getting, conforming user agents must return the MIME type of the <code>Blob</code>,
     if it is known. If conforming user agents cannot determine the media type of the <code>Blob</code>, they must return the empty string.
     A string is a valid MIME type if it matches the <code>media-type</code>
-    token defined in section 3.7 "Media Types" of RFC 2616 [<a href="#RFC2616">RFC2616</a>]. If not the empty string, user agents must treat it as an RFC2616 media-type [<a href="#RFC2616">RFC2616</a>], and as an opaque string that can be ignored if it is an invalid media-type.  This value must be used as the Content-Type header when dereferencing a <a href="#url">Blob URI</a>.</p></dd>
+    token defined in section 3.7 "Media Types" of RFC 2616 [<a href="#RFC2616">RFC2616</a>]. If not the empty string, user agents must treat it as an RFC2616 media-type [<a href="#RFC2616">RFC2616</a>], and as an opaque string that can be ignored if it is an invalid media-type.  This value must be used as the Content-Type header when dereferencing a <a href="#url">Blob URL</a>.</p></dd>
     </dl>
     <div class="note"><div class="noteHeader">Note</div>
-<p>Use of the <code>type</code> attribute informs the <a href="#encoding-determination">encoding determination</a> and <a href="#processing-media-types">parsing the Content-Type header</a> when dereferencing <a href="#ABNFForBlob">blob: URIs</a>.</p>
+<p>Use of the <code>type</code> attribute informs the <a href="#encoding-determination">encoding determination</a> and <a href="#processing-media-types">parsing the Content-Type header</a> when dereferencing <a href="#ABNFForBlob">blob: URLs</a>.</p>
     </div>
     </div>
     <div id="methodsandparams-blob" class="section">
@@ -557,7 +557,7 @@ var d = new Blob([buffer, b, c, bytes]);
    </p>
    <ol type="A">
    <li><p>If the <code>contentType</code> parameter is not provided, let <var>relativeContentType</var> be set to the empty string .</p></li>
-   <li><p>Else let <var>relativeContentType</var> be set to <code>contentType</code>.   User agents must treat it as an RFC2616 media-type [<a href="#RFC2616">RFC2616</a>], and as an opaque string that can be ignored if it is an invalid media-type.  This value must be used as the Content-Type header when dereferencing a <a href="#url">Blob URI</a>.</p>
+   <li><p>Else let <var>relativeContentType</var> be set to <code>contentType</code>.   User agents must treat it as an RFC2616 media-type [<a href="#RFC2616">RFC2616</a>], and as an opaque string that can be ignored if it is an invalid media-type.  This value must be used as the Content-Type header when dereferencing a <a href="#url">Blob URL</a>.</p>
  </li>
 <li><p>This defines the normalization of the <code>contentType</code> parameter.  When processing the <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call,
     user agents must normalize <code>contentType</code> to <var>relativeContentType</var>.</p></li>
@@ -608,7 +608,7 @@ var d = new Blob([buffer, b, c, bytes]);
 </div>
 <div id="close-method" class="section">
 <h4>7.4.2. The close method</h4>
-<p>Calling the <dfn id="dfn-close"><code>close</code></dfn> method must permanently <a href="#dfn-neuter">neuter</a> the original <a href="#dfn-Blob"><code>Blob</code></a> object. This is an irreversible and non-idempotent operation; once a <a href="#dfn-Blob"><code>Blob</code></a> has been neutered, it cannot be used again; dereferencing a Blob URI bound to a Blob object on which close has been called results in a <a href="#FiveHundredInternalServerError">500 Error</a>.  A neutered <a href="#dfn-Blob"><code>Blob</code></a> must have a <a href="#dfn-size"><code>size</code></a> of 0.</p>  
+<p>Calling the <dfn id="dfn-close"><code>close</code></dfn> method must permanently <a href="#dfn-neuter">neuter</a> the original <a href="#dfn-Blob"><code>Blob</code></a> object. This is an irreversible and non-idempotent operation; once a <a href="#dfn-Blob"><code>Blob</code></a> has been neutered, it cannot be used again; dereferencing a Blob URL bound to a Blob object on which close has been called results in a <a href="#FiveHundredInternalServerError">500 Error</a>.  A neutered <a href="#dfn-Blob"><code>Blob</code></a> must have a <a href="#dfn-size"><code>size</code></a> of 0.</p>  
 
 <div class="note"><div class="noteHeader">Note</div><p>Calling <a href="#dfn-close"><code>close</code></a> must not affect an <em>ongoing</em> read operation via any asynchronous <a href="#read-methods">read methods</a> .  Calling <a href="#dfn-close"><code>close</code></a> must not affect any <a href="#dfn-Blob"><code>Blob</code></a> objects created by a <a href="#dfn-slice"><code>slice</code></a> call on the <a href="#dfn-Blob"><code>Blob</code></a> object on which <a href="#dfn-close"><code>close</code></a> has been called.  While <code>Blob</code> objects can be neutered via a call to <a href="#dfn-close"><code>close</code></a>, they are not <code>Transferable</code> [<a href="#HTML">HTML</a>].  They are immutable, and thus invalidating them on the sending side is not useful; implementations can share <code>Blob</code> data between two threads without needing invalidation.</p>
 </div>
@@ -1317,35 +1317,35 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	</div> 
 	</div>
 	<div id="url" class="section">  
-	<h2>12. A URI for Blob and File reference</h2>
-	<p>This section defines a scheme for a URI used to refer to <a href="#dfn-Blob"><code>Blob</code></a> objects (and <a href="#dfn-file"><code>File</code></a> objects). 
+	<h2>12. A URL for Blob and File reference</h2>
+	<p>This section defines a scheme for a URL used to refer to <a href="#dfn-Blob"><code>Blob</code></a> objects (and <a href="#dfn-file"><code>File</code></a> objects). 
 	</p>
 	<div id="use-cases-scheme" class="section">
 	<h3>12.1. Requirements for a New Scheme</h3>
-	<p>This specification defines a scheme with URIs of the sort: <code>blob:550e8400-e29b-41d4-a716-446655440000#aboutABBA</code>.
+	<p>This specification defines a scheme with URLs of the sort: <code>blob:550e8400-e29b-41d4-a716-446655440000#aboutABBA</code>.
 	This section provides some requirements and is an informative discussion.</p>
 	<ul>
-	<li><p>This scheme should be able to be used with web APIs such as <code>XMLHttpRequest</code> [<a href="#XHR2">XHR2</a>], and with elements that are designed to be used with HTTP URIs, such as the
-	<code>img</code> element [<a href="#HTML">HTML</a>].  In general, this scheme should be designed to be used wherever URIs can be used on the web.  </p>
+	<li><p>This scheme should be able to be used with web APIs such as <code>XMLHttpRequest</code> [<a href="#XHR2">XHR2</a>], and with elements that are designed to be used with HTTP URLs, such as the
+	<code>img</code> element [<a href="#HTML">HTML</a>].  In general, this scheme should be designed to be used wherever URLs can be used on the web.  </p>
 	<p>This scheme should have defined response codes, so that web applications can respond to scenarios where the resource is not found, or raises an error, etc.
 	</p></li>
 	<li><p>This scheme should have an <a href="#origin">origin</a> policy and a
 	<a href="#lifeTime">lifetime</a> stipulation, to allow safe access to binary data from web applications.  </p>
-	<p>URIs in this scheme should be used as a references to "in-memory" <a href="#dfn-Blob">Blobs</a>, and also be re-used elsewhere on the platform to refer to binary
+	<p>URLs in this scheme should be used as a references to "in-memory" <a href="#dfn-Blob">Blobs</a>, and also be re-used elsewhere on the platform to refer to binary
 	resources (e.g. for video-conferencing
 	[<a href="#WebRTC">WebRTC</a>]).
-	URIs in this scheme are designed for impermanence, since they will be typically used to access "in memory" resources.</p></li>
-	<li><p>Developers should have the ability to revoke URIs in this scheme, so that they no longer refer to <a href="#dfn-Blob"><code>Blob</code></a> objects.  This includes scenarios
+	URLs in this scheme are designed for impermanence, since they will be typically used to access "in memory" resources.</p></li>
+	<li><p>Developers should have the ability to revoke URLs in this scheme, so that they no longer refer to <a href="#dfn-Blob"><code>Blob</code></a> objects.  This includes scenarios
 	where file references are no longer needed by a program, but also other uses of <a href="#dfn-Blob"><code>Blob</code></a> objects.
 	Consider a scenario where a <a href="#dfn-Blob"><code>Blob</code></a> object can be exported from a drawing program which uses the canvas element and API [<a href="#HTML">HTML</a>].  A snapshot of the drawing can be created by
 	exporting a <a href="#dfn-Blob"><code>Blob</code></a>.  This scheme can be used with the <code>img</code> [<a href="#HTML">HTML</a>] element to display the snapshot;
-	if the user deletes the snapshot, any reference to the snapshot in memory via a URI should be invalid, and hence the need to be able to revoke such a URI.  </p></li>
+	if the user deletes the snapshot, any reference to the snapshot in memory via a URL should be invalid, and hence the need to be able to revoke such a URL.  </p></li>
 	</ul>
 	</div>
 	<div id="alternative-schemas" class="section">
 	<h3>12.2. Discussion of Existing Schemes</h3>
 	<p>
-	This section is an informative discussion of existing schemes that may have been repurposed or reused for the use cases for URIs above, and justification for why a new scheme
+	This section is an informative discussion of existing schemes that may have been repurposed or reused for the use cases for URLs above, and justification for why a new scheme
 	is considered preferable.  These schemes include HTTP [<a href="#RFC2616">RFC2616</a>], file [<a href="#RFC1630">RFC1630</a>][<a href="#RFC1738">RFC1738</a>], and a scheme such as
 	urn:uuid [<a href="#UUID">RFC4122</a>].  One broad consideration in determining what scheme to use is providing something with intuitive appeal to web developers.
 	</p>
@@ -1354,20 +1354,20 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	But <a href="#dfn-Blob"><code>Blob</code></a> resources are typically "in-memory"
 	resident (e.g. after a file has been read into memory), and are thus unlike "traditional" HTTP resources that are dereferenced via DNS.  While some user agents automatically
 	"proxy" the underlying file system on the local machine via an HTTP server (e.g. with URLs of the sort http://localhost), HTTP is not traditionally used with local resources.
-	Moreover, an important use case for these URIs are that they can be revoked with an API call.  HTTP URIs have traditionally been used for resources that may be more permanent
+	Moreover, an important use case for these URLs are that they can be revoked with an API call.  HTTP URLs have traditionally been used for resources that may be more permanent
 	(and that are certainly not chiefly memory-resident, such as files that a web application can read).  Reusing the HTTP scheme might be confusing for web developers owing to well-established
 	practice. </p></li>
-	<li><p>The reuse of file URIs would involve changes to file URI use today, such as adding response codes.  While they are used inconsistently in web applications,
-	the structure of the URIs would change, and request-response behavior would have to be superimposed on what already works in a more-or-less ad-hoc manner.  Modifying this for the use cases
-	cited above is imprudent, given legacy usage.  Additionally, the use cases for a Blob URI scheme call for uses beyond the file system.</p></li>
-	<li><p>A scheme of the sort urn:uuid [<a href="#UUID">RFC4122</a>] could be used, though use of this scheme is unprecedented in HTML and JavaScript web applications.  The urn:uuid scheme is very generic.  URIs in the scheme urn:uuid have the disadvantage of unfamiliarity and inconsistency across the web platform.  A new scheme has the advantage of being explicit about what is being referenced.  In theory, URIs make no guarantee about what sort of resource is obtained when they are dereferenced; that is left to content labeling and media type.  But in practice, the name of the scheme creates an expectation about both the resource and the protocol of the request-response transaction.  Choosing a name that clarifies the primary use case - namely, access to memory-resident <a href="#dfn-Blob"><code>Blob</code></a> resources - is a worthwhile compromise, and favors clarity, familiarity, and consistency across the web platform.
+	<li><p>The reuse of file URLs would involve changes to file URL use today, such as adding response codes.  While they are used inconsistently in web applications,
+	the structure of the URLs would change, and request-response behavior would have to be superimposed on what already works in a more-or-less ad-hoc manner.  Modifying this for the use cases
+	cited above is imprudent, given legacy usage.  Additionally, the use cases for a Blob URL scheme call for uses beyond the file system.</p></li>
+	<li><p>A scheme of the sort urn:uuid [<a href="#UUID">RFC4122</a>] could be used, though use of this scheme is unprecedented in HTML and JavaScript web applications.  The urn:uuid scheme is very generic.  URLs in the scheme urn:uuid have the disadvantage of unfamiliarity and inconsistency across the web platform.  A new scheme has the advantage of being explicit about what is being referenced.  In theory, URLs make no guarantee about what sort of resource is obtained when they are dereferenced; that is left to content labeling and media type.  But in practice, the name of the scheme creates an expectation about both the resource and the protocol of the request-response transaction.  Choosing a name that clarifies the primary use case - namely, access to memory-resident <a href="#dfn-Blob"><code>Blob</code></a> resources - is a worthwhile compromise, and favors clarity, familiarity, and consistency across the web platform.
 	</p></li>
 	</ul>
 	</div>
 
 	<div id="ABNFForBlob" class="section">
-	<h3>12.3. Definition of blob URI Scheme</h3>
-	<p>This section defines a <code>blob:</code> URI scheme using a formal grammar.  A <code>blob:</code> URI consists of the blob: scheme and an opaque string, along with an optional fragment identifier.
+	<h3>12.3. Definition of blob URL Scheme</h3>
+	<p>This section defines a <code>blob:</code> URL scheme using a formal grammar.  A <code>blob:</code> URL consists of the blob: scheme and an opaque string, along with an optional fragment identifier.
 	In this specification an <dfn id="opaqueString">opaque string</dfn> is a unique string which can be heuristically generated upon demand such that the probability that two are alike is small, and which is hard to guess (e.g.
 	the Universally Unique IDentifier (UUID) as defined in [<a href="#UUID">RFC4122</a>] is an opaque string). A <dfn id="fragmentIdentifier">fragment identifier</dfn> is optional, and if used,
 	has a distinct interpretation depending on the media type of the <a href="#dfn-Blob"><code>Blob</code></a> or <a href="#dfn-file"><code>File</code></a> resource in question [<a href="#RFC2046">RFC2046</a>].</p>
@@ -1391,7 +1391,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	<p><a href="#opaqueString">Opaque strings</a> must NOT include any reserved characters from [<a href="#RFC3986">RFC3986</a>] without percent-encoding them.
 	<a href="#opaqueString">Opaque strings</a> must be globally unique.  Such strings should only use characters in the ranges U+002A to U+002B, U+002D to U+002E, U+0030 to U+0039,
 	U+0041 to U+005A, U+005E to U+007E [<a href="#Unicode">Unicode</a>], and should be at least 36 characters long.
-	UUID is one potential option available to user agents for use with <a href="#url">Blob URIs</a> as <a href="#opaqueString">opaque strings</a>, and their use is <em>strongly encouraged</em>.
+	UUID is one potential option available to user agents for use with <a href="#url">Blob URLs</a> as <a href="#opaqueString">opaque strings</a>, and their use is <em>strongly encouraged</em>.
 	UUIDs are defined in [<a href="#UUID">RFC4122</a>].  For an ABNF of UUID, see <a href="#AppendixA">Appendix A</a>.
 
 	</p>
@@ -1402,7 +1402,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	<h3>12.4. Discussion of Fragment Identifier</h3>
 	<p>
 	The fragment's format, resolution and processing directives depend on the media type [<a href="#RFC2046">RFC2046</a>] of a potentially retrieved representation, even though such
-	a retrieval is only performed if the <a href="#url">blob: URI</a> is dereferenced.  For example, in an HTML file [<a href="#HTML">HTML</a>] the fragment identifier
+	a retrieval is only performed if the <a href="#url">blob: URL</a> is dereferenced.  For example, in an HTML file [<a href="#HTML">HTML</a>] the fragment identifier
 	could be used to refer to an anchor within the file.  If the user agent does not recognize the media type of the resource, OR if a fragment identifer is not
 	meaningful within the resource, it must ignore the fragment identifier.  Additionally, user agents must honor additional fragment processing directives given in
 	the relevant media format specifications; in particular, this includes any modifications to the fragment production given in HTML [<a href="#HTML">HTML</a>].  The following
@@ -1427,38 +1427,38 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	                 / "*" / "+" / "," / ";" / "="
 	</code></pre></div></div>
 
-	<p>A valid Blob URI reference could look like: <code>blob:550e8400-e29b-41d4-a716-446655440000#aboutABBA</code> where "#aboutABBA" might be an HTML fragment identifier referring to an
+	<p>A valid Blob URL reference could look like: <code>blob:550e8400-e29b-41d4-a716-446655440000#aboutABBA</code> where "#aboutABBA" might be an HTML fragment identifier referring to an
 	element with an id attribute of "aboutABBA".</p>
 	</div>
 	<div id="originOfBlob" class="section">
-	<h3>12.5. Origin of Blob URIs</h3>
-	<p>The <a href="#origin">origin</a> of a <a href="#url">Blob URI</a> must be the  <a href="#origin">origin</a> of the script that called <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a>.
-	<a href="#url">Blob URIs</a> must only be valid within this <a href="#origin">origin</a>.</p>
+	<h3>12.5. Origin of Blob URLs</h3>
+	<p>The <a href="#origin">origin</a> of a <a href="#url">Blob URL</a> must be the  <a href="#origin">origin</a> of the script that called <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a>.
+	<a href="#url">Blob URLs</a> must only be valid within this <a href="#origin">origin</a>.</p>
 	</div>
 
 	<div id="lifeTime" class="section">
-	<h3>12.6. Lifetime of Blob URIs</h3>
-	<p>This specification defines the following lifetime conditions on <a href="#url">Blob URIs</a>: </p>
-	<ol><li><p>This specification adds an additional <a href="#unloading-document-cleanup-steps">unloading document cleanup step</a>: user agents must revoke any <a href="#url">Blob URIs</a> created with <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> from within that <a href="#document">document</a>.
-	If these <a href="#url">Blob URIs</a> are dereferenced, user agents must respond with <a href="#FiveHundredInternalServerError">500 Error Condition</a>; revocation of a <a href="#url">Blob URI</a> must behave as if <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> was called on it.</p></li>
-		<li><p>A <a href="#url">Blob URI</a> created with <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> using the optional <a href="#dfn-options-objectURL"><code>options</code></a> parameter with <a href="#dfn-autoRevoke"><code>autoRevoke</code></a> set to <code>true</code> must be revoked when the user agent performs the <a href="#global-script-cleanup-jobs">global script cleanup jobs</a> according to the <a href="#autoRevoke"><code>autoRevoke</code> steps</a>; subsequent attempts to dereference that Blob URI must return a <a href="#FiveHundredInternalServerError">500 Error Condition. </a></p></li>
-	<li><p>User agents must ensure that any <a href="#url">Blob URIs</a> are revoked after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called with that
-	<a href="#url">Blob URI</a> as an argument. User agents must respond with a <a href="#FiveHundredInternalServerError">500 Error Condition</a> if a <a href="#url">Blob URI</a> is
-	dereferenced after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called on that particular <a href="#url">Blob URI</a>. </p></li>
-  <li><p>User agents must ensure that any <a href="#url">Blob URIs</a> used to dereference <a href="#dfn-Blob"><code>Blob</code></a> objects that have been neutered with the <a href="#dfn-close"><code>close</code></a> method return a <a href="#FiveHundredInternalServerError">500 Error Condition. </a></p></li>
+	<h3>12.6. Lifetime of Blob URLs</h3>
+	<p>This specification defines the following lifetime conditions on <a href="#url">Blob URLs</a>: </p>
+	<ol><li><p>This specification adds an additional <a href="#unloading-document-cleanup-steps">unloading document cleanup step</a>: user agents must revoke any <a href="#url">Blob URLs</a> created with <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> from within that <a href="#document">document</a>.
+	If these <a href="#url">Blob URLs</a> are dereferenced, user agents must respond with <a href="#FiveHundredInternalServerError">500 Error Condition</a>; revocation of a <a href="#url">Blob URL</a> must behave as if <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> was called on it.</p></li>
+		<li><p>A <a href="#url">Blob URL</a> created with <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> using the optional <a href="#dfn-options-objectURL"><code>options</code></a> parameter with <a href="#dfn-autoRevoke"><code>autoRevoke</code></a> set to <code>true</code> must be revoked when the user agent performs the <a href="#global-script-cleanup-jobs">global script cleanup jobs</a> according to the <a href="#autoRevoke"><code>autoRevoke</code> steps</a>; subsequent attempts to dereference that Blob URL must return a <a href="#FiveHundredInternalServerError">500 Error Condition. </a></p></li>
+	<li><p>User agents must ensure that any <a href="#url">Blob URLs</a> are revoked after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called with that
+	<a href="#url">Blob URL</a> as an argument. User agents must respond with a <a href="#FiveHundredInternalServerError">500 Error Condition</a> if a <a href="#url">Blob URL</a> is
+	dereferenced after <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a> is called on that particular <a href="#url">Blob URL</a>. </p></li>
+  <li><p>User agents must ensure that any <a href="#url">Blob URLs</a> used to dereference <a href="#dfn-Blob"><code>Blob</code></a> objects that have been neutered with the <a href="#dfn-close"><code>close</code></a> method return a <a href="#FiveHundredInternalServerError">500 Error Condition. </a></p></li>
 	</ol>
 	</div>
 	<div id="processingModel" class="section">
-	<h3>12.7. Dereferencing Model for Blob URIs</h3>
+	<h3>12.7. Dereferencing Model for Blob URLs</h3>
 
 
 	<p>User agents must only support requests with GET [<a href="#RFC2616">RFC2616</a>].  If the <a href="#dfn-Blob"><code>Blob</code></a> has a
 	<a href="#dfn-type"><code>type</code></a> attribute, or if the <a href="#dfn-Blob"><code>Blob</code></a> has been created with a <a href="#dfn-slice"><code>slice</code></a> call which
-	uses a <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument, responses to dereferencing the Blob URI must include the Content-Type header from HTTP [<a href="#RFC2616">RFC2616</a>] with the value of the <a href="#dfn-type"><code>type</code></a>
-	attribute or <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument.  Responses to dereferencing the Blob URI must include the Content-Length header from HTTP [<a href="#RFC2616">RFC2616</a>] with the value of the <a href="#dfn-size"><code>size</code></a> attribute.  Specifically, responses must only support a subset of responses that are equivalent to the following from HTTP [<a href="#RFC2616">RFC2616</a>]:</p>
+	uses a <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument, responses to dereferencing the Blob URL must include the Content-Type header from HTTP [<a href="#RFC2616">RFC2616</a>] with the value of the <a href="#dfn-type"><code>type</code></a>
+	attribute or <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument.  Responses to dereferencing the Blob URL must include the Content-Length header from HTTP [<a href="#RFC2616">RFC2616</a>] with the value of the <a href="#dfn-size"><code>size</code></a> attribute.  Specifically, responses must only support a subset of responses that are equivalent to the following from HTTP [<a href="#RFC2616">RFC2616</a>]:</p>
 	<div id="TwoHundredOK" class="section">
 	<h4>12.7.1. 200 OK</h4>
-	<p>This response [<a href="#RFC2616">RFC2616</a>] must be used if the request has succeeded, namely the <a href="#ABNFForBlob">blob:</a> URI has been requested with a GET,
+	<p>This response [<a href="#RFC2616">RFC2616</a>] must be used if the request has succeeded, namely the <a href="#ABNFForBlob">blob:</a> URL has been requested with a GET,
 	satisfies the <a href="#originOfBlob">origin requirement</a>, and satisfies the <a href="#lifeTime">lifetime requirement.</a>  If this response code is used,
 	the user agent must also use a Content-Type header [<a href="#RFC2616">RFC2616</a>] with a value equal to the <code><a href="#dfn-Blob">Blob</a></code> object's <code><a href="#dfn-type">type</a></code> attribute.  See <a href="#ProtocolExamples">blob: protocol examples</a>.
 	</p>
@@ -1471,7 +1471,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	<ul>
 		<li><p>Any request method other than GET is used to dereference the URL.</p></li>
 		<li><p>The request violates the <a href="#originOfBlob">origin requirement</a>.  In this case, the response should be accompanied by clarifying text alongside the 500 response, e.g. "500 Origin Violation."</p></li>
-		<li><p>The request does not satisfy the <a href="#lifeTime">lifetime requirement</a>.  In this case, the response should be accompanied by clarifying text alongside the 500 response, e.g. "500 Expired URI."</p></li>
+		<li><p>The request does not satisfy the <a href="#lifeTime">lifetime requirement</a>.  In this case, the response should be accompanied by clarifying text alongside the 500 response, e.g. "500 Expired URL."</p></li>
 		<li><p>The underlying resource has changed, moved, been deleted or has become invalid.  In this case, the response should be accompanied by clarifying text alongside the 500 response, e.g. "500 Invalid Resource."</p></li>
 		<li><p>The permissions surrounding the underlying resource do not permit access.  In this case, the response should be accompanied by clarifying text alongside the 500 response, e.g. "500 Access Violation."</p></li>
 		<li><p>A security error has occurred.  In this case, the response should be accompanied by clarifying text alongside the 500 response, e.g. "500 Security Violation."  </p></li>
@@ -1514,11 +1514,11 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 
 	</div>
 	<div id="creating-revoking" class="section">
-	<h2>12.8. Creating and Revoking a Blob URI</h2>
-	<p><a href="#url"><code>Blob</code> URIs</a> are created and revoked using methods exposed on the <a href="#URL-object"><code>URL</code></a> object, supported by
-	global objects <code>Window</code> [<a href="#HTML">HTML</a>] and <code>WorkerGlobalScope</code> [<a href="#Workers">Web Workers</a>].  Revocation of a <a href="#url"><code>Blob</code> URI</a>
-	decouples the <a href="#url"><code>Blob</code> URI</a> from the resource it refers to, and if it is dereferenced after it is revoked, user agents must return a <a href="#FiveHundredInternalServerError">500</a> response.
-	This section describes a supplemental interface to the URL specification [<a href="#URL-API">URL API</a>] and presents methods for <a href="#url">Blob URI</a> creation and revocation.  </p>
+	<h2>12.8. Creating and Revoking a Blob URL</h2>
+	<p><a href="#url"><code>Blob</code> URLs</a> are created and revoked using methods exposed on the <a href="#URL-object"><code>URL</code></a> object, supported by
+	global objects <code>Window</code> [<a href="#HTML">HTML</a>] and <code>WorkerGlobalScope</code> [<a href="#Workers">Web Workers</a>].  Revocation of a <a href="#url"><code>Blob</code> URL</a>
+	decouples the <a href="#url"><code>Blob</code> URL</a> from the resource it refers to, and if it is dereferenced after it is revoked, user agents must return a <a href="#FiveHundredInternalServerError">500</a> response.
+	This section describes a supplemental interface to the URL specification [<a href="#URL-API">URL API</a>] and presents methods for <a href="#url">Blob URL</a> creation and revocation.  </p>
 	<div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
 	partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
 
@@ -1539,7 +1539,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	
 <div id="createRevokeMethodsParams" class="section">
 <h3>12.8.1. Methods and Parameters</h3>		
-	<dl><dt id="dfn-createObjectURL">The <code>createObjectURL</code> static method</dt><dd><p>Returns a unique <a href="#url"><code>Blob</code> URI</a> each time it is called on a
+	<dl><dt id="dfn-createObjectURL">The <code>createObjectURL</code> static method</dt><dd><p>Returns a unique <a href="#url"><code>Blob</code> URL</a> each time it is called on a
 	<dfn id="valid">valid</dfn> <a href="#dfn-fileBlob"><code>blob</code></a> argument, which is a non-null <a href="#dfn-Blob"><code>Blob</code></a> in scope of the global
 	object's <a href="#URL-object"><code>URL</code></a> property from which this static method is called.</p>
 	<ol>
@@ -1548,14 +1548,14 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
   <ol type="A">
     <li>The optional <a href="#dfn-objectURLOptions"><code>objectURLOptions</code></a> dictionary argument called <dfn id="dfn-options-objectURL"><code>options</code></dfn> has a boolean member <dfn id="dfn-autoRevoke"><code>autoRevoke</code></dfn> that defaults to <code>true</code>; if called without using the optional dictionary, or if called with <code>autoRevoke</code> set to <code>true</code>, execute the following <dfn id="autoRevoke"><code>autoRevoke</code> sub-steps</dfn>:
     <ol type="a">
-      <li>Return a unique <a href="#url"><code>Blob</code> URI</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument.</li>
-      <li><p>Add revoking the <a href="#url"><code>Blob</code> URI</a> to the <a href="#global-script-cleanup-jobs-list">global script clean-up jobs list</a>.  When user agents process the <a href="#global-script-cleanup-jobs">global script clean-up jobs</a>, they must treat revoking a <a href="#url"><code>Blob</code> URI</a> as equivalent to calling <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> on it.</p>
+      <li>Return a unique <a href="#url"><code>Blob</code> URL</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument.</li>
+      <li><p>Add revoking the <a href="#url"><code>Blob</code> URL</a> to the <a href="#global-script-cleanup-jobs-list">global script clean-up jobs list</a>.  When user agents process the <a href="#global-script-cleanup-jobs">global script clean-up jobs</a>, they must treat revoking a <a href="#url"><code>Blob</code> URL</a> as equivalent to calling <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> on it.</p>
     </li>
     <li><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</li>
     </ol>
     </li>
-   <li><p>If this method is called with the <code>autoRevoke</code> dictionary member set to <code>false</code>, return a unique <a href="#url"><code>Blob</code> URI</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument. </p>
-<div class="note"><div class="noteHeader">Note</div>This <a href="#url"><code>Blob</code> URI</a> must persist till a call to <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> is made, or till the  <a href="#unloading-document-cleanup-steps">unloading document cleanup steps</a> are executed.</div>
+   <li><p>If this method is called with the <code>autoRevoke</code> dictionary member set to <code>false</code>, return a unique <a href="#url"><code>Blob</code> URL</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument. </p>
+<div class="note"><div class="noteHeader">Note</div>This <a href="#url"><code>Blob</code> URL</a> must persist till a call to <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> is made, or till the  <a href="#unloading-document-cleanup-steps">unloading document cleanup steps</a> are executed.</div>
  </li>
 </ol>
 </li>
@@ -1575,18 +1575,18 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	</div>
 	</dd>
 	<dt id="dfn-revokeObjectURL">The <code>revokeObjectURL</code> static method</dt>
-	<dd><p>Revokes the <a href="#url"><code>Blob</code> URI</a> provided in the string <a href="#dfn-urlarg"><code>url</code></a> argument.
+	<dd><p>Revokes the <a href="#url"><code>Blob</code> URL</a> provided in the string <a href="#dfn-urlarg"><code>url</code></a> argument.
 	</p>
 	<ol>
 	  <li>If the <a href="#dfn-urlarg"><code>url</code></a> refers to a <a href="#dfn-Blob"><code>Blob</code></a> that is both <a href="#valid">valid</a> and in the
 	  <a href="#same-origin">same origin</a> of the global object's <a href="#URL-object">URL</a> property on which this static method was called,
 	user agents must return a <a href="#FiveHundredInternalServerError">500</a> response code when the <a href="#dfn-urlarg"><code>url</code></a> is dereferenced.</li>
 	<li>If the <a href="#dfn-urlarg"><code>url</code></a> refers to a <a href="#dfn-Blob"><code>Blob</code></a> that is NOT <a href="#valid">valid</a> OR if the value provided for
-	the <a href="#dfn-urlarg"><code>url</code></a> argument is not a <a href="#url"><code>Blob</code> URI</a> OR if the <a href="#dfn-urlarg"><code>url</code></a> argument
+	the <a href="#dfn-urlarg"><code>url</code></a> argument is not a <a href="#url"><code>Blob</code> URL</a> OR if the <a href="#dfn-urlarg"><code>url</code></a> argument
 	refers to a <a href="#dfn-Blob"><code>Blob</code></a> that is NOT in the <a href="#same-origin">same origin</a> as the global object's <a href="#URL-object">URL</a> property,
 	this method call does nothing.  User agents may display a message on the error console.</li>
 	</ol>
-	<p><dfn id="dfn-urlarg">The <code>url</code> argument</dfn> to the <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> method is a <a href="#url">Blob URI</a> string.</p>
+	<p><dfn id="dfn-urlarg">The <code>url</code> argument</dfn> to the <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> method is a <a href="#url">Blob URL</a> string.</p>
 	<div class="example"><div class="exampleHeader">Example</div>
 	<p>In the example below, <code>window1</code> and <code>window2</code> are separate, but in the <a href="#same-origin">same origin</a>; <code>window2</code> could be an <code>iframe</code>
 	[<a href="#HTML">HTML</a>] inside <code>window1</code>.</p>
@@ -1602,12 +1602,12 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	</div>
 	</div>
 <div id="examplesOfCreationRevocation" class="section">
-<h3>12.9. Examples of Blob URI Creation and Revocation</h3>
-<p><a href="#url">Blob URI</a>s are strings that dereference <code>Blob</code> objects, and can persist for as long as the <code>document</code> from which they were minted using <a href="#dfn-createObjectURL"><code>URL.createObjectURL()</code></a> - see <a href="#lifeTime">Lifetime of Blob URIs</a>.   </p>
+<h3>12.9. Examples of Blob URL Creation and Revocation</h3>
+<p><a href="#url">Blob URL</a>s are strings that dereference <code>Blob</code> objects, and can persist for as long as the <code>document</code> from which they were minted using <a href="#dfn-createObjectURL"><code>URL.createObjectURL()</code></a> - see <a href="#lifeTime">Lifetime of Blob URLs</a>.   </p>
 
-<p>This section gives sample usage of creation and revocation of <a href="#url">Blob URI</a>s with explanations.</p>
+<p>This section gives sample usage of creation and revocation of <a href="#url">Blob URL</a>s with explanations.</p>
 <div class="example"><div class="exampleHeader">Example</div>
-<p>In the example below, two <code>img</code> elements [<a href="#HTML">HTML</a>] refer to the same <a href="#url">Blob URI</a>, which was minted for one-time use only using the <code>boolean</code> key in the optional dictionary argument:</p>
+<p>In the example below, two <code>img</code> elements [<a href="#HTML">HTML</a>] refer to the same <a href="#url">Blob URL</a>, which was minted for one-time use only using the <code>boolean</code> key in the optional dictionary argument:</p>
 <div class="block"><div class="blockTitleDiv"><span class="blockTitle">ECMAScript</span></div><div class="blockContent"><pre class="code"><code class="es-code">
 &lt;script&gt;url = URL.createObjectURL(blob); &lt;/script&gt;&lt;script&gt; img2.src=url;&lt;/script&gt;
 </code></pre></div></div>
@@ -1646,7 +1646,7 @@ else {
 
 }
 </code></pre></div></div>
-<p>The example above allows multiple references to a single <a href="#url">Blob URI</a>, but revokes the <a href="#url">Blob URI</a> string after both image objects have been loaded.  While not restricting number of uses of the <a href="#url">Blob URI</a> offers more flexibility, it creates the potential for strings that linger after they are useful, especially in web applications where the <code>document</code> may persist for a while.  Developers must explicitly set the <a href="#dfn-autoRevoke"><code>autoRevoke</code></a> dictionary member to <code>false</code> in order to enable this usage.</p>
+<p>The example above allows multiple references to a single <a href="#url">Blob URL</a>, but revokes the <a href="#url">Blob URL</a> string after both image objects have been loaded.  While not restricting number of uses of the <a href="#url">Blob URL</a> offers more flexibility, it creates the potential for strings that linger after they are useful, especially in web applications where the <code>document</code> may persist for a while.  Developers must explicitly set the <a href="#dfn-autoRevoke"><code>autoRevoke</code></a> dictionary member to <code>false</code> in order to enable this usage.</p>
 </div>  
 </div>
 </div>
@@ -1666,8 +1666,8 @@ else {
 	type="file"/&gt;</code> (in a "must choose" loop that forces selection before the file picker is dismissed) and a user agent may prevent file
 	access to any selections by making the  <a href="#dfn-filelist"><code>FileList</code></a> object returned be of size 0.</p></li>
 	<li><p><dfn id="sensitive-files">System-sensitive files</dfn> (e.g. files in /usr/bin, password files, and other native operating system executables) typically should not
-	be exposed to web content, and should not be accessed via <a href="#url">Blob URIs</a>.  User agents may throw a <a href="#dfn-SecurityError"><code>SecurityError</code></a> exception for synchronous read methods, or return a <a href="#dfn-SecurityError"><code>SecurityError</code></a> <a href="#dfn-domerror"><code>DOMError</code></a> for asynchronous reads.</p></li>
-	<li><p><dfn id="cross-origin-requests-on-blobs">Cross-origin requests on Blob URIs</dfn> occur when a <a href="#url">Blob URI</a> is accessed across origins.    User agents should ensure that the
+	be exposed to web content, and should not be accessed via <a href="#url">Blob URLs</a>.  User agents may throw a <a href="#dfn-SecurityError"><code>SecurityError</code></a> exception for synchronous read methods, or return a <a href="#dfn-SecurityError"><code>SecurityError</code></a> <a href="#dfn-domerror"><code>DOMError</code></a> for asynchronous reads.</p></li>
+	<li><p><dfn id="cross-origin-requests-on-blobs">Cross-origin requests on Blob URLs</dfn> occur when a <a href="#url">Blob URL</a> is accessed across origins.    User agents should ensure that the
 	<a href="#FiveHundredInternalServerError">500 Error Condition</a> response
 	is used in cross-origin request contexts.  
 	</p></li>
@@ -1723,7 +1723,7 @@ else {
 	<div id="ABNFUUID" class="section">
 	<h3>15.1. An ABNF for UUID</h3>
 	<p>The following is an informative ABNF [<a href="#ABNF">ABNF</a>] for UUID, which is a <em>strongly encouraged</em> choice for the
-	<a href="#opaqueString">opaqueString</a> production of <a href="#url">Blob URIs</a>.</p> 
+	<a href="#opaqueString">opaqueString</a> production of <a href="#url">Blob URLs</a>.</p> 
 	<div class="block"><div class="blockTitleDiv"><span class="blockTitle">ABNF</span></div><div class="blockContent"><pre class="code"><code class="abnf-code">
 	UUID                   = time-low "-" time-mid "-"
 	                         time-high-and-version "-"
