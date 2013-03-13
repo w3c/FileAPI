@@ -459,7 +459,8 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 			<dt>An <em>optional</em> <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a></dt>
 			<dd>which takes one member:
 			<ul>
-				<li><dfn id="dfn-BPtype"><code>type</code></dfn>, a <code>DOMString</code> which corresponds to the <a href="#dfn-Blob"><code>Blob</code></a> object's <a href="#dfn-type"><code>type</code></a> attribute.  If not the empty string, user agents must treat it as an RFC2616 media-type [<a href="#RFC2616">RFC2616</a>], and as an opaque string that can be ignored if it is an invalid media-type.  This value must be used as the Content-Type header when dereferencing a <a href="#url">Blob URL</a>. </li>
+				<li><dfn id="dfn-BPtype"><code>type</code></dfn>, the ASCII-encoded string in lower case representing the media type of the <code>Blob</code>, expressed as an RFC2046 MIME type [<a href="#RFC2046">RFC2046</a>].  A string is a valid MIME type if it matches the <code>media-type</code>
+    token defined in section 3.7 "Media Types" of RFC 2616 [<a href="#RFC2616">RFC2616</a>]. If not the empty string, user agents must treat it as an RFC2616 media-type [<a href="#RFC2616">RFC2616</a>], and as an opaque string that can be ignored if it is an invalid media-type.  This value must be used as the Content-Type header when dereferencing a <a href="#url">Blob URL</a>. </li>
 			</ul>
 		</dd>
 		</dl>
@@ -509,8 +510,7 @@ var d = new Blob([buffer, b, c, bytes]);
     Blob has no bytes to be read.  If the <code>Blob</code> has been neutered with <a href="#dfn-close"><code>close</code></a> called on it, then <code>size</code> must return 0.</p></dd>
     <dt id="dfn-type"><code>type</code></dt>
     <dd><p>The ASCII-encoded string in lower case representing the media type of the <code>Blob</code>, expressed as an RFC2046 MIME type [<a href="#RFC2046">RFC2046</a>].
-    On getting, conforming user agents must return the MIME type of the <code>Blob</code>,
-    if it is known. If conforming user agents cannot determine the media type of the <code>Blob</code>, they must return the empty string.
+    On getting, if the type attribute is NOT specified, user agents must return the empty string; heuristic determination of type, including statistical methods, must not be used. 
     A string is a valid MIME type if it matches the <code>media-type</code>
     token defined in section 3.7 "Media Types" of RFC 2616 [<a href="#RFC2616">RFC2616</a>]. If not the empty string, user agents must treat it as an RFC2616 media-type [<a href="#RFC2616">RFC2616</a>], and as an opaque string that can be ignored if it is an invalid media-type.  This value must be used as the Content-Type header when dereferencing a <a href="#url">Blob URL</a>.</p></dd>
     </dl>
