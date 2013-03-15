@@ -873,9 +873,9 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	</div>
 	<div id="readAsDataText" class="section">
 	<h4>8.5.4. The <code>readAsText(blob, label)</code> method</h4>
-	<p>The <code>readAsText()</code> method can be called with an optional parameter, <dfn id="label"><code>label</code></dfn>, which is a <code>DOMString</code> argument that represents the label of an encoding [<a href="#encodingSpecification">Encoding Specification</a>]; if provided, it must be used as part of the <a href="#encoding-determination">encoding determination</a> used when processing this method call. </p>
+	<p>The <code>readAsText()</code> method can be called with an optional parameter, <dfn id="dfn-label"><code>label</code></dfn>, which is a <code>DOMString</code> argument that represents the label of an encoding [<a href="#encodingSpecification">Encoding Specification</a>]; if provided, it must be used as part of the <a href="#encoding-determination">encoding determination</a> used when processing this method call. </p>
   <p>
-	When the <dfn id="dfn-readAsText"><code>readAsText(blob, label)</code></dfn> method is called (the label argument is optional),
+	When the <dfn id="dfn-readAsText"><code>readAsText(blob, label)</code></dfn> method is called (the <a href="#dfn-label"><code>label</code></a> argument is optional),
 	the user agent must run the steps below (unless otherwise indicated).
 	</p>
 	<ol>
@@ -1008,68 +1008,19 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	<p>When reading <a href="#dfn-fileBlob"><code>blob</code></a> objects using the <a href="#dfn-readAsText"><code>readAsText()</code></a> <a href="#read-methods">read method</a>, the following <dfn id="encoding-determination">encoding determination</dfn> steps must be followed:</p>
 	<ol>
 	<li><p>Let <var>encoding</var> be null</p></li>
-	<li><p>If the <a href="#dfn-label"><code>label</code></a> argument is present, and is the name or alias of a character set used on the Internet 
-	[<a href="#IANACHARSET">IANACHARSET</a>], let <var>charset</var> be set to the value of the <code>label</code> parameter. </p></li>
-	<li><p>If <var>charset</var> is null, then for each of the rows in the
-	     following table, starting with the first one and going down, if the
-	     first bytes of <a href="#dfn-fileBlob"><code>blob</code></a> match the bytes given in the first
-	     column, then let <var>charset</var> be the encoding given in the cell in
-	     the second column of that row. If there is no match then <var>charset</var>
-	     remains null.</p>
-	    <table>
-	     <thead>
-	      <tr>
-	       <th>Bytes in Hexadecimal
-
-	       </th><th>Description
-
-	     </th></tr></thead><tbody><!-- UTF-32 is dead
-	      <tr>
-	       <td>00 00 FE FF
-	       <td>UTF-32BE BOM
-	      <tr>
-	       <td>FF FE 00 00
-	       <td>UTF-32LE BOM-->
-
-	      <tr>
-	       <td>FE FF
-
-	       </td><td>UTF-16BE BOM
-
-	      </td></tr><tr>
-
-	       <td>FF FE
-
-	       </td><td>UTF-16LE BOM
-
-	      </td></tr><tr>
-	       <td>EF BB BF
-
-	       </td><td>UTF-8 BOM<!-- nobody uses this
-	      <tr>
-	       <td>DD 73 66 73
-	       <td>UTF-EBCDIC
-	-->
-
-	    </td></tr></tbody></table>
-
+	<li><p>If the <a href="#dfn-label"><code>label</code></a> argument is present, set <var>encoding</var> to the result of "getting an encoding" using the Encoding Specification [<a href="#encodingSpecification">Encoding Specification</a>] for <a href="#dfn-label"><code>label</code></a>. </p></li>
+	<li><p>If the "getting an encoding" steps above return failure, then set <var>encoding</var> to null.</p>
 	   </li>
-	<li><p>If charset is null, and the <a href="#dfn-fileBlob"><code>blob</code></a> argument's <a href="#dfn-type"><code>type</code></a> attribute is present, and its Charset Parameter [<a href="#RFC2046">RFC2046</a>] is the name or alias of a character set used on the Internet [<a href="#IANACHARSET">IANACHARSET</a>], let <var>charset</var> be set to its Charset Parameter.</p>
+	<li><p>If <var>encoding</var> is null, and the <a href="#dfn-fileBlob"><code>blob</code></a> argument's <a href="#dfn-type"><code>type</code></a> attribute is present, and it uses a Charset Parameter [<a href="#RFC2046">RFC2046</a>], set <var>encoding</var> to the result of "getting an encoding" using the Encoding Specification 
+  [<a href="#encodingSpecification">Encoding Specification</a>] for the portion of the Charset Parameter that is a <em>label</em> of an encoding.</p>
 	<div class="example"><div class="exampleHeader">Example</div>
-	<p>If <a href="#dfn-fileBlob"><code>blob</code></a> has a <a href="#dfn-type"><code>type</code></a> attribute of <code>text/plain;charset=UTF-8</code> then <var>charset</var> is <a href="#dfn-UTF-8" class="dfnrefs">UTF-8</a>.</p>
+	<p>If <a href="#dfn-fileBlob"><code>blob</code></a> has a <a href="#dfn-type"><code>type</code></a> attribute of <code>text/plain;charset=UTF-8</code> then 
+  "getting an encoding" is run using <a href="#dfn-UTF-8" class="dfnrefs">UTF-8</a> as the label.  Note that user agents must parse and extract the portion of the Charset Parameter that constitutes a <em>label</em> of an encoding.</p>
 	</div>
 	</li>
-	<li><p>If <var>charset</var> is null let <var>charset</var> be <a href="#dfn-UTF-8" class="dfnrefs">UTF-8</a>.
-</p></li>
-	
-	    <li><p>Return the result of decoding the <a href="#dfn-fileBlob"><code>blob</code></a> using
-	     <var>charset</var>; on getting, the <a href="#dfn-result"><code>result</code></a> attribute of the <a href="#dfn-filereader"><code>FileReader</code></a>
-	     object returns a string in <var>charset</var> format.  The synchronous
-	     <a href="#dfn-readAsTextSync"><code>readAsText</code></a> method of the <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object returns a string in <var>charset</var> format.
-	     Replace bytes or sequences of bytes that are not
-	     valid according to the <var>charset</var> with a single U+FFFD character [<a href="#Unicode">Unicode</a>]. 
-	     When processing <a href="#partial-blob-data">Partial Blob Data</a>, use the <a href="#encodingCaveat">encoding caveat</a>, if applicable.
-	  </p></li>
+	<li><p>If the "getting an encoding" steps above return failure, then set <var>encoding</var> to null.</p></li>
+  <li><p>If <var>encoding</var> is null, then set encoding to utf-8.</p></li>
+  <li><p>"Decode" [<a href="#encodingSpecification">Encoding Specification</a>] this <a href="#dfn-fileBlob"><code>blob</code></a> using fallback encoding <var>encoding</var>, and return the result.  On getting, the <a href="#dfn-result"><code>result</code></a> attribute of the <a href="#dfn-filereader"><code>FileReader</code></a> object returns a string in <var>encoding</var> format.  The synchronous <a href="#dfn-readAsTextSync"><code>readAsText</code></a> method of the <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object returns a string in <var>encoding</var> format.  When processing <a href="#partial-blob-data">Partial Blob Data</a>, the <a href="#encodingCaveat">encoding caveat</a> must be applied.</p></li>  
 	</ol>
 	</div>
 	<div id="events" class="section">
@@ -1761,8 +1712,8 @@ else {
 		<dd><cite><a href="http://tools.ietf.org/html/rfc2616">Hypertext Transfer Protocol -- HTTP/1.1</a></cite>, R. Fielding, J. Gettys, J. Mogul, H. Frystyk, L. Masinter, P. Leach, T. Berners-Lee. IETF.</dd>
 		<dt id="RFC2046">RFC2046</dt>
 		<dd><cite><a href="http://tools.ietf.org/html/rfc2046">Multipurpose Internet Mail Extensions (MIME) Part Two: Media Extensions</a></cite>, N. Freed, N. Borenstein. IETF.</dd>
-	        <dt id="IANACHARSET">IANA Charsets</dt>
-	        <dd><cite><a href="http://www.iana.org/assignments/character-sets">Official Names for Character Sets on the Internet</a></cite>, K. Simonsen, W.Choi, et al. IANA.</dd>
+	        <dt id="encodingSpecification">Encoding Specification</dt>
+	        <dd><cite><a href="http://encoding.spec.whatwg.org/">Encoding Living Standard</a></cite>, A. van Kesteren, J. Bell.</dd>
 	        <dt id="TypedArrays">Typed Arrays</dt>
 	        <dd><cite><a href="https://cvs.khronos.org/svn/repos/registry/trunk/public/webgl/doc/spec/TypedArray-spec.html">Typed Arrays (work in progress)</a></cite>, V. Vukicevic, K. Russell. Khronos Group.</dd>
 	        <dt id="ABNF">RFC5234</dt>
@@ -1774,7 +1725,7 @@ else {
 		<dt id="ECMA-262">ECMAScript</dt>
 		<dd><cite><a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMAScript 5th Edition</a></cite>, A. Wirfs-Brock, P. Lakshman et al.</dd>
 		<dt id="MIMESNIFF">MIME Sniffing</dt>
-		<dd><cite><a href="http://mimesniff.spec.whatwg.org/">MIME Sniffing (work in progress)</a></cite>, A. Barth and I. Hickson.</dd>
+		<dd><cite><a href="http://mimesniff.spec.whatwg.org/">MIME Sniffing (work in progress)</a></cite>, A. Barth, I. Hickson.</dd>
 		</dl>
 	      </div>
 	    <div id="informative-references" class="section">
