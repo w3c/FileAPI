@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor's Draft <em>March 15 2013</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI">http://dev.w3.org/2006/webapi/FileAPI</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="https://mozillians.org/en-US/sicking">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor's Draft <em>March 19 2013</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI">http://dev.w3.org/2006/webapi/FileAPI</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="https://mozillians.org/en-US/sicking">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2013 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -73,7 +73,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the March 15 2013 <b>Editor's Draft</b> of the
+        This document is the March 19 2013 <b>Editor's Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -422,8 +422,18 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
      <li><p>If <var>element</var> is a <code>Blob</code>, append the bytes it represents to <var>bytes</var>.  The <a href="#dfn-type"><code>type</code></a> of the <code>Blob</code> array element is ignored.</p></li>
     </ol>
   </li>
+  <li><p>If the <a href="#dfn-BPtype"><code>type</code></a> member of the optional <code>options</code> argument is provided and is not the empty string, run the following sub-steps:
+    <ol>
+      <li>Let <var>t</var> be the <a href="#dfn-BPtype"><code>type</code></a> dictionary member. If <var>t</var> contains any non-ASCII characters, then set <var>t</var> to the empty string and return from these substeps.</li>
+      <li>Convert every character in <var>t</var> to lower case.</li>
+      <li>If <var>t</var> contains any line break characters like "CR" or "LF" or any CTLs or separators, then set <var>t</var> to the empty string and return from these substeps. </li>
+      <li>Parse <var>t</var> as an RFC2616 media-type, tokenizing it according to the ABNF for media-type [<a href="#RFC2616">RFC2616</a>] with the ASCII "/" character separating tokens representing the <em>type</em> and <em>subtype</em> productions. If <var>t</var> cannot be tokenized according to the ABNF for media-type [<a href="#RFC2616">RFC2616</a>], then set <var>t</var> to the empty string and return from these substeps. </li>
 
-<li><p>Return a <code>Blob</code> object consisting of <var>bytes</var>, with its <a href="#dfn-size"><code>size</code></a> set to the length of <var>bytes</var>, and its <a href="#dfn-type"><code>type</code></a> set to the <a href="#dfn-BPtype"><code>type</code></a> member of the <var>options</var> argument, if used.</p></li>
+    </ol>
+
+  </li>
+
+<li><p>Return a <code>Blob</code> object consisting of <var>bytes</var>, with its <a href="#dfn-size"><code>size</code></a> set to the length of <var>bytes</var>, and its <a href="#dfn-type"><code>type</code></a> set to the value of <var>t</var> from the substeps above.</p></li>
 </ol>
 
 
@@ -541,7 +551,14 @@ var d = new Blob([buffer, b, c, bytes]);
    </p>
    <ol type="A">
    <li><p>If the <code>contentType</code> parameter is not provided, let <var>relativeContentType</var> be set to the empty string .</p></li>
-   <li><p>Else let <var>relativeContentType</var> be set to <code>contentType</code>.   User agents must treat it as an RFC2616 media-type [<a href="#RFC2616">RFC2616</a>], and as an opaque string that can be ignored if it is an invalid media-type.  This value must be used as the Content-Type header when dereferencing a <a href="#url">Blob URL</a>.</p>
+   <li><p>Else let <var>relativeContentType</var> be set to <code>contentType</code> and run the substeps below: </p>
+    <ol>
+      <li>If <var>relativeContentType</var> contains any non-ASCII characters, then set <var>relativeContentType</var> to the empty string and return from these substeps.</li>
+      <li>Convert every character in <var>relativeContentType</var> to lower case.</li>
+      <li>If <var>relativeContentType</var> contains any line break characters like "CR" or "LF" or any CTLs or separators, then set <var>relativeContentType</var> to the empty string and return from these substeps. </li>
+      <li>Parse <var>relativeContentType</var> as an RFC2616 media-type, tokenizing it according to the ABNF for media-type [<a href="#RFC2616">RFC2616</a>] with the ASCII "/" character separating tokens representing the <em>type</em> and <em>subtype</em> productions. If <var>relativeContentType</var> cannot be tokenized according to the ABNF for media-type [<a href="#RFC2616">RFC2616</a>], then set <var>relativeContentType</var> to the empty string and return from these substeps. 
+      </li>
+    </ol>
  </li>
 <li><p>This defines the normalization of the <code>contentType</code> parameter.  When processing the <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call,
     user agents must normalize <code>contentType</code> to <var>relativeContentType</var>.</p></li>
@@ -831,9 +848,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
   <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> has been neutered through the <a href="#dfn-close"><code>close</code></a> method, throw an <code>InvalidStateError</code> exception [<a href="#DOM4">DOM4</a>] and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p>
   <p><strong>Note:</strong> The <a href="#dfn-readAsDataURL"><code>readAsDataURL()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
   </li> 
-	  <li><p>If an <a href="#file-error-read">error occurs during reading of the <code>blob</code> parameter</a>, OR if a user agent's URL length limitations prevent returning
-	  data as a Data URL [<a href="#DataURL">DataURL</a>], set <a href="#dfn-readyState"><code>readyState</code></a> to
-	  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
+	  <li><p>If an <a href="#file-error-read">error occurs during reading of the <code>blob</code> parameter</a> set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
 	  <ol>   
 	    <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
 	    <a href="#dfn-error-event"><code>error</code></a>.  <em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
@@ -1220,8 +1235,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	    thus resulting in an invalid read.  Additionally, some file and directory structures may be considered restricted
 	by the underlying filesystem; attempts to read from them may be considered a security violation.  See the <a href="#security-discussion">security considerations</a>.
 	See <a href="#dfn-SecurityError"><code>SecurityError</code></a></p></li>
-	    <li><p>Files may be too large to return to the data structures of a Web application.  An example might be that URL length limitations imposed by user agents on Data URLs may
-	make obtaining large files encoded as Data URLs impossible to return [<a href="#DataURL">DataURL</a>].  See <a href="#dfn-EncodingError"><code>EncodingError</code></a></p></li>
+	    
 	    </ul>
 	<div id="dfn-error-codes" class="section">
 	<h3>10.1. Throwing an Exception or Returning an Error</h3>
@@ -1247,9 +1261,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	    </td></tr><tr><td><dfn id="dfn-NotReadableError" title="NotReadableError"><code>NotReadableError</code></dfn>
 	     </td><td>If the <a href="#snapshot-state">snapshot state</a> of a <a href="#dfn-file"><code>File</code></a> or a <a href="#dfn-Blob"><code>Blob</code></a> does not match the state of the underlying storage, then for asynchronous read methods the  <a href="#dfn-error"><code>error</code></a> attribute must return a "<code>NotReadableError</code>" <a href="#dfn-domerror"><code>DOMError</code></a> and synchronous read methods must <a href="#throw-an-exception">throw</a> a <code>NotReadableError</code> exception. If the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> cannot be read, typically due due to permission problems that occur after a
 	     <a href="#snapshot-state">snapshot state</a> has been established (e.g. concurrent lock on the underlying storage with another application) then for asynchronous read methods the  <a href="#dfn-error"><code>error</code></a> attribute must return a "<code>NotReadableError</code>" <a href="#dfn-domerror"><code>DOMError</code></a> and synchronous read methods must <a href="#throw-an-exception">throw</a> a <code>NotReadableError</code> exception.
-	    </td></tr><tr><td><dfn id="dfn-EncodingError" title="EncodingError"><code>EncodingError</code>, <em>Deprecated</em></dfn>
-	     </td><td><em>Deprecated.</em> If the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> cannot be encoded as Base64 for a Data URL [<a href="#DataURL">DataURL</a>] owing to URL length limitations in implementations, then for asynchronous read methods the  <a href="#dfn-error"><code>error</code></a> attribute must return a "<code>EncodingError</code>" <a href="#dfn-domerror"><code>DOMError</code></a>, and synchronous read methods must <a href="#throw-an-exception">throw</a> an <code>EncodingError</code> exception.
-</td></tr></tbody></table>
+	    </td></tr></tbody></table>
 	</div> 
 	</div>
 	<div id="url" class="section">  
