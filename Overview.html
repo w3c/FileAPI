@@ -419,7 +419,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
     </code></pre></div></div>
     <div id="constructorBlob" class="section">
 		<h3>6.1. Constructors</h3>
-		<p>The <code>Blob()</code> constructor can be invoked with zero, one, two or three parameters.  When the <code>Blob()</code> constructor is invoked, user agents must run the following <dfn id="Blob-constructor-steps">Blob constructor steps</dfn>:</p>
+		<p>The <code>Blob()</code> constructor can be invoked with zero, one, two or three parameters.  When the <code>Blob()</code> constructor is invoked, user agents must run the following <dfn id="blob-constructor-steps">Blob constructor steps</dfn>:</p>
     <ol>
       <li><p>If invoked with zero parameters, return a new <code>Blob</code> object consisting of 0 bytes, with <a href="#dfn-size"><code>size</code></a> set to 0, and with <a href="#dfn-type"><code>type</code></a> set to the empty string.</p></li>
       <li><p>Otherwise, the constructor is invoked with a <a href="#dfn-blobParts"><code>blobParts</code></a> sequence.  Let <var>a</var> be that sequence.</p></li>
@@ -471,7 +471,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 			<dt>An <em>optional</em> <a href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a></dt>
 			<dd>which takes one member:
 			<ul>
-				<li><dfn id="dfn-BPtype"><code>type</code></dfn>, the ASCII-encoded string in lower case representing the media type of the <code>Blob</code>.  Normative conditions for this member are provided in the <a href="#Blob-constructor-steps">Blob constructor steps.</a></li>
+				<li><dfn id="dfn-BPtype"><code>type</code></dfn>, the ASCII-encoded string in lower case representing the media type of the <code>Blob</code>.  Normative conditions for this member are provided in the <a href="#blob-constructor-steps">Blob constructor steps.</a></li>
 			</ul>
 		</dd>
 		</dl>
@@ -520,7 +520,7 @@ var d = new Blob([buffer, b, c, bytes]);
     number of bytes that can be read by a <a href="#dfn-filereader"><code>FileReader</code></a> or <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object, or 0 if the
     Blob has no bytes to be read.  If the <code>Blob</code> has been neutered with <a href="#dfn-close"><code>close</code></a> called on it, then <code>size</code> must return 0.</p></dd>
     <dt id="dfn-type"><code>type</code></dt>
-    <dd><p>The ASCII-encoded string in lower case representing the media type of the <code>Blob</code>.  User agents must not attempt heuristic determination of <code>type</code>, including statistical methods.  Normative conditions for this attribute can be found in the <a href="#Blob-constructor-steps">Blob constructor steps</a> and in the <a href="#slice-method-algo">slice method algorithm</a>, where this attribute can be set. 
+    <dd><p>The ASCII-encoded string in lower case representing the media type of the <code>Blob</code>.  User agents must not attempt heuristic determination of <code>type</code>, including statistical methods.  Normative conditions for this attribute can be found in the <a href="#blob-constructor-steps">Blob constructor steps</a> and in the <a href="#slice-method-algo">slice method algorithm</a>, where this attribute can be set. 
     </p></dd>
     </dl>
     <div class="note"><div class="noteHeader">Note</div>
