@@ -554,9 +554,7 @@ var d = new Blob([buffer, b, c, bytes]);
     <li><p>Else, let <var>relativeEnd</var> be <em>min(end, size)</em></p></li>
     </ol>
   </li>
-  <li><p>The optional <dfn id="dfn-contentTypeBlob"><code>contentType</code></dfn> parameter is used to set a value identical to one that is set with the
-    HTTP/1.1 Content-Type header [<a href="#RFC2616">RFC2616</a>] on
-    the <a href="#dfn-Blob"><code>Blob</code></a> returned by the <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call.  User agents must process the <a href="#dfn-slice"><code>slice</code></a> with <code>contentType</code> normalized according to the following:
+  <li><p>The optional <dfn id="dfn-contentTypeBlob"><code>contentType</code></dfn> parameter is used to set the ASCII-encoded string in lower case representing the media type of the Blob.  User agents must process the <a href="#dfn-slice"><code>slice</code></a> with <code>contentType</code> normalized according to the following:
    </p>
    <ol type="A">
    <li><p>If the <code>contentType</code> parameter is not provided, let <var>relativeContentType</var> be set to the empty string .</p></li>
