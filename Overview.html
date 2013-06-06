@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor's Draft <em>April 10 2013</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI">http://dev.w3.org/2006/webapi/FileAPI</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="https://mozillians.org/en-US/sicking">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor's Draft <em>June 6 2013</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI">http://dev.w3.org/2006/webapi/FileAPI</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="https://mozillians.org/en-US/sicking">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2013 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -73,7 +73,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the April 10 2013 <b>Editor's Draft</b> of the
+        This document is the June 6 2013 <b>Editor's Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -851,41 +851,33 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
   <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> has been neutered through the <a href="#dfn-close"><code>close</code></a> method, throw an <code>InvalidStateError</code> exception [<a href="#DOM4">DOM4</a>] and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p>
   <p><strong>Note:</strong> The <a href="#dfn-readAsDataURL"><code>readAsDataURL()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
   </li> 
-	  <li><p>If an <a href="#file-error-read">error occurs during reading of the <code>blob</code> parameter</a> set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
-	  <ol>   
-	    <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
-	    <a href="#dfn-error-event"><code>error</code></a>.  <em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
-	    <a href="#dfn-error"><code>error</code></a> attribute must be a
-	    a <a href="#dfn-domerror"><code>DOMError</code></a> object that indicates the kind of
-	    <a href="#file-error-read">file error that has occurred</a>.</p></li>
-	    <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
-	    <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
-	    <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p>
-
-		<p><strong>Note:</strong> The <a href="#dfn-readAsDataURL"><code>readAsDataURL()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p> 
-	</li>    
-	  </ol>
+	  <li><p>If an <a href="#file-error-read">error occurs during reading of the <code>blob</code> parameter</a> set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the <a href="#dfn-error-steps">error steps</a>. </p>
 	  </li>
 	  <li><p>If no error has occurred, set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
 	  <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
 	<li><p>Return the <code>readAsDataURL()</code> method, but continue to process the steps in this algorithm. </p></li>
 	<li><p><a href="#make-progress-notifications">Make progress notifications.</a> There must be no <a href="#partial-blob-data">partial Blob data</a> associated with this <a href="#read-methods">read method</a>; while processing the read, <a href="#dfn-result"><code>result</code></a> returns <code>null</code> until the read is complete.</p></li>
-	  <li><p><a href="#queue-a-task">Queue a task</a> to update the <a href="#dfn-result"><code>result</code></a> attribute with the <a href="#dfn-fileBlob"><code>blob</code></a> as a
+	  <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been fully read into memory <a href="#queue-a-task">queue a task</a> to do the following:</p> 
+
+      <ol><li><p>Set <a href="dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code>.</a></p></li>
+      <li><p>Set the <a href="#dfn-result"><code>result</code></a> attribute with the <a href="#dfn-fileBlob"><code>blob</code></a> as a
 	  DataURL [<a href="#DataURL">DataURL</a>] after it has been fully read into memory; on getting, the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute returns the (complete) data of <a href="#dfn-fileBlob"><code>blob</code></a> as a
 	  Data URL [<a href="#DataURL">DataURL</a>].</p>
-	  <ul>
-	  <li>Use the <a href="#dfn-fileBlob"><code>blob</code></a>'s <a href="#dfn-type"><code>type</code></a>
-	  attribute as part of the Data URL if it is available in keeping with the Data URL specification [<a href="#DataURL">DataURL</a>] .</li>
-	  <li>If the <a href="#dfn-type"><code>type</code></a> attribute is not available on the <a href="#dfn-fileBlob"><code>blob</code></a> return a Data URL without a media-type.
-	  [<a href="#DataURL">DataURL</a>].
-	  <p>Data URLs that do not have media-types [<a href="#RFC2046">RFC2046</a>] must be treated as plain text by conforming user agents. [<a href="#DataURL">DataURL</a>].
+    <ul>
+    <li><p>Use the <a href="#dfn-fileBlob"><code>blob</code></a>'s <a href="#dfn-type"><code>type</code></a>
+    attribute as part of the Data URL if it is available in keeping with the Data URL specification [<a href="#DataURL">DataURL</a>].</p></li>
+    <li><p>If the <a href="#dfn-type"><code>type</code></a> attribute is not available on the <a href="#dfn-fileBlob"><code>blob</code></a> return a Data URL without a media-type.
+    [<a href="#DataURL">DataURL</a>].</p>
+    <p>Data URLs that do not have media-types [<a href="#RFC2046">RFC2046</a>] must be treated as plain text by conforming user agents. [<a href="#DataURL">DataURL</a>].
   </p>
 
-	  </li>
-	  </ul>
-	  </li>
-	  <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, set <a href="#dfn-readyState"><code>readyState</code></a> to
-	  <a href="#dfn-done"><code>DONE</code></a></p></li>
+    </li>
+    </ul>
+  </li>
+    <li><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-load-event"><code>load</code></a>.</li>
+    <li>Unless <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a>.  If <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> do NOT fire <a href="#dfn-loadend-event"><code>loadend</code></a>. </li>
+  </ol>
+</li>
 	  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p></li>
 	</ol>
 	</div>
@@ -907,21 +899,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
   </li> 
 	  <li><p>If an <a href="#file-error-read">error occurs during reading the <code>blob</code> parameter</a>, 
 	  set <a href="#dfn-readyState"><code>readyState</code></a> to
-	  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
-	  <ol>
-	    <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
-	    <a href="#dfn-error-event"><code>error</code></a>.  <em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
-	    <a href="#dfn-error"><code>error</code></a> attribute must be a
-	    a <a href="#dfn-domerror"><code>DOMError</code></a> object that indicates the kind of
-	    <a href="#file-error-read">file error that has occurred</a>.</p>
-	    </li>
-	    <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
-	    <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
-	    <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p>
-
-		<p><strong>Note:</strong> The <a href="#dfn-readAsText"><code>readAsText()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
-	</li>    
-	  </ol>
+	  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the <a href="#dfn-error-steps">error steps</a>.</p>
 	  </li>
 	  <li><p>If no error has occurred, set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
 	  <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
@@ -942,7 +920,13 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	replaced with U+FFFD till it can be determined definitively that the codepoint is invalid.
 	</p>
 	</li>
-	  <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
+	  <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, queue a task to do the following:</p>
+      <ol><li><p>Set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
+          <li><p>Set the <a href="#dfn-result"><code>result</code></a> attribute to the fully read <a href="#dfn-fileBlob"><code>blob</code></a>, represented as a string in a format determined by the <a href="#encoding-determination">encoding determination</a>.  This constitutes the final update of <a href="#partial-blob-data">partial Blob data</a>.</p></li>
+         <li><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-load-event"><code>load</code></a>.</li>
+    <li>Unless <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a>.  If <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> do NOT fire <a href="#dfn-loadend-event"><code>loadend</code></a>. </li>
+        </ol>
+      </li>
 	  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.
 	  </p></li>
 	</ol>
@@ -962,20 +946,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
   <p><strong>Note:</strong> The <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
   </li> 
 	  <li><p>If an <a href="#file-error-read">error occurs during reading the <code>blob</code> parameter</a>, set <a href="#dfn-readyState"><code>readyState</code></a> to
-	  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the error steps below.</p>
-	  <ol>
-	    <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
-	    <a href="#dfn-error-event"><code>error</code></a>.  <em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
-	    <a href="#dfn-error"><code>error</code></a> attribute must be a
-	    a <a href="#dfn-domerror"><code>DOMError</code></a> that indicates the kind of
-	    <a href="#file-error-read">file error that has occurred</a>.</p>
-	    </li>
-	    <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
-	    <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>. </p></li>
-	    <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p>
-	<p><strong>Note:</strong> The <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
-	</li>    
-	  </ol>
+	  <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to <code>null</code>. Proceed to the <a href="#dfn-error-steps">error steps</a>.</p>
 	  </li>
 	  <li><p>If no error has occurred, set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
 	  <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
@@ -989,12 +960,33 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	  (as a fraction of the <code>total</code>) [<a href="#ProgressEvents">ProgressEvents</a>], as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] object;
 	  user agents must return at least one such <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] while processing this read method.  The last returned value is at completion of
 	  the read.</p></li>
-	  <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
+	  <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, queue a task to do the following: </p>
+      <ol><li><p>Set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
+          <li><p>Set the <a href="#dfn-result"><code>result</code></a> attribute to the value of the fully read <a href="#dfn-fileBlob"><code>blob</code></a> as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] object.  This constitutes the final update of <a href="#partial-blob-data">partial Blob data</a></p></li>
+          <li><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-load-event"><code>load</code></a>.</li>
+          <li>Unless <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a>.  If <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> do NOT fire <a href="#dfn-loadend-event"><code>loadend</code></a>. </li>
+        </ol>
 	  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p></li>
 	</ol>
 	</div>
+  <div id="dfn-error-steps" class="section">
+    <h4>8.5.6. Error Steps</h4>
+        <ol>   
+      <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
+      <a href="#dfn-error-event"><code>error</code></a>.  <em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
+      <a href="#dfn-error"><code>error</code></a> attribute must be a
+      a <a href="#dfn-domerror"><code>DOMError</code></a> object that indicates the kind of
+      <a href="#file-error-read">file error that has occurred</a>.</p></li>
+      <li><p>Unless <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a>, <a href="#fire-a-progress-event">fire a progress event</a> called
+      <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>.  If <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> do NOT fire <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>.</p></li>
+      <li><p><a href="#terminate-an-algorithm">Terminate the algorithm</a> for any <a href="#read-methods">read method</a>.</p>
+
+    <p><strong>Note:</strong> The <a href="#read-methods">read method</a> returns due to the algorithm being terminated.</p> 
+  </li>    
+    </ol>
+  </div>
 	<div id="abort" class="section">
-	<h4>8.5.6. The abort() method</h4>
+	<h4>8.5.7. The abort() method</h4>
 	<p>
 	  When the <dfn id="dfn-abort"><code>abort()</code></dfn> method is called, the user agent must run the steps below:</p>
 	  <ol>
@@ -1006,12 +998,12 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	  <a href="#queue-a-task">task queues</a>, then remove those <a href="#dfn-task">tasks</a>.</p></li>
 	  <li><p><a href="#terminate-an-algorithm">Terminate the algorithm</a> for the <a href="#read-methods">read method</a> being processed.   </p></li>
 	  <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-abort-event"><code>abort</code></a></p></li>
-	  <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a></p></li>
+	  <li><p>Unless the <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code>.</a>  If <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> do NOT fire <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>.</p></li>
 	  </ol>
 	</div>
 
 	<div id="blobAndFileParams" class="section">
-	<h4>8.5.7. Blob Parameters</h4>
+	<h4>8.5.8. Blob Parameters</h4>
 	<p>The three <a href="#read-methods">asynchronous read methods</a>, the three <a href="#read-method-sync">synchronous read methods</a>, and <a href="#dfn-createObjectURL"><code>createObjectURL</code></a> take a mandatory
 	<a href="#dfn-Blob" class="dfnref"><code>Blob</code></a> parameter.  This section defines this parameter.
 	</p>
@@ -1022,7 +1014,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	</dl>
 	</div>
 	<div id="enctype" class="section">
-	<h4>8.5.8. Determining Encoding</h4>
+	<h4>8.5.9. Determining Encoding</h4>
 	<p>When reading <a href="#dfn-fileBlob"><code>blob</code></a> objects using the <a href="#dfn-readAsText"><code>readAsText()</code></a> <a href="#read-methods">read method</a>, the following <dfn id="encoding-determination">encoding determination</dfn> steps must be followed:</p>
 	<ol>
 	<li><p>Let <var>encoding</var> be null</p></li>
@@ -1042,7 +1034,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	</ol>
 	</div>
 	<div id="events" class="section">
-	<h4>8.5.9. Events</h4>
+	<h4>8.5.10. Events</h4>
 	<p>When this specification says to <dfn id="make-progress-notifications">make progress notifications </dfn> for a <a href="#read-methods">read method</a>,
 	the following steps must be followed:</p>
 	<ol>
@@ -1054,12 +1046,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	<p>If a given implementation uses buffers of size 65536 bytes to read files, and thus limits reading operations to that size, and a <a href="#read-methods">read method</a> is called on a file that is 65537 bytes, then that implementation must fire one <a href="#dfn-progress-event"><code>progress</code></a> event for the 65536 first bytes, one <a href="#dfn-progress-event"><code>progress</code></a> event for the 65537th byte (which is at completion of read), one <a href="#dfn-load-event"><code>load</code></a> event and one <a href="#dfn-loadend-event"><code>loadend</code></a> event.</p>
 	</div>	
 		</li>
-	<li><p>When the data from the <a href="#dfn-fileBlob"><code>blob</code></a> 
-	has been completely read into memory, <a href="#queue-a-task">queue a task</a> to <a href="#fire-a-progress-event">fire a progress event</a> called
-	<a href="#dfn-load-event"><code>load</code></a> at the <a href="#dfn-filereader"><code>FileReader</code></a> object.</p></li>
-	<li><p>When the data from the <a href="#dfn-fileBlob"><code>blob</code></a>
-	has been completely read into memory, <a href="#queue-a-task">queue a task</a> to <a href="#fire-a-progress-event">fire a progress event</a> called
-	<a href="#dfn-loadend-event"><code>loadend</code></a> at the <a href="#dfn-filereader"><code>FileReader</code></a> object.</p></li>
+    <li>If the <a href="#read-methods">read method</a> defines <a href="#partial-Blob-data">partial Blob data</a> to be returned through the <a href="#dfn-result"><code>result</code></a> attribute, these must be returned with the firing of each <a href="#dfn-progress-event"><code>progress</code></a> event.</li>
 	</ol>
 	<p>
 	  When this specification says to <dfn id="fire-a-progress-event">fire a progress event</dfn> <em>called e</em> (for some
@@ -1072,7 +1059,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	  [<a href="#ProgressEvents">ProgressEvents</a>].</p></li> 
 	  </ul>
 	  <div id="event-summary" class="section">
-	  <h5>8.5.9.1. Event Summary</h5>
+	  <h5>8.5.10.1. Event Summary</h5>
 	  <p>The following are the events that are fired at <code><a href="#dfn-filereader">FileReader</a></code> objects; <a href="#fire-a-progress-event">firing events</a> is defined in
 	  DOM Core [<a href="#DOM4">DOM4</a>].</p>
 	  <table id="event-summary-table">
@@ -1134,15 +1121,27 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 
 	  </div>
 	<div id="eventInvariants" class="section">
-	<h5>8.5.9.2. Summary of Event Invariants</h5>
+	<h5>8.5.10.2. Summary of Event Invariants</h5>
 	<p>
 	This section is informative.  The following are invariants applicable to <a href="#fire-an-event">event firing</a> for a given asynchronous <a href="#read-methods">read method</a> in this specification:
 	</p>
 	<ol> 
-		<li><p>Once a <a href="#dfn-loadstart-event"><code>loadstart</code></a> has been fired, a corresponding <a href="#dfn-loadend-event"><code>loadend</code></a> fires at completion of the read, EXCEPT if the <a href="#read-methods">read method</a> has been cancelled using <a href="#dfn-abort"><code>abort()</code></a> and a new <a href="#read-methods">read method</a> has been invoked.</p>
+		<li><p>Once a <a href="#dfn-loadstart-event"><code>loadstart</code></a> has been fired, a corresponding <a href="#dfn-loadend-event"><code>loadend</code></a> fires at completion of the read, EXCEPT if </p><ul><li><p>the <a href="#read-methods">read method</a> has been cancelled using <a href="#dfn-abort"><code>abort()</code></a> and a new <a href="#read-methods">read method</a> has been invoked.</p></li><li><p>the event handler function for a <a href="#dfn-load-event"><code>load</code></a> event initiates a new read</p></li><li><p>the event handler function for a <a href="#dfn-error-event"><code>error</code></a> event initiates a new read.</p></li></ul>
 	<div class="note"><div class="noteHeader">Note</div>
 	The events <a href="#dfn-loadstart-event"><code>loadstart</code></a> and <a href="#dfn-loadend-event"><code>loadend</code></a> are not coupled in a one-to-one manner. 	
-	</div>	
+	</div>
+  <div class="example"><div class="exampleHeader">Example</div>
+    <p>
+      This example showcases "read-chaining.""  
+    </p>
+    <div class="block"><div class="blockTitleDiv"><span class="blockTitle">ECMAScript</span></div><div class="blockContent"><pre class="code"><code class="es-code">
+    <span class="comment">// In code of the sort...</span>
+    reader.readAsText(file);
+    reader.onload = function(){reader.readAsText(alternateFile);}
+    
+    <span class="comment">// the loadend event must not fire for the first read</span>
+     
+    </code></pre></div></div>	
 		</li>
 		<li><p>One <a href="#dfn-progress-event"><code>progress</code></a> event will fire when <a href="#dfn-fileBlob"><code>blob</code></a> has been completely read into memory.  </p></li>
 		<li><p>No <a href="#dfn-progress-event"><code>progress</code></a> event fires before <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
