@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor's Draft <em>June 7 2013</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI">http://dev.w3.org/2006/webapi/FileAPI</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="https://mozillians.org/en-US/sicking">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor's Draft <em>June 10 2013</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI">http://dev.w3.org/2006/webapi/FileAPI</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="https://mozillians.org/en-US/sicking">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2013 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -73,7 +73,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the June 7 2013 <b>Editor's Draft</b> of the
+        This document is the June 10 2013 <b>Editor's Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -1482,7 +1482,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	
 	dictionary <dfn id="dfn-objectURLOptions" class="dfnrefs">objectURLOptions</dfn>
 	{
-		boolean <a href="#dfn-autoRevoke">autoRevoke</a> = true;
+		boolean <a href="#dfn-autoRevoke">autoRevoke</a> = false;
 
 	};
 	
@@ -1500,22 +1500,18 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	<li><p>If this method is called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that is NOT <a href="#valid">valid</a>, then user agents must return <code>null</code>.</p></li>
 	<li><p>If this method is called with a <a href="#valid">valid</a> <a href="#dfn-Blob"><code>Blob</code></a> argument, user agents must run the following steps:</p>
   <ol type="A">
-    <li>The optional <a href="#dfn-objectURLOptions"><code>objectURLOptions</code></a> dictionary argument called <dfn id="dfn-options-objectURL"><code>options</code></dfn> has a boolean member <dfn id="dfn-autoRevoke"><code>autoRevoke</code></dfn> that defaults to <code>true</code>; if called without using the optional dictionary, or if called with <code>autoRevoke</code> set to <code>true</code>, execute the following <dfn id="autoRevoke"><code>autoRevoke</code> sub-steps</dfn>:
+    <li>The optional <a href="#dfn-objectURLOptions"><code>objectURLOptions</code></a> dictionary argument called <dfn id="dfn-options-objectURL"><code>options</code></dfn> has a boolean member <dfn id="dfn-autoRevoke"><code>autoRevoke</code></dfn> that defaults to <code>false</code>; if called without using the optional dictionary, or if called with <code>autoRevoke</code> set to <code>false</code> return a unique <a href="#url"><code>Blob</code> URL</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument. </p>
+<div class="note"><div class="noteHeader">Note</div>This <a href="#url"><code>Blob</code> URL</a> must persist till a call to <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> is made, or till the  <a href="#unloading-document-cleanup-steps">unloading document cleanup steps</a> are executed.</div></li>
+<li><p>If called with the optional <a href="#dfn-objectURLOptions"><code>objectURLOptions</code></a> with <dfn id="dfn-autoRevoke"><code>autoRevoke</code></dfn> set to <code>true</code> run the following <dfn id="autoRevoke">autoRevoke substeps</dfn>:</p>
     <ol type="a">
-      <li>Return a unique <a href="#url"><code>Blob</code> URL</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument.</li>
+      <li><p>Return a unique <a href="#url"><code>Blob</code> URL</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument.</p></li>
       <li><p>Add revoking the <a href="#url"><code>Blob</code> URL</a> to the <a href="#global-script-cleanup-jobs-list">global script clean-up jobs list</a>.  When user agents process the <a href="#global-script-cleanup-jobs">global script clean-up jobs</a>, they must treat revoking a <a href="#url"><code>Blob</code> URL</a> as equivalent to calling <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> on it.</p>
     </li>
+</ol></li>
+</ol>
     <li><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</li>
     </ol>
-    </li>
-   <li><p>If this method is called with the <code>autoRevoke</code> dictionary member set to <code>false</code>, return a unique <a href="#url"><code>Blob</code> URL</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument. </p>
-<div class="note"><div class="noteHeader">Note</div>This <a href="#url"><code>Blob</code> URL</a> must persist till a call to <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> is made, or till the  <a href="#unloading-document-cleanup-steps">unloading document cleanup steps</a> are executed.</div>
- </li>
-</ol>
-</li>
-	</ol>
-
-
+    
 	<div class="example"><div class="exampleHeader">Example</div>
 	<p>In the example below, after obtaining a reference to a <a href="#dfn-Blob"><code>Blob</code></a> object (in this case, a user-selected <a href="#dfn-file"><code>File</code></a> from the underlying file system), the static method <code>URL.createObjectURL()</code> is called on that <a href="#dfn-Blob"><code>Blob</code></a> object.</p>
 	<div class="block"><div class="blockTitleDiv"><span class="blockTitle">ECMAScript</span></div><div class="blockContent"><pre class="code"><code class="es-code">
@@ -1523,6 +1519,8 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	if(file){
 	  blobURLref = window.URL.createObjectURL(file);
 	  myimg.src = blobURLref;
+
+    ....
 
 	}
 	</code></pre></div></div>
@@ -1563,15 +1561,15 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 <div class="example"><div class="exampleHeader">Example</div>
 <p>In the example below, two <code>img</code> elements [<a href="#HTML">HTML</a>] refer to the same <a href="#url">Blob URL</a>, which was minted for one-time use only using the <code>boolean</code> key in the optional dictionary argument:</p>
 <div class="block"><div class="blockTitleDiv"><span class="blockTitle">ECMAScript</span></div><div class="blockContent"><pre class="code"><code class="es-code">
-&lt;script&gt;url = URL.createObjectURL(blob); &lt;/script&gt;&lt;script&gt; img2.src=url;&lt;/script&gt;
+&lt;script&gt;url = URL.createObjectURL(blob, {autoRevoke:true;}); &lt;/script&gt;&lt;script&gt; img2.src=url;&lt;/script&gt;
 </code></pre></div></div>
-<p>In the example above, the assignment in the second script element fails, since <a href="#dfn-autoRevoke"><code>autoRevoke</code></a> is <code>true</code> by default.</p>
+<p>In the example above, the assignment in the second script element may fail, since <a href="#dfn-autoRevoke"><code>autoRevoke</code></a> is <code>true</code>.</p>
 
 <p>
 In the example below,  <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL()</code></a> is explicitly called.
 </p>
 <div class="block"><div class="blockTitleDiv"><span class="blockTitle">ECMAScript</span></div><div class="blockContent"><pre class="code"><code class="es-code">
-var blobURLref = URL.createObjectURL(file, {autoRevoke:false});
+var blobURLref = URL.createObjectURL(file);
 img1 = new Image();
 img2 = new Image();
 
@@ -1600,7 +1598,7 @@ else {
 
 }
 </code></pre></div></div>
-<p>The example above allows multiple references to a single <a href="#url">Blob URL</a>, but revokes the <a href="#url">Blob URL</a> string after both image objects have been loaded.  While not restricting number of uses of the <a href="#url">Blob URL</a> offers more flexibility, it creates the potential for strings that linger after they are useful, especially in web applications where the <code>document</code> may persist for a while.  Developers must explicitly set the <a href="#dfn-autoRevoke"><code>autoRevoke</code></a> dictionary member to <code>false</code> in order to enable this usage.</p>
+<p>The example above allows multiple references to a single <a href="#url">Blob URL</a>, but revokes the <a href="#url">Blob URL</a> string after both image objects have been loaded.  While not restricting number of uses of the <a href="#url">Blob URL</a> offers more flexibility, it increases the likelihood of leaks. </p>
 </div>  
 </div>
 </div>
