@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor's Draft <em>August 19 2013</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI">http://dev.w3.org/2006/webapi/FileAPI</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="https://mozillians.org/en-US/sicking">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor's Draft <em>August 20 2013</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI">http://dev.w3.org/2006/webapi/FileAPI</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="https://mozillians.org/en-US/sicking">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2013 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -73,7 +73,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the August 19 2013 <b>Editor's Draft</b> of the
+        This document is the August 20 2013 <b>Editor's Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -1475,7 +1475,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
 
 	    static DOMString? <a href="#dfn-createObjectURL">createObjectURL</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
-      static DOMString? <a href="#dfn-createAndRevoke">createAndRevoke</a>(<a href="#dfn-Blob">)Blob</a> <a href="#dfn-fileBlob">blob</a>);
+      static DOMString? <a href="#dfn-createFor">createFor</a>(<a href="#dfn-Blob">)Blob</a> <a href="#dfn-fileBlob">blob</a>);
 	    static void <a href="#dfn-revokeObjectURL">revokeObjectURL</a>(DOMString <a href="#dfn-urlarg">url</a>);
 	};
 
@@ -1499,7 +1499,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 </li>
 </ol>
 </dd>
-<dt id="dfn-createAndRevoke">The <code>createAndRevoke</code> static method</dt><dd><p>Returns a unique <a href="#url"><code>Blob></code> URL</a> each time it is called on a <dfn id="valid">valid</dfn> <a href="#dfn-fileBlob"><code>blob</code></a> argument, which is a non-null <a href="#dfn-Blob"><code>Blob</code></a> in scope of the global object's <a href="URL-object"><code>URL</code></a> property from which this static method is called.  <a href="#url"><code>Blob></code> URL</a>s created with this method are said to be <dfn id="autoRevoking">auto-revoking</dfn> since user-agents are responsible for the revocation of <a href="#url">Blob URL</a>s created with this method, subject to the <a href="#lifetime">lifetime stipulation</a> for <a href="#url">Blob URL</a>s.  This method must act as follows: <p>
+<dt id="dfn-createFor">The <code>createFor</code> static method</dt><dd><p>Returns a unique <a href="#url"><code>Blob></code> URL</a> each time it is called on a <dfn id="valid">valid</dfn> <a href="#dfn-fileBlob"><code>blob</code></a> argument, which is a non-null <a href="#dfn-Blob"><code>Blob</code></a> in scope of the global object's <a href="URL-object"><code>URL</code></a> property from which this static method is called.  <a href="#url"><code>Blob></code> URL</a>s created with this method are said to be <dfn id="autoRevoking">auto-revoking</dfn> since user-agents are responsible for the revocation of <a href="#url">Blob URL</a>s created with this method, subject to the <a href="#lifetime">lifetime stipulation</a> for <a href="#url">Blob URL</a>s.  This method must act as follows: <p>
 <ol>
   <li><p>If called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that is NOT <a href="#valid">valid</a>, then user agents must return <code>null</code>.</p></li>
   <li><p>If this method is called with a <a href="#valid">valid</a> <a href="#dfn-Blob"><code>Blob</code></a> argument, user agents must run the following steps:</p>
@@ -1604,7 +1604,7 @@ else {
 <div class="block"><div class="blockTitleDiv"><span class="blockTitle">ECMAScript</span></div>
 <div class="blockContent">
 <pre class="code"><code class="es-code">
-var blobURLref2 = URL.createAndRevoke(file);
+var blobURLref2 = URL.createFor(file);
 img1 = new Image();
 
 img1.src = blobURLref2;
@@ -1612,11 +1612,11 @@ img1.src = blobURLref2;
 ....
 
 </code></pre></div></div>
-<p>The example above uses <a href="#dfn-createAndRevoke"><code>URL.createAndRevoke</code></a>, which allows uses such as the one above, and obviates the need for a corresponding call by the web developer to <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a>.</p>
+<p>The example above uses <a href="#dfn-createFor"><code>URL.createFor</code></a>, which allows uses such as the one above, and obviates the need for a corresponding call by the web developer to <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a>.</p>
 </div>
 <div id="lifeTime" class="section">
   <h3>11.7. Lifetime of Blob URLs</h3>
-  <p>Each <em>unit of related similar origin browsing contexts</em> [<a href="#HTML">HTML</a>] must maintain a <dfn id="BlobURLStore">Blob URL Store</dfn> which is a list of <a href="#url">Blob URL</a>s that have been created using <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createAndRevoke"><code>URL.createAndRevoke</code></a>, and the <a href="#dfn-fileBlob"><code>blob</code></a> resource that each <a href="#url">Blob URL</a> refers to.  Additionally, each <em>unit of related similar origin browsing contexts</em> must maintain a <dfn id="revokeQueue">Revocation List</dfn>, consisting of <a href="#url">Blob URL</a>s that have been created with the <a href="#dfn-revokeObjectURL"><code>URL.createAndRevoke</code></a> method.  When this specification says to <dfn id="add-an-entry">add an entry to the Blob URL Store</dfn> the user-agent must add the <a href="#url">Blob URL</a> created using <code>URL.createObjectURL</code> or <code>URL.createAndRevoke</code>, and a reference to the <a href="#dfn-fileBlob"><code>blob</code></a> it refers to, to the list.  When this specification says to <dfn id="add-an-entry-revoke">add an entry to the The Revocation List</dfn>, user agents must add any <a href="#url">Blob URL</a> created with the <code>URL.createAndRevoke</code> method; the <a href="#revokeQueue">Revocation List</a> is only for <a href="#autoRevoking">auto-revoking</a> <a href="#url">Blob URL</a>s.  The <a href="#revokeQueue">Revocation List</a> and the <a href="#BlobURLStore">Blob URL Store</a> must be processed together as follows:</p>
+  <p>Each <em>unit of related similar origin browsing contexts</em> [<a href="#HTML">HTML</a>] must maintain a <dfn id="BlobURLStore">Blob URL Store</dfn> which is a list of <a href="#url">Blob URL</a>s that have been created using <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a>, and the <a href="#dfn-fileBlob"><code>blob</code></a> resource that each <a href="#url">Blob URL</a> refers to.  Additionally, each <em>unit of related similar origin browsing contexts</em> must maintain a <dfn id="revokeQueue">Revocation List</dfn>, consisting of <a href="#url">Blob URL</a>s that have been created with the <a href="#dfn-revokeObjectURL"><code>URL.createFor</code></a> method.  When this specification says to <dfn id="add-an-entry">add an entry to the Blob URL Store</dfn> the user-agent must add the <a href="#url">Blob URL</a> created using <code>URL.createObjectURL</code> or <code>URL.createFor</code>, and a reference to the <a href="#dfn-fileBlob"><code>blob</code></a> it refers to, to the list.  When this specification says to <dfn id="add-an-entry-revoke">add an entry to the The Revocation List</dfn>, user agents must add any <a href="#url">Blob URL</a> created with the <code>URL.createFor</code> method; the <a href="#revokeQueue">Revocation List</a> is only for <a href="#autoRevoking">auto-revoking</a> <a href="#url">Blob URL</a>s.  The <a href="#revokeQueue">Revocation List</a> and the <a href="#BlobURLStore">Blob URL Store</a> must be processed together as follows:</p>
   <ol>
   <li>Add revoking all the URLs in the <a href="#revokeQueue">Revocation List</a> to the <a href="#global-script-cleanup-jobs-list">global script cleanup jobs list</a>, such that the following occurs when processing the <a href="#global-script-cleanup">global script cleanup jobs</a>:
   <ol>
@@ -1628,7 +1628,7 @@ img1.src = blobURLref2;
   </li>
   <li><p>This specification adds an additional <a href="#unloading-document-cleanup-steps">unloading document cleanup step</a> [<a href="#HTML">HTML</a>]: user agents must remove all <a href="#url">Blob URLs</a> from the <a href="#BlobURLStore">Blob URL Store</a> within that <a href="#document">document</a>. If these <a href="#url">Blob URL</a>s are dereferenced, user agents must respond with a <a href="#networkError">network error</a>.</p></li>
   </ol>
-    <div class="note"><p><a href="#url">Blob URL</a>s that are not in the <a href="#BlobURLStore">Blob URL Store</a> may be garbage collected by the user agent.  Only <a href="#url">Blob URL</a>s created using <a href="#dfn-createAndRevoke"><code>URL.createAndRevoke</code></a> are automatically removed from the <a href="#BlobURLStore">Blob URL Store</a>.  The <a href="#revokeQueue">Revocation List</a> and the <a href="#BlobURLStore">Blob URL Store</a> are used in conjunction with the Fetch Specification [<a href="#fetch">Fetch</a>] .</p></div>
+    <div class="note"><p><a href="#url">Blob URL</a>s that are not in the <a href="#BlobURLStore">Blob URL Store</a> may be garbage collected by the user agent.  Only <a href="#url">Blob URL</a>s created using <a href="#dfn-createFor"><code>URL.createFor</code></a> are automatically removed from the <a href="#BlobURLStore">Blob URL Store</a>.  The <a href="#revokeQueue">Revocation List</a> and the <a href="#BlobURLStore">Blob URL Store</a> are used in conjunction with the Fetch Specification [<a href="#fetch">Fetch</a>] .</p></div>
   </div> 
 </div>
 </div>
