@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor's Draft <em>August 20 2013</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI">http://dev.w3.org/2006/webapi/FileAPI</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="https://mozillians.org/en-US/sicking">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor's Draft <em>September 5 2013</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI">http://dev.w3.org/2006/webapi/FileAPI</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="https://mozillians.org/en-US/sicking">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2013 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -73,7 +73,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the August 20 2013 <b>Editor's Draft</b> of the
+        This document is the September 5 2013 <b>Editor's Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -406,8 +406,8 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
       
       <span class="comment">//slice Blob into byte-ranged chunks</span>
       
-      Blob <a href="#dfn-slice" title="slice">slice</a>(optional long long <a href="#dfn-start" class="dfnref" title="start">start</a>,
-                 optional long long <a href="#dfn-end" class="dfnref" title="length">end</a>,
+      Blob <a href="#dfn-slice" title="slice">slice</a>(optional [Clamp] long long <a href="#dfn-start" class="dfnref" title="start">start</a>,
+                 optional [Clamp] long long <a href="#dfn-end" class="dfnref" title="length">end</a>,
                  optional DOMString <a href="#dfn-contentTypeBlob">contentType</a>);
       void <a href="#dfn-close" title="close">close</a>(); 
     
@@ -812,15 +812,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	<p>On getting, the <dfn id="dfn-result"><code>result</code></dfn> attribute returns a <a href="#dfn-Blob"><code>Blob</code></a>'s data as a <code>DOMString</code>, or as
 	an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>], or <code>null</code>, depending on the <a href="#read-methods" class="#dfnref">read method</a>
 	that has been called on the <a href="#dfn-filereader" class="dfnref"><code>FileReader</code></a>, and any errors that may have occurred.
-	It can also return <em>partial Blob data</em>.
-	<dfn id="partial-blob-data">Partial Blob data</dfn> is the part of the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a>
-	that has been read into memory <em>currently</em>;
-	when processing the <a href="#read-methods">read method</a>
-	<a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a>, partial Blob data is a <code>DOMString</code> return type for <a href="#dfn-result"><code>result</code></a> that consists of the bytes that 
-	are <code>loaded</code> at that point (as a portion of the <code>total</code>) [<a href="#ProgressEvents">ProgressEvents</a>], and
-	when processing <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer</code></a> partial Blob data is an
-	<code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] return type for <a href="#dfn-result"><code>result</code></a> consisting of the bytes <code>loaded</code> at that point (as a portion of the
-	<code>total</code>)[<a href="#ProgressEvents">ProgressEvents</a>].  
+	
 	The list below is normative for the <code>result</code> attribute and is the conformance criteria for this attribute:
 	</p>
 	<ul>
@@ -836,19 +828,11 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	  and no error in reading the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> has occurred,
 	  then the <code>result</code> attribute must return a string representing the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a>'s
 	  data as a text string, and should decode the string into memory in the format specified
-	  by the <a href="#encoding-determination">encoding determination</a>.  On getting, <em>while processing</em> the
-	  <a href="#dfn-readAsText" class="dfnref"><code>readAsText</code></a> <a href="#read-methods">read method</a>, this attibute should return
-	  <a href="#partial-blob-data">partial Blob data</a> in the format specified by
-	  the <a href="#encoding-determination">encoding determination</a> as a <code>DOMString</code>.
-	  User agents must return at least one such <code>result</code>, with the final <code>result</code> returned at completion of the read.  See the <a href="#encodingCaveat">caveat about</a>
-	  <a href="#partial-blob-data">partial Blob data</a> being valid within a giving encoding.
+	  by the <a href="#encoding-determination">encoding determination</a> as a <code>DOMString</code>.
 	  </p></li>
 	  <li><p>On getting, if the <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer</code></a> <a href="#read-methods">read method</a> is called
 	  and no error in reading the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> has occurred,
-	  then the <code>result</code> attribute must return an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] object. On getting, <em>while processing</em> the
-	  <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer</code></a> <a href="#read-methods">read method</a>, the <code>result</code>
-	  attribute should return <a href="#partial-blob-data">partial Blob data</a> as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>].  User agents must return at least one such <code>result</code>,
-	  with the final <code>result</code> returned at completion of the read.</p></li>
+	  then the <code>result</code> attribute must return an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] object. </p></li>
 	</ul>
 	<p>If a read is successful, the <code>result</code> attribute must return a non-null value only after a <a href="#event-summary-table">progress event</a> (see also [<a href="#ProgressEvents">ProgressEvents</a>]) has fired,
 	since all the <a href="#read-methods">read methods</a> access <a href="#dfn-Blob"><code>Blob</code></a> data asynchronously.  <a href="#queue-a-task">Tasks are queued</a> to update
@@ -870,7 +854,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	  <li><p>If no error has occurred, set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a></p></li>
 	  <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
 	<li><p>Return the <code>readAsDataURL()</code> method, but continue to process the steps in this algorithm. </p></li>
-	<li><p><a href="#make-progress-notifications">Make progress notifications.</a> There must be no <a href="#partial-blob-data">partial Blob data</a> associated with this <a href="#read-methods">read method</a>; while processing the read, <a href="#dfn-result"><code>result</code></a> returns <code>null</code> until the read is complete.</p></li>
+	<li><p><a href="#make-progress-notifications">Make progress notifications.</a> </p></li>
 	  <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been fully read into memory <a href="#queue-a-task">queue a task</a> to do the following:</p> 
 
       <ol><li><p>Set <a href="dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code>.</a></p></li>
@@ -919,24 +903,10 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	  <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
 	<li><p>Return the <code>readAsText()</code> method, but continue to process the steps in this algorithm</p></li>
 	    <li><p><a href="#make-progress-notifications">Make progress notifications</a>.</p></li>
-	<li><p>While processing the read, as data from the <a href="#dfn-fileBlob"><code>blob</code></a> becomes available, user agents should <a href="#queue-a-task">queue tasks</a> to update the <a href="#dfn-result"><code>result</code></a> with <a href="#partial-blob-data">partial Blob data</a> represented as a string in a format determined by the <a href="#encoding-determination">encoding determination</a> until the read is complete, to accompany the <a href="#fire-a-progress-event">firing</a> of <a href="#dfn-progress-event"><code>progress</code></a> events.  On getting, the <a href="#dfn-result"><code>result</code></a> attribute returns <a href="#partial-blob-data">partial Blob data</a> representing the number of bytes currently <code>loaded</code> (as a fraction of the <code>total</code>) [<a href="#ProgressEvents">ProgressEvents</a>], decoded into
-	  memory according to the <a href="#encoding-determination">encoding determination</a>; user agents must return at least one such <a href="#dfn-result"><code>result</code></a> while processing this read method.  The last returned value is at completion of the read.</p>
-	<p>
-	<a href="#partial-blob-data">Partial Blob data</a> must be returned such that where possible, the bytes read thus far should be valid code points
-	within the <a href="#dfn-label"><code>label</code></a>; in particular, when executing the <a href="#encoding-determination">encoding determination</a> for
-	<a href="#partial-blob-data">Partial Blob data</a>, user agents must NOT return the U+FFFD character for bytes that are invalid within an <a href="#dfn-label"><code>label</code></a>
-	till the entire codepoint has been read.  User agents must return <a href="#partial-blob-data">partial Blob data</a> subject to similar considerations as the  <dfn id="encodingCaveat">encoding caveat</dfn> below:</p>
-	<p>
-	Suppose a file resource is to be read in <a href="#dfn-UTF-8" class="dfnrefs">UTF-8</a>, and in hexadecimal the bytes in this file are E3 83 91 E3 83 91, which is effectively 0x30D1 0x30D1.
-	Suppose the first 5 bytes have been read.  The <a href="#dfn-result"><code>result</code></a> returned here must be 0x30D1 and have <code>result.length == 1 </code>,
-	and NOT be 0x30D1 0xFFFD with <code>result.length == 2 </code>.
-	Even though the trailing E3 83 is not a valid code point in <a href="#dfn-UTF-8" class="dfnrefs">UTF-8</a> at the fifth byte, user agents must NOT return a <a href="#dfn-result"><code>result</code></a> with such invalid code points
-	replaced with U+FFFD till it can be determined definitively that the codepoint is invalid.
-	</p>
-	</li>
+	
 	  <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, queue a task to do the following:</p>
       <ol><li><p>Set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
-          <li><p>Set the <a href="#dfn-result"><code>result</code></a> attribute to the fully read <a href="#dfn-fileBlob"><code>blob</code></a>, represented as a string in a format determined by the <a href="#encoding-determination">encoding determination</a>.  This constitutes the final update of <a href="#partial-blob-data">partial Blob data</a>.</p></li>
+          <li><p>Set the <a href="#dfn-result"><code>result</code></a> attribute to the fully read <a href="#dfn-fileBlob"><code>blob</code></a>, represented as a string in a format determined by the <a href="#encoding-determination">encoding determination</a>.  </p></li>
          <li><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-load-event"><code>load</code></a>.</li>
     <li>Unless <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a>.  If <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> do NOT fire <a href="#dfn-loadend-event"><code>loadend</code></a>. </li>
         </ol>
@@ -967,16 +937,9 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	<li><p>Return the <code>readAsArrayBuffer()</code> method, but continue to process the steps in this algorithm.</p></li>
 	  <li><p><a href="#make-progress-notifications">Make progress notifications</a>.  
 	  </p></li>
-	  <li><p>While processing the read, as data from the <a href="#dfn-fileBlob"><code>blob</code></a> becomes available, user agents should <a href="#queue-a-task">queue tasks</a> to update the
-	  <a href="#dfn-result"><code>result</code></a> with <a href="#partial-blob-data">partial Blob data</a> as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>]
-	  object containing the bytes read until the read is complete, to accompany the <a href="#fire-a-progress-event">firing</a> of <a href="#dfn-progress-event"><code>progress</code></a> events.  On getting,
-	  the <a href="#dfn-result"><code>result</code></a> attribute returns <a href="#partial-blob-data">partial Blob data</a> representing the number of bytes currently <code>loaded</code>
-	  (as a fraction of the <code>total</code>) [<a href="#ProgressEvents">ProgressEvents</a>], as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] object;
-	  user agents must return at least one such <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] while processing this read method.  The last returned value is at completion of
-	  the read.</p></li>
 	  <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, queue a task to do the following: </p>
       <ol><li><p>Set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
-          <li><p>Set the <a href="#dfn-result"><code>result</code></a> attribute to the value of the fully read <a href="#dfn-fileBlob"><code>blob</code></a> as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] object.  This constitutes the final update of <a href="#partial-blob-data">partial Blob data</a></p></li>
+          <li><p>Set the <a href="#dfn-result"><code>result</code></a> attribute to the value of the fully read <a href="#dfn-fileBlob"><code>blob</code></a> as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] object.  </li>
           <li><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-load-event"><code>load</code></a>.</li>
           <li>Unless <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a>.  If <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> do NOT fire <a href="#dfn-loadend-event"><code>loadend</code></a>. </li>
         </ol>
@@ -1044,24 +1007,20 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	</li>
 	<li><p>If the "getting an encoding" steps above return failure, then set <var>encoding</var> to null.</p></li>
   <li><p>If <var>encoding</var> is null, then set encoding to utf-8.</p></li>
-  <li><p>"Decode" [<a href="#encodingSpecification">Encoding Specification</a>] this <a href="#dfn-fileBlob"><code>blob</code></a> using fallback encoding <var>encoding</var>, and return the result.  On getting, the <a href="#dfn-result"><code>result</code></a> attribute of the <a href="#dfn-filereader"><code>FileReader</code></a> object returns a string in <var>encoding</var> format.  The synchronous <a href="#dfn-readAsTextSync"><code>readAsText</code></a> method of the <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object returns a string in <var>encoding</var> format.  When processing <a href="#partial-blob-data">Partial Blob Data</a>, the <a href="#encodingCaveat">encoding caveat</a> must be applied.</p></li>  
+  <li><p>"Decode" [<a href="#encodingSpecification">Encoding Specification</a>] this <a href="#dfn-fileBlob"><code>blob</code></a> using fallback encoding <var>encoding</var>, and return the result.  On getting, the <a href="#dfn-result"><code>result</code></a> attribute of the <a href="#dfn-filereader"><code>FileReader</code></a> object returns a string in <var>encoding</var> format.  The synchronous <a href="#dfn-readAsTextSync"><code>readAsText</code></a> method of the <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object returns a string in <var>encoding</var> format. </p></li>  
 	</ol>
 	</div>
 	<div id="events" class="section">
 	<h4>8.5.10. Events</h4>
-	<p>When this specification says to <dfn id="make-progress-notifications">make progress notifications </dfn> for a <a href="#read-methods">read method</a>,
-	the following steps must be followed:</p>
-	<ol>
-	<li><p>
-	While the read method is processing, <a href="#queue-a-task">queue a task</a> to
+	<p>When this specification says to <dfn id="make-progress-notifications">make progress notifications </dfn> for a <a href="#read-methods">read method</a>
+	while the read method is processing, <a href="#queue-a-task">queue a task</a> to
 	<a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-progress-event"><code>progress</code></a> at the
 	<a href="#dfn-filereader"><code>FileReader</code></a> object about every 50ms <em>or</em> for every byte read into memory, whichever is least frequent.  <em>At least one</em> event called <a href="#dfn-progress-event"><code>progress</code></a> must fire before <a href="#dfn-load-event"><code>load</code></a> is fired, and at 100% completion of the read operation; if 100% of <a href="#dfn-fileBlob"><code>blob</code></a> can be read into memory in <em>less than</em> 50ms, user agents must <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-progress-event"><code>progress</code></a> at completion. </p>
 	<div class="example"><div class="exampleHeader">Example</div>
 	<p>If a given implementation uses buffers of size 65536 bytes to read files, and thus limits reading operations to that size, and a <a href="#read-methods">read method</a> is called on a file that is 65537 bytes, then that implementation must fire one <a href="#dfn-progress-event"><code>progress</code></a> event for the 65536 first bytes, one <a href="#dfn-progress-event"><code>progress</code></a> event for the 65537th byte (which is at completion of read), one <a href="#dfn-load-event"><code>load</code></a> event and one <a href="#dfn-loadend-event"><code>loadend</code></a> event.</p>
 	</div>	
-		</li>
-    <li>If the <a href="#read-methods">read method</a> defines <a href="#partial-Blob-data">partial Blob data</a> to be returned through the <a href="#dfn-result"><code>result</code></a> attribute, these must be returned with the firing of each <a href="#dfn-progress-event"><code>progress</code></a> event.</li>
-	</ol>
+	
+
 	<p>
 	  When this specification says to <dfn id="fire-a-progress-event">fire a progress event</dfn> <em>called e</em> (for some
 	  <code>ProgressEvent</code> <code>e</code> at a <a href="#dfn-filereader"><code>FileReader</code></a> <code>reader</code>),
@@ -1100,7 +1059,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 
 	     </td><td><code>ProgressEvent</code>
 
-	     </td><td>While reading (and decoding) <a href="#dfn-fileBlob"><code>blob</code></a>, and reporting <a href="#partial-blob-data">partial Blob data</a> (<code>progess.loaded</code>/<code>progress.total</code>)
+	     </td><td>While reading (and decoding) <a href="#dfn-fileBlob"><code>blob</code></a>
 
 	    </td></tr><tr>
 	     <td><dfn id="dfn-abort-event" title="abort-event"><code>abort</code></dfn>
