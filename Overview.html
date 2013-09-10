@@ -940,10 +940,11 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	  </p></li>
 	  <li><p>When the <a href="#dfn-fileBlob"><code>blob</code></a> has been read into memory fully, queue a task to do the following: </p>
       <ol><li><p>Set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
-          <li><p>Set the <a href="#dfn-result"><code>result</code></a> attribute to the value of the fully read <a href="#dfn-fileBlob"><code>blob</code></a> as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] object.  </li>
-          <li><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-load-event"><code>load</code></a>.</li>
-          <li>Unless <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a>.  If <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> do NOT fire <a href="#dfn-loadend-event"><code>loadend</code></a>. </li>
+          <li><p>Set the <a href="#dfn-result"><code>result</code></a> attribute to the value of the fully read <a href="#dfn-fileBlob"><code>blob</code></a> as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] object. </p> </li>
+          <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-load-event"><code>load</code></a>.</p></li>
+          <li><p>Unless <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a>.  If <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> do NOT fire <a href="#dfn-loadend-event"><code>loadend</code></a>. </p></li>
         </ol>
+      </li>
 	  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p></li>
 	</ol>
 	</div>
