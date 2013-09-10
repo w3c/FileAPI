@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor's Draft <em>September 5 2013</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI">http://dev.w3.org/2006/webapi/FileAPI</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="https://mozillians.org/en-US/sicking">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Editor's Draft <em>September 10 2013</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI">http://dev.w3.org/2006/webapi/FileAPI</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd><a href="https://mozillians.org/en-US/sicking">Jonas Sicking</a>, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2013 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -73,7 +73,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the September 5 2013 <b>Editor's Draft</b> of the
+        This document is the September 10 2013 <b>Editor's Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -116,7 +116,7 @@
 	part of the <a href="http://www.w3.org/2006/rwc/Activity">Rich Web Clients Activity</a>
         in the W3C <a href="http://www.w3.org/Interaction/">Interaction Domain</a>.
         Changes made to this document can be found in the
-        <a href="http://dev.w3.org/cvsweb/2006/webapi/FileAPI/Overview-FA.xml">W3C public CVS server</a>.
+        <a href="http://dev.w3.org/cvsweb/2006/webapi/FileAPI/Overview.html">W3C public CVS server</a>.
     </p>
       <p>
           Publication as a Working Draft does not imply endorsement by the
@@ -248,6 +248,11 @@ function errorHandler(evt) {
   }
 }
 </code></pre></div></div>
+</div>
+<div class="section" id="model">
+<h3>1.1 Model</h3>
+<p>A <a href="#dfn-Blob">Blob</a> object provides asynchronous access to a byte sequence, making the bytes available for use within web applications through the <a href="#dfn-filereader"><code>FileReader</code></a> object; it has a <a href="#dfn-size"><code>size</code></a> attribute, representing the total number of bytes that constitute the byte sequence, and a <a href="#dfn-type"><code>type</code></a> attribute, which is an ASCII-encoded string in lower case.  When converted to a byte sequence, the <a href="#dfn-type"><code>type</code></a> is said to be a <em>parsable MIME type</em> if the <em>parse a MIME type algorithm</em> does not return undefined [<a href="#MIMESNIFF">MIMESNIFF</a>].  The Blob's <a href="#dfn-type"><code>type</code></a> is also used to generate <a href="#processingModel">a <code>Content-Type</code> header when using blob: URLs.</a></p>
+<p>A <a href="#dfn-File">File</a> object is a <a href="#dfn-Blob">Blob</a> object with a <a href="#dfn-name"><code>name</code></a> attribute, which is a <a href="#dfn-UTF-16">UTF-16</a> string representing the file's name within the underlying file system or at time of creation with a constructor invoked from within a web application.  Access to the byte sequence of the <a href="#dfn-File">File</a> is through the <a href="#dfn-filereader"><code>FileReader</code></a> object.</p>
 </div>
 </div>
 
@@ -447,13 +452,15 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   <li><p>If the <a href="#dfn-BPtype"><code>type</code></a> member of the optional <code>options</code> argument is provided and is not the empty string, run the following sub-steps:</p>
     <ol>
       <li>Let <var>t</var> be the <a href="#dfn-BPtype"><code>type</code></a> dictionary member. If <var>t</var> contains any characters outside the range U+0020 to U+007E, then set <var>t</var> to the empty string and return from these substeps.</li>
-      <li>Convert every character in <var>t</var> to lowercase using the "<a href="#converting-a-string-to-ASCII-lowercase">converting a string to ASCII lowercase</a>" algorithm.</li>
+      <li>Convert every character in <var>t</var> to lowercase using the "<a href="#converting-a-string-to-ASCII-lowercase">converting a string to ASCII lowercase</a>" algorithm [<a href="#WebIDL">WebIDL</a>].</li>
 
     </ol>
 
   </li>
 
-<li><p>Return a <code>Blob</code> object consisting of <var>bytes</var>, with its <a href="#dfn-size"><code>size</code></a> set to the length of <var>bytes</var>, and its <a href="#dfn-type"><code>type</code></a> set to the value of <var>t</var> from the substeps above.</p></li>
+<li><p>Return a <code>Blob</code> object consisting of <var>bytes</var>, with its <a href="#dfn-size"><code>size</code></a> set to the length of <var>bytes</var>, and its <a href="#dfn-type"><code>type</code></a> set to the value of <var>t</var> from the substeps above.  </p>
+<div class="note"><div class="noteHeader">Note</div><p>The type t of a <code>Blob</code> is considered a <em>parsable MIME type</em> if the ASCII-encoded string representing the Blob object's type, when converted to a byte sequence, does not return undefined for the <em>parse MIME type algorithm</em> [<a href="#MIMESNIFF">MIMESNIFF</a>].</p> </div>
+</li>
 </ol>
 
 
@@ -522,7 +529,8 @@ var d = new Blob([buffer, b, c, bytes]);
     number of bytes that can be read by a <a href="#dfn-filereader"><code>FileReader</code></a> or <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object, or 0 if the
     Blob has no bytes to be read.  If the <code>Blob</code> has been neutered with <a href="#dfn-close"><code>close</code></a> called on it, then <code>size</code> must return 0.</p></dd>
     <dt id="dfn-type"><code>type</code></dt>
-    <dd><p>The ASCII-encoded string in lower case representing the media type of the <code>Blob</code>.  User agents must return the type of a <code>Blob</code> as a RFC2616 media type [<a href="#RFC2616">RFC2616</a>], or the empty string if the type cannot be determined.  When the <code>Blob</code> is of type <code>text/plain</code> user agents must NOT append a charset parameter to the media type [<a href="#RFC2616">RFC2616</a>].  User agents must not attempt heuristic determination of encoding, including statistical methods.  Further normative conditions for this attribute can be found in the <a href="#blob-constructor-steps">Blob constructor steps</a> and in the <a href="#slice-method-algo">slice method algorithm</a>, where this attribute can be set with the <code>Blob</code> constructor or a <code>slice</code> method call. 
+    <dd><p>The ASCII-encoded string in lower case representing the media type of the <code>Blob</code>.  
+     For <a href="#dfn-File"><code>File</code></a> objects that are returned from the underlying file system, user agents must return the type of a <code>Blob</code> as an ASCII-encoded string in lower case, such that when it is converted to a corresponding byte sequence, it is a <em>parsable MIME type</em> [<a href="#MIMESNIFF">MIMESNIFF</a>], or the empty string -- 0 bytes -- if the type cannot be determined.  When the <code>Blob</code> is of type <code>text/plain</code> user agents must NOT append a charset parameter to the <em>dictionary of parameters</em> portion of the media type [<a href="#MIMESniff">MIMESNIFF</a>].  User agents must not attempt heuristic determination of encoding, including statistical methods.  Further normative conditions for this attribute can be found in the <a href="#blob-constructor-steps">Blob constructor steps</a> and in the <a href="#slice-method-algo">slice method algorithm</a>, where this attribute can be set with the <code>Blob</code> constructor or a <code>slice</code> method call. 
     </p></dd>
     </dl>
     <div class="note"><div class="noteHeader">Note</div>
@@ -574,7 +582,9 @@ var d = new Blob([buffer, b, c, bytes]);
     <ol type="a">
     <li><p><var>S</var> consists of <var>span</var> consecutive bytes from <var>O</var>, beginning with the byte at byte-order position <var>relativeStart</var>.</p></li>
     <li><p><var>S</var>.<a href="#dfn-size"><code>size</code></a> = <var>span</var>.</p></li>
-    <li><p><var>S</var>.<a href="#dfn-type"><code>type</code></a> = <var>relativeContentType</var>.</p></li>
+    <li><p><var>S</var>.<a href="#dfn-type"><code>type</code></a> = <var>relativeContentType</var>.</p>
+      <div class="note"><div class="noteHeader">Note</div><p>The type t of a <code>Blob</code> is considered a <em>parsable MIME type</em> if the ASCII-encoded string representing the Blob object's type, when converted to a byte sequence, does not return undefined for the <em>parse MIME type algorithm</em> [<a href="#MIMESNIFF">MIMESNIFF</a>].</p> </div>
+    </li>
     <li><p>Let the <a href="#snapshot-state">snapshot state</a> of S be set to the <a href="#snapshot-state">snapshot state</a> of O.</p></li>
     </ol>
     </li>
@@ -629,7 +639,7 @@ var d = new Blob([buffer, b, c, bytes]);
 	    It inherits from <a href="#dfn-Blob" class="dfnrefs">Blob</a>.
 	  </p>
 <div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
-[Constructor(Blob <a href="#dfn-fileBits" class="dfnrefs">fileBits</a>, DOMString <a href="#dfn-fileName" class="dfnrefs">fileName</a>)]
+[Constructor(Blob <a href="#dfn-fileBits" class="dfnrefs">fileBits</a>, [EnsureUTF16] DOMString <a href="#dfn-fileName" class="dfnrefs">fileName</a>)]
 interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blob</a> {
 
   readonly attribute DOMString <a href="#dfn-name" class="dfnref">name</a>;
@@ -641,8 +651,15 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
       <h3>7.1 File Constructor</h3>
     <p>The <code>File</code> constructor is invoked with a <a href="#dfn-Blob"><code>Blob</code></a> argument, and a <code>DOMString</code> argument and must return a new <code>File</code> object F with the following properties:</p>
     <ol>
-    <li><p><code>F.size</code> is the same as the size of the <dfn id="dfn-fileBits">fileBits</dfn> <code>Blob</code> argument, which constitutes the immutable raw data of F.</p></li>
-    <li><p><code>F.name</code> is set to the <dfn id="dfn-fileName">fileName</dfn> argument.</p></li>
+    <li><p><code>F.size</code> is the same as the <a href="#dfn-size"><code>size</code></a> of the <dfn id="dfn-fileBits">fileBits</dfn> <code>Blob</code> argument, which must be the immutable raw data of F.</p></li>
+    <li><p><code>F.name</code> is set as follows: </p>
+    <ol>
+      <li><p>Let <var>N</var> be a new string of the same size as the <dfn id="dfn-fileName"><code>fileName</code></dfn> argument to the constructor.  Copy every character from <code>fileName</code> to N, replacing any "/" character (U+002F SOLIDUS) with a ":" (U+003A COLON).</p></li>
+      <li><p>Set F.name to N.</p></li>
+    </ol>
+
+
+    </li>
     <li><p>If the <a href="#dfn-fileBits"><code>fileBits</code></a> argument has a <a href="#dfn-type"><code>type</code></a>, then <code>F.type</code> = <code>fileBits.type</code>.</p></li>
     <li><p>User agents must initially set <code>F.lastModifiedDate</code> to the time of object creation.</p></li>
     
