@@ -1124,7 +1124,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 
     <span class="comment">//... the loadend event must not fire for the first read</span>
      
-    </code></pre></div></div>	
+    </code></pre></div></div></div>
 		</li>
 		<li><p>One <a href="#dfn-progress-event"><code>progress</code></a> event will fire when <a href="#dfn-fileBlob"><code>blob</code></a> has been completely read into memory.  </p></li>
 		<li><p>No <a href="#dfn-progress-event"><code>progress</code></a> event fires before <a href="#dfn-loadstart-event"><code>loadstart</code></a>.</p></li>
@@ -1448,11 +1448,11 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 <div id="createRevokeMethodsParams" class="section">
 <h3>11.6.1. Methods and Parameters</h3>		
 	<dl><dt id="dfn-createObjectURL">The <code>createObjectURL</code> static method</dt><dd><p>Returns a unique <a href="#url"><code>Blob</code> URL</a> each time it is called on a 
-	<dfn id="valid">valid</dfn> <a href="#dfn-fileBlob"><code>blob</code></a> argument, which is a non-null <a href="#dfn-Blob"><code>Blob</code></a> in scope of the global
+	<dfn id="validBlob">valid</dfn> <a href="#dfn-fileBlob"><code>blob</code></a> argument, which is a non-null <a href="#dfn-Blob"><code>Blob</code></a> in scope of the global
 	object's <a href="#URL-object"><code>URL</code></a> property from which this static method is called.  This method must act as follows:</p>
 	<ol>
-	<li><p>If called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that is NOT <a href="#valid">valid</a>, then user agents must return <code>null</code>.</p></li>
-	<li><p>If this method is called with a <a href="#valid">valid</a> <a href="#dfn-Blob"><code>Blob</code></a> argument, user agents must run the following sub-steps:</p>
+	<li><p>If called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that is NOT <a href="#validBlob">valid</a>, then user agents must return <code>null</code>.</p></li>
+	<li><p>If this method is called with a <a href="#validBlob">valid</a> <a href="#dfn-Blob"><code>Blob</code></a> argument, user agents must run the following sub-steps:</p>
   <ol>
     <li>Return a unique <a href="#url">Blob URL</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument.</li>
     <li><a href="#add-an-entry">Add an entry to the Blob URL Store</a> for this <a href="#url"><code>Blob</code> URL</a>.</li>
@@ -1460,10 +1460,10 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 </li>
 </ol>
 </dd>
-<dt id="dfn-createFor">The <code>createFor</code> static method</dt><dd><p>Returns a unique <a href="#url"><code>Blob</code> URL</a> each time it is called on a <dfn id="valid">valid</dfn> <a href="#dfn-fileBlob"><code>blob</code></a> argument, which is a non-null <a href="#dfn-Blob"><code>Blob</code></a> in scope of the global object's <a href="URL-object"><code>URL</code></a> property from which this static method is called.  <a href="#url"><code>Blob</code> URL</a>s created with this method are said to be <dfn id="autoRevoking">auto-revoking</dfn> since user-agents are responsible for the revocation of <a href="#url">Blob URL</a>s created with this method, subject to the <a href="#lifetime">lifetime stipulation</a> for <a href="#url">Blob URL</a>s.  This method must act as follows: <p>
+<dt id="dfn-createFor">The <code>createFor</code> static method</dt><dd><p>Returns a unique <a href="#url"><code>Blob</code> URL</a> each time it is called on a <a href ="#validBlob">valid</a> <a href="#dfn-fileBlob"><code>blob</code></a> argument.  <a href="#url"><code>Blob</code> URL</a>s created with this method are said to be <dfn id="autoRevoking">auto-revoking</dfn> since user-agents are responsible for the revocation of <a href="#url">Blob URL</a>s created with this method, subject to the <a href="#lifetime">lifetime stipulation</a> for <a href="#url">Blob URL</a>s.  This method must act as follows: </p>
 <ol>
-  <li><p>If called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that is NOT <a href="#valid">valid</a>, then user agents must return <code>null</code>.</p></li>
-  <li><p>If this method is called with a <a href="#valid">valid</a> <a href="#dfn-Blob"><code>Blob</code></a> argument, user agents must run the following steps:</p>
+  <li><p>If called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that is NOT <a href="#validBlob">valid</a>, then user agents must return <code>null</code>.</p></li>
+  <li><p>If this method is called with a <a href="#validBlob">valid</a> <a href="#dfn-Blob"><code>Blob</code></a> argument, user agents must run the following steps:</p>
   <ol>
     <li>Return a unique <a href="#url">Blob URL</a> that can be used to dereference the blob argument.</li>
     <li><a href="#add-an-entry">Add an entry to the Blob URL Store</a> for this <a href="#url"><code>Blob</code> URL</a>.</li>
@@ -1491,7 +1491,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	<dd><p>Revokes the <a href="#url"><code>Blob</code> URL</a> provided in the string <a href="#dfn-urlarg"><code>url</code></a> argument, and removes the corresponding entry from the <a href="#BlobURLStore">Blob URL Store</a>.  This method must be processed as follows:
 	</p>
 	<ol>
-	  <li>If the <a href="#dfn-urlarg"><code>url</code></a> refers to a <a href="#dfn-Blob"><code>Blob</code></a> that is both <a href="#valid">valid</a> and in the
+	  <li>If the <a href="#dfn-urlarg"><code>url</code></a> refers to a <a href="#dfn-Blob"><code>Blob</code></a> that is both <a href="#validBlob">valid</a> and in the
 	  <a href="#same-origin">same origin</a> of the global object's <a href="#URL-object">URL</a> property on which this static method was called,
 	user agents must remove the entry that for the URL on which <code>URL.revokeObjectURL</code> was called from the <a href="#BlobURLStore">Blob URL Store</a>; subsequent attempts to dereference this URL must return a <a href="#dfn-networkError">network error</a> response code.</li>
 	<li>If the <a href="#dfn-urlarg"><code>url</code></a> refers to a <a href="#dfn-Blob"><code>Blob</code></a> that is NOT <a href="#valid">valid</a> OR if the value provided for
