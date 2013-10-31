@@ -1012,11 +1012,11 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
   <div id="dfn-error-steps" class="section">
     <h4>8.5.6. Error Steps</h4>
         <ol>   
-      <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called
-      <a href="#dfn-error-event"><code>error</code></a>.  <em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
+      <li><p><em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
       <a href="#dfn-error"><code>error</code></a> attribute must be a
       a <a href="#dfn-domerror"><code>DOMError</code></a> object that indicates the kind of
-      <a href="#file-error-read">file error that has occurred</a>.</p></li>
+      <a href="#file-error-read">file error that has occurred</a>.  <a href="#fire-a-progress-event">Fire a progress event</a> called
+      <a href="#dfn-error-event"><code>error</code></a>.  </p></li>
       <li><p>Unless <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a>, <a href="#fire-a-progress-event">fire a progress event</a> called
       <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>.  If <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> do NOT fire <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>.</p></li>
       <li><p><a href="#terminate-an-algorithm">Terminate the algorithm</a> for any <a href="#read-methods">read method</a>.</p>
