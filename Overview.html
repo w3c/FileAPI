@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-WD.css" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Last Call Working Draft <em>12 September 2013</em></h2><dl><dt>This Version:</dt><dd><a href="http://www.w3.org/TR/2013/WD-FileAPI-20130912/">http://www.w3.org/TR/2013/WD-FileAPI-20130912/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Last Call Working Draft <em>30 October 2013</em></h2><dl><dt>This Version:</dt><dd><a href="http://www.w3.org/TR/2013/WD-FileAPI-20130912/">http://www.w3.org/TR/2013/WD-FileAPI-20130912/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2013 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -73,7 +73,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 12 September 2013 <b>Last Call Working Draft</b> of the
+        This document is the 30 October 2013 <b>Last Call Working Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -117,7 +117,7 @@
         6 of the W3C Patent Policy</a>.
     </p>
     <p>
-      This draft is a <b>Last Call Working Draft</b>. Please send comments to the <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> as described above. The deadline for comments is six weeks after the date of publication in the header: 24 October 2013. 
+      This draft is a <b>Last Call Working Draft</b>. Please send comments to the <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> as described above. The deadline for comments is six weeks after the date of publication in the header: 24 October 2013.  <em>This date has elapsed</em>; you can see Last Call Feedback on the W3C Wiki: <a href="http://www.w3.org/wiki/Webapps/LCWD-FileAPI-20130912">http://www.w3.org/wiki/Webapps/LCWD-FileAPI-20130912</a> 
     </p>
     </div>
 
@@ -623,31 +623,91 @@ var d = new Blob([buffer, b, c, bytes]);
 	    It inherits from <a href="#dfn-Blob" class="dfnrefs">Blob</a>.
 	  </p>
 <div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
-[Constructor(Blob <a href="#dfn-fileBits" class="dfnrefs">fileBits</a>, [EnsureUTF16] DOMString <a href="#dfn-fileName" class="dfnrefs">fileName</a>)]
-interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blob</a> {
+<dfn id="dfn-file">[Constructor(sequence&lt;(Blob or DOMString or ArrayBufferView or ArrayBuffer)&gt; <a href="#dfn-fileBits" class="dfnrefs">fileBits</a>, 
+[EnsureUTF16] DOMString <a href="#dfn-fileName" class="dfnrefs">fileName</a>, optional FilePropertyBag options)]
+interface File</dfn> : <a href="#dfn-Blob" class="dfnref">Blob</a> {
 
   readonly attribute DOMString <a href="#dfn-name" class="dfnref">name</a>;
   readonly attribute Date <a href="#dfn-lastModifiedDate" class="dfnref">lastModifiedDate</a>;
 
 };
+
+dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
+    
+      DOMString <a href="#dfn-BPtype" title="BPtype">type</a> = "";
+      Date <a href="#dfn-FPdate" title="FPdate">lastModifiedDate</a> = Date.now();
+  
+};
 	  </code></pre></div></div>
     <div id="file-constructor" class="section">
-      <h3>7.1 File Constructor</h3>
-    <p>The <code>File</code> constructor is invoked with a <a href="#dfn-Blob"><code>Blob</code></a> argument, and a <code>DOMString</code> argument and must return a new <code>File</code> object F with the following properties:</p>
+      <h3>7.1 Constructor</h3>
+    <p>The <code>File</code> constructor is invoked with two or three parameters, depending on whether the optional dictionary parameter is used.  When the <code>File()</code> constructor is invoked, user agents must run the following <dfn id="file-constructor-steps">File constructor steps</dfn>:</p>
     <ol>
-    <li><p><code>F.size</code> is the same as the <a href="#dfn-size"><code>size</code></a> of the <dfn id="dfn-fileBits">fileBits</dfn> <code>Blob</code> argument, which must be the immutable raw data of F.</p></li>
-    <li><p><code>F.name</code> is set as follows: </p>
+    <li>Let <var>a</var> be the <code><a href="#dfn-fileBits">fileBits</a></code> sequence argument.  Let <var>bytes</var> be an empty sequence of bytes.  Let <var>length</var> be <var>a</var>'s length.  For 0 ≤ i &lt; <var>length</var>, repeat the following steps:
     <ol>
-      <li><p>Let <var>N</var> be a new string of the same size as the <dfn id="dfn-fileName"><code>fileName</code></dfn> argument to the constructor.  Copy every character from <code>fileName</code> to N, replacing any "/" character (U+002F SOLIDUS) with a ":" (U+003A COLON).</p></li>
-      <li><p>Set F.name to N.</p></li>
+      <li>Let <var>element</var> be the <var>i</var>'th element of <var>a</var>.</li>
+      <li>If <var>element</var> is a <code>DOMString</code>, run the following substeps:
+       <ol>
+          <li><p>Let <var>s</var> be the result of converting <var>element</var> to a sequence of Unicode characters [<a href="#Unicode">Unicode</a>] using the algorithm for doing so in WebIDL [<a href="#WebIDL">WebIDL</a>].</p></li>
+         
+         <li><p>Encode <var>s</var> as <a href="#dfn-UTF-8" class="dfnrefs">UTF-8</a> and append the resulting bytes to <var>bytes</var>.</p></li>
+       </ol>
+       <div class="note"><div class="noteHeader">Note</div>
+         <p>The algorithm from WebIDL [<a href="#WebIDL">WebIDL</a>] replaces unmatched surrogates in an invalid <a href="#dfn-UTF-16" class="dfnrefs">UTF-16</a> string with U+FFFD replacement characters. Scenarios exist when the <a id="dfnReturnLink-10" href="#dfn-Blob"><code>Blob</code></a> constructor may result in some data loss due to lost or scrambled character sequences. </p>
+       </div></li>
+       <li>If <var>element</var> is an ArrayBufferView [<a href="#TypedArrays">TypedArrays</a>], convert it to a sequence of <code>byteLength</code> bytes from the underlying ArrayBuffer, starting at the <code>byteOffset</code> of the ArrayBufferView [<a href="#TypedArrays">TypedArrays</a>], and append those bytes to <var>bytes</var>.</li>
+       <li><p>If <var>element</var> is an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>], convert it to a sequence of <code>byteLength</code> bytes, and append those bytes to <var>bytes</var>.</p></li>
+     <li><p>If <var>element</var> is a <code>Blob</code>, append the bytes it represents to <var>bytes</var>.  The <a href="#dfn-type"><code>type</code></a> of the <code>Blob</code> element is ignored.</p></li>
     </ol>
-
-
+     </li>
+     <li>Let <var>n</var> be a new string of the same size as the <code><a href="#dfn-fileName">fileName</a></code> argument to the constructor. Copy every character from <code><a href="#dfn-fileName">fileName</a></code> to <var>n</var>, replacing any "/" character (U+002F SOLIDUS) with a ":" (U+003A COLON).</li>
+     <li>If the optional <a href="#dfn-FilePropertyBag"><code>FilePropertyBag</code></a> dictionary argument is used, then run the following substeps:
+      <ol>
+        <li>If the <code>type</code> member is provided and is not the empty string, let <var>t</var> be set to the type dictionary member.  If <var>t</var> contains any characters outside the range U+0020 to U+007E, then set <var>t</var> to the empty string and return from these substeps. </li>
+        <li>Convert every character in <var>t</var> to lowercase using the "<a href="#converting-a-string-to-ASCII-lowercase">converting a string to ASCII lowercase algorithm</a>" [<a href="#WebIDL">WebIDL</a>].</li>
+        <li>If the <code>lastModifiedDate</code> member is provided, let <var>d</var> be set to the <code>lastModifiedDate</code> dictionary member.  If it is not provided, set <var>d</var> to the current date and time (<code>Date.now()</code> [<a href="#ECMA-262">ECMA-262</a>]).</li>
+      </ol>
     </li>
-    <li><p>If the <a href="#dfn-fileBits"><code>fileBits</code></a> argument has a <a href="#dfn-type"><code>type</code></a>, then <code>F.type</code> = <code>fileBits.type</code>.</p></li>
-    <li><p>User agents must initially set <code>F.lastModifiedDate</code> to the time of object creation.</p></li>
-    
+    <li>Return a new File object F such that:
+      <ol>
+        <li><code>F.size</code> is set to the number of total bytes in <var>bytes</var>, which consists of the immutable raw data of F.</li>
+        <li><code>F.name</code> is set to <var>n</var>.</li>
+        <li><code>F.type</code> is set to <var>t</var>.
+<div class="note"><div class="noteHeader">Note</div><p>The type t of a <code>File</code> is considered a <em>parsable MIME type</em> if the ASCII-encoded string representing the File object's type, when converted to a byte sequence, does not return undefined for the <em>parse MIME type algorithm</em> [<a href="#MIMESNIFF">MIMESNIFF</a>].</p> </div>
+        </li>
+        <li><code>F.lastModifiedDate</code> is set to <var>d</var>.</li>
+
+      </ol>
+    </li>
+
     </ol>
+    <div id="file-constructor-params">
+      <h4>7.1.1 Constructor Parameters</h4>
+      <p>The <code>File()</code> constructor can be invoked with the parameters below:</p>
+      <dl>
+        <dt id="dfn-fileBits">A <code>fileBits</code> <code>sequence</code></dt>
+        <dd>which takes any number of the following elements, and in any order:
+          <ul>
+            <li><p><code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] elements.</p></li>
+            <li><p><code>ArrayBufferView</code> [<a href="#TypedArrays">TypedArrays</a>] elements.</p></li>
+            <li><p><a href="#dfn-Blob"><code>Blob</code></a> elements, which includes <a href="dfn-file"><code>File</code></a> elements.</p></li>
+            <li><p><code>DOMString</code> [<a href="#WebIDL">WebIDL</a>] elements.</p></li>
+          </ul>
+        </dd>
+        <dt id="dfn-name">A <code>name</code> parameter</dt>
+        <dd>
+    <p>A <code>DOMString</code> [<a href="#WebIDL">WebIDL</a>] parameter representing the name of the file; normative conditions for this constructor parameter can be found in the <a href="#file-constructor-steps">File constructor steps</a>.</p></dd>
+    <dt id="def-Properties">An optional <a href="#dfn-FilePropertyBag"><code>FilePropertyBag</code></a> dictionary</dt><dd><p>which takes the following members:</p>
+    <ul>
+      <li><p>An optional <code>type</code> member; normative conditions for this member are provided in the <a href="#file-constructor-steps">File constructor steps</a> .</p></li>
+      <li><p>An optional <dfn id="dfn-FPdate"><code>lastModifiedDate</code></dfn> member, which must be a valid <code>Date</code> object [<a href="#ECMA-262">ECMA-262</a>].</p></li>
+    </ul>
+  </dd>
+
+      </dl>
+    </div>
+
+  
     </div>
 	  <div id="file-attrs" class="section">
 	  <h3>7.2. Attributes</h3>
@@ -659,6 +719,7 @@ interface <dfn id="dfn-file">File</dfn> : <a href="#dfn-Blob" class="dfnref">Blo
 	    <dd><p>The last modified date of the file.  On getting, if user agents can make this information available, this must return a new <code>Date</code>[<a href="#HTML">HTML</a>] object
 	initialized to the last modified date of the file.  If the last modification date and time are not known, the attribute must return the current date and time as a <code>Date</code> object.
 	</p></dd>
+
 	    </dl>
 	  </div>
 
