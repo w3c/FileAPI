@@ -395,8 +395,8 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
       
       <span class="comment">//slice Blob into byte-ranged chunks</span>
       
-      Blob <a href="#dfn-slice" title="slice">slice</a>(optional [Clamp] long long <a href="#dfn-start" class="dfnref" title="start">start</a>,
-                 optional [Clamp] long long <a href="#dfn-end" class="dfnref" title="length">end</a>,
+      Blob <a href="#dfn-slice" title="slice">slice</a>([Clamp] optional long long <a href="#dfn-start" class="dfnref" title="start">start</a>,
+                 [Clamp] optional long long <a href="#dfn-end" class="dfnref" title="length">end</a>,
                  optional DOMString <a href="#dfn-contentTypeBlob">contentType</a>);
       void <a href="#dfn-close" title="close">close</a>(); 
     
@@ -1501,7 +1501,7 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
 	partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
 
 	    static DOMString? <a href="#dfn-createObjectURL">createObjectURL</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
-      static DOMString? <a href="#dfn-createFor">createFor</a>(<a href="#dfn-Blob">)Blob</a> <a href="#dfn-fileBlob">blob</a>);
+      static DOMString? <a href="#dfn-createFor">createFor</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
 	    static void <a href="#dfn-revokeObjectURL">revokeObjectURL</a>(DOMString <a href="#dfn-urlarg">url</a>);
 	};
 
