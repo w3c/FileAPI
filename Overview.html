@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-WD.css" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Last Call Working Draft <em>31 October 2013</em></h2><dl><dt>This Version:</dt><dd><a href="http://www.w3.org/TR/2013/WD-FileAPI-20130912/">http://www.w3.org/TR/2013/WD-FileAPI-20130912/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>W3C Last Call Working Draft <em>16 November 2013</em></h2><dl><dt>This Version:</dt><dd><a href="http://www.w3.org/TR/2013/WD-FileAPI-20130912/">http://www.w3.org/TR/2013/WD-FileAPI-20130912/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2013 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -73,7 +73,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 31 October 2013 <b>Last Call Working Draft</b> of the
+        This document is the 16 November 2013 <b>Last Call Working Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -303,7 +303,7 @@ function errorHandler(evt) {
       </div>      
       <div id="terminology" class="section">
         <h2>4. Terminology and Algorithms</h2>
-        <p>The terms and algorithms <dfn id="fragment">&lt;fragment&gt;</dfn>, <dfn id="scheme">&lt;scheme&gt;</dfn>, <dfn id="document">document</dfn>,
+        <p>The terms and algorithms <dfn id="document">document</dfn>,
         <dfn id="unloading-document-cleanup-steps">unloading document cleanup steps</dfn>, <dfn id="event-handler-attributes">event handler attributes</dfn>,
         <dfn id="event-handler-event-type">event handler event type</dfn>,
         <dfn id="origin">origin</dfn>, <dfn id="same-origin">same origin</dfn>, <dfn id="event-loops">event loops</dfn>,
@@ -311,6 +311,7 @@ function errorHandler(evt) {
         <dfn id="queue-a-task">queue a task</dfn>, <dfn id="dfn-UTF-8">UTF-8</dfn>, <dfn id="dfn-UTF-16">UTF-16</dfn>. <dfn id="structured-clone">structured clone</dfn>, <dfn id="collect-a-sequence-of-characters">collect a sequence of characters</dfn> and <dfn id="converting-a-string-to-ASCII-lowercase">converting a string to ASCII lowercase</dfn> are as defined by the HTML specification [<a href="#HTML">HTML</a>]. </p>
  <p>When this specification says to <dfn id="terminate-an-algorithm">terminate an algorithm</dfn> the user agent must terminate the algorithm after finishing the step it is on.  Asynchronous <a href="#read-methods">read methods</a> defined in this specification may return before the algorithm in question is terminated, and can be terminated by an <a href="#dfn-abort"><code>abort()</code></a> call.</p>
 <p>The term <dfn id="throw-an-exception">throw</dfn> in this specification, as it pertains to exceptions, is used as defined in the DOM4 specification [<a href="#DOM4">DOM4</a>].</p>
+<p>The terms <dfn id="scheme">scheme</dfn>, <dfn id="scheme-data">scheme data</dfn>, <dfn id="query">query</dfn> and <dfn id="fragmentIDDef">fragment</dfn> are as defined by the WHATWG URL Specification [<a href="#URL-API">URL</a>].</p>
        <p>The algorithms and steps in this specification use the following mathematical operations:</p>
        <ul>
        <li><p>max(a,b) returns the maximum of a and b, and is always performed on integers as they are defined in WebIDL [<a href="#WebIDL">WebIDL</a>]; in the case of max(6,4) the result is 6.
@@ -690,7 +691,7 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
           <ul>
             <li><p><code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] elements.</p></li>
             <li><p><code>ArrayBufferView</code> [<a href="#TypedArrays">TypedArrays</a>] elements.</p></li>
-            <li><p><a href="#dfn-Blob"><code>Blob</code></a> elements, which includes <a href="dfn-file"><code>File</code></a> elements.</p></li>
+            <li><p><a href="#dfn-Blob"><code>Blob</code></a> elements, which includes <a href="#dfn-file"><code>File</code></a> elements.</p></li>
             <li><p><code>DOMString</code> [<a href="#WebIDL">WebIDL</a>] elements.</p></li>
           </ul>
         </dd>
@@ -1220,12 +1221,12 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
 	</code></pre></div></div>
 
 	<div id="filereadersyncConstrctr" class="section">
-	<h3>9.1.1. Constructors</h3>
+	<h4>9.1.1. Constructors</h4>
 	<p>When the <code>FileReaderSync()</code> constructor is invoked, the user agent must return a new <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object.</p>
 	<p>In environments where the global object is represented by a <code>WorkerGlobalScope</code> object, the <code>FileReaderSync</code> constructor must be available.</p>
 	</div>
 	<div id="readAsTextSync" class="section">
-	<h3>10.1.2. The <code>readAsText</code> method</h3>
+	<h3>9.2. The <code>readAsText</code> method</h3>
 	<p>When the <dfn id="dfn-readAsTextSync"><code>readAsText(blob, label)</code></dfn> method is called (the
 	<a href="#dfn-label"><code>label</code></a> argument is optional), the following steps must be followed:</p>
 	<ol>
@@ -1236,7 +1237,7 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
 	</ol>
 	</div>
 	<div id="readAsDataURLSync-section" class="section">
-	<h3>9.1.3. The <code>readAsDataURL</code> method</h3>
+	<h3>9.3. The <code>readAsDataURL</code> method</h3>
 	<p>
 	  When the <dfn id="dfn-readAsDataURLSync"><code>readAsDataURL(blob)</code></dfn> method is called, the following steps must be followed:</p>
 	<ol>
@@ -1256,7 +1257,7 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
 	</ol> 
 	</div>
 	<div id="readAsArrayBufferSyncSection" class="section">
-	<h3>9.1.4. The <code>readAsArrayBuffer</code> method</h3>
+	<h3>9.4. The <code>readAsArrayBuffer</code> method</h3>
 	<p>When the <dfn id="dfn-readAsArrayBufferSync"><code>readAsArrayBuffer(blob)</code></dfn> method is called, the following steps must be followed:</p>
 	<ol>
 	<li><p>If an <a href="#file-error-read">error occurs during reading the <code>blob</code> parameter</a>, throw the <a href="#dfn-error-codes">appropriate 
@@ -1359,27 +1360,16 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
 	</ul>
 	</div>
 
-	<div id="ABNFForBlob" class="section">
+	<div id="DefinitionOfScheme" class="section">
 	<h3>11.3. Definition of blob URL Scheme</h3>
-	<p>This section defines a <code>blob:</code> URL scheme using a formal grammar.  A <code>blob:</code> URL consists of the blob: scheme and an opaque string, along with an optional fragment identifier.
+	<p> A <code>blob:</code> URL must consist of the blob: <a href="#scheme">scheme</a> and an <a href="#opaqueString">opaque string</a> as <a href="#scheme-data">scheme data</a>, along with an optional <a href="#fragmentIDDef">fragment</a>.  A valid blob: URL must not have a <a href="#query">query</a>.
 	In this specification an <dfn id="opaqueString">opaque string</dfn> is a unique string which can be heuristically generated upon demand such that the probability that two are alike is small, and which is hard to guess (e.g.
-	the Universally Unique IDentifier (UUID) as defined in [<a href="#UUID">RFC4122</a>] is an opaque string). A <dfn id="fragmentIdentifier">fragment identifier</dfn> is optional, and if used,
+	the Universally Unique IDentifier (UUID) as defined in [<a href="#UUID">RFC4122</a>] is an opaque string). A <a href="#fragmentIDDef">fragment</a> is optional, and if used,
 	has a distinct interpretation depending on the media type of the <a href="#dfn-Blob"><code>Blob</code></a> or <a href="#dfn-file"><code>File</code></a> resource in question [<a href="#RFC2046">RFC2046</a>].</p>
-	<p>This section uses the Augmented Backus-Naur Form (ABNF), defined in [<a href="#ABNF">RFC5234</a>]. All <a href="#ABNFForBlob">blob:</a> URLs must follow this ABNF.
-	</p>
 
 
-	<div class="block"><div class="blockTitleDiv"><span class="blockTitle">ABNF</span></div><div class="blockContent"><pre class="code"><code class="abnf-code">
-	blob = scheme ":" opaqueString [fragIdentifier]
 
-	scheme = "blob"
-
-	; scheme is always "blob"
-
-	; opaqueString tokens must be globally unique
-	; opaqueString could be a UUID in its canonical form
-
-	</code></pre></div></div>
+	
 	<div id="OpaqueStringDiscussion" class="section">
 	<h4>11.3.1. The Opaque String</h4>
 	<p><a href="#opaqueString">Opaque strings</a> must NOT include any reserved characters from [<a href="#RFC3986">RFC3986</a>] without percent-encoding them.
@@ -1394,42 +1384,24 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
   <div class="section" id="fragmentDiscussion">
   <h4>11.3.2 Discussion of Fragment Identifier</h4>
   <p>
-  The fragment's format, resolution and processing directives depend on the media type [<a href="#RFC2046">RFC2046</a>] of a potentially retrieved representation, even though such
-  a retrieval is only performed if the <a href="#url">blob: URL</a> is dereferenced.  For example, in an HTML file [<a href="#HTML">HTML</a>] the fragment identifier
+  The <a href="#fragmentIDDef">fragment</a>'s resolution and processing directives depend on the media type [<a href="#RFC2046">RFC2046</a>] of a potentially retrieved representation, even though such
+  a retrieval is only performed if the <a href="#DefinitionOfScheme">blob: URL</a> is dereferenced.  For example, in an HTML file [<a href="#HTML">HTML</a>] the fragment identifier
   could be used to refer to an anchor within the file.  If the user agent does not recognize the media type of the resource, OR if a fragment identifer is not
   meaningful within the resource, it must ignore the fragment identifier.  Additionally, user agents must honor additional fragment processing directives given in
-  the relevant media format specifications; in particular, this includes any modifications to the fragment production given in HTML [<a href="#HTML">HTML</a>].  The following
-  section is normative for fragment identifers in general, though it should be noted that affiliated specifications may extend this definition.
+  the relevant media format specifications; in particular, this includes any modifications to the fragment production given in HTML [<a href="#HTML">HTML</a>].  
   </p>
-  <div class="block"><div class="blockTitleDiv"><span class="blockTitle">ABNF</span></div><div class="blockContent"><pre class="code"><code class="abnf-code">
-  fragIdentifier = "#" fragment
-
-  ; Fragment Identifiers depend on the media type of the Blob
-  ; fragment is defined in [<a href="#RFC3986">RFC3986</a>]
-  ; fragment processing for HTML is defined in [<a href="#HTML">HTML</a>]
-
-  fragment    = *( pchar / "/" / "?" )
-
-  pchar       = unreserved / pct-encoded / sub-delims / ":" / "@"
-
-  unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
-
-  pct-encoded   = "%" HEXDIG HEXDIG
-
-  sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")"
-                   / "*" / "+" / "," / ";" / "="
-  </code></pre></div></div>
+  
 
   <p>A valid Blob URL reference could look like: <code>blob:550e8400-e29b-41d4-a716-446655440000#aboutABBA</code> where "#aboutABBA" might be an HTML fragment identifier referring to an
   element with an id attribute of "aboutABBA".</p>
   </div>
-<div class="note"><div class="noteHeader">Note</div><p>The <code>blob:</code> scheme identifer and the <a href="#opaqueString">opaque string</a> together consist of the unique identifier for a <code>Blob</code> or <code>File</code> resource.  The <a href="#fragmentIdentifier">fragment identifier</a> is not used to identify the resource, and no other components of HTTP URLs are used to identify resources or are applicable for <a href="#url">blob: URL</a>s, including query strings [<a href="#RFC2616">RFC2616</a>]. </p></div>
+<div class="note"><div class="noteHeader">Note</div><p>The <code>blob:</code> <a href="#scheme">scheme</a> identifer and the <a href="#opaqueString">opaque string</a> as <a href="#scheme-data">scheme data</a> together consist of the unique identifier for a <code>Blob</code> or <code>File</code> resource.  The <a href="#fragmentDiscussion">fragment</a> is not used to identify the resource, and no other components of HTTP URLs are used to identify resources or are applicable for <a href="#DefinitionOfScheme">blob: URL</a>s. </p></div>
 	</div>
 	
 
 	
 	<div id="processingModel" class="section">
-	<h3>11.5. Dereferencing Model for Blob URLs</h3>
+	<h3>11.4. Dereferencing Model for Blob URLs</h3>
 
 
 	<p>User agents must only support requests with GET [<a href="#RFC2616">RFC2616</a>].  If the <a href="#dfn-Blob"><code>Blob</code></a> has a
@@ -1437,14 +1409,14 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
 	uses a <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument, responses to dereferencing the Blob URL must include the Content-Type header from HTTP [<a href="#RFC2616">RFC2616</a>] with the value of the <a href="#dfn-type"><code>type</code></a>
 	attribute or <a href="#dfn-contentTypeBlob"><code>contentType</code></a> argument.  Responses to dereferencing the Blob URL must include the Content-Length header from HTTP [<a href="#RFC2616">RFC2616</a>] with the value of the <a href="#dfn-size"><code>size</code></a> attribute.  Specifically, responses must only support a subset of responses that are equivalent to the following from HTTP [<a href="#RFC2616">RFC2616</a>]:</p>
 	<div id="TwoHundredOK" class="section">
-	<h4>11.5.1. 200 OK</h4>
+	<h4>11.4.1. 200 OK</h4>
 	<p>This response [<a href="#RFC2616">RFC2616</a>] must be used if the request has succeeded, namely the <a href="#ABNFForBlob">blob:</a> URL has been requested with a GET,
 	and satisfies the <a href="#lifeTime">lifetime requirement.</a>  If this response code is used,
 	the user agent must also use a Content-Type header [<a href="#RFC2616">RFC2616</a>] with a value equal to the <code><a href="#dfn-Blob">Blob</a></code> object's <code><a href="#dfn-type">type</a></code> attribute.  See <a href="#ProtocolExamples">blob: protocol examples</a>.
 	</p>
 	</div>
 	<div id="NetworkError" class="section">
-	<h4>11.5.2. Network Errors</h4>
+	<h4>11.4.2. Network Errors</h4>
 	<p>
 	  Responses that do not succeed with a <a href="#TwoHundredOK">200 OK</a> must act as if a <dfn id="dfn-networkError">network error</dfn> has occurred [<a href="#XHR">XHR</a>].  Network errors must be used when:
 	</p>
@@ -1459,7 +1431,7 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
 	
 	</div>
 	<div id="ProtocolExamples" class="section">
-	<h4>11.5.3. Request and Response Headers</h4>
+	<h4>11.4.3. Request and Response Headers</h4>
 	<p>This section provides sample exchanges between web applications and user agents using the <a href="#processingModel">blob: protocol</a>.  A request can be triggered using HTML markup of the sort <code>&lt;img src="blob:550e8400-e29b-41d4-a716-446655440000"&gt;</code>, after a web application calls <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> on a given <a href="#dfn-fileBlob"><code>blob</code></a>, which returns <code>blob:550e8400-e29b-41d4-a716-446655440000 </code> to dereference that <a href="#dfn-fileBlob"><code>blob</code></a>.  These examples merely illustrate the protocol; web developers are not likely to interact with all the headers, but the <code>getAllResponseHeaders()</code> method of <code>XMLHttpRequest</code>, if used, will show relevant response headers [<a href="#XHR">XHR</a>].  </p>
 	<div class="example"><div class="exampleHeader">Example</div>
 	<p>Requests could look like this:</p>
@@ -1479,18 +1451,20 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
 	
 	</div>
 	<div id="processing-media-types" class="section">
-	<h4>11.5.3.1. Processing Media Types</h4>
+	<h4>11.4.4. Processing Media Types</h4>
 	<p>
 	If a Content-Type header [<a href="#RFC2616">RFC2616</a>] is provided (e.g. if the <a href="#dfn-fileBlob"><code>blob</code></a> has an affiliated <a href="#dfn-type"><code>type</code></a> attribute), then user agents should obtain and process that media type in a manner consistent with the Media Type Sniffing specification [<a href="#MIMESNIFF">MIMESNIFF</a>].  
 	</p>
-  <p>User agents may provide mouse over behavior or hover behavior for <a href="#url">blob: URL</a>s used in web pages as anchor elements [<a href="#HTML">HTML</a>], including identifying the type of a resource referenced by a <a href="#url">blob: URL</a>; this behavior may be comparable to what is done for HTTP URLs. </p>
+  <p>User agents may provide mouse over behavior or hover behavior for <a href="#url">blob: URL</a>s used in web pages as anchor elements [<a href="#HTML">HTML</a>], including identifying the type of a resource referenced by a <a href="#url">blob: URL</a>. </p>
+  <p>If a resource identified with a <a href="#DefinitionOfScheme">blob: URL</a> is a <a href="#dfn-file"><code>File</code></a> object, user agents must use that file's <a href="#dfn-name"><code>name</code></a> attribute, as if the response had a <code>Content-Disposition</code> header with the filename parameter set to the <a href="#dfn-file"><code>File</code></a>'s <a href="#dfn-name"><code>name</code></a> attribute [<a href="#RFC6266">RFC6266</a>].  In particular, "File Save As" behavior must use the <a href="#dfn-file"><code>File</code></a>'s <code>name</code> attribute as the default name to save the file as.</p>
+
 
 	</div>
 	</div>
 
 	</div>
 	<div id="creating-revoking" class="section">
-	<h2>11.6. Creating and Revoking a Blob URL</h2>
+	<h2>11.5. Creating and Revoking a Blob URL</h2>
 	<p><a href="#url"><code>Blob</code> URLs</a> are created and revoked using methods exposed on the <a href="#URL-object"><code>URL</code></a> object, supported by
 	global objects <code>Window</code> [<a href="#HTML">HTML</a>] and <code>WorkerGlobalScope</code> [<a href="#Workers">Web Workers</a>].  Revocation of a <a href="#url"><code>Blob</code> URL</a>
 	decouples the <a href="#url"><code>Blob</code> URL</a> from the resource it refers to, and if it is dereferenced after it is revoked, user agents must act as if a <a href="#dfn-networkError">network error</a> has occurred.
@@ -1509,7 +1483,7 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
 	evaluate to true if the user agent implements the URL [<a href="#URL-API">URL API</a>] specification, and must NOT evaluate to true otherwise.</p>
 
 <div id="createRevokeMethodsParams" class="section">
-<h3>11.6.1. Methods and Parameters</h3>		
+<h3>11.5.1. Methods and Parameters</h3>		
 	<dl><dt id="dfn-createObjectURL">The <code>createObjectURL</code> static method</dt><dd><p>Returns a unique <a href="#url"><code>Blob</code> URL</a> each time it is called on a 
 	<dfn id="validBlob">valid</dfn> <a href="#dfn-fileBlob"><code>blob</code></a> argument, which is a non-null <a href="#dfn-Blob"><code>Blob</code></a> in scope of the global
 	object's <a href="#URL-object"><code>URL</code></a> property from which this static method is called.  This method must act as follows:</p>
@@ -1578,7 +1552,7 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
 	</div>
 	</div>
 <div id="examplesOfCreationRevocation" class="section">
-<h3>11.6.2. Examples of Blob URL Creation and Revocation</h3>
+<h3>11.5.2. Examples of Blob URL Creation and Revocation</h3>
 <p><a href="#url">Blob URL</a>s are strings that dereference <code>Blob</code> objects, and can persist for as long as the <code>document</code> from which they were minted using <a href="#dfn-createObjectURL"><code>URL.createObjectURL()</code></a> - see <a href="#lifeTime">Lifetime of Blob URLs</a>.   </p>
 
 <p>This section gives sample usage of creation and revocation of <a href="#url">Blob URL</a>s with explanations.</p>
@@ -1724,9 +1698,25 @@ img1.src = blobURLref2;
 	  </div>
 	<div id="AppendixA" class="section">
 	<h2>14. Appendix A</h2>
-	<p>This section is informative and not normative.</p>
-	<div id="ABNFUUID" class="section">
-	<h3>15.1. An ABNF for UUID</h3>
+	<p>This section is informative, and uses the Augmented Backus-Naur Form (ABNF), defined in [<a href="#ABNF">RFC5234</a>] to define components of blob: URLs.
+  </p>
+	 <div id="ABNFOpaqueString" class="section">
+    <h3>14.1. An ABNF for Opaque Strings</h3>
+  <div class="block"><div class="blockTitleDiv"><span class="blockTitle">ABNF</span></div><div class="blockContent"><pre class="code"><code class="abnf-code">
+  blob = scheme ":" opaqueString [fragIdentifier]
+
+  scheme = "blob"
+
+  ; scheme is always "blob"
+
+  ; opaqueString tokens must be globally unique
+  ; opaqueString could be a UUID in its canonical form
+
+  </code></pre></div></div>
+  </div>
+
+  <div id="ABNFUUID" class="section">
+	<h3>14.2. An ABNF for UUID</h3>
 	<p>The following is an informative ABNF [<a href="#ABNF">ABNF</a>] for UUID, which is a <em>strongly encouraged</em> choice for the
 	<a href="#opaqueString">opaqueString</a> production of <a href="#url">Blob URLs</a>.</p> 
 	<div class="block"><div class="blockTitleDiv"><span class="blockTitle">ABNF</span></div><div class="blockContent"><pre class="code"><code class="abnf-code">
@@ -1748,6 +1738,28 @@ img1.src = blobURLref2;
 
 	</code></pre></div></div>
 	</div>
+ <div id="ABNFFragment" class="section">
+<h3>14.3 An ABNF for Fragment Identifiers</h3>
+<div class="block"><div class="blockTitleDiv"><span class="blockTitle">ABNF</span></div><div class="blockContent"><pre class="code"><code class="abnf-code">
+  fragIdentifier = "#" fragment
+
+  ; Fragment Identifiers depend on the media type of the Blob
+  ; fragment is defined in [<a href="#RFC3986">RFC3986</a>]
+  ; fragment processing for HTML is defined in [<a href="#HTML">HTML</a>]
+
+  fragment    = *( pchar / "/" / "?" )
+
+  pchar       = unreserved / pct-encoded / sub-delims / ":" / "@"
+
+  unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
+
+  pct-encoded   = "%" HEXDIG HEXDIG
+
+  sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")"
+                   / "*" / "+" / "," / ";" / "="
+  </code></pre></div></div>
+ </div>
+
 	</div>
 	   <div id="acknowledgements-section" class="section">
 	    <h2>15. Acknowledgements</h2>
@@ -1781,6 +1793,8 @@ img1.src = blobURLref2;
 		<dd><cite><a href="http://tools.ietf.org/html/rfc2616">Hypertext Transfer Protocol -- HTTP/1.1</a></cite>, R. Fielding, J. Gettys, J. Mogul, H. Frystyk, L. Masinter, P. Leach, T. Berners-Lee. IETF.</dd>
 		<dt id="RFC2046">RFC2046</dt>
 		<dd><cite><a href="http://tools.ietf.org/html/rfc2046">Multipurpose Internet Mail Extensions (MIME) Part Two: Media Extensions</a></cite>, N. Freed, N. Borenstein. IETF.</dd>
+    <dt id="RFC6266">RFC6266</dt>
+    <dd><cite><a href="http://tools.ietf.org/html/rfc6266">Use of the Content-Disposition Header Field in the Hypertext Transfer Protocol (HTTP)</a></cite>, J. Reschke. IETF.</dd>
 	        <dt id="encodingSpecification">Encoding Specification</dt>
 	        <dd><cite><a href="http://encoding.spec.whatwg.org/">Encoding Living Standard</a></cite>, A. van Kesteren, J. Bell.</dd>
 	        <dt id="TypedArrays">Typed Arrays</dt>
@@ -1788,7 +1802,7 @@ img1.src = blobURLref2;
 	        <dt id="ABNF">RFC5234</dt>
 	        <dd><cite><a href="http://tools.ietf.org/html/rfc5234">Augmented BNF for Syntax Specifications: ABNF</a></cite>, D. Crocker, P. Overell. IETF.</dd>
 	        <dt id="URL-API">URL API Specification</dt>
-	        <dd><cite><a href="https://dvcs.w3.org/hg/url/raw-file/tip/Overview.html">URL API (work in progress)</a></cite>, A. Barth. W3C.</dd>
+	        <dd><cite><a href="http://url.spec.whatwg.org/">URL API (work in progress)</a></cite>, A. van Kesteren.</dd>
 		<dt id="WebIDL">WebIDL Specification</dt>
 		<dd><cite><a href="http://www.w3.org/TR/WebIDL/">WebIDL (work in progress)</a></cite>, C. McCormack.</dd>
 		<dt id="ECMA-262">ECMAScript</dt>
