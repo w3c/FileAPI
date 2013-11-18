@@ -1456,7 +1456,12 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
 	If a Content-Type header [<a href="#RFC2616">RFC2616</a>] is provided (e.g. if the <a href="#dfn-fileBlob"><code>blob</code></a> has an affiliated <a href="#dfn-type"><code>type</code></a> attribute), then user agents should obtain and process that media type in a manner consistent with the Media Type Sniffing specification [<a href="#MIMESNIFF">MIMESNIFF</a>].  
 	</p>
   <p>User agents may provide mouse over behavior or hover behavior for <a href="#url">blob: URL</a>s used in web pages as anchor elements [<a href="#HTML">HTML</a>], including identifying the type of a resource referenced by a <a href="#url">blob: URL</a>. </p>
-  <p>If a resource identified with a <a href="#DefinitionOfScheme">blob: URL</a> is a <a href="#dfn-file"><code>File</code></a> object, user agents must use that file's <a href="#dfn-name"><code>name</code></a> attribute, as if the response had a <code>Content-Disposition</code> header with the filename parameter set to the <a href="#dfn-file"><code>File</code></a>'s <a href="#dfn-name"><code>name</code></a> attribute [<a href="#RFC6266">RFC6266</a>].  In particular, "File Save As" behavior must use the <a href="#dfn-file"><code>File</code></a>'s <code>name</code> attribute as the default name to save the file as.</p>
+  <p>If a resource identified with a <a href="#DefinitionOfScheme">blob: URL</a> is a <a href="#dfn-file"><code>File</code></a> object, user agents must use that file's <a href="#dfn-name"><code>name</code></a> attribute, as if the response had a <code>Content-Disposition</code> header with the filename parameter set to the <a href="#dfn-file"><code>File</code></a>'s <a href="#dfn-name"><code>name</code></a> attribute [<a href="#RFC6266">RFC6266</a>].  </p>
+  <div class="note"><div class="noteHeader">Note</div><p>
+  A corollary to this is an optional implementation guideline: that the "File Save As" user interface in user agents takes into account the <a href="#dfn-file"><code>File</code></a>'s <code>name</code> attribute if presenting a default name to save the file as.
+</p>
+  
+  </div>
 
 
 	</div>
