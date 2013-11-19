@@ -629,14 +629,14 @@ var d = new Blob([buffer, b, c, bytes]);
 interface File</dfn> : <a href="#dfn-Blob" class="dfnref">Blob</a> {
 
   readonly attribute DOMString <a href="#dfn-name" class="dfnref">name</a>;
-  readonly attribute Date <a href="#dfn-lastModifiedDate" class="dfnref">lastModifiedDate</a>;
+  readonly attribute long long <a href="#dfn-lastModified" class="dfnref">lastModified</a>;
 
 };
 
 dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
     
       DOMString <a href="#dfn-BPtype" title="BPtype">type</a> = "";
-      Date <a href="#dfn-FPdate" title="FPdate">lastModifiedDate</a>;
+      long long <a href="#dfn-FPdate" title="FPdate">lastModified</a>;
   
 };
 	  </code></pre></div></div>
@@ -666,7 +666,7 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
       <ol>
         <li>If the <code>type</code> member is provided and is not the empty string, let <var>t</var> be set to the type dictionary member.  If <var>t</var> contains any characters outside the range U+0020 to U+007E, then set <var>t</var> to the empty string and return from these substeps. </li>
         <li>Convert every character in <var>t</var> to lowercase using the "<a href="#converting-a-string-to-ASCII-lowercase">converting a string to ASCII lowercase algorithm</a>" [<a href="#WebIDL">WebIDL</a>].</li>
-        <li>If the <code>lastModifiedDate</code> member is provided, let <var>d</var> be set to the <code>lastModifiedDate</code> dictionary member.  If it is not provided, set <var>d</var> to the current date and time (which is the equivalent of <code>Date.now()</code> [<a href="#ECMA-262">ECMA-262</a>]).</li>
+        <li>If the <code>lastModified</code> member is provided, let <var>d</var> be set to the <code>lastModified</code> dictionary member.  If it is not provided, set <var>d</var> to the current date and time represented as the number of milliseconds since the Unix Epoch (which is the equivalent of <code>Date.now()</code> [<a href="#ECMA-262">ECMA-262</a>]).</li>
       </ol>
     </li>
     <li>Return a new File object F such that:
@@ -676,7 +676,7 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
         <li><code>F.type</code> is set to <var>t</var>.
 <div class="note"><div class="noteHeader">Note</div><p>The type t of a <code>File</code> is considered a <em>parsable MIME type</em> if the ASCII-encoded string representing the File object's type, when converted to a byte sequence, does not return undefined for the <em>parse MIME type algorithm</em> [<a href="#MIMESNIFF">MIMESNIFF</a>].</p> </div>
         </li>
-        <li><code>F.lastModifiedDate</code> is set to <var>d</var>.</li>
+        <li><code>F.lastModified</code> is set to <var>d</var>.</li>
 
       </ol>
     </li>
@@ -701,7 +701,7 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
     <dt id="def-Properties">An optional <a href="#dfn-FilePropertyBag"><code>FilePropertyBag</code></a> dictionary</dt><dd><p>which takes the following members:</p>
     <ul>
       <li><p>An optional <code>type</code> member; normative conditions for this member are provided in the <a href="#file-constructor-steps">File constructor steps</a> .</p></li>
-      <li><p>An optional <dfn id="dfn-FPdate"><code>lastModifiedDate</code></dfn> member, which must be a valid <code>Date</code> object [<a href="#ECMA-262">ECMA-262</a>]; normative conditions for this member are provided in the <a href="#file-constructor-steps">File constructor steps</a>.</p></li>
+      <li><p>An optional <dfn id="dfn-FPdate"><code>lastModified</code></dfn> member, which must be a <code>long long</code>; normative conditions for this member are provided in the <a href="#file-constructor-steps">File constructor steps</a>.</p></li>
     </ul>
   </dd>
 
@@ -717,8 +717,7 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
 	    <dd><p>The name of the file; on getting, this must return the name of the file as a string. There are numerous file name variations on different systems;
 	    this is merely the name of the file, without path information.  On getting, if user agents cannot make this information available, they must return the empty string.</p></dd>
 	    <dt id="dfn-lastModifiedDate"><code>lastModifiedDate</code></dt>
-	    <dd><p>The last modified date of the file.  On getting, if user agents can make this information available, this must return a new <code>Date</code>[<a href="#HTML">HTML</a>] object
-	initialized to the last modified date of the file.  If the last modification date and time are not known, the attribute must return the current date and time as a <code>Date</code> object.
+	    <dd><p>The last modified date of the file.  On getting, if user agents can make this information available, this must return a <code>long long</code> set to the time the file was last modified as the number of milliseconds since the Unix Epoch.  If the last modification date and time are not known, the attribute must return the current date and time as a <code>long long</code> representing the number of milliseconds since the Unix Epoch; this is equivalent to <code>Date.now()</code> [<a href="#ECMA-262">ECMA-262</a>].
 	</p></dd>
 
 	    </dl>
