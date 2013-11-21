@@ -147,7 +147,7 @@
             <ul><li><a href="#file-constructor">7.1 File Constructor</a></li><li><a href="#file-attrs">7.2. Attributes</a></li></ul></li><li><a href="#FileReader-interface">8. The FileReader Interface</a><ul><li><a href="#blobreader-task-source">8.1. The FileReader Task Source</a></li><li><a href="#filereaderConstrctr">8.2. Constructors</a></li><li><a href="#event-handler-attributes-section">8.3. Event Handler Attributes</a></li><li><a href="#blobreader-state">8.4. FileReader States</a></li><li><a href="#reading-a-file">8.5. Reading a File or Blob</a><ul><li><a href="#MultipleReads">8.5.1. Multiple Reads</a></li><li><a href="#filedata-attr">8.5.2. The result attribute</a></li><li><a href="#readAsDataURL">8.5.3. The readAsDataURL(blob) method</a></li><li><a href="#readAsDataText">8.5.4. The readAsText(blob, label) method</a></li><li><a href="#readAsArrayBuffer">8.5.5. The readAsArrayBuffer(blob) method</a></li><li><a href="#dfn-error-steps">8.5.6. Error Steps</a></li><li><a href="#abort">8.5.7. The abort() method</a></li><li><a href="#blobAndFileParams">8.5.8. Blob Parameters</a></li><li><a href="#enctype">8.5.9. Determining Encoding</a></li><li><a href="#events">8.5.10. Events</a><ul><li><a href="#event-summary">8.5.10.1. Event Summary</a></li><li><a href="#eventInvariants">8.5.10.2. Summary of Event Invariants</a></li></ul></li></ul></li></ul></li><li><a href="#readingOnThreads">9. Reading on Threads</a><ul><li><a href="#FileReaderSync">9.1. The FileReaderSync Interface</a><ul><li><a href="#filereadersyncConstrctr">9.1.1. Constructors</a></li><li><a href="#readAsTextSync">9.1.2. The readAsText method</a></li><li><a href="#readAsDataURLSync-section">9.1.3. The readAsDataURL method</a></li><li><a href="#readAsArrayBufferSyncSection">9.1.4. The readAsArrayBuffer method</a></li></ul></li></ul></li><li><a href="#ErrorAndException">10. Errors and Exceptions</a><ul><li><a href="#dfn-error-codes">10.1. Throwing an Exception or Returning an Error</a></li></ul></li><li><a href="#url">11. A URL for Blob and File reference</a><ul><li><a href="#use-cases-scheme">11.1. Requirements for a New Scheme</a></li><li><a href="#alternative-schemas">11.2. Discussion of Existing Schemes</a></li><li><a href="#DefinitionOfScheme">11.3. Definition of blob URL Scheme</a><ul><li><a href="#OpaqueStringDiscussion">11.3.1. The Opaque String</a></li><li><a href="#fragmentDiscussion">11.3.2. Discussion of Fragment Identifier</a></li></ul></li><li><a href="#processingModel">11.4. Dereferencing Model for Blob URLs</a><ul><li><a href="#TwoHundredOK">11.4.1. 200 OK</a></li><li><a href="#NetworkError">11.4.2. NetworkError Conditions</a>
           </li><li><a href="#ProtocolExamples">11.4.3. Request and Response Headers</a><ul><li><a href="#processing-media-types">11.4.4. Processing Media Types</a></li></ul></li></ul></li><li><a href="#creating-revoking">11.5. Creating and Revoking a Blob URL</a><ul><li><a href="#createRevokeMethodsParams">11.5.1. Methods and Parameters</a></li><li><a href="#examplesOfCreationRevocation">11.5.2. Examples of Blob URL Creation and Revocation</a></li><li><a href="#lifeTime">11.5.3. Lifetime of Blob URLs</a></li></ul></li>
 
-        </ul></li><li><a href="#security-discussion">12. Security Considerations</a></li><li><a href="#requirements">13. Requirements and Use Cases</a></li><li><a href="#AppendixA">14. Appendix A</a><ul><li><a href="#ABNFUUID">14.1. An ABNF for UUID</a></li></ul></li><li><a href="#acknowledgements-section">15. Acknowledgements</a></li><li><a href="#references">16. References</a><ul><li><a href="#normative-references">16.1. Normative references</a></li><li><a href="#informative-references">16.2. Informative References</a></li></ul></li></ul></div>
+        </ul></li><li><a href="#security-discussion">12. Security Considerations</a></li><li><a href="#requirements">13. Requirements and Use Cases</a></li><li><a href="#AppendixA">14. Appendix A</a><ul><li><a href="#ABNFForBlobURLs">14.1. An ABNF for Blob URLs</a></li></ul></li><li><a href="#acknowledgements-section">15. Acknowledgements</a></li><li><a href="#references">16. References</a><ul><li><a href="#normative-references">16.1. Normative references</a></li><li><a href="#informative-references">16.2. Informative References</a></li></ul></li></ul></div>
     </div>
 
     <div id="sections">
@@ -1457,7 +1457,6 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
 	<p>
 	If a Content-Type header [<a href="#RFC2616">RFC2616</a>] is provided (e.g. if the <a href="#dfn-fileBlob"><code>blob</code></a> has an affiliated <a href="#dfn-type"><code>type</code></a> attribute), then user agents should obtain and process that media type in a manner consistent with the Media Type Sniffing specification [<a href="#MIMESNIFF">MIMESNIFF</a>].  
 	</p>
-  <p>User agents may provide mouse over behavior or hover behavior for <a href="#url">blob: URL</a>s used in web pages as anchor elements [<a href="#HTML">HTML</a>], including identifying the type of a resource referenced by a <a href="#url">blob: URL</a>. </p>
   <p>If a resource identified with a <a href="#DefinitionOfScheme">blob: URL</a> is a <a href="#dfn-file"><code>File</code></a> object, user agents must use that file's <a href="#dfn-name"><code>name</code></a> attribute, as if the response had a <code>Content-Disposition</code> header with the filename parameter set to the <a href="#dfn-file"><code>File</code></a>'s <a href="#dfn-name"><code>name</code></a> attribute [<a href="#RFC6266">RFC6266</a>].  </p>
   <div class="note"><div class="noteHeader">Note</div><p>
   A corollary to this is a non-normative implementation guideline: that the "File Save As" user interface in user agents takes into account the <a href="#dfn-file"><code>File</code></a>'s <code>name</code> attribute if presenting a default name to save the file as.
@@ -1477,12 +1476,14 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
 	decouples the <a href="#url"><code>Blob</code> URL</a> from the resource it refers to, and if it is dereferenced after it is revoked, user agents must act as if a <a href="#dfn-networkError">network error</a> has occurred.
 	This section describes a supplemental interface to the URL specification [<a href="#URL-API">URL API</a>] and presents methods for <a href="#url">Blob URL</a> creation and revocation.  </p>
 	<div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
-	partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
 
-	    static DOMString? <a href="#dfn-createObjectURL">createObjectURL</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
-      static DOMString? <a href="#dfn-createFor">createFor</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
-	    static void <a href="#dfn-revokeObjectURL">revokeObjectURL</a>(DOMString <a href="#dfn-urlarg">url</a>);
-	};
+partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
+
+  static DOMString? <a href="#dfn-createObjectURL">createObjectURL</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
+  static DOMString? <a href="#dfn-createFor">createFor</a>(<a href="#dfn-Blob">Blob</a> <a href="#dfn-fileBlob">blob</a>);
+  static void <a href="#dfn-revokeObjectURL">revokeObjectURL</a>(DOMString <a href="#dfn-urlarg">url</a>);
+
+};
 
 	</code></pre></div></div>
 	<p>ECMAScript user agents of this specification must ensure that they do not expose a <code>prototype</code> property on the URL interface
@@ -1707,8 +1708,8 @@ img1.src = blobURLref2;
 	<h2>14. Appendix A</h2>
 	<p>This section is informative, and uses the Augmented Backus-Naur Form (ABNF), defined in [<a href="#ABNF">RFC5234</a>] to describe components of blob: URLs.
   </p>
-	 <div id="ABNFOpaqueString" class="section">
-    <h3>14.1. An ABNF for Opaque Strings</h3>
+	 <div id="ABNFForBlobURLs" class="section">
+    <h3>14.1. An ABNF for Blob URLs</h3>
   <div class="block"><div class="blockTitleDiv"><span class="blockTitle">ABNF</span></div><div class="blockContent"><pre class="code"><code class="abnf-code">
   blob = scheme ":" opaqueString [fragIdentifier]
 
