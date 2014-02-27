@@ -422,7 +422,7 @@ function errorHandler(evt) {
     <p>A <a href="#dfn-Blob"><code>Blob</code></a> must have an internal <dfn id="readabilityState">readability state</dfn> flag, which is one of <a href="#dfn-openState"><code>OPENED</code></a> or <a href="#dfn-closedState"><code>CLOSED</code></a>. A <a href="#dfn-Blob"><code>Blob</code></a> that refers to a <a href="#byte">byte</a> sequence, including one of 0 bytes, is said to be in the <dfn id="dfn-openState"><code>OPENED</code></dfn> <a href="#readabilityState">readability state</a>. A <a href="#dfn-Blob"><code>Blob</code></a> is said to be <dfn id="neutered">neutered</dfn> if its <a href="#dfn-close"><code>close</code></a> method has been called, in which case it no longer refers to a <a href="#byte">byte</a> sequence, and must return 0 for its <a href="#dfn-size"><code>size</code></a> attribute. A <a href="#dfn-Blob"><code>Blob</code></a> that is <a href="#neutered">neutered</a> is said to be in the <dfn id="dfn-closedState"><code>CLOSED</code></dfn> <a href="#readabilityState">readability state</a>.</p>
     <p>Each <a href="#dfn-Blob"><code>Blob</code></a> must have an internal <dfn id="snapshot-state">snapshot state</dfn>, which must be initially set to the state of the underlying storage, if any such underlying storage exists, and must be preserved through <a href="#structured-clone">structured clone</a>.  Further normative definition of <a href="#snapshot-state">snapshot state</a> can be found for <a href="#file">files</a>. </p>
     <div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
-    <dfn id="dfn-Blob">[Constructor, 
+    <dfn id="dfn-Blob">[Exposed=Window,Worker][Constructor, 
      Constructor(sequence&lt;(ArrayBuffer or ArrayBufferView or Blob or DOMString)&gt; <a href="#dfn-blobParts" title="blobParts" class="dfnref">blobParts</a>, optional <a href="#dfn-BlobPropertyBag" title="BlobPropertyBag" class="dfnref">BlobPropertyBag</a> options)] 
     interface Blob</dfn> {
       
@@ -666,7 +666,7 @@ var d = new Blob([buffer, b, c, bytes]);
 </ul>
 
 <div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
-<dfn id="dfn-file">[Constructor(sequence&lt;(Blob or DOMString or ArrayBufferView or ArrayBuffer)&gt; <a href="#dfn-fileBits" class="dfnrefs">fileBits</a>, 
+<dfn id="dfn-file">[Exposed=Window,Worker][Constructor(sequence&lt;(Blob or DOMString or ArrayBufferView or ArrayBuffer)&gt; <a href="#dfn-fileBits" class="dfnrefs">fileBits</a>, 
 [EnsureUTF16] DOMString <a href="#dfn-fileName" class="dfnrefs">fileName</a>, optional FilePropertyBag options)]
 interface File</dfn> : <a href="#dfn-Blob" class="dfnref">Blob</a> {
 
@@ -806,7 +806,7 @@ var generatedFile = new File(["Rough Draft ...."], "Draft1.txt", {type: "text/pl
           This interface is a list of <a href="#dfn-file"><code>File</code></a> objects.
        </p>
     <div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
-    interface <dfn id="dfn-filelist">FileList</dfn> {
+    [Exposed=Window,Worker] interface <dfn id="dfn-filelist">FileList</dfn> {
       getter <a href="#dfn-file" class="dfnref">File</a>? <a href="#dfn-item" class="dfnref">item</a>(unsigned long <a href="#dfn-index" class="dfnref">index</a>);
       readonly attribute unsigned long <a href="#dfn-length" class="dfnref">length</a>;
     };
@@ -905,7 +905,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   <h3>8.3 The FileReader API</h3>
 	  <div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
 
-	[Constructor]
+	[Exposed=Window,Worker][Constructor]
 	interface <dfn id="dfn-filereader">FileReader</dfn>: EventTarget {
 
 	  <span class="comment">// async read methods</span>
@@ -1360,7 +1360,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   </a> objects into memory.</p>
 	<div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
 
-	[Constructor]
+	[Exposed=Worker][Constructor]
 	interface <dfn id="dfn-FileReaderSync">FileReaderSync</dfn> {
 
 	  <span class="comment">// Synchronously return strings</span>
