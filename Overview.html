@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>Editor's Draft <em>3 March 2014</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>Editor's Draft <em>11 March 2014</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2014 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -73,7 +73,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 3 March 2014 <b>Editor's Draft</b> of the
+        This document is the 11 March 2014 <b>Editor's Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -199,8 +199,9 @@
                     <li><a href="#alternative-schemas">10.2. Discussion of Existing Schemes</a></li>
                     <li><a href="#DefinitionOfScheme">10.3. Definition of blob URL Scheme</a>
                     <ul>
-                      <li><a href="#OpaqueStringDiscussion">10.3.1. The Opaque String</a></li>
-                      <li><a href="#fragmentDiscussion">10.3.2. Discussion of Fragment Identifier</a></li>
+                      <li><a href="#originOfBlobURL">10.3.1. Origin of Blob URLs</a></li>
+                      <li><a href="#OpaqueStringDiscussion">10.3.2. The Opaque String</a></li>
+                      <li><a href="#fragmentDiscussion">10.3.3. Discussion of Fragment Identifier</a></li>
                     </ul>
                     </li>
                     <li><a href="#requestResponseModel">10.4. Dereferencing Model for Blob URLs</a>
@@ -1532,9 +1533,12 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   has a distinct interpretation depending on the media type of the <a href="#dfn-Blob"><code>Blob</code></a> or <a href="#dfn-file"><code>File</code></a> resource in question (see <a href="fragmentDiscussion">fragment discussion</a>). </p>
 
 
-  
+  <div id="originOfBlobURL" class="section">
+  <h4>10.3.1. Origin of Blob URLs</h4>
+  <p><a href="#DefinitionOfScheme">Blob URL</a>s are created using <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a>, and are revoked using <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a>. The <a href="#origin">origin</a> of a <a href="#DefinitionOfScheme">Blob URL</a> must be the same as the <a href="#origin">origin</a> of the script from which the method that created it -- either <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a> -- was called. </p>
+  </div>
   <div id="OpaqueStringDiscussion" class="section">
-  <h4>10.3.1. The Opaque String</h4>
+  <h4>10.3.2. The Opaque String</h4>
   <p>An <dfn id="opaqueString">opaque string</dfn> is a unique string which can be heuristically generated upon demand such that the probability that two are alike is small, and which is hard to guess (e.g.
   the Universally Unique IDentifier -- UUID -- as defined in [<a href="#UUID">RFC4122</a>] is an opaque string). <a href="#opaqueString">Opaque strings</a> must NOT include any reserved characters from [<a href="#RFC3986">RFC3986</a>] without percent-encoding them.
   <a href="#opaqueString">Opaque strings</a> must be globally unique.  Such strings should only use characters in the ranges U+002A to U+002B, U+002D to U+002E, U+0030 to U+0039,
@@ -1546,7 +1550,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 
   </div>
   <div class="section" id="fragmentDiscussion">
-  <h4>10.3.2 Discussion of Fragment Identifier</h4>
+  <h4>10.3.3 Discussion of Fragment Identifier</h4>
   <p>
   The <a href="#fragmentIDDef">fragment</a>'s resolution and processing directives depend on the media type [<a href="#RFC2046">RFC2046</a>] of a potentially retrieved representation, even though such
   a retrieval is only performed if the <a href="#DefinitionOfScheme">blob: URL</a> is dereferenced.  For example, in an HTML file [<a href="#HTML">HTML</a>] the fragment
@@ -1712,7 +1716,7 @@ partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
   myurl = window1.URL.createObjectURL(myblob);
   window2.URL.revokeObjectURL(myurl);
   </code></pre></div></div>
-  <p>Since <code>window1</code> and <code>window2</code> are in the <a href="#same-origin">same origin</a>, the
+  <p>Since <code>window1</code> and <code>window2</code> are in the <a href="#same-origin">same origin</a> and share the same <a href="#BlobURLStore">Blob URL Store</a>, the
   <code>URL.revokeObjectURL</code> call ensures that subsequent dereferencing of <code>myurl</code> results in a the user agent acting as if a <a href="#dfn-networkError">network error</a> has occurred.</p>
   </div>
   </dd>
@@ -1834,7 +1838,7 @@ var windowRef = openPopup(blobURLAnchorRef, "Application Info");
 	access to any selections by making the  <a href="#dfn-filelist"><code>FileList</code></a> object returned be of size 0.</p></li>
 	<li><p><dfn id="sensitive-files">System-sensitive files</dfn> (e.g. files in /usr/bin, password files, and other native operating system executables) typically should not
 	be exposed to web content, and should not be accessed via <a href="#DefinitionOfScheme">Blob URLs</a>.  User agents may throw a <a href="#dfn-SecurityError"><code>SecurityError</code></a> exception for synchronous read methods, or return a <a href="#dfn-SecurityError"><code>SecurityError</code></a> <a href="#dfn-domerror"><code>DOMError</code></a> for asynchronous reads.</p></li>
-	<li><p><dfn id="cross-origin-requests-on-blobs">Cross-origin requests on Blob URLs</dfn> occur when a <a href="#DefinitionOfScheme">Blob URL</a> is accessed across origins.    User agents must act as if a 
+	<li><p><dfn id="cross-origin-requests-on-blobs">Cross-origin requests on Blob URLs</dfn> occur when a <a href="#DefinitionOfScheme">Blob URL</a> is accessed <a href="#originOfBlobURL">across origins</a>.    User agents must act as if a 
 	<a href="#dfn-networkError">network error</a> has occurred if such requests are made.
 	</p></li>
 	</ul>
