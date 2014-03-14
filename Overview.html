@@ -391,7 +391,7 @@ function errorHandler(evt) {
         <p>The terms and algorithms <dfn id="document">document</dfn>,
         <dfn id="unloading-document-cleanup-steps">unloading document cleanup steps</dfn>, <dfn id="event-handler-attributes">event handler attributes</dfn>,
         <dfn id="event-handler-event-type">event handler event type</dfn>,
-        <dfn id="origin">origin</dfn>, <dfn id="same-origin">same origin</dfn>, <dfn id="event-loops">event loops</dfn>,
+        <dfn id="origin">origin</dfn>, <dfn id="same-origin">same origin</dfn>, <dfn id="effectiveScriptOrigin">effective script origin</dfn>, <dfn id="incumbentSettingsObject">incumbent settings object</dfn>, <dfn id="event-loops">event loops</dfn>,
         <dfn id="dfn-task">task</dfn>, <dfn id="task-source">task source</dfn>, <dfn id="df-URL">URL</dfn>, <dfn id="global-script-cleanup-jobs-list">global script cleanup jobs list</dfn>, <dfn id="global-script-cleanup-jobs">global script cleanup</dfn>,
         <dfn id="queue-a-task">queue a task</dfn>, <dfn id="dfn-UTF-8">UTF-8</dfn>, <dfn id="dfn-UTF-16">UTF-16</dfn>. <dfn id="structured-clone">structured clone</dfn>, <dfn id="collect-a-sequence-of-characters">collect a sequence of characters</dfn> and <dfn id="converting-a-string-to-ASCII-lowercase">converting a string to ASCII lowercase</dfn> are as defined by the HTML specification [<a href="#HTML">HTML</a>]. </p>
  <p>When this specification says to <dfn id="terminate-an-algorithm">terminate an algorithm</dfn> the user agent must terminate the algorithm after finishing the step it is on, and return from it.  Asynchronous <a href="#read-methods">read methods</a> defined in this specification may return before the algorithm in question is terminated, and can be terminated by an <a href="#dfn-abort"><code>abort()</code></a> call.</p>
@@ -1535,7 +1535,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 
   <div id="originOfBlobURL" class="section">
   <h4>10.3.1. Origin of Blob URLs</h4>
-  <p><a href="#DefinitionOfScheme">Blob URL</a>s are created using <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a>, and are revoked using <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a>. The <a href="#origin">origin</a> of a <a href="#DefinitionOfScheme">Blob URL</a> must be the same as the <a href="#origin">origin</a> of the script from which the method that created it -- either <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a> -- was called. </p>
+  <p><a href="#DefinitionOfScheme">Blob URL</a>s are created using <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a>, and are revoked using <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a>. The <a href="#origin">origin</a> of a <a href="#DefinitionOfScheme">Blob URL</a> must be the same as the <a href="#effectiveScriptOrigin">effective script origin</a> specified by the <a href="#incumbentSettingsObject">incumbent settings object</a> at the time the method that created it -- either <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a> -- was called. </p>
   </div>
   <div id="OpaqueStringDiscussion" class="section">
   <h4>10.3.2. The Opaque String</h4>
