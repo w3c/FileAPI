@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>Editor's Draft <em>11 March 2014</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>Editor's Draft <em>26 March 2014</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2014 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -73,7 +73,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 11 March 2014 <b>Editor's Draft</b> of the
+        This document is the 26 March 2014 <b>Editor's Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -1596,6 +1596,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   <ul>
     <li><p>Any request method other than GET is used to dereference the URL.</p></li>
     <li><p>The <a href="#DefinitionOfScheme">Blob URL</a> does not have an <a href="#identifier">identifier</a> in the <a href="#BlobURLStore">Blob URL Store</a>.  </p></li>
+    <li><p>The Blob has been <a href="#neutered">neutered</a>; this also results in the Blob URL not having an <a href="#identifier">identifier</a> in the <a href="#BlobURLStore">Blob URL Store</a>.</p></li>
     <li><p>A <a href="#readOperation">read operation</a> on the <code>Blob</code> resource with the <a href="#synchronousFlag">synchronous flag</a> unset returns failure. </p></li>
     <li><p>A security error has occurred.  </p>
     </li>
@@ -1651,7 +1652,12 @@ partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
 <h4>10.5.1. Methods and Parameters</h4>   
   <dl><dt id="dfn-createObjectURL">The <code>createObjectURL</code> static method</dt><dd><p>Returns a unique <a href="#DefinitionOfScheme"><code>Blob</code> URL</a>. This method must act as follows:</p>
   <ol>
-  <li><p>If called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that has a <a href="#readabilityState">readability state</a> of <a href="#dfn-closedState"><code>CLOSED</code></a>, throw an <code>InvalidStateError</code> and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p></li>
+  <li><p>If called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that has a <a href="#readabilityState">readability state</a> of <a href="#dfn-closedState"><code>CLOSED</code></a>, user agents must return a unique <a href="#DefinitionOfScheme">Blob URL</a> that has the following properties:</p>
+    <ul>
+      <li>It must have <em>blob:</em> as its <a href="#scheme">scheme</a></li> <li>It must have an <a href="#opaqueString">opaque string</a> as its <a href="#scheme-data">scheme data</a>. </li>
+      <li>It must return a <a href="#networkError">network error</a> when dereferenced.</li>
+    </ul>
+  </li>
   <li><p>Otherwise, user agents must run the following sub-steps:</p>
   <ol>
     <li>Return a unique <a href="#DefinitionOfScheme">Blob URL</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument and has the following properties: 
@@ -1668,7 +1674,12 @@ partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
 </dd>
 <dt id="dfn-createFor">The <code>createFor</code> static method</dt><dd><p>Returns a unique <a href="#DefinitionOfScheme"><code>Blob</code> URL</a>; <a href="#DefinitionOfScheme"><code>Blob</code> URL</a>s created with this method are said to be <dfn id="autoRevoking">auto-revoking</dfn> since user-agents are responsible for the revocation of <a href="#DefinitionOfScheme">Blob URL</a>s created with this method, subject to the <a href="#lifeTime">lifetime stipulation</a> for <a href="#DefinitionOfScheme">Blob URL</a>s.  This method must act as follows: </p>
 <ol>
-  <li><p>If called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that has a <a href="#readabilityState">readability state</a> of <a href="#dfn-closedState"><code>CLOSED</code></a>, throw an <code>InvalidStateError</code> and terminate this algorithm.</p></li>
+  <li><p>If called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that has a <a href="#readabilityState">readability state</a> of <a href="#dfn-closedState"><code>CLOSED</code></a>, user agents must return a unique <a href="#DefinitionOfScheme">Blob URL</a> that has the following properties:</p>
+<ul>
+      <li>It must have <em>blob:</em> as its <a href="#scheme">scheme</a></li> <li>It must have an <a href="#opaqueString">opaque string</a> as its <a href="#scheme-data">scheme data</a>. </li>
+      <li>It must return a <a href="#networkError">network error</a> when dereferenced.</li>
+    </ul>
+  </li>
   <li><p>Otherwise, user agents must run the following steps:</p>
   <ol>
     <li>Return a unique <a href="#DefinitionOfScheme">Blob URL</a> that can be used to dereference the <a href="#dfn-fileBlob">blob</a> argument and has the following properties: 
