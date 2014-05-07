@@ -594,7 +594,7 @@ var d = new Blob([buffer, b, c, bytes]);
     <li><p>Return a new <a href="#dfn-Blob"><code>Blob</code></a> object <var>S</var> with the following characteristics:</p>
     <ol type="a">
     <li><p><var>S</var> has a <a href="#readabilityState">readability state</a> equal to that of <var>O</var>'s <a href="#readabilityState">readability state</a>; <var>S</var>.<a href="#dfn-isClosed"><code>isClosed</code></a> is set to the same boolean value as O.<a href="#dfn-isClosed"><code>isClosed</code></a>.</p>
-     <div class="note"<div class="noteHeader">Note</div><p>The <a href="#readabilityState">readability state</a> of the <a href="#contextObject">context object</a> is retained by the <a href="#dfn-Blob"><code>Blob</code></a> object returned by the <a href="#dfn-slice"><code>slice</code></a> call; this has implications on whether the returned 
+     <div class="note"><div class="noteHeader">Note</div><p>The <a href="#readabilityState">readability state</a> of the <a href="#contextObject">context object</a> is retained by the <a href="#dfn-Blob"><code>Blob</code></a> object returned by the <a href="#dfn-slice"><code>slice</code></a> call; this has implications on whether the returned 
      <a href="#dfn-Blob"><code>Blob</code></a> is actually usable for <a href="#readOperation">read operation</a>s or as a <a href="#DefinitionOfScheme">Blob URL</a>.</p></div> 
     </li>  
     <li><p><var>S</var> refers to <var>span</var> consecutive <a href="#byte">byte</a>s from <var>O</var>, beginning with the <a href="#byte">byte</a> at byte-order position <var>relativeStart</var>.</p></li>
@@ -642,9 +642,9 @@ var d = new Blob([buffer, b, c, bytes]);
 <h4>5.3.2. The close method</h4>
 <p>The <dfn id="dfn-close"><code>close</code></dfn> method is said to <a href="#closed">close</a> a <a href="#dfn-Blob"><code>Blob</code></a>, and must act as follows on the <a href="#dfn-Blob"><code>Blob</code></a> on which the method has been called:</p>
 <ol>
-  <li><p>If the <a href="#readabilityState">readability state</a> of the <a href="#contextObject">context object</a> is <a href="#dfn-closedState"><code>CLOSED</code></a>, do nothing, since the Blob is already <a href="#closed">closed</a>, and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p></li>
+  <li><p>If the <a href="#readabilityState">readability state</a> of the <a href="#contextObject">context object</a> is <a href="#dfn-closedState"><code>CLOSED</code></a>, do nothing, since <a href="#contextObject">context object</a> is already <a href="#closed">closed</a>, and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p></li>
   <li><p>Otherwise, set the <a href="#readabilityState">readability state</a> of the <a href="#contextObject">context object</a> to <a href="#dfn-closedState"><code>CLOSED</code></a> and set the <a href="#contextObject">context object</a>'s <a href="#dfn-isClosed"><code>isClosed</code></a> attribute to <code>true</code>.</p></li> 
-  <li><p>If the <a href="#contextObject">context object</a> has an entry in the <a href="#BlobURLStore">Blob URL Store</a>, <a href="#removeTheEntry">remove the entry</a> for this <a href="#dfn-Blob"><code>Blob</code></a>.</p></li>
+  <li><p>If the <a href="#contextObject">context object</a> has an entry in the <a href="#BlobURLStore">Blob URL Store</a>, <a href="#removeTheEntry">remove the entry</a> that corresponds to the <a href="#contextObject">context object</a>.</p></li>
 </ol>
 
 </div>
