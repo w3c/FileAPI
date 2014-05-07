@@ -871,7 +871,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
     <ol>
 
       <li><p>If the <a href="#synchronousFlag">synchronous flag</a> is set, run the following substeps:</p>
-      <div class="note"><div class="noteHeader">Note</div><p>The algorithm assumes that invoking methods have checked for <a href="#readabilityState">readability state</a>. <a href="#dfn-Blob"><code>Blob</code></a>s that are in the <a href="#dfn-closedState">CLOSED</a> state must not have a <a href="#readOperation">read operation</a> called on it.</p></div>
+      <div class="note"><div class="noteHeader">Note</div><p>The algorithm assumes that invoking methods have checked for <a href="#readabilityState">readability state</a>. A <a href="#dfn-Blob"><code>Blob</code></a> in the <a href="#dfn-closedState"><code>CLOSED</code></a> state must not have a <a href="#readOperation">read operation</a> called on it.</p></div>
       <ol>
        
         <li>Start reading bytes from the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a> into <var>result</var>. If <a href="#file-error-read">an error occurs</a> reading the <code>Blob</code>, return failure along with a <a href="#failureReason">failure reason</a>, and terminate this algorithm. 
@@ -884,7 +884,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 
       </li>
       <li><p>Otherwise, process the rest of this algorithm asynchronously, and run the following substeps.</p>
-        <div class="note"><div class="noteHeader">Note</div><p>The algorithm assumes that invoking methods have checked for <a href="#readabilityState">readability state</a>. <a href="#dfn-Blob"><code>Blob</code></a>s that are in the <a href="#dfn-closedState">CLOSED</a> state must not have a <a href="#readOperation">read operation</a> called on it.</p></div>
+        <div class="note"><div class="noteHeader">Note</div><p>The algorithm assumes that invoking methods have checked for <a href="#readabilityState">readability state</a>. A <a href="#dfn-Blob"><code>Blob</code></a> in the <a href="#dfn-closedState"><code>CLOSED</code></a> state must not have a <a href="#readOperation">read operation</a> called on it.</p></div>
       <ol>
       <li>If <a href="#file-error-read">an error occurs reading</a> the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a>, return failure and a <a href="#failureReason">failure reason</a>, and terminate this algorithm.
  <div class="note"><div class="noteHeader">Note</div>
