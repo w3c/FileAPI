@@ -450,7 +450,7 @@ function errorHandler(evt) {
 		<h3>5.1. Constructors</h3>
 		<p>The <code>Blob()</code> constructor can be invoked with zero or more parameters.  When the <code>Blob()</code> constructor is invoked, user agents must run the following <dfn id="blob-constructor-steps">Blob constructor steps</dfn>:</p>
     <ol>
-      <li><p>If invoked with zero parameters, return a new <code>Blob</code> object with its <a href="#readabilityState">readability state</a> set to <a href="#dfn-openedState"><code>OPENED</code></a>, the <a href="#dfn-isClosed"><code>isClosed</code></a> attribute set to <code>false</code>, consisting of 0 bytes, with <a href="#dfn-size"><code>size</code></a> set to 0, and with <a href="#dfn-type"><code>type</code></a> set to the empty string.</p></li>
+      <li><p>If invoked with zero parameters, return a new <code>Blob</code> object with its <a href="#readabilityState">readability state</a> set to <a href="#dfn-openedState"><code>OPENED</code></a>, consisting of 0 bytes, with <a href="#dfn-size"><code>size</code></a> set to 0, and with <a href="#dfn-type"><code>type</code></a> set to the empty string.</p></li>
       <li><p>Otherwise, the constructor is invoked with a <a href="#dfn-blobParts"><code>blobParts</code></a> sequence.  Let <var>a</var> be that sequence.</p></li>
      <li><p>Let <var>bytes</var> be an empty sequence of bytes.</p></li>
       <li><p>Let <var>length</var> be <var>a</var>'s length.  For 0 ≤ <var>i</var> &lt; <var>length</var>, repeat the following steps:</p>
@@ -480,7 +480,7 @@ function errorHandler(evt) {
 
   </li>
 
-<li><p>Return a <code>Blob</code> object with its <a href="#readabilityState">readability state</a> set to <a href="dfn-openState"><code>OPENED</code></a>, the <a href="#dfn-isClosed"><code>isClosed</code></a> attribute set to <code>false</code>, referring to <var>bytes</var> as its associated <a href="#byte">byte</a> sequence, with its <a href="#dfn-size"><code>size</code></a> set to the length of <var>bytes</var>, and its <a href="#dfn-type"><code>type</code></a> set to the value of <var>t</var> from the substeps above.  </p>
+<li><p>Return a <code>Blob</code> object with its <a href="#readabilityState">readability state</a> set to <a href="dfn-openState"><code>OPENED</code></a>, referring to <var>bytes</var> as its associated <a href="#byte">byte</a> sequence, with its <a href="#dfn-size"><code>size</code></a> set to the length of <var>bytes</var>, and its <a href="#dfn-type"><code>type</code></a> set to the value of <var>t</var> from the substeps above.  </p>
 <div class="note"><div class="noteHeader">Note</div><p>The type t of a <code>Blob</code> is considered a <em>parsable MIME type</em> if the ASCII-encoded string representing the Blob object's type, when converted to a byte sequence, does not return undefined for the <em>parse MIME type algorithm</em> [<a href="#MIMESNIFF">MIMESNIFF</a>].</p> </div>
 </li>
 </ol>
@@ -593,7 +593,7 @@ var d = new Blob([buffer, b, c, bytes]);
     <li><p>Let <var>span</var> be <em>max((relativeEnd - relativeStart), 0)</em>.</p></li>
     <li><p>Return a new <a href="#dfn-Blob"><code>Blob</code></a> object <var>S</var> with the following characteristics:</p>
     <ol type="a">
-    <li><p><var>S</var> has a <a href="#readabilityState">readability state</a> equal to that of <var>O</var>'s <a href="#readabilityState">readability state</a>; <var>S</var>.<a href="#dfn-isClosed"><code>isClosed</code></a> is set to the same boolean value as O.<a href="#dfn-isClosed"><code>isClosed</code></a>.</p>
+    <li><p><var>S</var> has a <a href="#readabilityState">readability state</a> equal to that of <var>O</var>'s <a href="#readabilityState">readability state</a>.</p>
      <div class="note"><div class="noteHeader">Note</div><p>The <a href="#readabilityState">readability state</a> of the <a href="#contextObject">context object</a> is retained by the <a href="#dfn-Blob"><code>Blob</code></a> object returned by the <a href="#dfn-slice"><code>slice</code></a> call; this has implications on whether the returned 
      <a href="#dfn-Blob"><code>Blob</code></a> is actually usable for <a href="#readOperation">read operation</a>s or as a <a href="#DefinitionOfScheme">Blob URL</a>.</p></div> 
     </li>  
@@ -643,7 +643,7 @@ var d = new Blob([buffer, b, c, bytes]);
 <p>The <dfn id="dfn-close"><code>close</code></dfn> method is said to <a href="#closed">close</a> a <a href="#dfn-Blob"><code>Blob</code></a>, and must act as follows on the <a href="#dfn-Blob"><code>Blob</code></a> on which the method has been called:</p>
 <ol>
   <li><p>If the <a href="#readabilityState">readability state</a> of the <a href="#contextObject">context object</a> is <a href="#dfn-closedState"><code>CLOSED</code></a>, <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p></li>
-  <li><p>Otherwise, set the <a href="#readabilityState">readability state</a> of the <a href="#contextObject">context object</a> to <a href="#dfn-closedState"><code>CLOSED</code></a> and set the <a href="#contextObject">context object</a>'s <a href="#dfn-isClosed"><code>isClosed</code></a> attribute to <code>true</code>.</p></li> 
+  <li><p>Otherwise, set the <a href="#readabilityState">readability state</a> of the <a href="#contextObject">context object</a> to <a href="#dfn-closedState"><code>CLOSED</code></a>.</p></li> 
   <li><p>If the <a href="#contextObject">context object</a> has an entry in the <a href="#BlobURLStore">Blob URL Store</a>, <a href="#removeTheEntry">remove the entry</a> that corresponds to the <a href="#contextObject">context object</a>.</p></li>
 </ol>
 
@@ -724,7 +724,7 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
     </li>
     <li>Return a new <code>File</code> object <var>F</var> such that:
       <ol>
-        <li><var>F</var> has a <a href="#readabilityState">readability state</a> of <a href="#dfn-openState"><code>OPENED</code></a>; <var>F</var>'s <a href="#dfn-isClosed"><code>isClosed</code></a> attribute must be set to <code>false</code>.</li> 
+        <li><var>F</var> has a <a href="#readabilityState">readability state</a> of <a href="#dfn-openState"><code>OPENED</code></a>.</li> 
         <li><var>F</var> refers to the <var>bytes</var> <a href="#byte">byte</a> sequence.</li> 
         <li><code>F.size</code> is set to the number of total bytes in <var>bytes</var>.</li>
         <li><code>F.name</code> is set to <var>n</var>.</li>
