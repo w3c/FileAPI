@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>Editor's Draft <em>26 March 2014</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>Editor's Draft <em>6 May 2014</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2014 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -73,7 +73,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 26 March 2014 <b>Editor's Draft</b> of the
+        This document is the 6 May 2014 <b>Editor's Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -420,7 +420,7 @@ function errorHandler(evt) {
     <p>
       A <a href="#dfn-Blob"><code>Blob</code></a> object refers to a <a href="#byte">byte</a> sequence, and has a <a href="#dfn-size"><code>size</code></a> attribute which is the total number of bytes in the byte sequence, and a <a href="#dfn-type"><code>type</code></a> attribute, which is an ASCII-encoded string in lower case representing the media type of the <a href="#byte">byte</a> sequence.   
     </p>
-    <p>A <a href="#dfn-Blob"><code>Blob</code></a> must have an internal <dfn id="readabilityState">readability state</dfn> flag, which is one of <a href="#dfn-openState"><code>OPENED</code></a> or <a href="#dfn-closedState"><code>CLOSED</code></a>. A <a href="#dfn-Blob"><code>Blob</code></a> that refers to a <a href="#byte">byte</a> sequence, including one of 0 bytes, is said to be in the <dfn id="dfn-openState"><code>OPENED</code></dfn> <a href="#readabilityState">readability state</a>. A <a href="#dfn-Blob"><code>Blob</code></a> is said to be <dfn id="neutered">neutered</dfn> if its <a href="#dfn-close"><code>close</code></a> method has been called, in which case it no longer refers to a <a href="#byte">byte</a> sequence, and must return 0 for its <a href="#dfn-size"><code>size</code></a> attribute. A <a href="#dfn-Blob"><code>Blob</code></a> that is <a href="#neutered">neutered</a> is said to be in the <dfn id="dfn-closedState"><code>CLOSED</code></dfn> <a href="#readabilityState">readability state</a>.</p>
+    <p>A <a href="#dfn-Blob"><code>Blob</code></a> must have a <dfn id="readabilityState">readability state</dfn>, which is one of <a href="#dfn-openState"><code>OPENED</code></a> or <a href="#dfn-closedState"><code>CLOSED</code></a>. A <a href="#dfn-Blob"><code>Blob</code></a> that refers to a <a href="#byte">byte</a> sequence, including one of 0 bytes, is said to be in the <dfn id="dfn-openState"><code>OPENED</code></dfn> <a href="#readabilityState">readability state</a>. A <a href="#dfn-Blob"><code>Blob</code></a> is said to be <dfn id="closed">closed</dfn> if its <a href="#dfn-close"><code>close</code></a> method has been called. A <a href="#dfn-Blob"><code>Blob</code></a> that is <a href="#closed">closed</a> is said to be in the <dfn id="dfn-closedState"><code>CLOSED</code></dfn> <a href="#readabilityState">readability state</a>.</p>
     <p>Each <a href="#dfn-Blob"><code>Blob</code></a> must have an internal <dfn id="snapshot-state">snapshot state</dfn>, which must be initially set to the state of the underlying storage, if any such underlying storage exists, and must be preserved through <a href="#structured-clone">structured clone</a>.  Further normative definition of <a href="#snapshot-state">snapshot state</a> can be found for <a href="#file">files</a>. </p>
     <div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
     <dfn id="dfn-Blob">[Exposed=Window,Worker][Constructor, 
@@ -429,6 +429,7 @@ function errorHandler(evt) {
       
       readonly attribute unsigned long long <a href="#dfn-size" title="size" class="dfnref">size</a>;
       readonly attribute DOMString <a href="#dfn-type" class="dfnref">type</a>;
+      readonly attribute boolean <a href="#dfn-isClosed" class="dfnref">isClosed</a>;
       
       <span class="comment">//slice Blob into byte-ranged chunks</span>
       
@@ -449,7 +450,7 @@ function errorHandler(evt) {
 		<h3>5.1. Constructors</h3>
 		<p>The <code>Blob()</code> constructor can be invoked with zero or more parameters.  When the <code>Blob()</code> constructor is invoked, user agents must run the following <dfn id="blob-constructor-steps">Blob constructor steps</dfn>:</p>
     <ol>
-      <li><p>If invoked with zero parameters, return a new <code>Blob</code> object with its <a href="#readabilityState">readability state</a> set to <a href="#dfn-openedState"><code>OPENED</code></a>, consisting of 0 bytes, with <a href="#dfn-size"><code>size</code></a> set to 0, and with <a href="#dfn-type"><code>type</code></a> set to the empty string.</p></li>
+      <li><p>If invoked with zero parameters, return a new <code>Blob</code> object with its <a href="#readabilityState">readability state</a> set to <a href="#dfn-openedState"><code>OPENED</code></a>, the <a href="#dfn-isClosed"><code>isClosed</code></a> attribute set to <code>false</code>, consisting of 0 bytes, with <a href="#dfn-size"><code>size</code></a> set to 0, and with <a href="#dfn-type"><code>type</code></a> set to the empty string.</p></li>
       <li><p>Otherwise, the constructor is invoked with a <a href="#dfn-blobParts"><code>blobParts</code></a> sequence.  Let <var>a</var> be that sequence.</p></li>
      <li><p>Let <var>bytes</var> be an empty sequence of bytes.</p></li>
       <li><p>Let <var>length</var> be <var>a</var>'s length.  For 0 ≤ <var>i</var> &lt; <var>length</var>, repeat the following steps:</p>
@@ -479,7 +480,7 @@ function errorHandler(evt) {
 
   </li>
 
-<li><p>Return a <code>Blob</code> object with its <a href="#readabilityState">readability state</a> set to <a href="dfn-openState"><code>OPENED</code></a>, referring to <var>bytes</var> as its associated <a href="#byte">byte</a> sequence, with its <a href="#dfn-size"><code>size</code></a> set to the length of <var>bytes</var>, and its <a href="#dfn-type"><code>type</code></a> set to the value of <var>t</var> from the substeps above.  </p>
+<li><p>Return a <code>Blob</code> object with its <a href="#readabilityState">readability state</a> set to <a href="dfn-openState"><code>OPENED</code></a>, the <a href="#dfn-isClosed"><code>isClosed</code></a> attribute set to <code>false</code>, referring to <var>bytes</var> as its associated <a href="#byte">byte</a> sequence, with its <a href="#dfn-size"><code>size</code></a> set to the length of <var>bytes</var>, and its <a href="#dfn-type"><code>type</code></a> set to the value of <var>t</var> from the substeps above.  </p>
 <div class="note"><div class="noteHeader">Note</div><p>The type t of a <code>Blob</code> is considered a <em>parsable MIME type</em> if the ASCII-encoded string representing the Blob object's type, when converted to a byte sequence, does not return undefined for the <em>parse MIME type algorithm</em> [<a href="#MIMESNIFF">MIMESNIFF</a>].</p> </div>
 </li>
 </ol>
@@ -542,6 +543,8 @@ var d = new Blob([buffer, b, c, bytes]);
     <dt id="dfn-type"><code>type</code></dt>
     <dd><p>The ASCII-encoded string in lower case representing the media type of the <code>Blob</code>. On getting, user agents must return the type of a <code>Blob</code> as an ASCII-encoded string in lower case, such that when it is converted to a <a href="#byte">byte</a> sequence, it is a <em>parsable MIME type</em> [<a href="#MIMESNIFF">MIMESNIFF</a>], or the empty string -- 0 bytes -- if the type cannot be determined. The <a href="#dfn-type"><code>type</code></a> attribute can be set by the web application itself through constructor invocation and through the <a href="#dfn-slice"><code>slice</code></a> call; in these cases, further normative conditions for this attribute are in the <a href="#blob-constructor-steps">Blob constructor steps</a>, the <a href="#file-constructor-steps">File Constructor steps</a>, and the <a href="#slice-method-algo">slice method algorithm</a> respectively. User agents can also determine the <a href="#dfn-type"><code>type</code></a> of a <a href="#dfn-Blob"><code>Blob</code></a>, especially if the <a href="#byte">byte</a> sequence is from an on-disk file; in this case, further normative conditions are in the <a href="#file-type-guidelines">file type guidelines.</a>.  
     </p></dd>
+    <dt id="dfn-isClosed"><code>isClosed</code></dt>
+    <dd><p>The boolean value that indicates whether the <code>Blob</code> is in the <a href="#dfn-closedState"><code>CLOSED</code></a> <a href="#readabilityState">readability state.</a> On getting, user agents must return <code>false</code> if the <code>Blob</code> is in the <a href="#dfn-openedState"><code>OPENED</code></a> <a href="#readabilityState">readability state</a>, and <code>true</code> if the <code>Blob</code> is in the <a href="#dfn-closedState"><code>CLOSED</code></a> <a href="#readabilityState">readability state</a> as a result of the <a href="#dfn-close"><code>close</code></a> method being called.</p></dd>
     </dl>
     <div class="note"><div class="noteHeader">Note</div>
 <p>Use of the <code>type</code> attribute informs the <a href="#encoding-determination">encoding determination</a> and <a href="#processing-media-types">parsing the Content-Type header</a> when dereferencing <a href="#ABNFForBlob">blob: URLs</a>.</p>
@@ -556,8 +559,8 @@ var d = new Blob([buffer, b, c, bytes]);
 	parameter upto but not including the optional <a href="#dfn-end"><code>end</code></a> parameter, and with a
 	<a href="#dfn-type" class="dfnref"><code>type</code></a> attribute that is the value of the optional <a href="#dfn-contentTypeBlob"><code>contentType</code></a> parameter.  It must act as follows :</p>
     <ol>
-    <li><p>Let <var>O</var> be the <a href="#dfn-Blob"><code>Blob</code></a> <a href="#contextObject">context object</a> on which the <code>slice</code> method is being called. If <var>O</var> has a <a href="#readabilityState">readability state</a> of <a href="#dfn-closedState"><code>CLOSED</code></a>, throw an <code>InvalidStateError</code> exception [<a href="#DOM4">DOM4</a>] and <a href="#terminate-an-algorith">terminate this algorithm</a>.</p></li>
-    <li><p>Otherwise, the optional <dfn id="dfn-start"><code>start</code></dfn> parameter is a value for the start point of a <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call, and must be treated as a byte-order position, with the zeroth position representing the first byte.
+    <li><p>Let <var>O</var> be the <a href="#dfn-Blob"><code>Blob</code></a> <a href="#contextObject">context object</a> on which the <code>slice</code> method is being called. </p></li>
+    <li><p>The optional <dfn id="dfn-start"><code>start</code></dfn> parameter is a value for the start point of a <a href="#dfn-slice" class="dfnref"><code>slice</code></a> call, and must be treated as a byte-order position, with the zeroth position representing the first byte.
     User agents must process <a href="#dfn-slice"><code>slice</code></a> with
     <code>start</code> <em>normalized</em> according to the following:</p>
     <ol type="a">
@@ -590,7 +593,10 @@ var d = new Blob([buffer, b, c, bytes]);
     <li><p>Let <var>span</var> be <em>max((relativeEnd - relativeStart), 0)</em>.</p></li>
     <li><p>Return a new <a href="#dfn-Blob"><code>Blob</code></a> object <var>S</var> with the following characteristics:</p>
     <ol type="a">
-    <li><p><var>S</var> has a <a href="#readabilityState">readability state</a> of <a href="#dfn-openedState"><code>OPENED</code></a>.</p></li>  
+    <li><p><var>S</var> has a <a href="#readabilityState">readability state</a> equal to that of <var>O</var>'s <a href="#readabilityState">readability state</a>; <var>S</var>.<a href="#dfn-isClosed"><code>isClosed</code></a> is set to the same boolean value as O.<a href="#dfn-isClosed"><code>isClosed</code></a>.</p>
+     <div class="note"<div class="noteHeader">Note</div><p>The <a href="#readabilityState">readability state</a> of the <a href="#contextObject">context object</a> is retained by the <a href="#dfn-Blob"><code>Blob</code></a> object returned by the <a href="#dfn-slice"><code>slice</code></a> call; this has implications on whether the returned 
+     <a href="#dfn-Blob"><code>Blob</code></a> is actually usable for <a href="#readOperation">read operation</a>s or as a <a href="#DefinitionOfScheme">Blob URL</a>.</p></div> 
+    </li>  
     <li><p><var>S</var> refers to <var>span</var> consecutive <a href="#byte">byte</a>s from <var>O</var>, beginning with the <a href="#byte">byte</a> at byte-order position <var>relativeStart</var>.</p></li>
     <li><p><var>S</var>.<a href="#dfn-size"><code>size</code></a> = <var>span</var>.</p></li>
     <li><p><var>S</var>.<a href="#dfn-type"><code>type</code></a> = <var>relativeContentType</var>.</p>
@@ -634,17 +640,13 @@ var d = new Blob([buffer, b, c, bytes]);
 </div>
 <div id="close-method" class="section">
 <h4>5.3.2. The close method</h4>
-<p>The <dfn id="dfn-close"><code>close</code></dfn> method is said to <a href="#neutered">neuter</a> a <a href="#dfn-Blob"><code>Blob</code></a>, and must act as follows on the <a href="#dfn-Blob"><code>Blob</code></a> on which the method has been called:</p>
+<p>The <dfn id="dfn-close"><code>close</code></dfn> method is said to <a href="#closed">close</a> a <a href="#dfn-Blob"><code>Blob</code></a>, and must act as follows on the <a href="#dfn-Blob"><code>Blob</code></a> on which the method has been called:</p>
 <ol>
-  <li><p>If the <a href="#readabilityState">readability state</a> of the <a href="#contextObject">context object</a> is <a href="#dfn-closedState"><code>CLOSED</code></a>, throw an <code>InvalidStateError</code> and terminate this algorithm.</p></li>
-  <li><p>Otherwise, set the context object to no longer refer to a <a href="#byte">byte</a> sequence. </p></li>
-  <li><p>Set the <a href="#readabilityState">readability state</a> of the <a href="#contextObject">context object</a> to <a href="#dfn-closedState"><code>CLOSED</code></a>.</p></li> 
-  <li><p>Set the <a href="#dfn-size"><code>size</code></a> of the <a href="#contextObject">context object</a> to 0.</p></li>
+  <li><p>If the <a href="#readabilityState">readability state</a> of the <a href="#contextObject">context object</a> is <a href="#dfn-closedState"><code>CLOSED</code></a>, do nothing, since the Blob is already <a href="#closed">closed</a>, and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p></li>
+  <li><p>Otherwise, set the <a href="#readabilityState">readability state</a> of the <a href="#contextObject">context object</a> to <a href="#dfn-closedState"><code>CLOSED</code></a> and set the <a href="#contextObject">context object</a>'s <a href="#dfn-isClosed"><code>isClosed</code></a> attribute to <code>true</code>.</p></li> 
   <li><p>If the <a href="#contextObject">context object</a> has an entry in the <a href="#BlobURLStore">Blob URL Store</a>, <a href="#removeTheEntry">remove the entry</a> for this <a href="#dfn-Blob"><code>Blob</code></a>.</p></li>
 </ol>
-<div class="note"><div class="noteHeader">Note</div>
-         <p>Neutering a <a href="#dfn-Blob"><code>Blob</code></a> decouples it from any binary data it may have referred to. User agents may engage in any affiliated garbage collection.</p>
-       </div>
+
 </div>
   </div>
   
@@ -722,7 +724,7 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
     </li>
     <li>Return a new <code>File</code> object <var>F</var> such that:
       <ol>
-        <li><var>F</var> has a <a href="#readabilityState">readability state</a> of <a href="#dfn-openState"><code>OPENED</code></a>.</li> 
+        <li><var>F</var> has a <a href="#readabilityState">readability state</a> of <a href="#dfn-openState"><code>OPENED</code></a>; <var>F</var>'s <a href="#dfn-isClosed"><code>isClosed</code></a> attribute must be set to <code>false</code>.</li> 
         <li><var>F</var> refers to the <var>bytes</var> <a href="#byte">byte</a> sequence.</li> 
         <li><code>F.size</code> is set to the number of total bytes in <var>bytes</var>.</li>
         <li><code>F.name</code> is set to <var>n</var>.</li>
@@ -863,30 +865,30 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
     <div id="readOperationSection" class="section">
       <h3>8.1 The Read Operation</h3>
 	  
-    <p>The algorithm below defines a <a href="#readOperation">read operation</a>, which takes a <a href="#dfn-Blob"><code>Blob</code></a> and a <a href="#synchonousFlag">synchronous flag</a> as <var>input</var>, and reads <a href="#byte">byte</a>s into system memory as the <var>result</var> of the <a href="#readOperation">read operation</a>, or else returns failure. The <var>result</var> of the read operation consists of <a href="#byte">byte</a>s in system memory. Methods in this specification invoke the <a href="#readOperation">read operation</a> with the <a href="#synchronousFlag">synchronous flag</a> either set or unset.</p>
+    <p>The algorithm below defines a <a href="#readOperation">read operation</a>, which takes a <a href="#dfn-Blob"><code>Blob</code></a> and a <a href="#synchonousFlag">synchronous flag</a> as <var>input</var>, and reads <a href="#byte">byte</a>s into system memory as the <var>result</var> of the <a href="#readOperation">read operation</a>, or else returns failure along with a <a href="#failureReason">failure reason</a>. The <var>result</var> of the read operation consists of <a href="#byte">byte</a>s in system memory. Methods in this specification invoke the <a href="#readOperation">read operation</a> with the <a href="#synchronousFlag">synchronous flag</a> either set or unset.</p>
     <p>The <dfn id="synchronousFlag">synchronous flag</dfn> determines if a read operation is synchronous or asynchronous, and is <em>unset</em> by default. Methods may set it. If it is set, the <a href="#readOperation">read operation</a> takes place synchronously. Otherwise, it takes place asynchronously, and <a href="#queue-a-task">queues tasks</a> annotated <a href="#process-read">process read</a>, <a href="#process-read-data">process read data</a>, and <a href="#process-read-EOF">process read EOF</a> for the <var>result</var> on the <a href="#fileReadingTaskSource">file reading task source</a>.  </p>
-    <p>To perform a <dfn id="readOperation">read operation</dfn> on an <var>input</var> consisting of a <a href="#dfn-Blob"><code>Blob</code></a> and the <a href="#synchronousFlag">synchronous flag</a>, run the following steps:</p>
+    <p>To perform a <dfn id="readOperation">read operation</dfn> on an <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a> and the <a href="#synchronousFlag">synchronous flag</a>, run the following steps:</p>
     <ol>
-      <li><p>Set <var>result</var> to <code>null</code> initially.</p></li>
-      <li><p>If the <a href="#readabilityState">readability state</a> of the <code>Blob</code> is <a href="#dfn-closedState"><code>CLOSED</code></a>, return failure and terminate this algorithm.</p>
 
-      </li>
       <li><p>If the <a href="#synchronousFlag">synchronous flag</a> is set, run the following substeps:</p>
-      <ol type="a">
-        <li>Start reading bytes from the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a> into <var>result</var>. If <a href="#file-error-read">an error occurs reading the <code>Blob</code></a>, return failure and terminate this algorithm. 
+      <div class="note"><div class="noteHeader">Note</div><p>The algorithm assumes that invoking methods have checked for <a href="#readabilityState">readability state</a>. <a href="#dfn-Blob"><code>Blob</code></a>s that are in the <a href="#dfn-closedState">CLOSED</a> state must not have a <a href="#readOperation">read operation</a> called on it.</p></div>
+      <ol>
+       
+        <li>Start reading bytes from the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a> into <var>result</var>. If <a href="#file-error-read">an error occurs</a> reading the <code>Blob</code>, return failure along with a <a href="#failureReason">failure reason</a>, and terminate this algorithm. 
           <div class="note"><div class="noteHeader">Note</div>
-         <p>Along with returning failure, this algorithm must return the <a href="#file-error-read">type of error</a> that occurred for <a href="#throw-an-exception">throwing an exception</a> by synchronous methods that invoke this algorithm with the <a href="#synchronousFlag">synchronous flag</a> set. </p>
+         <p>Along with returning failure, the synchronous part of this algorithm must return the <a href="#failureReason">failure reason</a> that occurred for <a href="#throw-an-exception">throwing an exception</a> by synchronous methods that invoke this algorithm with the <a href="#synchronousFlag">synchronous flag</a> set. </p>
     </div>
         </li>
-        <li>When all the <a href="#byte">byte</a>s from the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a> have been read into system memory, return them as <var>result</var> and terminate this algorithm.</li>
+        <li>When all the <a href="#byte">byte</a>s from the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a> have been read into system memory, return them as <var>result</var> and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</li>
       </ol>
 
       </li>
       <li><p>Otherwise, process the rest of this algorithm asynchronously, and run the following substeps.</p>
+        <div class="note"><div class="noteHeader">Note</div><p>The algorithm assumes that invoking methods have checked for <a href="#readabilityState">readability state</a>. <a href="#dfn-Blob"><code>Blob</code></a>s that are in the <a href="#dfn-closedState">CLOSED</a> state must not have a <a href="#readOperation">read operation</a> called on it.</p></div>
       <ol>
-      <li>If <a href="#file-error-read">an error occurs reading</a> the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a>, return failure and terminate this algorithm.
+      <li>If <a href="#file-error-read">an error occurs reading</a> the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a>, return failure and a <a href="#failureReason">failure reason</a>, and terminate this algorithm.
  <div class="note"><div class="noteHeader">Note</div>
-         <p>Along with returning failure, this algorithm must return the <a href="#file-error-read">type of error</a> that occurred to asynchronous methods that invoke this algorithm with the <a href="#synchronousFlag">synchronous flag</a> unset, to enable asynchronous error reporting. </p>
+         <p>Along with returning failure, this algorithm must return the <a href="#failureReason">failure reason</a> that occurred to asynchronous methods that invoke this algorithm with the <a href="#synchronousFlag">synchronous flag</a> unset, to enable asynchronous error reporting. </p>
     </div>
       </li>  
       <li><p>Otherwise, <a href="#queue-a-task">queue a task</a> to <dfn id="process-read">process read</dfn>, which starts reading bytes from the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a> into <var>result</var> .   </p></li>
@@ -1064,21 +1066,20 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 	  </p>
 	<p><strong>Note:</strong> The <a href="#dfn-readAsDataURL"><code>readAsDataURL()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
 	</li> 
-  <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> has been <a href="#dfn-neutered">neutered</a> through the <a href="#dfn-close"><code>close</code></a> method, throw an <code>InvalidStateError</code> exception [<a href="#DOM4">DOM4</a>] and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p>
-  <p><strong>Note:</strong> The <a href="#dfn-readAsDataURL"><code>readAsDataURL()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
+  <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> is in the <a href="#dfn-closedState">CLOSED</a> <a href="#readabilityState">readability state</a>, set the <a href="#dfn-error"><code>error</code></a> attribute of the <a href="#contextObject">context object</a> to return an <code>InvalidStateError</code> <a href="#dfn-domerror">DOMError</a> and <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-error-event"><code>error</code></a> at the <a href="#contextObject">context object</a>. <a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p>
   </li> 
-	  <li><p>Otherwise initiate a <a href="#readOperation">read operation</a> using the <a href="#dfn-fileBlob"><code>blob</code></a> argument and with the <a href="#synchronousFlag">synchronous flag</a> <em>unset</em>.  If the <a href="#readOperation">read operation</a> returns failure, set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to null if it is not already set to null. Proceed to the <a href="#dfn-error-steps">error steps</a>. 
+	  <li><p>Otherwise initiate a <a href="#readOperation">read operation</a> using the <a href="#dfn-fileBlob"><code>blob</code></a> argument as <var>input</var> and with the <a href="#synchronousFlag">synchronous flag</a> <em>unset</em>.  If the <a href="#readOperation">read operation</a> returns failure, set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to null if it is not already set to null. Proceed to the <a href="#dfn-error-steps">error steps</a>. 
     </p>
-    <div class="note"><div class="noteHeader">Note</div><p>The <a href="#readOperation">read operation</a> also returns the cause of failure for use with the <a href="#dfn-error-steps">error steps</a>.</p></div>
+    <div class="note"><div class="noteHeader">Note</div><p>The <a href="#readOperation">read operation</a> also returns the <a href="#failureReason">failure reason</a> for use with the <a href="#dfn-error-steps">error steps</a>.</p></div>
 	  </li>
 	  <li><p>If no error has occurred, set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a> and handle <a href="#queue-a-task">tasks queued</a> on the <a href="#fileReadingTaskSource">file reading task source</a> per below.</p></li>
-	  <li><p>To <a href="#process-read">process read</a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a> at the <a href="#dfn-filereader"><code>FileReader</code></a>.</p></li>
-	<li><p>To <a href="#process-read-data">process read data</a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-progress-event"><code>progress</code></a> at the <a href="#dfn-filereader"><code>FileReader</code></a>. </p></li>
+	  <li><p>To <a href="#process-read">process read</a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a> at the <a href="#contextObject">context object</a>.</p></li>
+	<li><p>To <a href="#process-read-data">process read data</a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-progress-event"><code>progress</code></a> at the <a href="#contextObject">context object</a>. </p></li>
 	  <li><p>To <a href="#process-read-EOF">process read EOF</a> run these substeps:</p> 
 
       <ol><li><p>Set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code>.</a></p></li>
       <li><p>Set the <a href="#dfn-result"><code>result</code></a> attribute to the <var>result</var> of the <a href="#readOperation">read operation</a> as a
-	  DataURL [<a href="#DataURL">DataURL</a>]; on getting, the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute returns the (complete) data of <a href="#dfn-fileBlob"><code>blob</code></a> as a
+	  DataURL [<a href="#DataURL">DataURL</a>]; on getting, the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute returns the <a href="#dfn-fileBlob"><code>blob</code></a> as a
 	  Data URL [<a href="#DataURL">DataURL</a>].</p>
     <ul>
     <li><p>Use the <a href="#dfn-fileBlob"><code>blob</code></a>'s <a href="#dfn-type"><code>type</code></a>
@@ -1091,8 +1092,8 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
     </li>
     </ul>
   </li>
-    <li><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-load-event"><code>load</code></a> at the <a href="#dfn-filereader"><code>FileReader</code></a>.</li>
-    <li>Unless <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a> at the <a href="#dfn-filereader"><code>FileReader</code></a>.  If <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> do NOT fire <a href="#dfn-loadend-event"><code>loadend</code></a> at the <a href="#dfn-filereader"><code>FileReader</code></a>. </li>
+    <li><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-load-event"><code>load</code></a> at the <a href="#contextObject">context object</a>.</li>
+    <li>Unless <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a> at the <a href="#contextObject">context object</a>.  If <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> do NOT fire <a href="#dfn-loadend-event"><code>loadend</code></a> at the <a href="#contextObject">context object</a>. </li>
   </ol>
 </li>
 	  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p></li>
@@ -1111,23 +1112,22 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 
 	<p><strong>Note:</strong> The <a href="#dfn-readAsText"><code>readAsText()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
 	</li>
-  <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> has been neutered through the <a href="#dfn-close"><code>close</code></a> method, throw an <code>InvalidStateError</code> exception [<a href="#DOM4">DOM4</a>] and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p>
-  <p><strong>Note:</strong> The <a href="#dfn-readAsText"><code>readAsText()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
+  <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> is in the <a href="#dfn-closedState">CLOSED</a> <a href="#readabilityState">readability state</a>, set the <a href="#dfn-error"><code>error</code></a> attribute of the <a href="#contextObject">context object</a> to return an <code>InvalidStateError</code> <a href="#dfn-domerror">DOMError</a> and <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-error-event"><code>error</code></a> at the <a href="#contextObject">context object</a>. <a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p>
   </li> 
-	  <li><p>Otherwise, initiate a <a href="#readOperation">read operation</a> using the <a href="#dfn-fileBlob"><code>blob</code></a> argument and with the <a href="#synchronousFlag">synchronous flag</a> <em>unset</em>. If the <a href="#readOperation">read operation</a> returns failure, set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to null if it is not already set to null. Proceed to the <a href="#dfn-error-steps">error steps</a>. 
+	  <li><p>Otherwise, initiate a <a href="#readOperation">read operation</a> using the <a href="#dfn-fileBlob"><code>blob</code></a> argument as <var>input</var> and with the <a href="#synchronousFlag">synchronous flag</a> <em>unset</em>. If the <a href="#readOperation">read operation</a> returns failure, set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to null if it is not already set to null. Proceed to the <a href="#dfn-error-steps">error steps</a>. 
     </p>
-    <div class="note"><div class="noteHeader">Note</div><p>The <a href="#readOperation">read operation</a> also returns the cause of failure for use with the <a href="#dfn-error-steps">error steps</a>.</p></div> 
+    <div class="note"><div class="noteHeader">Note</div><p>The <a href="#readOperation">read operation</a> also returns the <a href="#failureReason">failure reason</a> for use with the <a href="#dfn-error-steps">error steps</a>.</p></div> 
 	  </li>
 	  <li><p>If no error has occurred, set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a> and handle <a href="#queue-a-task">tasks queued</a> on the <a href="#fileReadingTaskSource">file reading task source</a> per below.</p></li>
-    <li><p>To <a href="#process-read">process read</a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a> at the <a href="#dfn-filereader"><code>FileReader</code></a>.</p></li>
-  <li><p>To <a href="#process-read-data">process read data</a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-progress-event"><code>progress</code></a> at the <a href="#dfn-filereader"><code>FileReader</code></a>. </p></li>
+    <li><p>To <a href="#process-read">process read</a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a> at the <a href="#contextObject">context object</a>.</p></li>
+  <li><p>To <a href="#process-read-data">process read data</a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-progress-event"><code>progress</code></a> at the <a href="#contextObject">context object</a>. </p></li>
 	
 	  <li><p>To <a href="#process-read-EOF">process read EOF</a> run these substeps:</p> 
 
       <ol><li><p>Set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
           <li><p>Set the <a href="#dfn-result"><code>result</code></a> attribute to the <var>result</var> of the <a href="#readOperation">read operation</a>, represented as a string in a format determined by the <a href="#encoding-determination">encoding determination</a>.  </p></li>
-         <li><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-load-event"><code>load</code></a> at the <a href="#dfn-filereader"><code>FileReader</code></a>.</li>
-    <li>Unless <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a> at the <a href="#dfn-filereader"><code>FileReader</code></a>.  If <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> do NOT fire <a href="#dfn-loadend-event"><code>loadend</code></a> at the <a href="#dfn-filereader"><code>FileReader</code></a>. </li>
+         <li><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-load-event"><code>load</code></a> at the <a href="#contextObject">context object</a>.</li>
+    <li>Unless <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a> at the <a href="#contextObject">context object</a>.  If <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> do NOT fire <a href="#dfn-loadend-event"><code>loadend</code></a> at the <a href="#contextObject">context object</a>. </li>
         </ol>
       </li>
 	  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.
@@ -1145,22 +1145,22 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 
 	<p><strong>Note:</strong> The <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
 	</li>
-  <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> has been neutered through the <a href="#dfn-close"><code>close</code></a> method, throw an <code>InvalidStateError</code> exception [<a href="#DOM4">DOM4</a>] and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p>
+  <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> is in the <a href="#dfn-closedState">CLOSED</a> <a href="#readabilityState">readability state</a>, .</p>
   <p><strong>Note:</strong> The <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
   </li> 
-	<li><p>Otherwise, initiate a <a href="#readOperation">read operation</a> using the <a href="#dfn-fileBlob"><code>blob</code></a> argument and with the <a href="#synchronousFlag">synchronous flag</a> <em>unset</em>. If the <a href="#readOperation">read operation</a> returns failure, set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to null if it is not already set to null. Proceed to the <a href="#dfn-error-steps">error steps</a>. 
+	<li><p>Otherwise, initiate a <a href="#readOperation">read operation</a> using the <a href="#dfn-fileBlob"><code>blob</code></a> argument as <var>input</var> and with the <a href="#synchronousFlag">synchronous flag</a> <em>unset</em>. If the <a href="#readOperation">read operation</a> returns failure, set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to null if it is not already set to null. Proceed to the <a href="#dfn-error-steps">error steps</a>.  
     </p>
-    <div class="note"><div class="noteHeader">Note</div><p>The <a href="#readOperation">read operation</a> also returns the cause of failure for use with the <a href="#dfn-error-steps">error steps</a>.</p></div> 
+    <div class="note"><div class="noteHeader">Note</div><p>The <a href="#readOperation">read operation</a> also returns the <a href="#failureReason">failure reason</a> for use with the <a href="#dfn-error-steps">error steps</a>.</p></div> 
     </li>
     <li><p>If no error has occurred, set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a> and handle <a href="#queue-a-task">tasks queued</a> on the <a href="#fileReadingTaskSource">file reading task source</a> per below.</p></li>
-    <li><p>To <a href="#process-read">process read</a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a> at the <a href="#dfn-filereader"><code>FileReader</code></a>.</p></li>
-  <li><p>To <a href="#process-read-data">process read data</a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-progress-event"><code>progress</code></a> at the <a href="#dfn-filereader"><code>FileReader</code></a>. </p></li>
+    <li><p>To <a href="#process-read">process read</a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a> at the <a href="#contextObject">context object</a>.</p></li>
+  <li><p>To <a href="#process-read-data">process read data</a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-progress-event"><code>progress</code></a> at the <a href="#contextObject">context object</a>. </p></li>
   
 	   <li><p>To <a href="#process-read-EOF">process read EOF</a> run these substeps:</p> 
       <ol><li><p>Set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
           <li><p>Set the <a href="#dfn-result"><code>result</code></a> attribute to the <var>result</var> of the <a href="#readOperation">read operation</a> as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] object. </p> </li>
-          <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-load-event"><code>load</code></a> at the <a href="#dfn-filereader"><code>FileReader</code></a>.</p></li>
-          <li><p>Unless <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a> at the <a href="#dfn-filereader"><code>FileReader</code></a>.  If <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> do NOT fire <a href="#dfn-loadend-event"><code>loadend</code></a> at the <a href="#dfn-filereader"><code>FileReader</code></a>. </p></li>
+          <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-load-event"><code>load</code></a> at the <a href="#contextObject">context object</a>.</p></li>
+          <li><p>Unless <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a> at the <a href="#contextObject">context object</a>.  If <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> do NOT fire <a href="#dfn-loadend-event"><code>loadend</code></a> at the <a href="#contextObject">context object</a>. </p></li>
         </ol>
       </li>
 	  <li><p><a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p></li>
@@ -1168,14 +1168,14 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 	</div>
   <div id="dfn-error-steps" class="section">
     <h5>8.3.4.5. Error Steps</h5>
+    <p>These <em>error steps</em> apply when a <a href="#readOperation">read operation</a> invoked by a <a href="#dfn-filereader"><code>FileReader</code></a> object's <a href="#read-methods">read method</a> fails.</p>
         <ol>   
-      <li><p><em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em>; on getting, the
+      <li><p><em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em> on the <a href="#contextObject">context object</a>; on getting, the
       <a href="#dfn-error"><code>error</code></a> attribute must be a
-      a <a href="#dfn-domerror"><code>DOMError</code></a> object that indicates the kind of
-      <a href="#file-error-read">file error that has occurred</a>.  <a href="#fire-a-progress-event">Fire a progress event</a> called
-      <a href="#dfn-error-event"><code>error</code></a>.  </p></li>
+      a <a href="#dfn-domerror"><code>DOMError</code></a> object that corresponds to the <a href="#failureReason">failure reason</a> supplied by the <a href="#readOperation">read operation</a> when it failed.  <a href="#fire-a-progress-event">Fire a progress event</a> called
+      <a href="#dfn-error-event"><code>error</code></a> at the <a href="#contextObject">context object</a>.  </p></li>
       <li><p>Unless <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a>, <a href="#fire-a-progress-event">fire a progress event</a> called
-      <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>.  If <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> do NOT fire <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a>.</p></li>
+      <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a> at the <a href="#contextObject">context object</a>.  If <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> do NOT fire <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a> at the <a href="#contextObject">context object</a>.</p></li>
       <li><p><a href="#terminate-an-algorithm">Terminate the algorithm</a> for any <a href="#read-methods">read method</a>.</p>
 
     <p><strong>Note:</strong> The <a href="#read-methods">read method</a> returns due to the algorithm being terminated.</p> 
@@ -1386,7 +1386,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
     </p>
 
   <p><strong>Note:</strong> The method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p></li>
-  <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> has been neutered through the <a href="#dfn-close"><code>close</code></a> method, throw an <code>InvalidStateError</code> exception [<a href="#DOM4">DOM4</a>] and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p>
+  <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> has been closed through the <a href="#dfn-close"><code>close</code></a> method, throw an <code>InvalidStateError</code> exception [<a href="#DOM4">DOM4</a>] and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p>
   <p><strong>Note:</strong> The method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
   </li> 
 	<li><p>Otherwise, initiate a <a href="#readOperation">read operation</a> using the <a href="#dfn-fileBlob"><code>blob</code></a> argument, and with the <a href="#synchronousFlag">synchronous flag</a> <em>set</em>. If the read operation returns failure, throw the <a href="#dfn-error-codes">appropriate exception</a>. <a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p></li>
@@ -1401,7 +1401,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 	<li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> throw an <code>InvalidStateError</code> exception [<a href="#DOM4">DOM4</a>] and terminate these steps.
     </p>
   <p><strong>Note:</strong> The method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p></li>
-  <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> has been neutered through the <a href="#dfn-close"><code>close</code></a> method, throw an <code>InvalidStateError</code> exception [<a href="#DOM4">DOM4</a>] and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p>
+  <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> has been closed through the <a href="#dfn-close"><code>close</code></a> method, throw an <code>InvalidStateError</code> exception [<a href="#DOM4">DOM4</a>] and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p>
   <p><strong>Note:</strong> The method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
   </li> 
   <li><p>Otherwise, initiate a <a href="#readOperation">read operation</a> using the <a href="#dfn-fileBlob"><code>blob</code></a> argument, and with the <a href="#synchronousFlag">synchronous flag</a> <em>set</em>. If the <a href="#readOperation">read operation</a> returns failure, throw the <a href="#dfn-error-codes">appropriate exception</a>. <a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p></li>
@@ -1426,7 +1426,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 	<li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> throw an <code>InvalidStateError</code> exception [<a href="#DOM4">DOM4</a>] and terminate these steps.
     </p>
   <p><strong>Note:</strong> The method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p></li>
-  <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> has been neutered through the <a href="#dfn-close"><code>close</code></a> method, throw an <code>InvalidStateError</code> exception [<a href="#DOM4">DOM4</a>] and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p>
+  <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> has been closed through the <a href="#dfn-close"><code>close</code></a> method, throw an <code>InvalidStateError</code> exception [<a href="#DOM4">DOM4</a>] and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p>
   <p><strong>Note:</strong> The method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
   </li> 
   <li><p>Otherwise, initiate a <a href="#readOperation">read operation</a> using the <a href="#dfn-fileBlob"><code>blob</code></a> argument, and with the synchronous flag <em>set</em>. If the <a href="#readOperation">read operation</a> returns failure, throw the <a href="#dfn-error-codes">appropriate exception</a>. <a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p></li>
@@ -1453,28 +1453,30 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 	    </ul>
 	<div id="dfn-error-codes" class="section">
 	<h3>9.1. Throwing an Exception or Returning an Error</h3>
-	<p>This section is normative.  Error conditions can arise when reading a file.</p>
-	<p>Synchronous read methods <a href="#throw-an-exception">throw</a> exceptions of the type in the table below if there has been an error with reading.</p>
+	<p>This section is normative.  Error conditions can arise when reading a <a href="#dfn-file"><code>File</code></a> or a <a href="#dfn-Blob"><code>Blob</code></a>.</p>
 
-	<p>The <dfn id="dfn-error"><code>error</code></dfn> attribute of the <a href="#dfn-filereader"><code>FileReader</code></a> object must return a <dfn id="dfn-domerror">DOMError</dfn> object [<a href="#DOM4">DOM4</a>] of the most appropriate type from the table below if there has been an error, and otherwise returns null.</p>
+  <p>The <a href="#readOperation">read operation</a> can terminate due to error conditions when reading a <code>File</code> or a <code>Blob</code>; the particular error condition that causes a read operation to return failure is called a <dfn id="failureReason">failure reason</dfn>.</p>
+	<p>Synchronous read methods <a href="#throw-an-exception">throw</a> exceptions of the type in the table below if there has been an error owing to a particular <a href="#failureReason">failure reason</a>.</p>
+
+	<p>Asynchronous read methods use the <dfn id="dfn-error"><code>error</code></dfn> attribute of the <a href="#dfn-filereader"><code>FileReader</code></a> object, which must return a <dfn id="dfn-domerror">DOMError</dfn> object [<a href="#DOM4">DOM4</a>] of the most appropriate type from the table below if there has been an error owing to a particular <a href="#failureReason">failure reason</a>, or otherwise return null.</p>
 
 	<table><thead><tr><th>Type
-	     </th><th>Description
+	     </th><th>Description and Failure Reason
 	   </th></tr></thead><tbody><tr><td><dfn id="dfn-NotFoundError" title="NotFoundError"><code>NotFoundError</code></dfn>
-	     </td><td>If the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> resource could not be found at the time the read was processed, then for asynchronous read methods the <a href="#dfn-error"><code>error</code></a> attribute must return a "<code>NotFoundError</code>" <a href="#dfn-domerror"><code>DOMError</code></a> and synchronous read methods must <a href="#throw-an-exception">throw</a> a <code>NotFoundError</code> exception.
+	     </td><td>If the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> resource could not be found at the time the read was processed, this is the <dfn id="NotFoundFR">NotFound</dfn> <a href="#failureReason">failure reason</a>. For asynchronous read methods the <a href="#dfn-error"><code>error</code></a> attribute must return a "<code>NotFoundError</code>" <a href="#dfn-domerror"><code>DOMError</code></a> and synchronous read methods must <a href="#throw-an-exception">throw</a> a <code>NotFoundError</code> exception.
 
 	    </td></tr><tr><td><dfn id="dfn-SecurityError" title="SecurityError"><code>SecurityError</code></dfn>
 	     </td><td>If: <ul>
-	     <li>it is determined that certain files are unsafe for access within a Web application</li>
-	     <li>it is determined that too many read calls are being made on <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> resources </li>
-	     <li>it is determined that the file has changed on disk since the user selected it</li>
+	     <li>it is determined that certain files are unsafe for access within a Web application, this is the <dfn id="UnsafeFileFR">UnsafeFile</dfn> <a href="#failureReason">failure reason.</a></li>
+	     <li>it is determined that too many read calls are being made on <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> resources, this is the <dfn id="TooManyReadsFR">TooManyReads</dfn> <a href="#failureReason">failure reason</a>. </li>
 	     </ul>
-	     <p>then for asynchronous read methods the <a href="#dfn-error"><code>error</code></a> attribute may return a "<code>SecurityError</code>" <a href="#dfn-domerror"><code>DOMError</code></a> and synchronous read methods may <a href="#throw-an-exception">throw</a> a <code>SecurityError</code> exception.</p>
-	     <p>This is a security error to be used in situations not covered by any other exception type.</p>
+	     <p>For asynchronous read methods the <a href="#dfn-error"><code>error</code></a> attribute may return a "<code>SecurityError</code>" <a href="#dfn-domerror"><code>DOMError</code></a> and synchronous read methods may <a href="#throw-an-exception">throw</a> a <code>SecurityError</code> exception.</p>
+	     <p>This is a security error to be used in situations not covered by any other <a href="#failureReason">failure reason</a>.</p>
 
 	    </td></tr><tr><td><dfn id="dfn-NotReadableError" title="NotReadableError"><code>NotReadableError</code></dfn>
-	     </td><td>If the <a href="#snapshot-state">snapshot state</a> of a <a href="#dfn-file"><code>File</code></a> or a <a href="#dfn-Blob"><code>Blob</code></a> does not match the state of the underlying storage, then for asynchronous read methods the  <a href="#dfn-error"><code>error</code></a> attribute must return a "<code>NotReadableError</code>" <a href="#dfn-domerror"><code>DOMError</code></a> and synchronous read methods must <a href="#throw-an-exception">throw</a> a <code>NotReadableError</code> exception. If the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> cannot be read, typically due due to permission problems that occur after a
-	     <a href="#snapshot-state">snapshot state</a> has been established (e.g. concurrent lock on the underlying storage with another application) then for asynchronous read methods the  <a href="#dfn-error"><code>error</code></a> attribute must return a "<code>NotReadableError</code>" <a href="#dfn-domerror"><code>DOMError</code></a> and synchronous read methods must <a href="#throw-an-exception">throw</a> a <code>NotReadableError</code> exception.
+	     </td><td>If: <ul><li>the <a href="#snapshot-state">snapshot state</a> of a <a href="#dfn-file"><code>File</code></a> or a <a href="#dfn-Blob"><code>Blob</code></a> does not match the state of the underlying storage, this is the <dfn id="SnapshotStateFR">SnapshotState</dfn> <a href="#failureReason">failure reason</a>.</li>
+       <li>the <a href="#dfn-file"><code>File</code></a> or <a href="#dfn-Blob"><code>Blob</code></a> cannot be read, typically due due to permission problems that occur after a
+	     <a href="#snapshot-state">snapshot state</a> has been established (e.g. concurrent lock on the underlying storage with another application) then this is the <dfn id="FileLockFR">FileLock</dfn> <a href="#failureReason">failure reason</a>.</li></ul><p> For asynchronous read methods the  <a href="#dfn-error"><code>error</code></a> attribute must return a "<code>NotReadableError</code>" <a href="#dfn-domerror"><code>DOMError</code></a> and synchronous read methods must <a href="#throw-an-exception">throw</a> a <code>NotReadableError</code> exception.</p>
 	    </td></tr></tbody></table>
 	</div> 
 	</div>
@@ -1596,7 +1598,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   <ul>
     <li><p>Any request method other than GET is used to dereference the URL.</p></li>
     <li><p>The <a href="#DefinitionOfScheme">Blob URL</a> does not have an <a href="#identifier">identifier</a> in the <a href="#BlobURLStore">Blob URL Store</a>.  </p></li>
-    <li><p>The Blob has been <a href="#neutered">neutered</a>; this also results in the Blob URL not having an <a href="#identifier">identifier</a> in the <a href="#BlobURLStore">Blob URL Store</a>.</p></li>
+    <li><p>The Blob has been <a href="#closed">closed</a>; this also results in the Blob URL not having an <a href="#identifier">identifier</a> in the <a href="#BlobURLStore">Blob URL Store</a>.</p></li>
     <li><p>A <a href="#readOperation">read operation</a> on the <code>Blob</code> resource with the <a href="#synchronousFlag">synchronous flag</a> unset returns failure. </p></li>
     <li><p>A security error has occurred.  </p>
     </li>
