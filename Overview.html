@@ -642,7 +642,7 @@ var d = new Blob([buffer, b, c, bytes]);
 <h4>5.3.2. The close method</h4>
 <p>The <dfn id="dfn-close"><code>close</code></dfn> method is said to <a href="#closed">close</a> a <a href="#dfn-Blob"><code>Blob</code></a>, and must act as follows on the <a href="#dfn-Blob"><code>Blob</code></a> on which the method has been called:</p>
 <ol>
-  <li><p>If the <a href="#readabilityState">readability state</a> of the <a href="#contextObject">context object</a> is <a href="#dfn-closedState"><code>CLOSED</code></a>, do nothing, since <a href="#contextObject">context object</a> is already <a href="#closed">closed</a>, and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p></li>
+  <li><p>If the <a href="#readabilityState">readability state</a> of the <a href="#contextObject">context object</a> is <a href="#dfn-closedState"><code>CLOSED</code></a>, <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p></li>
   <li><p>Otherwise, set the <a href="#readabilityState">readability state</a> of the <a href="#contextObject">context object</a> to <a href="#dfn-closedState"><code>CLOSED</code></a> and set the <a href="#contextObject">context object</a>'s <a href="#dfn-isClosed"><code>isClosed</code></a> attribute to <code>true</code>.</p></li> 
   <li><p>If the <a href="#contextObject">context object</a> has an entry in the <a href="#BlobURLStore">Blob URL Store</a>, <a href="#removeTheEntry">remove the entry</a> that corresponds to the <a href="#contextObject">context object</a>.</p></li>
 </ol>
