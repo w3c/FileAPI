@@ -1750,7 +1750,7 @@ partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
 </div>
 <div id="examplesOfCreationRevocation" class="section">
 <h4>10.5.2. Examples of Blob URL Creation and Revocation</h4>
-<p><a href="#DefinitionOfScheme">Blob URL</a>s are strings that dereference <code>Blob</code> objects, and can persist for as long as the <code>document</code> from which they were minted using <a href="#dfn-createObjectURL"><code>URL.createObjectURL()</code></a> - see <a href="#lifeTime">Lifetime of Blob URLs</a>.   </p>
+<p><a href="#DefinitionOfScheme">Blob URL</a>s are strings that are used to <a href="#dereference">dereference</a> <code>Blob</code> objects, and can persist for as long as the <code>document</code> from which they were minted using <a href="#dfn-createObjectURL"><code>URL.createObjectURL()</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a>  - see <a href="#lifeTime">Lifetime of Blob URLs</a>.   </p>
 
 <p>This section gives sample usage of creation and revocation of <a href="#DefinitionOfScheme">Blob URL</a>s with explanations.</p>
 <div class="example"><div class="exampleHeader">Examples</div>
@@ -1824,7 +1824,7 @@ var windowRef = openPopup(blobURLAnchorRef, "Application Info");
 ....
 
 </code></pre></div></div>
-<p>The example above uses <a href="#dfn-createFor"><code>URL.createFor</code></a> to mint a <a href="#DefinitionOfScheme">Blob URL</a> identifier for a file resource, and appends a <a href="#fragmentIDDef">fragment</a> that has an understood meaning within the resource (in this case, it references an anchor within the HTML document).</p>
+<p>The example above uses <a href="#dfn-createFor"><code>URL.createFor</code></a> to mint a <a href="#DefinitionOfScheme">Blob URL</a> and <a href="#identifier">identifier</a> for a file resource, and appends a <a href="#fragmentIDDef">fragment</a> that has an understood meaning within the resource (in this case, it references an anchor within the HTML document).</p>
 </div>
 </div>
 <div id="lifeTime" class="section">
