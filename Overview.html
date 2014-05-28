@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>Editor's Draft <em>6 May 2014</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>Editor's Draft <em>28 May 2014</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2014 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -73,7 +73,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 6 May 2014 <b>Editor's Draft</b> of the
+        This document is the 28 May 2014 <b>Editor's Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -200,7 +200,7 @@
                     <li><a href="#DefinitionOfScheme">10.3. Definition of blob URL Scheme</a>
                     <ul>
                       <li><a href="#originOfBlobURL">10.3.1. Origin of Blob URLs</a></li>
-                      <li><a href="#OpaqueStringDiscussion">10.3.2. The Opaque String</a></li>
+                      <li><a href="#unicodeBlobURL">10.3.2. Unicode Serialization of a Blob URL</a></li>
                       <li><a href="#fragmentDiscussion">10.3.3. Discussion of Fragment Identifier</a></li>
                     </ul>
                     </li>
@@ -223,9 +223,6 @@
               <li><a href="#security-discussion">11. Security Considerations</a></li>
               <li><a href="#requirements">12. Requirements and Use Cases</a></li>
               <li><a href="#AppendixA">13. Appendix A</a>
-                <ul>
-                  <li><a href="#ABNFForBlobURLs">13.1. An ABNF for Blob URLs</a></li>
-                </ul>
               </li>
               <li><a href="#acknowledgements-section">14. Acknowledgements</a></li>
               <li><a href="#references">15. References</a>
@@ -391,9 +388,10 @@ function errorHandler(evt) {
         <p>The terms and algorithms <dfn id="document">document</dfn>,
         <dfn id="unloading-document-cleanup-steps">unloading document cleanup steps</dfn>, <dfn id="event-handler-attributes">event handler attributes</dfn>,
         <dfn id="event-handler-event-type">event handler event type</dfn>,
-        <dfn id="origin">origin</dfn>, <dfn id="same-origin">same origin</dfn>, <dfn id="effectiveScriptOrigin">effective script origin</dfn>, <dfn id="incumbentSettingsObject">incumbent settings object</dfn>, <dfn id="event-loops">event loops</dfn>,
+        <dfn id="effectiveScriptOrigin">effective script origin</dfn>, <dfn id="incumbentSettingsObject">incumbent settings object</dfn>, <dfn id="event-loops">event loops</dfn>,
         <dfn id="dfn-task">task</dfn>, <dfn id="task-source">task source</dfn>, <dfn id="df-URL">URL</dfn>, <dfn id="global-script-cleanup-jobs-list">global script cleanup jobs list</dfn>, <dfn id="global-script-cleanup-jobs">global script cleanup</dfn>,
         <dfn id="queue-a-task">queue a task</dfn>, <dfn id="dfn-UTF-8">UTF-8</dfn>, <dfn id="dfn-UTF-16">UTF-16</dfn>. <dfn id="structured-clone">structured clone</dfn>, <dfn id="collect-a-sequence-of-characters">collect a sequence of characters</dfn> and <dfn id="converting-a-string-to-ASCII-lowercase">converting a string to ASCII lowercase</dfn> are as defined by the HTML specification [<a href="#HTML">HTML</a>]. </p>
+        <p>The terms <dfn id="origin">origin</dfn> and <dfn id="same-origin">same origin</dfn> are as defined by the Web Origin Concept specification [<a href="#WEBORIGIN">ORIGIN</a>].</p>
  <p>When this specification says to <dfn id="terminate-an-algorithm">terminate an algorithm</dfn> the user agent must terminate the algorithm after finishing the step it is on, and return from it.  Asynchronous <a href="#read-methods">read methods</a> defined in this specification may return before the algorithm in question is terminated, and can be terminated by an <a href="#dfn-abort"><code>abort()</code></a> call.</p>
 <p>The term <dfn id="throw-an-exception">throw</dfn> in this specification, as it pertains to exceptions, is used as defined in the DOM4 specification [<a href="#DOM4">DOM4</a>].</p>
 <p>The term <dfn id="byte">byte</dfn> in this specification is used as defined in the Encoding Specification [<a href="#encodingSpecification">Encoding Specification</a>].</p>
@@ -865,8 +863,8 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
     <div id="readOperationSection" class="section">
       <h3>8.1 The Read Operation</h3>
 	  
-    <p>The algorithm below defines a <a href="#readOperation">read operation</a>, which takes a <a href="#dfn-Blob"><code>Blob</code></a> and a <a href="#synchonousFlag">synchronous flag</a> as <var>input</var>, and reads <a href="#byte">byte</a>s into system memory as the <var>result</var> of the <a href="#readOperation">read operation</a>, or else returns failure along with a <a href="#failureReason">failure reason</a>. The <var>result</var> of the read operation consists of <a href="#byte">byte</a>s in system memory. Methods in this specification invoke the <a href="#readOperation">read operation</a> with the <a href="#synchronousFlag">synchronous flag</a> either set or unset.</p>
-    <p>The <dfn id="synchronousFlag">synchronous flag</dfn> determines if a read operation is synchronous or asynchronous, and is <em>unset</em> by default. Methods may set it. If it is set, the <a href="#readOperation">read operation</a> takes place synchronously. Otherwise, it takes place asynchronously, and <a href="#queue-a-task">queues tasks</a> annotated <a href="#process-read">process read</a>, <a href="#process-read-data">process read data</a>, and <a href="#process-read-EOF">process read EOF</a> for the <var>result</var> on the <a href="#fileReadingTaskSource">file reading task source</a>.  </p>
+    <p>The algorithm below defines a <a href="#readOperation">read operation</a>, which takes a <a href="#dfn-Blob"><code>Blob</code></a> and a <a href="#synchonousFlag">synchronous flag</a> as <var>input</var>, and reads <a href="#byte">byte</a>s into system memory as the <var>result</var> of the <a href="#readOperation">read operation</a>, or else fails along with a <a href="#failureReason">failure reason</a>. The <var>result</var> of the read operation consists of <a href="#byte">byte</a>s in system memory. Methods in this specification invoke the <a href="#readOperation">read operation</a> with the <a href="#synchronousFlag">synchronous flag</a> either set or unset.</p>
+    <p>The <dfn id="synchronousFlag">synchronous flag</dfn> determines if a read operation is synchronous or asynchronous, and is <em>unset</em> by default. Methods may set it. If it is set, the <a href="#readOperation">read operation</a> takes place synchronously. Otherwise, it takes place asynchronously, and <a href="#queue-a-task">queues tasks</a> annotated <a href="#process-read">process read</a>, <a href="#process-read-data">process read data</a>, <a href="#process-read-EOF">process read EOF</a>, and/or <a href="#process-read-error">process read error</a> with a <a href="#failureReason">failure reason</a> for the <var>result</var> on the <a href="#fileReadingTaskSource">file reading task source</a>.  </p>
     <p>To perform a <dfn id="readOperation">read operation</dfn> on an <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a> and the <a href="#synchronousFlag">synchronous flag</a>, run the following steps:</p>
     <ol>
 
@@ -886,9 +884,9 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
       <li><p>Otherwise, process the rest of this algorithm asynchronously, and run the following substeps.</p>
         <div class="note"><div class="noteHeader">Note</div><p>The algorithm assumes that invoking methods have checked for <a href="#readabilityState">readability state</a>. A <a href="#dfn-Blob"><code>Blob</code></a> in the <a href="#dfn-closedState"><code>CLOSED</code></a> state must not have a <a href="#readOperation">read operation</a> called on it.</p></div>
       <ol>
-      <li>If <a href="#file-error-read">an error occurs reading</a> the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a>, return failure and a <a href="#failureReason">failure reason</a>, and terminate this algorithm.
+      <li>If <a href="#file-error-read">an error occurs reading</a> the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a>, <a href="#queue-a-task">queue a task</a> to <dfn id="process-read-error">process read error</dfn> with the <a href="#failureReason">failure reason</a>, and <a href="#terminate-an-algorithm">terminate this algorithm</a>.
  <div class="note"><div class="noteHeader">Note</div>
-         <p>Along with returning failure, this algorithm must return the <a href="#failureReason">failure reason</a> that occurred to asynchronous methods that invoke this algorithm with the <a href="#synchronousFlag">synchronous flag</a> unset, to enable asynchronous error reporting. </p>
+         <p>This <a href="#queue-a-task">task can be queued</a> at any point during the read operation if <a href="#file-error-read">an error occurs during reading</a>; after <a href="#queue-a-task">queuing this task</a>, this algorithm is always <a href="#terminate-an-algorithm">terminated</a>. </p>
     </div>
       </li>  
       <li><p>Otherwise, <a href="#queue-a-task">queue a task</a> to <dfn id="process-read">process read</dfn>, which starts reading bytes from the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a> into <var>result</var> .   </p></li>
@@ -902,7 +900,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
  </div>
  <div id="blobreader-task-source" class="section">
   <h3>8.2. The File Reading Task Source</h3>
- <p>This specification defines a new generic <a href="#task-source">task source</a> called the <dfn id="fileReadingTaskSource">file reading task source</dfn>, which is used for all <a href="#queue-a-task">tasks that are queued</a> in this specification to read byte sequences associated with <a href="#dfn-Blob"><code>Blob</code></a> and <a href="#dfn-file"><code>File</code></a> objects, and also for all <a href="#events">events</a> that are fired at the <a href="#dfn-filereader"><code>FileReader</code></a>.  It is to be used for features that trigger in response to asynchronously reading binary data.</p>  
+ <p>This specification defines a new generic <a href="#task-source">task source</a> called the <dfn id="fileReadingTaskSource">file reading task source</dfn>, which is used for all <a href="#queue-a-task">tasks that are queued</a> in this specification to read byte sequences associated with <a href="#dfn-Blob"><code>Blob</code></a> and <a href="#dfn-file"><code>File</code></a> objects.  It is to be used for features that trigger in response to asynchronously reading binary data.</p>  
  </div>
 <div id="APIASynch" class="section">
   <h3>8.3 The FileReader API</h3>
@@ -1067,12 +1065,13 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 	<p><strong>Note:</strong> The <a href="#dfn-readAsDataURL"><code>readAsDataURL()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
 	</li> 
   <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> is in the <a href="#dfn-closedState">CLOSED</a> <a href="#readabilityState">readability state</a>, set the <a href="#dfn-error"><code>error</code></a> attribute of the <a href="#contextObject">context object</a> to return an <code>InvalidStateError</code> <a href="#dfn-domerror">DOMError</a> and <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-error-event"><code>error</code></a> at the <a href="#contextObject">context object</a>. <a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p>
-  </li> 
-	  <li><p>Otherwise initiate a <a href="#readOperation">read operation</a> using the <a href="#dfn-fileBlob"><code>blob</code></a> argument as <var>input</var> and with the <a href="#synchronousFlag">synchronous flag</a> <em>unset</em>.  If the <a href="#readOperation">read operation</a> returns failure, set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to null if it is not already set to null. Proceed to the <a href="#dfn-error-steps">error steps</a>. 
+  </li>
+    <li><p>Otherwise set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a>. </p></li> 
+	  <li><p>Initiate a <a href="#readOperation">read operation</a> using the <a href="#dfn-fileBlob"><code>blob</code></a> argument as <var>input</var> and with the <a href="#synchronousFlag">synchronous flag</a> <em>unset</em> and handle <a href="#queue-a-task">tasks queued</a> on the <a href="#fileReadingTaskSource">file reading task source</a> per below.  
     </p>
-    <div class="note"><div class="noteHeader">Note</div><p>The <a href="#readOperation">read operation</a> also returns the <a href="#failureReason">failure reason</a> for use with the <a href="#dfn-error-steps">error steps</a>.</p></div>
 	  </li>
-	  <li><p>If no error has occurred, set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a> and handle <a href="#queue-a-task">tasks queued</a> on the <a href="#fileReadingTaskSource">file reading task source</a> per below.</p></li>
+	
+    <li><p>To <a href="#process-read-error">process read error</a> with a <a href="#failureReason">failure reason</a>, proceed to the <a href="#dfn-error-steps">error steps</a>.</p></li>
 	  <li><p>To <a href="#process-read">process read</a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a> at the <a href="#contextObject">context object</a>.</p></li>
 	<li><p>To <a href="#process-read-data">process read data</a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-progress-event"><code>progress</code></a> at the <a href="#contextObject">context object</a>. </p></li>
 	  <li><p>To <a href="#process-read-EOF">process read EOF</a> run these substeps:</p> 
@@ -1114,11 +1113,11 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 	</li>
   <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> is in the <a href="#dfn-closedState">CLOSED</a> <a href="#readabilityState">readability state</a>, set the <a href="#dfn-error"><code>error</code></a> attribute of the <a href="#contextObject">context object</a> to return an <code>InvalidStateError</code> <a href="#dfn-domerror">DOMError</a> and <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-error-event"><code>error</code></a> at the <a href="#contextObject">context object</a>. <a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p>
   </li> 
-	  <li><p>Otherwise, initiate a <a href="#readOperation">read operation</a> using the <a href="#dfn-fileBlob"><code>blob</code></a> argument as <var>input</var> and with the <a href="#synchronousFlag">synchronous flag</a> <em>unset</em>. If the <a href="#readOperation">read operation</a> returns failure, set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to null if it is not already set to null. Proceed to the <a href="#dfn-error-steps">error steps</a>. 
+	  <li><p>Otherwise set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a>. </p></li> 
+    <li><p>Initiate a <a href="#readOperation">read operation</a> using the <a href="#dfn-fileBlob"><code>blob</code></a> argument as <var>input</var> and with the <a href="#synchronousFlag">synchronous flag</a> <em>unset</em> and handle <a href="#queue-a-task">tasks queued</a> on the <a href="#fileReadingTaskSource">file reading task source</a> per below.   
     </p>
-    <div class="note"><div class="noteHeader">Note</div><p>The <a href="#readOperation">read operation</a> also returns the <a href="#failureReason">failure reason</a> for use with the <a href="#dfn-error-steps">error steps</a>.</p></div> 
-	  </li>
-	  <li><p>If no error has occurred, set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a> and handle <a href="#queue-a-task">tasks queued</a> on the <a href="#fileReadingTaskSource">file reading task source</a> per below.</p></li>
+    </li>
+     <li><p>To <a href="#process-read-error">process read error</a> with a <a href="#failureReason">failure reason</a>, proceed to the <a href="#dfn-error-steps">error steps</a>.</p></li>
     <li><p>To <a href="#process-read">process read</a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a> at the <a href="#contextObject">context object</a>.</p></li>
   <li><p>To <a href="#process-read-data">process read data</a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-progress-event"><code>progress</code></a> at the <a href="#contextObject">context object</a>. </p></li>
 	
@@ -1145,14 +1144,14 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 
 	<p><strong>Note:</strong> The <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
 	</li>
-  <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> is in the <a href="#dfn-closedState">CLOSED</a> <a href="#readabilityState">readability state</a>, .</p>
+  <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> is in the <a href="#dfn-closedState">CLOSED</a> <a href="#readabilityState">readability state</a>, set the <a href="#dfn-error"><code>error</code></a> attribute of the <a href="#contextObject">context object</a> to return an <code>InvalidStateError</code> <a href="#dfn-domerror">DOMError</a> and <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-error-event"><code>error</code></a> at the <a href="#contextObject">context object</a>. <a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p> .</p>
   <p><strong>Note:</strong> The <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
   </li> 
-	<li><p>Otherwise, initiate a <a href="#readOperation">read operation</a> using the <a href="#dfn-fileBlob"><code>blob</code></a> argument as <var>input</var> and with the <a href="#synchronousFlag">synchronous flag</a> <em>unset</em>. If the <a href="#readOperation">read operation</a> returns failure, set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a> and set <a href="#dfn-result"><code>result</code></a> to null if it is not already set to null. Proceed to the <a href="#dfn-error-steps">error steps</a>.  
+	<li><p>Otherwise set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a>. </p></li> 
+    <li><p>Initiate a <a href="#readOperation">read operation</a> using the <a href="#dfn-fileBlob"><code>blob</code></a> argument as <var>input</var> and with the <a href="#synchronousFlag">synchronous flag</a> <em>unset</em> and handle <a href="#queue-a-task">tasks queued</a> on the <a href="#fileReadingTaskSource">file reading task source</a> per below.   
     </p>
-    <div class="note"><div class="noteHeader">Note</div><p>The <a href="#readOperation">read operation</a> also returns the <a href="#failureReason">failure reason</a> for use with the <a href="#dfn-error-steps">error steps</a>.</p></div> 
     </li>
-    <li><p>If no error has occurred, set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a> and handle <a href="#queue-a-task">tasks queued</a> on the <a href="#fileReadingTaskSource">file reading task source</a> per below.</p></li>
+     <li><p>To <a href="#process-read-error">process read error</a> with a <a href="#failureReason">failure reason</a>, proceed to the <a href="#dfn-error-steps">error steps</a>.</p></li>
     <li><p>To <a href="#process-read">process read</a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadstart-event"><code>loadstart</code></a> at the <a href="#contextObject">context object</a>.</p></li>
   <li><p>To <a href="#process-read-data">process read data</a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-progress-event"><code>progress</code></a> at the <a href="#contextObject">context object</a>. </p></li>
   
@@ -1168,11 +1167,12 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 	</div>
   <div id="dfn-error-steps" class="section">
     <h5>8.3.4.5. Error Steps</h5>
-    <p>These <em>error steps</em> apply when a <a href="#readOperation">read operation</a> invoked by a <a href="#dfn-filereader"><code>FileReader</code></a> object's <a href="#read-methods">read method</a> fails.</p>
-        <ol>   
+    <p>These <em>error steps</em> are to <a href="#process-read-error">process read error</a> with a <a href="#failureReason">failure reason</a>.</p>
+        <ol>
+        <li>Set the <a href="#contextObject">context object</a>'s <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a> and <a href="#dfn-result"><code>result</code></a> to null if it is not already set to null. </li>  
       <li><p><em>Set the <a href="#dfn-error"><code>error</code></a> attribute</em> on the <a href="#contextObject">context object</a>; on getting, the
       <a href="#dfn-error"><code>error</code></a> attribute must be a
-      a <a href="#dfn-domerror"><code>DOMError</code></a> object that corresponds to the <a href="#failureReason">failure reason</a> supplied by the <a href="#readOperation">read operation</a> when it failed.  <a href="#fire-a-progress-event">Fire a progress event</a> called
+      a <a href="#dfn-domerror"><code>DOMError</code></a> object that corresponds to the <a href="#failureReason">failure reason</a>.  <a href="#fire-a-progress-event">Fire a progress event</a> called
       <a href="#dfn-error-event"><code>error</code></a> at the <a href="#contextObject">context object</a>.  </p></li>
       <li><p>Unless <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a>, <a href="#fire-a-progress-event">fire a progress event</a> called
       <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a> at the <a href="#contextObject">context object</a>.  If <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> do NOT fire <a href="#dfn-loadend-event" class="dfnref"><code>loadend</code></a> at the <a href="#contextObject">context object</a>.</p></li>
@@ -1188,7 +1188,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 	  When the <dfn id="dfn-abort"><code>abort()</code></dfn> method is called, the user agent must run the steps below:</p>
 	  <ol>
 	  <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-empty"><code>EMPTY</code></a> or if <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-done"><code>DONE</code></a> set <a href="#dfn-result"><code>result</code></a> to <code>null</code>
-	  and terminate this overall set of steps without doing anything else.</p></li>
+	  and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p></li>
 	  <li><p>If <a href="#dfn-readyState"><code>readyState</code></a> = <a href="#dfn-loading"><code>LOADING</code></a> set <a href="#dfn-readyState"><code>readyState</code></a> to
 	  <a href="#dfn-done"><code>DONE</code></a> and <a href="#dfn-result"><code>result</code></a> to <code>null</code>.</p></li>
 	  <li><p>If there are any <a href="#dfn-task">tasks</a> from the <a href="#contextObject">context object</a> on the <a href="#fileReadingTaskSource">file reading task source</a> in an affiliated 
@@ -1201,13 +1201,13 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
  
 	<div id="blobAndFileParams" class="section">
 	<h4>8.3.4.7. Blob Parameters</h4>
-	<p>The three <a href="#read-methods">asynchronous read methods</a>, the three <a href="#read-method-sync">synchronous read methods</a>, and <a href="#dfn-createObjectURL"><code>createObjectURL</code></a> take a
+	<p>The three <a href="#read-methods">asynchronous read methods</a>, the three <a href="#read-method-sync">synchronous read methods</a>, <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> and <a href="#dfn-createFor"><code>URL.createFor</code></a> take a
 	<a href="#dfn-Blob" class="dfnref"><code>Blob</code></a> parameter.  This section defines this parameter.
 	</p>
 	<dl>
 	<dt><dfn id="dfn-fileBlob"><code>blob</code></dfn></dt>
 	<dd><p>This is a <a href="#dfn-Blob"><code>Blob</code></a> argument and must be a reference to a single <a href="#dfn-file"><code>File</code></a> in a
-	<a href="#dfn-filelist"><code>FileList</code></a> or a <a href="#dfn-Blob"><code>Blob</code></a> object not obtained from the file system.</p></dd>
+	<a href="#dfn-filelist"><code>FileList</code></a> or a <a href="#dfn-Blob"><code>Blob</code></a> argument not obtained from the underlying OS file system.</p></dd>
 	</dl>
 	</div>
 </div>
@@ -1455,7 +1455,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 	<h3>9.1. Throwing an Exception or Returning an Error</h3>
 	<p>This section is normative.  Error conditions can arise when reading a <a href="#dfn-file"><code>File</code></a> or a <a href="#dfn-Blob"><code>Blob</code></a>.</p>
 
-  <p>The <a href="#readOperation">read operation</a> can terminate due to error conditions when reading a <code>File</code> or a <code>Blob</code>; the particular error condition that causes a read operation to return failure is called a <dfn id="failureReason">failure reason</dfn>.</p>
+  <p>The <a href="#readOperation">read operation</a> can terminate due to error conditions when reading a <code>File</code> or a <code>Blob</code>; the particular error condition that causes a read operation to return failure or <a href="#queue-a-task">queue a task</a> to <a href="#process-read-error">process read error</a> is called a <dfn id="failureReason">failure reason</dfn>.</p>
 	<p>Synchronous read methods <a href="#throw-an-exception">throw</a> exceptions of the type in the table below if there has been an error owing to a particular <a href="#failureReason">failure reason</a>.</p>
 
 	<p>Asynchronous read methods use the <dfn id="dfn-error"><code>error</code></dfn> attribute of the <a href="#dfn-filereader"><code>FileReader</code></a> object, which must return a <dfn id="dfn-domerror">DOMError</dfn> object [<a href="#DOM4">DOM4</a>] of the most appropriate type from the table below if there has been an error owing to a particular <a href="#failureReason">failure reason</a>, or otherwise return null.</p>
@@ -1529,49 +1529,66 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   </ul>
   </div>
     <div id="DefinitionOfScheme" class="section">
-  <h3>10.3. The blob URL</h3>
-  <p> A <code>blob:</code> URL must consist of the blob: <a href="#scheme">scheme</a> and an <a href="#opaqueString">opaque string</a> as <a href="#scheme-data">scheme data</a>, along with an optional <a href="#fragmentIDDef">fragment</a>. </p>
+  <h3>10.3. The Blob URL</h3>
+  <p> A Blob URL must consist of the blob: <a href="#scheme">scheme</a> followed by <a href="#scheme-data">scheme data</a> which must consist of a string tuple comprising the <a href="#originOfBlobURL">origin of the Blob URL</a>, the "/" (U+0024 SOLIDUS) character, and a UUID [<a href="#UUID">RFC4122</a>; for an ABNF of UUID, see <a href="#AppendixA">Appendix A</a>]. The <a href="#scheme-data">scheme data</a> of a Blob URL is called an <dfn id="identifier">identifier</dfn> and is used to identify the <a href="#dfn-Blob"><code>Blob</code></a> resource. A Blob URL may contain an optional <a href="#fragmentIDDef">fragment</a>. The Blob URL is serialized as a string according to the <a href="#unicodeBlobURL">Unicode Serialization of a Blob URL</a> algorithm. </p>
 <p>A <a href="#fragmentIDDef">fragment</a>, if used,
   has a distinct interpretation depending on the media type of the <a href="#dfn-Blob"><code>Blob</code></a> or <a href="#dfn-file"><code>File</code></a> resource in question (see <a href="fragmentDiscussion">fragment discussion</a>). </p>
+   <div class="block"><div class="blockTitleDiv"><span class="blockTitle">ABNF</span></div><div class="blockContent"><pre class="code"><code class="abnf-code">
+  blob = scheme ":" origin "/" UUID [fragIdentifier]
+
+  scheme = "blob"
+
+  ; scheme is always "blob"
+
+  ; origin is a string representation of the <a href="#originOfBlobURL">Blob URL's origin</a>.
+  ; UUID is as defined in [<a href="#UUID">RFC4122</a>] and <a href="#AppendixA">Appendix A</a>
+  ; fragIdentifier is optional and as defined in [<a href="#3986">RFC3986</a>] and <a href="#AppendixA">Appendix A</a>
+
+  </code></pre></div></div>
 
 
   <div id="originOfBlobURL" class="section">
   <h4>10.3.1. Origin of Blob URLs</h4>
-  <p><a href="#DefinitionOfScheme">Blob URL</a>s are created using <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a>, and are revoked using <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a>. The <a href="#origin">origin</a> of a <a href="#DefinitionOfScheme">Blob URL</a> must be the same as the <a href="#effectiveScriptOrigin">effective script origin</a> specified by the <a href="#incumbentSettingsObject">incumbent settings object</a> at the time the method that created it -- either <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a> -- was called. </p>
-  </div>
-  <div id="OpaqueStringDiscussion" class="section">
-  <h4>10.3.2. The Opaque String</h4>
-  <p>An <dfn id="opaqueString">opaque string</dfn> is a unique string which can be heuristically generated upon demand such that the probability that two are alike is small, and which is hard to guess (e.g.
-  the Universally Unique IDentifier -- UUID -- as defined in [<a href="#UUID">RFC4122</a>] is an opaque string). <a href="#opaqueString">Opaque strings</a> must NOT include any reserved characters from [<a href="#RFC3986">RFC3986</a>] without percent-encoding them.
-  <a href="#opaqueString">Opaque strings</a> must be globally unique.  Such strings should only use characters in the ranges U+002A to U+002B, U+002D to U+002E, U+0030 to U+0039,
-  U+0041 to U+005A, U+005E to U+007E [<a href="#Unicode">Unicode</a>], and should be at least 36 characters long.
-  UUID is one potential option available to user agents for use with <a href="#DefinitionOfScheme">Blob URLs</a> as <a href="#opaqueString">opaque strings</a>, and their use is <em>strongly encouraged</em>.
-  UUIDs are defined in [<a href="#UUID">RFC4122</a>].  For an ABNF of UUID, see <a href="#AppendixA">Appendix A</a>.
-
+  <p><a href="#DefinitionOfScheme">Blob URL</a>s are created using <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a>, and are revoked using <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a>. The <a href="#origin">origin</a> of a <a href="#DefinitionOfScheme">Blob URL</a> must be the same as the <a href="#effectiveScriptOrigin">effective script origin</a> specified by the <a href="#incumbentSettingsObject">incumbent settings object</a> at the time the method that created it -- either <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a> -- was called. The <a href="#origin">origin</a> of a Blob URL, when serialized as a string, must conform to the Web Origin Specification's Unicode Serialization of an Origin algorithm [<a href="#WEBORIGIN">ORIGIN</a>]. <a href="#cross-origin-requests-on-blobs">Cross-origin requests</a> on Blob URLs must return a <a href="#dfn-networkError">network error</a>.</a>
   </p>
+  <div class="note"><div class="noteHeader">Note</div><p>In practice this means that HTTP and HTTPS <a href="#origin">origins</a> are covered by this specification as valid origins for use with Blob URLs. This specification does not address the case of non-HTTP and non-HTTPS <a href="#origin">origins</a>. For instance blob:file:///Users/arunranga/702efefb-c234-4988-a73b-6104f1b615ee (which uses the "file:" <a href="#origin">origin</a>, which is part of the Blob URL's <a href="#scheme-data">scheme data</a>) may have behavior that is undefined, even though user agents may treat such Blob URLs as valid.</p></div>
 
+  </div>
+  <div id="unicodeSerializationOfBlobURL" class="section">
+ <h4>10.3.2. Unicode Serialization of Blob URL</h4>
+ <div class="note"><div class="noteHeader">Note</div><p>This algorithm is invoked by one of <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a>.</p></div>
+ <p>The <dfn id="unicodeBlobURL">Unicode Serialization of a Blob URL</dfn> for a given Blob URL is the value returned by the following algorithm:</p>
+ <ol>
+  <li><p>Let <var>result</var> be the empty string. Append the string "blob" (that is, the Unicode code point sequence U+0062, U+006C, U+006F, U+0062) to <var>result</var>.</p></li>
+  <li><p>Append the ":" (U+003A COLON) character to <var>result</var>.</p></li>
+  <li><p>Let <var>O</var> be the <a href="#originOfBlobURL">origin of the Blob URL.</a> If the Unicode Serialization of an Origin algorithm [<a href="#WEBORIGIN">ORIGIN</a>] on <var>O</var> returns null, user agents may substitute an implementation defined value for the return value of the Unicode Serialization of an Origin algorithm. Append the result of the Unicode Serialization of an Origin algorithm for <var>O</var> [<a href="#WEBORIGIN">ORIGIN</a>] to <var>result</var>.</p></li>
+  <li><p>Append the "/" character (U+0024 SOLIDUS) to <var>result</var>.</p></li> 
+  <li><p>Generate a UUID [<a href="#UUID">RFC4122</a>] as a Unicode string and append it to <var>result</var>.</p></li>
+  <li><p>Return <var>result</var>.</p></li>
+ </ol>
+ <p>An example of a Blob URL might be <em>blob:https://example.org/9115d58c-bcda-ff47-86e5-083e9a215304</em>.</p>
   </div>
   <div class="section" id="fragmentDiscussion">
   <h4>10.3.3 Discussion of Fragment Identifier</h4>
   <p>
   The <a href="#fragmentIDDef">fragment</a>'s resolution and processing directives depend on the media type [<a href="#RFC2046">RFC2046</a>] of a potentially retrieved representation, even though such
-  a retrieval is only performed if the <a href="#DefinitionOfScheme">blob: URL</a> is dereferenced.  For example, in an HTML file [<a href="#HTML">HTML</a>] the fragment
+  a retrieval is only performed if the <a href="#DefinitionOfScheme">Blob URL</a> is dereferenced.  For example, in an HTML file [<a href="#HTML">HTML</a>] the fragment
   could be used to refer to an anchor within the file.  If the user agent does not recognize the media type of the resource, OR if a fragment is not
-  meaningful within the resource, it must ignore the fragment.  The fragment must not be used to identify a resource; only the blob: scheme and the opaque string scheme data constitute a valid resource identifier.
+  meaningful within the resource, it must ignore the fragment.  The fragment must not be used to identify a resource; only the blob: <a href="#scheme">scheme</a> and the <a href="#scheme-data">scheme data</a> constitute a valid resource identifier.
   </p>
   
 
-  <p>A valid Blob URL reference could look like: <code>blob:550e8400-e29b-41d4-a716-446655440000#aboutABBA</code> where "#aboutABBA" might be an HTML fragment identifier referring to an
+  <p>A valid Blob URL reference could look like: <code>blob:http://example.org:8080/550e8400-e29b-41d4-a716-446655440000#aboutABBA</code> where "#aboutABBA" might be an HTML fragment identifier referring to an
   element with an id attribute of "aboutABBA".  </p>
-  <div class="note"><div class="noteHeader">Note</div><p>The <code>blob:</code> <a href="#scheme">scheme</a> <a href="#identifier">identifier</a> and the <a href="#opaqueString">opaque string</a> as <a href="#scheme-data">scheme data</a> together consist of the unique identifier for a <code>Blob</code> or <code>File</code> resource.  The <a href="#fragmentDiscussion">fragment</a> is not used to identify the resource.   </p></div>
+  <div class="note"><div class="noteHeader">Note</div><p>The <a href="#fragmentDiscussion">fragment</a> is not used to identify the resource. Neither the <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> method nor the <a href="#dfn-createFor"><code>URL.createFor</code></a> method generate a fragment. </p></div>
 
   </div>
 </div>
   <div id="requestResponseModel" class="section">
   <h3>10.4. Dereferencing Model for Blob URLs</h3>
 
-  <p>The URL Specification [<a href="#URL-API">URL</a>] along with the Fetch Specification [<a href="#Fetch">Fetch</a>] define how <a href="#DefinitionOfScheme"><code>Blob</code> URL</a>s are dereferenced. This section provides guidance on request and response headers.</p>
-  <p>User agents must only support requests with GET [<a href="#RFC2616">RFC2616</a>].      Specifically, responses must only support a subset of responses that are equivalent to the following from HTTP [<a href="#RFC2616">RFC2616</a>]:</p>
+  <p>The URL Specification [<a href="#URL-API">URL</a>] along with the Fetch Specification [<a href="#Fetch">Fetch</a>] define how <a href="#DefinitionOfScheme"><code>Blob</code> URL</a>s are <dfn id="dereference">dereferenced</dfn>. This section provides guidance on request and response headers.</p>
+  <p>User agents must only support requests with GET [<a href="#RFC2616">RFC2616</a>]. Specifically, responses must only support a subset of responses that are equivalent to the following from HTTP [<a href="#RFC2616">RFC2616</a>]:</p>
   <div id="TwoHundredOK" class="section">
   <h4>10.4.1. 200 OK</h4>
   <p>This response [<a href="#RFC2616">RFC2616</a>] must be used if the request has succeeded, and no <a href="#dfn-networkError">network errors</a> are generated.</p> 
@@ -1598,8 +1615,8 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   <ul>
     <li><p>Any request method other than GET is used to dereference the URL.</p></li>
     <li><p>The <a href="#DefinitionOfScheme">Blob URL</a> does not have an <a href="#identifier">identifier</a> in the <a href="#BlobURLStore">Blob URL Store</a>.  </p></li>
-    <li><p>The Blob has been <a href="#closed">closed</a>; this also results in the Blob URL not having an <a href="#identifier">identifier</a> in the <a href="#BlobURLStore">Blob URL Store</a>.</p></li>
-    <li><p>A <a href="#readOperation">read operation</a> on the <code>Blob</code> resource with the <a href="#synchronousFlag">synchronous flag</a> unset returns failure. </p></li>
+    <li><p>The Blob has been <a href="#closed">closed</a>; this also results in the <a href="#DefinitionOfScheme">Blob URL</a> not having an <a href="#identifier">identifier</a> in the <a href="#BlobURLStore">Blob URL Store</a>.</p></li>
+    <li><p>A <a href="#cross-origin-requests-on-blobs">cross-origin request</a> is made on a <a href="#DefinitionOfScheme">Blob URL</a>.</p></li>
     <li><p>A security error has occurred.  </p>
     </li>
   </ul>
@@ -1656,20 +1673,17 @@ partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
   <ol>
   <li><p>If called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that has a <a href="#readabilityState">readability state</a> of <a href="#dfn-closedState"><code>CLOSED</code></a>, user agents must return a unique <a href="#DefinitionOfScheme">Blob URL</a> that has the following properties:</p>
     <ul>
-      <li>It must have <em>blob:</em> as its <a href="#scheme">scheme</a></li> <li>It must have an <a href="#opaqueString">opaque string</a> as its <a href="#scheme-data">scheme data</a>. </li>
-      <li>It must return a <a href="#networkError">network error</a> when dereferenced.</li>
+      <li>It must be the result of the <a href="#unicodeBlobURL">serialization of a Blob URL algorithm</a>. </li>
+      <li>It must return a <a href="#networkError">network error</a> when <a href="#dereference">dereferenced</a>.</li>
     </ul>
   </li>
   <li><p>Otherwise, user agents must run the following sub-steps:</p>
   <ol>
-    <li>Return a unique <a href="#DefinitionOfScheme">Blob URL</a> that can be used to dereference the <a href="#dfn-fileBlob"><code>blob</code></a> argument and has the following properties: 
-    <ul>
-      <li>It must have <em>blob:</em> as its <a href="#scheme">scheme</a></li> <li>It must have an <a href="#opaqueString">opaque string</a> as its <a href="#scheme-data">scheme data</a>. The <a href="#scheme-data">scheme data</a> component of the <a href="url">Blob URL</a> is called an <dfn id="identifier">identifier</dfn>, which uniquely identifies the <a href="#dfn-fileBlob"><code>blob</code></a> argument that the <a href="#DefinitionOfScheme">Blob URL</a> has been created for.</li>
-      
-    </ul>
-
+    <li>
+      Let <var>r</var> be the result of the <a href="#unicodeBlobURL">Unicode Serialization of a Blob URL</a> for this <a href="#dfn-fileBlob"><code>blob</code></a>.
     </li>
-    <li><a href="#add-an-entry">Add an entry to the Blob URL Store</a> for this <a href="#DefinitionOfScheme"><code>Blob</code> URL</a>.</li>
+    <li><a href="#add-an-entry">Add an entry to the Blob URL Store</a> for <var>r</var> and <a href="#dfn-fileBlob"><code>blob</code></a>.</li>
+    <li>Return <var>r</var>.</li>
   </ol>
 </li>
 </ol>
@@ -1678,19 +1692,17 @@ partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
 <ol>
   <li><p>If called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that has a <a href="#readabilityState">readability state</a> of <a href="#dfn-closedState"><code>CLOSED</code></a>, user agents must return a unique <a href="#DefinitionOfScheme">Blob URL</a> that has the following properties:</p>
 <ul>
-      <li>It must have <em>blob:</em> as its <a href="#scheme">scheme</a></li> <li>It must have an <a href="#opaqueString">opaque string</a> as its <a href="#scheme-data">scheme data</a>. </li>
-      <li>It must return a <a href="#networkError">network error</a> when dereferenced.</li>
+      <li>It must be the result of the <a href="#unicodeBlobURL">serialization of a Blob URL algorithm</a>.</li>
+      <li>It must return a <a href="#networkError">network error</a> when <a href="#dereference">dereferenced</a>.</li>
     </ul>
   </li>
   <li><p>Otherwise, user agents must run the following steps:</p>
   <ol>
-    <li>Return a unique <a href="#DefinitionOfScheme">Blob URL</a> that can be used to dereference the <a href="#dfn-fileBlob">blob</a> argument and has the following properties: 
-    <ul>
-      <li>It must have <em>blob:</em> as its <a href="#scheme">scheme</a>.</li> <li>It must have an <a href="#opaqueString">opaque string</a> as <a href="#scheme-data">scheme data</a>. The <a href="#scheme-data">scheme data</a> component of the <a href="url">Blob URL</a> is an <a href="identifier">identifier</a>, which uniquely identifies the <a href="#dfn-fileBlob"><code>blob</code></a> argument that the <a href="#DefinitionOfScheme">Blob URL</a> has been created for.</li>
-    </ul>
+    <li>Let <var>r</var> be the result of the <a href="#unicodeBlobURL">Unicode Serialization of a Blob URL</a> for this <a href="#dfn-fileBlob"><code>blob</code></a>.     
 </li>
-    <li><a href="#add-an-entry">Add an entry to the Blob URL Store</a> for this <a href="#DefinitionOfScheme"><code>Blob</code> URL</a>.</li>
-    <li><a href="#add-an-entry-revoke">Add an entry to the Revocation List</a> for this <a href="#DefinitionOfScheme"><code>Blob</code> URL</a>.</li>
+    <li><a href="#add-an-entry">Add an entry to the Blob URL Store</a> for <var>r</var> and <a href="#dfn-fileBlob"><code>blob</code></a>.</li>
+    <li><a href="#add-an-entry-revoke">Add an entry to the Revocation List</a> for <var>r</var>.</li>
+    <li>Return <var>r</var>.</li>
   </ol>
 </li>
 </ol>
@@ -1717,7 +1729,7 @@ partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
     <li>If the <a href="#dfn-urlarg"><code>url</code></a> refers to a <a href="#dfn-Blob"><code>Blob</code></a> that has a <a href="#readabilityState">readability state</a> of <a href="#dfn-closedState"><code>CLOSED</code></a> OR if the value provided for the <a href="#dfn-urlarg"><code>url</code></a> argument is not a <a href="#DefinitionOfScheme"><code>Blob</code> URL</a>, OR if the value provided for the <a href="#dfn-urlarg"><code>url</code></a> argument does not have an <a href="#identifier">identifier</a> in the <a href="#BlobURLStore">Blob URL Store</a>,
   this method call does nothing.  User agents may display a message on the error console.</li>
     <li>Otherwise, user agents must
-   <a href="#removeTheEntry">remove the entry</a> from the <a href="#BlobURLStore">Blob URL Store</a> for the <a href="#identifier">identifier</a> associated with the <a href="#dfn-urlarg"><code>url</code></a> argument; subsequent attempts to dereference this URL must return a <a href="#dfn-networkError">network error</a> response code.
+   <a href="#removeTheEntry">remove the entry</a> from the <a href="#BlobURLStore">Blob URL Store</a> for the <a href="#identifier">identifier</a> associated with the <a href="#dfn-urlarg"><code>url</code></a> argument; subsequent attempts to <a href="#dereference">dereference</a> this URL must return a <a href="#dfn-networkError">network error</a> response code.
 </li>
   
   </ol>
@@ -1820,14 +1832,14 @@ var windowRef = openPopup(blobURLAnchorRef, "Application Info");
  <p>Each <em>unit of similar origin browsing contexts</em> [<a href="#HTML">HTML</a>] must maintain a <dfn id="BlobURLStore">Blob URL Store</dfn> which is a list of <a href="#identifiers">identifiers</a> created by the <code>URL.createObjectURL</code> method or the <code>URL.createFor</code> method, and the <a href="#dfn-fileBlob"><code>blob</code></a> resource that each <a href="#identifier">identifier</a> refers to. </p>
  <p>Each <em>unit of related similar origin browsing contexts</em> must maintain a <dfn id="revokeList">Revocation List</dfn> which is a list of <a href="#identifier">identifiers</a> that have been created with the <a href="#dfn-createFor"><code>URL.createFor</code></a> method, and the <a href="#dfn-fileBlob"><code>blob</code></a> resource that each <a href="#identifier">identifier</a> refers to.</p>
  <p>When this specification says to <dfn id="add-an-entry">add an entry to the Blob URL Store</dfn> the user-agent must add the <a href="#identifier">identifier</a> created using <code>URL.createObjectURL</code> or <code>URL.createFor</code>, and a reference to the <a href="#dfn-fileBlob"><code>blob</code></a> it refers to, to the <a href="#BlobURLStore">Blob URL Store</a>.</p>
- <p>When this specification says to <dfn id="add-an-entry-revoke">add an entry to the The Revocation List</dfn>, user agents must add the <a href="#identifier">identifier</a> of any <a href="#DefinitionOfScheme">Blob URL</a> created with the <code>URL.createFor</code> method to the <a href="#revokeList">Revocation List</a>. This is only for <a href="#autoRevoking">auto-revoking</a> <a href="#DefinitionOfScheme">Blob URL</a>s.</p>
- <p>When this specification says to <dfn id="removeTheEntry">remove an entry from the Blob URL Store</dfn> for a given <a href="#identifier">identifier</a> or for a given <a href="#dfn-Blob"><code>Blob</code></a>, user agents must remove the <a href="#identifier">identifier</a> and the <a href="#dfn-Blob"><code>blob</code></a> it refers to from the <a href="#BlobURLStore">Blob URL Store</a>. Subsequent attempts to dereference this URL must result in a <a href="#dfn-networkError">network error</a>.</p>
+ <p>When this specification says to <dfn id="add-an-entry-revoke">add an entry to the The Revocation List</dfn>, user agents must add the <a href="#identifier">identifier</a> of any <a href="#DefinitionOfScheme">Blob URL</a> created with the <a href="#dfn-createFor"><code>URL.createFor</code></a> method to the <a href="#revokeList">Revocation List</a>. This is only for <a href="#autoRevoking">auto-revoking</a> <a href="#DefinitionOfScheme">Blob URL</a>s.</p>
+ <p>When this specification says to <dfn id="removeTheEntry">remove an entry from the Blob URL Store</dfn> for a given <a href="#identifier">identifier</a> or for a given <a href="#dfn-Blob"><code>Blob</code></a>, user agents must remove the <a href="#identifier">identifier</a> and the <a href="#dfn-Blob"><code>blob</code></a> it refers to from the <a href="#BlobURLStore">Blob URL Store</a>. Subsequent attempts to <a href="#dereference">dereference</a> this URL must result in a <a href="#dfn-networkError">network error</a>.</p>
  <p>The <a href="#revokeQueue">Revocation List</a> and the <a href="#BlobURLStore">Blob URL Store</a> must be processed together as follows:</p>
 <ol>
-  <li>Add <a href="#removeTheEntry">removing the entries</a> for all the <a href="#identifiers">identifiers</a> in the <a href="#revokeQueue">Revocation List</a> to the <a href="#global-script-cleanup-jobs-list">global script cleanup jobs list</a></li>
+  <li>Add <a href="#removeTheEntry">removing the entries</a> for all the <a href="#identifiers">identifiers</a> in the <a href="#revokeQueue">Revocation List</a> to the <a href="#global-script-cleanup-jobs-list">global script cleanup jobs list</a>.</li>
   <li><p>When all the <a href="#identifier">identifier</a>s in the <a href="#revokeList">Revocation List</a> have had their corresponding entries in the <a href="#BlobURLStore">Blob URL Store</a> removed, remove all the <a href="#identifier">identifier</a>s in the <a href="#revokeList">Revocation List</a>.</p>
   </li>
-   <li><p>This specification adds an additional <a href="#unloading-document-cleanup-steps">unloading document cleanup step</a> [<a href="#HTML">HTML</a>]: user agents must remove all <a href="#identifier">identifiers</a> from the <a href="#BlobURLStore">Blob URL Store</a> within that <a href="#document">document</a>. If these <a href="#identifier">identifier</a>s are dereferenced, user agents must respond with a <a href="#dfn-networkError">network error</a>.</p></li>
+   <li><p>This specification adds an additional <a href="#unloading-document-cleanup-steps">unloading document cleanup step</a> [<a href="#HTML">HTML</a>]: user agents must remove all <a href="#identifier">identifiers</a> from the <a href="#BlobURLStore">Blob URL Store</a> within that <a href="#document">document</a>. If these <a href="#identifier">identifier</a>s are <a href="#dereference">dereferenced</a>, user agents must respond with a <a href="#dfn-networkError">network error</a>.</p></li>
 </ol>
  <div class="note"><div class="noteHeader">Note</div><p>User agents are free to garbage collect resources removed from the <a href="#BlobURLStore">Blob URL Store</a>.</p></div>
 
@@ -1902,27 +1914,13 @@ var windowRef = openPopup(blobURLAnchorRef, "Application Info");
 	  </div>
 	<div id="AppendixA" class="section">
 	<h2>13. Appendix A</h2>
-	<p>This section is informative, and uses the Augmented Backus-Naur Form (ABNF), defined in [<a href="#ABNF">RFC5234</a>] to describe components of blob: URLs.
+	<p>This section uses the Augmented Backus-Naur Form (ABNF), defined in [<a href="#ABNF">RFC5234</a>] to describe components of blob: URLs.
   </p>
-	 <div id="ABNFForBlobURLs" class="section">
-    <h3>13.1. An ABNF for Blob URLs</h3>
-  <div class="block"><div class="blockTitleDiv"><span class="blockTitle">ABNF</span></div><div class="blockContent"><pre class="code"><code class="abnf-code">
-  blob = scheme ":" opaqueString [fragIdentifier]
 
-  scheme = "blob"
-
-  ; scheme is always "blob"
-
-  ; opaqueString tokens must be globally unique
-  ; opaqueString could be a UUID in its canonical form
-
-  </code></pre></div></div>
-  </div>
 
   <div id="ABNFUUID" class="section">
-	<h3>13.2. An ABNF for UUID</h3>
-	<p>The following is an informative ABNF [<a href="#ABNF">ABNF</a>] for UUID, which is a <em>strongly encouraged</em> choice for the
-	<a href="#opaqueString">opaqueString</a> production of <a href="#DefinitionOfScheme">Blob URLs</a>.</p> 
+	<h3>13.1. An ABNF for UUID</h3>
+	<p>The following is an ABNF [<a href="#ABNF">ABNF</a>] for UUID. UUID strings must only use characters in the ranges U+002A to U+002B, U+002D to U+002E, U+0030 to U+0039, U+0041 to U+005A, U+005E to U+007E [<a href="#Unicode">Unicode</a>], and should be at least 36 characters long.</p> 
 	<div class="block"><div class="blockTitleDiv"><span class="blockTitle">ABNF</span></div><div class="blockContent"><pre class="code"><code class="abnf-code">
 	UUID                   = time-low "-" time-mid "-"
 	                         time-high-and-version "-"
@@ -1943,7 +1941,7 @@ var windowRef = openPopup(blobURLAnchorRef, "Application Info");
 	</code></pre></div></div>
 	</div>
  <div id="ABNFFragment" class="section">
-<h3>13.3 An ABNF for Fragment Identifiers</h3>
+<h3>13.2 An ABNF for Fragment Identifiers</h3>
 <div class="block"><div class="blockTitleDiv"><span class="blockTitle">ABNF</span></div><div class="blockContent"><pre class="code"><code class="abnf-code">
   fragIdentifier = "#" fragment
 
@@ -1983,6 +1981,8 @@ var windowRef = openPopup(blobURLAnchorRef, "Application Info");
 		<dd><cite><a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, S. Bradner. IETF.</dd>
 		<dt id="HTML">HTML</dt>
 		<dd><cite><a href="http://dev.w3.org/html5/spec/Overview.html">HTML 5.1 Nightly: A vocabulary and associated APIs for HTML and XHTML (work in progress)</a></cite>, I. Hickson. W3C.</dd>
+    <dt id="WEBORIGIN">Web Origin Concept</dt>
+    <dd><cite><a href="http://tools.ietf.org/html/rfc6454/">Web Origin Concept</a></cite>, A. Barth. IETF.</dd>
 	        <dt id="ProgressEvents">ProgressEvents</dt>
 	        <dd><cite><a href="http://www.w3.org/TR/progress-events/">Progress Events</a></cite>, A. van Kesteren. W3C.</dd>
 		<dt id="DataURL">RFC2397</dt>
