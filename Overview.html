@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>Editor's Draft <em>28 May 2014</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>Editor's Draft <em>30 May 2014</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2014 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -73,7 +73,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 28 May 2014 <b>Editor's Draft</b> of the
+        This document is the 30 May 2014 <b>Editor's Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -201,7 +201,8 @@
                     <ul>
                       <li><a href="#originOfBlobURL">10.3.1. Origin of Blob URLs</a></li>
                       <li><a href="#unicodeBlobURL">10.3.2. Unicode Serialization of a Blob URL</a></li>
-                      <li><a href="#fragmentDiscussion">10.3.3. Discussion of Fragment Identifier</a></li>
+                      <li><a href="#extractionOfOriginFromBlobURL">10.3.3. Extraction of Origin From Blob URL</a></li>
+                      <li><a href="#fragmentDiscussion">10.3.4. Discussion of Fragment Identifier</a></li>
                     </ul>
                     </li>
                     <li><a href="#requestResponseModel">10.4. Dereferencing Model for Blob URLs</a>
@@ -397,7 +398,7 @@ function errorHandler(evt) {
 <p>The term <dfn id="byte">byte</dfn> in this specification is used as defined in the Encoding Specification [<a href="#encodingSpecification">Encoding Specification</a>].</p>
 <p>The term <dfn id="contextObject">context object</dfn> in this specification is used as defined in the DOM4 specification [<a href="#DOM4">DOM4</a>].</p>
 <p>The terms <dfn id="parseAURL">parse a URL</dfn>, <dfn id="scheme">scheme</dfn>, <dfn id="scheme-data">scheme data</dfn>, <dfn id="query">query</dfn> and <dfn id="fragmentIDDef">fragment</dfn> are as defined by the WHATWG URL Specification [<a href="#URL-API">URL</a>].</p>
-<p>The terms <dfn id="requestFetch">request</dfn> and <dfn id="responseFetch">response</dfn> are as defined in the WHATWG Fetch Specification [<a href="#Fetch">Fetch Specification</a>].</p>
+<p>The terms <dfn id="requestFetch">request</dfn>, <dfn id="responseFetch">response</dfn>, and <dfn id="cross-origin-request">cross-origin request</dfn> are as defined in the WHATWG Fetch Specification [<a href="#Fetch">Fetch Specification</a>].</p>
 <p>The term <dfn id="UnixEpoch">Unix Epoch</dfn> is used in this specification to refer to the time 00:00:00 UTC on January 1 1970 (or 1970-01-01T00:00:00Z ISO 8601); this is the same time that is conceptually "0" in ECMA-262 [<a href="#ECMA-262">ECMA-262</a>].</p> 
        <p>The algorithms and steps in this specification use the following mathematical operations:</p>
        <ul>
@@ -1549,7 +1550,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 
   <div id="originOfBlobURL" class="section">
   <h4>10.3.1. Origin of Blob URLs</h4>
-  <p><a href="#DefinitionOfScheme">Blob URL</a>s are created using <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a>, and are revoked using <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a>. The <a href="#origin">origin</a> of a <a href="#DefinitionOfScheme">Blob URL</a> must be the same as the <a href="#effectiveScriptOrigin">effective script origin</a> specified by the <a href="#incumbentSettingsObject">incumbent settings object</a> at the time the method that created it -- either <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a> -- was called. The <a href="#origin">origin</a> of a Blob URL, when serialized as a string, must conform to the Web Origin Specification's Unicode Serialization of an Origin algorithm [<a href="#WEBORIGIN">ORIGIN</a>]. <a href="#cross-origin-requests-on-blobs">Cross-origin requests</a> on Blob URLs must return a <a href="#dfn-networkError">network error</a>.</a>
+  <p><a href="#DefinitionOfScheme">Blob URL</a>s are created using <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a>, and are revoked using <a href="#dfn-revokeObjectURL"><code>URL.revokeObjectURL</code></a>. The <a href="#origin">origin</a> of a <a href="#DefinitionOfScheme">Blob URL</a> must be the same as the <a href="#effectiveScriptOrigin">effective script origin</a> specified by the <a href="#incumbentSettingsObject">incumbent settings object</a> at the time the method that created it -- either <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a> -- was called. The <a href="#origin">origin</a> of a Blob URL, when serialized as a string, must conform to the Web Origin Specification's Unicode Serialization of an Origin algorithm [<a href="#WEBORIGIN">ORIGIN</a>]. <a href="#cross-origin-request">Cross-origin requests</a> on Blob URLs must return a <a href="#dfn-networkError">network error</a>.</a>
   </p>
   <div class="note"><div class="noteHeader">Note</div><p>In practice this means that HTTP and HTTPS <a href="#origin">origins</a> are covered by this specification as valid origins for use with Blob URLs. This specification does not address the case of non-HTTP and non-HTTPS <a href="#origin">origins</a>. For instance blob:file:///Users/arunranga/702efefb-c234-4988-a73b-6104f1b615ee (which uses the "file:" <a href="#origin">origin</a>, which is part of the Blob URL's <a href="#scheme-data">scheme data</a>) may have behavior that is undefined, even though user agents may treat such Blob URLs as valid.</p></div>
 
@@ -1568,11 +1569,28 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
  </ol>
  <p>An example of a Blob URL might be <em>blob:https://example.org/9115d58c-bcda-ff47-86e5-083e9a215304</em>.</p>
   </div>
+  <div id="extractionOfOriginFromBlobURL" class="section">
+    <h4>10.3.3. Extraction of Origin from Blob URL</h4>
+   <p>An <a href="#origin">origin</a> extracted from a Unicode-serialized <a href="#DefinitionOfScheme">Blob URL</a> is the value returned by the following <dfn id="extractionOfOrigin">extraction of origin from Blob URL</dfn> algorithm:</p>
+    <ol>
+      <li><p>Let <var>input</var> be a <a href="#unicodeBlobURL">Unicode-serialized Blob URL</a>, <var>position</var> be a pointer to <var>input</var> initially placed at the start of <var>input</var>, and <var>result</var> the empty string.</p></li>
+      <li><p>Advance <var>pointer</var> to the <em>first character</em> past the ":" (U+003A) character.</p>
+      <div class="note"><div class="noteHeader">Note</div><p>This algorithm assumes that Blob URLs that serve as <var>input</var> are results of the <a href="#unicodeBlobURL">Unicode Serialization of a Blob URL algorithm</a>; after this step, <var>pointer</var> advances past the Unicode code points U+0062, U+006C, U+006F, U+0062 and U+003A. </p></div>
+      </li>
+      <li><p><a href="#collect-a-sequence-of-characters">Collect a sequence of characters</a>. If the character at <var>position</var> is a "/" (U+0024 SOLIDUS) character, it must only be appended to <var>result</var> if it is immediately followed by another "/" (U+0024 SOLIDUS) or immediately preceded by another "/" (U+0024 SOLIDUS). If the character at <var>position</var> is a "/" (U+0024 SOLIDUS) character that is neither preceded nor followed by another "/" (U+0024 SOLIDUS), then <em>stop collecting characters</em> and <em>do not append</em> the "/" (U+0024 SOLIDUS) to <var>result</var>.</p>
+      <div class="note"><div class="noteHeader">Note</div><p>In practice, this allows "http://" and "file:///" to be appended to <var>result</var> as part of the collection of characters, but the file <a href="#scheme">scheme</a> is NOT defined as an <a href="#origin">origin</a> to be used with <a href="#DefinitionOfScheme">Blob URLs</a>.</p></div>
+      </li>
+      <li><p>Return <var>result</var>.</p>
+     <div class="note"><div class="noteHeader">Note</div><p>The value returned as <var>result</var> matches the value generated by the Unicode Serialization of an Origin algorithm [<a href="#WEBORIGIN">ORIGIN</a>] when this <a href="#DefinitionOfScheme">Blob URL</a> was created with <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a>or <a href="#dfn-createFor"><code>URL.createFor</code></a>.</p></div>   
+      </li>
+    </ol>
+
+  </div>
   <div class="section" id="fragmentDiscussion">
-  <h4>10.3.3 Discussion of Fragment Identifier</h4>
+  <h4>10.3.4. Discussion of Fragment Identifier</h4>
   <p>
   The <a href="#fragmentIDDef">fragment</a>'s resolution and processing directives depend on the media type [<a href="#RFC2046">RFC2046</a>] of a potentially retrieved representation, even though such
-  a retrieval is only performed if the <a href="#DefinitionOfScheme">Blob URL</a> is dereferenced.  For example, in an HTML file [<a href="#HTML">HTML</a>] the fragment
+  a retrieval is only performed if the <a href="#DefinitionOfScheme">Blob URL</a> is <a href="#dereference">dereferenced</a>.  For example, in an HTML file [<a href="#HTML">HTML</a>] the fragment
   could be used to refer to an anchor within the file.  If the user agent does not recognize the media type of the resource, OR if a fragment is not
   meaningful within the resource, it must ignore the fragment.  The fragment must not be used to identify a resource; only the blob: <a href="#scheme">scheme</a> and the <a href="#scheme-data">scheme data</a> constitute a valid resource identifier.
   </p>
@@ -1587,11 +1605,11 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   <div id="requestResponseModel" class="section">
   <h3>10.4. Dereferencing Model for Blob URLs</h3>
 
-  <p>The URL Specification [<a href="#URL-API">URL</a>] along with the Fetch Specification [<a href="#Fetch">Fetch</a>] define how <a href="#DefinitionOfScheme"><code>Blob</code> URL</a>s are <dfn id="dereference">dereferenced</dfn>. This section provides guidance on request and response headers.</p>
-  <p>User agents must only support requests with GET [<a href="#RFC2616">RFC2616</a>]. Specifically, responses must only support a subset of responses that are equivalent to the following from HTTP [<a href="#RFC2616">RFC2616</a>]:</p>
+  <p>The URL Specification [<a href="#URL-API">URL</a>] along with the Fetch Specification [<a href="#Fetch">Fetch</a>] define how <a href="#DefinitionOfScheme"><code>Blob</code> URL</a>s are <dfn id="dereference">dereferenced</dfn>. This section provides guidance on <a href="#requestFetch">requests</a> and <a href="#responseFetch">responses</a>.</p>
+  <p>User agents must only support requests with GET [<a href="#RFC2616">RFC2616</a>]. Specifically, <a href="#responseFetch">responses</a> must only support a subset of the following from HTTP [<a href="#RFC2616">RFC2616</a>]:</p>
   <div id="TwoHundredOK" class="section">
   <h4>10.4.1. 200 OK</h4>
-  <p>This response [<a href="#RFC2616">RFC2616</a>] must be used if the request has succeeded, and no <a href="#dfn-networkError">network errors</a> are generated.</p> 
+  <p>This <a href="#responseFetch">response</a> must be used if the <a href="#requestFetch">request</a> has succeeded, and no <a href="#dfn-networkError">network errors</a> are generated.</p> 
   </div>
   <div id="processing-media-types" class="section">
   <h4>10.4.2. Response Headers</h4>
@@ -1600,7 +1618,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   <p>
   If a Content-Type header [<a href="#RFC2616">RFC2616</a>] is provided, then user agents should obtain and process that media type in a manner consistent with the Mime Sniffing specification [<a href="#MIMESNIFF">MIMESNIFF</a>].  
   </p>
-  <p>If a resource identified with a <a href="#DefinitionOfScheme">blob: URL</a> is a <a href="#dfn-file"><code>File</code></a> object, user agents must use that file's <a href="#dfn-name"><code>name</code></a> attribute, as if the response had a <code>Content-Disposition</code> header with the filename parameter set to the <a href="#dfn-file"><code>File</code></a>'s <a href="#dfn-name"><code>name</code></a> attribute [<a href="#RFC6266">RFC6266</a>].  </p>
+  <p>If a resource identified with a <a href="#DefinitionOfScheme">Blob URL</a> is a <a href="#dfn-file"><code>File</code></a> object, user agents must use that file's <a href="#dfn-name"><code>name</code></a> attribute, as if the <a href="#responseFetch">response</a> had a <code>Content-Disposition</code> header with the filename parameter set to the <a href="#dfn-file"><code>File</code></a>'s <a href="#dfn-name"><code>name</code></a> attribute [<a href="#RFC6266">RFC6266</a>].  </p>
   <div class="note"><div class="noteHeader">Note</div><p>
   A corollary to this is a non-normative implementation guideline: that the "File Save As" user interface in user agents takes into account the <a href="#dfn-file"><code>File</code></a>'s <code>name</code> attribute if presenting a default name to save the file as.
 </p>
@@ -1610,13 +1628,13 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   <div id="NetworkError" class="section">
   <h4>10.4.3. Network Errors</h4>
   <p>
-    Responses that do not succeed with a <a href="#TwoHundredOK">200 OK</a> must act as if a <dfn id="dfn-networkError">network error</dfn> has occurred [<a href="#XHR">XHR</a>].  Network errors must be used when:
+    Responses that do not succeed with a <a href="#TwoHundredOK">200 OK</a> must act as if a <dfn id="dfn-networkError">network error</dfn> has occurred [<a href="#Fetch">Fetch</a>].  Network errors must be used when:
   </p>
   <ul>
-    <li><p>Any request method other than GET is used to dereference the URL.</p></li>
+    <li><p>Any <a href="#requestFetch">request</a> method other than GET is used.</p></li>
     <li><p>The <a href="#DefinitionOfScheme">Blob URL</a> does not have an <a href="#identifier">identifier</a> in the <a href="#BlobURLStore">Blob URL Store</a>.  </p></li>
     <li><p>The Blob has been <a href="#closed">closed</a>; this also results in the <a href="#DefinitionOfScheme">Blob URL</a> not having an <a href="#identifier">identifier</a> in the <a href="#BlobURLStore">Blob URL Store</a>.</p></li>
-    <li><p>A <a href="#cross-origin-requests-on-blobs">cross-origin request</a> is made on a <a href="#DefinitionOfScheme">Blob URL</a>.</p></li>
+    <li><p>A <a href="#cross-origin-request">cross-origin request</a> is made on a <a href="#DefinitionOfScheme">Blob URL</a>.</p></li>
     <li><p>A security error has occurred.  </p>
     </li>
   </ul>
@@ -1624,11 +1642,11 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   </div>
   <div id="ProtocolExamples" class="section">
   <h4>10.4.4. Sample Request and Response Headers</h4>
-  <p>This section provides sample exchanges between web applications and user agents using the <a href="#processingModel">blob: protocol</a>.  A request can be triggered using HTML markup of the sort <code>&lt;img src="blob:550e8400-e29b-41d4-a716-446655440000"&gt;</code>, after a web application calls <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> on a given <a href="#dfn-fileBlob"><code>blob</code></a>, which returns <code>blob:550e8400-e29b-41d4-a716-446655440000 </code> to dereference that <a href="#dfn-fileBlob"><code>blob</code></a>.  These examples merely illustrate the protocol; web developers are not likely to interact with all the headers, but the <code>getAllResponseHeaders()</code> method of <code>XMLHttpRequest</code>, if used, will show relevant response headers [<a href="#XHR">XHR</a>].  </p>
+  <p>This section provides sample exchanges between web applications and user agents using <a href="#DefinitionOfScheme">Blob URLs</a>.  A <a href="#requestFetch">request</a> can be triggered using HTML markup of the sort <code>&lt;img src="blob:http://example.org:8080/550e8400-e29b-41d4-a716-446655440000"&gt;</code>.  These examples merely illustrate the <a href="#requestFetch">request</a> and <a href="#responseFetch">response</a>; web developers are not likely to interact with all the headers, but the <code>getAllResponseHeaders()</code> method of <code>XMLHttpRequest</code>, if used, will show relevant <a href="#responseFetch">response</a> headers [<a href="#XHR">XHR</a>].  </p>
   <div class="example"><div class="exampleHeader">Example</div>
-  <p>Requests could look like this:</p>
+  <p><a href="#requestFetch">Requests</a> could look like this:</p>
   <div class="block"><div class="blockTitleDiv"><span class="blockTitle">HEADERS</span></div><div class="blockContent"><pre class="code"><code class="headers-code">
-  GET 550e8400-e29b-41d4-a716-446655440000
+  GET http://example.org:8080/550e8400-e29b-41d4-a716-446655440000
   </code></pre></div></div>
   <p>If the <a href="#dfn-fileBlob"><code>blob</code></a> has an affiliated media type [<a href="#RFC2046">RFC2046</a>] represented by its <a href="#dfn-type"><code>type</code></a> attribute, then the response message should include the Content-Type header from RFC2616 [<a href="#RFC2616">RFC2616</a>].  See <a href="#processing-media-types">processing media types</a>. </p>
   <div class="block"><div class="blockTitleDiv"><span class="blockTitle">HEADERS</span></div><div class="blockContent"><pre class="code"><code class="headers-code">
@@ -1639,7 +1657,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   
   ....
   </code></pre></div></div>
-  <p>If there is a <a href="#file-error-read">file error</a> or any other kind of error associated with the <a href="#dfn-fileBlob"><code>blob</code></a>, then a user agent must act as if a <a href="#dfn-networkError">network error</a> has occurred. </p>
+  <p>If there is a <a href="#file-error-read">file error</a> associated with the <a href="#dfn-fileBlob"><code>blob</code></a>, then a user agent must act as if a <a href="#dfn-networkError">network error</a> has occurred. </p>
   
   </div>
   
@@ -1863,8 +1881,8 @@ var windowRef = openPopup(blobURLAnchorRef, "Application Info");
 	access to any selections by making the  <a href="#dfn-filelist"><code>FileList</code></a> object returned be of size 0.</p></li>
 	<li><p><dfn id="sensitive-files">System-sensitive files</dfn> (e.g. files in /usr/bin, password files, and other native operating system executables) typically should not
 	be exposed to web content, and should not be accessed via <a href="#DefinitionOfScheme">Blob URLs</a>.  User agents may throw a <a href="#dfn-SecurityError"><code>SecurityError</code></a> exception for synchronous read methods, or return a <a href="#dfn-SecurityError"><code>SecurityError</code></a> <a href="#dfn-domerror"><code>DOMError</code></a> for asynchronous reads.</p></li>
-	<li><p><dfn id="cross-origin-requests-on-blobs">Cross-origin requests on Blob URLs</dfn> occur when a <a href="#DefinitionOfScheme">Blob URL</a> is accessed <a href="#originOfBlobURL">across origins</a>.    User agents must act as if a 
-	<a href="#dfn-networkError">network error</a> has occurred if such requests are made.
+	<li><p>User agents must act as if a 
+	<a href="#dfn-networkError">network error</a> has occurred if <a href="#cross-origin-request">cross-origin requests</a> are made.
 	</p></li>
 	</ul>
 	<div class="ednote"><div class="ednoteHeader">Editorial note</div><p>This section is provisional; more security data may supplement this in subsequent drafts.</p></div>
