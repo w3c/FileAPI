@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>Editor's Draft <em>30 May 2014</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>Editor's Draft <em>02 June 2014</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2014 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -73,7 +73,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 30 May 2014 <b>Editor's Draft</b> of the
+        This document is the 02 June 2014 <b>Editor's Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -201,8 +201,9 @@
                     <ul>
                       <li><a href="#originOfBlobURL">10.3.1. Origin of Blob URLs</a></li>
                       <li><a href="#unicodeBlobURL">10.3.2. Unicode Serialization of a Blob URL</a></li>
-                      <li><a href="#extractionOfOriginFromBlobURL">10.3.3. Extraction of Origin From Blob URL</a></li>
-                      <li><a href="#fragmentDiscussion">10.3.4. Discussion of Fragment Identifier</a></li>
+                      <li><a href="#extractionOfIdentifierFromBlobURL">10.3.3. Extraction of Identifier from Blob URL</a></li>
+                      <li><a href="#extractionOfOriginFromIdentifier">10.3.4. Extraction of Origin From Blob URL</a></li>
+                      <li><a href="#fragmentDiscussion">10.3.5. Discussion of Fragment Identifier</a></li>
                     </ul>
                     </li>
                     <li><a href="#requestResponseModel">10.4. Dereferencing Model for Blob URLs</a>
@@ -1557,7 +1558,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   </div>
   <div id="unicodeSerializationOfBlobURL" class="section">
  <h4>10.3.2. Unicode Serialization of Blob URL</h4>
- <div class="note"><div class="noteHeader">Note</div><p>This algorithm is invoked by one of <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a>.</p></div>
+
  <p>The <dfn id="unicodeBlobURL">Unicode Serialization of a Blob URL</dfn> for a given Blob URL is the value returned by the following algorithm:</p>
  <ol>
   <li><p>Let <var>result</var> be the empty string. Append the string "blob" (that is, the Unicode code point sequence U+0062, U+006C, U+006F, U+0062) to <var>result</var>.</p></li>
@@ -1569,25 +1570,35 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
  </ol>
  <p>An example of a Blob URL might be <em>blob:https://example.org/9115d58c-bcda-ff47-86e5-083e9a215304</em>.</p>
   </div>
-  <div id="extractionOfOriginFromBlobURL" class="section">
-    <h4>10.3.3. Extraction of Origin from Blob URL</h4>
-   <p>An <a href="#origin">origin</a> extracted from a Unicode-serialized <a href="#DefinitionOfScheme">Blob URL</a> is the value returned by the following <dfn id="extractionOfOrigin">extraction of origin from Blob URL</dfn> algorithm:</p>
+  <div id="extractionOfIdentifierFromBlobURL" class="section">
+    <h4>10.3.3. Extraction of Identifier from Blob URL</h4>
+    <p>A <a href="#DefintionOfScheme">Blob URL</a>'s <a href="#scheme-data">scheme data</a> component is called an <a href="#identifier">identifier</a> and is used to <a href="#add-an-entry">add an entry to the Blob URL store</a>. An <a href="#identifier">identifier</a> extracted from a Unicode-serialized <a href="#DefinitionOfScheme">Blob URL</a> is the value returned by the following <dfn id="extractionOfIdentifier">extraction of identifier from Blob URL</dfn> algorithm:</p>
     <ol>
-      <li><p>Let <var>input</var> be a <a href="#unicodeBlobURL">Unicode-serialized Blob URL</a>, <var>position</var> be a pointer to <var>input</var> initially placed at the start of <var>input</var>, and <var>result</var> the empty string.</p></li>
-      <li><p>Advance <var>pointer</var> to the <em>first character</em> past the ":" (U+003A) character.</p>
-      <div class="note"><div class="noteHeader">Note</div><p>This algorithm assumes that Blob URLs that serve as <var>input</var> are results of the <a href="#unicodeBlobURL">Unicode Serialization of a Blob URL algorithm</a>; after this step, <var>pointer</var> advances past the Unicode code points U+0062, U+006C, U+006F, U+0062 and U+003A. </p></div>
+      <li><p>Let <var>input</var> be a <a href="#unicodeBlobURL">Unicode-serialized Blob URL</a>, and <var>position</var> be a pointer to <var>input</var> initially placed at the start of <var>input</var>.</p></li>
+      <li><p>Advance <var>position</var> to the <em>first character</em> past the ":" (U+003A) character.</p>
+      <div class="note"><div class="noteHeader">Note</div><p>This algorithm assumes that <a href="#DefinitionOfScheme">Blob URL</a>s that serve as <var>input</var> are results of the <a href="#unicodeBlobURL">Unicode Serialization of a Blob URL algorithm</a>; after this step, <var>position</var> advances past the Unicode code points U+0062, U+006C, U+006F, U+0062 and U+003A. </p></div></p></li>
+      <li><p><a href="#collect-a-sequence-of-characters">Collect a sequence of characters</a>. If the character at <var>position</var> is a "#" (U+0023 NUMBER SIGN), do not append it to the <var>result</var> of the collection, <em>stop collecting characters</em>, and return the <var>result</var> of the collection till <var>position</var>.</p>
+      <div class="note"><div class="noteHeader">Note</div><p>Web developers may append a <a href="#fragmentDiscussion">fragment identifier</a> to a <a href="#DefinitionOfScheme">Blob URL</a>, but it is not part of the <a href="#identifier">identifier</a>; only the <a href="#scheme-data">scheme data</a> identifies a resource.</p></div>
       </li>
+
+    </ol>
+  </div>
+  <div id="extractionOfOriginFromIdentifier" class="section">
+    <h4>10.3.4. Extraction of Origin from Identifier</h4>
+   <p>An <a href="#origin">origin</a> extracted from an <a href="#identifier">identifier</a> is the value returned by the following <dfn id="extractionOfOrigin">extraction of origin from an identifier</dfn> algorithm:</p>
+    <ol>
+      <li><p>Let <var>input</var> be an <a href="#identifier">identifier</a>, <var>position</var> be a pointer to <var>input</var> initially placed at the start of <var>input</var>, and <var>result</var> the empty string.</p></li>
       <li><p><a href="#collect-a-sequence-of-characters">Collect a sequence of characters</a>. If the character at <var>position</var> is a "/" (U+0024 SOLIDUS) character, it must only be appended to <var>result</var> if it is immediately followed by another "/" (U+0024 SOLIDUS) or immediately preceded by another "/" (U+0024 SOLIDUS). If the character at <var>position</var> is a "/" (U+0024 SOLIDUS) character that is neither preceded nor followed by another "/" (U+0024 SOLIDUS), then <em>stop collecting characters</em> and <em>do not append</em> the "/" (U+0024 SOLIDUS) to <var>result</var>.</p>
-      <div class="note"><div class="noteHeader">Note</div><p>In practice, this allows "http://" and "file:///" to be appended to <var>result</var> as part of the collection of characters, but the file <a href="#scheme">scheme</a> is NOT defined as an <a href="#origin">origin</a> to be used with <a href="#DefinitionOfScheme">Blob URLs</a>.</p></div>
+      <div class="note"><div class="noteHeader">Note</div><p>In practice, this allows "http://" and "file:///" to be appended to <var>result</var> as part of the collection of characters, but the <code>file</code> <a href="#scheme">scheme</a> is NOT defined as an <a href="#origin">origin</a> to be used with <a href="#DefinitionOfScheme">Blob URLs</a>.</p></div>
       </li>
       <li><p>Return <var>result</var>.</p>
-     <div class="note"><div class="noteHeader">Note</div><p>The value returned as <var>result</var> matches the value generated by the Unicode Serialization of an Origin algorithm [<a href="#WEBORIGIN">ORIGIN</a>] when this <a href="#DefinitionOfScheme">Blob URL</a> was created with <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a>or <a href="#dfn-createFor"><code>URL.createFor</code></a>.</p></div>   
+     <div class="note"><div class="noteHeader">Note</div><p>The value returned as <var>result</var> matches the value generated by the Unicode Serialization of an Origin algorithm [<a href="#WEBORIGIN">ORIGIN</a>] when this <a href="#DefinitionOfScheme">Blob URL</a> was created with <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a>.</p></div>   
       </li>
     </ol>
 
   </div>
   <div class="section" id="fragmentDiscussion">
-  <h4>10.3.4. Discussion of Fragment Identifier</h4>
+  <h4>10.3.5. Discussion of Fragment Identifier</h4>
   <p>
   The <a href="#fragmentIDDef">fragment</a>'s resolution and processing directives depend on the media type [<a href="#RFC2046">RFC2046</a>] of a potentially retrieved representation, even though such
   a retrieval is only performed if the <a href="#DefinitionOfScheme">Blob URL</a> is <a href="#dereference">dereferenced</a>.  For example, in an HTML file [<a href="#HTML">HTML</a>] the fragment
@@ -1847,10 +1858,10 @@ var windowRef = openPopup(blobURLAnchorRef, "Application Info");
 </div>
 <div id="lifeTime" class="section">
   <h3>10.6. Lifetime of Blob URLs</h3>
- <p>Each <em>unit of similar origin browsing contexts</em> [<a href="#HTML">HTML</a>] must maintain a <dfn id="BlobURLStore">Blob URL Store</dfn> which is a list of <a href="#identifiers">identifiers</a> created by the <code>URL.createObjectURL</code> method or the <code>URL.createFor</code> method, and the <a href="#dfn-fileBlob"><code>blob</code></a> resource that each <a href="#identifier">identifier</a> refers to. </p>
- <p>Each <em>unit of related similar origin browsing contexts</em> must maintain a <dfn id="revokeList">Revocation List</dfn> which is a list of <a href="#identifier">identifiers</a> that have been created with the <a href="#dfn-createFor"><code>URL.createFor</code></a> method.</p>
- <p>When this specification says to <dfn id="add-an-entry">add an entry to the Blob URL Store</dfn> the user-agent must add the <a href="#identifier">identifier</a> created using <code>URL.createObjectURL</code> or <code>URL.createFor</code>, and a reference to the <a href="#dfn-fileBlob"><code>blob</code></a> it refers to, to the <a href="#BlobURLStore">Blob URL Store</a>.</p>
- <p>When this specification says to <dfn id="add-an-entry-revoke">add an entry to the The Revocation List</dfn>, user agents must add the <a href="#identifier">identifier</a> of any <a href="#DefinitionOfScheme">Blob URL</a> created with the <a href="#dfn-createFor"><code>URL.createFor</code></a> method to the <a href="#revokeList">Revocation List</a>. This is only for <a href="#autoRevoking">auto-revoking</a> <a href="#DefinitionOfScheme">Blob URL</a>s.</p>
+ <p>Each <em>unit of similar origin browsing contexts</em> [<a href="#HTML">HTML</a>] must maintain a <dfn id="BlobURLStore">Blob URL Store</dfn> which is a list of <a href="#identifiers">identifiers</a> extracted from <a href="#DefinitionOfScheme">Blob URL</a>s created by the <code>URL.createObjectURL</code> method or the <code>URL.createFor</code> method, and the <a href="#dfn-fileBlob"><code>blob</code></a> resource that each <a href="#identifier">identifier</a> refers to. </p>
+ <p>Each <em>unit of related similar origin browsing contexts</em> must maintain a <dfn id="revokeList">Revocation List</dfn> which is a list of <a href="#identifier">identifiers</a> that have been extracted from <a href="#DefinitionOfScheme">Blob URL</a>s created with the <a href="#dfn-createFor"><code>URL.createFor</code></a> method.</p>
+ <p>When this specification says to <dfn id="add-an-entry">add an entry to the Blob URL Store</dfn> the user-agent must <a href="#extractionOfIdentifier">extract the identifier from a Blob URL</a> created using <a href="#dfn-createFor"><code>URL.createFor</code></a> or <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a>, and add the <a href="#identifier">identifier</a>, and a reference to the <a href="#dfn-fileBlob"><code>blob</code></a> it refers to, to the <a href="#BlobURLStore">Blob URL Store</a>.</p>
+ <p>When this specification says to <dfn id="add-an-entry-revoke">add an entry to the The Revocation List</dfn>, user agents must <a href="#extractionOfIdentifier">extract the identifier from a Blob URL</a> created using <a href="#dfn-createFor"><code>URL.createFor</code></a>, and add that <a href="#identifier">identifier</a> to the <a href="#revokeList">Revocation List</a>. This is only for <a href="#autoRevoking">auto-revoking</a> <a href="#DefinitionOfScheme">Blob URL</a>s.</p>
  <p>When this specification says to <dfn id="removeTheEntry">remove an entry from the Blob URL Store</dfn> for a given <a href="#identifier">identifier</a> or for a given <a href="#dfn-Blob"><code>Blob</code></a>, user agents must remove the <a href="#identifier">identifier</a> and the <a href="#dfn-Blob"><code>blob</code></a> it refers to from the <a href="#BlobURLStore">Blob URL Store</a>. Subsequent attempts to <a href="#dereference">dereference</a> this URL must result in a <a href="#dfn-networkError">network error</a>.</p>
  <p>The <a href="#revokeQueue">Revocation List</a> and the <a href="#BlobURLStore">Blob URL Store</a> must be processed together as follows:</p>
 <ol>
@@ -1881,8 +1892,7 @@ var windowRef = openPopup(blobURLAnchorRef, "Application Info");
 	access to any selections by making the  <a href="#dfn-filelist"><code>FileList</code></a> object returned be of size 0.</p></li>
 	<li><p><dfn id="sensitive-files">System-sensitive files</dfn> (e.g. files in /usr/bin, password files, and other native operating system executables) typically should not
 	be exposed to web content, and should not be accessed via <a href="#DefinitionOfScheme">Blob URLs</a>.  User agents may throw a <a href="#dfn-SecurityError"><code>SecurityError</code></a> exception for synchronous read methods, or return a <a href="#dfn-SecurityError"><code>SecurityError</code></a> <a href="#dfn-domerror"><code>DOMError</code></a> for asynchronous reads.</p></li>
-	<li><p>User agents must act as if a 
-	<a href="#dfn-networkError">network error</a> has occurred if <a href="#cross-origin-request">cross-origin requests</a> are made.
+	<li><p><a href="#cross-origin-request">Cross-origin requests</a> may also be treated as a security issue; this specification treats such <a href="#requestFetch">requests</a> as <a href="#dfn-networkError">network errors</a>. 
 	</p></li>
 	</ul>
 	<div class="ednote"><div class="ednoteHeader">Editorial note</div><p>This section is provisional; more security data may supplement this in subsequent drafts.</p></div>
