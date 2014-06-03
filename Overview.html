@@ -538,7 +538,7 @@ var d = new Blob([buffer, b, c, bytes]);
 	</div>        
     <div id="attributes-blob" class="section">
     <h3>5.2. Attributes</h3>
-    <dl><dt id="dfn-size"><code>size</code></dt><dd><p>Returns the size of the byte sequence in number of bytes.  On getting, conforming user agents must return the total
+    <dl><dt id="dfn-size"><code>size</code></dt><dd><p>Returns the size of the <a href="#byte">byte</a> sequence in number of bytes.  On getting, conforming user agents must return the total
     number of bytes that can be read by a <a href="#dfn-filereader"><code>FileReader</code></a> or <a href="#dfn-FileReaderSync"><code>FileReaderSync</code></a> object, or 0 if the Blob has no bytes to be read.  If the <code>Blob</code> has a readability state of <a href="#dfn-closedState"><code>CLOSED</code></a> then <code>size</code> must return 0.</p></dd>
     <dt id="dfn-type"><code>type</code></dt>
     <dd><p>The ASCII-encoded string in lower case representing the media type of the <code>Blob</code>. On getting, user agents must return the type of a <code>Blob</code> as an ASCII-encoded string in lower case, such that when it is converted to a <a href="#byte">byte</a> sequence, it is a <em>parsable MIME type</em> [<a href="#MIMESNIFF">MIMESNIFF</a>], or the empty string -- 0 bytes -- if the type cannot be determined. The <a href="#dfn-type"><code>type</code></a> attribute can be set by the web application itself through constructor invocation and through the <a href="#dfn-slice"><code>slice</code></a> call; in these cases, further normative conditions for this attribute are in the <a href="#blob-constructor-steps">Blob constructor steps</a>, the <a href="#file-constructor-steps">File Constructor steps</a>, and the <a href="#slice-method-algo">slice method algorithm</a> respectively. User agents can also determine the <a href="#dfn-type"><code>type</code></a> of a <a href="#dfn-Blob"><code>Blob</code></a>, especially if the <a href="#byte">byte</a> sequence is from an on-disk file; in this case, further normative conditions are in the <a href="#file-type-guidelines">file type guidelines.</a>.  
@@ -680,7 +680,7 @@ interface File</dfn> : <a href="#dfn-Blob" class="dfnref">Blob</a> {
 
 dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
     
-      DOMString <a href="#dfn-BPtype" title="BPtype">type</a> = "";
+      DOMString <a href="#dfn-FPtype" title="FPtype">type</a> = "";
       long long <a href="#dfn-FPdate" title="FPdate">lastModified</a>;
   
 };
@@ -715,10 +715,10 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
      </li>
      <li>If the optional <a href="#dfn-FilePropertyBag"><code>FilePropertyBag</code></a> dictionary argument is used, then run the following substeps:
       <ol>
-        <li>If the <code>type</code> member is provided and is not the empty string, let <var>t</var> be set to the type dictionary member.  If <var>t</var> contains any characters outside the range U+0020 to U+007E, then set <var>t</var> to the empty string and return from these substeps. </li>
+        <li>If the <a href="#dfn-FPtype"><code>type</code></a> member is provided and is not the empty string, let <var>t</var> be set to the <a href="#dfn-FPtype"><code>type</code></a> dictionary member.  If <var>t</var> contains any characters outside the range U+0020 to U+007E, then set <var>t</var> to the empty string and return from these substeps. </li>
         <li>Convert every character in <var>t</var> to lowercase using the "<a href="#converting-a-string-to-ASCII-lowercase">converting a string to ASCII lowercase algorithm</a>" [<a href="#WebIDL">WebIDL</a>].</li>
-        <li>If the <code>lastModified</code> member is provided, let <var>d</var> be set to the <code>lastModified</code> dictionary member.  If it is not provided, set <var>d</var> to the current date and time represented as the number of milliseconds since the <a href="#UnixEpoch">Unix Epoch</a> (which is the equivalent of <code>Date.now()</code> [<a href="#ECMA-262">ECMA-262</a>]).
-        <div class="note"><div class="noteHeader">Note</div><p>Since ECMA-262 <code>Date</code> objects convert to <code>long long</code> values representing the number of milliseconds since the <a href="#UnixEpoch">Unix Epoch</a>, the <code>lastModified</code> member could be a <code>Date</code> object [<a href="#ECMA-262">ECMA-262</a>].</p></div> 
+        <li>If the <a href="#dfn-FPdate"><code>lastModified</code></a> member is provided, let <var>d</var> be set to the  <a href="#dfn-FPdate"><code>lastModified</code></a> dictionary member.  If it is not provided, set <var>d</var> to the current date and time represented as the number of milliseconds since the <a href="#UnixEpoch">Unix Epoch</a> (which is the equivalent of <code>Date.now()</code> [<a href="#ECMA-262">ECMA-262</a>]).
+        <div class="note"><div class="noteHeader">Note</div><p>Since ECMA-262 <code>Date</code> objects convert to <code>long long</code> values representing the number of milliseconds since the <a href="#UnixEpoch">Unix Epoch</a>, the <a href="#dfn-FPdate"><code>lastModified</code></a> member could be a <code>Date</code> object [<a href="#ECMA-262">ECMA-262</a>].</p></div> 
         </li>
       </ol>
     </li>
@@ -750,12 +750,12 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
             <li><p><code>DOMString</code> [<a href="#WebIDL">WebIDL</a>] elements.</p></li>
           </ul>
         </dd>
-        <dt id="dfn-cons-name">A <code>name</code> parameter</dt>
+        <dt id="dfn-fileName">A <code>name</code> parameter</dt>
         <dd>
     <p>A <code>DOMString</code> [<a href="#WebIDL">WebIDL</a>] parameter representing the name of the file; normative conditions for this constructor parameter can be found in the <a href="#file-constructor-steps">File constructor steps</a>.</p></dd>
     <dt id="def-Properties">An optional <a href="#dfn-FilePropertyBag"><code>FilePropertyBag</code></a> dictionary</dt><dd><p>which takes the following members:</p>
     <ul>
-      <li><p>An optional <code>type</code> member; normative conditions for this member are provided in the <a href="#file-constructor-steps">File constructor steps</a> .</p></li>
+      <li><p>An optional <dfn id="dfn-FPtype"><code>type</code></dfn> member; the ASCII-encoded string in lower case representing the media type of the <code>File</code>. Normative conditions for this member are provided in the <a href="#file-constructor-steps">File constructor steps</a>.</p></li>
       <li><p>An optional <dfn id="dfn-FPdate"><code>lastModified</code></dfn> member, which must be a <code>long long</code>; normative conditions for this member are provided in the <a href="#file-constructor-steps">File constructor steps</a>.</p></li>
     </ul>
   </dd>
@@ -768,7 +768,7 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
 	  <div id="file-attrs" class="section">
 	  <h3>6.2. Attributes</h3>
 	  <dl>
-	    <dt id="dfn-fileName"><code>name</code></dt>
+	    <dt id="dfn-name"><code>name</code></dt>
 	    <dd><p>The name of the file; on getting, this must return the name of the file as a string. There are numerous file name variations and conventions used by different underlying OS file systems;
 	    this is merely the name of the file, without path information.  On getting, if user agents cannot make this information available, they must return the empty string.  If a <a href="#dfn-file"><code>File</code></a> object is created using a constructor, further normative conditions for this attribute are found in the <a href="#file-constructor-steps">file constructor steps</a>.</p>
     </dd>
