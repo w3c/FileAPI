@@ -154,7 +154,7 @@
             <li><a href="#reading-data-section">8. Reading Data</a>
             <ul>
               <li><a href="#readOperationSection">8.1 The Read Operation</a></li>
-              <li><a href="#reading-task-source">8.2. The File Reading Task Source</a></li>
+              <li><a href="#blobreader-task-source">8.2. The File Reading Task Source</a></li>
               <li><a href="#APIASynch">8.3. FileReader</a>
               <ul>   
                 <li><a href="#filereaderConstrctr">8.3.1. Constructors</a></li>
@@ -450,7 +450,7 @@ function errorHandler(evt) {
 		<h3>5.1. Constructors</h3>
 		<p>The <code>Blob()</code> constructor can be invoked with zero or more parameters.  When the <code>Blob()</code> constructor is invoked, user agents must run the following <dfn id="blob-constructor-steps">Blob constructor steps</dfn>:</p>
     <ol>
-      <li><p>If invoked with zero parameters, return a new <code>Blob</code> object with its <a href="#readabilityState">readability state</a> set to <a href="#dfn-openedState"><code>OPENED</code></a>, consisting of 0 bytes, with <a href="#dfn-size"><code>size</code></a> set to 0, and with <a href="#dfn-type"><code>type</code></a> set to the empty string.</p></li>
+      <li><p>If invoked with zero parameters, return a new <code>Blob</code> object with its <a href="#readabilityState">readability state</a> set to <a href="#dfn-openState"><code>OPENED</code></a>, consisting of 0 bytes, with <a href="#dfn-size"><code>size</code></a> set to 0, and with <a href="#dfn-type"><code>type</code></a> set to the empty string.</p></li>
       <li><p>Otherwise, the constructor is invoked with a <a href="#dfn-blobParts"><code>blobParts</code></a> sequence.  Let <var>a</var> be that sequence.</p></li>
      <li><p>Let <var>bytes</var> be an empty sequence of bytes.</p></li>
       <li><p>Let <var>length</var> be <var>a</var>'s length.  For 0 ≤ <var>i</var> &lt; <var>length</var>, repeat the following steps:</p>
@@ -480,7 +480,7 @@ function errorHandler(evt) {
 
   </li>
 
-<li><p>Return a <code>Blob</code> object with its <a href="#readabilityState">readability state</a> set to <a href="dfn-openState"><code>OPENED</code></a>, referring to <var>bytes</var> as its associated <a href="#byte">byte</a> sequence, with its <a href="#dfn-size"><code>size</code></a> set to the length of <var>bytes</var>, and its <a href="#dfn-type"><code>type</code></a> set to the value of <var>t</var> from the substeps above.  </p>
+<li><p>Return a <code>Blob</code> object with its <a href="#readabilityState">readability state</a> set to <a href="#dfn-openState"><code>OPENED</code></a>, referring to <var>bytes</var> as its associated <a href="#byte">byte</a> sequence, with its <a href="#dfn-size"><code>size</code></a> set to the length of <var>bytes</var>, and its <a href="#dfn-type"><code>type</code></a> set to the value of <var>t</var> from the substeps above.  </p>
 <div class="note"><div class="noteHeader">Note</div><p>The type t of a <code>Blob</code> is considered a <em>parsable MIME type</em> if the ASCII-encoded string representing the Blob object's type, when converted to a byte sequence, does not return undefined for the <em>parse MIME type algorithm</em> [<a href="#MIMESNIFF">MIMESNIFF</a>].</p> </div>
 </li>
 </ol>
@@ -544,10 +544,10 @@ var d = new Blob([buffer, b, c, bytes]);
     <dd><p>The ASCII-encoded string in lower case representing the media type of the <code>Blob</code>. On getting, user agents must return the type of a <code>Blob</code> as an ASCII-encoded string in lower case, such that when it is converted to a <a href="#byte">byte</a> sequence, it is a <em>parsable MIME type</em> [<a href="#MIMESNIFF">MIMESNIFF</a>], or the empty string -- 0 bytes -- if the type cannot be determined. The <a href="#dfn-type"><code>type</code></a> attribute can be set by the web application itself through constructor invocation and through the <a href="#dfn-slice"><code>slice</code></a> call; in these cases, further normative conditions for this attribute are in the <a href="#blob-constructor-steps">Blob constructor steps</a>, the <a href="#file-constructor-steps">File Constructor steps</a>, and the <a href="#slice-method-algo">slice method algorithm</a> respectively. User agents can also determine the <a href="#dfn-type"><code>type</code></a> of a <a href="#dfn-Blob"><code>Blob</code></a>, especially if the <a href="#byte">byte</a> sequence is from an on-disk file; in this case, further normative conditions are in the <a href="#file-type-guidelines">file type guidelines.</a>.  
     </p></dd>
     <dt id="dfn-isClosed"><code>isClosed</code></dt>
-    <dd><p>The boolean value that indicates whether the <code>Blob</code> is in the <a href="#dfn-closedState"><code>CLOSED</code></a> <a href="#readabilityState">readability state.</a> On getting, user agents must return <code>false</code> if the <code>Blob</code> is in the <a href="#dfn-openedState"><code>OPENED</code></a> <a href="#readabilityState">readability state</a>, and <code>true</code> if the <code>Blob</code> is in the <a href="#dfn-closedState"><code>CLOSED</code></a> <a href="#readabilityState">readability state</a> as a result of the <a href="#dfn-close"><code>close</code></a> method being called.</p></dd>
+    <dd><p>The boolean value that indicates whether the <code>Blob</code> is in the <a href="#dfn-closedState"><code>CLOSED</code></a> <a href="#readabilityState">readability state.</a> On getting, user agents must return <code>false</code> if the <code>Blob</code> is in the <a href="#dfn-openState"><code>OPENED</code></a> <a href="#readabilityState">readability state</a>, and <code>true</code> if the <code>Blob</code> is in the <a href="#dfn-closedState"><code>CLOSED</code></a> <a href="#readabilityState">readability state</a> as a result of the <a href="#dfn-close"><code>close</code></a> method being called.</p></dd>
     </dl>
     <div class="note"><div class="noteHeader">Note</div>
-<p>Use of the <code>type</code> attribute informs the <a href="#encoding-determination">encoding determination</a> and <a href="#processing-media-types">parsing the Content-Type header</a> when dereferencing <a href="#ABNFForBlob">blob: URLs</a>.</p>
+<p>Use of the <code>type</code> attribute informs the <a href="#encoding-determination">encoding determination</a> and <a href="#processing-media-types">parsing the Content-Type header</a> when <a href="#dereference">dereferencing</a> <a href="#DefinitionOfScheme">Blob URLs</a>.</p>
     </div>
     </div>
     <div id="methodsandparams-blob" class="section">
@@ -689,14 +689,14 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
       <h3>6.1 Constructor</h3>
     <p>The <code>File</code> constructor is invoked with two or three parameters, depending on whether the optional dictionary parameter is used.  When the <code>File()</code> constructor is invoked, user agents must run the following <dfn id="file-constructor-steps">File constructor steps</dfn>:</p>
     <ol>
-    <li>Let <var>a</var> be the <code><a href="#dfn-fileBits">fileBits</a></code> sequence argument.  Let <var>bytes</var> be an empty sequence of <a href="#bytes">bytes</a>.  Let <var>length</var> be <var>a</var>'s length.  For 0 ≤ i &lt; <var>length</var>, repeat the following steps:
+    <li>Let <var>a</var> be the <code><a href="#dfn-fileBits">fileBits</a></code> sequence argument.  Let <var>bytes</var> be an empty sequence of <a href="#byte">bytes</a>.  Let <var>length</var> be <var>a</var>'s length.  For 0 ≤ i &lt; <var>length</var>, repeat the following steps:
     <ol>
       <li>Let <var>element</var> be the <var>i</var>'th element of <var>a</var>.</li>
       <li>If <var>element</var> is a <code>DOMString</code>, run the following substeps:
        <ol>
           <li><p>Let <var>s</var> be the result of converting <var>element</var> to a sequence of Unicode characters [<a href="#Unicode">Unicode</a>] using the algorithm for doing so in WebIDL [<a href="#WebIDL">WebIDL</a>].</p></li>
          
-         <li><p>Encode <var>s</var> as <a href="#dfn-UTF-8" class="dfnrefs">UTF-8</a> and append the resulting <a href="#bytes">bytes</a> to <var>bytes</var>.</p></li>
+         <li><p>Encode <var>s</var> as <a href="#dfn-UTF-8" class="dfnrefs">UTF-8</a> and append the resulting <a href="#byte">bytes</a> to <var>bytes</var>.</p></li>
        </ol>
        <div class="note"><div class="noteHeader">Note</div>
          <p>The algorithm from WebIDL [<a href="#WebIDL">WebIDL</a>] replaces unmatched surrogates in an invalid <a href="#dfn-UTF-16" class="dfnrefs">UTF-16</a> string with U+FFFD replacement characters. Scenarios exist when the <a id="dfnReturnLink-10" href="#dfn-Blob"><code>Blob</code></a> constructor may result in some data loss due to lost or scrambled character sequences. </p>
@@ -718,7 +718,7 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
         <li>If the <code>type</code> member is provided and is not the empty string, let <var>t</var> be set to the type dictionary member.  If <var>t</var> contains any characters outside the range U+0020 to U+007E, then set <var>t</var> to the empty string and return from these substeps. </li>
         <li>Convert every character in <var>t</var> to lowercase using the "<a href="#converting-a-string-to-ASCII-lowercase">converting a string to ASCII lowercase algorithm</a>" [<a href="#WebIDL">WebIDL</a>].</li>
         <li>If the <code>lastModified</code> member is provided, let <var>d</var> be set to the <code>lastModified</code> dictionary member.  If it is not provided, set <var>d</var> to the current date and time represented as the number of milliseconds since the <a href="#UnixEpoch">Unix Epoch</a> (which is the equivalent of <code>Date.now()</code> [<a href="#ECMA-262">ECMA-262</a>]).
-        <div class="note"><div class="noteHeader">Note</div><p>Since ECMA-262 <code>Date</code> objects convert to <code>long long</code> values representing the number of milliseconds since the <a href="#UnixEpoch">Unix Epoch</a>, the <code>lastModified</code> member could be a <code>Date</code> object [<a href="ECMA-262">ECMA-262</a>].</p></div> 
+        <div class="note"><div class="noteHeader">Note</div><p>Since ECMA-262 <code>Date</code> objects convert to <code>long long</code> values representing the number of milliseconds since the <a href="#UnixEpoch">Unix Epoch</a>, the <code>lastModified</code> member could be a <code>Date</code> object [<a href="#ECMA-262">ECMA-262</a>].</p></div> 
         </li>
       </ol>
     </li>
@@ -768,7 +768,7 @@ dictionary <dfn id="dfn-FilePropertyBag">FilePropertyBag</dfn> {
 	  <div id="file-attrs" class="section">
 	  <h3>6.2. Attributes</h3>
 	  <dl>
-	    <dt id="dfn-name"><code>name</code></dt>
+	    <dt id="dfn-fileName"><code>name</code></dt>
 	    <dd><p>The name of the file; on getting, this must return the name of the file as a string. There are numerous file name variations and conventions used by different underlying OS file systems;
 	    this is merely the name of the file, without path information.  On getting, if user agents cannot make this information available, they must return the empty string.  If a <a href="#dfn-file"><code>File</code></a> object is created using a constructor, further normative conditions for this attribute are found in the <a href="#file-constructor-steps">file constructor steps</a>.</p>
     </dd>
@@ -865,7 +865,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
     <div id="readOperationSection" class="section">
       <h3>8.1 The Read Operation</h3>
 	  
-    <p>The algorithm below defines a <a href="#readOperation">read operation</a>, which takes a <a href="#dfn-Blob"><code>Blob</code></a> and a <a href="#synchonousFlag">synchronous flag</a> as <var>input</var>, and reads <a href="#byte">byte</a>s into system memory as the <var>result</var> of the <a href="#readOperation">read operation</a>, or else fails along with a <a href="#failureReason">failure reason</a>. The <var>result</var> of the read operation consists of <a href="#byte">byte</a>s in system memory. Methods in this specification invoke the <a href="#readOperation">read operation</a> with the <a href="#synchronousFlag">synchronous flag</a> either set or unset.</p>
+    <p>The algorithm below defines a <a href="#readOperation">read operation</a>, which takes a <a href="#dfn-Blob"><code>Blob</code></a> and a <a href="#synchronousFlag">synchronous flag</a> as <var>input</var>, and reads <a href="#byte">byte</a>s into system memory as the <var>result</var> of the <a href="#readOperation">read operation</a>, or else fails along with a <a href="#failureReason">failure reason</a>. The <var>result</var> of the read operation consists of <a href="#byte">byte</a>s in system memory. Methods in this specification invoke the <a href="#readOperation">read operation</a> with the <a href="#synchronousFlag">synchronous flag</a> either set or unset.</p>
     <p>The <dfn id="synchronousFlag">synchronous flag</dfn> determines if a read operation is synchronous or asynchronous, and is <em>unset</em> by default. Methods may set it. If it is set, the <a href="#readOperation">read operation</a> takes place synchronously. Otherwise, it takes place asynchronously, and <a href="#queue-a-task">queues tasks</a> annotated <a href="#process-read">process read</a>, <a href="#process-read-data">process read data</a>, <a href="#process-read-EOF">process read EOF</a>, and/or <a href="#process-read-error">process read error</a> with a <a href="#failureReason">failure reason</a> for the <var>result</var> on the <a href="#fileReadingTaskSource">file reading task source</a>.  </p>
     <p>To perform a <dfn id="readOperation">read operation</dfn> on an <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a> and the <a href="#synchronousFlag">synchronous flag</a>, run the following steps:</p>
     <ol>
@@ -892,7 +892,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
     </div>
       </li>  
       <li><p>Otherwise, <a href="#queue-a-task">queue a task</a> to <dfn id="process-read">process read</dfn>, which starts reading bytes from the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a> into <var>result</var> .   </p></li>
-      <li><p>Then, either once <var>result</var> has at least one <a href="#byte">byte</a> read into it or there are no <a href="#byte">byte</a>s to read, <a href="#queue-a-task">queue a task</a> to <dfn id="process-read-data">process read data</dfn> for <var>result</var>. Keep <a href="#queue-a-task">queuing tasks</a> to <a href="#process-tead-data">process read data</a> every 50ms or for each <a href="#byte">byte</a> of the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a> read into <var>result</var>, whichever is <em>least frequent</em>.</p></li>
+      <li><p>Then, either once <var>result</var> has at least one <a href="#byte">byte</a> read into it or there are no <a href="#byte">byte</a>s to read, <a href="#queue-a-task">queue a task</a> to <dfn id="process-read-data">process read data</dfn> for <var>result</var>. Keep <a href="#queue-a-task">queuing tasks</a> to <a href="#process-read-data">process read data</a> every 50ms or for each <a href="#byte">byte</a> of the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a> read into <var>result</var>, whichever is <em>least frequent</em>.</p></li>
       <li><p>Then, once <var>result</var> consists of all the bytes of the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a> in system memory, <a href="#queue-a-task">queue a task</a> to <dfn id="process-read-EOF">process read EOF</dfn>.</p>
       </li>  
     </ol>
@@ -1534,7 +1534,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   <h3>10.3. The Blob URL</h3>
   <p> A Blob URL must consist of the blob: <a href="#scheme">scheme</a> followed by <a href="#scheme-data">scheme data</a> which must consist of a string tuple comprising the <a href="#originOfBlobURL">origin of the Blob URL</a>, the "/" (U+0024 SOLIDUS) character, and a UUID [<a href="#UUID">RFC4122</a>; for an ABNF of UUID, see <a href="#AppendixA">Appendix A</a>]. The <a href="#scheme-data">scheme data</a> of a Blob URL is called an <dfn id="identifier">identifier</dfn> and is used to identify the <a href="#dfn-Blob"><code>Blob</code></a> resource. A Blob URL may contain an optional <a href="#fragmentIDDef">fragment</a>. The Blob URL is serialized as a string according to the <a href="#unicodeBlobURL">Unicode Serialization of a Blob URL</a> algorithm. </p>
 <p>A <a href="#fragmentIDDef">fragment</a>, if used,
-  has a distinct interpretation depending on the media type of the <a href="#dfn-Blob"><code>Blob</code></a> or <a href="#dfn-file"><code>File</code></a> resource in question (see <a href="fragmentDiscussion">fragment discussion</a>). </p>
+  has a distinct interpretation depending on the media type of the <a href="#dfn-Blob"><code>Blob</code></a> or <a href="#dfn-file"><code>File</code></a> resource in question (see <a href="#fragmentDiscussion">fragment discussion</a>). </p>
    <div class="block"><div class="blockTitleDiv"><span class="blockTitle">ABNF</span></div><div class="blockContent"><pre class="code"><code class="abnf-code">
   blob = scheme ":" origin "/" UUID [fragIdentifier]
 
@@ -1544,7 +1544,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 
   ; origin is a string representation of the <a href="#originOfBlobURL">Blob URL's origin</a>.
   ; UUID is as defined in [<a href="#UUID">RFC4122</a>] and <a href="#AppendixA">Appendix A</a>
-  ; fragIdentifier is optional and as defined in [<a href="#3986">RFC3986</a>] and <a href="#AppendixA">Appendix A</a>
+  ; fragIdentifier is optional and as defined in [<a href="#RFC3986">RFC3986</a>] and <a href="#AppendixA">Appendix A</a>
 
   </code></pre></div></div>
 
@@ -1572,7 +1572,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   </div>
   <div id="extractionOfIdentifierFromBlobURL" class="section">
     <h4>10.3.3. Extraction of Identifier from Blob URL</h4>
-    <p>A <a href="#DefintionOfScheme">Blob URL</a>'s <a href="#scheme-data">scheme data</a> component is called an <a href="#identifier">identifier</a> and is used to <a href="#add-an-entry">add an entry to the Blob URL store</a>. An <a href="#identifier">identifier</a> extracted from a Unicode-serialized <a href="#DefinitionOfScheme">Blob URL</a> is the value returned by the following <dfn id="extractionOfIdentifier">extraction of identifier from Blob URL</dfn> algorithm:</p>
+    <p>A <a href="#DefinitionOfScheme">Blob URL</a>'s <a href="#scheme-data">scheme data</a> component is called an <a href="#identifier">identifier</a> and is used to <a href="#add-an-entry">add an entry to the Blob URL store</a>. An <a href="#identifier">identifier</a> extracted from a Unicode-serialized <a href="#DefinitionOfScheme">Blob URL</a> is the value returned by the following <dfn id="extractionOfIdentifier">extraction of identifier from Blob URL</dfn> algorithm:</p>
     <ol>
       <li><p>Let <var>input</var> be a <a href="#unicodeBlobURL">Unicode-serialized Blob URL</a>, and <var>position</var> be a pointer to <var>input</var> initially placed at the start of <var>input</var>.</p></li>
       <li><p>Advance <var>position</var> to the <em>first character</em> past the ":" (U+003A) character.</p>
@@ -1703,7 +1703,7 @@ partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
   <li><p>If called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that has a <a href="#readabilityState">readability state</a> of <a href="#dfn-closedState"><code>CLOSED</code></a>, user agents must return a unique <a href="#DefinitionOfScheme">Blob URL</a> that has the following properties:</p>
     <ul>
       <li>It must be the result of the <a href="#unicodeBlobURL">serialization of a Blob URL algorithm</a>. </li>
-      <li>It must return a <a href="#networkError">network error</a> when <a href="#dereference">dereferenced</a>.</li>
+      <li>It must return a <a href="#dfn-networkError">network error</a> when <a href="#dereference">dereferenced</a>.</li>
     </ul>
   </li>
   <li><p>Otherwise, user agents must run the following sub-steps:</p>
@@ -1722,7 +1722,7 @@ partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
   <li><p>If called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that has a <a href="#readabilityState">readability state</a> of <a href="#dfn-closedState"><code>CLOSED</code></a>, user agents must return a unique <a href="#DefinitionOfScheme">Blob URL</a> that has the following properties:</p>
 <ul>
       <li>It must be the result of the <a href="#unicodeBlobURL">serialization of a Blob URL algorithm</a>.</li>
-      <li>It must return a <a href="#networkError">network error</a> when <a href="#dereference">dereferenced</a>.</li>
+      <li>It must return a <a href="#dfn-networkError">network error</a> when <a href="#dereference">dereferenced</a>.</li>
     </ul>
   </li>
   <li><p>Otherwise, user agents must run the following steps:</p>
@@ -1858,14 +1858,14 @@ var windowRef = openPopup(blobURLAnchorRef, "Application Info");
 </div>
 <div id="lifeTime" class="section">
   <h3>10.6. Lifetime of Blob URLs</h3>
- <p>Each <em>unit of similar origin browsing contexts</em> [<a href="#HTML">HTML</a>] must maintain a <dfn id="BlobURLStore">Blob URL Store</dfn> which is a list of <a href="#identifiers">identifiers</a> extracted from <a href="#DefinitionOfScheme">Blob URL</a>s created by the <code>URL.createObjectURL</code> method or the <code>URL.createFor</code> method, and the <a href="#dfn-fileBlob"><code>blob</code></a> resource that each <a href="#identifier">identifier</a> refers to. </p>
+ <p>Each <em>unit of similar origin browsing contexts</em> [<a href="#HTML">HTML</a>] must maintain a <dfn id="BlobURLStore">Blob URL Store</dfn> which is a list of <a href="#identifier">identifiers</a> extracted from <a href="#DefinitionOfScheme">Blob URL</a>s created by the <code>URL.createObjectURL</code> method or the <code>URL.createFor</code> method, and the <a href="#dfn-fileBlob"><code>blob</code></a> resource that each <a href="#identifier">identifier</a> refers to. </p>
  <p>Each <em>unit of related similar origin browsing contexts</em> must maintain a <dfn id="revokeList">Revocation List</dfn> which is a list of <a href="#identifier">identifiers</a> that have been extracted from <a href="#DefinitionOfScheme">Blob URL</a>s created with the <a href="#dfn-createFor"><code>URL.createFor</code></a> method.</p>
  <p>When this specification says to <dfn id="add-an-entry">add an entry to the Blob URL Store</dfn> the user-agent must <a href="#extractionOfIdentifier">extract the identifier from a Blob URL</a> created using <a href="#dfn-createFor"><code>URL.createFor</code></a> or <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a>, and add the <a href="#identifier">identifier</a>, and a reference to the <a href="#dfn-fileBlob"><code>blob</code></a> it refers to, to the <a href="#BlobURLStore">Blob URL Store</a>.</p>
  <p>When this specification says to <dfn id="add-an-entry-revoke">add an entry to the The Revocation List</dfn>, user agents must <a href="#extractionOfIdentifier">extract the identifier from a Blob URL</a> created using <a href="#dfn-createFor"><code>URL.createFor</code></a>, and add that <a href="#identifier">identifier</a> to the <a href="#revokeList">Revocation List</a>. This is only for <a href="#autoRevoking">auto-revoking</a> <a href="#DefinitionOfScheme">Blob URL</a>s.</p>
  <p>When this specification says to <dfn id="removeTheEntry">remove an entry from the Blob URL Store</dfn> for a given <a href="#identifier">identifier</a> or for a given <a href="#dfn-Blob"><code>Blob</code></a>, user agents must remove the <a href="#identifier">identifier</a> and the <a href="#dfn-Blob"><code>blob</code></a> it refers to from the <a href="#BlobURLStore">Blob URL Store</a>. Subsequent attempts to <a href="#dereference">dereference</a> this URL must result in a <a href="#dfn-networkError">network error</a>.</p>
- <p>The <a href="#revokeQueue">Revocation List</a> and the <a href="#BlobURLStore">Blob URL Store</a> must be processed together as follows:</p>
+ <p>The <a href="#revokeList">Revocation List</a> and the <a href="#BlobURLStore">Blob URL Store</a> must be processed together as follows:</p>
 <ol>
-  <li>Add <a href="#removeTheEntry">removing the entries</a> for all the <a href="#identifiers">identifiers</a> in the <a href="#revokeQueue">Revocation List</a> to the <a href="#global-script-cleanup-jobs-list">global script cleanup jobs list</a>.</li>
+  <li>Add <a href="#removeTheEntry">removing the entries</a> for all the <a href="#identifier">identifiers</a> in the <a href="#revokeList">Revocation List</a> to the <a href="#global-script-cleanup-jobs-list">global script cleanup jobs list</a>.</li>
   <li><p>When all the <a href="#identifier">identifier</a>s in the <a href="#revokeList">Revocation List</a> have had their corresponding entries in the <a href="#BlobURLStore">Blob URL Store</a> removed, remove all the <a href="#identifier">identifier</a>s in the <a href="#revokeList">Revocation List</a>.</p>
   </li>
    <li><p>This specification adds an additional <a href="#unloading-document-cleanup-steps">unloading document cleanup step</a> [<a href="#HTML">HTML</a>]: user agents must remove all <a href="#identifier">identifiers</a> from the <a href="#BlobURLStore">Blob URL Store</a> within that <a href="#document">document</a>. If these <a href="#identifier">identifier</a>s are <a href="#dereference">dereferenced</a>, user agents must respond with a <a href="#dfn-networkError">network error</a>.</p></li>
