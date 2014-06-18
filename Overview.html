@@ -1362,7 +1362,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   </a> objects into memory.</p>
 	<div class="block"><div class="blockTitleDiv"><span class="blockTitle">IDL</span></div><div class="blockContent"><pre class="code"><code class="idl-code">
 
-	[Exposed=Worker][Constructor]
+	[Constructor, Exposed=Window,Worker]
 	interface <dfn id="dfn-FileReaderSync">FileReaderSync</dfn> {
 
 	  <span class="comment">// Synchronously return strings</span>
@@ -1606,7 +1606,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 </div>
   <div id="requestResponseModel" class="section">
   <h3>10.4. Dereferencing Model for Blob URLs</h3>
-<div class="note"><div class="noteHeader">Note</div><p>The <a href="#URL-API">URL</a> and <a href="#Fetch">Fetch</a> Specifications should be considered normative for parsing and fetching <a href="#DefinitionOfScheme">Blob URLs</a>. The section below is for informational purposes only, and is not considered normative; no normative language is used in this section.</p></div>
+<div class="note"><div class="noteHeader">Note</div><p>The <a href="#URL-API">URL</a> and <a href="#Fetch">Fetch</a> Specifications should be considered normative for parsing and fetching <a href="#DefinitionOfScheme">Blob URLs</a>. The section below is for informational purposes only, and is not considered normative.</p></div>
   <p><a href="#DefinitionOfScheme"><code>Blob</code> URL</a>s are <dfn id="dereference">dereferenced</dfn> when the user agent retrieves the resource identified by the Blob URL and returns it to the requesting entity. This section provides guidance on <a href="#requestFetch">requests</a> and <a href="#responseFetch">responses</a>.</p>
   <p>Only <a href="#requestFetch">requests</a> with GET [<a href="#RFC2616">RFC2616</a>] are supported. Specifically, <a href="#responseFetch">responses</a> are only a subset of the following from HTTP [<a href="#RFC2616">RFC2616</a>]:</p>
   <div id="TwoHundredOK" class="section">
@@ -1850,7 +1850,7 @@ var windowRef = openPopup(blobURLAnchorRef, "Application Info");
 </div>
 <div id="lifeTime" class="section">
   <h3>10.6. Lifetime of Blob URLs</h3>
- <p>A global object which exposes <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a> must maintain a <dfn id="BlobURLStore">Blob URL Store</dfn> which is a list of <a href="#identifier">identifiers</a> extracted from <a href="#DefinitionOfScheme">Blob URL</a>s created by the <code>URL.createObjectURL</code> method or the <code>URL.createFor</code> method, and the <a href="#dfn-fileBlob"><code>blob</code></a> resource that each <a href="#identifier">identifier</a> refers to. </p>
+ <p>A global object which exposes <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a> must maintain a <dfn id="BlobURLStore">Blob URL Store</dfn> which is a list of <a href="#identifier">identifiers</a> created by the <code>URL.createObjectURL</code> method or the <code>URL.createFor</code> method, and the <a href="#dfn-fileBlob"><code>blob</code></a> resource that each <a href="#identifier">identifier</a> refers to. </p>
  <p>A global object which exposes <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a> must maintain a <dfn id="revokeList">Revocation List</dfn> which is a list of <a href="#identifier">identifiers</a> that have been extracted from <a href="#DefinitionOfScheme">Blob URL</a>s created with the <a href="#dfn-createFor"><code>URL.createFor</code></a> method.</p>
  <p>When this specification says to <dfn id="add-an-entry">add an entry to the Blob URL Store</dfn> the user-agent must add the <a href="#identifier">identifier</a> of a <a href="#DefinitionOfScheme">Blob URL</a> created using <a href="#dfn-createFor"><code>URL.createFor</code></a> or <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a>, and a reference to the <a href="#dfn-fileBlob"><code>blob</code></a> it refers to, to the <a href="#BlobURLStore">Blob URL Store</a>.</p>
 
