@@ -201,9 +201,8 @@
                     <ul>
                       <li><a href="#originOfBlobURL">10.3.1. Origin of Blob URLs</a></li>
                       <li><a href="#unicodeBlobURL">10.3.2. Unicode Serialization of a Blob URL</a></li>
-                      <li><a href="#extractionOfIdentifierFromBlobURL">10.3.3. Extraction of Identifier from Blob URL</a></li>
-                      <li><a href="#extractionOfOriginFromIdentifier">10.3.4. Extraction of Origin From Blob URL</a></li>
-                      <li><a href="#fragmentDiscussion">10.3.5. Discussion of Fragment Identifier</a></li>
+                      <li><a href="#extractionOfOriginFromIdentifier">10.3.3. Extraction of Origin From Blob URL</a></li>
+                      <li><a href="#fragmentDiscussion">10.3.4. Discussion of Fragment Identifier</a></li>
                     </ul>
                     </li>
                     <li><a href="#requestResponseModel">10.4. Dereferencing Model for Blob URLs</a>
@@ -1572,7 +1571,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   </div>
 
   <div id="extractionOfOriginFromIdentifier" class="section">
-    <h4>10.3.4. Extraction of Origin from Identifier</h4>
+    <h4>10.3.3. Extraction of Origin from Identifier</h4>
    <p>A <dfn id="parsedBlobURL">parsed Blob URL</dfn> is a <a href="#DefinitionOfScheme">Blob URL</a> that has been parsed by the <a href="#URLParser">URL parser</a>. An <a href="#origin">origin</a> extracted from a <a href="#parsedBlobURL">parsed Blob URL</a> is the tuple of <a href="#scheme">scheme</a>, <a href="#host">host</a> and <a href="#port">port</a> returned by the following <dfn id="extractionOfOrigin">extraction of origin from an identifier</dfn> algorithm:</p>
     <ol>
       <li><p>Let <var>input</var> be a <a href="#parsedBlobURL">parsed Blob URL</a>. Set <var>i</var> to the <a href="#scheme-data">scheme data</a> of <var>input</var>, and <var>result</var> to the empty string.</p>
@@ -1590,7 +1589,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 
   </div>
   <div class="section" id="fragmentDiscussion">
-  <h4>10.3.5. Discussion of Fragment Identifier</h4>
+  <h4>10.3.4. Discussion of Fragment Identifier</h4>
   <p>
   The <a href="#fragmentIDDef">fragment</a>'s resolution and processing directives depend on the media type [<a href="#RFC2046">RFC2046</a>] of a potentially retrieved representation, even though such
   a retrieval is only performed if the <a href="#DefinitionOfScheme">Blob URL</a> is <a href="#dereference">dereferenced</a>.  For example, in an HTML file [<a href="#HTML">HTML</a>] the fragment
