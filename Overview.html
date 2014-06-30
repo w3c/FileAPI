@@ -200,7 +200,7 @@
                     <li><a href="#DefinitionOfScheme">10.3. Definition of blob URL Scheme</a>
                     <ul>
                       <li><a href="#originOfBlobURL">10.3.1. Origin of Blob URLs</a></li>
-                      <li><a href="#unicodeBlobURL">10.3.2. Unicode Serialization of a Blob URL</a></li>
+                      <li><a href="#unicodeIdentifier">10.3.2. Unicode Serialization of an Identifier</a></li>
                       <li><a href="#extractionOfIdentifierFromBlobURL">10.3.3. Extraction of Identifier From Blob URL</a></li>
                       <li><a href="#fragmentDiscussion">10.3.4. Discussion of Fragment Identifier</a></li>
                     </ul>
@@ -1535,9 +1535,11 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 <p>A <a href="#fragmentIDDef">fragment</a>, if used,
   has a distinct interpretation depending on the media type of the <a href="#dfn-Blob"><code>Blob</code></a> or <a href="#dfn-file"><code>File</code></a> resource in question (see <a href="#fragmentDiscussion">fragment discussion</a>). </p>
    <div class="block"><div class="blockTitleDiv"><span class="blockTitle">ABNF</span></div><div class="blockContent"><pre class="code"><code class="abnf-code">
-  blob = scheme ":" origin "/" UUID [fragIdentifier]
+  blob = scheme ":" identifier [fragIdentifier]
 
   scheme = "blob"
+  identifier = origin "/" UUID
+  
 
   ; scheme is always "blob"
 
@@ -1545,7 +1547,9 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   ; UUID is as defined in [<a href="#UUID">RFC4122</a>] and <a href="#AppendixA">Appendix A</a>
   ; fragIdentifier is optional and as defined in [<a href="#RFC3986">RFC3986</a>] and <a href="#AppendixA">Appendix A</a>
 
-  </code></pre></div></div>
+  </code></pre></div>
+<p>An example of a Blob URL might be <em>blob:https://example.org/9115d58c-bcda-ff47-86e5-083e9a215304</em>.</p>
+</div>
 
 
   <div id="originOfBlobURL" class="section">
@@ -1555,19 +1559,18 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   <div class="note"><div class="noteHeader">Note</div><p>In practice this means that HTTP and HTTPS <a href="#origin">origins</a> are covered by this specification as valid origins for use with Blob URLs. This specification does not address the case of non-HTTP and non-HTTPS <a href="#origin">origins</a>. For instance blob:file:///Users/arunranga/702efefb-c234-4988-a73b-6104f1b615ee (which uses the "file:" <a href="#origin">origin</a>, which is part of the Blob URL's <a href="#scheme-data">scheme data</a>) may have behavior that is undefined, even though user agents may treat such Blob URLs as valid.</p></div>
 
   </div>
-  <div id="unicodeSerializationOfBlobURL" class="section">
- <h4>10.3.2. Unicode Serialization of Blob URL</h4>
+  <div id="unicodeSerializationOfIdentifier" class="section">
+ <h4>10.3.2. Unicode Serialization of an Identifier</h4>
 
- <p>The <dfn id="unicodeBlobURL">Unicode Serialization of a Blob URL</dfn> for a given Blob URL is the value returned by the following algorithm:</p>
+ <p>The <dfn id="unicodeIdentifier">Unicode Serialization of an Identifier</dfn> is the value returned by the following algorithm, which is invoked by <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a>:</p>
  <ol>
-  <li><p>Let <var>result</var> be the empty string. Append the string "blob" (that is, the Unicode code point sequence U+0062, U+006C, U+006F, U+0062) to <var>result</var>.</p></li>
-  <li><p>Append the ":" (U+003A COLON) character to <var>result</var>.</p></li>
-  <li><p>Let <var>O</var> be the <a href="#originOfBlobURL">origin of the Blob URL.</a> If the Unicode Serialization of an Origin algorithm [<a href="#WEBORIGIN">ORIGIN</a>] on <var>O</var> returns null, user agents may substitute an implementation defined value for the return value of the Unicode Serialization of an Origin algorithm. Append the result of the Unicode Serialization of an Origin algorithm for <var>O</var> [<a href="#WEBORIGIN">ORIGIN</a>] to <var>result</var>.</p></li>
-  <li><p>Append the "/" character (U+0024 SOLIDUS) to <var>result</var>.</p></li> 
-  <li><p>Generate a UUID [<a href="#UUID">RFC4122</a>] as a Unicode string and append it to <var>result</var>.</p></li>
-  <li><p>Return <var>result</var>.</p></li>
+  <li><p>Let <var>identifier</var> be the empty string. </p></li>
+  <li><p>Let <var>O</var> be the <a href="#effectiveScriptOrigin">effective script origin</a> specified by the <a href="#incumbentSettingsObject">incumbent settings object</a> at the time either <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a> is called. If the Unicode Serialization of an Origin algorithm [<a href="#WEBORIGIN">ORIGIN</a>] on <var>O</var> returns null, user agents may substitute an implementation defined value for the return value of the Unicode Serialization of an Origin algorithm. Append the result of the Unicode Serialization of an Origin algorithm for <var>O</var> [<a href="#WEBORIGIN">ORIGIN</a>] to <var>identifier</var>.</p></li>
+  <li><p>Append the "/" character (U+0024 SOLIDUS) to <var>identifier</var>.</p></li> 
+  <li><p>Generate a UUID [<a href="#UUID">RFC4122</a>] as a Unicode string and append it to <var>identifier</var>.</p></li>
+  <li><p>Return <var>identifier</var>.</p></li>
  </ol>
- <p>An example of a Blob URL might be <em>blob:https://example.org/9115d58c-bcda-ff47-86e5-083e9a215304</em>.</p>
+ 
   </div>
 
   <div id="extractionOfIdentifierFromBlobURL" class="section">
@@ -1579,6 +1582,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 <li><p>Run the <a href="#basicURLParser">basic URL parser</a> on <var>input</var> and return the <a href="#scheme-data">scheme data</a> component.</p></li>
 </ol>
   </div>
+
   <div class="section" id="fragmentDiscussion">
   <h4>10.3.4. Discussion of Fragment Identifier</h4>
   <p>
@@ -1683,42 +1687,53 @@ partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
 <h4>10.5.1. Methods and Parameters</h4>   
   <dl><dt id="dfn-createObjectURL">The <code>createObjectURL</code> static method</dt><dd><p>Returns a unique <a href="#DefinitionOfScheme"><code>Blob</code> URL</a>. This method must act as follows:</p>
   <ol>
-  <li><p>If called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that has a <a href="#readabilityState">readability state</a> of <a href="#dfn-closedState"><code>CLOSED</code></a>, user agents must return a unique <a href="#DefinitionOfScheme">Blob URL</a> that has the following properties:</p>
-    <ul>
-      <li>It must be the result of the <a href="#unicodeBlobURL">serialization of a Blob URL algorithm</a>. </li>
-      <li>It must return a <a href="#dfn-networkError">network error</a> when <a href="#dereference">dereferenced</a>.
-        <div class="note"><div class="noteHeader">Note</div><p>No entry is added to the <a href="#BlobURLStore">Blob URL Store</a>.</p></div>
+  <li><p>If called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that has a <a href="#readabilityState">readability state</a> of <a href="#dfn-closedState"><code>CLOSED</code></a>, user agents must run the following steps:</p>
+    <ol>
+      <li><p>Set <var>result</var> to the empty string. Append the string "blob:" (that is, the Unicode code point sequence U+0062, U+006C, U+006F, U+0062, U+003A) to <var>result</var>.
+      </p></li>
+      <li>Append the output of the <a href="#unicodeIdentifier">Unicode Serialization of an Identifer algorithm</a> to <var>result</var>. </li>
+      <li>Return <var>result</var>.
+        <div class="note"><div class="noteHeader">Note</div><p>No entry is added to the <a href="#BlobURLStore">Blob URL Store</a>; consequently, when this <a href="#DefinitionOfScheme">Blob URL</a> is <a href="#dereference">dereferenced</a>, a <a href="#dfn-networkError">network error</a> occurs.</p></div>
       </li>
-    </ul>
+    </ol>
   </li>
   <li><p>Otherwise, user agents must run the following sub-steps:</p>
   <ol>
     <li>
-      Let <var>r</var> be the result of the <a href="#unicodeBlobURL">Unicode Serialization of a Blob URL</a> for this <a href="#dfn-fileBlob"><code>blob</code></a>.
+      Let <var>i</var> be the result of the <a href="#unicodeIdentifier">Unicode Serialization of an Identifier</a> algorithm.
     </li>
-    <li><a href="#add-an-entry">Add an entry to the Blob URL Store</a> for <var>r</var> and <a href="#dfn-fileBlob"><code>blob</code></a>.</li>
-    <li>Return <var>r</var>.</li>
+    <li><a href="#add-an-entry">Add an entry to the Blob URL Store</a> for <var>i</var> and <a href="#dfn-fileBlob"><code>blob</code></a>.</li>
+    <li><p>Set <var>result</var> to the empty string. Append the string "blob:" (that is, the Unicode code point sequence U+0062, U+006C, U+006F, U+0062, U+003A) to <var>result</var>.
+      </p></li>
+      <li>Append <var>i</var> to <var>result</var>. </li>
+      <li>Return <var>result</var>.
+    
   </ol>
 </li>
 </ol>
 </dd>
 <dt id="dfn-createFor">The <code>createFor</code> static method</dt><dd><p>Returns a unique <a href="#DefinitionOfScheme"><code>Blob</code> URL</a>; <a href="#DefinitionOfScheme"><code>Blob</code> URL</a>s created with this method are said to be <dfn id="autoRevoking">auto-revoking</dfn> since user-agents are responsible for the revocation of <a href="#DefinitionOfScheme">Blob URL</a>s created with this method, subject to the <a href="#lifeTime">lifetime stipulation</a> for <a href="#DefinitionOfScheme">Blob URL</a>s.  This method must act as follows: </p>
 <ol>
-  <li><p>If called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that has a <a href="#readabilityState">readability state</a> of <a href="#dfn-closedState"><code>CLOSED</code></a>, user agents must return a unique <a href="#DefinitionOfScheme">Blob URL</a> that has the following properties:</p>
-<ul>
-      <li>It must be the result of the <a href="#unicodeBlobURL">serialization of a Blob URL algorithm</a>.</li>
-      <li>It must return a <a href="#dfn-networkError">network error</a> when <a href="#dereference">dereferenced</a>.
-<div class="note"><div class="noteHeader">Note</div><p>No entry is added to the <a href="#BlobURLStore">Blob URL Store</a>.</p></div>
+  <li><p>If called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that has a <a href="#readabilityState">readability state</a> of <a href="#dfn-closedState"><code>CLOSED</code></a>, user agents must run the following steps:</p>
+ <ol>
+      <li><p>Set <var>result</var> to the empty string. Append the string "blob:" (that is, the Unicode code point sequence U+0062, U+006C, U+006F, U+0062, U+003A) to <var>result</var>.
+      </p></li>
+      <li>Append the output of the <a href="#unicodeIdentifier">Unicode Serialization of an Identifer algorithm</a> to <var>result</var>. </li>
+      <li>Return <var>result</var>.
+        <div class="note"><div class="noteHeader">Note</div><p>No entry is added to the <a href="#BlobURLStore">Blob URL Store</a>; consequently, when this <a href="#DefinitionOfScheme">Blob URL</a> is <a href="#dereference">dereferenced</a>, a <a href="#dfn-networkError">network error</a> occurs.</p></div>
       </li>
-    </ul>
+    </ol>
   </li>
   <li><p>Otherwise, user agents must run the following steps:</p>
   <ol>
-    <li>Let <var>r</var> be the result of the <a href="#unicodeBlobURL">Unicode Serialization of a Blob URL</a> for this <a href="#dfn-fileBlob"><code>blob</code></a>.     
+    <li>Let <var>i</var> be the result of the <a href="#unicodeIdentifier">Unicode Serialization of an Identifier</a>.     
 </li>
-    <li><a href="#add-an-entry">Add an entry to the Blob URL Store</a> for <var>r</var> and <a href="#dfn-fileBlob"><code>blob</code></a>.</li>
-    <li><a href="#add-an-entry-revoke">Add an entry to the Revocation List</a> for <var>r</var>.</li>
-    <li>Return <var>r</var>.</li>
+    <li><a href="#add-an-entry">Add an entry to the Blob URL Store</a> for <var>i</var> and <a href="#dfn-fileBlob"><code>blob</code></a>.</li>
+    <li><a href="#add-an-entry-revoke">Add an entry to the Revocation List</a> for <var>i</var>.</li>
+    <li><p>Set <var>result</var> to the empty string. Append the string "blob:" (that is, the Unicode code point sequence U+0062, U+006C, U+006F, U+0062, U+003A) to <var>result</var>.
+      </p></li>
+      <li>Append <var>i</var> to <var>result</var>. </li>
+      <li>Return <var>result</var>.</li>
   </ol>
 </li>
 </ol>
@@ -1747,7 +1762,7 @@ partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
     <li>Otherwise, user agents must run the following steps:
       <ol>
         <li><p><a href="#extractionOfIdentifier">Extract the identifier</a> from <a href="#dfn-urlarg"><code>url</code></a>.</p></li>
-        <li><p><a href="#removeTheEntry">Remove the entry</a> from the <a href="#BlobURLStore">Blob URL Store</a> for the <a href="#identifier">identifier</a>; subsequent attempts to <a href="#dereference">dereference</a> this URL must return a <a href="#dfn-networkError">network error</a>.</p></li>
+        <li><p><a href="#removeTheEntry">Remove the entry</a> from the <a href="#BlobURLStore">Blob URL Store</a> for the <a href="#identifier">identifier</a>; subsequent attempts to <a href="#dereference">dereference</a> <a href="#dfn-urlarg"><code>url</code></a> must return a <a href="#dfn-networkError">network error</a>.</p></li>
       </ol>
 </li>
   
@@ -1850,17 +1865,8 @@ var windowRef = openPopup(blobURLAnchorRef, "Application Info");
   <h3>10.6. Lifetime of Blob URLs</h3>
  <p>A global object which exposes <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a> must maintain a <dfn id="BlobURLStore">Blob URL Store</dfn> which is a list of <a href="#identifier">identifiers</a> created by the <code>URL.createObjectURL</code> method or the <code>URL.createFor</code> method, and the <a href="#dfn-fileBlob"><code>blob</code></a> resource that each <a href="#identifier">identifier</a> refers to. </p>
  <p>A global object which exposes <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a> must maintain a <dfn id="revokeList">Revocation List</dfn> which is a list of <a href="#identifier">identifiers</a> that have been extracted from <a href="#DefinitionOfScheme">Blob URL</a>s created with the <a href="#dfn-createFor"><code>URL.createFor</code></a> method.</p>
- <p>When this specification says to <dfn id="add-an-entry">add an entry to the Blob URL Store</dfn> for a <a href="#DefinitionOfScheme">Blob URL</a> and a <a href="#dfn-fileBlob"><code>blob</code></a> input, the user-agent must run the following steps:
-</p>
-<ol>
-  <li><p><a href="#extractionOfIdentifier">Extract the identifier</a> from the <a href="#DefinitionOfScheme">Blob URL</a>.</p></li>
-  <li><p>Add the <a href="#identifier">identifier</a> and a reference to the <a href="#dfn-fileBlob"><code>blob</code></a> to the <a href="#BlobURLStore">Blob URL Store</a>.</p></li>
-</ol>
- <p>When this specification says to <dfn id="add-an-entry-revoke">add an entry to the The Revocation List</dfn> for a <a href="#DefinitionOfScheme">Blob URL</a>, user agents must run the following steps:</p>
-<ol>
-<li><p><a href="#extractionOfIdentifier">Extract the identifier</a> from the <a href="#DefinitionOfScheme">Blob URL</a>.</p></li>
-<li><p>Add the <a href="#identifier">identifier</a> to the <a href="#revokeList">Revocation List</a>. This is only for <a href="#autoRevoking">auto-revoking</a> <a href="#DefinitionOfScheme">Blob URL</a>s.</p></li>
-</ol>
+ <p>When this specification says to <dfn id="add-an-entry">add an entry to the Blob URL Store</dfn> for an <a href="#identifier">identifier</a> and a <a href="#dfn-fileBlob"><code>blob</code></a> input, the user-agent must add the <a href="#identifier">identifier</a> and a reference to the <a href="#dfn-fileBlob"><code>blob</code></a> to the <a href="#BlobURLStore">Blob URL Store</a>.</p>
+ <p>When this specification says to <dfn id="add-an-entry-revoke">add an entry to the The Revocation List</dfn> for an <a href="#identifier">identifier</a>, user agents must add the <a href="#identifier">identifier</a> to the <a href="#revokeList">Revocation List</a>. This is only for <a href="#autoRevoking">auto-revoking</a> <a href="#DefinitionOfScheme">Blob URL</a>s.</p>
  <p>When this specification says to <dfn id="removeTheEntry">remove an entry from the Blob URL Store</dfn> for a given <a href="#identifier">identifier</a> or for a given <a href="#dfn-Blob"><code>Blob</code></a>, user agents must remove the <a href="#identifier">identifier</a> and the <a href="#dfn-Blob"><code>blob</code></a> it refers to from the <a href="#BlobURLStore">Blob URL Store</a>. Subsequent attempts to <a href="#dereference">dereference</a> this URL must result in a <a href="#dfn-networkError">network error</a>.</p>
  <p>The <a href="#revokeList">Revocation List</a> and the <a href="#BlobURLStore">Blob URL Store</a> must be processed together as follows:</p>
 <ol>
