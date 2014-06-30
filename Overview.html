@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>Editor's Draft <em>25 June 2014</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>Editor's Draft <em>30 June 2014</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2014 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -73,7 +73,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 25 June 2014 <b>Editor's Draft</b> of the
+        This document is the 30 June 2014 <b>Editor's Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -201,7 +201,7 @@
                     <ul>
                       <li><a href="#originOfBlobURL">10.3.1. Origin of Blob URLs</a></li>
                       <li><a href="#unicodeBlobURL">10.3.2. Unicode Serialization of a Blob URL</a></li>
-                      <li><a href="#extractionOfOriginFromIdentifier">10.3.3. Extraction of Origin From Blob URL</a></li>
+                      <li><a href="#extractionOfIdentifierFromBlobURL">10.3.3. Extraction of Identifier From Blob URL</a></li>
                       <li><a href="#fragmentDiscussion">10.3.4. Discussion of Fragment Identifier</a></li>
                     </ul>
                     </li>
@@ -397,7 +397,7 @@ function errorHandler(evt) {
 <p>The term <dfn id="throw-an-exception">throw</dfn> in this specification, as it pertains to exceptions, is used as defined in the DOM4 specification [<a href="#DOM4">DOM4</a>].</p>
 <p>The term <dfn id="byte">byte</dfn> in this specification is used as defined in the Encoding Specification [<a href="#encodingSpecification">Encoding Specification</a>].</p>
 <p>The term <dfn id="contextObject">context object</dfn> in this specification is used as defined in the DOM4 specification [<a href="#DOM4">DOM4</a>].</p>
-<p>The terms <dfn id="URL">URL</dfn>, <dfn id="relativeURL">relative URL</dfn>, <dfn id="baseURL">base URL</dfn>, <dfn id="URLParser">URL parser</dfn>, <dfn id="scheme">scheme</dfn>, <dfn id="host">host</dfn>, <dfn id="relativeScheme">relative scheme</dfn>, <dfn id="scheme-data">scheme data</dfn>, and <dfn id="fragmentIDDef">fragment</dfn> are as defined by the WHATWG URL Specification [<a href="#URL-API">URL</a>].</p>
+<p>The terms <dfn id="URL">URL</dfn>, <dfn id="relativeURL">relative URL</dfn>, <dfn id="baseURL">base URL</dfn>, <dfn id="URLParser">URL parser</dfn>, <dfn id="basicURLParser">basic URL Parser</dfn>, <dfn id="scheme">scheme</dfn>, <dfn id="host">host</dfn>, <dfn id="relativeScheme">relative scheme</dfn>, <dfn id="scheme-data">scheme data</dfn>, and <dfn id="fragmentIDDef">fragment</dfn> are as defined by the WHATWG URL Specification [<a href="#URL-API">URL</a>].</p>
 <p>The terms <dfn id="requestFetch">request</dfn>, <dfn id="responseFetch">response</dfn>, and <dfn id="cross-origin-request">cross-origin request</dfn> are as defined in the WHATWG Fetch Specification [<a href="#Fetch">Fetch Specification</a>].</p>
 <p>The term <dfn id="UnixEpoch">Unix Epoch</dfn> is used in this specification to refer to the time 00:00:00 UTC on January 1 1970 (or 1970-01-01T00:00:00Z ISO 8601); this is the same time that is conceptually "0" in ECMA-262 [<a href="#ECMA-262">ECMA-262</a>].</p> 
        <p>The algorithms and steps in this specification use the following mathematical operations:</p>
@@ -1570,24 +1570,14 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
  <p>An example of a Blob URL might be <em>blob:https://example.org/9115d58c-bcda-ff47-86e5-083e9a215304</em>.</p>
   </div>
 
-  <div id="extractionOfOriginFromIdentifier" class="section">
-    <h4>10.3.3. Extraction of Origin from Identifier</h4>
-   <p>A <dfn id="parsedBlobURL">parsed Blob URL</dfn> is a <a href="#DefinitionOfScheme">Blob URL</a> that has been parsed by the <a href="#URLParser">URL parser</a>. An <a href="#origin">origin</a> extracted from a <a href="#parsedBlobURL">parsed Blob URL</a> is the value returned by the following <dfn id="extractionOfOrigin">extraction of origin from an identifier</dfn> algorithm:</p>
-    <ol>
-      <li><p>Let <var>input</var> be a <a href="#parsedBlobURL">parsed Blob URL</a>. Set <var>i</var> to the <a href="#scheme-data">scheme data</a> of <var>input</var>, and <var>parsed URL</var> to the empty string. </p>
-      <div class="note"><div class="noteHeader">Note</div><p>The <a href="#scheme-data">scheme data</a> of a <a href="#parsedBlobURL">parsed Blob URL</a>, <var>i</var>, is also a <a href="#URL">URL</a>, and can be parsed into components.</p></div>
-      </li>
-      <li><p>Run the <a href="#basicURLParser">basic URL parser</a> on <var>i</var>. If the <a href="#basicURLParser">basic URL parser</a> returns failure, return an implementation-defined value for <a href="#origin">origin</a> and <a href="#terminate-an-algorithm">terminate this algorithm</a>. </p>
-      <div class="note"><div class="noteHeader">Note</div><p>Certain <a href="#origin">origins</a> are user-agent specific, and their use as part of an <a href="#identifier">identifier</a> is not defined in this specification.</p></div>  
-
-      </li>
-      
-      <li><p>Set <var>parsed URL</var> to the <a href="#URL">URL</a> returned by the <a href="#basicURLParser">basic URL parser</a> invoked on <var>i</var>. Return the <a href="#origin">origin</a> of <var>parsed URL</var>.</p></li>
-      
-     <div class="note"><div class="noteHeader">Note</div><p>The value returned as the <a href="#origin">origin</a> matches the value generated by the Unicode Serialization of an Origin algorithm [<a href="#WEBORIGIN">ORIGIN</a>] when this <a href="#DefinitionOfScheme">Blob URL</a> was created with <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a>. </p></div>   
-      </li>
-    </ol>
-
+  <div id="extractionOfIdentifierFromBlobURL" class="section">
+<h4>10.3.3. Extraction of Identifier from Blob URL</h4>
+<p>To extract an <a href="#identifier">identifier</a> from a <a href="#DefinitionOfScheme">Blob URL</a>, user agents must run the following <dfn id="extractionOfIdentifier">extraction of identifier</dfn> steps:
+</p>
+<ol>
+<li><p>Let <var>input</var> be a <a href="#DefinitionOfScheme">Blob URL</a> generated by the <a href="#dfn-createFor"><code>URL.createFor</code></a> or <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> method.</p></li>
+<li><p>Run the <a href="#basicURLParser">basic URL parser</a> on <var>input</var> and return the <a href="#scheme-data">scheme data</a> component.</p></li>
+</ol>
   </div>
   <div class="section" id="fragmentDiscussion">
   <h4>10.3.4. Discussion of Fragment Identifier</h4>
@@ -1696,7 +1686,9 @@ partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
   <li><p>If called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that has a <a href="#readabilityState">readability state</a> of <a href="#dfn-closedState"><code>CLOSED</code></a>, user agents must return a unique <a href="#DefinitionOfScheme">Blob URL</a> that has the following properties:</p>
     <ul>
       <li>It must be the result of the <a href="#unicodeBlobURL">serialization of a Blob URL algorithm</a>. </li>
-      <li>It must return a <a href="#dfn-networkError">network error</a> when <a href="#dereference">dereferenced</a>.</li>
+      <li>It must return a <a href="#dfn-networkError">network error</a> when <a href="#dereference">dereferenced</a>.
+        <div class="note"><div class="noteHeader">Note</div><p>No entry is added to the <a href="#BlobURLStore">Blob URL Store</a>.</p></div>
+      </li>
     </ul>
   </li>
   <li><p>Otherwise, user agents must run the following sub-steps:</p>
@@ -1715,7 +1707,9 @@ partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
   <li><p>If called with a <a href="#dfn-Blob"><code>Blob</code></a> argument that has a <a href="#readabilityState">readability state</a> of <a href="#dfn-closedState"><code>CLOSED</code></a>, user agents must return a unique <a href="#DefinitionOfScheme">Blob URL</a> that has the following properties:</p>
 <ul>
       <li>It must be the result of the <a href="#unicodeBlobURL">serialization of a Blob URL algorithm</a>.</li>
-      <li>It must return a <a href="#dfn-networkError">network error</a> when <a href="#dereference">dereferenced</a>.</li>
+      <li>It must return a <a href="#dfn-networkError">network error</a> when <a href="#dereference">dereferenced</a>.
+<div class="note"><div class="noteHeader">Note</div><p>No entry is added to the <a href="#BlobURLStore">Blob URL Store</a>.</p></div>
+      </li>
     </ul>
   </li>
   <li><p>Otherwise, user agents must run the following steps:</p>
@@ -1745,13 +1739,16 @@ partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
   </div>
   </dd>
   <dt id="dfn-revokeObjectURL">The <code>revokeObjectURL</code> static method</dt>
-  <dd><p>Revokes the <a href="#DefinitionOfScheme"><code>Blob</code> URL</a> provided in the string <a href="#dfn-urlarg"><code>url</code></a> by removing the corresponding entry from the <a href="#BlobURLStore">Blob URL Store</a>.  This method must act as follows:
+  <dd><p>Revokes the <a href="#DefinitionOfScheme">Blob URL</a> provided in the string <a href="#dfn-urlarg"><code>url</code></a> by removing the corresponding entry from the <a href="#BlobURLStore">Blob URL Store</a>.  This method must act as follows:
   </p>
   <ol>
     <li>If the <a href="#dfn-urlarg"><code>url</code></a> refers to a <a href="#dfn-Blob"><code>Blob</code></a> that has a <a href="#readabilityState">readability state</a> of <a href="#dfn-closedState"><code>CLOSED</code></a> OR if the value provided for the <a href="#dfn-urlarg"><code>url</code></a> argument is not a <a href="#DefinitionOfScheme"><code>Blob</code> URL</a>, OR if the value provided for the <a href="#dfn-urlarg"><code>url</code></a> argument does not have an <a href="#identifier">identifier</a> in the <a href="#BlobURLStore">Blob URL Store</a>,
   this method call does nothing.  User agents may display a message on the error console.</li>
-    <li>Otherwise, user agents must
-   <a href="#removeTheEntry">remove the entry</a> from the <a href="#BlobURLStore">Blob URL Store</a> for the <a href="#identifier">identifier</a> associated with the <a href="#dfn-urlarg"><code>url</code></a> argument; subsequent attempts to <a href="#dereference">dereference</a> this URL must return a <a href="#dfn-networkError">network error</a> response code.
+    <li>Otherwise, user agents must run the following steps:
+      <ol>
+        <li><p><a href="#extractionOfIdentifier">Extract the identifier</a> from <a href="#dfn-urlarg"><code>url</code></a>.</p></li>
+        <li><p><a href="#removeTheEntry">Remove the entry</a> from the <a href="#BlobURLStore">Blob URL Store</a> for the <a href="#identifier">identifier</a>; subsequent attempts to <a href="#dereference">dereference</a> this URL must return a <a href="#dfn-networkError">network error</a>.</p></li>
+      </ol>
 </li>
   
   </ol>
@@ -1853,9 +1850,17 @@ var windowRef = openPopup(blobURLAnchorRef, "Application Info");
   <h3>10.6. Lifetime of Blob URLs</h3>
  <p>A global object which exposes <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a> must maintain a <dfn id="BlobURLStore">Blob URL Store</dfn> which is a list of <a href="#identifier">identifiers</a> created by the <code>URL.createObjectURL</code> method or the <code>URL.createFor</code> method, and the <a href="#dfn-fileBlob"><code>blob</code></a> resource that each <a href="#identifier">identifier</a> refers to. </p>
  <p>A global object which exposes <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a> or <a href="#dfn-createFor"><code>URL.createFor</code></a> must maintain a <dfn id="revokeList">Revocation List</dfn> which is a list of <a href="#identifier">identifiers</a> that have been extracted from <a href="#DefinitionOfScheme">Blob URL</a>s created with the <a href="#dfn-createFor"><code>URL.createFor</code></a> method.</p>
- <p>When this specification says to <dfn id="add-an-entry">add an entry to the Blob URL Store</dfn> the user-agent must add the <a href="#identifier">identifier</a> of a <a href="#DefinitionOfScheme">Blob URL</a> created using <a href="#dfn-createFor"><code>URL.createFor</code></a> or <a href="#dfn-createObjectURL"><code>URL.createObjectURL</code></a>, and a reference to the <a href="#dfn-fileBlob"><code>blob</code></a> it refers to, to the <a href="#BlobURLStore">Blob URL Store</a>.</p>
-
- <p>When this specification says to <dfn id="add-an-entry-revoke">add an entry to the The Revocation List</dfn>, user agents must add the <a href="#identifier">identifier</a> from a Blob URL</a> created using <a href="#dfn-createFor"><code>URL.createFor</code></a> to the <a href="#revokeList">Revocation List</a>. This is only for <a href="#autoRevoking">auto-revoking</a> <a href="#DefinitionOfScheme">Blob URL</a>s.</p>
+ <p>When this specification says to <dfn id="add-an-entry">add an entry to the Blob URL Store</dfn> for a <a href="#DefinitionOfScheme">Blob URL</a> and a <a href="#dfn-fileBlob"><code>blob</code></a> input, the user-agent must run the following steps:
+</p>
+<ol>
+  <li><p><a href="#extractionOfIdentifier">Extract the identifier</a> from the <a href="#DefinitionOfScheme">Blob URL</a>.</p></li>
+  <li><p>Add the <a href="#identifier">identifier</a> and a reference to the <a href="#dfn-fileBlob"><code>blob</code></a> to the <a href="#BlobURLStore">Blob URL Store</a>.</p></li>
+</ol>
+ <p>When this specification says to <dfn id="add-an-entry-revoke">add an entry to the The Revocation List</dfn> for a <a href="#DefinitionOfScheme">Blob URL</a>, user agents must run the following steps:</p>
+<ol>
+<li><p><a href="#extractionOfIdentifier">Extract the identifier</a> from the <a href="#DefinitionOfScheme">Blob URL</a>.</p></li>
+<li><p>Add the <a href="#identifier">identifier</a> to the <a href="#revokeList">Revocation List</a>. This is only for <a href="#autoRevoking">auto-revoking</a> <a href="#DefinitionOfScheme">Blob URL</a>s.</p></li>
+</ol>
  <p>When this specification says to <dfn id="removeTheEntry">remove an entry from the Blob URL Store</dfn> for a given <a href="#identifier">identifier</a> or for a given <a href="#dfn-Blob"><code>Blob</code></a>, user agents must remove the <a href="#identifier">identifier</a> and the <a href="#dfn-Blob"><code>blob</code></a> it refers to from the <a href="#BlobURLStore">Blob URL Store</a>. Subsequent attempts to <a href="#dereference">dereference</a> this URL must result in a <a href="#dfn-networkError">network error</a>.</p>
  <p>The <a href="#revokeList">Revocation List</a> and the <a href="#BlobURLStore">Blob URL Store</a> must be processed together as follows:</p>
 <ol>
