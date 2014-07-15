@@ -1534,11 +1534,9 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 <p>A <a href="#fragmentIDDef">fragment</a>, if used,
   has a distinct interpretation depending on the media type of the <a href="#dfn-Blob"><code>Blob</code></a> or <a href="#dfn-file"><code>File</code></a> resource in question (see <a href="#fragmentDiscussion">fragment discussion</a>). </p>
    <div class="block"><div class="blockTitleDiv"><span class="blockTitle">ABNF</span></div><div class="blockContent"><pre class="code"><code class="abnf-code">
-  blob = scheme ":" identifier [fragIdentifier]
+  blob = scheme ":" origin "/" UUID [fragIdentifier]
 
   scheme = "blob"
-  identifier = origin "/" UUID
-  
 
   ; scheme is always "blob"
 
