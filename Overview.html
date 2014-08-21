@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>Editor's Draft <em>15 July 2014</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>Editor's Draft <em>21 August 2014</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2014 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -73,7 +73,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 15 July 2014 <b>Editor's Draft</b> of the
+        This document is the 21 August 2014 <b>Editor's Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -1510,7 +1510,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   <h3>10.2. Discussion of Existing Schemes</h3>
   <p>
   This section is an informative discussion of existing schemes that may have been repurposed or reused for the use cases for URLs above, and justification for why a new scheme
-  is considered preferable.  These schemes include HTTP [<a href="#RFC2616">RFC2616</a>], file [<a href="#RFC1630">RFC1630</a>][<a href="#RFC1738">RFC1738</a>], and a scheme such as
+  is considered preferable.  These schemes include HTTP [<a href="#RFC7230">RFC7230</a>], file [<a href="#RFC1630">RFC1630</a>][<a href="#RFC1738">RFC1738</a>], and a scheme such as
   urn:uuid [<a href="#UUID">RFC4122</a>].  One broad consideration in determining what scheme to use is providing something with intuitive appeal to web developers.
   </p>
   <ul>
@@ -1591,17 +1591,17 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   <h3>10.4. Dereferencing Model for Blob URLs</h3>
 <div class="note"><div class="noteHeader">Note</div><p>The <a href="#URL-API">URL</a> and <a href="#Fetch">Fetch</a> Specifications should be considered normative for parsing and fetching <a href="#DefinitionOfScheme">Blob URLs</a>. The section below is for informational purposes only, and is not considered normative.</p></div>
   <p><a href="#DefinitionOfScheme"><code>Blob</code> URL</a>s are <dfn id="dereference">dereferenced</dfn> when the user agent retrieves the resource identified by the Blob URL and returns it to the requesting entity. This section provides guidance on <a href="#requestFetch">requests</a> and <a href="#responseFetch">responses</a>.</p>
-  <p>Only <a href="#requestFetch">requests</a> with GET [<a href="#RFC2616">RFC2616</a>] are supported. Specifically, <a href="#responseFetch">responses</a> are only a subset of the following from HTTP [<a href="#RFC2616">RFC2616</a>]:</p>
+  <p>Only <a href="#requestFetch">requests</a> with GET [<a href="#RFC7231">RFC7231</a>] are supported. Specifically, <a href="#responseFetch">responses</a> are only a subset of the following from HTTP [<a href="#RFC7231">RFC7231</a>]:</p>
   <div id="TwoHundredOK" class="section">
   <h4>10.4.1. 200 OK</h4>
   <p>This <a href="#responseFetch">response</a> is used if the <a href="#requestFetch">request</a> has succeeded, and no <a href="#dfn-networkError">network errors</a> are generated.</p> 
   </div>
   <div id="processing-media-types" class="section">
   <h4>10.4.2. Response Headers</h4>
-  <p>Along with <a href="#TwoHundredOK">200 OK</a> responses, user agents use a Content-Type header [<a href="#RFC2616">RFC2616</a>] that is equal to the value of the <a href="#dfn-Blob"><code>Blob</code></a>'s <a href="#dfn-type"><code>type</code></a> attribute, if it is not the empty string.</p>
-  <p>Along with <a href="#TwoHundredOK">200 OK</a> responses, user agents use a Content-Length header [<a href="#RFC2616">RFC2616</a>] that is equal to the value of the <a href="#dfn-Blob"><code>Blob</code></a>'s <a href="#dfn-size"><code>size</code></a> attribute.</p>
+  <p>Along with <a href="#TwoHundredOK">200 OK</a> responses, user agents use a Content-Type header [<a href="#RFC7231">RFC7231</a>] that is equal to the value of the <a href="#dfn-Blob"><code>Blob</code></a>'s <a href="#dfn-type"><code>type</code></a> attribute, if it is not the empty string.</p>
+  <p>Along with <a href="#TwoHundredOK">200 OK</a> responses, user agents use a Content-Length header [<a href="#RFC7230">RFC7230</a>] that is equal to the value of the <a href="#dfn-Blob"><code>Blob</code></a>'s <a href="#dfn-size"><code>size</code></a> attribute.</p>
   <p>
-  If a Content-Type header [<a href="#RFC2616">RFC2616</a>] is provided, then user agents obtain and process that media type in a manner consistent with the Mime Sniffing specification [<a href="#MIMESNIFF">MIMESNIFF</a>].  
+  If a Content-Type header [<a href="#RFC7231">RFC7231</a>] is provided, then user agents obtain and process that media type in a manner consistent with the Mime Sniffing specification [<a href="#MIMESNIFF">MIMESNIFF</a>].  
   </p>
   <p>If a resource identified with a <a href="#DefinitionOfScheme">Blob URL</a> is a <a href="#dfn-file"><code>File</code></a> object, user agents use that file's <a href="#dfn-name"><code>name</code></a> attribute, as if the <a href="#responseFetch">response</a> had a <code>Content-Disposition</code> header with the filename parameter set to the <a href="#dfn-file"><code>File</code></a>'s <a href="#dfn-name"><code>name</code></a> attribute [<a href="#RFC6266">RFC6266</a>].  </p>
   <div class="note"><div class="noteHeader">Note</div><p>
@@ -1634,7 +1634,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   <div class="block"><div class="blockTitleDiv"><span class="blockTitle">HEADERS</span></div><div class="blockContent"><pre class="code"><code class="headers-code">
   GET http://example.org:8080/550e8400-e29b-41d4-a716-446655440000
   </code></pre></div></div>
-  <p>If the <a href="#dfn-fileBlob"><code>blob</code></a> has an affiliated media type [<a href="#RFC2046">RFC2046</a>] represented by its <a href="#dfn-type"><code>type</code></a> attribute, then the response message should include the Content-Type header from RFC2616 [<a href="#RFC2616">RFC2616</a>].  See <a href="#processing-media-types">processing media types</a>. </p>
+  <p>If the <a href="#dfn-fileBlob"><code>blob</code></a> has an affiliated media type [<a href="#RFC2046">RFC2046</a>] represented by its <a href="#dfn-type"><code>type</code></a> attribute, then the response message should include the Content-Type header from RFC7231 [<a href="#RFC7231">RFC7231</a>].  See <a href="#processing-media-types">processing media types</a>. </p>
   <div class="block"><div class="blockTitleDiv"><span class="blockTitle">HEADERS</span></div><div class="blockContent"><pre class="code"><code class="headers-code">
   
   200 OK
@@ -1990,8 +1990,10 @@ var windowRef = openPopup(blobURLAnchorRef, "Application Info");
 		<dd><cite><a href="http://www.w3.org/TR/domcore/">DOM4 (work in progress)</a></cite>, A. Gregor, A. van Kesteren, Ms2ger. W3C.</dd>
 		<dt id="Unicode">Unicode</dt>
 		<dd><cite><a href="http://www.unicode.org/versions/Unicode5.2.0/">The Unicode Standard, Version 5.2.0.</a></cite>, J. D. Allen, D. Anderson, et al. Unicode Consortium.</dd>  	
-		<dt id="RFC2616">RFC2616</dt>
-		<dd><cite><a href="http://tools.ietf.org/html/rfc2616">Hypertext Transfer Protocol -- HTTP/1.1</a></cite>, R. Fielding, J. Gettys, J. Mogul, H. Frystyk, L. Masinter, P. Leach, T. Berners-Lee. IETF.</dd>
+		<dt id="RFC7230">RFC7230</dt>
+		<dd><cite><a href="http://tools.ietf.org/html/rfc7230">Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing</a></cite>, R. Fielding, J. Reschke. IETF.</dd>
+    <dt id="RFC7231">RFC7231</dt>
+    <dd><cite><a href="http://tools.ietf.org/html/rfc7231">Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content</a></cite>, R. Fielding, J. Reschke. IETF.</dd>
 		<dt id="RFC2046">RFC2046</dt>
 		<dd><cite><a href="http://tools.ietf.org/html/rfc2046">Multipurpose Internet Mail Extensions (MIME) Part Two: Media Extensions</a></cite>, N. Freed, N. Borenstein. IETF.</dd>
     <dt id="RFC6266">RFC6266</dt>
