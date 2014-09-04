@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>Editor's Draft <em>21 August 2014</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>Editor's Draft <em>03 September 2014</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2014 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -73,7 +73,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 21 August 2014 <b>Editor's Draft</b> of the
+        This document is the 03 September 2014 <b>Editor's Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -395,9 +395,10 @@ function errorHandler(evt) {
  <p>When this specification says to <dfn id="terminate-an-algorithm">terminate an algorithm</dfn> the user agent must terminate the algorithm after finishing the step it is on, and return from it.  Asynchronous <a href="#read-methods">read methods</a> defined in this specification may return before the algorithm in question is terminated, and can be terminated by an <a href="#dfn-abort"><code>abort()</code></a> call.</p>
 <p>The term <dfn id="throw-an-exception">throw</dfn> in this specification, as it pertains to exceptions, is used as defined in the DOM4 specification [<a href="#DOM4">DOM4</a>].</p>
 <p>The term <dfn id="byte">byte</dfn> in this specification is used as defined in the Encoding Specification [<a href="#encodingSpecification">Encoding Specification</a>].</p>
+<p>The term <dfn id="chunk">chunk</dfn> in this specification is used as defined in the Streams Specification [<a href="#streamsSpecification">Streams Specification</a>.]</p>
 <p>The term <dfn id="contextObject">context object</dfn> in this specification is used as defined in the DOM4 specification [<a href="#DOM4">DOM4</a>].</p>
 <p>The terms <dfn id="URL">URL</dfn>, <dfn id="relativeURL">relative URL</dfn>, <dfn id="baseURL">base URL</dfn>, <dfn id="URLParser">URL parser</dfn>, <dfn id="basicURLParser">basic URL Parser</dfn>, <dfn id="scheme">scheme</dfn>, <dfn id="host">host</dfn>, <dfn id="relativeScheme">relative scheme</dfn>, <dfn id="scheme-data">scheme data</dfn>, and <dfn id="fragmentIDDef">fragment</dfn> are as defined by the WHATWG URL Specification [<a href="#URL-API">URL</a>].</p>
-<p>The terms <dfn id="requestFetch">request</dfn>, <dfn id="responseFetch">response</dfn>, and <dfn id="cross-origin-request">cross-origin request</dfn> are as defined in the WHATWG Fetch Specification [<a href="#Fetch">Fetch Specification</a>].</p>
+<p>The terms <dfn id="requestFetch">request</dfn>, <dfn id="responseFetch">response</dfn>, <dfn id="dfn-body">body</dfn> and <dfn id="cross-origin-request">cross-origin request</dfn> are as defined in the WHATWG Fetch Specification [<a href="#Fetch">Fetch Specification</a>].</p>
 <p>The term <dfn id="UnixEpoch">Unix Epoch</dfn> is used in this specification to refer to the time 00:00:00 UTC on January 1 1970 (or 1970-01-01T00:00:00Z ISO 8601); this is the same time that is conceptually "0" in ECMA-262 [<a href="#ECMA-262">ECMA-262</a>].</p> 
        <p>The algorithms and steps in this specification use the following mathematical operations:</p>
        <ul>
@@ -863,41 +864,47 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
     <div id="readOperationSection" class="section">
       <h3>8.1 The Read Operation</h3>
 	  
-    <p>The algorithm below defines a <a href="#readOperation">read operation</a>, which takes a <a href="#dfn-Blob"><code>Blob</code></a> and a <a href="#synchronousFlag">synchronous flag</a> as <var>input</var>, and reads <a href="#byte">byte</a>s into system memory as the <var>result</var> of the <a href="#readOperation">read operation</a>, or else fails along with a <a href="#failureReason">failure reason</a>. The <var>result</var> of the read operation consists of <a href="#byte">byte</a>s in system memory. Methods in this specification invoke the <a href="#readOperation">read operation</a> with the <a href="#synchronousFlag">synchronous flag</a> either set or unset.</p>
-    <p>The <dfn id="synchronousFlag">synchronous flag</dfn> determines if a read operation is synchronous or asynchronous, and is <em>unset</em> by default. Methods may set it. If it is set, the <a href="#readOperation">read operation</a> takes place synchronously. Otherwise, it takes place asynchronously, and <a href="#queue-a-task">queues tasks</a> annotated <a href="#process-read">process read</a>, <a href="#process-read-data">process read data</a>, <a href="#process-read-EOF">process read EOF</a>, and/or <a href="#process-read-error">process read error</a> with a <a href="#failureReason">failure reason</a> for the <var>result</var> on the <a href="#fileReadingTaskSource">file reading task source</a>.  </p>
-    <p>To perform a <dfn id="readOperation">read operation</dfn> on an <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a> and the <a href="#synchronousFlag">synchronous flag</a>, run the following steps:</p>
+    <p>The algorithm below defines a <a href="#readOperation">read operation</a>, which takes a <a href="#dfn-Blob"><code>Blob</code></a> and a <a href="#synchronousFlag">synchronous flag</a> as input, and reads <a href="#byte">byte</a>s into a byte stream which is returned as the <var>result</var> of the <a href="#readOperation">read operation</a>, or else fails along with a <a href="#failureReason">failure reason</a>. Methods in this specification invoke the <a href="#readOperation">read operation</a> with the <a href="#synchronousFlag">synchronous flag</a> either set or unset.</p>
+    <p>The <dfn id="synchronousFlag">synchronous flag</dfn> determines if a read operation is synchronous or asynchronous, and is <em>unset</em> by default. Methods may set it. If it is set, the <a href="#readOperation">read operation</a> takes place synchronously. Otherwise, it takes place asynchronously.  </p>
+    <p>To perform a <dfn id="readOperation">read operation</dfn> on a <a href="#dfn-Blob"><code>Blob</code></a> and the <a href="#synchronousFlag">synchronous flag</a>, run the following steps:</p>
     <ol>
 
-      <li><p>If the <a href="#synchronousFlag">synchronous flag</a> is set, run the following substeps:</p>
+      <li><p>Let <var>s</var> be a a new <a href="#dfn-body">body</a>, <var>b</var> be the <a href="#dfn-Blob"><code>Blob</code></a> to be read from, and <var>bytes</var> initially set to an empty byte sequence. While there are still bytes to be read in <var>b</var> perform the following substeps:</p>
+
       <div class="note"><div class="noteHeader">Note</div><p>The algorithm assumes that invoking methods have checked for <a href="#readabilityState">readability state</a>. A <a href="#dfn-Blob"><code>Blob</code></a> in the <a href="#dfn-closedState"><code>CLOSED</code></a> state must not have a <a href="#readOperation">read operation</a> called on it.</p></div>
       <ol>
        
-        <li>Start reading bytes from the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a> into <var>result</var>. If <a href="#file-error-read">an error occurs</a> reading the <code>Blob</code>, return failure along with a <a href="#failureReason">failure reason</a>, and terminate this algorithm. 
+        <li><p>If the <a href="#synchronousFlag">synchronous flag</a> is set, follow the steps below: </p>
+          <ol><li><p>Let <var>bytes</var> be the byte sequence that results from reading a <a href="#chunk">chunk</a> from <var>b</var>. If <a href="#file-error-read">an error occurs</a> reading a <a href="#chunk">chunk</a> from <var>b</var>, return failure along with a <a href="#failureReason">failure reason</a>, and <a href="#terminate-an-algorithm">terminate this algorithm</a>. </p>
           <div class="note"><div class="noteHeader">Note</div>
          <p>Along with returning failure, the synchronous part of this algorithm must return the <a href="#failureReason">failure reason</a> that occurred for <a href="#throw-an-exception">throwing an exception</a> by synchronous methods that invoke this algorithm with the <a href="#synchronousFlag">synchronous flag</a> set. </p>
-    </div>
+        </div>
         </li>
-        <li>When all the <a href="#byte">byte</a>s from the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a> have been read into system memory, return them as <var>result</var> and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</li>
+        <li><p>If there are no errors, push <var>bytes</var> to <var>s</var>, and increment <var>s</var>'s <var>transmitted</var> [<a href="#Fetch">Fetch</a>] by the number of bytes in <var>bytes</var>. Reset <var>bytes</var> to the empty byte sequence and continue reading <a href="#chunk">chunk</a>s as above.</p></li>
+        <li><p>When all the bytes of <var>b</var> have been read into <var>s</var>, return <var>s</var> and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p></li>
       </ol>
 
       </li>
-      <li><p>Otherwise, process the rest of this algorithm asynchronously, and run the following substeps.</p>
-        <div class="note"><div class="noteHeader">Note</div><p>The algorithm assumes that invoking methods have checked for <a href="#readabilityState">readability state</a>. A <a href="#dfn-Blob"><code>Blob</code></a> in the <a href="#dfn-closedState"><code>CLOSED</code></a> state must not have a <a href="#readOperation">read operation</a> called on it.</p></div>
-      <ol>
-      <li>If <a href="#file-error-read">an error occurs reading</a> the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a>, <a href="#queue-a-task">queue a task</a> to <dfn id="process-read-error">process read error</dfn> with the <a href="#failureReason">failure reason</a>, and <a href="#terminate-an-algorithm">terminate this algorithm</a>.
- <div class="note"><div class="noteHeader">Note</div>
-         <p>This <a href="#queue-a-task">task can be queued</a> at any point during the read operation if <a href="#file-error-read">an error occurs during reading</a>; after <a href="#queue-a-task">queuing this task</a>, this algorithm is always <a href="#terminate-an-algorithm">terminated</a>. </p>
-    </div>
-      </li>  
-      <li><p>Otherwise, <a href="#queue-a-task">queue a task</a> to <dfn id="process-read">process read</dfn>, which starts reading bytes from the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a> into <var>result</var> .   </p></li>
-      <li><p>Then, either once <var>result</var> has at least one <a href="#byte">byte</a> read into it or there are no <a href="#byte">byte</a>s to read, <a href="#queue-a-task">queue a task</a> to <dfn id="process-read-data">process read data</dfn> for <var>result</var>. Keep <a href="#queue-a-task">queuing tasks</a> to <a href="#process-read-data">process read data</a> every 50ms or for each <a href="#byte">byte</a> of the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a> read into <var>result</var>, whichever is <em>least frequent</em>.</p></li>
-      <li><p>Then, once <var>result</var> consists of all the bytes of the <var>input</var> <a href="#dfn-Blob"><code>Blob</code></a> in system memory, <a href="#queue-a-task">queue a task</a> to <dfn id="process-read-EOF">process read EOF</dfn>.</p>
-      </li>  
+      <li><p>Otherwise, the <a href="#synchronousFlag">synchronous flag</a> is unset. Return <var>s</var> and process the rest of this algorithm asynchronously.</p></li>
+      <li><p>Let <var>bytes</var> be the byte sequence that results from reading a <a href="#chunk">chunk</a> from <var>b</var>. If <a href="#file-error-read">an error occurs</a> reading a <a href="#chunk">chunk</a> from <var>b</var>, <a href="#terminate-an-algorithm">terminate this algorithm</a> with a <a href="#failureReason">failure reason</a>.</p>
+          <div class="note"><div class="noteHeader">Note</div>
+         <p>The asynchronous part of this algorithm must signal the <a href="#failureReason">failure reason</a> that occurred for asynchronous error reporting by methods expecting <var>s</var> and which invoke this algorithm with the <a href="#synchronousFlag">synchronous flag</a> unset. </p>
+        </div></li>
+      <li><p>If no <a href="#file-error-read">error</a> occurs, push <var>bytes</var> to <var>s</var>, and increment <var>s</var>'s <var>transmitted</var> [<a href="Fetch">Fetch</a>] by the number of bytes in <var>bytes</var>. Reset <var>bytes</var> to the empty byte sequence and continue reading <a href="#chunk">chunk</a>s as above. </p></li>
+      
     </ol>
-    <p>Use the <a href="#fileReadingTaskSource">file reading task source</a> for these tasks.</p> 
-  </li>
-</ol>
+
+    <p>To perform an <dfn id="task-read-operation">annotated task read operation</dfn> on a <a href="#dfn-Blob">Blob</a> <var>b</var>, perform the steps below:</p>
+    <ol>
+    <li><p>Perform a <a href="#readOperation">read operation</a> on <var>b</var> with the <a href="#synchronousFlag">synchronous flag</a> unset, along with the additional steps below.</p></li>
+    <li><p>If the <a href="#readOperation">read operation</a> terminates with a <a href="#failureReason">failure reason</a>, <a href="#queue-a-task">queue a task</a> to <dfn id="process-read-error">process read error</dfn> with the <a href="#failureReason">failure reason</a> and terminate this algorithm.</p></li>
+    <li><p>When the first <a href="#chunk">chunk</a> is being pushed to the <a href="#dfn-body">body</a> <var>s</var> during the <a href="#readOperation">read operation</a>, <a href="#queue-a-task">queue a task</a> to <dfn id="process-read">process read</dfn>.</p></li> 
+    <li><p>Once the <a href="#dfn-body">body</a> <var>s</var> from the <a href="#readOperation">read operation</a> has at least one <a href="#chunk">chunk</a> read into it, or there are no <a href="#chunk">chunk</a>s left to read from <var>b</var>, <a href="#queue-a-task">queue a task</a> to <dfn id="process-read-data">process read data</dfn>. Keep <a href="#queue-a-task">queuing tasks</a> to <a href="#process-read-data">process read data</a> for every <a href="#chunk">chunk</a> read or every 50ms, whichever is <em>least frequent</em>.</p></li> 
+    <li><p>When all of the <a href="#chunk">chunk</a>s from <var>b</var> are read into the <a href="#dfn-body">body</a> <var>s</var> from the <a href="#readOperation">read operation</a>, <a href="#queue-a-task">queue a task</a> to <dfn id="process-read-EOF">process read EOF</dfn>.</p></li>
+  </ol>
+  <p>Use the <a href="#fileReadingTaskSource">file reading task source</a> for all these tasks.</p>
  </div>
+
  <div id="blobreader-task-source" class="section">
   <h3>8.2. The File Reading Task Source</h3>
  <p>This specification defines a new generic <a href="#task-source">task source</a> called the <dfn id="fileReadingTaskSource">file reading task source</dfn>, which is used for all <a href="#queue-a-task">tasks that are queued</a> in this specification to read byte sequences associated with <a href="#dfn-Blob"><code>Blob</code></a> and <a href="#dfn-file"><code>File</code></a> objects.  It is to be used for features that trigger in response to asynchronously reading binary data.</p>  
@@ -1067,7 +1074,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> is in the <a href="#dfn-closedState">CLOSED</a> <a href="#readabilityState">readability state</a>, set the <a href="#dfn-error"><code>error</code></a> attribute of the <a href="#contextObject">context object</a> to return an <code>InvalidStateError</code> <a href="#dfn-domerror">DOMError</a> and <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-error-event"><code>error</code></a> at the <a href="#contextObject">context object</a>. <a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p>
   </li>
     <li><p>Otherwise set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a>. </p></li> 
-	  <li><p>Initiate a <a href="#readOperation">read operation</a> using the <a href="#dfn-fileBlob"><code>blob</code></a> argument as <var>input</var> and with the <a href="#synchronousFlag">synchronous flag</a> <em>unset</em> and handle <a href="#queue-a-task">tasks queued</a> on the <a href="#fileReadingTaskSource">file reading task source</a> per below.  
+	  <li><p>Initiate an <a href="#task-read-operation">annotated task read operation</a> using the <a href="#dfn-fileBlob"><code>blob</code></a> argument as <var>input</var> and handle <a href="#queue-a-task">tasks queued</a> on the <a href="#fileReadingTaskSource">file reading task source</a> per below.  
     </p>
 	  </li>
 	
@@ -1077,7 +1084,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 	  <li><p>To <a href="#process-read-EOF">process read EOF</a> run these substeps:</p> 
 
       <ol><li><p>Set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code>.</a></p></li>
-      <li><p>Set the <a href="#dfn-result"><code>result</code></a> attribute to the <var>result</var> of the <a href="#readOperation">read operation</a> as a
+      <li><p>Set the <a href="#dfn-result"><code>result</code></a> attribute to the <a href="#dfn-body">body</a> returned by the <a href="#readOperation">read operation</a> as a
 	  DataURL [<a href="#DataURL">DataURL</a>]; on getting, the <a href="#dfn-result" class="dfnref"><code>result</code></a> attribute returns the <a href="#dfn-fileBlob"><code>blob</code></a> as a
 	  Data URL [<a href="#DataURL">DataURL</a>].</p>
     <ul>
@@ -1114,7 +1121,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   <li><p>If the <a href="#dfn-fileBlob"><code>blob</code></a> is in the <a href="#dfn-closedState">CLOSED</a> <a href="#readabilityState">readability state</a>, set the <a href="#dfn-error"><code>error</code></a> attribute of the <a href="#contextObject">context object</a> to return an <code>InvalidStateError</code> <a href="#dfn-domerror">DOMError</a> and <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-error-event"><code>error</code></a> at the <a href="#contextObject">context object</a>. <a href="#terminate-an-algorithm">Terminate this algorithm</a>.</p>
   </li> 
 	  <li><p>Otherwise set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a>. </p></li> 
-    <li><p>Initiate a <a href="#readOperation">read operation</a> using the <a href="#dfn-fileBlob"><code>blob</code></a> argument as <var>input</var> and with the <a href="#synchronousFlag">synchronous flag</a> <em>unset</em> and handle <a href="#queue-a-task">tasks queued</a> on the <a href="#fileReadingTaskSource">file reading task source</a> per below.   
+    <li><p>Initiate an <a href="#task-read-operation">annotated task read operation</a> using the <a href="#dfn-fileBlob"><code>blob</code></a> argument as <var>input</var> and handle <a href="#queue-a-task">tasks queued</a> on the <a href="#fileReadingTaskSource">file reading task source</a> per below.   
     </p>
     </li>
      <li><p>To <a href="#process-read-error">process read error</a> with a <a href="#failureReason">failure reason</a>, proceed to the <a href="#dfn-error-steps">error steps</a>.</p></li>
@@ -1124,7 +1131,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
 	  <li><p>To <a href="#process-read-EOF">process read EOF</a> run these substeps:</p> 
 
       <ol><li><p>Set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
-          <li><p>Set the <a href="#dfn-result"><code>result</code></a> attribute to the <var>result</var> of the <a href="#readOperation">read operation</a>, represented as a string in a format determined by the <a href="#encoding-determination">encoding determination</a>.  </p></li>
+          <li><p>Set the <a href="#dfn-result"><code>result</code></a> attribute to the <a href="#dfn-body">body</a> returned by the <a href="#readOperation">read operation</a>, represented as a string in a format determined by the <a href="#encoding-determination">encoding determination</a>.  </p></li>
          <li><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-load-event"><code>load</code></a> at the <a href="#contextObject">context object</a>.</li>
     <li>Unless <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a> at the <a href="#contextObject">context object</a>.  If <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> do NOT fire <a href="#dfn-loadend-event"><code>loadend</code></a> at the <a href="#contextObject">context object</a>. </li>
         </ol>
@@ -1148,7 +1155,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   <p><strong>Note:</strong> The <a href="#dfn-readAsArrayBuffer"><code>readAsArrayBuffer()</code></a> method returns due to the algorithm being <a href="#terminate-an-algorithm">terminated</a>.</p>
   </li> 
 	<li><p>Otherwise set <a href="#dfn-readyState" class="dfnref"><code>readyState</code></a> to <a href="#dfn-loading"><code>LOADING</code></a>. </p></li> 
-    <li><p>Initiate a <a href="#readOperation">read operation</a> using the <a href="#dfn-fileBlob"><code>blob</code></a> argument as <var>input</var> and with the <a href="#synchronousFlag">synchronous flag</a> <em>unset</em> and handle <a href="#queue-a-task">tasks queued</a> on the <a href="#fileReadingTaskSource">file reading task source</a> per below.   
+    <li><p>Initiate an <a href="#task-read-operation">annotated task read operation</a> using the <a href="#dfn-fileBlob"><code>blob</code></a> argument as <var>input</var> and handle <a href="#queue-a-task">tasks queued</a> on the <a href="#fileReadingTaskSource">file reading task source</a> per below.   
     </p>
     </li>
      <li><p>To <a href="#process-read-error">process read error</a> with a <a href="#failureReason">failure reason</a>, proceed to the <a href="#dfn-error-steps">error steps</a>.</p></li>
@@ -1157,7 +1164,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
   
 	   <li><p>To <a href="#process-read-EOF">process read EOF</a> run these substeps:</p> 
       <ol><li><p>Set <a href="#dfn-readyState"><code>readyState</code></a> to <a href="#dfn-done"><code>DONE</code></a></p></li>
-          <li><p>Set the <a href="#dfn-result"><code>result</code></a> attribute to the <var>result</var> of the <a href="#readOperation">read operation</a> as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] object. </p> </li>
+          <li><p>Set the <a href="#dfn-result"><code>result</code></a> attribute to the <a href="#dfn-body">body</a> returned by the <a href="#readOperation">read operation</a> as an <code>ArrayBuffer</code> [<a href="#TypedArrays">TypedArrays</a>] object. </p> </li>
           <li><p><a href="#fire-a-progress-event">Fire a progress event</a> called <a href="#dfn-load-event"><code>load</code></a> at the <a href="#contextObject">context object</a>.</p></li>
           <li><p>Unless <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> <a href="#fire-a-progress-event">fire a progress event</a> called <a href="#dfn-loadend-event"><code>loadend</code></a> at the <a href="#contextObject">context object</a>.  If <a href="#dfn-readyState"><code>readyState</code></a> is <a href="#dfn-loading"><code>LOADING</code></a> do NOT fire <a href="#dfn-loadend-event"><code>loadend</code></a> at the <a href="#contextObject">context object</a>. </p></li>
         </ol>
