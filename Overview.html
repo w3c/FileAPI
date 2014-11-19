@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" /></head>
 
   <body>
-    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>Editor's Draft <em>30 October 2014</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
+    <div class="head"><div><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" width="72" height="48" alt="W3C" /></a></div><h1>File API</h1><h2>Editor's Draft <em>19 November 2014</em></h2><dl><dt>This Version:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a></dd><dt>Latest Editor’s Draft:</dt><dd><a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a></dd><dt>Previous Version(s):</dt><dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a></dd><dt>Editors:</dt><dd><a href="http://arunranga.com/">Arun Ranganathan</a>, Mozilla Corporation &lt;arun@mozilla.com&gt;</dd><dd>Jonas Sicking, Mozilla Corporation &lt;jonas@sicking.cc&gt;</dd><dt>Participate:</dt><dd><p>Send feedback to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>), or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=File%20API">file a bug</a> 
     (see <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=File%20API&amp;resolution=---">existing bugs</a>).</p></dd></dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2014 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr />
 
     <div class="section">
@@ -73,7 +73,7 @@
         report can be found in the <a href="http://www.w3.org/TR/">W3C technical
           reports index</a> at http://www.w3.org/TR/.
       </em></p><p>
-        This document is the 30 October 2014 <b>Editor's Draft</b> of the
+        This document is the 19 November 2014 <b>Editor's Draft</b> of the
         <cite>File API</cite> specification.
       
       Please send comments about this document to
@@ -881,7 +881,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
          <p>Along with returning failure, the synchronous part of this algorithm must return the <a href="#failureReason">failure reason</a> that occurred for <a href="#throw-an-exception">throwing an exception</a> by synchronous methods that invoke this algorithm with the <a href="#synchronousFlag">synchronous flag</a> set. </p>
         </div>
         </li>
-        <li><p>If there are no errors, push <var>bytes</var> to <var>s</var>, and increment <var>s</var>'s <var>transmitted</var> [<a href="#Fetch">Fetch</a>] by the number of bytes in <var>bytes</var>. Reset <var>bytes</var> to the empty byte sequence and continue reading <a href="#chunk">chunk</a>s as above.</p></li>
+        <li><p>If there are no errors, push <var>bytes</var> to <var>s</var>, and increment <var>s</var>'s <var>length</var> [<a href="#Fetch">Fetch</a>] by the number of bytes in <var>bytes</var>. Reset <var>bytes</var> to the empty byte sequence and continue reading <a href="#chunk">chunk</a>s as above.</p></li>
         <li><p>When all the bytes of <var>b</var> have been read into <var>s</var>, return <var>s</var> and <a href="#terminate-an-algorithm">terminate this algorithm</a>.</p></li>
       </ol>
 
@@ -891,7 +891,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
           <div class="note"><div class="noteHeader">Note</div>
          <p>The asynchronous part of this algorithm must signal the <a href="#failureReason">failure reason</a> that occurred for asynchronous error reporting by methods expecting <var>s</var> and which invoke this algorithm with the <a href="#synchronousFlag">synchronous flag</a> unset. </p>
         </div></li>
-      <li><p>If no <a href="#file-error-read">error</a> occurs, push <var>bytes</var> to <var>s</var>, and increment <var>s</var>'s <var>transmitted</var> [<a href="Fetch">Fetch</a>] by the number of bytes in <var>bytes</var>. Reset <var>bytes</var> to the empty byte sequence and continue reading <a href="#chunk">chunk</a>s as above. </p></li>
+      <li><p>If no <a href="#file-error-read">error</a> occurs, push <var>bytes</var> to <var>s</var>, and increment <var>s</var>'s <var>length</var> [<a href="Fetch">Fetch</a>] by the number of bytes in <var>bytes</var>. Reset <var>bytes</var> to the empty byte sequence and continue reading <a href="#chunk">chunk</a>s as above. </p></li>
       
     </ol>
 
