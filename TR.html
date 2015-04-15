@@ -947,7 +947,7 @@ If there are no such <a href="#dfn-file"><code>File</code></a> objects, then the
           <div class="note"><div class="noteHeader">Note</div>
          <p>The asynchronous part of this algorithm must signal the <a href="#failureReason">failure reason</a> that occurred for asynchronous error reporting by methods expecting <var>s</var> and which invoke this algorithm with the <a href="#synchronousFlag">synchronous flag</a> unset. </p>
         </div></li>
-      <li><p>If no <a href="#file-error-read">error</a> occurs, push <var>bytes</var> to <var>s</var>, and increment <var>s</var>'s <var>transmitted</var> [<a href="Fetch">Fetch</a>] by the number of bytes in <var>bytes</var>. Reset <var>bytes</var> to the empty byte sequence and continue reading <a href="#chunk">chunk</a>s as above. </p></li>
+      <li><p>If no <a href="#file-error-read">error</a> occurs, push <var>bytes</var> to <var>s</var>, and increment <var>s</var>'s <var>transmitted</var> [<a href="#Fetch">Fetch</a>] by the number of bytes in <var>bytes</var>. Reset <var>bytes</var> to the empty byte sequence and continue reading <a href="#chunk">chunk</a>s as above. </p></li>
       
     </ol>
 
@@ -1796,7 +1796,7 @@ partial interface <dfn id="URL-object" class="dfnrefs">URL</dfn> {
     <li><p>If the <a href="#dfn-urlarg"><code>url</code></a> refers to a <a href="#dfn-Blob"><code>Blob</code></a> that has a <a href="#readabilityState">readability state</a> of <a href="#dfn-closedState"><code>CLOSED</code></a> OR if the value provided for the <a href="#dfn-urlarg"><code>url</code></a> argument is not a <a href="#DefinitionOfScheme"><code>Blob</code> URL</a>, OR if the value provided for the <a href="#dfn-urlarg"><code>url</code></a> argument does not have an entry in the <a href="#BlobURLStore">Blob URL Store</a>,
   this method call does nothing.  User agents may display a message on the error console.</p></li>
     <li><p>Otherwise, user agents must <a href="#removeTheEntry">remove the entry</a> from the <a href="#BlobURLStore">Blob URL Store</a> for <a href="#dfn-urlarg"><code>url</code></a>.</p>
-<div class="note"><div class="noteHeader">Note</div><p>Subsequent attemps to dereference <a href="#dfn-urlarg"><code>url</code></a> result in a <a href="#networkError">network error</a>, since the entry has been removed from the <a href="#BlobURLStore">Blob URL Store</a>.</p></div>
+<div class="note"><div class="noteHeader">Note</div><p>Subsequent attemps to dereference <a href="#dfn-urlarg"><code>url</code></a> result in a <a href="#dfn-networkError">network error</a>, since the entry has been removed from the <a href="#BlobURLStore">Blob URL Store</a>.</p></div>
     </li>
   </ol>
   <p><dfn id="dfn-urlarg">The <code>url</code> argument</dfn> to the <a href="#dfn-revokeObjectURL"><code>revokeObjectURL</code></a> method is a <a href="#DefinitionOfScheme">Blob URL</a> string.</p>
@@ -2068,23 +2068,25 @@ var windowRef = openPopup(blobURLAnchorRef, "Application Info");
     <dt id="RFC6266">RFC6266</dt>
     <dd><cite><a href="http://tools.ietf.org/html/rfc6266">Use of the Content-Disposition Header Field in the Hypertext Transfer Protocol (HTTP)</a></cite>, J. Reschke. IETF.</dd>
 	        <dt id="encodingSpecification">Encoding Specification</dt>
-	        <dd><cite><a href="http://encoding.spec.whatwg.org/">Encoding Living Standard</a></cite>, A. van Kesteren, J. Bell.</dd>
+	        <dd><cite><a href="https://encoding.spec.whatwg.org/">Encoding Living Standard</a></cite>, A. van Kesteren, J. Bell.</dd>
+	        <dt id="streamsSpecification">Streams Specification</dt>
+	        <dd><cite><a href="https://streams.spec.whatwg.org/">Sreams Living Standard</a></cite>, Domenic Denicola, Takeshi Yoshino.</dd>
 	        <dt id="TypedArrays">Typed Arrays</dt>
 	        <dd><cite><a href="https://cvs.khronos.org/svn/repos/registry/trunk/public/webgl/doc/spec/TypedArray-spec.html">Typed Arrays (work in progress)</a></cite>, V. Vukicevic, K. Russell. Khronos Group.</dd>
 	        <dt id="ABNF">RFC5234</dt>
 	        <dd><cite><a href="http://tools.ietf.org/html/rfc5234">Augmented BNF for Syntax Specifications: ABNF</a></cite>, D. Crocker, P. Overell. IETF.</dd>
 	        <dt id="URL-API">URL Specification</dt>
-	        <dd><cite><a href="http://url.spec.whatwg.org/">URL Living Standard (work in progress)</a></cite>, A. van Kesteren.</dd>
+	        <dd><cite><a href="https://url.spec.whatwg.org/">URL Living Standard (work in progress)</a></cite>, A. van Kesteren.</dd>
            <dt id="Fetch">Fetch Specification</dt>
-      <dd><cite><a href="http://fetch.spec.whatwg.org">Fetch Specification</a></cite>, A. van Kesteren. WHATWG.</dd>
+      <dd><cite><a href="https://fetch.spec.whatwg.org">Fetch Specification</a></cite>, A. van Kesteren. WHATWG.</dd>
 		<dt id="WebIDL">WebIDL Specification</dt>
 		<dd><cite><a href="http://www.w3.org/TR/WebIDL/">WebIDL (work in progress)</a></cite>, C. McCormack.</dd>
 		<dt id="ECMA-262">ECMAScript</dt>
 		<dd><cite><a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMAScript 5th Edition</a></cite>, A. Wirfs-Brock, P. Lakshman et al.</dd>
 		<dt id="MIMESNIFF">MIME Sniffing</dt>
-		<dd><cite><a href="http://mimesniff.spec.whatwg.org/">MIME Sniffing (work in progress)</a></cite>, A. Barth, I. Hickson.</dd>
+		<dd><cite><a href="https://mimesniff.spec.whatwg.org/">MIME Sniffing (work in progress)</a></cite>, A. Barth, I. Hickson.</dd>
     <dt id="XHR">XMLHttpRequest</dt>
-      <dd><cite><a href="http://xhr.spec.whatwg.org/">XMLHttpRequest Living Standard</a></cite>, A. van Kesteren.</dd>
+      <dd><cite><a href="https://xhr.spec.whatwg.org/">XMLHttpRequest Living Standard</a></cite>, A. van Kesteren.</dd>
 		</dl>
 	      </div>
 	    <div id="informative-references" class="section">
