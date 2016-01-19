@@ -24,7 +24,7 @@ Abstract: This specification provides an API for representing file objects in we
 
 	This API is designed to be used in conjunction with other APIs and elements on the web platform, notably:
 	{{XMLHttpRequest}} (e.g. with an overloaded {{XMLHttpRequest/send()}} method for {{File}} or {{Blob}} arguments),
-	{{postMessage()}},
+	{{Worker/postMessage()}},
 	{{DataTransfer}} (part of the drag and drop API defined in [[HTML]])
 	and Web Workers.
 	Additionally, it should be possible to programmatically obtain a list of files from the <{input}> element
@@ -32,7 +32,7 @@ Abstract: This specification provides an API for representing file objects in we
 	These kinds of behaviors are defined in the appropriate affiliated specifications.
 Status Text: Previous discussion of this specification has taken place on two other mailing lists: <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archive</a>) and <a href="mailto:public-webapi@w3.org">public-webapi@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapi/">archive</a>). Ongoing discussion will be on the <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> mailing list.
 Boilerplate: omit conformance
-Ignored Terms: unsigned long long, long long, boolean
+Ignored Terms: unsigned long, unsigned long long, long long, boolean, Array, Date
 </pre>
 
 <pre class="link-defaults">
@@ -46,8 +46,12 @@ urlPrefix: https://xhr.spec.whatwg.org/
 	type: interface
 		text: XMLHttpRequest
 	type: method
-		text: send(); for: XMLHttpRequest; url: #dom-xmlhttprequest-send
+		for: XMLHttpRequest
+			text: send(); url: #dom-xmlhttprequest-send
+			text: getAllResponseHeaders(); url: #dom-xmlhttprequest-getallresponseheaders
 urlPrefix: https://html.spec.whatwg.org/multipage/
+	urlPrefix: semantics.html
+		type: element-attr; for: a; text: download; url: #attr-hyperlink-download
 	urlPrefix: webappapis.html
 		type: dfn
 			text: event loop
@@ -77,9 +81,14 @@ urlPrefix: https://encoding.spec.whatwg.org/
 		text: byte
 		text: utf-8
 		text: utf-16
+		text: decode
+		text: getting an encoding; url: #concept-encoding-get
 urlPrefix: https://heycam.github.io/webidl/
 	type: dfn; urlPrefix: #dfn-
 		text: throw
+		text: supported property indices
+	type: interface
+		text: InvalidStateError
 urlPrefix: https://streams.spec.whatwg.org/
 	type: dfn
 		text: chunk
@@ -100,6 +109,9 @@ urlPrefix: https://mimesniff.spec.whatwg.org/
 	type: dfn
 		text: parsable mime type
 		text: parse a MIME type
+urlPrefix: https://www.w3.org/TR/progress-events/
+	type: interface
+		text: ProgressEvent
 </pre>
 
 <h2 id="intro">
@@ -295,7 +307,7 @@ this is the same time that is conceptually "<code>0</code>" in ECMA-262 [[ECMA-2
 ████████  ████████  ███████  ████████
 -->
 
-<h2 id="blob">
+<h2 id="blobs">
 The Blob Interface and Binary Data</h2>
 
 A {{Blob}} object refers to a <a>byte</a> sequence,
@@ -304,12 +316,12 @@ and a {{Blob/type}} attribute,
 which is an ASCII-encoded string in lower case representing the media type of the <a>byte</a> sequence.
 
 A {{Blob}} must have a <dfn id="readabilityState" for="Blob">readability state</dfn>,
-which is one of <a><code>OPENED</code></a> or <a><code>CLOSED</code></a>.
+which is one of <a><code>OPENED</code></a> or <a for="Blob/readability state">CLOSED</code></a>.
 A {{Blob}} that refers to a <a>byte</a> sequence,
 including one of 0 bytes,
 is said to be in the <dfn id="dfn-openState" for="Blob/readability state"><code>OPENED</code></dfn> <a>readability state</a>.
 A {{Blob}} is said to be <dfn id="closed" for=Blob>closed</dfn> if its {{Blob/close()}} method has been called.
-A {{Blob}} that is <a>closed</a> is said to be in the <dfn id="dfn-closedState" for="Blob/readability state"><code>CLOSED</code></dfn> <a>readability state</a>.
+A {{Blob}} that is <a for=Blob>closed</a> is said to be in the <dfn id="dfn-closedState" for="Blob/readability state"><code>CLOSED</code></dfn> <a>readability state</a>.
 
 Each {{Blob}} must have an internal <dfn id="snapshot-state" for=Blob>snapshot state</dfn>,
 which must be initially set to the state of the underlying storage,
@@ -460,7 +472,7 @@ Attributes</h3>
 	<dd>Returns the size of the <a>byte</a> sequence in number of bytes.
 		On getting, conforming user agents must return the total number of bytes that can be read by a {{FileReader}} or {{FileReaderSync}} object,
 		or 0 if the {{Blob}} has no bytes to be read.
-		If the {{Blob}} has a readability state of <a><code>CLOSED</code></a>
+		If the {{Blob}} has a readability state of <a for="Blob/readability state">CLOSED</code></a>
 		then {{Blob/size}} must return 0.
 
 	<dt><dfn>type</dfn>
@@ -481,10 +493,10 @@ Attributes</h3>
 		in this case, further normative conditions are in the <a>file type guidelines</a>.
 
 	<dt><dfn>isClosed</dfn>
-	<dd>The boolean value that indicates whether the {{Blob}} is in the <a><code>CLOSED</code></a> <a>readability state</a>.
+	<dd>The boolean value that indicates whether the {{Blob}} is in the <a for="Blob/readability state">CLOSED</code></a> <a>readability state</a>.
 		On getting, user agents must return <code>false</code>
 		if the {{Blob}} is in the <a><code>OPENED</code></a> <a>readability state</a>,
-		and <code>true</code> if the {{Blob}} is in the <a><code>CLOSED</code></a> <a>readability state</a>
+		and <code>true</code> if the {{Blob}} is in the <a for="Blob/readability state">CLOSED</code></a> <a>readability state</a>
 		as a result of the {{Blob/close()}} method being called.
 </dl>
 
@@ -500,13 +512,13 @@ The slice method</h4>
 
 The <dfn id="dfn-slice" method for=Blob lt="slice(start, end, contentType), slice(start, end), slice(start), slice()">slice()</dfn> method
 returns a new {{Blob}} object with bytes ranging from
-the optional {{Blob/slice()/start}} parameter
-upto but not including the optional {{Blob/slice()/end}} parameter,
+the optional {{start}} parameter
+upto but not including the optional {{end}} parameter,
 and with a {{Blob/type}} attribute that is the value of the optional {{contentType!!argument}} parameter.
 It must act as follows:
 
 1. Let <var>O</var> be the {{Blob}} <a>context object</a> on which the {{slice()}} method is being called.
-2. The optional <dfn argument for="Blob/start()">start</dfn> parameter
+2. The optional <dfn argument for="Blob/slice(start, end, contentType)">start</dfn> parameter
 	is a value for the start point of a {{slice()}} call,
 	and must be treated as a byte-order position,
 	with the zeroth position representing the first byte.
@@ -518,7 +530,7 @@ It must act as follows:
 		<li>Else, let <var>relativeStart</var> be <code>min(start, size)</code>.
 		</ol>
 
-3. The optional <dfn argument for="Blob/start()">end</dfn> parameter
+3. The optional <dfn argument for="Blob/slice(start, end, contentType)">end</dfn> parameter
 	is a value for the end point of a {{slice()}} call.
 	User agents must process {{Blob/slice()}} with {{end}} normalized according to the following:
 
@@ -528,7 +540,7 @@ It must act as follows:
 		<li>Else, let <var>relativeEnd</var> be <code>min(end, size)</code>.
 	</ol>
 
-4. The optional <dfn argument for="Blob/slice()">contentType</dfn> parameter
+4. The optional <dfn argument for="Blob/slice(start, end, contentType)">contentType</dfn> parameter
 	is used to set the ASCII-encoded string in lower case representing the media type of the Blob.
 	User agents must process the {{Blob/slice()}} with {{contentType}} normalized according to the following:
 
@@ -597,12 +609,12 @@ It must act as follows:
 <h4 id="close-method">
 The close method</h4>
 
-The <dfn id="dfn-close" method for=Blob>close()</dfn> method is said to <a lt="closed">close</a> a {{Blob}},
+The <dfn id="dfn-close" method for=Blob>close()</dfn> method is said to <a lt="closed" for=Blob>close</a> a {{Blob}},
 and must act as follows on the {{Blob}} on which the method has been called:
 
-1. If the <a>readability state</a> of the <a>context object</a> is <a><code>CLOSED</code></a>,
+1. If the <a>readability state</a> of the <a>context object</a> is <a for="Blob/readability state">CLOSED</code></a>,
 	<a>terminate this algorithm</a>.
-2. Otherwise, set the <a>readability state</a> of the <a>context object</a> to <a><code>CLOSED</code></a>.
+2. Otherwise, set the <a>readability state</a> of the <a>context object</a> to <a for="Blob/readability state">CLOSED</code></a>.
 3. If the <a>context object</a> has an entry in the <a>Blob URL Store</a>,
 	<a>remove the entry</a> that corresponds to the <a>context object</a>.
 
@@ -617,7 +629,7 @@ and must act as follows on the {{Blob}} on which the method has been called:
 ██       ████ ████████ ████████
 -->
 
-<h2 id="file">
+<h2 id="files">
 The File Interface</h2>
 
 A {{File}} object is a {{Blob}} object with a {{File/name}} attribute, which is a string;
@@ -645,7 +657,7 @@ and must follow the <dfn export>file type guidelines</dfn> below:
 	it is a <a>parsable MIME type</a>,
 	or the empty string &ndash; 0 bytes &ndash; if the type cannot be determined.
 * When the file is of type <code>text/plain</code>
-	user agents must NOT append a charset parameter to the <i>dictionary of parameters</i> portion of the media type [[SNIFF]].
+	user agents must NOT append a charset parameter to the <i>dictionary of parameters</i> portion of the media type [[MIMESNIFF]].
 * User agents must not attempt heuristic determination of encoding,
 	including statistical methods.
 
@@ -710,7 +722,7 @@ user agents must run the following steps:
 		let <var>t</var> be set to the {{FilePropertyBag/type}} dictionary member.
 		If <var>t</var> contains any characters outside the range U+0020 to U+007E,
 		then set <var>t</var> to the empty string and return from these substeps.
-	2. Convert every character in <var>t</var> to lowercase using the "<a>converting a string to ASCII lowercase algorithm</a>".
+	2. Convert every character in <var>t</var> to lowercase using the "<a>converting a string to ASCII lowercase</a>" algorithm.
 	3. If the {{FilePropertyBag/lastModified}} member is provided,
 		let <var>d</var> be set to the  {{FilePropertyBag/lastModified}} dictionary member.
 		If it is not provided,
@@ -725,9 +737,9 @@ user agents must run the following steps:
 4. Return a new {{File}} object <var>F</var> such that:
 	1. <var>F</var> has a <a>readability state</a> of <a><code>OPENED</code></a>.
 	2. <var>F</var> refers to the <var>bytes</var> <a>byte</a> sequence.
-	3. <var>F</var>.{{File/size}} is set to the number of total bytes in <var>bytes</var>.
+	3. <var>F</var>.{{Blob/size}} is set to the number of total bytes in <var>bytes</var>.
 	4. <var>F</var>.{{File/name}} is set to <var>n</var>.
-	5. <var>F</var>.{{File/type}} is set to <var>t</var>.
+	5. <var>F</var>.{{Blob/type}} is set to <var>t</var>.
 
 		Note: The type t of a {{File}} is considered a <a>parsable MIME type</a>
 		if the ASCII-encoded string representing the File object's type,
@@ -793,11 +805,11 @@ The {{File}} interface is available on objects that expose an attribute of type 
 these objects are defined in HTML [[HTML]].
 The {{File}} interface, which inherits from {{Blob}}, is immutable,
 and thus represents file data that can be read into memory at the time a <a>read operation</a> is initiated.
-User agents must process reads on files that no longer exist at the time of read as <a lt="error conditions">errors</a>,
+User agents must process reads on files that no longer exist at the time of read as <a lt="file read error">errors</a>,
 throwing a {{NotFoundError}} exception
 if using a {{FileReaderSync}} on a Web Worker [[Workers]]
-or firing an {{error}} event
-with the {{FileReader/error}} attribute returning a {{NotFoundError}} {{DOMError}}.
+or firing an {{error!!event}} event
+with the {{error!!attribute}} attribute returning a {{NotFoundError}} {{DOMError}}.
 
 <div class="example">
 	In the examples below, metadata from a file object is displayed meaningfully, and a file object is created with a name and a last modified date.
@@ -818,7 +830,7 @@ with the {{FileReader/error}} attribute returning a {{NotFoundError}} {{DOMError
 	</pre>
 </div>
 
-<h2 id="filelist">
+<h2 id="filelists">
 The FileList Interface</h2>
 
 Note: The {{FileList}} interface should be considered "at risk"
@@ -920,7 +932,7 @@ run the following steps:
 	perform the following substeps:
 
 	Note: The algorithm assumes that invoking methods have checked for <a>readability state</a>.
-	A {{Blob}} in the <a><code>CLOSED</code></a> state must not have a <a>read operation</a> called on it.
+	A {{Blob}} in the <a for="Blob/readability state">CLOSED</code></a> state must not have a <a>read operation</a> called on it.
 
 	1. If the <a>synchronous flag</a> is set, follow the steps below:
 		1. Let <var>bytes</var> be the byte sequence that results from reading a <a>chunk</a> from <var>b</var>.
@@ -1066,7 +1078,7 @@ that user agents must support on {{FileReader}} as DOM attributes:
 			<td>{{abort}}
 		<tr>
 			<td><dfn>onerror</dfn>
-			<td>{{error}}
+			<td>{{error!!event}}
 		<tr>
 			<td><dfn>onload</dfn>
 			<td>{{load}}
@@ -1107,12 +1119,16 @@ which must be one of the following values:
 <h4 id="reading-a-file">
 Reading a File or Blob</h4>
 
-The {{FileReader}} interface makes available three asynchronous <dfn id="read-methods" lt="read method">read methods</dfn>--
+The {{FileReader}} interface makes available three <dfn id="asynchronous-read-methods" lt="asynchronous read method">asynchronous read methods</dfn>--
 {{FileReader/readAsArrayBuffer()}}, {{FileReader/readAsText()}}, and {{FileReader/readAsDataURL()}},
 which read files into memory.
 If multiple concurrent read methods are called on the same {{FileReader}} object,
 user agents must throw an {{InvalidStateError}} on any of the read methods that occur
 when {{FileReader/readyState}} = {{FileReader/LOADING}}.
+
+({{FileReaderSync}} makes available three <a>synchronous read methods</a>.
+	Collectively, the sync and async read methods of {{FileReader}} and {{FileReaderSync}}
+	are referred to as just <dfn lt="read method">read methods</dfn>.)
 
 <h5 id="filedata-attr">
 The {{FileReader/result}} attribute</h5>
@@ -1153,10 +1169,10 @@ the user agent must run the steps below.
 
 1. If {{FileReader/readyState}} = {{FileReader/LOADING}}
 	throw an {{InvalidStateError}} exception and <a>terminate this algorithm</a>.
-2. If the <code>blob</code> is in the <a>CLOSED</a> <a>readability state</a>,
-	set the {{FileReader/error}} attribute of the <a>context object</a>
+2. If the <code>blob</code> is in the <a for="Blob/readability state">CLOSED</a> <a>readability state</a>,
+	set the {{error!!attribute}} attribute of the <a>context object</a>
 	to return an {{InvalidStateError}} exception
-	and <a>fire a progress event</a> called {{error}}
+	and <a>fire a progress event</a> called {{error!!event}}
 	at the <a>context object</a>.
 	<a>Terminate this algorithm</a>.
 3. Otherwise set {{FileReader/readyState}} to {{FileReader/LOADING}}.
@@ -1185,19 +1201,18 @@ the user agent must run the steps below.
 The {{FileReader/readAsText()}} method</h5>
 
 The {{FileReader/readAsText()}} method can be called with an optional parameter,
-<dfn argument for="FileReader/readAsText()">label</dfn>,
+<dfn argument for="FileReader/readAsText(blob, label)">label</dfn>,
 which is a {{DOMString}} argument that represents the label of an encoding [[Encoding Specification]];
 if provided, it must be used as part of the <a>encoding determination</a> used when processing this method call.
 
-When the <dfn method for=FileReader>readAsText(blob, optional label)</dfn> method is called
-(the {{label!!argument}} argument is optional),
+When the <dfn method for=FileReader>readAsText(blob, optional label)</dfn> method is called,
 the user agent must run the steps below.
 
 1. If {{FileReader/readyState}} = {{FileReader/LOADING}} throw an {{InvalidStateError}} and <a>terminate this algorithm</a>.
-2. If the <code>blob</code> is in the <a>CLOSED</a> <a>readability state</a>,
-	set the {{FileReader/error}} attribute of the <a>context object</a>
+2. If the <code>blob</code> is in the <a for="Blob/readability state">CLOSED</a> <a>readability state</a>,
+	set the {{error!!attribute}} attribute of the <a>context object</a>
 	to return an {{InvalidStateError}} exception
-	and <a>fire a progress event</a> called {{error}} at the <a>context object</a>.
+	and <a>fire a progress event</a> called {{error!!event}} at the <a>context object</a>.
 	<a>Terminate this algorithm</a>.
 3. Otherwise set {{FileReader/readyState}} to {{FileReader/LOADING}}.
 4. Initiate an <a>annotated task read operation</a> using the <code>blob</code> argument as <var>input</var>
@@ -1224,10 +1239,10 @@ When the <dfn method for=FileReader>readAsArrayBuffer(blob)</dfn> method is call
 the user agent must run the steps below.
 
 1. If {{FileReader/readyState}} = {{FileReader/LOADING}} throw an {{InvalidStateError}} exception and <a>terminate this algorithm</a>.
-2. If the <code>blob</code> is in the <a>CLOSED</a> <a>readability state</a>,
-	set the {{FileReader/error}} attribute of the <a>context object</a>
+2. If the <code>blob</code> is in the <a for="Blob/readability state">CLOSED</a> <a>readability state</a>,
+	set the {{error!!attribute}} attribute of the <a>context object</a>
 	to return an {{InvalidStateError}} exception
-	and <a>fire a progress event</a> called {{error}} at the <a>context object</a>.
+	and <a>fire a progress event</a> called {{error!!event}} at the <a>context object</a>.
 	<a>Terminate this algorithm</a>.
 3. Otherwise set {{FileReader/readyState}} to {{FileReader/LOADING}}.
 4. Initiate an <a>annotated task read operation</a> using the <code>blob</code> argument as <var>input</var>
@@ -1253,10 +1268,10 @@ These error steps are to <a>process read error</a> with a <a>failure reason</a>.
 
 1. Set the <a>context object</a>'s {{FileReader/readyState}} to {{FileReader/DONE}}
 	and {{FileReader/result}} to null if it is not already set to null.
-2. Set the {{FileReader/error}} attribute on the <a>context object</a>;
-	on getting, the {{FileReader/error}} attribute must be a a {{DOMError}} object
+2. Set the {{error!!attribute}} attribute on the <a>context object</a>;
+	on getting, the {{error!!attribute}} attribute must be a a {{DOMError}} object
 	that corresponds to the <a>failure reason</a>.
-	<a>Fire a progress event</a> called {{error}} at the <a>context object</a>.
+	<a>Fire a progress event</a> called {{error!!event}} at the <a>context object</a>.
 3. Unless {{FileReader/readyState}} is {{FileReader/LOADING}},
 	<a>fire a progress event</a> called {{loadend}} at the <a>context object</a>.
 	If {{FileReader/readyState}} is {{FileReader/LOADING}}
@@ -1294,7 +1309,7 @@ take a {{Blob}} parameter.
 This section defines this parameter.
 
 <dl>
-	<dt><dfn argument for="FileReader/readAsArrayBuffer(blob), FileReader/readAsText(blob), FileReader/readAsDataURL(blob), URL/createObjectURL(blob), URL/createFor(blob)">blob</dfn>
+	<dt><dfn argument for="FileReader/readAsArrayBuffer(blob), FileReader/readAsText(blob, label), FileReader/readAsDataURL(blob), URL/createObjectURL(blob), URL/createFor(blob)">blob</dfn>
 	<dd>This is a {{Blob}} argument
 		and must be a reference to a single {{File}} in a {{FileList}}
 		or a {{Blob}} argument not obtained from the underlying OS file system.
@@ -1308,12 +1323,12 @@ When reading {{Blob}} objects using the {{FileReader/readAsText()}} <a>read meth
 the following <dfn id="encoding-determination">encoding determination</dfn> steps must be followed:
 
 1. Let <var>encoding</var> be null.
-2. If the {{label!!argument}} argument is present when calling the method,
-	set <var>encoding</var> to the result of the <a>getting an encoding</a> from {{label!!argument}}.
+2. If the {{FileReader/readAsText()/label}} argument is present when calling the method,
+	set <var>encoding</var> to the result of the <a>getting an encoding</a> from {{FileReader/readAsText()/label}}.
 3. If the <a>getting an encoding</a> steps above return failure,
 	then set <var>encoding</var> to null.
 4. If <var>encoding</var> is null,
-	and the <code>blob</code> argument's {{Blob/type}} attribute is present,
+	and the {{FileReader/readAsText()/blob}} argument's {{Blob/type}} attribute is present,
 	and it uses a Charset Parameter [[RFC2046]],
 	set <var>encoding</var> to the result of <a>getting an encoding</a>
 	for the portion of the Charset Parameter that is a <i>label</i> of an encoding.
@@ -1401,7 +1416,7 @@ for a given asynchronous <a>read method</a> in this specification:
 	* the <a>read method</a> has been cancelled using {{abort()}}
 		and a new <a>read method</a> has been invoked
 	* the event handler function for a {{load}} event initiates a new read
-	* the event handler function for a {{error}} event initiates a new read.
+	* the event handler function for a {{error!!event}} event initiates a new read.
 
 	Note: The events {{loadstart}} and {{loadend}} are not coupled in a one-to-one manner.
 
@@ -1427,9 +1442,9 @@ for a given asynchronous <a>read method</a> in this specification:
 	</div>
 2. One {{progress}} event will fire when <code>blob</code> has been completely read into memory.
 3. No {{progress}} event fires before {{loadstart}}.
-4. No {{progress}} event fires after any one of {{abort}}, {{load}}, and {{error}} have fired.
-	At most one of {{abort}}, {{load}}, and {{error}} fire for a given read.
-5. No {{abort}}, {{load}}, or {{error}} event fires after {{loadend}}.
+4. No {{progress}} event fires after any one of {{abort}}, {{load}}, and {{error!!event}} have fired.
+	At most one of {{abort}}, {{load}}, and {{error!!event}} fire for a given read.
+5. No {{abort}}, {{load}}, or {{error!!event}} event fires after {{loadend}}.
 
 <h3 id="readingOnThreads">
 Reading on Threads</h3>
@@ -1585,7 +1600,7 @@ or otherwise return null.
 			<td>If the {{File}} or {{Blob}} resource could not be found at the time the read was processed,
 				this is the "NotFound" <a>failure reason</a>.
 
-				For asynchronous read methods the {{FileReader/error}} attribute must return a {{NotFoundError}} exception
+				For asynchronous read methods the {{error!!attribute}} attribute must return a {{NotFoundError}} exception
 				and synchronous read methods must <a>throw</a> a {{NotFoundError}} exception.
 		<tr>
 			<td><dfn>SecurityError</dfn>
@@ -1593,7 +1608,7 @@ or otherwise return null.
 				* it is determined that certain files are unsafe for access within a Web application, this is the "UnsafeFile" <a href="#failureReason">failure reason.</a>
 				* it is determined that too many read calls are being made on {{File}} or {{Blob}} resources, this is the "TooManyReads" <a>failure reason</a>.
 
-				For asynchronous read methods the {{FileReader/error}} attribute may return a {{SecurityError}} exception
+				For asynchronous read methods the {{error!!attribute}} attribute may return a {{SecurityError}} exception
 				and synchronous read methods may <a>throw</a> a {{SecurityError}} exception.
 
 				This is a security error to be used in situations not covered by any other <a>failure reason</a>.
@@ -1607,7 +1622,7 @@ or otherwise return null.
 					(e.g. concurrent lock on the underlying storage with another application)
 					then this is the "FileLock" <a>failure reason</a>.
 
-				For asynchronous read methods the {{FileReader/error}} attribute must return a {{NotReadableError}} exception
+				For asynchronous read methods the {{error!!attribute}} attribute must return a {{NotReadableError}} exception
 				and synchronous read methods must <a>throw</a> a {{NotReadableError}} exception.
 </table>
 
@@ -1698,16 +1713,16 @@ One broad consideration in determining what scheme to use is providing something
 <h3 id="DefinitionOfScheme">
 The Blob URL</h3>
 
-A <dfn export>Blob URL</dfn> must consist of the <code>blob:</code> <a>scheme</a>
-followed by <a>scheme data</a> which must consist of
-a string tuple comprising the <a>origin of the Blob URL</a>,
-the "/" (U+0024 SOLIDUS) character,
-and a UUID [[RFC4122]]
-(see [[#uuid-abnf]]).
-A Blob URL may contain an optional <a>fragment</a>.
+A <dfn export>Blob URL</dfn> is a <a>URL</a>
+with a <a for=url>scheme</a> of <code>blob</code>,
+a <a for=url>host</a> of the <a>origin</a> of the <a>Blob URL</a>,
+a <a for=url>path</a> with one entry comprised of a UUID [[RFC4122]]
+(see [[#uuid-abnf]]),
+and an <a for=url>object</a> of the associated {{Blob}} or {{File}}.
+A Blob URL may contain an optional <a for=url>fragment</a>.
 The Blob URL is serialized as a string according to the <a>Unicode Serialization of a Blob URL</a> algorithm.
 
-A <a>fragment</a>, if used,
+A <a for=url>fragment</a>, if used,
 has a distinct interpretation depending on the media type of the {{Blob}} or {{File}} resource in question
 (see [[#fragmentDiscussion]]).
 
@@ -1718,12 +1733,15 @@ has a distinct interpretation depending on the media type of the {{Blob}} or {{F
 
 	; scheme is always "blob"
 
-	; origin is a string representation of the <a>Blob URL's origin</a>.
+	; origin is a string representation of the Blob URL's <a>origin</a>.
 	; UUID is as defined in [[RFC4122]] and [[#uuid-abnf]]
 	; fragIdentifier is optional and as defined in [[RFC3986]] and [[#uuid-fragment]]
 </pre>
 
-An example of a Blob URL might be <code>blob:https://example.org/9115d58c-bcda-ff47-86e5-083e9a215304</code>.
+<div class="example">
+	An example of a Blob URL might be
+	<code>blob:https://example.org/9115d58c-bcda-ff47-86e5-083e9a215304</code>.
+</div>
 
 
 <h4 id="originOfBlobURL">
@@ -1740,15 +1758,14 @@ was called.
 
 The <a>origin</a> of a Blob URL,
 when serialized as a string,
-must conform to the Web Origin Specification's Unicode Serialization of an Origin algorithm [[RFC6454]].
+must conform to the Web Origin Specification's <dfn>Unicode Serialization of an Origin algorithm</dfn> [[RFC6454]].
 <a>Cross-origin requests</a> on Blob URLs must return a <a>network error</a>.
 
 Note: In practice this means that HTTP and HTTPS <a>origins</a>
 are covered by this specification as valid origins for use with Blob URLs.
 This specification does not address the case of non-HTTP and non-HTTPS <a>origins</a>.
 For instance <code>blob:file:///Users/arunranga/702efefb-c234-4988-a73b-6104f1b615ee</code>
-(which uses the "file:" <a>origin</a>,
-which is part of the Blob URL's <a>scheme data</a>)
+(which uses the "file:" <a>origin</a>)
 may have behavior that is undefined,
 even though user agents may treat such Blob URLs as valid.
 
@@ -1765,7 +1782,7 @@ and/or <code>URL.{{URL/createFor()}}</code>:
 	(that is, the Unicode code point sequence U+0062, U+006C, U+006F, U+0062)
 	to <var>result</var>.
 2. Append the ":" (U+003A COLON) character to <var>result</var>.
-3. Let <var>O</var> be the <a>Blob URL's origin</a>.
+3. Let <var>O</var> be the Blob URL's <a>origin</a>.
 	If the <a>Unicode Serialization of an Origin algorithm</a> on <var>O</var> returns null,
 	user agents may substitute an implementation defined value for the return value of the <a>Unicode Serialization of an Origin algorithm</a>.
 	Append the result of the <a>Unicode Serialization of an Origin algorithm</a> for <var>O</var> [[RFC6454]] to <var>result</var>.
@@ -1776,7 +1793,7 @@ and/or <code>URL.{{URL/createFor()}}</code>:
 <h4 id="fragmentDiscussion">
 Discussion of Fragment Identifier</h4>
 
-The <a>fragment</a>'s resolution and processing directives depend on the media type [[RFC2046]]
+The <a for=url>fragment</a>'s resolution and processing directives depend on the media type [[RFC2046]]
 of a potentially retrieved representation,
 even though such a retrieval is only performed if the <a>Blob URL</a> is <a>dereferenced</a>.
 For example, in an HTML file [[HTML]] the fragment could be used to refer to an anchor within the file.
@@ -1784,13 +1801,13 @@ If the user agent does not recognize the media type of the resource,
 OR if a fragment is not meaningful within the resource,
 it must ignore the fragment.
 The fragment must not be used to identify a resource;
-only the <code>blob:</code> <a>scheme</a> and the <a>scheme data</a> constitute a valid resource identifier.
+only the <code>blob</code> <a for=url>scheme</a> and the <a for=url>origin</a>/<a for=url>path</a> of the <a>URL</a> constitute a valid resource identifier.
 
 A valid Blob URL reference could look like:
 <code>blob:http://example.org:8080/550e8400-e29b-41d4-a716-446655440000#aboutABBA</code>
 where "#aboutABBA" might be an HTML fragment identifier referring to an element with an id attribute of "aboutABBA".
 
-Note: The <a>fragment</a> is not used to identify the resource.
+Note: The <a for=url>fragment</a> is not used to identify the resource.
 Neither the <code>URL.{{URL/createObjectURL()}}</code> method
 nor the <code>URL.{{URL/createFor()}}</code> method generate a fragment.
 
@@ -1830,7 +1847,7 @@ that is equal to the value of the {{Blob}}'s {{Blob/size}} attribute.
 
 If a Content-Type header [[RFC7231]] is provided,
 then user agents obtain and process that media type
-in a manner consistent with the Mime Sniffing specification [[SNIFF]].
+in a manner consistent with the Mime Sniffing specification [[MIMESNIFF]].
 
 If a resource identified with a <a>Blob URL</a> is a {{File}} object,
 user agents use that file's {{File/name}} attribute,
@@ -1850,7 +1867,7 @@ Network errors are used when:
 
 * Any <a>request</a> method other than GET is used.
 * The <a>Blob URL</a> does not have an entry in the <a>Blob URL Store</a>.
-* The Blob has been <a>closed</a>;
+* The Blob has been <a for=Blob>closed</a>;
 	this also results in the <a>Blob URL</a> not having an entry in the <a>Blob URL Store</a>.
 * A <a>cross-origin request</a> is made on a <a>Blob URL</a>.
 * A security error has occurred.
@@ -1926,8 +1943,8 @@ Methods and Parameters</h4>
 	<dd>Returns a unique <a>Blob URL</a>.
 		This method must act as follows:
 
-		1. If called with a {{Blob}} argument that has a <a>readability state</a> of <a><code>CLOSED</code></a>,
-			user agents must return the output of the <a>Unicode Serialization of an Blob URL</a>.
+		1. If called with a {{Blob}} argument that has a <a>readability state</a> of <a for="Blob/readability state">CLOSED</code></a>,
+			user agents must return the output of the <a>Unicode Serialization of a Blob URL</a>.
 
 			Note: No entry is added to the <a>Blob URL Store</a>;
 			consequently, when this <a>Blob URL</a> is <a>dereferenced</a>,
@@ -1942,10 +1959,10 @@ Methods and Parameters</h4>
 	<dd>Returns a unique <a>Blob URL</a>.
 		<a>Blob URLs</a> created with this method are said to be <dfn id="autoRevoking">auto-revoking</dfn>
 		since user-agents are responsible for the revocation of <a>Blob URL</a>s created with this method,
-		subject to the <a href="#lifeTime">lifetime stipulation</a> for <a>Blob URL</a>s.
+		subject to the <a>lifetime stipulation</a> for <a>Blob URL</a>s.
 		This method must act as follows:
 
-		1. If called with a {{Blob}} argument that has a <a>readability state</a> of <a><code>CLOSED</code></a>,
+		1. If called with a {{Blob}} argument that has a <a>readability state</a> of <a for="Blob/readability state">CLOSED</code></a>,
 			user agents must return the output of the <a>Unicode Serialization of a Blob URL</a>.
 
 			Note: No entry is added to the <a>Blob URL Store</a>;
@@ -1981,7 +1998,7 @@ Methods and Parameters</h4>
 		by removing the corresponding entry from the <a>Blob URL Store</a>.
 		This method must act as follows:
 
-		1. If the {{url!!argument}} refers to a {{Blob}} that has a <a>readability state</a> of <a><code>CLOSED</code></a>
+		1. If the {{url!!argument}} refers to a {{Blob}} that has a <a>readability state</a> of <a for="Blob/readability state">CLOSED</code></a>
 			OR if the value provided for the {{url!!argument}} argument is not a <a>Blob URL</a>,
 			OR if the value provided for the {{url!!argument}} argument does not have an entry in the <a>Blob URL Store</a>,
 			this method call does nothing.
@@ -2080,7 +2097,7 @@ developers should pair it with a corresponding call to <code>URL.{{revokeObjectU
 
 <div class="example">
 	This example uses <code>URL.{{URL/createFor()}}</code> to mint a <a>Blob URL</a>,
-	and appends a <a>fragment</a> that has an understood meaning within the resource
+	and appends a <a for=url>fragment</a> that has an understood meaning within the resource
 	(in this case, it references an anchor within the HTML document).
 
 	<pre class="lang-javascript">
@@ -2097,7 +2114,7 @@ developers should pair it with a corresponding call to <code>URL.{{revokeObjectU
 	</pre>
 </div>
 
-<h3 id="lifeTime">
+<h3 id="lifeTime" dfn for="blob url" lt="lifetime|lifetime stipulation" export>
 Lifetime of Blob URLs</h3>
 
 A global object which exposes <code>URL.{{URL/createObjectURL()}}</code>
@@ -2111,16 +2128,16 @@ A global object which exposes <code>URL.{{URL/createFor()}}</code>
 must maintain a <dfn id="revokeList">Revocation List</dfn>
 which is a list of <a>Blob URLs</a> created with the <code>URL.{{URL/createFor()}}</code> method.
 
-When this specification says to <dfn id="add-an-entry">add an entry to the Blob URL Store</dfn>
+When this specification says to <dfn id="add-an-entry" lt="add an entry|add the entry|add an entry to the Blob URL Store|add the entry to the Blob URL Store" for="blob url store">add an entry to the Blob URL Store</dfn>
 for a <a>Blob URL</a> and a {{Blob}} input,
 the user-agent must add the <a>Blob URL</a> and a reference to the {{Blob}} it refers to to the <a>Blob URL Store</a>.
 
-When this specification says to <dfn id="add-an-entry-revoke">add an entry to the The Revocation List</dfn>
+When this specification says to <dfn id="add-an-entry-revoke" lt="add an entry|add the entry|add an entry to the Revocation List|add the entry to the Revocation List" for="blob revocation list">add an entry to the Revocation List</dfn>
 for a <a>Blob URL</a>,
 user agents must add the <a>Blob URL</a> to the <a>Revocation List</a>.
 This is only for <a>auto-revoking</a> <a>Blob URL</a>s.
 
-When this specification says to <dfn id="removeTheEntry">remove an entry from the Blob URL Store</dfn>
+When this specification says to <dfn id="removeTheEntry" lt="remove an entry|remove the entry|remove an entry from the Blob URL Store|remove the entry from the Blob URL Store" for="blob url store">remove an entry from the Blob URL Store</dfn>
 for a given <a>Blob URL</a> or for a given {{Blob}},
 user agents must remove the <a>Blob URL</a> and the {{Blob}} it refers to from the <a>Blob URL Store</a>.
 Subsequent attempts to <a>dereference</a> this URL must result in a <a>network error</a>.
