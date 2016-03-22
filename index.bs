@@ -1,117 +1,121 @@
 <pre class="metadata">
+Indent: 2
 Title: File API
 Shortname: fileapi
 Level: 1
 Group: webplatform
 Editor: Arun Ranganathan, Mozilla Corporation, http://arunranga.com/, arun@mozilla.com
 Editor: Jonas Sicking, Mozilla Corporation, jonas@sicking.cc
+Editor: Marijn Kruisselbrink, Google, mek@chromium.org
 Status: ED
 ED: https://w3c.github.io/FileAPI/
 TR: http://www.w3.org/TR/FileAPI/
 Previous Version: http://www.w3.org/TR/2012/WD-FileAPI-20121025/
 Abstract: This specification provides an API for representing file objects in web applications,
-	as well as programmatically selecting them and accessing their data. This includes:
+  as well as programmatically selecting them and accessing their data. This includes:
 
-	* A {{FileList}} interface, which represents an array of individually selected files from the underlying system. The user interface for selection can be invoked via <code>&lt;input type="file"></code>, i.e. when the input element is in the <code>File Upload</code> state [[HTML]] .
-	* A {{Blob}} interface, which represents immutable raw binary data, and allows access to ranges of bytes within the {{Blob}} object as a separate {{Blob}}.
-	* A {{File}} interface, which includes readonly informational attributes about a file such as its name and the date of the last modification (on disk) of the file.
-	* A {{FileReader}} interface, which provides methods to read a {{File}} or a {{Blob}}, and an event model to obtain the results of these reads.
-	* A <a section href="#url">URL scheme</a> for use with binary data such as files, so that they can be referenced within web applications.
+  * A {{FileList}} interface, which represents an array of individually selected files from the underlying system. The user interface for selection can be invoked via <code>&lt;input type="file"></code>, i.e. when the input element is in the <code>File Upload</code> state [[HTML]] .
+  * A {{Blob}} interface, which represents immutable raw binary data, and allows access to ranges of bytes within the {{Blob}} object as a separate {{Blob}}.
+  * A {{File}} interface, which includes readonly informational attributes about a file such as its name and the date of the last modification (on disk) of the file.
+  * A {{FileReader}} interface, which provides methods to read a {{File}} or a {{Blob}}, and an event model to obtain the results of these reads.
+  * A <a section href="#url">URL scheme</a> for use with binary data such as files, so that they can be referenced within web applications.
 
-	Additionally, this specification defines objects to be used within threaded web applications for the synchronous reading of files.
+  Additionally, this specification defines objects to be used within threaded web applications for the synchronous reading of files.
 
-	[[#requirements]] covers the motivation behind this specification.
+  [[#requirements]] covers the motivation behind this specification.
 
-	This API is designed to be used in conjunction with other APIs and elements on the web platform, notably:
-	{{XMLHttpRequest}} (e.g. with an overloaded {{XMLHttpRequest/send()}} method for {{File}} or {{Blob}} arguments),
-	{{Worker/postMessage()}},
-	{{DataTransfer}} (part of the drag and drop API defined in [[HTML]])
-	and Web Workers.
-	Additionally, it should be possible to programmatically obtain a list of files from the <{input}> element
-	when it is in the <code>File Upload</code> state [[HTML]].
-	These kinds of behaviors are defined in the appropriate affiliated specifications.
+  This API is designed to be used in conjunction with other APIs and elements on the web platform, notably:
+  {{XMLHttpRequest}} (e.g. with an overloaded {{XMLHttpRequest/send()}} method for {{File}} or {{Blob}} arguments),
+  {{Worker/postMessage()}},
+  {{DataTransfer}} (part of the drag and drop API defined in [[HTML]])
+  and Web Workers.
+  Additionally, it should be possible to programmatically obtain a list of files from the <{input}> element
+  when it is in the <code>File Upload</code> state [[HTML]].
+  These kinds of behaviors are defined in the appropriate affiliated specifications.
 Status Text: Previous discussion of this specification has taken place on two other mailing lists: <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archive</a>) and <a href="mailto:public-webapi@w3.org">public-webapi@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapi/">archive</a>). Ongoing discussion will be on the <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> mailing list.
+
+  This draft consists of changes made to the previous Last Call Working Draft. Please send comments to the <a href="mailto:public-webapi@w3.org">public-webapi@w3.org</a> as described above. You can see Last Call Feedback on the W3C Wiki: <a href="http://www.w3.org/wiki/Webapps/LCWD-FileAPI-20130912">http://www.w3.org/wiki/Webapps/LCWD-FileAPI-20130912</a>
 Boilerplate: omit conformance
 Ignored Terms: unsigned long, unsigned long long, long long, boolean, Array, Date
 </pre>
 
 <pre class="link-defaults">
 spec: html; type: element
-	text: a
-	text: iframe
+  text: a
+  text: iframe
 </pre>
 
 <pre class="anchors">
 urlPrefix: https://xhr.spec.whatwg.org/
-	type: interface
-		text: XMLHttpRequest
-	type: method
-		for: XMLHttpRequest
-			text: send(); url: #dom-xmlhttprequest-send
-			text: getAllResponseHeaders(); url: #dom-xmlhttprequest-getallresponseheaders
+  type: interface
+    text: XMLHttpRequest
+  type: method
+    for: XMLHttpRequest
+      text: send(); url: #dom-xmlhttprequest-send
+      text: getAllResponseHeaders(); url: #dom-xmlhttprequest-getallresponseheaders
 urlPrefix: https://html.spec.whatwg.org/multipage/
-	urlPrefix: semantics.html
-		type: element-attr; for: a; text: download; url: #attr-hyperlink-download
-	urlPrefix: webappapis.html
-		type: dfn
-			text: event loop
-			text: event handler content attribute
-			text: event handler event type
-			text: incumbent settings object
-			text: task; url: #concept-task
-			text: task source
-			text: global script clean-up jobs list
-			text: queue a task
-	urlPrefix: infrastructure.html
-		type: dfn
-			text: structured clone
-			text: collect a sequence of characters
-			text: converting a string to ASCII lowercase; url: #converted-to-ascii-lowercase
-	urlPrefix: browsers.html
-		type: dfn
-			text: unloading document cleanup steps
-			text: effective script origin
-			text: origin
-			text: same origin
-	urlPrefix: dom.html
-		type: dfn
-			text: document; url: #dom
+  urlPrefix: semantics.html
+    type: element-attr; for: a; text: download; url: #attr-hyperlink-download
+  urlPrefix: webappapis.html
+    type: dfn
+      text: event loop
+      text: event handler content attribute
+      text: event handler event type
+      text: incumbent settings object
+      text: task; url: #concept-task
+      text: task source
+      text: global script clean-up jobs list
+      text: queue a task
+  urlPrefix: infrastructure.html
+    type: dfn
+      text: structured clone
+      text: collect a sequence of characters
+      text: converting a string to ASCII lowercase; url: #converted-to-ascii-lowercase
+  urlPrefix: browsers.html
+    type: dfn
+      text: unloading document cleanup steps
+      text: effective script origin
+      text: origin
+      text: same origin
+  urlPrefix: dom.html
+    type: dfn
+      text: document; url: #dom
 urlPrefix: https://encoding.spec.whatwg.org/
-	type: dfn
-		text: byte
-		text: utf-8
-		text: utf-16
-		text: decode
-		text: getting an encoding; url: #concept-encoding-get
+  type: dfn
+    text: byte
+    text: utf-8
+    text: utf-16
+    text: decode
+    text: getting an encoding; url: #concept-encoding-get
 urlPrefix: https://heycam.github.io/webidl/
-	type: dfn; urlPrefix: #dfn-
-		text: throw
-		text: supported property indices
-	type: interface
-		text: InvalidStateError
+  type: dfn; urlPrefix: #dfn-
+    text: throw
+    text: supported property indices
+  type: interface
+    text: InvalidStateError
 urlPrefix: https://streams.spec.whatwg.org/
-	type: dfn
-		text: chunk
+  type: dfn
+    text: chunk
 urlPrefix: https://url.spec.whatwg.org/
-	type: dfn
-		urlPrefix: #concept-
-			text: URL
-	type: interface; text: URL
+  type: dfn
+    urlPrefix: #concept-
+      text: URL
+  type: interface; text: URL
 urlPrefix: https://fetch.spec.whatwg.org/
-	type: dfn
-		urlPrefix: #concept-
-			text: request
-			text: response
-			text: body
-			text: network error
-		text: cross-origin request; url: #http-cors-protocol
+  type: dfn
+    urlPrefix: #concept-
+      text: request
+      text: response
+      text: body
+      text: network error
+    text: cross-origin request; url: #http-cors-protocol
 urlPrefix: https://mimesniff.spec.whatwg.org/
-	type: dfn
-		text: parsable mime type
-		text: parse a MIME type
+  type: dfn
+    text: parsable mime type
+    text: parse a MIME type
 urlPrefix: https://www.w3.org/TR/progress-events/
-	type: interface
-		text: ProgressEvent
+  type: interface
+    text: ProgressEvent
 </pre>
 
 <h2 id="intro">
@@ -131,7 +135,7 @@ The interfaces and API defined in this specification can be used with other inte
 
 The {{File}} interface represents file data typically obtained from the underlying file system,
 and the {{Blob}} interface
-("Binary Large Object" - a name originally introduced to web APIs in [[Google Gears Blob API]])
+("Binary Large Object" - a name originally introduced to web APIs in <a href="https://developers.google.com/gears/?csw=1">Google Gears</a>)
 represents immutable raw data.
 {{File}} or {{Blob}} reads should happen asynchronously on the main thread,
 with an optional synchronous API used within threaded web applications.
@@ -143,66 +147,66 @@ through event handler content attributes and the firing of events.
 The use of events and event handlers allows separate code blocks the ability
 to monitor the <em>progress of the read</em>
 (which is particularly useful for remote drives or mounted drives,
-	where file access performance may vary from local drives)
+  where file access performance may vary from local drives)
 and error conditions that may arise during reading of a file.
 An example will be illustrative.
 
 <div class="example">
-	In the example below, different code blocks handle progress, error, and success conditions.
+  In the example below, different code blocks handle progress, error, and success conditions.
 
-	<pre class="lang-javascript">
-	function startRead() {
-		// obtain input element through DOM
+  <pre class="lang-javascript">
+  function startRead() {
+    // obtain input element through DOM
 
-		var file = document.getElementById('file').files[0];
-		if(file){
-			getAsText(file);
-		}
-	}
+    var file = document.getElementById('file').files[0];
+    if(file){
+      getAsText(file);
+    }
+  }
 
-	function getAsText(readFile) {
+  function getAsText(readFile) {
 
-		var reader = new FileReader();
+    var reader = new FileReader();
 
-		// Read file into memory as UTF-16
-		reader.readAsText(readFile, "UTF-16");
+    // Read file into memory as UTF-16
+    reader.readAsText(readFile, "UTF-16");
 
-		// Handle progress, success, and errors
-		reader.onprogress = updateProgress;
-		reader.onload = loaded;
-		reader.onerror = errorHandler;
-	}
+    // Handle progress, success, and errors
+    reader.onprogress = updateProgress;
+    reader.onload = loaded;
+    reader.onerror = errorHandler;
+  }
 
-	function updateProgress(evt) {
-		if (evt.lengthComputable) {
-			// evt.loaded and evt.total are ProgressEvent properties
-			var loaded = (evt.loaded / evt.total);
-			if (loaded &lt; 1) {
-				// Increase the prog bar length
-				// style.width = (loaded * 200) + "px";
-			}
-		}
-	}
+  function updateProgress(evt) {
+    if (evt.lengthComputable) {
+      // evt.loaded and evt.total are ProgressEvent properties
+      var loaded = (evt.loaded / evt.total);
+      if (loaded &lt; 1) {
+        // Increase the prog bar length
+        // style.width = (loaded * 200) + "px";
+      }
+    }
+  }
 
-	function loaded(evt) {
-		// Obtain the read file data
-		var fileString = evt.target.result;
-		// Handle UTF-16 file dump
-		if(utils.regexp.isChinese(fileString)) {
-			//Chinese Characters + Name validation
-		}
-		else {
-			// run other charset test
-		}
-		// xhr.send(fileString)
-	}
+  function loaded(evt) {
+    // Obtain the read file data
+    var fileString = evt.target.result;
+    // Handle UTF-16 file dump
+    if(utils.regexp.isChinese(fileString)) {
+      //Chinese Characters + Name validation
+    }
+    else {
+      // run other charset test
+    }
+    // xhr.send(fileString)
+  }
 
-	function errorHandler(evt) {
-		if(evt.target.error.name == "NotReadableError") {
-			// The file could not be read
-		}
-	}
-	</pre>
+  function errorHandler(evt) {
+    if(evt.target.error.name == "NotReadableError") {
+      // The file could not be read
+    }
+  }
+  </pre>
 </div>
 
 <h2 id="conformance">
@@ -221,22 +225,22 @@ The keywords “<span class='rfc2119'>MUST</span>”,
 “<span class='rfc2119'>OPTIONAL</span>” in this document are to be
 interpreted as described in
 <cite><a href='http://www.ietf.org/rfc/rfc2119'>Key words for use in RFCs to Indicate Requirement Levels</a></cite>
-[[RFC2119]].
+[[!RFC2119]].
 
 The following conformance classes are defined by this specification:
 
 <dl>
-	<dt><dfn id='dfn-conforming-implementation'>conforming user agent</dfn>
-	<dd>
-		A user agent is considered to be a <a>conforming user agent</a>
-		if it satisfies all of the <span class='rfc2119'>MUST</span>-,
-		<span class='rfc2119'>REQUIRED</span>-,
-		and <span class='rfc2119'>SHALL</span>-level criteria in this specification that apply to implementations.
-		This specification uses both the terms "conforming user agent" and "user agent" to refer to this product class.
+  <dt><dfn id='dfn-conforming-implementation'>conforming user agent</dfn>
+  <dd>
+    A user agent is considered to be a <a>conforming user agent</a>
+    if it satisfies all of the <span class='rfc2119'>MUST</span>-,
+    <span class='rfc2119'>REQUIRED</span>-,
+    and <span class='rfc2119'>SHALL</span>-level criteria in this specification that apply to implementations.
+    This specification uses both the terms "conforming user agent" and "user agent" to refer to this product class.
 
-		User agents may implement algorithms in this specifications in any way desired,
-		so long as the end result is indistinguishable from the result that would be obtained
-		from the specification's algorithms.
+    User agents may implement algorithms in this specifications in any way desired,
+    so long as the end result is indistinguishable from the result that would be obtained
+    from the specification's algorithms.
 </dl>
 
 User agents that use ECMAScript to implement the APIs defined in this specification
@@ -250,24 +254,24 @@ Dependencies</h3>
 This specification relies on underlying specifications.
 
 <dl>
-	<dt>DOM
-	<dd>A <a>conforming user agent</a> must support at least the subset of the functionality defined in DOM4 that this specification relies upon;
-		in particular, it must support {{EventTarget}}.
+  <dt>DOM
+  <dd>A <a>conforming user agent</a> must support at least the subset of the functionality defined in DOM4 that this specification relies upon;
+    in particular, it must support {{EventTarget}}.
 
-	<dt>Progress Events
-	<dd>A <a>conforming user agent</a> must support the Progress Events specification.
-		Data access on read operations is enabled via Progress Events. [[PROGRESS-EVENTS]]
+  <dt>Progress Events
+  <dd>A <a>conforming user agent</a> must support the Progress Events specification.
+    Data access on read operations is enabled via Progress Events. [[!PROGRESS-EVENTS]]
 
-	<dt>HTML
-	<dd>A <a>conforming user agent</a> must support at least the subset of the functionality defined in HTML that this specification relies upon;
-	in particular, it must support <a>event loops</a> and <a>event handler content attributes</a>. [[HTML]]
+  <dt>HTML
+  <dd>A <a>conforming user agent</a> must support at least the subset of the functionality defined in HTML that this specification relies upon;
+  in particular, it must support <a>event loops</a> and <a>event handler content attributes</a>. [[HTML]]
 
-	<dt>Web IDL
-	<dd>A <a>conforming user agent</a> must also be a conforming implementation of the IDL fragments in this specification,
-	as described in the Web IDL specification. [[WebIDL]]
+  <dt>Web IDL
+  <dd>A <a>conforming user agent</a> must also be a conforming implementation of the IDL fragments in this specification,
+  as described in the Web IDL specification. [[WebIDL]]
 
-	<dt>Typed Arrays
-	<dd>A <a>conforming user agent</a> must support the Typed Arrays specification [[TypedArray]].
+  <dt>Typed Arrays
+  <dd>A <a>conforming user agent</a> must support the Typed Arrays specification [[TypedArray]].
 </dl>
 
 Parts of this specification rely on the Web Workers specification;
@@ -284,13 +288,13 @@ and can be terminated by an {{abort()}} call.
 The algorithms and steps in this specification use the following mathematical operations:
 
 * max(a,b) returns the maximum of a and b,
-	and is always performed on integers as they are defined in WebIDL [[WebIDL]];
-	in the case of max(6,4) the result is 6.
-	This operation is also defined in ECMAScript [[ECMA-262]].
+  and is always performed on integers as they are defined in WebIDL [[WebIDL]];
+  in the case of max(6,4) the result is 6.
+  This operation is also defined in ECMAScript [[!ECMA-262]].
 * min(a,b) returns the minimum of a and b,
-	and is always performed on integers as they are defined in WebIDL [[WebIDL]];
-	in the case of min(6,4) the result is 4.
-	This operation is also defined in ECMAScript [[ECMA-262]].
+  and is always performed on integers as they are defined in WebIDL [[WebIDL]];
+  in the case of min(6,4) the result is 4.
+  This operation is also defined in ECMAScript [[ECMA-262]].
 * Mathematical comparisons such as &lt; (less than), ≤ (less than or equal to), and > (greater than) are as in ECMAScript [[ECMA-262]].
 
 The term <dfn>Unix Epoch</dfn> is used in this specification to refer to the time 00:00:00 UTC on January 1 1970
@@ -316,7 +320,7 @@ and a {{Blob/type}} attribute,
 which is an ASCII-encoded string in lower case representing the media type of the <a>byte</a> sequence.
 
 A {{Blob}} must have a <dfn id="readabilityState" for="Blob">readability state</dfn>,
-which is one of <a><code>OPENED</code></a> or <a for="Blob/readability state">CLOSED</code></a>.
+which is one of <a><code>OPENED</code></a> or <a for="Blob/readability state"><code>CLOSED</code></a>.
 A {{Blob}} that refers to a <a>byte</a> sequence,
 including one of 0 bytes,
 is said to be in the <dfn id="dfn-openState" for="Blob/readability state"><code>OPENED</code></dfn> <a>readability state</a>.
@@ -330,8 +334,8 @@ and must be preserved through <a>structured clone</a>.
 Further normative definition of <a>snapshot state</a> can be found for {{File}}s.
 
 <pre class="idl">
-[Constructor(optional sequence&lt;BlobPart> blobParts, optional BlobPropertyBag options),
- Exposed=(Window,Worker)]
+[Constructor, Constructor(sequence&lt;BlobPart> blobParts, optional BlobPropertyBag options),
+Exposed=(Window,Worker)]
 interface Blob {
 
   readonly attribute unsigned long long size;
@@ -341,8 +345,8 @@ interface Blob {
   //slice Blob into byte-ranged chunks
 
   Blob slice([Clamp] optional long long start,
-             [Clamp] optional long long end,
-             optional DOMString contentType);
+            [Clamp] optional long long end,
+            optional DOMString contentType);
   void close();
 
 };
@@ -362,59 +366,60 @@ When the {{Blob()}} constructor is invoked,
 user agents must run the following steps:
 
 1. If invoked with zero parameters,
-	return a new {{Blob}} object with its <a>readability state</a> set to <a><code>OPENED</code></a>,
-	consisting of 0 bytes,
-	with {{Blob/size}} set to 0,
-	and with {{Blob/type}} set to the empty string.
+  return a new {{Blob}} object with its <a>readability state</a> set to <a><code>OPENED</code></a>,
+  consisting of 0 bytes,
+  with {{Blob/size}} set to 0,
+  and with {{Blob/type}} set to the empty string.
 
 2. Otherwise, the constructor is invoked with a {{blobParts}} sequence.  Let <var>a</var> be that sequence.
 
 3. Let <var>bytes</var> be an empty sequence of bytes.
 
 4. Let <var>length</var> be <var>a</var>'s length.
-	For 0 ≤ <var>i</var> &lt; <var>length</var>, repeat the following steps:
+  For 0 ≤ <var>i</var> &lt; <var>length</var>, repeat the following steps:
 
-	1. Let <var>element</var> be the <var>i</var>th element of <var>a</var>.
-	2. If <var>element</var> is a {{DOMString}}, run the following substeps:
-		1. Let <var>s</var> be the result of converting <var>element</var> to a sequence of Unicode characters [[Unicode]]
-			using the algorithm for doing so in WebIDL [[WebIDL]].
-		2. Encode <var>s</var> as <a>utf-8</a> and append the resulting bytes to <var>bytes</var>.
+  1. Let <var>element</var> be the <var>i</var>th element of <var>a</var>.
+  2. If <var>element</var> is a {{DOMString}}, run the following substeps:
 
-			Note: The algorithm from WebIDL [[WebIDL]] replaces unmatched surrogates in an invalid <a>utf-16</a> string
-			with U+FFFD replacement characters.
-			Scenarios exist when the {{Blob}} constructor may result in some data loss
-			due to lost or scrambled character sequences.
-	3. If <var>element</var> is an {{ArrayBufferView}},
-		convert it to a sequence of <code>byteLength</code> bytes
-		from the underlying {{ArrayBuffer}},
-		starting at the <code>byteOffset</code> of the {{ArrayBufferView}},
-		and append those bytes to <var>bytes</var>.
-	4. If <var>element</var> is an {{ArrayBuffer}},
-		convert it to a sequence of <code>byteLength</code> bytes,
-		and append those bytes to <var>bytes</var>.
-	5. If <var>element</var> is a {{Blob}},
-		append the bytes it represents to <var>bytes</var>.
-		The {{Blob/type}} of the {{Blob}} array element is ignored.
+    1. Let <var>s</var> be the result of converting <var>element</var> to a sequence of Unicode characters [[Unicode]]
+      using the algorithm for doing so in WebIDL [[WebIDL]].
+    2. Encode <var>s</var> as <a>utf-8</a> and append the resulting bytes to <var>bytes</var>.
+
+      Note: The algorithm from WebIDL [[WebIDL]] replaces unmatched surrogates in an invalid <a>utf-16</a> string
+      with U+FFFD replacement characters.
+      Scenarios exist when the {{Blob}} constructor may result in some data loss
+      due to lost or scrambled character sequences.
+  3. If <var>element</var> is an {{ArrayBufferView}},
+    convert it to a sequence of <code>byteLength</code> bytes
+    from the underlying {{ArrayBuffer}},
+    starting at the <code>byteOffset</code> of the {{ArrayBufferView}},
+    and append those bytes to <var>bytes</var>.
+  4. If <var>element</var> is an {{ArrayBuffer}},
+    convert it to a sequence of <code>byteLength</code> bytes,
+    and append those bytes to <var>bytes</var>.
+  5. If <var>element</var> is a {{Blob}},
+    append the bytes it represents to <var>bytes</var>.
+    The {{Blob/type}} of the {{Blob}} array element is ignored.
 
 5. If the {{BlobPropertyBag/type}} member of the optional <code>options</code> argument is provided
-	and is not the empty string,
-	run the following sub-steps:
+  and is not the empty string,
+  run the following sub-steps:
 
-	1. Let <var>t</var> be the {{BlobPropertyBag/type}} dictionary member.
-		If <var>t</var> contains any characters outside the range U+0020 to U+007E,
-		then set <var>t</var> to the empty string and return from these substeps.
-	2. Convert every character in <var>t</var> to lowercase
-		using the "<a>converting a string to ASCII lowercase</a>" algorithm.
+  1. Let <var>t</var> be the {{BlobPropertyBag/type}} dictionary member.
+    If <var>t</var> contains any characters outside the range U+0020 to U+007E,
+    then set <var>t</var> to the empty string and return from these substeps.
+  2. Convert every character in <var>t</var> to lowercase
+    using the "<a>converting a string to ASCII lowercase</a>" algorithm.
 
 6. Return a {{Blob}} object with its <a>readability state</a> set to <a><code>OPENED</code></a>,
-	referring to <var>bytes</var> as its associated <a>byte</a> sequence,
-	with its {{Blob/size}} set to the length of <var>bytes</var>,
-	and its {{Blob/type}} set to the value of <var>t</var> from the substeps above.
+  referring to <var>bytes</var> as its associated <a>byte</a> sequence,
+  with its {{Blob/size}} set to the length of <var>bytes</var>,
+  and its {{Blob/type}} set to the value of <var>t</var> from the substeps above.
 
-	Note: The type t of a {{Blob}} is considered a <a>parsable MIME type</a>
-	if the ASCII-encoded string representing the Blob object's type,
-	when converted to a byte sequence,
-	does not return undefined for the <a>parse a MIME type</a> algorithm.
+  Note: The type t of a {{Blob}} is considered a <a>parsable MIME type</a>
+  if the ASCII-encoded string representing the Blob object's type,
+  when converted to a byte sequence,
+  does not return undefined for the <a>parse a MIME type</a> algorithm.
 
 <h4 id="constructorParams">
 Constructor Parameters</h4>
@@ -422,82 +427,82 @@ Constructor Parameters</h4>
 The {{Blob()}} constructor can be invoked with the parameters below:
 
 <dl>
-	<dt id="dfn-blobParts">A <code>blobParts</code> <code>sequence</code>
-	<dd>which takes any number of the following types of elements, and in any order:
-		* {{ArrayBuffer}} elements.
-		* {{ArrayBufferView}} elements.
-		* {{Blob}} elements.
-		* {{DOMString}} elements.
+  <dt>A <dfn id="dfn-blobParts" argument for="Blob/Blob(blobParts, options)"><code>blobParts</code></dfn> <code>sequence</code>
+  <dd>which takes any number of the following types of elements, and in any order:
+    * {{ArrayBuffer}} elements.
+    * {{ArrayBufferView}} elements.
+    * {{Blob}} elements.
+    * {{DOMString}} elements.
 
-	<dt>An <em>optional</em> {{BlobPropertyBag}}
-	<dd>which takes one member:
-		* <dfn id="dfn-BPtype" dict-member for="BlobPropertyBag">type</dfn>,
-			the ASCII-encoded string in lower case representing the media type of the {{Blob}}.
-			Normative conditions for this member are provided in the [[#constructorBlob]].
+  <dt>An <em>optional</em> {{BlobPropertyBag}}
+  <dd>which takes one member:
+    * <dfn id="dfn-BPtype" dict-member for="BlobPropertyBag">type</dfn>,
+      the ASCII-encoded string in lower case representing the media type of the {{Blob}}.
+      Normative conditions for this member are provided in the [[#constructorBlob]].
 </dl>
 
 <div class="example">
-	Examples of constructor usage follow.
+  Examples of constructor usage follow.
 
-	<pre class="lang-javascript">
-	// Create a new Blob object
+  <pre class="lang-javascript">
+  // Create a new Blob object
 
-	var a = new Blob();
+  var a = new Blob();
 
-	// Create a 1024-byte ArrayBuffer
-	// buffer could also come from reading a File
+  // Create a 1024-byte ArrayBuffer
+  // buffer could also come from reading a File
 
-	var buffer = new ArrayBuffer(1024);
+  var buffer = new ArrayBuffer(1024);
 
-	// Create ArrayBufferView objects based on buffer
+  // Create ArrayBufferView objects based on buffer
 
-	var shorts = new Uint16Array(buffer, 512, 128);
-	var bytes = new Uint8Array(buffer, shorts.byteOffset + shorts.byteLength);
+  var shorts = new Uint16Array(buffer, 512, 128);
+  var bytes = new Uint8Array(buffer, shorts.byteOffset + shorts.byteLength);
 
-	var b = new Blob(["foobarbazetcetc" + "birdiebirdieboo"], {type: "text/plain;charset=utf-8"});
+  var b = new Blob(["foobarbazetcetc" + "birdiebirdieboo"], {type: "text/plain;charset=utf-8"});
 
-	var c = new Blob([b, shorts]);
+  var c = new Blob([b, shorts]);
 
-	var a = new Blob([b, c, bytes]);
+  var a = new Blob([b, c, bytes]);
 
-	var d = new Blob([buffer, b, c, bytes]);
-	</pre>
+  var d = new Blob([buffer, b, c, bytes]);
+  </pre>
 </div>
 
 <h3 id="attributes-blob">
 Attributes</h3>
 
 <dl dfn-type="attribute" dfn-for="Blob">
-	<dt><dfn>size</dfn>
-	<dd>Returns the size of the <a>byte</a> sequence in number of bytes.
-		On getting, conforming user agents must return the total number of bytes that can be read by a {{FileReader}} or {{FileReaderSync}} object,
-		or 0 if the {{Blob}} has no bytes to be read.
-		If the {{Blob}} has a readability state of <a for="Blob/readability state">CLOSED</code></a>
-		then {{Blob/size}} must return 0.
+  <dt><dfn>size</dfn>
+  <dd>Returns the size of the <a>byte</a> sequence in number of bytes.
+    On getting, conforming user agents must return the total number of bytes that can be read by a {{FileReader}} or {{FileReaderSync}} object,
+    or 0 if the {{Blob}} has no bytes to be read.
+    If the {{Blob}} has a readability state of <a for="Blob/readability state"><code>CLOSED</code></a>
+    then {{Blob/size}} must return 0.
 
-	<dt><dfn>type</dfn>
-	<dd>The ASCII-encoded string in lower case representing the media type of the {{Blob}}.
-		On getting, user agents must return the type of a {{Blob}}
-		as an ASCII-encoded string in lower case,
-		such that when it is converted to a <a>byte</a> sequence,
-		it is a <a>parsable MIME type</a>,
-		or the empty string &ndash; 0 bytes &ndash; if the type cannot be determined.
+  <dt><dfn>type</dfn>
+  <dd>The ASCII-encoded string in lower case representing the media type of the {{Blob}}.
+    On getting, user agents must return the type of a {{Blob}}
+    as an ASCII-encoded string in lower case,
+    such that when it is converted to a <a>byte</a> sequence,
+    it is a <a>parsable MIME type</a>,
+    or the empty string &ndash; 0 bytes &ndash; if the type cannot be determined.
 
-		The {{Blob/type}} attribute can be set by the web application itself through constructor invocation
-		and through the {{Blob/slice()}} call;
-		in these cases, further normative conditions for this attribute are in [[#constructorBlob]],
-		[[#file-constructor]],
-		and [[#slice-method-algo]] respectively.
-		User agents can also determine the {{Blob/type}} of a {{Blob}},
-		especially if the <a>byte</a> sequence is from an on-disk file;
-		in this case, further normative conditions are in the <a>file type guidelines</a>.
+    The {{Blob/type}} attribute can be set by the web application itself through constructor invocation
+    and through the {{Blob/slice()}} call;
+    in these cases, further normative conditions for this attribute are in [[#constructorBlob]],
+    [[#file-constructor]],
+    and [[#slice-method-algo]] respectively.
+    User agents can also determine the {{Blob/type}} of a {{Blob}},
+    especially if the <a>byte</a> sequence is from an on-disk file;
+    in this case, further normative conditions are in the <a>file type guidelines</a>.
 
-	<dt><dfn>isClosed</dfn>
-	<dd>The boolean value that indicates whether the {{Blob}} is in the <a for="Blob/readability state">CLOSED</code></a> <a>readability state</a>.
-		On getting, user agents must return <code>false</code>
-		if the {{Blob}} is in the <a><code>OPENED</code></a> <a>readability state</a>,
-		and <code>true</code> if the {{Blob}} is in the <a for="Blob/readability state">CLOSED</code></a> <a>readability state</a>
-		as a result of the {{Blob/close()}} method being called.
+  <dt><dfn>isClosed</dfn>
+  <dd>The boolean value that indicates whether the {{Blob}} is in the <a for="Blob/readability state"><code>CLOSED</code></a> <a>readability state</a>.
+    On getting, user agents must return <code>false</code>
+    if the {{Blob}} is in the <a><code>OPENED</code></a> <a>readability state</a>,
+    and <code>true</code> if the {{Blob}} is in the <a for="Blob/readability state"><code>CLOSED</code></a> <a>readability state</a>
+    as a result of the {{Blob/close()}} method being called.
 </dl>
 
 Note: Use of the {{Blob/type}} attribute informs the <a>encoding determination</a>
@@ -519,91 +524,91 @@ It must act as follows:
 
 1. Let <var>O</var> be the {{Blob}} <a>context object</a> on which the {{slice()}} method is being called.
 2. The optional <dfn argument for="Blob/slice(start, end, contentType)">start</dfn> parameter
-	is a value for the start point of a {{slice()}} call,
-	and must be treated as a byte-order position,
-	with the zeroth position representing the first byte.
-	User agents must process {{Blob/slice()}} with {{start}} normalized according to the following:
+  is a value for the start point of a {{slice()}} call,
+  and must be treated as a byte-order position,
+  with the zeroth position representing the first byte.
+  User agents must process {{Blob/slice()}} with {{start}} normalized according to the following:
 
-	<ol type="a">
-		<li>If the optional {{start}} parameter is not used as a parameter when making this call, let <var>relativeStart</var> be 0.
-		<li>If {{start}} is negative, let <var>relativeStart</var> be <code>max(({{Blob/size}} + {{start}}), 0)</code>.
-		<li>Else, let <var>relativeStart</var> be <code>min(start, size)</code>.
-		</ol>
+  <ol type="a">
+    <li>If the optional {{start}} parameter is not used as a parameter when making this call, let <var>relativeStart</var> be 0.
+    <li>If {{start}} is negative, let <var>relativeStart</var> be <code>max(({{Blob/size}} + {{start}}), 0)</code>.
+    <li>Else, let <var>relativeStart</var> be <code>min(start, size)</code>.
+    </ol>
 
 3. The optional <dfn argument for="Blob/slice(start, end, contentType)">end</dfn> parameter
-	is a value for the end point of a {{slice()}} call.
-	User agents must process {{Blob/slice()}} with {{end}} normalized according to the following:
+  is a value for the end point of a {{slice()}} call.
+  User agents must process {{Blob/slice()}} with {{end}} normalized according to the following:
 
-	<ol type="a">
-		<li>If the optional {{end}} parameter is not used as a parameter when making this call, let <var>relativeEnd</var> be {{Blob/size}}.
-		<li>If {{end}} is negative, let <var>relativeEnd</var> be <code>max((size + end), 0)</code> .
-		<li>Else, let <var>relativeEnd</var> be <code>min(end, size)</code>.
-	</ol>
+  <ol type="a">
+    <li>If the optional {{end}} parameter is not used as a parameter when making this call, let <var>relativeEnd</var> be {{Blob/size}}.
+    <li>If {{end}} is negative, let <var>relativeEnd</var> be <code>max((size + end), 0)</code> .
+    <li>Else, let <var>relativeEnd</var> be <code>min(end, size)</code>.
+  </ol>
 
 4. The optional <dfn argument for="Blob/slice(start, end, contentType)">contentType</dfn> parameter
-	is used to set the ASCII-encoded string in lower case representing the media type of the Blob.
-	User agents must process the {{Blob/slice()}} with {{contentType}} normalized according to the following:
+  is used to set the ASCII-encoded string in lower case representing the media type of the Blob.
+  User agents must process the {{Blob/slice()}} with {{contentType}} normalized according to the following:
 
-	<ol type="a">
-		<li>If the {{contentType}} parameter is not provided, let <var>relativeContentType</var> be set to the empty string .
-		<li>Else let <var>relativeContentType</var> be set to {{contentType}} and run the substeps below:
-			1. If <var>relativeContentType</var> contains any characters outside the range of U+0020 to U+007E,
-				then set <var>relativeContentType</var> to the empty string and return from these substeps.
-			2. Convert every character in <var>relativeContentType</var> to lower case using the "<a>Converting a string to ASCII lowercase</a>" algorithm.
-	</ol>
+  <ol type="a">
+    <li>If the {{contentType}} parameter is not provided, let <var>relativeContentType</var> be set to the empty string .
+    <li>Else let <var>relativeContentType</var> be set to {{contentType}} and run the substeps below:
+      1. If <var>relativeContentType</var> contains any characters outside the range of U+0020 to U+007E,
+        then set <var>relativeContentType</var> to the empty string and return from these substeps.
+      2. Convert every character in <var>relativeContentType</var> to lower case using the "<a>Converting a string to ASCII lowercase</a>" algorithm.
+  </ol>
 
 5. Let <var>span</var> be <code>max((relativeEnd - relativeStart), 0)</code>.
 
 6. Return a new {{Blob}} object <var>S</var> with the following characteristics:
 
-	<ol type="a">
-		<li><var>S</var> has a <a>readability state</a> equal to that of <var>O</var>'s <a>readability state</a>.
+  <ol type="a">
+    <li><var>S</var> has a <a>readability state</a> equal to that of <var>O</var>'s <a>readability state</a>.
 
-			Note: The <a>readability state</a> of the <a>context object</a> is retained
-			by the {{Blob}} object returned by the {{Blob/slice()}} call;
-			this has implications on whether the returned {{Blob}} is actually usable
-			for <a>read operation</a>s or as a <a>Blob URL</a>.
-		<li><var>S</var> refers to <var>span</var> consecutive <a>byte</a>s from <var>O</var>,
-			beginning with the <a>byte</a> at byte-order position <var>relativeStart</var>.
-		<li><var>S</var>.{{Blob/size}} = <var>span</var>.
-		<li><var>S</var>.{{Blob/type}} = <var>relativeContentType</var>.
+      Note: The <a>readability state</a> of the <a>context object</a> is retained
+      by the {{Blob}} object returned by the {{Blob/slice()}} call;
+      this has implications on whether the returned {{Blob}} is actually usable
+      for <a>read operation</a>s or as a <a>Blob URL</a>.
+    <li><var>S</var> refers to <var>span</var> consecutive <a>byte</a>s from <var>O</var>,
+      beginning with the <a>byte</a> at byte-order position <var>relativeStart</var>.
+    <li><var>S</var>.{{Blob/size}} = <var>span</var>.
+    <li><var>S</var>.{{Blob/type}} = <var>relativeContentType</var>.
 
-			Note: The type t of a {{Blob}} is considered a <a>parsable MIME type</a>
-			if the ASCII-encoded string representing the Blob object's type,
-			when converted to a byte sequence,
-			does not return undefined for the <a>parse a MIME type</a> algorithm.
-	</ol>
+      Note: The type t of a {{Blob}} is considered a <a>parsable MIME type</a>
+      if the ASCII-encoded string representing the Blob object's type,
+      when converted to a byte sequence,
+      does not return undefined for the <a>parse a MIME type</a> algorithm.
+  </ol>
 
 <div class="example">
-	The examples below illustrate the different types of {{slice()}} calls possible. Since the
-	{{File}} interface inherits from the {{Blob}} interface, examples are based on the use of the {{File}} interface.
+  The examples below illustrate the different types of {{slice()}} calls possible. Since the
+  {{File}} interface inherits from the {{Blob}} interface, examples are based on the use of the {{File}} interface.
 
-	<pre class="lang-javascript">
-		// obtain input element through DOM
+  <pre class="lang-javascript">
+    // obtain input element through DOM
 
-		var file = document.getElementById('file').files[0];
-		if(file)
-		{
-			// create an identical copy of file
-			// the two calls below are equivalent
+    var file = document.getElementById('file').files[0];
+    if(file)
+    {
+      // create an identical copy of file
+      // the two calls below are equivalent
 
-			var fileClone = file.slice();
-			var fileClone2 = file.slice(0, file.size);
+      var fileClone = file.slice();
+      var fileClone2 = file.slice(0, file.size);
 
-			// slice file into 1/2 chunk starting at middle of file
-			// Note the use of negative number
+      // slice file into 1/2 chunk starting at middle of file
+      // Note the use of negative number
 
-			var fileChunkFromEnd = file.slice(-(Math.round(file.size/2)));
+      var fileChunkFromEnd = file.slice(-(Math.round(file.size/2)));
 
-			// slice file into 1/2 chunk starting at beginning of file
+      // slice file into 1/2 chunk starting at beginning of file
 
-			var fileChunkFromStart = file.slice(0, Math.round(file.size/2));
+      var fileChunkFromStart = file.slice(0, Math.round(file.size/2));
 
-			// slice file from beginning till 150 bytes before end
+      // slice file from beginning till 150 bytes before end
 
-			var fileNoMetadata = file.slice(0, -150, "application/experimental");
-		}
-	</pre>
+      var fileNoMetadata = file.slice(0, -150, "application/experimental");
+    }
+  </pre>
 </div>
 
 <h4 id="close-method">
@@ -612,11 +617,11 @@ The close method</h4>
 The <dfn id="dfn-close" method for=Blob>close()</dfn> method is said to <a lt="closed" for=Blob>close</a> a {{Blob}},
 and must act as follows on the {{Blob}} on which the method has been called:
 
-1. If the <a>readability state</a> of the <a>context object</a> is <a for="Blob/readability state">CLOSED</code></a>,
-	<a>terminate this algorithm</a>.
-2. Otherwise, set the <a>readability state</a> of the <a>context object</a> to <a for="Blob/readability state">CLOSED</code></a>.
+1. If the <a>readability state</a> of the <a>context object</a> is <a for="Blob/readability state"><code>CLOSED</code></a>,
+  <a>terminate this algorithm</a>.
+2. Otherwise, set the <a>readability state</a> of the <a>context object</a> to <a for="Blob/readability state"><code>CLOSED</code></a>.
 3. If the <a>context object</a> has an entry in the <a>Blob URL Store</a>,
-	<a>remove the entry</a> that corresponds to the <a>context object</a>.
+  <a>remove the entry</a> that corresponds to the <a>context object</a>.
 
 
 <!--
@@ -653,27 +658,27 @@ user agents must return the {{Blob/type}} of that file,
 and must follow the <dfn export>file type guidelines</dfn> below:
 
 * User agents must return the {{Blob/type}} as an ASCII-encoded string in lower case,
-	such that when it is converted to a corresponding byte sequence,
-	it is a <a>parsable MIME type</a>,
-	or the empty string &ndash; 0 bytes &ndash; if the type cannot be determined.
+  such that when it is converted to a corresponding byte sequence,
+  it is a <a>parsable MIME type</a>,
+  or the empty string &ndash; 0 bytes &ndash; if the type cannot be determined.
 * When the file is of type <code>text/plain</code>
-	user agents must NOT append a charset parameter to the <i>dictionary of parameters</i> portion of the media type [[MIMESNIFF]].
+  user agents must NOT append a charset parameter to the <i>dictionary of parameters</i> portion of the media type [[!MIMESNIFF]].
 * User agents must not attempt heuristic determination of encoding,
-	including statistical methods.
+  including statistical methods.
 
 <pre class="idl">
 [Constructor(sequence&lt;BlobPart> fileBits,
-             [EnsureUTF16] DOMString fileName,
-             optional FilePropertyBag options),
- Exposed=(Window,Worker)]
+            [EnsureUTF16] DOMString fileName,
+            optional FilePropertyBag options),
+Exposed=(Window,Worker)]
 interface File : Blob {
-	readonly attribute DOMString name;
-	readonly attribute long long lastModified;
+  readonly attribute DOMString name;
+  readonly attribute long long lastModified;
 };
 
 dictionary FilePropertyBag {
-	DOMString type = "";
-	long long lastModified;
+  DOMString type = "";
+  long long lastModified;
 };
 </pre>
 
@@ -686,66 +691,66 @@ When the {{File()}} constructor is invoked,
 user agents must run the following steps:
 
 1. Let <var>a</var> be the {{fileBits}} sequence argument.
-	Let <var>bytes</var> be an empty sequence of <a>byte</a>.
-	Let <var>length</var> be <var>a</var>'s length.
-	For 0 ≤ i &lt; <var>length</var>, repeat the following steps:
+  Let <var>bytes</var> be an empty sequence of <a>byte</a>.
+  Let <var>length</var> be <var>a</var>'s length.
+  For 0 ≤ i &lt; <var>length</var>, repeat the following steps:
 
-	1. Let <var>element</var> be the <var>i</var>'th element of <var>a</var>.
-	2. If <var>element</var> is a {{DOMString}}, run the following substeps:
-		1.Let <var>s</var> be the result of converting <var>element</var> to a sequence of Unicode characters [[Unicode]]
-			using the algorithm for doing so in WebIDL [[WebIDL]].
-		2. Encode <var>s</var> as <a>utf-8</a> and append the resulting <a>byte</a> to <var>bytes</var>.
+  1. Let <var>element</var> be the <var>i</var>'th element of <var>a</var>.
+  2. If <var>element</var> is a {{DOMString}}, run the following substeps:
+    1. Let <var>s</var> be the result of converting <var>element</var> to a sequence of Unicode characters [[Unicode]]
+      using the algorithm for doing so in WebIDL [[WebIDL]].
+    2. Encode <var>s</var> as <a>utf-8</a> and append the resulting <a>byte</a> to <var>bytes</var>.
 
-		Note: The algorithm from WebIDL [[WebIDL]] replaces unmatched surrogates in an invalid <a>utf-16</a> string with U+FFFD replacement characters.
-		Scenarios exist when the {{Blob}} constructor may result in some data loss due to lost or scrambled character sequences.
-	3. If <var>element</var> is an {{ArrayBufferView}},
-		convert it to a sequence of <code>byteLength</code> bytes from the underlying {{ArrayBuffer}},
-		starting at the <code>byteOffset</code> of the {{ArrayBufferView}},
-		and append those bytes to <var>bytes</var>.
-	4. If <var>element</var> is an {{ArrayBuffer}},
-		convert it to a sequence of <code>byteLength</code> bytes,
-		and append those bytes to <var>bytes</var>.
-	5. If <var>element</var> is a {{Blob}},
-		append the bytes it represents to <var>bytes</var>.
-		The {{Blob/type}} of the {{Blob}} argument must be ignored.
+    Note: The algorithm from WebIDL [[WebIDL]] replaces unmatched surrogates in an invalid <a>utf-16</a> string with U+FFFD replacement characters.
+    Scenarios exist when the {{Blob}} constructor may result in some data loss due to lost or scrambled character sequences.
+  3. If <var>element</var> is an {{ArrayBufferView}},
+    convert it to a sequence of <code>byteLength</code> bytes from the underlying {{ArrayBuffer}},
+    starting at the <code>byteOffset</code> of the {{ArrayBufferView}},
+    and append those bytes to <var>bytes</var>.
+  4. If <var>element</var> is an {{ArrayBuffer}},
+    convert it to a sequence of <code>byteLength</code> bytes,
+    and append those bytes to <var>bytes</var>.
+  5. If <var>element</var> is a {{Blob}},
+    append the bytes it represents to <var>bytes</var>.
+    The {{Blob/type}} of the {{Blob}} argument must be ignored.
 2. Let <var>n</var> be a new string of the same size as the {{fileName}} argument to the constructor.
-	Copy every character from {{fileName}} to <var>n</var>,
-	replacing any "/" character (U+002F SOLIDUS) with a ":" (U+003A COLON).
+  Copy every character from {{fileName}} to <var>n</var>,
+  replacing any "/" character (U+002F SOLIDUS) with a ":" (U+003A COLON).
 
-	Note: Underlying OS filesystems use differing conventions for file name;
-	with constructed files, mandating UTF-16 lessens ambiquity when file names are converted to <a>byte</a> sequences.
+  Note: Underlying OS filesystems use differing conventions for file name;
+  with constructed files, mandating UTF-16 lessens ambiquity when file names are converted to <a>byte</a> sequences.
 
 3. If the optional {{FilePropertyBag}} dictionary argument is used,
-	then run the following substeps:
+  then run the following substeps:
 
-	1. If the {{FilePropertyBag/type}} member is provided and is not the empty string,
-		let <var>t</var> be set to the {{FilePropertyBag/type}} dictionary member.
-		If <var>t</var> contains any characters outside the range U+0020 to U+007E,
-		then set <var>t</var> to the empty string and return from these substeps.
-	2. Convert every character in <var>t</var> to lowercase using the "<a>converting a string to ASCII lowercase</a>" algorithm.
-	3. If the {{FilePropertyBag/lastModified}} member is provided,
-		let <var>d</var> be set to the  {{FilePropertyBag/lastModified}} dictionary member.
-		If it is not provided,
-		set <var>d</var> to the current date and time
-		represented as the number of milliseconds since the <a>Unix Epoch</a>
-		(which is the equivalent of <code>Date.now()</code> [[ECMA-262]]).
+  1. If the {{FilePropertyBag/type}} member is provided and is not the empty string,
+    let <var>t</var> be set to the {{FilePropertyBag/type}} dictionary member.
+    If <var>t</var> contains any characters outside the range U+0020 to U+007E,
+    then set <var>t</var> to the empty string and return from these substeps.
+  2. Convert every character in <var>t</var> to lowercase using the "<a>converting a string to ASCII lowercase</a>" algorithm.
+  3. If the {{FilePropertyBag/lastModified}} member is provided,
+    let <var>d</var> be set to the  {{FilePropertyBag/lastModified}} dictionary member.
+    If it is not provided,
+    set <var>d</var> to the current date and time
+    represented as the number of milliseconds since the <a>Unix Epoch</a>
+    (which is the equivalent of <code>Date.now()</code> [[ECMA-262]]).
 
-		Note: Since ECMA-262 {{Date}} objects convert to <code>long long</code> values
-		representing the number of milliseconds since the <a>Unix Epoch</a>,
-		the {{FilePropertyBag/lastModified}} member could be a {{Date}} object [[ECMA-262]].
+    Note: Since ECMA-262 {{Date}} objects convert to <code>long long</code> values
+    representing the number of milliseconds since the <a>Unix Epoch</a>,
+    the {{FilePropertyBag/lastModified}} member could be a {{Date}} object [[ECMA-262]].
 
 4. Return a new {{File}} object <var>F</var> such that:
-	1. <var>F</var> has a <a>readability state</a> of <a><code>OPENED</code></a>.
-	2. <var>F</var> refers to the <var>bytes</var> <a>byte</a> sequence.
-	3. <var>F</var>.{{Blob/size}} is set to the number of total bytes in <var>bytes</var>.
-	4. <var>F</var>.{{File/name}} is set to <var>n</var>.
-	5. <var>F</var>.{{Blob/type}} is set to <var>t</var>.
+  1. <var>F</var> has a <a>readability state</a> of <a><code>OPENED</code></a>.
+  2. <var>F</var> refers to the <var>bytes</var> <a>byte</a> sequence.
+  3. <var>F</var>.{{Blob/size}} is set to the number of total bytes in <var>bytes</var>.
+  4. <var>F</var>.{{File/name}} is set to <var>n</var>.
+  5. <var>F</var>.{{Blob/type}} is set to <var>t</var>.
 
-		Note: The type t of a {{File}} is considered a <a>parsable MIME type</a>
-		if the ASCII-encoded string representing the File object's type,
-		when converted to a byte sequence,
-		does not return undefined for the <a>parse a MIME type</a> algorithm.
-	6. <code>F.lastModified</code> is set to <var>d</var>.
+    Note: The type t of a {{File}} is considered a <a>parsable MIME type</a>
+    if the ASCII-encoded string representing the File object's type,
+    when converted to a byte sequence,
+    does not return undefined for the <a>parse a MIME type</a> algorithm.
+  6. <var>F</var>.{{File/lastModified}} is set to <var>d</var>.
 
 <h4 id="file-constructor-params">
 Constructor Parameters</h4>
@@ -753,52 +758,52 @@ Constructor Parameters</h4>
 The {{File()}} constructor can be invoked with the parameters below:
 
 <dl>
-	<dt id="dfn-fileBits">A <code>fileBits</code> <code>sequence</code>
-	<dd>which takes any number of the following elements, and in any order:
-		* {{ArrayBuffer}} elements.
-		* {{ArrayBufferView}} elements.
-		* {{Blob}} elements, which includes {{File}} elements.
-		* {{DOMString}} elements.
+  <dt>A <dfn id="dfn-fileBits" argument for="File/File(fileBits, fileName, options)"><code>fileBits</code></dfn> <code>sequence</code>
+  <dd>which takes any number of the following elements, and in any order:
+    * {{ArrayBuffer}} elements.
+    * {{ArrayBufferView}} elements.
+    * {{Blob}} elements, which includes {{File}} elements.
+    * {{DOMString}} elements.
 
-	<dt id="dfn-fileName">A <code>name</code> parameter
-	<dd>A {{DOMString}} parameter representing the name of the file;
-		normative conditions for this constructor parameter can be found in [[#file-constructor]].
+  <dt>A <dfn id="dfn-fileName" argument for="File/File(fileBits, fileName, options)"><code>fileName</code></dfn> parameter
+  <dd>A {{DOMString}} parameter representing the name of the file;
+    normative conditions for this constructor parameter can be found in [[#file-constructor]].
 
-	<dt id="def-Properties">An optional {{FilePropertyBag}} dictionary
-	<dd>which takes the following members:
-		* An optional <dfn dict-member for=FilePropertyBag>type</dfn> member;
-			the ASCII-encoded string in lower case representing the media type of the {{File}}.
-			Normative conditions for this member are provided in [[#file-constructor]].
-		* An optional <dfn dict-member for=FilePropertyBag>lastModified</dfn> member,
-			which must be a <code>long long</code>;
-			normative conditions for this member are provided in [[#file-constructor]].
+  <dt id="def-Properties">An optional {{FilePropertyBag}} dictionary
+  <dd>which takes the following members:
+    * An optional <dfn dict-member for=FilePropertyBag>type</dfn> member;
+      the ASCII-encoded string in lower case representing the media type of the {{File}}.
+      Normative conditions for this member are provided in [[#file-constructor]].
+    * An optional <dfn dict-member for=FilePropertyBag>lastModified</dfn> member,
+      which must be a <code>long long</code>;
+      normative conditions for this member are provided in [[#file-constructor]].
 </dl>
 
 <h3 id="file-attrs">
 Attributes</h3>
 
 <dl dfn-type=attribute dfn-for=File>
-	<dt><dfn>name</dfn>
-	<dd>The name of the file.
-		On getting, this must return the name of the file as a string.
-		There are numerous file name variations and conventions used by different underlying OS file systems;
-		this is merely the name of the file, without path information.
-		On getting, if user agents cannot make this information available,
-		they must return the empty string.
-		If a {{File}} object is created using a constructor,
-		further normative conditions for this attribute are found in [[#file-constructor]].
+  <dt><dfn>name</dfn>
+  <dd>The name of the file.
+    On getting, this must return the name of the file as a string.
+    There are numerous file name variations and conventions used by different underlying OS file systems;
+    this is merely the name of the file, without path information.
+    On getting, if user agents cannot make this information available,
+    they must return the empty string.
+    If a {{File}} object is created using a constructor,
+    further normative conditions for this attribute are found in [[#file-constructor]].
 
-	<dt><dfn>lastModified</dfn>
-	<dd>The last modified date of the file.
-		On getting, if user agents can make this information available,
-		this must return a <code>long long</code> set to the time the file was last modified
-		as the number of milliseconds since the <a>Unix Epoch</a>.
-		If the last modification date and time are not known,
-		the attribute must return the current date and time
-		as a <code>long long</code> representing the number of milliseconds since the <a>Unix Epoch</a>;
-		this is equivalent to <code class="lang-javascript">Date.now()</code> [[ECMA-262]].
-		If a {{File}} object is created using a constructor,
-		further normative conditions for this attribute are found in [[#file-constructor]].
+  <dt><dfn>lastModified</dfn>
+  <dd>The last modified date of the file.
+    On getting, if user agents can make this information available,
+    this must return a <code>long long</code> set to the time the file was last modified
+    as the number of milliseconds since the <a>Unix Epoch</a>.
+    If the last modification date and time are not known,
+    the attribute must return the current date and time
+    as a <code>long long</code> representing the number of milliseconds since the <a>Unix Epoch</a>;
+    this is equivalent to <code class="lang-javascript">Date.now()</code> [[ECMA-262]].
+    If a {{File}} object is created using a constructor,
+    further normative conditions for this attribute are found in [[#file-constructor]].
 </dl>
 
 The {{File}} interface is available on objects that expose an attribute of type {{FileList}};
@@ -812,22 +817,22 @@ or firing an {{error!!event}} event
 with the {{error!!attribute}} attribute returning a {{NotFoundError}} {{DOMError}}.
 
 <div class="example">
-	In the examples below, metadata from a file object is displayed meaningfully, and a file object is created with a name and a last modified date.
+  In the examples below, metadata from a file object is displayed meaningfully, and a file object is created with a name and a last modified date.
 
-	<pre class="lang-javascript">
-	var file = document.getElementById("filePicker").files[0];
-	var date = new Date(file.lastModified);
-	println("You selected the file " + file.name + " which was modified on " + date.toDateString() + " .");
+  <pre class="lang-javascript">
+  var file = document.getElementById("filePicker").files[0];
+  var date = new Date(file.lastModified);
+  println("You selected the file " + file.name + " which was modified on " + date.toDateString() + " .");
 
-	...
+  ...
 
-	// Generate a file with a specific last modified date
+  // Generate a file with a specific last modified date
 
-	var d = new Date(2013, 12, 5, 16, 23, 45, 600);
-	var generatedFile = new File(["Rough Draft ...."], "Draft1.txt", {type: "text/plain"; lastModified: d})
+  var d = new Date(2013, 12, 5, 16, 23, 45, 600);
+  var generatedFile = new File(["Rough Draft ...."], "Draft1.txt", {type: "text/plain"; lastModified: d})
 
-	...
-	</pre>
+  ...
+  </pre>
 </div>
 
 <h2 id="filelists">
@@ -844,55 +849,55 @@ This interface is a list of {{File}} objects.
 <pre class="idl">
 [Exposed=(Window,Worker)]
 interface FileList {
-	getter File? item(unsigned long index);
-	readonly attribute unsigned long length;
+  getter File? item(unsigned long index);
+  readonly attribute unsigned long length;
 };
 </pre>
 
 <div class="example">
-	Sample usage typically involves DOM access to the <code>&lt;input type="file"></code> element within a form,
-	and then accessing selected files.
+  Sample usage typically involves DOM access to the <code>&lt;input type="file"></code> element within a form,
+  and then accessing selected files.
 
-	<pre class="lang-javascript">
-		// uploadData is a form element
-		// fileChooser is input element of type 'file'
-		var file = document.forms['uploadData']['fileChooser'].files[0];
+  <pre class="lang-javascript">
+    // uploadData is a form element
+    // fileChooser is input element of type 'file'
+    var file = document.forms['uploadData']['fileChooser'].files[0];
 
-		// alternative syntax can be
-		// var file = document.forms['uploadData']['fileChooser'].files.item(0);
+    // alternative syntax can be
+    // var file = document.forms['uploadData']['fileChooser'].files.item(0);
 
-		if(file)
-		{
-			// Perform file ops
-		}
-	</pre>
+    if(file)
+    {
+      // Perform file ops
+    }
+  </pre>
 </div>
 
 <h3 id="attributes-filelist">
 Attributes</h3>
 
-	<dl>
-		<dt><dfn attribute for=FileList>length</dfn>
-		<dd>must return the number of files in the {{FileList}} object.
-			If there are no files, this attribute must return 0.
-	</dl>
+  <dl>
+    <dt><dfn attribute for=FileList>length</dfn>
+    <dd>must return the number of files in the {{FileList}} object.
+      If there are no files, this attribute must return 0.
+  </dl>
 
 <h3 id="filelist-methods-params">
 Methods and Parameters</h3>
 
 <dl>
-	<dt><dfn method for=FileList>item(index)</dfn>
-	<dd>must return the <em>indexth</em> {{File}} object in the {{FileList}}.
-		If there is no <em>indexth</em> {{File}} object in the {{FileList}},
-		then this method must return <code>null</code>.
+  <dt><dfn method for=FileList>item(index)</dfn>
+  <dd>must return the <em>indexth</em> {{File}} object in the {{FileList}}.
+    If there is no <em>indexth</em> {{File}} object in the {{FileList}},
+    then this method must return <code>null</code>.
 
-		<dfn argument for="FileList/item()">index</dfn> must be treated by user agents
-		as value for the position of a {{File}} object in the {{FileList}},
-		with 0 representing the first file.
-		<a>Supported property indices</a> are the numbers in the range zero
-		to one less than the number of {{File}} objects represented by the {{FileList}} object.
-		If there are no such {{File}} objects,
-		then there are no supported property indices.
+    <dfn argument for="FileList/item(index)">index</dfn> must be treated by user agents
+    as value for the position of a {{File}} object in the {{FileList}},
+    with 0 representing the first file.
+    <a>Supported property indices</a> are the numbers in the range zero
+    to one less than the number of {{File}} objects represented by the {{FileList}} object.
+    If there are no such {{File}} objects,
+    then there are no supported property indices.
 </dl>
 
 Note: The {{HTMLInputElement}} interface has a readonly attribute of type {{FileList}},
@@ -925,76 +930,76 @@ To perform a <dfn id="readOperation">read operation</dfn> on a {{Blob}} and the 
 run the following steps:
 
 1. Let <var>s</var> be a a new <a>body</a>,
-	<var>b</var> be the {{Blob}} to be read from,
-	and <var>bytes</var> initially set to an empty byte sequence.
-	Set the <var>length</var> on <var>s</var> to the {{Blob/size}} of <var>b</var>.
-	While there are still bytes to be read in <var>b</var>,
-	perform the following substeps:
+  <var>b</var> be the {{Blob}} to be read from,
+  and <var>bytes</var> initially set to an empty byte sequence.
+  Set the <var>length</var> on <var>s</var> to the {{Blob/size}} of <var>b</var>.
+  While there are still bytes to be read in <var>b</var>,
+  perform the following substeps:
 
-	Note: The algorithm assumes that invoking methods have checked for <a>readability state</a>.
-	A {{Blob}} in the <a for="Blob/readability state">CLOSED</code></a> state must not have a <a>read operation</a> called on it.
+  Note: The algorithm assumes that invoking methods have checked for <a>readability state</a>.
+  A {{Blob}} in the <a for="Blob/readability state"><code>CLOSED</code></a> state must not have a <a>read operation</a> called on it.
 
-	1. If the <a>synchronous flag</a> is set, follow the steps below:
-		1. Let <var>bytes</var> be the byte sequence that results from reading a <a>chunk</a> from <var>b</var>.
-			If a <a>file read error</a> occurs reading a <a>chunk</a> from <var>b</var>,
-			return <var>s</var> with the error flag set,
-			along with a <a>failure reason</a>,
-			and <a>terminate this algorithm</a>.
+  1. If the <a>synchronous flag</a> is set, follow the steps below:
+    1. Let <var>bytes</var> be the byte sequence that results from reading a <a>chunk</a> from <var>b</var>.
+      If a <a>file read error</a> occurs reading a <a>chunk</a> from <var>b</var>,
+      return <var>s</var> with the error flag set,
+      along with a <a>failure reason</a>,
+      and <a>terminate this algorithm</a>.
 
-			Note: Along with returning failure,
-			the synchronous part of this algorithm must return the <a>failure reason</a> that occurred
-			for <a lt="throw">throwing an exception</a> by synchronous methods
-			that invoke this algorithm with the <a>synchronous flag</a> set.
+      Note: Along with returning failure,
+      the synchronous part of this algorithm must return the <a>failure reason</a> that occurred
+      for <a lt="throw">throwing an exception</a> by synchronous methods
+      that invoke this algorithm with the <a>synchronous flag</a> set.
 
-		2. If there are no errors,
-			push <var>bytes</var> to <var>s</var>,
-			and increment <var>s</var>'s <var>transmitted</var> [[Fetch]]
-			by the number of bytes in <var>bytes</var>.
-			Reset <var>bytes</var> to the empty byte sequence
-			and continue reading <a>chunk</a>s as above.
+    2. If there are no errors,
+      push <var>bytes</var> to <var>s</var>,
+      and increment <var>s</var>'s <var>transmitted</var> [[Fetch]]
+      by the number of bytes in <var>bytes</var>.
+      Reset <var>bytes</var> to the empty byte sequence
+      and continue reading <a>chunk</a>s as above.
 
-		3. When all the bytes of <var>b</var> have been read into <var>s</var>,
-			return <var>s</var>
-			and <a>terminate this algorithm</a>.
+    3. When all the bytes of <var>b</var> have been read into <var>s</var>,
+      return <var>s</var>
+      and <a>terminate this algorithm</a>.
 
-	2. Otherwise, the <a>synchronous flag</a> is unset.
-		Return <var>s</var> and process the rest of this algorithm asynchronously.
+  2. Otherwise, the <a>synchronous flag</a> is unset.
+    Return <var>s</var> and process the rest of this algorithm asynchronously.
 
-	3. Let <var>bytes</var> be the byte sequence that results from reading a <a>chunk</a> from <var>b</var>.
-		If a <a>file read error</a> occurs reading a <a>chunk</a> from <var>b</var>,
-		set the error flag on <var>s</var>,
-		and <a>terminate this algorithm</a> with a <a>failure reason</a>.
+  3. Let <var>bytes</var> be the byte sequence that results from reading a <a>chunk</a> from <var>b</var>.
+    If a <a>file read error</a> occurs reading a <a>chunk</a> from <var>b</var>,
+    set the error flag on <var>s</var>,
+    and <a>terminate this algorithm</a> with a <a>failure reason</a>.
 
-		Note: The asynchronous part of this algorithm must signal the <a>failure reason</a> that occurred
-		for asynchronous error reporting by methods expecting <var>s</var>
-		and which invoke this algorithm with the <a>synchronous flag</a> unset.
+    Note: The asynchronous part of this algorithm must signal the <a>failure reason</a> that occurred
+    for asynchronous error reporting by methods expecting <var>s</var>
+    and which invoke this algorithm with the <a>synchronous flag</a> unset.
 
-	4. If no <a>file read error</a> occurs,
-		push <var>bytes</var> to <var>s</var>,
-		and increment <var>s</var>'s <var>transmitted</var> [[Fetch]]
-		by the number of bytes in <var>bytes</var>.
-		Reset <var>bytes</var> to the empty byte sequence
-		and continue reading <a>chunk</a>s as above.
+  4. If no <a>file read error</a> occurs,
+    push <var>bytes</var> to <var>s</var>,
+    and increment <var>s</var>'s <var>transmitted</var> [[Fetch]]
+    by the number of bytes in <var>bytes</var>.
+    Reset <var>bytes</var> to the empty byte sequence
+    and continue reading <a>chunk</a>s as above.
 
 To perform an <dfn id="task-read-operation">annotated task read operation</dfn>
 on a {{Blob}} <var>b</var>,
 perform the steps below:
 
 1. Perform a <a>read operation</a> on <var>b</var> with the <a>synchronous flag</a> unset,
-	along with the additional steps below.
+  along with the additional steps below.
 2. If the <a>read operation</a> terminates with a <a>failure reason</a>,
-	<a>queue a task</a> to <dfn id="process-read-error">process read error</dfn> with the <a>failure reason</a>
-	and terminate this algorithm.
+  <a>queue a task</a> to <dfn id="process-read-error">process read error</dfn> with the <a>failure reason</a>
+  and terminate this algorithm.
 3. When the first <a>chunk</a> is being pushed to the <a>body</a> <var>s</var> during the <a>read operation</a>,
-	<a>queue a task</a> to <dfn id="process-read">process read</dfn>.
+  <a>queue a task</a> to <dfn id="process-read">process read</dfn>.
 4. Once the <a>body</a> <var>s</var> from the <a>read operation</a> has at least one <a>chunk</a> read into it,
-	or there are no <a>chunk</a>s left to read from <var>b</var>,
-	<a>queue a task</a> to <dfn id="process-read-data">process read data</dfn>.
-	Keep <a lt="queue a task">queuing tasks</a> to <a>process read data</a>
-	for every <a>chunk</a> read or every 50ms,
-	whichever is <em>least frequent</em>.
+  or there are no <a>chunk</a>s left to read from <var>b</var>,
+  <a>queue a task</a> to <dfn id="process-read-data">process read data</dfn>.
+  Keep <a lt="queue a task">queuing tasks</a> to <a>process read data</a>
+  for every <a>chunk</a> read or every 50ms,
+  whichever is <em>least frequent</em>.
 5. When all of the <a>chunk</a>s from <var>b</var> are read into the <a>body</a> <var>s</var> from the <a>read operation</a>,
-	<a>queue a task</a> to <dfn id="process-read-EOF">process read EOF</dfn>.
+  <a>queue a task</a> to <dfn id="process-read-EOF">process read EOF</dfn>.
 
 Use the <a>file reading task source</a> for all these tasks.
 
@@ -1014,33 +1019,33 @@ The FileReader API</h3>
 [Constructor, Exposed=(Window,Worker)]
 interface FileReader: EventTarget {
 
-	// async read methods
-	void readAsArrayBuffer(Blob blob);
-	void readAsText(Blob blob, optional DOMString label);
-	void readAsDataURL(Blob blob);
+  // async read methods
+  void readAsArrayBuffer(Blob blob);
+  void readAsText(Blob blob, optional DOMString label);
+  void readAsDataURL(Blob blob);
 
-	void abort();
+  void abort();
 
-	// states
-	const unsigned short EMPTY = 0;
-	const unsigned short LOADING = 1;
-	const unsigned short DONE = 2;
+  // states
+  const unsigned short EMPTY = 0;
+  const unsigned short LOADING = 1;
+  const unsigned short DONE = 2;
 
 
-	readonly attribute unsigned short readyState;
+  readonly attribute unsigned short readyState;
 
-	// File or Blob data
-	readonly attribute (DOMString or ArrayBuffer)? result;
+  // File or Blob data
+  readonly attribute (DOMString or ArrayBuffer)? result;
 
-	readonly attribute DOMError? error;
+  readonly attribute DOMError? error;
 
-	// event handler content attributes
-	attribute EventHandler onloadstart;
-	attribute EventHandler onprogress;
-	attribute EventHandler onload;
-	attribute EventHandler onabort;
-	attribute EventHandler onerror;
-	attribute EventHandler onloadend;
+  // event handler content attributes
+  attribute EventHandler onloadstart;
+  attribute EventHandler onprogress;
+  attribute EventHandler onload;
+  attribute EventHandler onabort;
+  attribute EventHandler onerror;
+  attribute EventHandler onloadend;
 
 };
 </pre>
@@ -1062,29 +1067,29 @@ The following are the <a>event handler content attributes</a>
 that user agents must support on {{FileReader}} as DOM attributes:
 
 <table>
-	<thead>
-		<tr>
-			<th><a>event handler content attribute</a>
-			<th><a>event handler event type</a>
-	<tbody dfn-type=attribute dfn-for=FileReader>
-		<tr>
-			<td><dfn>onloadstart</dfn>
-			<td>{{loadstart}}
-		<tr>
-			<td><dfn>onprogress</dfn>
-			<td>{{progress}}
-		<tr>
-			<td><dfn>onabort</dfn>
-			<td>{{abort}}
-		<tr>
-			<td><dfn>onerror</dfn>
-			<td>{{error!!event}}
-		<tr>
-			<td><dfn>onload</dfn>
-			<td>{{load}}
-		<tr>
-			<td><dfn>onloadend</dfn>
-			<td>{{loadend}}
+  <thead>
+    <tr>
+      <th><a>event handler content attribute</a>
+      <th><a>event handler event type</a>
+  <tbody dfn-type=attribute dfn-for=FileReader>
+    <tr>
+      <td><dfn>onloadstart</dfn>
+      <td>{{loadstart}}
+    <tr>
+      <td><dfn>onprogress</dfn>
+      <td>{{progress}}
+    <tr>
+      <td><dfn>onabort</dfn>
+      <td>{{abort}}
+    <tr>
+      <td><dfn>onerror</dfn>
+      <td>{{error!!event}}
+    <tr>
+      <td><dfn>onload</dfn>
+      <td>{{load}}
+    <tr>
+      <td><dfn>onloadend</dfn>
+      <td>{{loadend}}
 </table>
 
 <h4 id="blobreader-state">
@@ -1097,23 +1102,23 @@ must return the current state,
 which must be one of the following values:
 
 <dl dfn-type=const dfn-for=FileReader>
-	<dt><dfn>EMPTY</dfn> (numeric value 0)
-	<dd>The {{FileReader}} object has been constructed,
-		and there are no pending reads.
-		None of the <a>read methods</a> have been called.
-		This is the default state of a newly minted {{FileReader}} object,
-		until one of the <a>read methods</a> have been called on it.
-	<dt><dfn>LOADING</dfn> (numeric value 1)
-	<dd>A {{File}} or {{Blob}} is being read.
-		One of the <a>read methods</a> is being processed,
-		and no error has occurred during the read.
-	<dt><dfn>DONE</dfn> (numeric value 2)
-	<dd>The entire {{File}} or {{Blob}} has been read into memory,
-		OR a <a>file read error</a> occurred,
-		OR the read was aborted using {{abort()}}.
-		The {{FileReader}} is no longer reading a {{File}} or {{Blob}}.
-		If {{FileReader/readyState}} is set to {{FileReader/DONE}}
-		it means at least one of the <a>read methods</a> have been called on this {{FileReader}}.
+  <dt><dfn>EMPTY</dfn> (numeric value 0)
+  <dd>The {{FileReader}} object has been constructed,
+    and there are no pending reads.
+    None of the <a>read methods</a> have been called.
+    This is the default state of a newly minted {{FileReader}} object,
+    until one of the <a>read methods</a> have been called on it.
+  <dt><dfn>LOADING</dfn> (numeric value 1)
+  <dd>A {{File}} or {{Blob}} is being read.
+    One of the <a>read methods</a> is being processed,
+    and no error has occurred during the read.
+  <dt><dfn>DONE</dfn> (numeric value 2)
+  <dd>The entire {{File}} or {{Blob}} has been read into memory,
+    OR a <a>file read error</a> occurred,
+    OR the read was aborted using {{abort()}}.
+    The {{FileReader}} is no longer reading a {{File}} or {{Blob}}.
+    If {{FileReader/readyState}} is set to {{FileReader/DONE}}
+    it means at least one of the <a>read methods</a> have been called on this {{FileReader}}.
 </dl>
 
 <h4 id="reading-a-file">
@@ -1127,8 +1132,8 @@ user agents must throw an {{InvalidStateError}} on any of the read methods that 
 when {{FileReader/readyState}} = {{FileReader/LOADING}}.
 
 ({{FileReaderSync}} makes available three <a>synchronous read methods</a>.
-	Collectively, the sync and async read methods of {{FileReader}} and {{FileReaderSync}}
-	are referred to as just <dfn lt="read method">read methods</dfn>.)
+  Collectively, the sync and async read methods of {{FileReader}} and {{FileReaderSync}}
+  are referred to as just <dfn lt="read method">read methods</dfn>.)
 
 <h5 id="filedata-attr">
 The {{FileReader/result}} attribute</h5>
@@ -1142,24 +1147,24 @@ The list below is normative for the {{FileReader/result}} attribute
 and is the conformance criteria for this attribute:
 
 * On getting,
-	if the {{FileReader/readyState}} is {{FileReader/EMPTY}}
-	(no read method has been called)
-	then the {{FileReader/result}} attribute must return <code>null</code>.
+  if the {{FileReader/readyState}} is {{FileReader/EMPTY}}
+  (no read method has been called)
+  then the {{FileReader/result}} attribute must return <code>null</code>.
 * On getting,
-	if an error in reading the {{File}} or {{Blob}} has occurred
-	(using <em>any</em> <a>read method</a>)
-	then the {{FileReader/result}} attribute must return <code>null</code>.
+  if an error in reading the {{File}} or {{Blob}} has occurred
+  (using <em>any</em> <a>read method</a>)
+  then the {{FileReader/result}} attribute must return <code>null</code>.
 * On getting, if the {{FileReader/readAsDataURL()}} <a>read method</a> is used,
-	the {{FileReader/result}} attribute must return a {{DOMString}}
-	that is a Data URL [[RFC2397]] encoding of the {{File}} or {{Blob}}'s data.
+  the {{FileReader/result}} attribute must return a {{DOMString}}
+  that is a Data URL [[!RFC2397]] encoding of the {{File}} or {{Blob}}'s data.
 * On getting, if the {{FileReader/readAsText()}} <a>read method</a> is called
-	and no error in reading the {{File}} or {{Blob}} has occurred,
-	then the {{FileReader/result}} attribute must return a string
-	representing the {{File}} or {{Blob}}'s data as a text string,
-	and should decode the string into memory in the format specified by the <a>encoding determination</a> as a {{DOMString}}.
+  and no error in reading the {{File}} or {{Blob}} has occurred,
+  then the {{FileReader/result}} attribute must return a string
+  representing the {{File}} or {{Blob}}'s data as a text string,
+  and should decode the string into memory in the format specified by the <a>encoding determination</a> as a {{DOMString}}.
 * On getting, if the {{FileReader/readAsArrayBuffer()}} <a>read method</a> is called
-	and no error in reading the {{File}} or {{Blob}} has occurred,
-	then the {{FileReader/result}} attribute must return an {{ArrayBuffer}} object.
+  and no error in reading the {{File}} or {{Blob}} has occurred,
+  then the {{FileReader/result}} attribute must return an {{ArrayBuffer}} object.
 
 <h5 id="readAsDataURL">
 The {{FileReader/readAsDataURL()}} method</h5>
@@ -1168,41 +1173,41 @@ When the <dfn method for=FileReader>readAsDataURL(blob)</dfn> method is called,
 the user agent must run the steps below.
 
 1. If {{FileReader/readyState}} = {{FileReader/LOADING}}
-	throw an {{InvalidStateError}} exception and <a>terminate this algorithm</a>.
+  throw an {{InvalidStateError}} exception and <a>terminate this algorithm</a>.
 2. If the <code>blob</code> is in the <a for="Blob/readability state">CLOSED</a> <a>readability state</a>,
-	set the {{error!!attribute}} attribute of the <a>context object</a>
-	to return an {{InvalidStateError}} exception
-	and <a>fire a progress event</a> called {{error!!event}}
-	at the <a>context object</a>.
-	<a>Terminate this algorithm</a>.
+  set the {{error!!attribute}} attribute of the <a>context object</a>
+  to return an {{InvalidStateError}} exception
+  and <a>fire a progress event</a> called {{error!!event}}
+  at the <a>context object</a>.
+  <a>Terminate this algorithm</a>.
 3. Otherwise set {{FileReader/readyState}} to {{FileReader/LOADING}}.
 4. Initiate an <a>annotated task read operation</a> using the <code>blob</code> argument as <var>input</var>
-	and handle <a lt="queue a task">tasks queued</a> on the <a>file reading task source</a> per below.
+  and handle <a lt="queue a task">tasks queued</a> on the <a>file reading task source</a> per below.
 5. To <a>process read error</a> with a <a>failure reason</a>,
-	proceed to [[#error-steps]].
+  proceed to [[#error-steps]].
 6. To <a>process read</a> <a>fire a progress event</a> called {{loadstart}} at the <a>context object</a>.
 7. To <a>process read data</a> <a>fire a progress event</a> called {{progress}} at the <a>context object</a>.
 8. To <a>process read EOF</a> run these substeps:
-	1. Set {{FileReader/readyState}} to {{FileReader/DONE}}.
-	2. Set the {{FileReader/result}} attribute to the <a>body</a> returned by the <a>read operation</a> as a DataURL [[RFC2397]];
-		on getting, the {{FileReader/result}} attribute returns the <code>blob</code> as a Data URL [[RFC2397]].
+  1. Set {{FileReader/readyState}} to {{FileReader/DONE}}.
+  2. Set the {{FileReader/result}} attribute to the <a>body</a> returned by the <a>read operation</a> as a DataURL [[!RFC2397]];
+    on getting, the {{FileReader/result}} attribute returns the <code>blob</code> as a Data URL [[!RFC2397]].
 
-		* Use the <code>blob</code>'s {{Blob/type}} attribute as part of the Data URL if it is available
-			in keeping with the Data URL specification [[RFC2397]].
-		* If the {{Blob/type}} attribute is not available on the <code>blob</code> return a Data URL without a media-type. [[RFC2397]].
-			Data URLs that do not have media-types [[RFC2046]] must be treated as plain text by conforming user agents. [[RFC2397]].
-	3. <a>Fire a progress event</a> called {{load}} at the <a>context object</a>.
-	4. Unless {{FileReader/readyState}} is {{FileReader/LOADING}}
-		<a>fire a progress event</a> called {{loadend}} at the <a>context object</a>.
-		If {{FileReader/readyState}} is {{FileReader/LOADING}} do NOT fire {{loadend}} at the <a>context object</a>.
+    * Use the <code>blob</code>'s {{Blob/type}} attribute as part of the Data URL if it is available
+      in keeping with the Data URL specification [[!RFC2397]].
+    * If the {{Blob/type}} attribute is not available on the <code>blob</code> return a Data URL without a media-type. [[!RFC2397]].
+      Data URLs that do not have media-types [[RFC2046]] must be treated as plain text by conforming user agents. [[!RFC2397]].
+  3. <a>Fire a progress event</a> called {{load}} at the <a>context object</a>.
+  4. Unless {{FileReader/readyState}} is {{FileReader/LOADING}}
+    <a>fire a progress event</a> called {{loadend}} at the <a>context object</a>.
+    If {{FileReader/readyState}} is {{FileReader/LOADING}} do NOT fire {{loadend}} at the <a>context object</a>.
 9. <a>Terminate this algorithm</a>.
 
 <h5 id="readAsText">
 The {{FileReader/readAsText()}} method</h5>
 
 The {{FileReader/readAsText()}} method can be called with an optional parameter,
-<dfn argument for="FileReader/readAsText(blob, label)">label</dfn>,
-which is a {{DOMString}} argument that represents the label of an encoding [[Encoding Specification]];
+<dfn argument for="FileReader/readAsText(blob, label), FileReaderSync/readAsText(blob, label)" id="dfn-label">label</dfn>,
+which is a {{DOMString}} argument that represents the label of an encoding [[!Encoding]];
 if provided, it must be used as part of the <a>encoding determination</a> used when processing this method call.
 
 When the <dfn method for=FileReader>readAsText(blob, optional label)</dfn> method is called,
@@ -1210,26 +1215,26 @@ the user agent must run the steps below.
 
 1. If {{FileReader/readyState}} = {{FileReader/LOADING}} throw an {{InvalidStateError}} and <a>terminate this algorithm</a>.
 2. If the <code>blob</code> is in the <a for="Blob/readability state">CLOSED</a> <a>readability state</a>,
-	set the {{error!!attribute}} attribute of the <a>context object</a>
-	to return an {{InvalidStateError}} exception
-	and <a>fire a progress event</a> called {{error!!event}} at the <a>context object</a>.
-	<a>Terminate this algorithm</a>.
+  set the {{error!!attribute}} attribute of the <a>context object</a>
+  to return an {{InvalidStateError}} exception
+  and <a>fire a progress event</a> called {{error!!event}} at the <a>context object</a>.
+  <a>Terminate this algorithm</a>.
 3. Otherwise set {{FileReader/readyState}} to {{FileReader/LOADING}}.
 4. Initiate an <a>annotated task read operation</a> using the <code>blob</code> argument as <var>input</var>
-	and handle <a lt="queue a task">tasks queued</a> on the <a>file reading task source</a> per below.
+  and handle <a lt="queue a task">tasks queued</a> on the <a>file reading task source</a> per below.
 5. To <a>process read error</a> with a <a>failure reason</a>,
-	proceed to the [[#error-steps]].
+  proceed to the [[#error-steps]].
 6. To <a>process read</a> <a>fire a progress event</a> called {{loadstart}} at the <a>context object</a>.
 7. To <a>process read data</a> <a>fire a progress event</a> called {{progress}} at the <a>context object</a>.
 8. To <a>process read EOF</a> run these substeps:
-	1. Set {{FileReader/readyState}} to {{FileReader/DONE}}
-	2. Set the {{FileReader/result}} attribute to the <a>body</a> returned by the <a>read operation</a>,
-		represented as a string in a format determined by the <a>encoding determination</a>.
-	3. <a>Fire a progress event</a> called {{load}} at the <a>context object</a>.
-	4. Unless {{FileReader/readyState}} is {{FileReader/LOADING}}
-		<a>fire a progress event</a> called {{loadend}} at the <a>context object</a>.
-		If {{FileReader/readyState}} is {{FileReader/LOADING}}
-		do NOT fire {{loadend}} at the <a>context object</a>.
+  1. Set {{FileReader/readyState}} to {{FileReader/DONE}}
+  2. Set the {{FileReader/result}} attribute to the <a>body</a> returned by the <a>read operation</a>,
+    represented as a string in a format determined by the <a>encoding determination</a>.
+  3. <a>Fire a progress event</a> called {{load}} at the <a>context object</a>.
+  4. Unless {{FileReader/readyState}} is {{FileReader/LOADING}}
+    <a>fire a progress event</a> called {{loadend}} at the <a>context object</a>.
+    If {{FileReader/readyState}} is {{FileReader/LOADING}}
+    do NOT fire {{loadend}} at the <a>context object</a>.
 9. <a>Terminate this algorithm</a>.
 
 <h5 id="readAsArrayBuffer">
@@ -1240,25 +1245,25 @@ the user agent must run the steps below.
 
 1. If {{FileReader/readyState}} = {{FileReader/LOADING}} throw an {{InvalidStateError}} exception and <a>terminate this algorithm</a>.
 2. If the <code>blob</code> is in the <a for="Blob/readability state">CLOSED</a> <a>readability state</a>,
-	set the {{error!!attribute}} attribute of the <a>context object</a>
-	to return an {{InvalidStateError}} exception
-	and <a>fire a progress event</a> called {{error!!event}} at the <a>context object</a>.
-	<a>Terminate this algorithm</a>.
+  set the {{error!!attribute}} attribute of the <a>context object</a>
+  to return an {{InvalidStateError}} exception
+  and <a>fire a progress event</a> called {{error!!event}} at the <a>context object</a>.
+  <a>Terminate this algorithm</a>.
 3. Otherwise set {{FileReader/readyState}} to {{FileReader/LOADING}}.
 4. Initiate an <a>annotated task read operation</a> using the <code>blob</code> argument as <var>input</var>
-	and handle <a lt="queue a task">tasks queued</a> on the <a>file reading task source</a> per below.
+  and handle <a lt="queue a task">tasks queued</a> on the <a>file reading task source</a> per below.
 5. To <a>process read error</a> with a <a>failure reason</a>,
-	proceed to the [[#error-steps]].
+  proceed to the [[#error-steps]].
 6. To <a>process read</a> <a>fire a progress event</a> called {{loadstart}} at the <a>context object</a>.
 7. To <a>process read data</a> <a>fire a progress event</a> called {{progress}} at the <a>context object</a>.
 8. To <a>process read EOF</a> run these substeps:
-	1. Set {{FileReader/readyState}} to {{FileReader/DONE}}
-	2. Set the {{FileReader/result}} attribute to the <a>body</a> returned by the <a>read operation</a> as an {{ArrayBuffer}} object.
-	3. <a>Fire a progress event</a> called {{load}} at the <a>context object</a>.
-	4. Unless {{FileReader/readyState}} is {{FileReader/LOADING}}
-		<a>fire a progress event</a> called {{loadend}} at the <a>context object</a>.
-		If {{FileReader/readyState}} is {{FileReader/LOADING}}
-		do NOT fire {{loadend}} at the <a>context object</a>.
+  1. Set {{FileReader/readyState}} to {{FileReader/DONE}}
+  2. Set the {{FileReader/result}} attribute to the <a>body</a> returned by the <a>read operation</a> as an {{ArrayBuffer}} object.
+  3. <a>Fire a progress event</a> called {{load}} at the <a>context object</a>.
+  4. Unless {{FileReader/readyState}} is {{FileReader/LOADING}}
+    <a>fire a progress event</a> called {{loadend}} at the <a>context object</a>.
+    If {{FileReader/readyState}} is {{FileReader/LOADING}}
+    do NOT fire {{loadend}} at the <a>context object</a>.
 9. <a>Terminate this algorithm</a>.
 
 <h5 id="error-steps">
@@ -1267,15 +1272,15 @@ Error Steps</h5>
 These error steps are to <a>process read error</a> with a <a>failure reason</a>.
 
 1. Set the <a>context object</a>'s {{FileReader/readyState}} to {{FileReader/DONE}}
-	and {{FileReader/result}} to null if it is not already set to null.
+  and {{FileReader/result}} to null if it is not already set to null.
 2. Set the {{error!!attribute}} attribute on the <a>context object</a>;
-	on getting, the {{error!!attribute}} attribute must be a a {{DOMError}} object
-	that corresponds to the <a>failure reason</a>.
-	<a>Fire a progress event</a> called {{error!!event}} at the <a>context object</a>.
+  on getting, the {{error!!attribute}} attribute must be a a {{DOMError}} object
+  that corresponds to the <a>failure reason</a>.
+  <a>Fire a progress event</a> called {{error!!event}} at the <a>context object</a>.
 3. Unless {{FileReader/readyState}} is {{FileReader/LOADING}},
-	<a>fire a progress event</a> called {{loadend}} at the <a>context object</a>.
-	If {{FileReader/readyState}} is {{FileReader/LOADING}}
-	do NOT fire {{loadend}} at the <a>context object</a>.
+  <a>fire a progress event</a> called {{loadend}} at the <a>context object</a>.
+  If {{FileReader/readyState}} is {{FileReader/LOADING}}
+  do NOT fire {{loadend}} at the <a>context object</a>.
 4. <a lt="terminate this algorithm">Terminate the algorithm</a> for any <a>read method</a>.
 
 <h5 id="abort">
@@ -1285,15 +1290,15 @@ When the <dfn method for=FileReader>abort()</dfn> method is called,
 the user agent must run the steps below:
 
 1. If {{FileReader/readyState}} = {{FileReader/EMPTY}}
-	or if {{FileReader/readyState}} = {{FileReader/DONE}}
-	set {{FileReader/result}} to <code>null</code>
-	and <a>terminate this algorithm</a>.
+  or if {{FileReader/readyState}} = {{FileReader/DONE}}
+  set {{FileReader/result}} to <code>null</code>
+  and <a>terminate this algorithm</a>.
 2. If {{FileReader/readyState}} = {{FileReader/LOADING}}
-	set {{FileReader/readyState}} to {{FileReader/DONE}}
-	and {{FileReader/result}} to <code>null</code>.
+  set {{FileReader/readyState}} to {{FileReader/DONE}}
+  and {{FileReader/result}} to <code>null</code>.
 3. If there are any <a>tasks</a> from the <a>context object</a>
-	on the <a>file reading task source</a> in an affiliated <a lt="queue a task">task queue</a>,
-	then remove those <a>tasks</a> from that task queue.
+  on the <a>file reading task source</a> in an affiliated <a lt="queue a task">task queue</a>,
+  then remove those <a>tasks</a> from that task queue.
 4. <a lt="terminate an algorithm">Terminate the algorithm</a> for the <a>read method</a> being processed.
 5. <a>Fire a progress event</a> called {{abort}}.
 6. <a>Fire a progress event</a> called {{loadend}}.
@@ -1309,10 +1314,10 @@ take a {{Blob}} parameter.
 This section defines this parameter.
 
 <dl>
-	<dt><dfn argument for="FileReader/readAsArrayBuffer(blob), FileReader/readAsText(blob, label), FileReader/readAsDataURL(blob), URL/createObjectURL(blob), URL/createFor(blob)">blob</dfn>
-	<dd>This is a {{Blob}} argument
-		and must be a reference to a single {{File}} in a {{FileList}}
-		or a {{Blob}} argument not obtained from the underlying OS file system.
+  <dt><dfn id="dfn-fileBlob" argument for="FileReader/readAsArrayBuffer(blob), FileReader/readAsText(blob, label), FileReader/readAsDataURL(blob), URL/createObjectURL(blob), URL/createFor(blob), FileReaderSync/readAsArrayBuffer(blob), FileReaderSync/readAsText(blob, label), FileReaderSync/readAsDataURL(blob)">blob</dfn>
+  <dd>This is a {{Blob}} argument
+    and must be a reference to a single {{File}} in a {{FileList}}
+    or a {{Blob}} argument not obtained from the underlying OS file system.
 </dl>
 
 
@@ -1324,30 +1329,30 @@ the following <dfn id="encoding-determination">encoding determination</dfn> step
 
 1. Let <var>encoding</var> be null.
 2. If the {{FileReader/readAsText()/label}} argument is present when calling the method,
-	set <var>encoding</var> to the result of the <a>getting an encoding</a> from {{FileReader/readAsText()/label}}.
+  set <var>encoding</var> to the result of the <a>getting an encoding</a> from {{FileReader/readAsText()/label}}.
 3. If the <a>getting an encoding</a> steps above return failure,
-	then set <var>encoding</var> to null.
+  then set <var>encoding</var> to null.
 4. If <var>encoding</var> is null,
-	and the {{FileReader/readAsText()/blob}} argument's {{Blob/type}} attribute is present,
-	and it uses a Charset Parameter [[RFC2046]],
-	set <var>encoding</var> to the result of <a>getting an encoding</a>
-	for the portion of the Charset Parameter that is a <i>label</i> of an encoding.
+  and the {{FileReader/readAsText()/blob}} argument's {{Blob/type}} attribute is present,
+  and it uses a Charset Parameter [[RFC2046]],
+  set <var>encoding</var> to the result of <a>getting an encoding</a>
+  for the portion of the Charset Parameter that is a <i>label</i> of an encoding.
 
-	<div class="example">
-		If <code>blob</code> has a {{Blob/type}} attribute of <code>text/plain;charset=utf-8</code>
-		then <a>getting an encoding</a> is run using <a>utf-8</a> as the label.
-		Note that user agents must parse and extract the portion of the Charset Parameter that constitutes a <i>label</i> of an encoding.
-	</div>
+  <div class="example">
+    If <code>blob</code> has a {{Blob/type}} attribute of <code>text/plain;charset=utf-8</code>
+    then <a>getting an encoding</a> is run using <a>utf-8</a> as the label.
+    Note that user agents must parse and extract the portion of the Charset Parameter that constitutes a <i>label</i> of an encoding.
+  </div>
 5. If the <a>getting an encoding</a> steps above return failure,
-	then set <var>encoding</var> to null.
+  then set <var>encoding</var> to null.
 6. If <var>encoding</var> is null,
-	then set encoding to utf-8.
+  then set encoding to utf-8.
 7. <a>Decode</a> this <code>blob</code> using fallback encoding <var>encoding</var>,
-	and return the result.
-	On getting, the {{FileReader/result}} attribute of the {{FileReader}} object
-	returns a string in <var>encoding</var> format.
-	The synchronous {{FileReaderSync/readAsText()}} method of the {{FileReaderSync}} object
-	returns a string in <var>encoding</var> format.
+  and return the result.
+  On getting, the {{FileReader/result}} attribute of the {{FileReader}} object
+  returns a string in <var>encoding</var> format.
+  The synchronous {{FileReaderSync/readAsText()}} method of the {{FileReaderSync}} object
+  returns a string in <var>encoding</var> format.
 
 <h3 id="events">
 Events</h3>
@@ -1368,37 +1373,37 @@ Event Summary</h4>
 The following are the events that are <a lt="fire an event">fired</a> at {{FileReader}} objects.
 
 <table id="event-summary-table">
-	<thead>
-		<tr>
-			<th>Event name
-			<th>Interface
-			<th>Fired when…
-	<tbody dfn-type="event" dfn-for="FileReader">
-		<tr>
-			<td><dfn>loadstart</dfn>
-			<td>{{ProgressEvent}}
-			<td>When the read starts.
-		<tr>
-			<td><dfn>progress</dfn>
-			<td>{{ProgressEvent}}
-			<td>While reading (and decoding) <code>blob</code>
-		<tr>
-			<td><dfn>abort</dfn>
-			<td>{{ProgressEvent}}
-			<td>When the read has been aborted.
-				For instance, by invoking the {{FileReader/abort()}} method.
-		<tr>
-			<td><dfn>error</dfn>
-			<td>{{ProgressEvent}}
-			<td>When the read has failed (see <a>file read errors</a>).
-		<tr>
-			<td><dfn>load</dfn>
-			<td>{{ProgressEvent}}
-			<td>When the read has successfully completed.
-		<tr>
-			<td><dfn>loadend</dfn>
-			<td>{{ProgressEvent}}
-			<td>When the request has completed (either in success or failure).
+  <thead>
+    <tr>
+      <th>Event name
+      <th>Interface
+      <th>Fired when…
+  <tbody dfn-type="event" dfn-for="FileReader">
+    <tr>
+      <td><dfn>loadstart</dfn>
+      <td>{{ProgressEvent}}
+      <td>When the read starts.
+    <tr>
+      <td><dfn>progress</dfn>
+      <td>{{ProgressEvent}}
+      <td>While reading (and decoding) <code>blob</code>
+    <tr>
+      <td><dfn>abort</dfn>
+      <td>{{ProgressEvent}}
+      <td>When the read has been aborted.
+        For instance, by invoking the {{FileReader/abort()}} method.
+    <tr>
+      <td><dfn>error</dfn>
+      <td>{{ProgressEvent}}
+      <td>When the read has failed (see <a>file read errors</a>).
+    <tr>
+      <td><dfn>load</dfn>
+      <td>{{ProgressEvent}}
+      <td>When the read has successfully completed.
+    <tr>
+      <td><dfn>loadend</dfn>
+      <td>{{ProgressEvent}}
+      <td>When the request has completed (either in success or failure).
 </table>
 
 <h4 id="eventInvariants">
@@ -1410,40 +1415,40 @@ The following are invariants applicable to <a lt="fire an event">event firing</a
 for a given asynchronous <a>read method</a> in this specification:
 
 1. Once a {{loadstart}} has been fired,
-	a corresponding {{loadend}} fires at completion of the read,
-	UNLESS any of the following are true:
+  a corresponding {{loadend}} fires at completion of the read,
+  UNLESS any of the following are true:
 
-	* the <a>read method</a> has been cancelled using {{abort()}}
-		and a new <a>read method</a> has been invoked
-	* the event handler function for a {{load}} event initiates a new read
-	* the event handler function for a {{error!!event}} event initiates a new read.
+  * the <a>read method</a> has been cancelled using {{abort()}}
+    and a new <a>read method</a> has been invoked
+  * the event handler function for a {{load}} event initiates a new read
+  * the event handler function for a {{error!!event}} event initiates a new read.
 
-	Note: The events {{loadstart}} and {{loadend}} are not coupled in a one-to-one manner.
+  Note: The events {{loadstart}} and {{loadend}} are not coupled in a one-to-one manner.
 
-	<div class="example">
-		This example showcases "read-chaining":
-		initiating another read from within an event handler while the "first" read continues processing.
+  <div class="example">
+    This example showcases "read-chaining":
+    initiating another read from within an event handler while the "first" read continues processing.
 
-		<pre class="lang-javascript">
-			// In code of the sort...
-			reader.readAsText(file);
-			reader.onload = function(){reader.readAsText(alternateFile);}
+    <pre class="lang-javascript">
+      // In code of the sort...
+      reader.readAsText(file);
+      reader.onload = function(){reader.readAsText(alternateFile);}
 
-			.....
+      .....
 
-			//... the loadend event must not fire for the first read
+      //... the loadend event must not fire for the first read
 
-			reader.readAsText(file);
-			reader.abort();
-			reader.onabort = function(){reader.readAsText(updatedFile);}
+      reader.readAsText(file);
+      reader.abort();
+      reader.onabort = function(){reader.readAsText(updatedFile);}
 
-			//... the loadend event must not fire for the first read
-		</pre>
-	</div>
+      //... the loadend event must not fire for the first read
+    </pre>
+  </div>
 2. One {{progress}} event will fire when <code>blob</code> has been completely read into memory.
 3. No {{progress}} event fires before {{loadstart}}.
 4. No {{progress}} event fires after any one of {{abort}}, {{load}}, and {{error!!event}} have fired.
-	At most one of {{abort}}, {{load}}, and {{error!!event}} fire for a given read.
+  At most one of {{abort}}, {{load}}, and {{error!!event}} fire for a given read.
 5. No {{abort}}, {{load}}, or {{error!!event}} event fires after {{loadend}}.
 
 <h3 id="readingOnThreads">
@@ -1464,11 +1469,11 @@ This interface  provides methods to <dfn id="read-method-sync" lt="synchronous r
 <pre class="idl">
 [Constructor, Exposed=Worker]
 interface FileReaderSync {
-	// Synchronously return strings
+  // Synchronously return strings
 
-	ArrayBuffer readAsArrayBuffer(Blob blob);
-	DOMString readAsText(Blob blob, optional DOMString label);
-	DOMString readAsDataURL(Blob blob);
+  ArrayBuffer readAsArrayBuffer(Blob blob);
+  DOMString readAsText(Blob blob, optional DOMString label);
+  DOMString readAsDataURL(Blob blob);
 };
 </pre>
 
@@ -1488,19 +1493,19 @@ When the <dfn method for=FileReaderSync>readAsText(blob, optional label)</dfn> m
 the following steps must be followed:
 
 1. If {{FileReader/readyState}} = {{FileReader/LOADING}}
-	throw an {{InvalidStateError}} exception
-	and <a>terminate this algorithm</a>.
+  throw an {{InvalidStateError}} exception
+  and <a>terminate this algorithm</a>.
 2. If the <code>blob</code> has been closed through the {{Blob/close()}} method,
-	throw an {{InvalidStateError}} exception
-	and <a>terminate this algorithm</a>.
+  throw an {{InvalidStateError}} exception
+  and <a>terminate this algorithm</a>.
 3. Otherwise, initiate a <a>read operation</a> using the <code>blob</code> argument,
-	and with the <a>synchronous flag</a> <em>set</em>.
-	If the read operation returns failure,
-	throw the appropriate exception as defined in [[#error-codes]].
-	<a>Terminate this algorithm</a>.
+  and with the <a>synchronous flag</a> <em>set</em>.
+  If the read operation returns failure,
+  throw the appropriate exception as defined in [[#error-codes]].
+  <a>Terminate this algorithm</a>.
 4. If no error has occurred,
-	return the <var>result</var> of the <a>read operation</a> represented as a string
-	in a format determined through the <a>encoding determination</a> algorithm.
+  return the <var>result</var> of the <a>read operation</a> represented as a string
+  in a format determined through the <a>encoding determination</a> algorithm.
 
 <h5 id="readAsDataURLSync-section">
 The {{FileReaderSync/readAsDataURL()}} method</h5>
@@ -1509,23 +1514,23 @@ When the <dfn method for=FileReaderSync>readAsDataURL(blob)</dfn> method is call
 the following steps must be followed:
 
 1. If {{FileReader/readyState}} = {{FileReader/LOADING}}
-	throw an {{InvalidStateError}} exception
-	and <a>terminate this algorithm</a>.
+  throw an {{InvalidStateError}} exception
+  and <a>terminate this algorithm</a>.
 2. If the <code>blob</code> has been closed through the {{Blob/close()}} method,
-	throw an {{InvalidStateError}} exception
-	and <a>terminate this algorithm</a>.
+  throw an {{InvalidStateError}} exception
+  and <a>terminate this algorithm</a>.
 3. Otherwise, initiate a <a>read operation</a> using the <code>blob</code> argument,
-	and with the <a>synchronous flag</a> <em>set</em>.
-	If the <a>read operation</a> returns failure,
-	throw the appropriate exception as defined in [[#error-codes]].
-	<a>Terminate this algorithm</a>.
+  and with the <a>synchronous flag</a> <em>set</em>.
+  If the <a>read operation</a> returns failure,
+  throw the appropriate exception as defined in [[#error-codes]].
+  <a>Terminate this algorithm</a>.
 4. If no error has occurred, return the <var>result</var> of the <a>read operation</a>
-	as a Data URL [[RFC2397]] subject to the considerations below:
+  as a Data URL [[!RFC2397]] subject to the considerations below:
 
-	* Use the <code>blob</code>'s {{Blob/type}} attribute as part of the Data URL if it is available
-		in keeping with the Data URL specification [[RFC2397]] .
-	* If the {{Blob/type}} attribute is not available on the <code>blob</code> return a Data URL without a media-type. [[RFC2397]].
-		Data URLs that do not have media-types [[RFC2046]] must be treated as plain text by conforming user agents. [[RFC2397]].
+  * Use the <code>blob</code>'s {{Blob/type}} attribute as part of the Data URL if it is available
+    in keeping with the Data URL specification [[!RFC2397]] .
+  * If the {{Blob/type}} attribute is not available on the <code>blob</code> return a Data URL without a media-type. [[!RFC2397]].
+    Data URLs that do not have media-types [[RFC2046]] must be treated as plain text by conforming user agents. [[!RFC2397]].
 
 <h5 id="readAsArrayBufferSyncSection">
 The {{FileReaderSync/readAsArrayBuffer()}} method</h5>
@@ -1534,16 +1539,16 @@ When the <dfn method for=FileReaderSync>readAsArrayBuffer(blob)</dfn> method is 
 the following steps must be followed:
 
 1. If {{FileReader/readyState}} = {{FileReader/LOADING}}
-	throw an {{InvalidStateError}} exception
-	and <a>terminate this algorithm</a>.
+  throw an {{InvalidStateError}} exception
+  and <a>terminate this algorithm</a>.
 2. If the <code>blob</code> has been closed through the {{Blob/close()}} method,
-	throw an {{InvalidStateError}} exception
-	and <a>terminate this algorithm</a>.
+  throw an {{InvalidStateError}} exception
+  and <a>terminate this algorithm</a>.
 3. Otherwise, initiate a <a>read operation</a> using the <code>blob</code> argument,
-	and with the <a>synchronous flag</a> <em>set</em>.
-	If the <a>read operation</a> returns failure,
-	throw the appropriate exception as defined in [[#error-codes]].
-	<a>Terminate this algorithm</a>.
+  and with the <a>synchronous flag</a> <em>set</em>.
+  If the <a>read operation</a> returns failure,
+  throw the appropriate exception as defined in [[#error-codes]].
+  <a>Terminate this algorithm</a>.
 4. If no error has occurred, return the <var>result</var> of the <a>read operation</a> as an {{ArrayBuffer}}.
 
 <h2 id="ErrorAndException">
@@ -1553,21 +1558,21 @@ Errors and Exceptions</h2>
 The list below of potential error conditions is <em>informative</em>.
 
 * The {{File}} or {{Blob}} being accessed may not exist
-	at the time one of the <a>asynchronous read methods</a> or <a>synchronous read methods</a> are called.
-	This may be due to it having been moved or deleted after a reference to it was acquired
-	(e.g. concurrent modification with another application).
-	See {{NotFoundError}}.
+  at the time one of the <a>asynchronous read methods</a> or <a>synchronous read methods</a> are called.
+  This may be due to it having been moved or deleted after a reference to it was acquired
+  (e.g. concurrent modification with another application).
+  See {{NotFoundError}}.
 * A {{File}} or {{Blob}} may be unreadable.
-	This may be due to permission problems that occur after a reference to a {{File}} or {{Blob}} has been acquired
-	(e.g. concurrent lock with another application).
-	Additionally, the <a>snapshot state</a> may have changed.
-	See {{NotReadableError}}.
+  This may be due to permission problems that occur after a reference to a {{File}} or {{Blob}} has been acquired
+  (e.g. concurrent lock with another application).
+  Additionally, the <a>snapshot state</a> may have changed.
+  See {{NotReadableError}}.
 * User agents MAY determine that some files are unsafe for use within Web applications.
-	A file may change on disk since the original file selection,
-	thus resulting in an invalid read.
-	Additionally, some file and directory structures may be considered restricted by the underlying filesystem;
-	attempts to read from them may be considered a security violation.
-	See [[#security-discussion]] and {{SecurityError}}.
+  A file may change on disk since the original file selection,
+  thus resulting in an invalid read.
+  Additionally, some file and directory structures may be considered restricted by the underlying filesystem;
+  attempts to read from them may be considered a security violation.
+  See [[#security-discussion]] and {{SecurityError}}.
 
 <h3 id="error-codes">
 Throwing an Exception or Returning an Error</h3>
@@ -1590,40 +1595,40 @@ if there has been an error owing to a particular <a>failure reason</a>,
 or otherwise return null.
 
 <table class='data'>
-	<thead>
-		<tr>
-			<th>Type
-			<th>Description and Failure Reason
-	<tbody dfn-type=exception>
-		<tr>
-			<td><dfn>NotFoundError</dfn>
-			<td>If the {{File}} or {{Blob}} resource could not be found at the time the read was processed,
-				this is the "NotFound" <a>failure reason</a>.
+  <thead>
+    <tr>
+      <th>Type
+      <th>Description and Failure Reason
+  <tbody dfn-type=exception>
+    <tr>
+      <td><dfn>NotFoundError</dfn>
+      <td>If the {{File}} or {{Blob}} resource could not be found at the time the read was processed,
+        this is the "NotFound" <a>failure reason</a>.
 
-				For asynchronous read methods the {{error!!attribute}} attribute must return a {{NotFoundError}} exception
-				and synchronous read methods must <a>throw</a> a {{NotFoundError}} exception.
-		<tr>
-			<td><dfn>SecurityError</dfn>
-			<td>If:
-				* it is determined that certain files are unsafe for access within a Web application, this is the "UnsafeFile" <a href="#failureReason">failure reason.</a>
-				* it is determined that too many read calls are being made on {{File}} or {{Blob}} resources, this is the "TooManyReads" <a>failure reason</a>.
+        For asynchronous read methods the {{error!!attribute}} attribute must return a {{NotFoundError}} exception
+        and synchronous read methods must <a>throw</a> a {{NotFoundError}} exception.
+    <tr>
+      <td><dfn>SecurityError</dfn>
+      <td>If:
+        * it is determined that certain files are unsafe for access within a Web application, this is the "UnsafeFile" <a href="#failureReason">failure reason.</a>
+        * it is determined that too many read calls are being made on {{File}} or {{Blob}} resources, this is the "TooManyReads" <a>failure reason</a>.
 
-				For asynchronous read methods the {{error!!attribute}} attribute may return a {{SecurityError}} exception
-				and synchronous read methods may <a>throw</a> a {{SecurityError}} exception.
+        For asynchronous read methods the {{error!!attribute}} attribute may return a {{SecurityError}} exception
+        and synchronous read methods may <a>throw</a> a {{SecurityError}} exception.
 
-				This is a security error to be used in situations not covered by any other <a>failure reason</a>.
-		<tr>
-			<td><dfn>NotReadableError</dfn>
-			<td>If:
-				* the <a>snapshot state</a> of a {{File}} or a {{Blob}} does not match the state of the underlying storage,
-					this is the "SnapshotState" <a>failure reason</a>.
-				* the {{File}} or {{Blob}} cannot be read,
-					typically due due to permission problems that occur after a <a>snapshot state</a> has been established
-					(e.g. concurrent lock on the underlying storage with another application)
-					then this is the "FileLock" <a>failure reason</a>.
+        This is a security error to be used in situations not covered by any other <a>failure reason</a>.
+    <tr>
+      <td><dfn>NotReadableError</dfn>
+      <td>If:
+        * the <a>snapshot state</a> of a {{File}} or a {{Blob}} does not match the state of the underlying storage,
+          this is the "SnapshotState" <a>failure reason</a>.
+        * the {{File}} or {{Blob}} cannot be read,
+          typically due due to permission problems that occur after a <a>snapshot state</a> has been established
+          (e.g. concurrent lock on the underlying storage with another application)
+          then this is the "FileLock" <a>failure reason</a>.
 
-				For asynchronous read methods the {{error!!attribute}} attribute must return a {{NotReadableError}} exception
-				and synchronous read methods must <a>throw</a> a {{NotReadableError}} exception.
+        For asynchronous read methods the {{error!!attribute}} attribute must return a {{NotReadableError}} exception
+        and synchronous read methods must <a>throw</a> a {{NotReadableError}} exception.
 </table>
 
 <h2 id=url>
@@ -1638,33 +1643,33 @@ This specification defines a scheme with URLs of the sort: <code>blob:550e8400-e
 This section provides some requirements and is an informative discussion.
 
 * This scheme should be able to be used with web APIs such as {{XMLHttpRequest}},
-	and with elements that are designed to be used with HTTP URLs,
-	such as the <{img}> element.
-	In general, this scheme should be designed to be used wherever URLs can be used on the web.
+  and with elements that are designed to be used with HTTP URLs,
+  such as the <{img}> element.
+  In general, this scheme should be designed to be used wherever URLs can be used on the web.
 
 * This scheme should have defined response codes,
-	so that web applications can respond to scenarios where the resource is not found, or raises an error, etc.
+  so that web applications can respond to scenarios where the resource is not found, or raises an error, etc.
 
 * This scheme should have an <a>origin</a> policy and a <a>lifetime</a> stipulation,
-	to allow safe access to binary data from web applications.
+  to allow safe access to binary data from web applications.
 
-	URLs in this scheme should be used as a references to "in-memory" {{Blob}}s,
-	and also be re-used elsewhere on the platform to refer to binary resources
-	(e.g. for video-conferencing [[WebRTC]]).
-	URLs in this scheme are designed for impermanence,
-	since they will be typically used to access "in memory" resources.
+  URLs in this scheme should be used as a references to "in-memory" {{Blob}}s,
+  and also be re-used elsewhere on the platform to refer to binary resources
+  (e.g. for video-conferencing [[WebRTC]]).
+  URLs in this scheme are designed for impermanence,
+  since they will be typically used to access "in memory" resources.
 
 * Developers should have the ability to revoke URLs in this scheme,
-	so that they no longer refer to {{Blob}} objects.
-	This includes scenarios where file references are no longer needed by a program,
-	but also other uses of {{Blob}} objects.
-	Consider a scenario where a {{Blob}} object can be exported from a drawing program
-	which uses the canvas element and API [[HTML]].
-	A snapshot of the drawing can be created by exporting a {{Blob}}.
-	This scheme can be used with the <{img}> [[HTML]] element to display the snapshot;
-	if the user deletes the snapshot,
-	any reference to the snapshot in memory via a URL should be invalid,
-	and hence the need to be able to revoke such a URL.
+  so that they no longer refer to {{Blob}} objects.
+  This includes scenarios where file references are no longer needed by a program,
+  but also other uses of {{Blob}} objects.
+  Consider a scenario where a {{Blob}} object can be exported from a drawing program
+  which uses the canvas element and API [[HTML]].
+  A snapshot of the drawing can be created by exporting a {{Blob}}.
+  This scheme can be used with the <{img}> [[HTML]] element to display the snapshot;
+  if the user deletes the snapshot,
+  any reference to the snapshot in memory via a URL should be invalid,
+  and hence the need to be able to revoke such a URL.
 
 <h3 id="alternative-schemas">
 Discussion of Existing Schemes</h3>
@@ -1672,43 +1677,43 @@ Discussion of Existing Schemes</h3>
 This section is an informative discussion of existing schemes
 that may have been repurposed or reused for the use cases for URLs above,
 and justification for why a new scheme is considered preferable.
-These schemes include HTTP [[RFC7230]],
+These schemes include HTTP [[!RFC7230]],
 file [[RFC1630]][[RFC1738]],
 and a scheme such as <code>urn:uuid</code> [[RFC4122]].
 One broad consideration in determining what scheme to use is providing something with intuitive appeal to web developers.
 
 * HTTP could be repurposed for the use cases mentioned above;
-	it already comes with well-defined request-response semantics that are already used by web applications.
-	But {{Blob}} resources are typically "in-memory" resident
-	(e.g. after a file has been read into memory),
-	and are thus unlike "traditional" HTTP resources that are dereferenced via DNS.
-	While some user agents automatically "proxy" the underlying file system on the local machine via an HTTP server
-	(e.g. with URLs of the sort <code>http://localhost</code>),
-	HTTP is not traditionally used with local resources.
-	Moreover, an important use case for these URLs are that they can be revoked with an API call.
-	HTTP URLs have traditionally been used for resources that may be more permanent
-	(and that are certainly not chiefly memory-resident, such as files that a web application can read).
-	Reusing the HTTP scheme might be confusing for web developers owing to well-established practice.
+  it already comes with well-defined request-response semantics that are already used by web applications.
+  But {{Blob}} resources are typically "in-memory" resident
+  (e.g. after a file has been read into memory),
+  and are thus unlike "traditional" HTTP resources that are dereferenced via DNS.
+  While some user agents automatically "proxy" the underlying file system on the local machine via an HTTP server
+  (e.g. with URLs of the sort <code>http://localhost</code>),
+  HTTP is not traditionally used with local resources.
+  Moreover, an important use case for these URLs are that they can be revoked with an API call.
+  HTTP URLs have traditionally been used for resources that may be more permanent
+  (and that are certainly not chiefly memory-resident, such as files that a web application can read).
+  Reusing the HTTP scheme might be confusing for web developers owing to well-established practice.
 * The reuse of file URLs would involve changes to file URL use today,
-	such as adding response codes.
-	While they are used inconsistently in web applications,
-	the structure of the URLs would change,
-	and request-response behavior would have to be superimposed on what already works in a more-or-less ad-hoc manner.
-	Modifying this for the use cases cited above is imprudent, given legacy usage.
-	Additionally, the use cases for a Blob URL scheme call for uses beyond the file system.
+  such as adding response codes.
+  While they are used inconsistently in web applications,
+  the structure of the URLs would change,
+  and request-response behavior would have to be superimposed on what already works in a more-or-less ad-hoc manner.
+  Modifying this for the use cases cited above is imprudent, given legacy usage.
+  Additionally, the use cases for a Blob URL scheme call for uses beyond the file system.
 * A scheme of the sort <code>urn:uuid</code> [[RFC4122]] could be used,
-	though use of this scheme is unprecedented in HTML and JavaScript web applications.
-	The urn:uuid scheme is very generic.
-	URLs in the scheme urn:uuid have the disadvantage of unfamiliarity and inconsistency across the web platform.
-	A new scheme has the advantage of being explicit about what is being referenced.
-	In theory, URLs make no guarantee about what sort of resource is obtained when they are dereferenced;
-	that is left to content labeling and media type.
-	But in practice, the name of the scheme creates an expectation about both the resource
-	and the protocol of the request-response transaction.
-	Choosing a name that clarifies the primary use case--
-	namely, access to memory-resident {{Blob}} resources--
-	is a worthwhile compromise,
-	and favors clarity, familiarity, and consistency across the web platform.
+  though use of this scheme is unprecedented in HTML and JavaScript web applications.
+  The urn:uuid scheme is very generic.
+  URLs in the scheme urn:uuid have the disadvantage of unfamiliarity and inconsistency across the web platform.
+  A new scheme has the advantage of being explicit about what is being referenced.
+  In theory, URLs make no guarantee about what sort of resource is obtained when they are dereferenced;
+  that is left to content labeling and media type.
+  But in practice, the name of the scheme creates an expectation about both the resource
+  and the protocol of the request-response transaction.
+  Choosing a name that clarifies the primary use case--
+  namely, access to memory-resident {{Blob}} resources--
+  is a worthwhile compromise,
+  and favors clarity, familiarity, and consistency across the web platform.
 
 <h3 id="DefinitionOfScheme">
 The Blob URL</h3>
@@ -1727,20 +1732,20 @@ has a distinct interpretation depending on the media type of the {{Blob}} or {{F
 (see [[#fragmentDiscussion]]).
 
 <pre>
-	blob = scheme ":" origin "/" UUID [fragIdentifier]
+  blob = scheme ":" origin "/" UUID [fragIdentifier]
 
-	scheme = "blob"
+  scheme = "blob"
 
-	; scheme is always "blob"
+  ; scheme is always "blob"
 
-	; origin is a string representation of the Blob URL's <a>origin</a>.
-	; UUID is as defined in [[RFC4122]] and [[#uuid-abnf]]
-	; fragIdentifier is optional and as defined in [[RFC3986]] and [[#uuid-fragment]]
+  ; origin is a string representation of the Blob URL's <a>origin</a>.
+  ; UUID is as defined in <a biblio data-biblio-type=informative>\[RFC4122]</a> and <a href="#uuid-abnf"></a>
+  ; fragIdentifier is optional and as defined in <a biblio data-biblio-type=informative>\[RFC3986]</a> and <a href="#fragment-abnf"></a>
 </pre>
 
 <div class="example">
-	An example of a Blob URL might be
-	<code>blob:https://example.org/9115d58c-bcda-ff47-86e5-083e9a215304</code>.
+  An example of a Blob URL might be
+  <code>blob:https://example.org/9115d58c-bcda-ff47-86e5-083e9a215304</code>.
 </div>
 
 
@@ -1758,7 +1763,7 @@ was called.
 
 The <a>origin</a> of a Blob URL,
 when serialized as a string,
-must conform to the Web Origin Specification's <dfn>Unicode Serialization of an Origin algorithm</dfn> [[RFC6454]].
+must conform to the Web Origin Specification's <dfn>Unicode Serialization of an Origin algorithm</dfn> [[!RFC6454]].
 <a>Cross-origin requests</a> on Blob URLs must return a <a>network error</a>.
 
 Note: In practice this means that HTTP and HTTPS <a>origins</a>
@@ -1778,14 +1783,14 @@ which is invoked by <code>URL.{{URL/createObjectURL()}}</code>
 and/or <code>URL.{{URL/createFor()}}</code>:
 
 1. Let <var>result</var> be the empty string.
-	Append the string "blob"
-	(that is, the Unicode code point sequence U+0062, U+006C, U+006F, U+0062)
-	to <var>result</var>.
+  Append the string "blob"
+  (that is, the Unicode code point sequence U+0062, U+006C, U+006F, U+0062)
+  to <var>result</var>.
 2. Append the ":" (U+003A COLON) character to <var>result</var>.
 3. Let <var>O</var> be the Blob URL's <a>origin</a>.
-	If the <a>Unicode Serialization of an Origin algorithm</a> on <var>O</var> returns null,
-	user agents may substitute an implementation defined value for the return value of the <a>Unicode Serialization of an Origin algorithm</a>.
-	Append the result of the <a>Unicode Serialization of an Origin algorithm</a> for <var>O</var> [[RFC6454]] to <var>result</var>.
+  If the <a>Unicode Serialization of an Origin algorithm</a> on <var>O</var> returns null,
+  user agents may substitute an implementation defined value for the return value of the <a>Unicode Serialization of an Origin algorithm</a>.
+  Append the result of the <a>Unicode Serialization of an Origin algorithm</a> for <var>O</var> [[!RFC6454]] to <var>result</var>.
 4. Append the "/" character (U+0024 SOLIDUS) to <var>result</var>.
 5. Generate a UUID [[RFC4122]] as a Unicode string and append it to <var>result</var>.
 6. Return <var>result</var>.
@@ -1825,7 +1830,7 @@ and returns it to the requesting entity.
 This section provides guidance on <a>requests</a> and <a>responses</a>.
 
 Only <a>requests</a> with GET [[RFC7231]] are supported.
-Specifically, <a>responses</a> are only a subset of the following from HTTP [[RFC7231]]:
+Specifically, <a>responses</a> are only a subset of the following from HTTP [[!RFC7231]]:
 
 <h4 id="TwoHundredOK">
 200 OK</h4>
@@ -1852,7 +1857,7 @@ in a manner consistent with the Mime Sniffing specification [[MIMESNIFF]].
 If a resource identified with a <a>Blob URL</a> is a {{File}} object,
 user agents use that file's {{File/name}} attribute,
 as if the <a>response</a> had a <code>Content-Disposition</code> header
-with the filename parameter set to the {{File}}'s {{File/name}} attribute [[RFC6266]].
+with the filename parameter set to the {{File}}'s {{File/name}} attribute [[!RFC6266]].
 
 Note: A corollary to this is a non-normative implementation guideline:
 that the "File Save As" user interface in user agents takes into account the {{File}}'s {{File/name}} attribute
@@ -1868,7 +1873,7 @@ Network errors are used when:
 * Any <a>request</a> method other than GET is used.
 * The <a>Blob URL</a> does not have an entry in the <a>Blob URL Store</a>.
 * The Blob has been <a for=Blob>closed</a>;
-	this also results in the <a>Blob URL</a> not having an entry in the <a>Blob URL Store</a>.
+  this also results in the <a>Blob URL</a> not having an entry in the <a>Blob URL Store</a>.
 * A <a>cross-origin request</a> is made on a <a>Blob URL</a>.
 * A security error has occurred.
 
@@ -1886,28 +1891,28 @@ but the {{XMLHttpRequest/getAllResponseHeaders()}} method of {{XMLHttpRequest}},
 will show relevant <a>response</a> headers.
 
 <div class="example">
-	<a>Requests</a> could look like this:
+  <a>Requests</a> could look like this:
 
-	<pre>
-	GET http://example.org:8080/550e8400-e29b-41d4-a716-446655440000
-	</pre>
+  <pre>
+  GET http://example.org:8080/550e8400-e29b-41d4-a716-446655440000
+  </pre>
 
-	If the {{Blob}} has an affiliated media type [[RFC2046]] represented by its {{Blob/type}} attribute,
-	then the response message should include the Content-Type header from RFC7231 [[RFC7231]].
-	See [[#processing-media-types]].
+  If the {{Blob}} has an affiliated media type [[!RFC2046]] represented by its {{Blob/type}} attribute,
+  then the response message should include the Content-Type header from RFC7231 [[RFC7231]].
+  See [[#processing-media-types]].
 
-	Example response:
+  Example response:
 
-	<pre>
-	200 OK
-	Content-Type: image/jpeg
-	Content-Length: 21897
+  <pre>
+  200 OK
+  Content-Type: image/jpeg
+  Content-Length: 21897
 
-	....
-	</pre>
+  ....
+  </pre>
 
-	If there is a <a>file read error</a> associated with the {{Blob}},
-	then a user agent acts as if a <a>network error</a> has occurred.
+  If there is a <a>file read error</a> associated with the {{Blob}},
+  then a user agent acts as if a <a>network error</a> has occurred.
 </div>
 
 <h3 id="creating-revoking">
@@ -1918,7 +1923,7 @@ supported by global objects {{Window}} [[HTML]] and {{WorkerGlobalScope}} [[Web 
 Revocation of a <a>Blob URL</a> decouples the <a>Blob URL</a> from the resource it refers to,
 and if it is dereferenced after it is revoked,
 user agents must act as if a <a>network error</a> has occurred.
-This section describes a supplemental interface to the URL specification [[URL API]]
+This section describes a supplemental interface to the URL specification [[URL]]
 and presents methods for <a>Blob URL</a> creation and revocation.
 
 <pre class="idl">
@@ -1931,103 +1936,103 @@ partial interface URL {
 
 ECMAScript user agents of this specification must ensure
 that they do not expose a <code>prototype</code> property on the URL interface object
-unless the user agent also implements the URL [[URL API]] specification.
-In other words, <code>URL.prototype</code> must evaluate to true if the user agent implements the URL [[URL API]] specification,
+unless the user agent also implements the URL [[URL]] specification.
+In other words, <code>URL.prototype</code> must evaluate to true if the user agent implements the URL [[URL]] specification,
 and must NOT evaluate to true otherwise.
 
 <h4 id="createRevokeMethodsParams">
 Methods and Parameters</h4>
 
 <dl>
-	<dt>The <dfn method for=URL>createObjectURL(blob)</dfn> static method
-	<dd>Returns a unique <a>Blob URL</a>.
-		This method must act as follows:
+  <dt>The <dfn method for=URL>createObjectURL(blob)</dfn> static method
+  <dd>Returns a unique <a>Blob URL</a>.
+    This method must act as follows:
 
-		1. If called with a {{Blob}} argument that has a <a>readability state</a> of <a for="Blob/readability state">CLOSED</code></a>,
-			user agents must return the output of the <a>Unicode Serialization of a Blob URL</a>.
+    1. If called with a {{Blob}} argument that has a <a>readability state</a> of <a for="Blob/readability state"><code>CLOSED</code></a>,
+      user agents must return the output of the <a>Unicode Serialization of a Blob URL</a>.
 
-			Note: No entry is added to the <a>Blob URL Store</a>;
-			consequently, when this <a>Blob URL</a> is <a>dereferenced</a>,
-			a <a>network error</a> occurs.
+      Note: No entry is added to the <a>Blob URL Store</a>;
+      consequently, when this <a>Blob URL</a> is <a>dereferenced</a>,
+      a <a>network error</a> occurs.
 
-		2. Otherwise, user agents must run the following sub-steps:
-			1. Let <var>url</var> be the result of the <a>Unicode Serialization of a Blob URL</a> algorithm.
-			2. <a>Add an entry to the Blob URL Store</a> for <var>url</var> and <code>blob</code>.
-			3. Return <var>url</var>.
+    2. Otherwise, user agents must run the following sub-steps:
+      1. Let <var>url</var> be the result of the <a>Unicode Serialization of a Blob URL</a> algorithm.
+      2. <a>Add an entry to the Blob URL Store</a> for <var>url</var> and <var>blob</var>.
+      3. Return <var>url</var>.
 
-	<dt>The <dfn method for=URL>createFor(blob)</dfn> static method
-	<dd>Returns a unique <a>Blob URL</a>.
-		<a>Blob URLs</a> created with this method are said to be <dfn id="autoRevoking">auto-revoking</dfn>
-		since user-agents are responsible for the revocation of <a>Blob URL</a>s created with this method,
-		subject to the <a>lifetime stipulation</a> for <a>Blob URL</a>s.
-		This method must act as follows:
+  <dt>The <dfn method for=URL>createFor(blob)</dfn> static method
+  <dd>Returns a unique <a>Blob URL</a>.
+    <a>Blob URLs</a> created with this method are said to be <dfn id="autoRevoking">auto-revoking</dfn>
+    since user-agents are responsible for the revocation of <a>Blob URL</a>s created with this method,
+    subject to the <a>lifetime stipulation</a> for <a>Blob URL</a>s.
+    This method must act as follows:
 
-		1. If called with a {{Blob}} argument that has a <a>readability state</a> of <a for="Blob/readability state">CLOSED</code></a>,
-			user agents must return the output of the <a>Unicode Serialization of a Blob URL</a>.
+    1. If called with a {{Blob}} argument that has a <a>readability state</a> of <a for="Blob/readability state"><code>CLOSED</code></a>,
+      user agents must return the output of the <a>Unicode Serialization of a Blob URL</a>.
 
-			Note: No entry is added to the <a>Blob URL Store</a>;
-			consequently, when this <a>Blob URL</a> is <a>dereferenced</a>,
-			a <a>network error</a> occurs.
+      Note: No entry is added to the <a>Blob URL Store</a>;
+      consequently, when this <a>Blob URL</a> is <a>dereferenced</a>,
+      a <a>network error</a> occurs.
 
-		2. Otherwise, user agents must run the following steps:
-			1. Let <var>url</var> be the result of the <a>Unicode Serialization of a Blob URL</a>.
-			2. <a>Add an entry to the Blob URL Store</a> for <var>url</var> and <code>blob</code>.
-			3. <a>Add an entry to the Revocation List</a> for <var>url</var>.
-			4. Return <var>url</var>.
+    2. Otherwise, user agents must run the following steps:
+      1. Let <var>url</var> be the result of the <a>Unicode Serialization of a Blob URL</a>.
+      2. <a>Add an entry to the Blob URL Store</a> for <var>url</var> and <var>blob</var>.
+      3. <a>Add an entry to the Revocation List</a> for <var>url</var>.
+      4. Return <var>url</var>.
 
-		<div class="example">
-			In the example below,
-			after obtaining a reference to a {{Blob}} object
-			(in this case, a user-selected {{File}} from the underlying file system),
-			the static method <code>URL.{{createObjectURL()}}</code> is called on that {{Blob}} object.
+    <div class="example">
+      In the example below,
+      after obtaining a reference to a {{Blob}} object
+      (in this case, a user-selected {{File}} from the underlying file system),
+      the static method <code>URL.{{createObjectURL()}}</code> is called on that {{Blob}} object.
 
-			<pre class="lang-javascript">
-				var file = document.getElementById('file').files[0];
-				if(file){
-					blobURLref = window.URL.createObjectURL(file);
-					myimg.src = blobURLref;
+      <pre class="lang-javascript">
+        var file = document.getElementById('file').files[0];
+        if(file){
+          blobURLref = window.URL.createObjectURL(file);
+          myimg.src = blobURLref;
 
-					....
+          ....
 
-				}
-			</pre>
-		</div>
+        }
+      </pre>
+    </div>
 
-	<dt>The <dfn method for=URL>revokeObjectURL(url)</dfn> static method
-	<dd>Revokes the <a>Blob URL</a> provided in the string {{url!!argument}}
-		by removing the corresponding entry from the <a>Blob URL Store</a>.
-		This method must act as follows:
+  <dt>The <dfn method for=URL>revokeObjectURL(url)</dfn> static method
+  <dd>Revokes the <a>Blob URL</a> provided in the string {{url!!argument}}
+    by removing the corresponding entry from the <a>Blob URL Store</a>.
+    This method must act as follows:
 
-		1. If the {{url!!argument}} refers to a {{Blob}} that has a <a>readability state</a> of <a for="Blob/readability state">CLOSED</code></a>
-			OR if the value provided for the {{url!!argument}} argument is not a <a>Blob URL</a>,
-			OR if the value provided for the {{url!!argument}} argument does not have an entry in the <a>Blob URL Store</a>,
-			this method call does nothing.
-			User agents may display a message on the error console.
-		2. Otherwise, user agents must <a>remove the entry</a> from the <a>Blob URL Store</a> for {{url!!argument}}.
+    1. If the {{url!!argument}} refers to a {{Blob}} that has a <a>readability state</a> of <a for="Blob/readability state"><code>CLOSED</code></a>
+      OR if the value provided for the {{url!!argument}} argument is not a <a>Blob URL</a>,
+      OR if the value provided for the {{url!!argument}} argument does not have an entry in the <a>Blob URL Store</a>,
+      this method call does nothing.
+      User agents may display a message on the error console.
+    2. Otherwise, user agents must <a>remove the entry</a> from the <a>Blob URL Store</a> for {{url!!argument}}.
 
-			Note: Subsequent attemps to dereference {{url!!argument}} result in a <a>network error</a>,
-			since the entry has been removed from the <a>Blob URL Store</a>.
+      Note: Subsequent attemps to dereference {{url!!argument}} result in a <a>network error</a>,
+      since the entry has been removed from the <a>Blob URL Store</a>.
 
-		The <dfn argument for="URL/revokeObjectURL(url)">url</dfn> argument to the {{revokeObjectURL()}} method
-		is a <a>Blob URL</a> string.
+    The <dfn argument for="URL/revokeObjectURL(url)" id="dfn-urlarg">url</dfn> argument to the {{revokeObjectURL()}} method
+    is a <a>Blob URL</a> string.
 
-		<div class="example">
-			In the example below,
-			<code>window1</code> and <code>window2</code> are separate,
-			but in the <a>same origin</a>;
-			<code>window2</code> could be an <{iframe}> inside <code>window1</code>.
+    <div class="example">
+      In the example below,
+      <code>window1</code> and <code>window2</code> are separate,
+      but in the <a>same origin</a>;
+      <code>window2</code> could be an <{iframe}> inside <code>window1</code>.
 
-			<pre class="lang-javascript">
-				myurl = window1.URL.createObjectURL(myblob);
-				window2.URL.revokeObjectURL(myurl);
-			</pre>
+      <pre class="lang-javascript">
+        myurl = window1.URL.createObjectURL(myblob);
+        window2.URL.revokeObjectURL(myurl);
+      </pre>
 
-			Since <code>window1</code> and <code>window2</code> are in the <a>same origin</a>
-			and share the same <a>Blob URL Store</a>,
-			the <code>URL.{{revokeObjectURL()}}</code> call
-			ensures that subsequent dereferencing of <code>myurl</code>
-			results in a the user agent acting as if a <a>network error</a> has occurred.
-		</div>
+      Since <code>window1</code> and <code>window2</code> are in the <a>same origin</a>
+      and share the same <a>Blob URL Store</a>,
+      the <code>URL.{{revokeObjectURL()}}</code> call
+      ensures that subsequent dereferencing of <code>myurl</code>
+      results in a the user agent acting as if a <a>network error</a> has occurred.
+    </div>
 </dl>
 
 <h4 id="examplesOfCreationRevocation">
@@ -2041,38 +2046,38 @@ see [[#lifeTime]].
 This section gives sample usage of creation and revocation of <a>Blob URL</a>s with explanations.
 
 <div class="example">
-	In the example below, two <{img}> elements [[HTML]] refer to the same <a>Blob URL</a>:
+  In the example below, two <{img}> elements [[HTML]] refer to the same <a>Blob URL</a>:
 
-	<pre class="lang-javascript">
-		url = URL.createObjectURL(blob);
-		img1.src = url;
-		img2.src = url;
-	</pre>
+  <pre class="lang-javascript">
+    url = URL.createObjectURL(blob);
+    img1.src = url;
+    img2.src = url;
+  </pre>
 </div>
 
 <div class="example">
-	In the example below,  <code>URL.{{revokeObjectURL()}}</code> is explicitly called.
+  In the example below,  <code>URL.{{revokeObjectURL()}}</code> is explicitly called.
 
-	<pre class="lang-javascript">
-		var blobURLref = URL.createObjectURL(file);
-		img1 = new Image();
-		img2 = new Image();
+  <pre class="lang-javascript">
+    var blobURLref = URL.createObjectURL(file);
+    img1 = new Image();
+    img2 = new Image();
 
-		// Both assignments below work as expected
-		img1.src = blobURLref;
-		img2.src = blobURLref;
+    // Both assignments below work as expected
+    img1.src = blobURLref;
+    img2.src = blobURLref;
 
-		// ... Following body load
-		// Check if both images have loaded
-		if(img1.complete && img2.complete) {
-			// Ensure that subsequent refs throw an exception
-			URL.revokeObjectURL(blobURLref);
-		} else {
-			msg("Images cannot be previewed!");
-			// revoke the string-based reference
-			URL.revokeObjectURL(blobURLref);
-		}
-	</pre>
+    // ... Following body load
+    // Check if both images have loaded
+    if(img1.complete && img2.complete) {
+      // Ensure that subsequent refs throw an exception
+      URL.revokeObjectURL(blobURLref);
+    } else {
+      msg("Images cannot be previewed!");
+      // revoke the string-based reference
+      URL.revokeObjectURL(blobURLref);
+    }
+  </pre>
 </div>
 
 The example above allows multiple references to a single <a>Blob URL</a>,
@@ -2082,36 +2087,36 @@ it increases the likelihood of leaks;
 developers should pair it with a corresponding call to <code>URL.{{revokeObjectURL()}}</code>.
 
 <div class="example">
-	This example uses <code>URL.{{URL/createFor()}}</code>,
-	which allows uses such as the one above,
-	and obviates the need for a corresponding call by the web developer to <code>URL.{{URL/revokeObjectURL()}}</code>.
+  This example uses <code>URL.{{URL/createFor()}}</code>,
+  which allows uses such as the one above,
+  and obviates the need for a corresponding call by the web developer to <code>URL.{{URL/revokeObjectURL()}}</code>.
 
-	<pre class="lang-javascript">
-		var blobURLref2 = URL.createFor(file);
-		img1 = new Image();
-		img1.src = blobURLref2;
-		....
-	</pre>
+  <pre class="lang-javascript">
+    var blobURLref2 = URL.createFor(file);
+    img1 = new Image();
+    img1.src = blobURLref2;
+    ....
+  </pre>
 </div>
 
 
 <div class="example">
-	This example uses <code>URL.{{URL/createFor()}}</code> to mint a <a>Blob URL</a>,
-	and appends a <a for=url>fragment</a> that has an understood meaning within the resource
-	(in this case, it references an anchor within the HTML document).
+  This example uses <code>URL.{{URL/createFor()}}</code> to mint a <a>Blob URL</a>,
+  and appends a <a for=url>fragment</a> that has an understood meaning within the resource
+  (in this case, it references an anchor within the HTML document).
 
-	<pre class="lang-javascript">
-		// file is an HTML file
-		// One of the anchor identifiers in file is "#applicationInfo"
+  <pre class="lang-javascript">
+    // file is an HTML file
+    // One of the anchor identifiers in file is "#applicationInfo"
 
-		var blobURLAnchorRef = URL.createFor(file) + "#applicationInfo";
+    var blobURLAnchorRef = URL.createFor(file) + "#applicationInfo";
 
-		// openPopup is an utility function to open a small informational window
+    // openPopup is an utility function to open a small informational window
 
-		var windowRef = openPopup(blobURLAnchorRef, "Application Info");
+    var windowRef = openPopup(blobURLAnchorRef, "Application Info");
 
-		....
-	</pre>
+    ....
+  </pre>
 </div>
 
 <h3 id="lifeTime" dfn for="blob url" lt="lifetime|lifetime stipulation" export>
@@ -2145,13 +2150,13 @@ Subsequent attempts to <a>dereference</a> this URL must result in a <a>network e
 The <a>Revocation List</a> and the <a>Blob URL Store</a> must be processed together as follows:
 
 1. Add <a lt="remove an entry from the Blob URL Store">removing the entries</a>
-	for all the <a>Blob URLs</a> in the <a>Revocation List</a>
-	to the <a>global script clean-up jobs list</a>.
+  for all the <a>Blob URLs</a> in the <a>Revocation List</a>
+  to the <a>global script clean-up jobs list</a>.
 2. When all the <a>Blob URL</a>s in the <a>Revocation List</a>
-	have had their corresponding entries in the <a>Blob URL Store</a> removed,
-	remove all the <a>Blob URL</a>s in the <a>Revocation List</a>.
+  have had their corresponding entries in the <a>Blob URL Store</a> removed,
+  remove all the <a>Blob URL</a>s in the <a>Revocation List</a>.
 3. This specification adds an additional <a>unloading document cleanup step</a>:
-	user agents must remove all <a>Blob URLs</a> from the <a>Blob URL Store</a> within that <a>document</a>.
+  user agents must remove all <a>Blob URLs</a> from the <a>Blob URL Store</a> within that <a>document</a>.
 
 Note: User agents are free to garbage collect resources removed from the <a>Blob URL Store</a>.
 
@@ -2170,15 +2175,15 @@ preventing access to system-sensitive files,
 and guarding against modifications of files on disk after a selection has taken place.
 
 * <dfn id="selection-looping">Preventing selection looping</dfn>.
-	During file selection, a user may be bombarded with the file picker associated with <code>&lt;input type="file"/></code>
-	(in a "must choose" loop that forces selection before the file picker is dismissed)
-	and a user agent may prevent file access to any selections by making the  {{FileList}} object returned be of size 0.
+  During file selection, a user may be bombarded with the file picker associated with <code>&lt;input type="file"/></code>
+  (in a "must choose" loop that forces selection before the file picker is dismissed)
+  and a user agent may prevent file access to any selections by making the  {{FileList}} object returned be of size 0.
 * <dfn id="sensitive-files">System-sensitive files</dfn>
-	(e.g. files in /usr/bin, password files, and other native operating system executables)
-	typically should not be exposed to web content,
-	and should not be accessed via <a>Blob URLs</a>.
-	User agents may <a>throw</a> a {{SecurityError}} exception for synchronous read methods,
-	or return a {{SecurityError}} exception for asynchronous reads.
+  (e.g. files in /usr/bin, password files, and other native operating system executables)
+  typically should not be exposed to web content,
+  and should not be accessed via <a>Blob URLs</a>.
+  User agents may <a>throw</a> a {{SecurityError}} exception for synchronous read methods,
+  or return a {{SecurityError}} exception for asynchronous reads.
 
 Issue: This section is provisional; more security data may supplement this in subsequent drafts.
 
@@ -2191,68 +2196,68 @@ This version of the API does not satisfy all use cases;
 subsequent versions may elect to address these.
 
 * Once a user has given permission,
-	user agents should provide the ability to read and parse data directly from a local file programmatically.
+  user agents should provide the ability to read and parse data directly from a local file programmatically.
 
-	<div class="example">
-		A lyrics viewer.
-		User wants to read song lyrics from songs in his plist file.
-		User browses for plist file.
-		File is opened, read, parsed, and presented to the user as a sortable, actionable list within a web application.
-		User can select songs to fetch lyrics.
-		User uses the "browse for file" dialog.
-	</div>
+  <div class="example">
+    A lyrics viewer.
+    User wants to read song lyrics from songs in his plist file.
+    User browses for plist file.
+    File is opened, read, parsed, and presented to the user as a sortable, actionable list within a web application.
+    User can select songs to fetch lyrics.
+    User uses the "browse for file" dialog.
+  </div>
 * Data should be able to be stored locally so that it is available for later use,
-	which is useful for offline data access for web applications.
+  which is useful for offline data access for web applications.
 
-	<div class="example">
-		A Calendar App.
-		User's company has a calendar.
-		User wants to sync local events to company calendar,
-		marked as "busy" slots (without leaking personal info).
-		User browses for file and selects it.
-		The <code>text/calendar</code> file is parsed in the browser,
-		allowing the user to merge the files to one calendar view.
-		The user wants to then save the file back to his local calendar file (using "Save As"?).
-		The user can also send the integrated calendar file back to the server calendar store asynchronously.
-	</div>
+  <div class="example">
+    A Calendar App.
+    User's company has a calendar.
+    User wants to sync local events to company calendar,
+    marked as "busy" slots (without leaking personal info).
+    User browses for file and selects it.
+    The <code>text/calendar</code> file is parsed in the browser,
+    allowing the user to merge the files to one calendar view.
+    The user wants to then save the file back to his local calendar file (using "Save As"?).
+    The user can also send the integrated calendar file back to the server calendar store asynchronously.
+  </div>
 * User agents should provide the ability to save a local file programmatically given an amount of data and a file name.
 
-	Note: While this specification doesn't provide an explicit API call to trigger downloads,
-	the HTML5 specification has addressed this.
-	The <{a/download}> attribute of the <{a}> element initiates a download,
-	saving a {{File}} with the name specified.
-	The combination of this API and the <{a/download}> attribute on <{a}> elements
-	allows for the creation of files within web applications,
-	and the ability to save them locally.
+  Note: While this specification doesn't provide an explicit API call to trigger downloads,
+  the HTML5 specification has addressed this.
+  The <{a/download}> attribute of the <{a}> element initiates a download,
+  saving a {{File}} with the name specified.
+  The combination of this API and the <{a/download}> attribute on <{a}> elements
+  allows for the creation of files within web applications,
+  and the ability to save them locally.
 
-	<div class="example">
-		A Spreadsheet App.
-		User interacts with a form, and generates some input.
-		The form then generates a CSV (Comma Separated Variables) output for the user to import into a spreadsheet,
-		and uses "Save...".
-		The generated output can also be directly integrated into a web-based spreadsheet,
-		and uploaded asynchronously.
-	</div>
+  <div class="example">
+    A Spreadsheet App.
+    User interacts with a form, and generates some input.
+    The form then generates a CSV (Comma Separated Variables) output for the user to import into a spreadsheet,
+    and uses "Save...".
+    The generated output can also be directly integrated into a web-based spreadsheet,
+    and uploaded asynchronously.
+  </div>
 * User agents should provide a streamlined programmatic ability to send data from a file to a remote server
-	that works more efficiently than form-based uploads today.
+  that works more efficiently than form-based uploads today.
 
-	<div class="example">
-		A Video/Photo Upload App.
-		User is able to select large files for upload,
-		which can then be "chunk-transfered" to the server.
-	</div>
+  <div class="example">
+    A Video/Photo Upload App.
+    User is able to select large files for upload,
+    which can then be "chunk-transfered" to the server.
+  </div>
 * User agents should provide an API exposed to script that exposes the features above.
-	The user is notified by UI anytime interaction with the file system takes place,
-	giving the user full ability to cancel or abort the transaction.
-	The user is notified of any file selections,
-	and can cancel these.
-	No invocations to these APIs occur silently without user intervention.
+  The user is notified by UI anytime interaction with the file system takes place,
+  giving the user full ability to cancel or abort the transaction.
+  The user is notified of any file selections,
+  and can cancel these.
+  No invocations to these APIs occur silently without user intervention.
 
 <h2 id="blob-url-grammar" class="no-num">
 Appendix A: Blob URL Grammar</h2>
 
 This section uses the Augmented Backus-Naur Form (ABNF),
-defined in [[RFC5234]],
+defined in [[!RFC5234]],
 to describe components of blob: URLs.
 
 <h3 id="uuid-abnf">
@@ -2264,46 +2269,46 @@ U+002A to U+002B,
 U+002D to U+002E,
 U+0030 to U+0039,
 U+0041 to U+005A,
-U+005E to U+007E [[Unicode]],
+U+005E to U+007E [[!Unicode]],
 and should be at least 36 characters long.
 
 <pre>
-	UUID                   = time-low "-" time-mid "-"
-	                         time-high-and-version "-"
-	                         clock-seq-and-reserved
-	                         clock-seq-low "-" node
-	time-low               = 4hexOctet
-	time-mid               = 2hexOctet
-	time-high-and-version  = 2hexOctet
-	clock-seq-and-reserved = hexOctet
-	clock-seq-low          = hexOctet
-	node                   = 6hexOctet
-	hexOctet               = hexDigit hexDigit
-	hexDigit = "0" / "1" / "2" / "3" / "4" / "5" / "6" / "7" / "8" / "9" /
-	           "a" / "b" / "c" / "d" / "e" / "f" /
-	           "A" / "B" / "C" / "D" / "E" / "F"
+  UUID                   = time-low "-" time-mid "-"
+                          time-high-and-version "-"
+                          clock-seq-and-reserved
+                          clock-seq-low "-" node
+  time-low               = 4hexOctet
+  time-mid               = 2hexOctet
+  time-high-and-version  = 2hexOctet
+  clock-seq-and-reserved = hexOctet
+  clock-seq-low          = hexOctet
+  node                   = 6hexOctet
+  hexOctet               = hexDigit hexDigit
+  hexDigit = "0" / "1" / "2" / "3" / "4" / "5" / "6" / "7" / "8" / "9" /
+            "a" / "b" / "c" / "d" / "e" / "f" /
+            "A" / "B" / "C" / "D" / "E" / "F"
 </pre>
 
 <h3 id="fragment-abnf">
 An ABNF for Fragment Identifiers</h3>
 
 <pre>
-	fragIdentifier = "#" fragment
+  fragIdentifier = "#" fragment
 
-	; Fragment Identifiers depend on the media type of the Blob
-	; fragment is defined in [[RFC3986]]
-	; fragment processing for HTML is defined in [[HTML]]
+  ; Fragment Identifiers depend on the media type of the Blob
+  ; fragment is defined in [[RFC3986]]
+  ; fragment processing for HTML is defined in [[HTML]]
 
-	fragment    = *( pchar / "/" / "?" )
+  fragment    = *( pchar / "/" / "?" )
 
-	pchar       = unreserved / pct-encoded / sub-delims / ":" / "@"
+  pchar       = unreserved / pct-encoded / sub-delims / ":" / "@"
 
-	unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
+  unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
 
-	pct-encoded   = "%" HEXDIG HEXDIG
+  pct-encoded   = "%" HEXDIG HEXDIG
 
-	sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
-	                "*" / "+" / "," / ";" / "="
+  sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
+                  "*" / "+" / "," / ";" / "="
 </pre>
 
 <h2 id="acks" class="no-num">
