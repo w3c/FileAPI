@@ -3614,7 +3614,8 @@ Revocation of a <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-14
 and if it is dereferenced after it is revoked,
 user agents must act as if a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a> has occurred.
 This section describes a supplemental interface to the URL specification <a data-link-type="biblio" href="#biblio-url">[URL]</a> and presents methods for <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-16">Blob URL</a> creation and revocation.</p>
-<pre class="idl def">partial interface <a class="idl-code" data-link-type="interface" href="https://url.spec.whatwg.org/#url">URL</a> {
+<pre class="idl def">[Exposed=Window,DedicatedWorker,SharedWorker]
+partial interface <a class="idl-code" data-link-type="interface" href="https://url.spec.whatwg.org/#url">URL</a> {
   static DOMString <a class="idl-code" data-link-type="method" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-6">createObjectURL</a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-94">Blob</a> <a class="idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-7">blob</a>);
   static DOMString <a class="idl-code" data-link-type="method" href="#dfn-createFor" id="ref-for-dfn-createFor-6">createFor</a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-95">Blob</a> <a class="idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-8">blob</a>);
   static void <a class="idl-code" data-link-type="method" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL-2">revokeObjectURL</a>(DOMString <a class="idl-code" data-link-type="argument" href="#dfn-urlarg" id="ref-for-dfn-urlarg-1">url</a>);
@@ -4378,6 +4379,7 @@ interface <a href="#dfn-FileReaderSync">FileReaderSync</a> {
   DOMString <a class="idl-code" data-link-type="method" href="#dfn-readAsDataURLSync">readAsDataURL</a>(<a data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
 };
 
+[Exposed=Window,DedicatedWorker,SharedWorker]
 partial interface <a class="idl-code" data-link-type="interface" href="https://url.spec.whatwg.org/#url">URL</a> {
   static DOMString <a class="idl-code" data-link-type="method" href="#dfn-createObjectURL">createObjectURL</a>(<a data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
   static DOMString <a class="idl-code" data-link-type="method" href="#dfn-createFor">createFor</a>(<a data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
