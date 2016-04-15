@@ -1190,6 +1190,11 @@ Possible extra rowspan handling
 
 /** Autolinks produced using Bikeshed *****************************************/
 
+	[data-link-type]:not([data-link-type="dfn"]),
+	[data-dfn-type]:not([data-dfn-type="dfn"]) {
+		hyphens: none;
+	}
+
 	[data-link-type="property"]::before,
 	[data-link-type="propdesc"]::before,
 	[data-link-type="descriptor"]::before,
@@ -1252,6 +1257,9 @@ Possible extra rowspan handling
 	}
 	.heading > a.self-link {
 		font-size: 83%;
+	}
+	li > a.self-link {
+		left: calc(-1 * (3.5rem - 26px) - 2em);
 	}
 	dfn > a.self-link {
 		top: auto;
@@ -1396,7 +1404,7 @@ Possible extra rowspan handling
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="http://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">File API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-03-25">25 March 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-04-15">15 April 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1720,7 +1728,7 @@ Dependencies</a> <a href="#ref-for-dfn-conforming-implementation-3">(2)</a> <a h
    </dl>
    <p>User agents that use ECMAScript to implement the APIs defined in this specification
 must implement them in a manner consistent with the ECMAScript Bindings
-defined in the Web IDL specification <a data-link-type="biblio" href="#biblio-webidl">[WEBIDL]</a> as this specification uses that specification and terminology.</p>
+defined in the Web IDL specification <a data-link-type="biblio" href="#biblio-webidl">[WebIDL]</a> as this specification uses that specification and terminology.</p>
    <h3 class="heading settled" data-level="2.1" id="dependencies"><span class="secno">2.1. </span><span class="content"> Dependencies</span><a class="self-link" href="#dependencies"></a></h3>
    <p>This specification relies on underlying specifications.</p>
    <dl>
@@ -2402,9 +2410,9 @@ these objects are defined in HTML <a data-link-type="biblio" href="#biblio-html"
 The <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-21">File</a></code> interface, which inherits from <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-43">Blob</a></code>, is immutable,
 and thus represents file data that can be read into memory at the time a <a data-link-type="dfn" href="#readOperation" id="ref-for-readOperation-2">read operation</a> is initiated.
 User agents must process reads on files that no longer exist at the time of read as <a data-link-type="dfn" href="#file-error-read" id="ref-for-file-error-read-1">errors</a>,
-throwing a <code class="idl"><a data-link-type="idl" href="#exceptdef-notfounderror" id="ref-for-exceptdef-notfounderror-1">NotFoundError</a></code> exception
+throwing a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notfounderror">NotFoundError</a></code> exception
 if using a <code class="idl"><a data-link-type="idl" href="#dfn-FileReaderSync" id="ref-for-dfn-FileReaderSync-2">FileReaderSync</a></code> on a Web Worker <a data-link-type="biblio" href="#biblio-workers">[Workers]</a> or firing an <code class="idl"><a class="idl-code" data-link-type="event" href="#dfn-error-event" id="ref-for-dfn-error-event-1">error</a></code> event
-with the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dfn-error" id="ref-for-dfn-error-1">error</a></code> attribute returning a <code class="idl"><a data-link-type="idl" href="#exceptdef-notfounderror" id="ref-for-exceptdef-notfounderror-2">NotFoundError</a></code> <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#domerror">DOMError</a></code>.</p>
+with the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dfn-error" id="ref-for-dfn-error-1">error</a></code> attribute returning a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notfounderror">NotFoundError</a></code> <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#domerror">DOMError</a></code>.</p>
    <div class="example" id="example-cd21d22d">
     <a class="self-link" href="#example-cd21d22d"></a> In the examples below, metadata from a file object is displayed meaningfully, and a file object is created with a name and a last modified date. 
 <pre class="lang-javascript highlight"><span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"filePicker"</span><span class="p">).</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
@@ -2861,7 +2869,7 @@ If <code class="idl"><a data-link-type="idl" href="#dfn-readyState" id="ref-for-
    <p>The <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-5">readAsText()</a></code> method can be called with an optional parameter, <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader/readAsText(blob, label), FileReaderSync/readAsText(blob, label)" data-dfn-type="argument" data-export="" data-lt="label" id="dfn-label">label<span class="dfn-panel" data-deco=""><b><a href="#dfn-label">#dfn-label</a></b><b>Referenced in:</b><span><a href="#ref-for-dfn-label-1">7.3. 
 The FileReader API</a></span><span><a href="#ref-for-dfn-label-2">7.6.1. 
 The FileReaderSync API</a></span></span></dfn>,
-which is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></code> argument that represents the label of an encoding <a data-link-type="biblio" href="#biblio-whatwg-encoding">[Encoding]</a>;
+which is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></code> argument that represents the label of an encoding <a data-link-type="biblio" href="#biblio-encoding">[Encoding]</a>;
 if provided, it must be used as part of the <a data-link-type="dfn" href="#encoding-determination" id="ref-for-encoding-determination-3">encoding determination</a> used when processing this method call.</p>
    <p>When the <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="method" data-export="" data-lt="readAsText(blob, label)|readAsText(blob)" id="dfn-readAsText">readAsText(blob, optional label)<span class="dfn-panel" data-deco=""><b><a href="#dfn-readAsText">#dfn-readAsText</a></b><b>Referenced in:</b><span><a href="#ref-for-dfn-readAsText-1">7.3. 
 The FileReader API</a></span><span><a href="#ref-for-dfn-readAsText-2">7.3.4. 
@@ -3044,9 +3052,9 @@ The abort() method</a> <a href="#ref-for-fire-a-progress-event-19">(2)</a></span
 the following are normative:</p>
    <ul>
     <li data-md="">
-     <p>The progress event <code>e</code> does not bubble. <code>e.bubbles</code> must be false <a data-link-type="biblio" href="#biblio-whatwg-dom">[DOM]</a></p>
+     <p>The progress event <code>e</code> does not bubble. <code>e.bubbles</code> must be false <a data-link-type="biblio" href="#biblio-dom">[DOM]</a></p>
     <li data-md="">
-     <p>The progress event <code>e</code> is NOT cancelable. <code>e.cancelable</code> must be false <a data-link-type="biblio" href="#biblio-whatwg-dom">[DOM]</a></p>
+     <p>The progress event <code>e</code> is NOT cancelable. <code>e.cancelable</code> must be false <a data-link-type="biblio" href="#biblio-dom">[DOM]</a></p>
    </ul>
    <h4 class="heading settled" data-level="7.5.1" id="event-summary"><span class="secno">7.5.1. </span><span class="content"> Event Summary</span><a class="self-link" href="#event-summary"></a></h4>
    <p>The following are the events that are <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">fired</a> at <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader-18">FileReader</a></code> objects.</p>
@@ -3279,20 +3287,20 @@ The list below of potential error conditions is <em>informative</em>.</p>
 at the time one of the <a data-link-type="dfn" href="#asynchronous-read-methods" id="ref-for-asynchronous-read-methods-2">asynchronous read methods</a> or <a data-link-type="dfn" href="#read-method-sync" id="ref-for-read-method-sync-3">synchronous read methods</a> are called.
 This may be due to it having been moved or deleted after a reference to it was acquired
 (e.g. concurrent modification with another application).
-See <code class="idl"><a data-link-type="idl" href="#exceptdef-notfounderror" id="ref-for-exceptdef-notfounderror-3">NotFoundError</a></code>.</p>
+See <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notfounderror">NotFoundError</a></code>.</p>
     <li data-md="">
      <p>A <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-42">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-72">Blob</a></code> may be unreadable.
 This may be due to permission problems that occur after a reference to a <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-43">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-73">Blob</a></code> has been acquired
 (e.g. concurrent lock with another application).
 Additionally, the <a data-link-type="dfn" href="#snapshot-state" id="ref-for-snapshot-state-6">snapshot state</a> may have changed.
-See <code class="idl"><a data-link-type="idl" href="#exceptdef-notreadableerror" id="ref-for-exceptdef-notreadableerror-1">NotReadableError</a></code>.</p>
+See <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notreadableerror">NotReadableError</a></code>.</p>
     <li data-md="">
      <p>User agents MAY determine that some files are unsafe for use within Web applications.
 A file may change on disk since the original file selection,
 thus resulting in an invalid read.
 Additionally, some file and directory structures may be considered restricted by the underlying filesystem;
 attempts to read from them may be considered a security violation.
-See <a href="#security-discussion">§10 Security Considerations</a> and <code class="idl"><a data-link-type="idl" href="#exceptdef-securityerror" id="ref-for-exceptdef-securityerror-1">SecurityError</a></code>.</p>
+See <a href="#security-discussion">§10 Security Considerations</a> and <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#securityerror">SecurityError</a></code>.</p>
    </ul>
    <h3 class="heading settled" data-level="8.1" id="dfn-error-codes"><span class="secno">8.1. </span><span class="content"> Throwing an Exception or Returning an Error</span><a class="self-link" href="#dfn-error-codes"></a></h3>
    <p><em>This section is normative.</em></p>
@@ -3326,49 +3334,41 @@ or otherwise return null.</p>
       <th>Description and Failure Reason 
     <tbody>
      <tr>
-      <td><dfn class="dfn-paneled idl-code" data-dfn-type="exception" data-export="" data-lt="NotFoundError" id="exceptdef-notfounderror">NotFoundError<span class="dfn-panel" data-deco=""><b><a href="#exceptdef-notfounderror">#exceptdef-notfounderror</a></b><b>Referenced in:</b><span><a href="#ref-for-exceptdef-notfounderror-1">5.2. 
-Attributes</a> <a href="#ref-for-exceptdef-notfounderror-2">(2)</a></span><span><a href="#ref-for-exceptdef-notfounderror-3">8. 
-Errors and Exceptions</a></span><span><a href="#ref-for-exceptdef-notfounderror-4">8.1. 
-Throwing an Exception or Returning an Error</a> <a href="#ref-for-exceptdef-notfounderror-5">(2)</a></span></span></dfn> 
+      <td><code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notfounderror">NotFoundError</a></code> 
       <td>
        If the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-46">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-76">Blob</a></code> resource could not be found at the time the read was processed,
-        this is the <dfn class="idl-code" data-dfn-type="exception" data-export="" id="NotFoundFR">NotFound<a class="self-link" href="#NotFoundFR"></a></dfn> <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-15">failure reason</a>. 
-       <p>For asynchronous read methods the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dfn-error" id="ref-for-dfn-error-8">error</a></code> attribute must return a <code class="idl"><a data-link-type="idl" href="#exceptdef-notfounderror" id="ref-for-exceptdef-notfounderror-4">NotFoundError</a></code> exception
-        and synchronous read methods must <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> a <code class="idl"><a data-link-type="idl" href="#exceptdef-notfounderror" id="ref-for-exceptdef-notfounderror-5">NotFoundError</a></code> exception.</p>
+        this is the <dfn data-dfn-type="dfn" data-noexport="" id="NotFoundFR">NotFound<a class="self-link" href="#NotFoundFR"></a></dfn> <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-15">failure reason</a>. 
+       <p>For asynchronous read methods the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dfn-error" id="ref-for-dfn-error-8">error</a></code> attribute must return a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notfounderror">NotFoundError</a></code> exception
+        and synchronous read methods must <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notfounderror">NotFoundError</a></code> exception.</p>
      <tr>
-      <td><dfn class="dfn-paneled idl-code" data-dfn-type="exception" data-export="" data-lt="SecurityError" id="exceptdef-securityerror">SecurityError<span class="dfn-panel" data-deco=""><b><a href="#exceptdef-securityerror">#exceptdef-securityerror</a></b><b>Referenced in:</b><span><a href="#ref-for-exceptdef-securityerror-1">8. 
-Errors and Exceptions</a></span><span><a href="#ref-for-exceptdef-securityerror-2">8.1. 
-Throwing an Exception or Returning an Error</a> <a href="#ref-for-exceptdef-securityerror-3">(2)</a></span><span><a href="#ref-for-exceptdef-securityerror-4">10. 
-Security Considerations</a> <a href="#ref-for-exceptdef-securityerror-5">(2)</a></span></span></dfn> 
+      <td><code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#securityerror">SecurityError</a></code> 
       <td>
        If: 
        <ul>
         <li data-md="">
-         <p>it is determined that certain files are unsafe for access within a Web application, this is the <dfn class="idl-code" data-dfn-type="exception" data-export="" id="UnsafeFileFR">UnsafeFile<a class="self-link" href="#UnsafeFileFR"></a></dfn> <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-16">failure reason</a>.</p>
+         <p>it is determined that certain files are unsafe for access within a Web application, this is the <dfn data-dfn-type="dfn" data-noexport="" id="UnsafeFileFR">UnsafeFile<a class="self-link" href="#UnsafeFileFR"></a></dfn> <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-16">failure reason</a>.</p>
         <li data-md="">
-         <p>it is determined that too many read calls are being made on <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-47">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-77">Blob</a></code> resources, this is the <dfn class="idl-code" data-dfn-type="exception" data-export="" id="TooManyReadsFR">TooManyReads<a class="self-link" href="#TooManyReadsFR"></a></dfn> <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-17">failure reason</a>.</p>
+         <p>it is determined that too many read calls are being made on <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-47">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-77">Blob</a></code> resources, this is the <dfn data-dfn-type="dfn" data-noexport="" id="TooManyReadsFR">TooManyReads<a class="self-link" href="#TooManyReadsFR"></a></dfn> <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-17">failure reason</a>.</p>
        </ul>
-       <p>For asynchronous read methods the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dfn-error" id="ref-for-dfn-error-9">error</a></code> attribute may return a <code class="idl"><a data-link-type="idl" href="#exceptdef-securityerror" id="ref-for-exceptdef-securityerror-2">SecurityError</a></code> exception
-        and synchronous read methods may <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> a <code class="idl"><a data-link-type="idl" href="#exceptdef-securityerror" id="ref-for-exceptdef-securityerror-3">SecurityError</a></code> exception.</p>
+       <p>For asynchronous read methods the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dfn-error" id="ref-for-dfn-error-9">error</a></code> attribute may return a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#securityerror">SecurityError</a></code> exception
+        and synchronous read methods may <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#securityerror">SecurityError</a></code> exception.</p>
        <p>This is a security error to be used in situations not covered by any other <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-18">failure reason</a>.</p>
      <tr>
-      <td><dfn class="dfn-paneled idl-code" data-dfn-type="exception" data-export="" data-lt="NotReadableError" id="exceptdef-notreadableerror">NotReadableError<span class="dfn-panel" data-deco=""><b><a href="#exceptdef-notreadableerror">#exceptdef-notreadableerror</a></b><b>Referenced in:</b><span><a href="#ref-for-exceptdef-notreadableerror-1">8. 
-Errors and Exceptions</a></span><span><a href="#ref-for-exceptdef-notreadableerror-2">8.1. 
-Throwing an Exception or Returning an Error</a> <a href="#ref-for-exceptdef-notreadableerror-3">(2)</a></span></span></dfn> 
+      <td><code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notreadableerror">NotReadableError</a></code> 
       <td>
        If: 
        <ul>
         <li data-md="">
          <p>the <a data-link-type="dfn" href="#snapshot-state" id="ref-for-snapshot-state-7">snapshot state</a> of a <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-48">File</a></code> or a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-78">Blob</a></code> does not match the state of the underlying storage,
-this is the <dfn class="idl-code" data-dfn-type="exception" data-export="" id="SnapshotStateFR">SnapshotState<a class="self-link" href="#SnapshotStateFR"></a></dfn> <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-19">failure reason</a>.</p>
+this is the <dfn data-dfn-type="dfn" data-noexport="" id="SnapshotStateFR">SnapshotState<a class="self-link" href="#SnapshotStateFR"></a></dfn> <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-19">failure reason</a>.</p>
         <li data-md="">
          <p>the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-49">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-79">Blob</a></code> cannot be read,
 typically due due to permission problems that occur after a <a data-link-type="dfn" href="#snapshot-state" id="ref-for-snapshot-state-8">snapshot state</a> has been established
 (e.g. concurrent lock on the underlying storage with another application)
-then this is the <dfn class="idl-code" data-dfn-type="exception" data-export="" id="FileLockFR">FileLock<a class="self-link" href="#FileLockFR"></a></dfn> <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-20">failure reason</a>.</p>
+then this is the <dfn data-dfn-type="dfn" data-noexport="" id="FileLockFR">FileLock<a class="self-link" href="#FileLockFR"></a></dfn> <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-20">failure reason</a>.</p>
        </ul>
-       <p>For asynchronous read methods the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dfn-error" id="ref-for-dfn-error-10">error</a></code> attribute must return a <code class="idl"><a data-link-type="idl" href="#exceptdef-notreadableerror" id="ref-for-exceptdef-notreadableerror-2">NotReadableError</a></code> exception
-        and synchronous read methods must <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> a <code class="idl"><a data-link-type="idl" href="#exceptdef-notreadableerror" id="ref-for-exceptdef-notreadableerror-3">NotReadableError</a></code> exception.</p>
+       <p>For asynchronous read methods the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dfn-error" id="ref-for-dfn-error-10">error</a></code> attribute must return a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notreadableerror">NotReadableError</a></code> exception
+        and synchronous read methods must <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notreadableerror">NotReadableError</a></code> exception.</p>
    </table>
    <h2 class="heading settled" data-level="9" id="url"><span class="secno">9. </span><span class="content"> A URL for Blob and File reference</span><a class="self-link" href="#url"></a></h2>
    <p>This section defines a scheme for a URL used to refer to <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-80">Blob</a></code> objects (and <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-50">File</a></code> objects).</p>
@@ -3536,7 +3536,7 @@ Neither the <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-creat
 nor the <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createFor" id="ref-for-dfn-createFor-5">createFor()</a></code></code> method generate a fragment.</p>
    <h3 class="heading settled" data-level="9.4" id="requestResponseModel"><span class="secno">9.4. </span><span class="content"> Dereferencing Model for Blob URLs</span><a class="self-link" href="#requestResponseModel"></a></h3>
    <p><em>This section is informative.</em></p>
-   <p class="note" role="note">Note: The <a data-link-type="biblio" href="#biblio-whatwg-url">[URL]</a> and <a data-link-type="biblio" href="#biblio-fetch">[Fetch]</a> specifications should be considered normative for parsing and fetching <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-6">Blob URLs</a>.</p>
+   <p class="note" role="note">Note: The <a data-link-type="biblio" href="#biblio-url">[URL]</a> and <a data-link-type="biblio" href="#biblio-fetch">[Fetch]</a> specifications should be considered normative for parsing and fetching <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-6">Blob URLs</a>.</p>
    <p><a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-7">Blob URLs</a> are <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="dereference" data-noexport="" id="dereference">dereferenced<span class="dfn-panel" data-deco=""><b><a href="#dereference">#dereference</a></b><b>Referenced in:</b><span><a href="#ref-for-dereference-1">4.2. 
 Attributes</a></span><span><a href="#ref-for-dereference-2">9.3.3. 
 Discussion of Fragment Identifier</a></span><span><a href="#ref-for-dereference-3">9.5.1. 
@@ -3613,7 +3613,7 @@ supported by global objects <code class="idl"><a data-link-type="idl" href="http
 Revocation of a <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-14">Blob URL</a> decouples the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-15">Blob URL</a> from the resource it refers to,
 and if it is dereferenced after it is revoked,
 user agents must act as if a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a> has occurred.
-This section describes a supplemental interface to the URL specification <a data-link-type="biblio" href="#biblio-whatwg-url">[URL]</a> and presents methods for <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-16">Blob URL</a> creation and revocation.</p>
+This section describes a supplemental interface to the URL specification <a data-link-type="biblio" href="#biblio-url">[URL]</a> and presents methods for <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-16">Blob URL</a> creation and revocation.</p>
 <pre class="idl def">partial interface <a class="idl-code" data-link-type="interface" href="https://url.spec.whatwg.org/#url">URL</a> {
   static DOMString <a class="idl-code" data-link-type="method" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-6">createObjectURL</a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-94">Blob</a> <a class="idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-7">blob</a>);
   static DOMString <a class="idl-code" data-link-type="method" href="#dfn-createFor" id="ref-for-dfn-createFor-6">createFor</a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-95">Blob</a> <a class="idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-8">blob</a>);
@@ -3622,8 +3622,8 @@ This section describes a supplemental interface to the URL specification <a data
 </pre>
    <p>ECMAScript user agents of this specification must ensure
 that they do not expose a <code>prototype</code> property on the URL interface object
-unless the user agent also implements the URL <a data-link-type="biblio" href="#biblio-whatwg-url">[URL]</a> specification.
-In other words, <code>URL.prototype</code> must evaluate to true if the user agent implements the URL <a data-link-type="biblio" href="#biblio-whatwg-url">[URL]</a> specification,
+unless the user agent also implements the URL <a data-link-type="biblio" href="#biblio-url">[URL]</a> specification.
+In other words, <code>URL.prototype</code> must evaluate to true if the user agent implements the URL <a data-link-type="biblio" href="#biblio-url">[URL]</a> specification,
 and must NOT evaluate to true otherwise.</p>
    <h4 class="heading settled" data-level="9.5.1" id="createRevokeMethodsParams"><span class="secno">9.5.1. </span><span class="content"> Methods and Parameters</span><a class="self-link" href="#createRevokeMethodsParams"></a></h4>
    <dl>
@@ -3855,8 +3855,8 @@ and a user agent may prevent file access to any selections by making the <code c
      <p><dfn data-dfn-type="dfn" data-noexport="" id="sensitive-files">System-sensitive files<a class="self-link" href="#sensitive-files"></a></dfn> (e.g. files in /usr/bin, password files, and other native operating system executables)
 typically should not be exposed to web content,
 and should not be accessed via <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-47">Blob URLs</a>.
-User agents may <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> a <code class="idl"><a data-link-type="idl" href="#exceptdef-securityerror" id="ref-for-exceptdef-securityerror-4">SecurityError</a></code> exception for synchronous read methods,
-or return a <code class="idl"><a data-link-type="idl" href="#exceptdef-securityerror" id="ref-for-exceptdef-securityerror-5">SecurityError</a></code> exception for asynchronous reads.</p>
+User agents may <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#securityerror">SecurityError</a></code> exception for synchronous read methods,
+or return a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#securityerror">SecurityError</a></code> exception for asynchronous reads.</p>
    </ul>
    <p class="issue" id="issue-61296551"><a class="self-link" href="#issue-61296551"></a> This section is provisional; more security data may supplement this in subsequent drafts.</p>
    <h2 class="heading settled" data-level="11" id="requirements"><span class="secno">11. </span><span class="content"> Requirements and Use Cases</span><a class="self-link" href="#requirements"></a></h2>
@@ -4049,8 +4049,6 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
    <li><a href="#dfn-loadstart-event">loadstart</a><span>, in §7.5.1</span>
    <li><a href="#dfn-name">name</a><span>, in §5.2</span>
    <li><a href="#NotFoundFR">NotFound</a><span>, in §8.1</span>
-   <li><a href="#exceptdef-notfounderror">NotFoundError</a><span>, in §8.1</span>
-   <li><a href="#exceptdef-notreadableerror">NotReadableError</a><span>, in §8.1</span>
    <li><a href="#dfn-onabort">onabort</a><span>, in §7.3.2</span>
    <li><a href="#dfn-onerror">onerror</a><span>, in §7.3.2</span>
    <li><a href="#dfn-onload">onload</a><span>, in §7.3.2</span>
@@ -4100,7 +4098,6 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
    <li><a href="#dfn-result">result</a><span>, in §7.3.4.1</span>
    <li><a href="#revokeList">Revocation List</a><span>, in §9.6</span>
    <li><a href="#dfn-revokeObjectURL">revokeObjectURL(url)</a><span>, in §9.5.1</span>
-   <li><a href="#exceptdef-securityerror">SecurityError</a><span>, in §8.1</span>
    <li><a href="#dfn-size">size</a><span>, in §4.2</span>
    <li><a href="#dfn-slice">slice(start, end, contentType), slice(start, end), slice(start), slice()</a><span>, in §4.3.1</span>
    <li><a href="#SnapshotStateFR">SnapshotState</a><span>, in §8.1</span>
@@ -4126,7 +4123,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
    <li>
-    <a data-link-type="biblio" href="#biblio-whatwg-dom">[WHATWG-DOM]</a> defines the following terms:
+    <a data-link-type="biblio">[DOM]</a> defines the following terms:
     <ul>
      <li><a href="https://dom.spec.whatwg.org/#domerror">DOMError</a>
      <li><a href="https://dom.spec.whatwg.org/#eventtarget">EventTarget</a>
@@ -4134,7 +4131,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
      <li><a href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a>
     </ul>
    <li>
-    <a data-link-type="biblio" href="#biblio-whatwg-encoding">[WHATWG-ENCODING]</a> defines the following terms:
+    <a data-link-type="biblio">[Encoding]</a> defines the following terms:
     <ul>
      <li><a href="https://encoding.spec.whatwg.org/#byte">byte</a>
      <li><a href="https://encoding.spec.whatwg.org/#decode">decode</a>
@@ -4143,7 +4140,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
      <li><a href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a>
     </ul>
    <li>
-    <a data-link-type="biblio" href="#biblio-fetch">[FETCH]</a> defines the following terms:
+    <a data-link-type="biblio">[Fetch]</a> defines the following terms:
     <ul>
      <li><a href="https://fetch.spec.whatwg.org/#concept-body">body</a>
      <li><a href="https://fetch.spec.whatwg.org/#http-cors-protocol">cross-origin request</a>
@@ -4152,7 +4149,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
      <li><a href="https://fetch.spec.whatwg.org/#concept-response">response</a>
     </ul>
    <li>
-    <a data-link-type="biblio" href="#biblio-html">[HTML]</a> defines the following terms:
+    <a data-link-type="biblio">[HTML]</a> defines the following terms:
     <ul>
      <li><a href="https://html.spec.whatwg.org/multipage/interaction.html#datatransfer">DataTransfer</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a>
@@ -4182,29 +4179,29 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#unloading-document-cleanup-steps">unloading document cleanup steps</a>
     </ul>
    <li>
-    <a data-link-type="biblio" href="#biblio-mimesniff">[MIMESNIFF]</a> defines the following terms:
+    <a data-link-type="biblio">[MIMESNIFF]</a> defines the following terms:
     <ul>
      <li><a href="https://mimesniff.spec.whatwg.org/#parsable-mime-type">parsable mime type</a>
      <li><a href="https://mimesniff.spec.whatwg.org/#parse-a-mime-type">parse a mime type</a>
     </ul>
    <li>
-    <a data-link-type="biblio" href="#biblio-progress-events">[progress-events]</a> defines the following terms:
+    <a data-link-type="biblio">[PROGRESS-EVENTS]</a> defines the following terms:
     <ul>
      <li><a href="https://www.w3.org/TR/progress-events/#progressevent">ProgressEvent</a>
     </ul>
    <li>
-    <a data-link-type="biblio" href="#biblio-streams">[STREAMS]</a> defines the following terms:
+    <a data-link-type="biblio">[STREAMS]</a> defines the following terms:
     <ul>
      <li><a href="https://streams.spec.whatwg.org/#chunk">chunk</a>
     </ul>
    <li>
-    <a data-link-type="biblio" href="#biblio-typedarray">[typedarray]</a> defines the following terms:
+    <a data-link-type="biblio">[TypedArray]</a> defines the following terms:
     <ul>
      <li><a href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBuffer">ArrayBuffer</a>
      <li><a href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBufferView">ArrayBufferView</a>
     </ul>
    <li>
-    <a data-link-type="biblio" href="#biblio-whatwg-url">[WHATWG-URL]</a> defines the following terms:
+    <a data-link-type="biblio">[URL]</a> defines the following terms:
     <ul>
      <li><a href="https://url.spec.whatwg.org/#url">URL</a>
      <li><a href="https://url.spec.whatwg.org/#concept-url-fragment">fragment</a>
@@ -4216,15 +4213,18 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
      <li><a href="https://url.spec.whatwg.org/#concept-url">url</a>
     </ul>
    <li>
-    <a data-link-type="biblio" href="#biblio-webidl">[WebIDL]</a> defines the following terms:
+    <a data-link-type="biblio">[WebIDL]</a> defines the following terms:
     <ul>
      <li><a href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a>
      <li><a href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a>
+     <li><a href="https://heycam.github.io/webidl/#notfounderror">NotFoundError</a>
+     <li><a href="https://heycam.github.io/webidl/#notreadableerror">NotReadableError</a>
+     <li><a href="https://heycam.github.io/webidl/#securityerror">SecurityError</a>
      <li><a href="https://heycam.github.io/webidl/#dfn-supported-property-indices">supported property indices</a>
      <li><a href="https://heycam.github.io/webidl/#dfn-throw">throw</a>
     </ul>
    <li>
-    <a data-link-type="biblio" href="#biblio-xhr">[XHR]</a> defines the following terms:
+    <a data-link-type="biblio">[XHR]</a> defines the following terms:
     <ul>
      <li><a href="https://xhr.spec.whatwg.org/#xmlhttprequest">XMLHttpRequest</a>
      <li><a href="https://xhr.spec.whatwg.org/#dom-xmlhttprequest-getallresponseheaders">getAllResponseHeaders()</a>
@@ -4234,16 +4234,20 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
+   <dt id="biblio-dom">[DOM]
+   <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/">DOM Standard</a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
    <dt id="biblio-ecma-262">[ECMA-262]
    <dd><a href="https://tc39.github.io/ecma262/">ECMAScript Language Specification</a>. URL: <a href="https://tc39.github.io/ecma262/">https://tc39.github.io/ecma262/</a>
-   <dt id="biblio-fetch">[FETCH]
+   <dt id="biblio-encoding">[Encoding]
+   <dd>Anne van Kesteren. <a href="https://encoding.spec.whatwg.org/">Encoding Standard</a>. Living Standard. URL: <a href="https://encoding.spec.whatwg.org/">https://encoding.spec.whatwg.org/</a>
+   <dt id="biblio-fetch">[Fetch]
    <dd>Anne van Kesteren. <a href="https://fetch.spec.whatwg.org/">Fetch Standard</a>. Living Standard. URL: <a href="https://fetch.spec.whatwg.org/">https://fetch.spec.whatwg.org/</a>
    <dt id="biblio-html">[HTML]
    <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-mimesniff">[MIMESNIFF]
    <dd>Gordon P. Hemsley. <a href="https://mimesniff.spec.whatwg.org/">MIME Sniffing Standard</a>. Living Standard. URL: <a href="https://mimesniff.spec.whatwg.org/">https://mimesniff.spec.whatwg.org/</a>
    <dt id="biblio-progress-events">[PROGRESS-EVENTS]
-   <dd>Anne van Kesteren; Charles McCathie Nevile; Jungkee Song. <a href="http://www.w3.org/TR/progress-events/">Progress Events</a>. 11 February 2014. REC. URL: <a href="http://www.w3.org/TR/progress-events/">http://www.w3.org/TR/progress-events/</a>
+   <dd>Anne van Kesteren; Charles McCathie Nevile; Jungkee Song. <a href="http://dvcs.w3.org/hg/progress/raw-file/tip/Overview.html">Progress Events</a>. 11 February 2014. REC. URL: <a href="http://dvcs.w3.org/hg/progress/raw-file/tip/Overview.html">http://dvcs.w3.org/hg/progress/raw-file/tip/Overview.html</a>
    <dt id="biblio-rfc2046">[RFC2046]
    <dd>N. Freed; N. Borenstein. <a href="https://tools.ietf.org/html/rfc2046">Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types</a>. November 1996. Draft Standard. URL: <a href="https://tools.ietf.org/html/rfc2046">https://tools.ietf.org/html/rfc2046</a>
    <dt id="biblio-rfc2119">[RFC2119]
@@ -4262,19 +4266,15 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
    <dd>R. Fielding, Ed.; J. Reschke, Ed.. <a href="https://tools.ietf.org/html/rfc7231">Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content</a>. June 2014. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc7231">https://tools.ietf.org/html/rfc7231</a>
    <dt id="biblio-streams">[STREAMS]
    <dd>Domenic Denicola. <a href="https://streams.spec.whatwg.org/">Streams Standard</a>. Living Standard. URL: <a href="https://streams.spec.whatwg.org/">https://streams.spec.whatwg.org/</a>
-   <dt id="biblio-typedarray">[TYPEDARRAY]
+   <dt id="biblio-typedarray">[TypedArray]
    <dd>David Herman; Kenneth Russell. <a href="https://www.khronos.org/registry/typedarray/specs/latest/">Typed Array Specification</a>. 26 June 2013. Khronos Working Draft. URL: <a href="https://www.khronos.org/registry/typedarray/specs/latest/">https://www.khronos.org/registry/typedarray/specs/latest/</a>
-   <dt id="biblio-unicode">[UNICODE]
+   <dt id="biblio-unicode">[Unicode]
    <dd><a href="http://www.unicode.org/versions/latest/">The Unicode Standard</a>. URL: <a href="http://www.unicode.org/versions/latest/">http://www.unicode.org/versions/latest/</a>
+   <dt id="biblio-url">[URL]
+   <dd>Anne van Kesteren; Sam Ruby. <a href="https://url.spec.whatwg.org/">URL Standard</a>. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a>
    <dt id="biblio-webidl">[WebIDL]
    <dd>Cameron McCormack; Boris Zbarsky. <a href="https://heycam.github.io/webidl/">WebIDL Level 1</a>. 8 March 2016. CR. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
-   <dt id="biblio-whatwg-dom">[WHATWG-DOM]
-   <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/">DOM Standard</a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
-   <dt id="biblio-whatwg-encoding">[WHATWG-ENCODING]
-   <dd>Anne van Kesteren. <a href="https://encoding.spec.whatwg.org/">Encoding Standard</a>. Living Standard. URL: <a href="https://encoding.spec.whatwg.org/">https://encoding.spec.whatwg.org/</a>
-   <dt id="biblio-whatwg-url">[WHATWG-URL]
-   <dd>Anne van Kesteren; Sam Ruby. <a href="https://url.spec.whatwg.org/">URL Standard</a>. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a>
-   <dt id="biblio-workers">[WORKERS]
+   <dt id="biblio-workers">[Workers]
    <dd>Ian Hickson. <a href="http://www.w3.org/TR/workers/">Web Workers</a>. 24 September 2015. WD. URL: <a href="http://www.w3.org/TR/workers/">http://www.w3.org/TR/workers/</a>
    <dt id="biblio-xhr">[XHR]
    <dd>Anne van Kesteren. <a href="https://xhr.spec.whatwg.org/">XMLHttpRequest Standard</a>. Living Standard. URL: <a href="https://xhr.spec.whatwg.org/">https://xhr.spec.whatwg.org/</a>
@@ -4289,7 +4289,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
    <dd>T. Berners-Lee; R. Fielding; L. Masinter. <a href="https://tools.ietf.org/html/rfc3986">Uniform Resource Identifier (URI): Generic Syntax</a>. January 2005. Internet Standard. URL: <a href="https://tools.ietf.org/html/rfc3986">https://tools.ietf.org/html/rfc3986</a>
    <dt id="biblio-rfc4122">[RFC4122]
    <dd>P. Leach; M. Mealling; R. Salz. <a href="https://tools.ietf.org/html/rfc4122">A Universally Unique IDentifier (UUID) URN Namespace</a>. July 2005. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc4122">https://tools.ietf.org/html/rfc4122</a>
-   <dt id="biblio-webrtc">[WEBRTC]
+   <dt id="biblio-webrtc">[WebRTC]
    <dd>Adam Bergkvist; et al. <a href="http://www.w3.org/TR/webrtc/">WebRTC 1.0: Real-time Communication Between Browsers</a>. 28 January 2016. WD. URL: <a href="http://www.w3.org/TR/webrtc/">http://www.w3.org/TR/webrtc/</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>

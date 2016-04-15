@@ -246,7 +246,7 @@ The following conformance classes are defined by this specification:
 
 User agents that use ECMAScript to implement the APIs defined in this specification
 must implement them in a manner consistent with the ECMAScript Bindings
-defined in the Web IDL specification [[WEBIDL]] as this specification uses that specification and terminology.
+defined in the Web IDL specification [[WebIDL]] as this specification uses that specification and terminology.
 
 
 <h3 id="dependencies">
@@ -1600,16 +1600,16 @@ or otherwise return null.
     <tr>
       <th>Type
       <th>Description and Failure Reason
-  <tbody dfn-type=exception>
+  <tbody>
     <tr>
-      <td><dfn>NotFoundError</dfn>
+      <td>{{NotFoundError}}
       <td>If the {{File}} or {{Blob}} resource could not be found at the time the read was processed,
         this is the <dfn id="NotFoundFR">NotFound</dfn> <a>failure reason</a>.
 
         For asynchronous read methods the {{error!!attribute}} attribute must return a {{NotFoundError}} exception
         and synchronous read methods must <a>throw</a> a {{NotFoundError}} exception.
     <tr>
-      <td><dfn>SecurityError</dfn>
+      <td>{{SecurityError}}
       <td>If:
         * it is determined that certain files are unsafe for access within a Web application, this is the <dfn id="UnsafeFileFR">UnsafeFile</dfn> <a>failure reason</a>.
         * it is determined that too many read calls are being made on {{File}} or {{Blob}} resources, this is the <dfn id="TooManyReadsFR">TooManyReads</dfn> <a>failure reason</a>.
@@ -1619,7 +1619,7 @@ or otherwise return null.
 
         This is a security error to be used in situations not covered by any other <a>failure reason</a>.
     <tr>
-      <td><dfn>NotReadableError</dfn>
+      <td>{{NotReadableError}}
       <td>If:
         * the <a>snapshot state</a> of a {{File}} or a {{Blob}} does not match the state of the underlying storage,
           this is the <dfn id="SnapshotStateFR">SnapshotState</dfn> <a>failure reason</a>.
