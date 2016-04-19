@@ -92,8 +92,6 @@ spec: webidl; urlPrefix: https://heycam.github.io/webidl/
   type: dfn; urlPrefix: #dfn-
     text: throw
     text: supported property indices
-  type: interface
-    text: InvalidStateError
 spec: streams; urlPrefix: https://streams.spec.whatwg.org/
   type: dfn
     text: chunk
@@ -356,7 +354,7 @@ dictionary BlobPropertyBag {
   DOMString type = "";
 };
 
-typedef (ArrayBuffer or ArrayBufferView or Blob or DOMString) BlobPart;
+typedef (ArrayBuffer or ArrayBufferView or Blob or USVString) BlobPart;
 </pre>
 
 <h3 id="constructorBlob">
@@ -380,11 +378,9 @@ user agents must run the following steps:
   For 0 ≤ <var>i</var> &lt; <var>length</var>, repeat the following steps:
 
   1. Let <var>element</var> be the <var>i</var>th element of <var>a</var>.
-  2. If <var>element</var> is a {{DOMString}}, run the following substeps:
+  2. If <var>element</var> is a {{USVString}}, run the following substeps:
 
-    1. Let <var>s</var> be the result of converting <var>element</var> to a sequence of Unicode characters [[Unicode]]
-      using the algorithm for doing so in WebIDL [[WebIDL]].
-    2. Encode <var>s</var> as <a>utf-8</a> and append the resulting bytes to <var>bytes</var>.
+    1. Encode <var>s</var> as <a>utf-8</a> and append the resulting bytes to <var>bytes</var>.
 
       Note: The algorithm from WebIDL [[WebIDL]] replaces unmatched surrogates in an invalid <a>utf-16</a> string
       with U+FFFD replacement characters.
@@ -697,10 +693,8 @@ user agents must run the following steps:
   For 0 ≤ i &lt; <var>length</var>, repeat the following steps:
 
   1. Let <var>element</var> be the <var>i</var>'th element of <var>a</var>.
-  2. If <var>element</var> is a {{DOMString}}, run the following substeps:
-    1. Let <var>s</var> be the result of converting <var>element</var> to a sequence of Unicode characters [[Unicode]]
-      using the algorithm for doing so in WebIDL [[WebIDL]].
-    2. Encode <var>s</var> as <a>utf-8</a> and append the resulting <a>byte</a> to <var>bytes</var>.
+  2. If <var>element</var> is a {{USVString}}, run the following substeps:
+    1. Encode <var>s</var> as <a>utf-8</a> and append the resulting <a>byte</a> to <var>bytes</var>.
 
     Note: The algorithm from WebIDL [[WebIDL]] replaces unmatched surrogates in an invalid <a>utf-16</a> string with U+FFFD replacement characters.
     Scenarios exist when the {{Blob}} constructor may result in some data loss due to lost or scrambled character sequences.

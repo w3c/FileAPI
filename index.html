@@ -1887,7 +1887,7 @@ Constructor Parameters</a></span></span></dfn> {
   DOMString <a class="idl-code" data-default="&quot;&quot;" data-link-type="dict-member" data-type="DOMString " href="#dfn-BPtype" id="ref-for-dfn-BPtype-1">type</a> = "";
 };
 
-typedef (ArrayBuffer or <a data-link-type="idl-name" href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBufferView">ArrayBufferView</a> or <a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-11">Blob</a> or DOMString) <dfn class="dfn-paneled idl-code" data-dfn-type="typedef" data-export="" data-lt="BlobPart" id="typedefdef-blobpart">BlobPart<span class="dfn-panel" data-deco=""><b><a href="#typedefdef-blobpart">#typedefdef-blobpart</a></b><b>Referenced in:</b><span><a href="#ref-for-typedefdef-blobpart-1">4. 
+typedef (ArrayBuffer or <a data-link-type="idl-name" href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBufferView">ArrayBufferView</a> or <a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-11">Blob</a> or USVString) <dfn class="dfn-paneled idl-code" data-dfn-type="typedef" data-export="" data-lt="BlobPart" id="typedefdef-blobpart">BlobPart<span class="dfn-panel" data-deco=""><b><a href="#typedefdef-blobpart">#typedefdef-blobpart</a></b><b>Referenced in:</b><span><a href="#ref-for-typedefdef-blobpart-1">4. 
 The Blob Interface and Binary Data</a></span><span><a href="#ref-for-typedefdef-blobpart-2">5. 
 The File Interface</a></span></span></dfn>;
 </pre>
@@ -1913,10 +1913,8 @@ For 0 ≤ <var>i</var> &lt; <var>length</var>, repeat the following steps:</p>
       <li data-md="">
        <p>Let <var>element</var> be the <var>i</var>th element of <var>a</var>.</p>
       <li data-md="">
-       <p>If <var>element</var> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></code>, run the following substeps:</p>
+       <p>If <var>element</var> is a <code class="idl"><a data-link-type="idl">USVString</a></code>, run the following substeps:</p>
        <ol>
-        <li data-md="">
-         <p>Let <var>s</var> be the result of converting <var>element</var> to a sequence of Unicode characters <a data-link-type="biblio" href="#biblio-unicode">[Unicode]</a> using the algorithm for doing so in WebIDL <a data-link-type="biblio" href="#biblio-webidl">[WebIDL]</a>.</p>
         <li data-md="">
          <p>Encode <var>s</var> as <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a> and append the resulting bytes to <var>bytes</var>.</p>
          <p class="note" role="note">Note: The algorithm from WebIDL <a data-link-type="biblio" href="#biblio-webidl">[WebIDL]</a> replaces unmatched surrogates in an invalid <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-16">utf-16</a> string
@@ -2266,10 +2264,8 @@ For 0 ≤ i &lt; <var>length</var>, repeat the following steps:</p>
       <li data-md="">
        <p>Let <var>element</var> be the <var>i</var>’th element of <var>a</var>.</p>
       <li data-md="">
-       <p>If <var>element</var> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></code>, run the following substeps:</p>
+       <p>If <var>element</var> is a <code class="idl"><a data-link-type="idl">USVString</a></code>, run the following substeps:</p>
        <ol>
-        <li data-md="">
-         <p>Let <var>s</var> be the result of converting <var>element</var> to a sequence of Unicode characters <a data-link-type="biblio" href="#biblio-unicode">[Unicode]</a> using the algorithm for doing so in WebIDL <a data-link-type="biblio" href="#biblio-webidl">[WebIDL]</a>.</p>
         <li data-md="">
          <p>Encode <var>s</var> as <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a> and append the resulting <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#byte">byte</a> to <var>bytes</var>.</p>
        </ol>
@@ -4315,7 +4311,7 @@ dictionary <a href="#dfn-BlobPropertyBag">BlobPropertyBag</a> {
   DOMString <a class="idl-code" data-default="&quot;&quot;" data-link-type="dict-member" data-type="DOMString " href="#dfn-BPtype">type</a> = "";
 };
 
-typedef (ArrayBuffer or <a data-link-type="idl-name" href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBufferView">ArrayBufferView</a> or <a data-link-type="idl-name" href="#dfn-Blob">Blob</a> or DOMString) <a href="#typedefdef-blobpart">BlobPart</a>;
+typedef (ArrayBuffer or <a data-link-type="idl-name" href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBufferView">ArrayBufferView</a> or <a data-link-type="idl-name" href="#dfn-Blob">Blob</a> or USVString) <a href="#typedefdef-blobpart">BlobPart</a>;
 
 [<a href="#dom-file-file">Constructor</a>(sequence&lt;<a data-link-type="idl-name" href="#typedefdef-blobpart">BlobPart</a>> <a class="idl-code" data-link-type="argument" href="#dfn-fileBits">fileBits</a>,
             [EnsureUTF16] DOMString <a class="idl-code" data-link-type="argument" href="#dfn-fileName">fileName</a>,
