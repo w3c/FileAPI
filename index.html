@@ -1404,7 +1404,7 @@ Possible extra rowspan handling
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="http://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">File API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-04-15">15 April 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-04-19">19 April 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2413,8 +2413,8 @@ User agents must process reads on files that no longer exist at the time of read
 throwing a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notfounderror">NotFoundError</a></code> exception
 if using a <code class="idl"><a data-link-type="idl" href="#dfn-FileReaderSync" id="ref-for-dfn-FileReaderSync-2">FileReaderSync</a></code> on a Web Worker <a data-link-type="biblio" href="#biblio-workers">[Workers]</a> or firing an <code class="idl"><a class="idl-code" data-link-type="event" href="#dfn-error-event" id="ref-for-dfn-error-event-1">error</a></code> event
 with the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dfn-error" id="ref-for-dfn-error-1">error</a></code> attribute returning a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notfounderror">NotFoundError</a></code> <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#domerror">DOMError</a></code>.</p>
-   <div class="example" id="example-cd21d22d">
-    <a class="self-link" href="#example-cd21d22d"></a> In the examples below, metadata from a file object is displayed meaningfully, and a file object is created with a name and a last modified date. 
+   <div class="example" id="example-b63bb870">
+    <a class="self-link" href="#example-b63bb870"></a> In the examples below, metadata from a file object is displayed meaningfully, and a file object is created with a name and a last modified date. 
 <pre class="lang-javascript highlight"><span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"filePicker"</span><span class="p">).</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 <span class="kd">var</span> <span class="nx">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">lastModified</span><span class="p">);</span>
 <span class="nx">println</span><span class="p">(</span><span class="s2">"You selected the file "</span> <span class="o">+</span> <span class="nx">file</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s2">" which was modified on "</span> <span class="o">+</span> <span class="nx">date</span><span class="p">.</span><span class="nx">toDateString</span><span class="p">()</span> <span class="o">+</span> <span class="s2">" ."</span><span class="p">);</span>
@@ -2424,7 +2424,7 @@ with the <code class="idl"><a class="idl-code" data-link-type="attribute" href="
 <span class="c1">// Generate a file with a specific last modified date</span>
 
 <span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">2013</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">600</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">generatedFile</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">File</span><span class="p">([</span><span class="s2">"Rough Draft ...."</span><span class="p">],</span> <span class="s2">"Draft1.txt"</span><span class="p">,</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="s2">"text/plain"</span><span class="p">;</span> <span class="nx">lastModified</span><span class="o">:</span> <span class="nx">d</span><span class="p">})</span>
+<span class="kd">var</span> <span class="nx">generatedFile</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">File</span><span class="p">([</span><span class="s2">"Rough Draft ...."</span><span class="p">],</span> <span class="s2">"Draft1.txt"</span><span class="p">,</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="s2">"text/plain"</span><span class="p">,</span> <span class="nx">lastModified</span><span class="o">:</span> <span class="nx">d</span><span class="p">})</span>
 
 <span class="p">...</span></pre>
    </div>

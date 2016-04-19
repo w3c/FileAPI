@@ -830,7 +830,7 @@ with the {{error!!attribute}} attribute returning a {{NotFoundError}} {{DOMError
   // Generate a file with a specific last modified date
 
   var d = new Date(2013, 12, 5, 16, 23, 45, 600);
-  var generatedFile = new File(["Rough Draft ...."], "Draft1.txt", {type: "text/plain"; lastModified: d})
+  var generatedFile = new File(["Rough Draft ...."], "Draft1.txt", {type: "text/plain", lastModified: d})
 
   ...
   </pre>
