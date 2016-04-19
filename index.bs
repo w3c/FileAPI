@@ -431,7 +431,7 @@ The {{Blob()}} constructor can be invoked with the parameters below:
     * {{Blob}} elements.
     * {{DOMString}} elements.
 
-  <dt>An <em>optional</em> {{BlobPropertyBag}}
+  <dt id="dfn-BlobPropertyBagMembers">An <em>optional</em> {{BlobPropertyBag}}
   <dd>which takes one member:
     * <dfn id="dfn-BPtype" dict-member for="BlobPropertyBag">type</dfn>,
       the ASCII-encoded string in lower case representing the media type of the {{Blob}}.
@@ -673,8 +673,7 @@ interface File : Blob {
   readonly attribute long long lastModified;
 };
 
-dictionary FilePropertyBag {
-  DOMString type = "";
+dictionary FilePropertyBag : BlobPropertyBag {
   long long lastModified;
 };
 </pre>
@@ -718,8 +717,8 @@ user agents must run the following steps:
 3. If the optional {{FilePropertyBag}} dictionary argument is used,
   then run the following substeps:
 
-  1. If the {{FilePropertyBag/type}} member is provided and is not the empty string,
-    let <var>t</var> be set to the {{FilePropertyBag/type}} dictionary member.
+  1. If the {{BlobPropertyBag/type}} member is provided and is not the empty string,
+    let <var>t</var> be set to the {{BlobPropertyBag/type}} dictionary member.
     If <var>t</var> contains any characters outside the range U+0020 to U+007E,
     then set <var>t</var> to the empty string and return from these substeps.
   2. Convert every character in <var>t</var> to lowercase using the "<a>converting a string to ASCII lowercase</a>" algorithm.
@@ -765,10 +764,8 @@ The {{File()}} constructor can be invoked with the parameters below:
     normative conditions for this constructor parameter can be found in [[#file-constructor]].
 
   <dt id="def-Properties">An optional {{FilePropertyBag}} dictionary
-  <dd>which takes the following members:
-    * An optional <dfn dict-member for=FilePropertyBag id="dfn-FPtype">type</dfn> member;
-      the ASCII-encoded string in lower case representing the media type of the {{File}}.
-      Normative conditions for this member are provided in [[#file-constructor]].
+  <dd>which in addition to the <a href="#dfn-BlobPropertyBagMembers">members</a> of
+    {{BlobPropertyBag}} takes one member:
     * An optional <dfn dict-member for=FilePropertyBag id="dfn-FPdate">lastModified</dfn> member,
       which must be a <code>long long</code>;
       normative conditions for this member are provided in [[#file-constructor]].
