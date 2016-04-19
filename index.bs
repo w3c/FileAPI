@@ -1919,7 +1919,7 @@ This section describes a supplemental interface to the URL specification [[URL]]
 and presents methods for <a>Blob URL</a> creation and revocation.
 
 <pre class="idl">
-[Exposed=Window,DedicatedWorker,SharedWorker]
+[Exposed=(Window,DedicatedWorker,SharedWorker)]
 partial interface URL {
   static DOMString createObjectURL(Blob blob);
   static DOMString createFor(Blob blob);
