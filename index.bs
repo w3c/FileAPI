@@ -335,7 +335,7 @@ and must be preserved through <a>structured clone</a>.
 Further normative definition of <a>snapshot state</a> can be found for {{File}}s.
 
 <pre class="idl">
-[Constructor, Constructor(sequence&lt;BlobPart> blobParts, optional BlobPropertyBag options),
+[Constructor(optional sequence&lt;BlobPart> blobParts, optional BlobPropertyBag options),
 Exposed=(Window,Worker)]
 interface Blob {
 

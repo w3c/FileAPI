@@ -1830,9 +1830,9 @@ which must be initially set to the state of the underlying storage,
 if any such underlying storage exists,
 and must be preserved through <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#structured-clone">structured clone</a>.
 Further normative definition of <a data-link-type="dfn" href="#snapshot-state" id="ref-for-snapshot-state-1">snapshot state</a> can be found for <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-4">File</a></code>s.</p>
-<pre class="idl def">[<dfn class="dfn-paneled idl-code" data-dfn-for="Blob" data-dfn-type="constructor" data-export="" data-lt="Blob()" id="dom-blob-blob">Constructor<span class="dfn-panel" data-deco=""><b><a href="#dom-blob-blob">#dom-blob-blob</a></b><b>Referenced in:</b><span><a href="#ref-for-dom-blob-blob-1">4.1. 
+<pre class="idl def">[<dfn class="dfn-paneled idl-code" data-dfn-for="Blob" data-dfn-type="constructor" data-export="" data-lt="Blob(blobParts, options)|Blob(blobParts)|Blob()" id="dom-blob-blob">Constructor<span class="dfn-panel" data-deco=""><b><a href="#dom-blob-blob">#dom-blob-blob</a></b><b>Referenced in:</b><span><a href="#ref-for-dom-blob-blob-1">4.1. 
 Constructors</a> <a href="#ref-for-dom-blob-blob-2">(2)</a></span><span><a href="#ref-for-dom-blob-blob-3">4.1.1. 
-Constructor Parameters</a></span></span></dfn>, <dfn class="idl-code" data-dfn-for="Blob" data-dfn-type="constructor" data-export="" data-lt="Blob(blobParts, options)|Blob(blobParts)" id="dom-blob-blob-blobparts-options">Constructor<a class="self-link" href="#dom-blob-blob-blobparts-options"></a></dfn>(sequence&lt;<a data-link-type="idl-name" href="#typedefdef-blobpart" id="ref-for-typedefdef-blobpart-1">BlobPart</a>> <a class="idl-code" data-link-type="argument" href="#dfn-blobParts" id="ref-for-dfn-blobParts-1">blobParts</a>, optional <a data-link-type="idl-name" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag-1">BlobPropertyBag</a> <dfn class="idl-code" data-dfn-for="Blob/Blob(blobParts, options)" data-dfn-type="argument" data-export="" id="dom-blob-blob-blobparts-options-options">options<a class="self-link" href="#dom-blob-blob-blobparts-options-options"></a></dfn>),
+Constructor Parameters</a></span></span></dfn>(optional sequence&lt;<a data-link-type="idl-name" href="#typedefdef-blobpart" id="ref-for-typedefdef-blobpart-1">BlobPart</a>> <a class="idl-code" data-link-type="argument" href="#dfn-blobParts" id="ref-for-dfn-blobParts-1">blobParts</a>, optional <a data-link-type="idl-name" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag-1">BlobPropertyBag</a> <dfn class="idl-code" data-dfn-for="Blob/Blob(blobParts, options)" data-dfn-type="argument" data-export="" id="dom-blob-blob-blobparts-options-options">options<a class="self-link" href="#dom-blob-blob-blobparts-options-options"></a></dfn>),
 Exposed=(Window,Worker)]
 interface <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export="" data-lt="Blob" id="dfn-Blob">Blob<span class="dfn-panel" data-deco=""><b><a href="#dfn-Blob">#dfn-Blob</a></b><b>Referenced in:</b><span><a href="#ref-for-dfn-Blob-1">1. 
 Introduction</a> <a href="#ref-for-dfn-Blob-2">(2)</a> <a href="#ref-for-dfn-Blob-3">(3)</a></span><span><a href="#ref-for-dfn-Blob-4">4. 
@@ -3995,8 +3995,8 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
    <li><a href="#autoRevoking">auto-revoking</a><span>, in §9.5.1</span>
    <li><a href="#dom-blob-blob">Blob()</a><span>, in §4</span>
    <li><a href="#dfn-Blob">Blob</a><span>, in §4</span>
-   <li><a href="#dom-blob-blob-blobparts-options">Blob(blobParts)</a><span>, in §4</span>
-   <li><a href="#dom-blob-blob-blobparts-options">Blob(blobParts, options)</a><span>, in §4</span>
+   <li><a href="#dom-blob-blob">Blob(blobParts)</a><span>, in §4</span>
+   <li><a href="#dom-blob-blob">Blob(blobParts, options)</a><span>, in §4</span>
    <li><a href="#typedefdef-blobpart">BlobPart</a><span>, in §4</span>
    <li><a href="#dfn-BlobPropertyBag">BlobPropertyBag</a><span>, in §4</span>
    <li><a href="#blob-url">Blob URL</a><span>, in §9.3</span>
@@ -4294,7 +4294,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
    <dd>Adam Bergkvist; et al. <a href="http://www.w3.org/TR/webrtc/">WebRTC 1.0: Real-time Communication Between Browsers</a>. 28 January 2016. WD. URL: <a href="http://www.w3.org/TR/webrtc/">http://www.w3.org/TR/webrtc/</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
-<pre class="idl def">[<a href="#dom-blob-blob">Constructor</a>, <a href="#dom-blob-blob-blobparts-options">Constructor</a>(sequence&lt;<a data-link-type="idl-name" href="#typedefdef-blobpart">BlobPart</a>> <a class="idl-code" data-link-type="argument" href="#dfn-blobParts">blobParts</a>, optional <a data-link-type="idl-name" href="#dfn-BlobPropertyBag">BlobPropertyBag</a> <a href="#dom-blob-blob-blobparts-options-options">options</a>),
+<pre class="idl def">[<a href="#dom-blob-blob">Constructor</a>(optional sequence&lt;<a data-link-type="idl-name" href="#typedefdef-blobpart">BlobPart</a>> <a class="idl-code" data-link-type="argument" href="#dfn-blobParts">blobParts</a>, optional <a data-link-type="idl-name" href="#dfn-BlobPropertyBag">BlobPropertyBag</a> <a href="#dom-blob-blob-blobparts-options-options">options</a>),
 Exposed=(Window,Worker)]
 interface <a href="#dfn-Blob">Blob</a> {
 
