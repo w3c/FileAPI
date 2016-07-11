@@ -390,7 +390,8 @@ user agents must run the following steps:
     a copy of the bytes held by the buffer source</a>, and append those bytes to <var>bytes</var>.
   4. If <var>element</var> is a {{Blob}},
     append the bytes it represents to <var>bytes</var>.
-    The {{Blob/type}} of the {{Blob}} array element is ignored.
+    The {{Blob/type}} of the {{Blob}} array element is ignored and will not effect {{Blob/type}} of returned
+    {{Blob}} object.
 
 5. If the {{BlobPropertyBag/type}} member of the optional <code>options</code> argument is provided
   and is not the empty string,
@@ -406,11 +407,6 @@ user agents must run the following steps:
   referring to <var>bytes</var> as its associated <a>byte</a> sequence,
   with its {{Blob/size}} set to the length of <var>bytes</var>,
   and its {{Blob/type}} set to the value of <var>t</var> from the substeps above.
-
-  Note: The type t of a {{Blob}} is considered a <a>parsable MIME type</a>
-  if the ASCII-encoded string representing the Blob object's type,
-  when converted to a byte sequence,
-  does not return undefined for the <a>parse a MIME type</a> algorithm.
 
 <h4 id="constructorParams">
 Constructor Parameters</h4>
@@ -487,6 +483,14 @@ Attributes</h3>
     especially if the <a>byte</a> sequence is from an on-disk file;
     in this case, further normative conditions are in the <a>file type guidelines</a>.
 
+    Note: The type <var>t</var> of a {{Blob}} is considered a <a>parsable MIME type</a>,
+    if performing the <a>parse a MIME type</a> algorithm to a byte sequence converted from
+    the ASCII-encoded string representing the Blob object's type does not return undefined.
+
+    Note: Use of the {{Blob/type}} attribute informs the <a>encoding determination</a>
+    and <a href="#processing-media-types">parsing the Content-Type header</a>
+    when <a>dereferencing</a> <a>Blob URLs</a>.
+
   <dt><dfn id="dfn-isClosed">isClosed</dfn>
   <dd>The boolean value that indicates whether the {{Blob}} is in the <a for="Blob/readability state"><code>CLOSED</code></a> <a>readability state</a>.
     On getting, user agents must return <code>false</code>
@@ -495,9 +499,6 @@ Attributes</h3>
     as a result of the {{Blob/close()}} method being called.
 </dl>
 
-Note: Use of the {{Blob/type}} attribute informs the <a>encoding determination</a>
-and <a href="#processing-media-types">parsing the Content-Type header</a>
-when <a>dereferencing</a> <a>Blob URLs</a>.
 
 <h3 id="methodsandparams-blob">
 Methods and Parameters</h3>
@@ -508,7 +509,7 @@ The slice method</h4>
 The <dfn id="dfn-slice" method for=Blob lt="slice(start, end, contentType), slice(start, end), slice(start), slice()">slice()</dfn> method
 returns a new {{Blob}} object with bytes ranging from
 the optional {{start}} parameter
-upto but not including the optional {{end}} parameter,
+up to but not including the optional {{end}} parameter,
 and with a {{Blob/type}} attribute that is the value of the optional {{contentType!!argument}} parameter.
 It must act as follows:
 
@@ -562,11 +563,6 @@ It must act as follows:
       beginning with the <a>byte</a> at byte-order position <var>relativeStart</var>.
     <li><var>S</var>.{{Blob/size}} = <var>span</var>.
     <li><var>S</var>.{{Blob/type}} = <var>relativeContentType</var>.
-
-      Note: The type t of a {{Blob}} is considered a <a>parsable MIME type</a>
-      if the ASCII-encoded string representing the Blob object's type,
-      when converted to a byte sequence,
-      does not return undefined for the <a>parse a MIME type</a> algorithm.
   </ol>
 
 <div class="example">
@@ -605,7 +601,7 @@ It must act as follows:
 The close method</h4>
 
 The <dfn id="dfn-close" method for=Blob>close()</dfn> method is said to <a lt="closed" for=Blob>close</a> a {{Blob}},
-and must act as follows on the {{Blob}} on which the method has been called:
+and must act as follows:
 
 1. If the <a>readability state</a> of the <a>context object</a> is <a for="Blob/readability state"><code>CLOSED</code></a>,
   <a>terminate this algorithm</a>.
@@ -727,11 +723,6 @@ user agents must run the following steps:
   3. <var>F</var>.{{Blob/size}} is set to the number of total bytes in <var>bytes</var>.
   4. <var>F</var>.{{File/name}} is set to <var>n</var>.
   5. <var>F</var>.{{Blob/type}} is set to <var>t</var>.
-
-    Note: The type t of a {{File}} is considered a <a>parsable MIME type</a>
-    if the ASCII-encoded string representing the File object's type,
-    when converted to a byte sequence,
-    does not return undefined for the <a>parse a MIME type</a> algorithm.
   6. <var>F</var>.{{File/lastModified}} is set to <var>d</var>.
 
 <h4 id="file-constructor-params">
