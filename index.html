@@ -1236,7 +1236,7 @@ Possible extra rowspan handling
                 counter-increment: figure;
             }
             figcaption:not(.no-marker)::before {
-                content: "Figure " counter(figure);
+                content: "Figure " counter(figure) " ";
             }</style>
 <style>/* style-autolinks */
 
@@ -1399,7 +1399,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="http://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">File API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-07-14">14 July 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-07-21">21 July 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1450,6 +1450,24 @@ These kinds of behaviors are defined in the appropriate affiliated specification
   </div>
   <h2 class="no-num no-toc no-ref heading settled" id="status"><span class="content">Status of this document</span></h2>
   <div data-fill-with="status">
+   <p> This is a public copy of the editors’ draft.
+  It is provided for discussion only and may change at any moment.
+  Its publication here does not imply endorsement of its contents by W3C.
+  Don’t cite this document other than as work in progress. </p>
+   <p> <strong>Changes to this document may be tracked at <a href="https://github.com/w3c/FileAPI">https://github.com/w3c/FileAPI</a>.</strong> </p>
+   <p> The (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archived</a>) public mailing list <a href="mailto:public-webapps@w3.org?Subject=%5Bfileapi%5D%20PUT%20SUBJECT%20HERE">public-webapps@w3.org</a> (see <a href="http://www.w3.org/Mail/Request">instructions</a>)
+  is preferred for discussion of this specification.
+  When sending e-mail,
+  please put the text “fileapi” in the subject,
+  preferably like this:
+  “[fileapi] <em>…summary of comment…</em>” </p>
+   <p> This document was produced by the <a href="https://www.w3.org/WebPlatform/WG/">Web Platform Working Group</a>. </p>
+   <p> This document was produced by a group operating under
+  the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 W3C Patent Policy</a>.
+  W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/83482/status" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group;
+  that page also includes instructions for disclosing a patent.
+  An individual who has actual knowledge of a patent which the individual believes contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section 6 of the W3C Patent Policy</a>. </p>
+   <p> This document is governed by the <a href="http://www.w3.org/2015/Process-20150901/" id="w3c_process_revision">1 September 2015 W3C Process Document</a>. </p>
    <p></p>
    <p>Previous discussion of this specification has taken place on two other mailing lists: <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archive</a>) and <a href="mailto:public-webapi@w3.org">public-webapi@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapi/">archive</a>). Ongoing discussion will be on the <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> mailing list.</p>
    <p>This draft consists of changes made to the previous Last Call Working Draft. Please send comments to the <a href="mailto:public-webapi@w3.org">public-webapi@w3.org</a> as described above. You can see Last Call Feedback on the W3C Wiki: <a href="http://www.w3.org/wiki/Webapps/LCWD-FileAPI-20130912">http://www.w3.org/wiki/Webapps/LCWD-FileAPI-20130912</a></p>
@@ -1628,7 +1646,7 @@ and error conditions that may arise during reading of a file.
 An example will be illustrative.</p>
    <div class="example" id="example-6004b6cf">
     <a class="self-link" href="#example-6004b6cf"></a> In the example below, different code blocks handle progress, error, and success conditions. 
-<pre class="lang-javascript highlight"><span></span><span class="kd">function</span> <span class="nx">startRead</span><span class="p">()</span> <span class="p">{</span>
+<pre class="lang-javascript highlight"><span class="kd">function</span> <span class="nx">startRead</span><span class="p">()</span> <span class="p">{</span>
   <span class="c1">// obtain input element through DOM</span>
 
   <span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'file'</span><span class="p">).</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
@@ -1787,7 +1805,7 @@ Further normative definition of <a data-link-type="dfn" href="#snapshot-state" i
   <span class="kt">DOMString</span> <a class="nv idl-code" data-default="&quot;&quot;" data-link-type="dict-member" data-type="DOMString " href="#dfn-BPtype" id="ref-for-dfn-BPtype-1">type</a> = "";
 };
 
-<span class="kt">typedef</span> (<span class="kt">ArrayBuffer</span> <span class="kt">or</span> <a class="n" data-link-type="idl-name" href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBufferView">ArrayBufferView</a> <span class="kt">or</span> <a class="n" data-link-type="idl-name" href="#d" id="ref-for-d-11">Blob</a> <span class="kt">or</span> <span class="kt">USVString</span>) <a class="nv idl-code" data-link-type="typedef" href="https://w3c.github.io/FileAPI/#typedefdef-blobpart">BlobPart</a>;
+<span class="kt">typedef</span> (<a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#BufferSource">BufferSource</a> <span class="kt">or</span> <a class="n" data-link-type="idl-name" href="#d" id="ref-for-d-11">Blob</a> <span class="kt">or</span> <span class="kt">USVString</span>) <a class="nv idl-code" data-link-type="typedef" href="https://w3c.github.io/FileAPI/#typedefdef-blobpart">BlobPart</a>;
 </pre>
    <h3 class="heading settled" data-level="4.1" id="constructorBlob"><span class="secno">4.1. </span><span class="content"> Constructors</span><a class="self-link" href="#constructorBlob"></a></h3>
    <p>The <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dom-blob-blob">Blob()</a></code> constructor can be invoked with zero or more parameters.
@@ -1821,15 +1839,8 @@ Scenarios exist when the <code class="idl"><a data-link-type="idl" href="#d" id=
 due to lost or scrambled character sequences.</p>
        </ol>
       <li data-md="">
-       <p>If <var>element</var> is an <code class="idl"><a data-link-type="idl" href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBufferView">ArrayBufferView</a></code>,
-convert it to a sequence of <code>byteLength</code> bytes
-from the underlying <code class="idl"><a data-link-type="idl" href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBuffer">ArrayBuffer</a></code>,
-starting at the <code>byteOffset</code> of the <code class="idl"><a data-link-type="idl" href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBufferView">ArrayBufferView</a></code>,
-and append those bytes to <var>bytes</var>.</p>
-      <li data-md="">
-       <p>If <var>element</var> is an <code class="idl"><a data-link-type="idl" href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBuffer">ArrayBuffer</a></code>,
-convert it to a sequence of <code>byteLength</code> bytes,
-and append those bytes to <var>bytes</var>.</p>
+       <p>If <var>element</var> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#BufferSource">BufferSource</a></code>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-get-buffer-source-copy">get
+a copy of the bytes held by the buffer source</a>, and append those bytes to <var>bytes</var>.</p>
       <li data-md="">
        <p>If <var>element</var> is a <code class="idl"><a data-link-type="idl" href="#d" id="ref-for-d-14">Blob</a></code>,
 append the bytes it represents to <var>bytes</var>.
@@ -1865,9 +1876,7 @@ does not return undefined for the <a data-link-type="dfn" href="https://mimesnif
      which takes any number of the following types of elements, and in any order: 
      <ul>
       <li data-md="">
-       <p><code class="idl"><a data-link-type="idl" href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBuffer">ArrayBuffer</a></code> elements.</p>
-      <li data-md="">
-       <p><code class="idl"><a data-link-type="idl" href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBufferView">ArrayBufferView</a></code> elements.</p>
+       <p><code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#BufferSource">BufferSource</a></code> elements.</p>
       <li data-md="">
        <p><code class="idl"><a data-link-type="idl" href="#d" id="ref-for-d-18">Blob</a></code> elements.</p>
       <li data-md="">
@@ -1885,7 +1894,7 @@ Normative conditions for this member are provided in the <a href="#constructorBl
    </dl>
    <div class="example" id="example-b4f2f2b4">
     <a class="self-link" href="#example-b4f2f2b4"></a> Examples of constructor usage follow. 
-<pre class="lang-javascript highlight"><span></span><span class="c1">// Create a new Blob object</span>
+<pre class="lang-javascript highlight"><span class="c1">// Create a new Blob object</span>
 
 <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blob</span><span class="p">();</span>
 
@@ -2005,7 +2014,7 @@ then set <var>relativeContentType</var> to the empty string and return from thes
    </ol>
    <div class="example" id="example-5fb7503c">
     <a class="self-link" href="#example-5fb7503c"></a> The examples below illustrate the different types of <code class="idl"><a data-link-type="idl" href="#dfn-slice" id="ref-for-dfn-slice-9">slice()</a></code> calls possible. Since the <code class="idl"><a data-link-type="idl" href="#d0" id="ref-for-d0-5">File</a></code> interface inherits from the <code class="idl"><a data-link-type="idl" href="#d" id="ref-for-d-34">Blob</a></code> interface, examples are based on the use of the <code class="idl"><a data-link-type="idl" href="#d0" id="ref-for-d0-6">File</a></code> interface. 
-<pre class="lang-javascript highlight"><span></span><span class="c1">// obtain input element through DOM</span>
+<pre class="lang-javascript highlight"><span class="c1">// obtain input element through DOM</span>
 
 <span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'file'</span><span class="p">).</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 <span class="k">if</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span>
@@ -2106,14 +2115,8 @@ For 0 ≤ i &lt; <var>length</var>, repeat the following steps:</p>
        <p class="note" role="note">Note: The algorithm from WebIDL <a data-link-type="biblio" href="#biblio-webidl">[WebIDL]</a> replaces unmatched surrogates in an invalid <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-16">utf-16</a> string with U+FFFD replacement characters.
 Scenarios exist when the <code class="idl"><a data-link-type="idl" href="#d" id="ref-for-d-39">Blob</a></code> constructor may result in some data loss due to lost or scrambled character sequences.</p>
       <li data-md="">
-       <p>If <var>element</var> is an <code class="idl"><a data-link-type="idl" href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBufferView">ArrayBufferView</a></code>,
-convert it to a sequence of <code>byteLength</code> bytes from the underlying <code class="idl"><a data-link-type="idl" href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBuffer">ArrayBuffer</a></code>,
-starting at the <code>byteOffset</code> of the <code class="idl"><a data-link-type="idl" href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBufferView">ArrayBufferView</a></code>,
-and append those bytes to <var>bytes</var>.</p>
-      <li data-md="">
-       <p>If <var>element</var> is an <code class="idl"><a data-link-type="idl" href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBuffer">ArrayBuffer</a></code>,
-convert it to a sequence of <code>byteLength</code> bytes,
-and append those bytes to <var>bytes</var>.</p>
+       <p>If <var>element</var> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#BufferSource">BufferSource</a></code>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-get-buffer-source-copy">get
+a copy of the bytes held by the buffer source</a>, and append those bytes to <var>bytes</var>.</p>
       <li data-md="">
        <p>If <var>element</var> is a <code class="idl"><a data-link-type="idl" href="#d" id="ref-for-d-40">Blob</a></code>,
 append the bytes it represents to <var>bytes</var>.
@@ -2174,9 +2177,7 @@ does not return undefined for the <a data-link-type="dfn" href="https://mimesnif
      which takes any number of the following elements, and in any order: 
      <ul>
       <li data-md="">
-       <p><code class="idl"><a data-link-type="idl" href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBuffer">ArrayBuffer</a></code> elements.</p>
-      <li data-md="">
-       <p><code class="idl"><a data-link-type="idl" href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBufferView">ArrayBufferView</a></code> elements.</p>
+       <p><code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#BufferSource">BufferSource</a></code> elements.</p>
       <li data-md="">
        <p><code class="idl"><a data-link-type="idl" href="#d" id="ref-for-d-42">Blob</a></code> elements, which includes <code class="idl"><a data-link-type="idl" href="#d0" id="ref-for-d0-16">File</a></code> elements.</p>
       <li data-md="">
@@ -2214,7 +2215,7 @@ normative conditions for this member are provided in <a href="#file-constructor"
     If the last modification date and time are not known,
     the attribute must return the current date and time
     as a <code>long long</code> representing the number of milliseconds since the <a data-link-type="dfn" href="#UnixEpoch" id="ref-for-UnixEpoch-4">Unix Epoch</a>;
-    this is equivalent to <code class="lang-javascript highlight"><span></span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> </code> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>.
+    this is equivalent to <code class="lang-javascript highlight"><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> </code> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>.
     If a <code class="idl"><a data-link-type="idl" href="#d0" id="ref-for-d0-18">File</a></code> object is created using a constructor,
     further normative conditions for this attribute are found in <a href="#file-constructor">§5.1 Constructor</a>. 
    </dl>
@@ -2228,7 +2229,7 @@ if using a <code class="idl"><a data-link-type="idl" href="#d3" id="ref-for-d3-2
 with the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dfn-error" id="ref-for-dfn-error-1">error</a></code> attribute returning a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notfounderror">NotFoundError</a></code> <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#domerror">DOMError</a></code>.</p>
    <div class="example" id="example-b63bb870">
     <a class="self-link" href="#example-b63bb870"></a> In the examples below, metadata from a file object is displayed meaningfully, and a file object is created with a name and a last modified date. 
-<pre class="lang-javascript highlight"><span></span><span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"filePicker"</span><span class="p">).</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<pre class="lang-javascript highlight"><span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"filePicker"</span><span class="p">).</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 <span class="kd">var</span> <span class="nx">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">lastModified</span><span class="p">);</span>
 <span class="nx">println</span><span class="p">(</span><span class="s2">"You selected the file "</span> <span class="o">+</span> <span class="nx">file</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s2">" which was modified on "</span> <span class="o">+</span> <span class="nx">date</span><span class="p">.</span><span class="nx">toDateString</span><span class="p">()</span> <span class="o">+</span> <span class="s2">" ."</span><span class="p">);</span>
 
@@ -2246,7 +2247,7 @@ with the <code class="idl"><a class="idl-code" data-link-type="attribute" href="
    <p class="note" role="note">Note: The <code class="idl"><a data-link-type="idl" href="#d1" id="ref-for-d1-2">FileList</a></code> interface should be considered "at risk"
 since the general trend on the Web Platform is to replace such interfaces
 with the <code class="idl"><a data-link-type="idl">Array</a></code> platform object in ECMAScript <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>.
-In particular, this means syntax of the sort <code class="lang-javascript highlight"><span></span><span class="nx">filelist</span><span class="p">.</span><span class="nx">item</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> </code> is at risk;
+In particular, this means syntax of the sort <code class="lang-javascript highlight"><span class="nx">filelist</span><span class="p">.</span><span class="nx">item</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> </code> is at risk;
 most other programmatic use of <code class="idl"><a data-link-type="idl" href="#d1" id="ref-for-d1-3">FileList</a></code> is unlikely to be affected by the eventual migration to an <code class="idl"><a data-link-type="idl">Array</a></code> type.</p>
    <p>This interface is a list of <code class="idl"><a data-link-type="idl" href="#d0" id="ref-for-d0-21">File</a></code> objects.</p>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">Exposed</a>=(<span class="n">Window</span>,<span class="n">Worker</span>)]
@@ -2258,7 +2259,7 @@ most other programmatic use of <code class="idl"><a data-link-type="idl" href="#
    <div class="example" id="example-6cf5eb7d">
     <a class="self-link" href="#example-6cf5eb7d"></a> Sample usage typically involves DOM access to the <code>&lt;input type="file"></code> element within a form,
   and then accessing selected files. 
-<pre class="lang-javascript highlight"><span></span><span class="c1">// uploadData is a form element</span>
+<pre class="lang-javascript highlight"><span class="c1">// uploadData is a form element</span>
 <span class="c1">// fileChooser is input element of type 'file'</span>
 <span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">forms</span><span class="p">[</span><span class="s1">'uploadData'</span><span class="p">][</span><span class="s1">'fileChooser'</span><span class="p">].</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 
@@ -2509,7 +2510,7 @@ the <code class="idl"><a data-link-type="idl" href="#dfn-result" id="ref-for-dfn
      <p>On getting, if the <code class="idl"><a data-link-type="idl" href="#dfn-readAsBinaryString" id="ref-for-dfn-readAsBinaryString-3">readAsBinaryString()</a></code> <a data-link-type="dfn" href="#read-method" id="ref-for-read-method-9">read method</a> is called
 and no error in reading the <code class="idl"><a data-link-type="idl" href="#d0" id="ref-for-d0-34">File</a></code> or <code class="idl"><a data-link-type="idl" href="#d" id="ref-for-d-60">Blob</a></code> has occurred,
 then the <code class="idl"><a data-link-type="idl" href="#dfn-result" id="ref-for-dfn-result-7">result</a></code> attribute must return a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></code> representing the <code class="idl"><a data-link-type="idl" href="#d0" id="ref-for-d0-35">File</a></code> or <code class="idl"><a data-link-type="idl" href="#d" id="ref-for-d-61">Blob</a></code>'s data as a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="binary-string">binary string</dfn>,
-in which every byte is represented by a <a data-link-type="dfn">code unit</a> of equal value [0...255].</p>
+in which every byte is represented by a code unit of equal value [0...255].</p>
     <li data-md="">
      <p>On getting, if the <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-3">readAsText()</a></code> <a data-link-type="dfn" href="#read-method" id="ref-for-read-method-10">read method</a> is called
 and no error in reading the <code class="idl"><a data-link-type="idl" href="#d0" id="ref-for-d0-36">File</a></code> or <code class="idl"><a data-link-type="idl" href="#d" id="ref-for-d-62">Blob</a></code> has occurred,
@@ -2824,7 +2825,7 @@ UNLESS any of the following are true:</p>
      <div class="example" id="example-89381d0d">
       <a class="self-link" href="#example-89381d0d"></a> This example showcases "read-chaining":
   initiating another read from within an event handler while the "first" read continues processing. 
-<pre class="lang-javascript highlight"><span></span><span class="c1">// In code of the sort...</span>
+<pre class="lang-javascript highlight"><span class="c1">// In code of the sort...</span>
 <span class="nx">reader</span><span class="p">.</span><span class="nx">readAsText</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
 <span class="nx">reader</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span><span class="nx">reader</span><span class="p">.</span><span class="nx">readAsText</span><span class="p">(</span><span class="nx">alternateFile</span><span class="p">);}</span>
 
@@ -3231,7 +3232,7 @@ this also results in the <a data-link-type="dfn" href="#blob-url" id="ref-for-bl
    <h4 class="heading settled" data-level="9.4.4" id="ProtocolExamples"><span class="secno">9.4.4. </span><span class="content"> Sample Request and Response Headers</span><a class="self-link" href="#ProtocolExamples"></a></h4>
    <p><em>This section is informative.</em></p>
    <p>This section provides sample exchanges between web applications and user agents using <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-12">Blob URLs</a>.
-A <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request">request</a> can be triggered using HTML markup of the sort <code class="lang-markup highlight"><span></span><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">"blob:http://example.org:8080/550e8400-e29b-41d4-a716-446655440000"</span><span class="p">></span> </code>.
+A <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request">request</a> can be triggered using HTML markup of the sort <code class="lang-markup highlight"><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"blob:http://example.org:8080/550e8400-e29b-41d4-a716-446655440000"</span><span class="nt">></span> </code>.
 These examples merely illustrate the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request">request</a> and <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response">response</a>;
 web developers are not likely to interact with all the headers,
 but the <code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#dom-xmlhttprequest-getallresponseheaders">getAllResponseHeaders()</a></code> method of <code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#xmlhttprequest">XMLHttpRequest</a></code>, if used,
@@ -3326,7 +3327,7 @@ a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-e
       after obtaining a reference to a <code class="idl"><a data-link-type="idl" href="#d" id="ref-for-d-102">Blob</a></code> object
       (in this case, a user-selected <code class="idl"><a data-link-type="idl" href="#d0" id="ref-for-d0-57">File</a></code> from the underlying file system),
       the static method <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-7">createObjectURL()</a></code></code> is called on that <code class="idl"><a data-link-type="idl" href="#d" id="ref-for-d-103">Blob</a></code> object. 
-<pre class="lang-javascript highlight"><span></span><span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'file'</span><span class="p">).</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<pre class="lang-javascript highlight"><span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'file'</span><span class="p">).</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 <span class="k">if</span><span class="p">(</span><span class="nx">file</span><span class="p">){</span>
   <span class="nx">blobURLref</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
   <span class="nx">myimg</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">blobURLref</span><span class="p">;</span>
@@ -3356,7 +3357,7 @@ since the entry has been removed from the <a data-link-type="dfn" href="#BlobURL
      <div class="example" id="example-a97f8a33">
       <a class="self-link" href="#example-a97f8a33"></a> In the example below, <code>window1</code> and <code>window2</code> are separate,
       but in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#same-origin">same origin</a>; <code>window2</code> could be an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-iframe-element">iframe</a></code> inside <code>window1</code>. 
-<pre class="lang-javascript highlight"><span></span><span class="nx">myurl</span> <span class="o">=</span> <span class="nx">window1</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">myblob</span><span class="p">);</span>
+<pre class="lang-javascript highlight"><span class="nx">myurl</span> <span class="o">=</span> <span class="nx">window1</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">myblob</span><span class="p">);</span>
 <span class="nx">window2</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">revokeObjectURL</span><span class="p">(</span><span class="nx">myurl</span><span class="p">);</span>
 </pre>
       <p>Since <code>window1</code> and <code>window2</code> are in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#same-origin">same origin</a> and share the same <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-10">Blob URL Store</a>,
@@ -3371,14 +3372,14 @@ using <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjec
    <p>This section gives sample usage of creation and revocation of <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-28">Blob URL</a>s with explanations.</p>
    <div class="example" id="example-1c236228">
     <a class="self-link" href="#example-1c236228"></a> In the example below, two <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element">img</a></code> elements <a data-link-type="biblio" href="#biblio-html">[HTML]</a> refer to the same <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-29">Blob URL</a>: 
-<pre class="lang-javascript highlight"><span></span><span class="nx">url</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
+<pre class="lang-javascript highlight"><span class="nx">url</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
 <span class="nx">img1</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">url</span><span class="p">;</span>
 <span class="nx">img2</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">url</span><span class="p">;</span>
 </pre>
    </div>
    <div class="example" id="example-7d838eae">
     <a class="self-link" href="#example-7d838eae"></a> In the example below, <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL-5">revokeObjectURL()</a></code></code> is explicitly called. 
-<pre class="lang-javascript highlight"><span></span><span class="kd">var</span> <span class="nx">blobURLref</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+<pre class="lang-javascript highlight"><span class="kd">var</span> <span class="nx">blobURLref</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
 <span class="nx">img1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
 <span class="nx">img2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
 
@@ -3407,7 +3408,7 @@ developers should pair it with a corresponding call to <code>URL.<code class="id
     <a class="self-link" href="#example-ffe52a2e"></a> This example uses <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createFor" id="ref-for-dfn-createFor-8">createFor()</a></code></code>,
   which allows uses such as the one above,
   and obviates the need for a corresponding call by the web developer to <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL-7">revokeObjectURL()</a></code></code>. 
-<pre class="lang-javascript highlight"><span></span><span class="kd">var</span> <span class="nx">blobURLref2</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createFor</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+<pre class="lang-javascript highlight"><span class="kd">var</span> <span class="nx">blobURLref2</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createFor</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
 <span class="nx">img1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
 <span class="nx">img1</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">blobURLref2</span><span class="p">;</span>
 <span class="p">....</span>
@@ -3417,7 +3418,7 @@ developers should pair it with a corresponding call to <code>URL.<code class="id
     <a class="self-link" href="#example-54a0e6ac"></a> This example uses <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createFor" id="ref-for-dfn-createFor-9">createFor()</a></code></code> to mint a <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-33">Blob URL</a>,
   and appends a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-fragment">fragment</a> that has an understood meaning within the resource
   (in this case, it references an anchor within the HTML document). 
-<pre class="lang-javascript highlight"><span></span><span class="c1">// file is an HTML file</span>
+<pre class="lang-javascript highlight"><span class="c1">// file is an HTML file</span>
 <span class="c1">// One of the anchor identifiers in file is "#applicationInfo"</span>
 
 <span class="kd">var</span> <span class="nx">blobURLAnchorRef</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createFor</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"#applicationInfo"</span><span class="p">;</span>
@@ -3826,7 +3827,6 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
     <a data-link-type="biblio">[TypedArray]</a> defines the following terms:
     <ul>
      <li><a href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBuffer">ArrayBuffer</a>
-     <li><a href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBufferView">ArrayBufferView</a>
     </ul>
    <li>
     <a data-link-type="biblio">[URL]</a> defines the following terms:
@@ -3843,6 +3843,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
    <li>
     <a data-link-type="biblio">[WebIDL]</a> defines the following terms:
     <ul>
+     <li><a href="https://heycam.github.io/webidl/#BufferSource">BufferSource</a>
      <li><a href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a>
      <li><a href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a>
      <li><a href="https://heycam.github.io/webidl/#notfounderror">NotFoundError</a>
@@ -3850,6 +3851,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
      <li><a href="https://heycam.github.io/webidl/#securityerror">SecurityError</a>
      <li><a href="https://heycam.github.io/webidl/#dom-USVString">USVString</a>
      <li><a href="https://heycam.github.io/webidl/#dom-boolean">boolean</a>
+     <li><a href="https://heycam.github.io/webidl/#dfn-get-buffer-source-copy">get a copy of the buffer source</a>
      <li><a href="https://heycam.github.io/webidl/#dom-longlong">long long</a>
      <li><a href="https://heycam.github.io/webidl/#dfn-supported-property-indices">supported property indices</a>
      <li><a href="https://heycam.github.io/webidl/#dfn-throw">throw</a>
@@ -3949,7 +3951,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
   <span class="kt">DOMString</span> <a class="nv idl-code" data-default="&quot;&quot;" data-link-type="dict-member" data-type="DOMString " href="#dfn-BPtype">type</a> = "";
 };
 
-<span class="kt">typedef</span> (<span class="kt">ArrayBuffer</span> <span class="kt">or</span> <a class="n" data-link-type="idl-name" href="https://www.khronos.org/registry/typedarray/specs/latest/#ArrayBufferView">ArrayBufferView</a> <span class="kt">or</span> <a class="n" data-link-type="idl-name" href="#d">Blob</a> <span class="kt">or</span> <span class="kt">USVString</span>) <a class="nv idl-code" data-link-type="typedef" href="https://w3c.github.io/FileAPI/#typedefdef-blobpart">BlobPart</a>;
+<span class="kt">typedef</span> (<a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#BufferSource">BufferSource</a> <span class="kt">or</span> <a class="n" data-link-type="idl-name" href="#d">Blob</a> <span class="kt">or</span> <span class="kt">USVString</span>) <a class="nv idl-code" data-link-type="typedef" href="https://w3c.github.io/FileAPI/#typedefdef-blobpart">BlobPart</a>;
 
 [<a class="nv idl-code" data-link-type="constructor" href="https://w3c.github.io/FileAPI/#dom-file-file">Constructor</a>(<span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#typedefdef-blobpart">BlobPart</a>> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBits">fileBits</a>,
             [<a class="nv idl-code" data-link-type="extended-attribute">EnsureUTF16</a>] <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileName">fileName</a>,

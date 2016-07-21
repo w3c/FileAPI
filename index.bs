@@ -354,7 +354,7 @@ dictionary BlobPropertyBag {
   DOMString type = "";
 };
 
-typedef (ArrayBuffer or ArrayBufferView or Blob or USVString) BlobPart;
+typedef (BufferSource or Blob or USVString) BlobPart;
 </pre>
 
 <h3 id="constructorBlob">
@@ -386,15 +386,9 @@ user agents must run the following steps:
       with U+FFFD replacement characters.
       Scenarios exist when the {{Blob}} constructor may result in some data loss
       due to lost or scrambled character sequences.
-  3. If <var>element</var> is an {{ArrayBufferView}},
-    convert it to a sequence of <code>byteLength</code> bytes
-    from the underlying {{ArrayBuffer}},
-    starting at the <code>byteOffset</code> of the {{ArrayBufferView}},
-    and append those bytes to <var>bytes</var>.
-  4. If <var>element</var> is an {{ArrayBuffer}},
-    convert it to a sequence of <code>byteLength</code> bytes,
-    and append those bytes to <var>bytes</var>.
-  5. If <var>element</var> is a {{Blob}},
+  3. If <var>element</var> is a {{BufferSource}}, <a lt="get a copy of the buffer source">get
+    a copy of the bytes held by the buffer source</a>, and append those bytes to <var>bytes</var>.
+  4. If <var>element</var> is a {{Blob}},
     append the bytes it represents to <var>bytes</var>.
     The {{Blob/type}} of the {{Blob}} array element is ignored.
 
@@ -426,8 +420,7 @@ The {{Blob()}} constructor can be invoked with the parameters below:
 <dl>
   <dt>A <dfn id="dfn-blobParts" argument for="Blob/Blob(blobParts, options)"><code>blobParts</code></dfn> <code>sequence</code>
   <dd>which takes any number of the following types of elements, and in any order:
-    * {{ArrayBuffer}} elements.
-    * {{ArrayBufferView}} elements.
+    * {{BufferSource}} elements.
     * {{Blob}} elements.
     * {{DOMString}} elements.
 
@@ -697,14 +690,9 @@ user agents must run the following steps:
 
     Note: The algorithm from WebIDL [[WebIDL]] replaces unmatched surrogates in an invalid <a>utf-16</a> string with U+FFFD replacement characters.
     Scenarios exist when the {{Blob}} constructor may result in some data loss due to lost or scrambled character sequences.
-  3. If <var>element</var> is an {{ArrayBufferView}},
-    convert it to a sequence of <code>byteLength</code> bytes from the underlying {{ArrayBuffer}},
-    starting at the <code>byteOffset</code> of the {{ArrayBufferView}},
-    and append those bytes to <var>bytes</var>.
-  4. If <var>element</var> is an {{ArrayBuffer}},
-    convert it to a sequence of <code>byteLength</code> bytes,
-    and append those bytes to <var>bytes</var>.
-  5. If <var>element</var> is a {{Blob}},
+  3. If <var>element</var> is a {{BufferSource}}, <a lt="get a copy of the buffer source">get
+    a copy of the bytes held by the buffer source</a>, and append those bytes to <var>bytes</var>.
+  4. If <var>element</var> is a {{Blob}},
     append the bytes it represents to <var>bytes</var>.
     The {{Blob/type}} of the {{Blob}} argument must be ignored.
 2. Let <var>n</var> be a new string of the same size as the {{fileName}} argument to the constructor.
@@ -754,8 +742,7 @@ The {{File()}} constructor can be invoked with the parameters below:
 <dl>
   <dt>A <dfn id="dfn-fileBits" argument for="File/File(fileBits, fileName, options)"><code>fileBits</code></dfn> <code>sequence</code>
   <dd>which takes any number of the following elements, and in any order:
-    * {{ArrayBuffer}} elements.
-    * {{ArrayBufferView}} elements.
+    * {{BufferSource}} elements.
     * {{Blob}} elements, which includes {{File}} elements.
     * {{DOMString}} elements.
 
