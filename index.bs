@@ -1013,6 +1013,7 @@ interface FileReader: EventTarget {
 
   // async read methods
   void readAsArrayBuffer(Blob blob);
+  void readAsBinaryString(Blob blob);
   void readAsText(Blob blob, optional DOMString label);
   void readAsDataURL(Blob blob);
 
@@ -1116,14 +1117,14 @@ which must be one of the following values:
 <h4 id="reading-a-file">
 Reading a File or Blob</h4>
 
-The {{FileReader}} interface makes available three <dfn id="asynchronous-read-methods" lt="asynchronous read method">asynchronous read methods</dfn>--
-{{FileReader/readAsArrayBuffer()}}, {{FileReader/readAsText()}}, and {{FileReader/readAsDataURL()}},
+The {{FileReader}} interface makes available several <dfn id="asynchronous-read-methods" lt="asynchronous read method">asynchronous read methods</dfn>--
+{{FileReader/readAsArrayBuffer()}}, {{FileReader/readAsBinaryString()}}, {{FileReader/readAsText()}} and {{FileReader/readAsDataURL()}},
 which read files into memory.
 If multiple concurrent read methods are called on the same {{FileReader}} object,
 user agents must throw an {{InvalidStateError}} on any of the read methods that occur
 when {{FileReader/readyState}} = {{FileReader/LOADING}}.
 
-({{FileReaderSync}} makes available three <a>synchronous read methods</a>.
+({{FileReaderSync}} makes available several <a>synchronous read methods</a>.
   Collectively, the sync and async read methods of {{FileReader}} and {{FileReaderSync}}
   are referred to as just <dfn lt="read method">read methods</dfn>.)
 
@@ -1149,6 +1150,11 @@ and is the conformance criteria for this attribute:
 * On getting, if the {{FileReader/readAsDataURL()}} <a>read method</a> is used,
   the {{FileReader/result}} attribute must return a {{DOMString}}
   that is a Data URL [[!RFC2397]] encoding of the {{File}} or {{Blob}}'s data.
+* On getting, if the {{FileReader/readAsBinaryString()}} <a>read method</a> is called
+  and no error in reading the {{File}} or {{Blob}} has occurred,
+  then the {{FileReader/result}} attribute must return a {{DOMString}}
+  representing the {{File}} or {{Blob}}'s data as a <dfn>binary string</dfn>,
+  in which every byte is represented by a code unit of equal value [0...255].
 * On getting, if the {{FileReader/readAsText()}} <a>read method</a> is called
   and no error in reading the {{File}} or {{Blob}} has occurred,
   then the {{FileReader/result}} attribute must return a string
@@ -1258,6 +1264,41 @@ the user agent must run the steps below.
     do NOT fire {{loadend}} at the <a>context object</a>.
 9. <a>Terminate this algorithm</a>.
 
+<h5 id="readAsBinaryString">
+The {{FileReader/readAsBinaryString()}} method</h5>
+
+When the <dfn method for=FileReader id="dfn-readAsBinaryString">readAsBinaryString(blob)</dfn> method is called,
+the user agent must run the steps below.
+
+1. If {{FileReader/readyState}} = {{FileReader/LOADING}} throw an {{InvalidStateError}} exception and <a>terminate this algorithm</a>.
+2. If the <code>blob</code> is in the <a for="Blob/readability state">CLOSED</a> <a>readability state</a>,
+  set the {{error!!attribute}} attribute of the <a>context object</a>
+  to return an {{InvalidStateError}} exception
+  and <a>fire a progress event</a> called {{error!!event}} at the <a>context object</a>.
+  <a>Terminate this algorithm</a>.
+3. Otherwise set {{FileReader/readyState}} to {{FileReader/LOADING}}.
+4. Initiate an <a>annotated task read operation</a> using the <code>blob</code> argument as <var>input</var>
+  and handle <a lt="queue a task">tasks queued</a> on the <a>file reading task source</a> per below.
+5. To <a>process read error</a> with a <a>failure reason</a>,
+  proceed to the [[#dfn-error-steps]].
+6. To <a>process read</a> <a>fire a progress event</a> called {{loadstart}} at the <a>context object</a>.
+7. To <a>process read data</a> <a>fire a progress event</a> called {{progress}} at the <a>context object</a>.
+8. To <a>process read EOF</a> run these substeps:
+  1. Set {{FileReader/readyState}} to {{FileReader/DONE}}
+  2. Set the {{FileReader/result}} attribute to the <a>body</a> returned by the <a>read operation</a> as a <a>binary string</a>.
+  3. <a>Fire a progress event</a> called {{load}} at the <a>context object</a>.
+  4. Unless {{FileReader/readyState}} is {{FileReader/LOADING}}
+    <a>fire a progress event</a> called {{loadend}} at the <a>context object</a>.
+    If {{FileReader/readyState}} is {{FileReader/LOADING}}
+    do NOT fire {{loadend}} at the <a>context object</a>.
+9. <a>Terminate this algorithm</a>.
+
+<div class=note>
+  The use of {{FileReader/readAsArrayBuffer()}} is preferred over
+  {{FileReader/readAsBinaryString()}}, which is provided for backwards
+  compatibility.
+</div>
+
 <h5 id="dfn-error-steps">
 Error Steps</h5>
 
@@ -1298,15 +1339,15 @@ the user agent must run the steps below:
 <h5 id="blobAndFileParams">
 Blob Parameters</h5>
 
-The three <a>asynchronous read methods</a>,
-the three <a>synchronous read methods</a>,
+The <a>asynchronous read methods</a>,
+the <a>synchronous read methods</a>,
 <code>URL.{{URL/createObjectURL()}}</code>
 and <code>URL.{{URL/createFor()}}</code>
 take a {{Blob}} parameter.
 This section defines this parameter.
 
 <dl>
-  <dt><dfn id="dfn-fileBlob" argument for="FileReader/readAsArrayBuffer(blob), FileReader/readAsText(blob, label), FileReader/readAsDataURL(blob), URL/createObjectURL(blob), URL/createFor(blob), FileReaderSync/readAsArrayBuffer(blob), FileReaderSync/readAsText(blob, label), FileReaderSync/readAsDataURL(blob)">blob</dfn>
+  <dt><dfn id="dfn-fileBlob" argument for="FileReader/readAsArrayBuffer(blob), FileReader/readAsBinaryString(blob), FileReader/readAsText(blob, label), FileReader/readAsDataURL(blob), URL/createObjectURL(blob), URL/createFor(blob), FileReaderSync/readAsArrayBuffer(blob), FileReaderSync/readAsBinaryString(blob), FileReaderSync/readAsText(blob, label), FileReaderSync/readAsDataURL(blob)">blob</dfn>
   <dd>This is a {{Blob}} argument
     and must be a reference to a single {{File}} in a {{FileList}}
     or a {{Blob}} argument not obtained from the underlying OS file system.
@@ -1464,6 +1505,7 @@ interface FileReaderSync {
   // Synchronously return strings
 
   ArrayBuffer readAsArrayBuffer(Blob blob);
+  DOMString readAsBinaryString(Blob blob);
   DOMString readAsText(Blob blob, optional DOMString label);
   DOMString readAsDataURL(Blob blob);
 };
@@ -1542,6 +1584,32 @@ the following steps must be followed:
   throw the appropriate exception as defined in [[#dfn-error-codes]].
   <a>Terminate this algorithm</a>.
 4. If no error has occurred, return the <var>result</var> of the <a>read operation</a> as an {{ArrayBuffer}}.
+
+<h5 id="readAsBinaryStringSyncSection">
+The {{FileReaderSync/readAsBinaryString()}} method</h5>
+
+When the <dfn method for=FileReaderSync id="dfn-readAsBinaryStringSync">readAsBinaryString(blob)</dfn> method is called,
+the following steps must be followed:
+
+1. If {{FileReader/readyState}} = {{FileReader/LOADING}}
+  throw an {{InvalidStateError}} exception
+  and <a>terminate this algorithm</a>.
+2. If the <code>blob</code> has been closed through the {{Blob/close()}} method,
+  throw an {{InvalidStateError}} exception
+  and <a>terminate this algorithm</a>.
+3. Otherwise, initiate a <a>read operation</a> using the <code>blob</code> argument,
+  and with the <a>synchronous flag</a> <em>set</em>.
+  If the <a>read operation</a> returns failure,
+  throw the appropriate exception as defined in [[#dfn-error-codes]].
+  <a>Terminate this algorithm</a>.
+4. If no error has occurred, return the <var>result</var> of the
+  <a>read operation</a> as an <a>binary string</a>.
+
+<div class=note>
+  The use of {{FileReaderSync/readAsArrayBuffer()}} is preferred over
+  {{FileReaderSync/readAsBinaryString()}}, which is provided for
+  backwards compatibility.
+</div>
 
 <h2 id="ErrorAndException">
 Errors and Exceptions</h2>
