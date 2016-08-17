@@ -1182,7 +1182,7 @@ the user agent must run the steps below.
 The {{FileReader/readAsText()}} method</h5>
 
 The {{FileReader/readAsText()}} method can be called with an optional parameter,
-<dfn argument for="FileReader/readAsText(blob, label), FileReaderSync/readAsText(blob, label)" id="dfn-label">label</dfn>,
+<dfn argument for="FileReader/readAsText(blob, label), FileReader/readAsText(), FileReaderSync/readAsText(blob, label)" id="dfn-label">label</dfn>,
 which is a {{DOMString}} argument that represents the label of an encoding [[!Encoding]];
 if provided, it must be used as part of the <a>encoding determination</a> used when processing this method call.
 
@@ -1325,7 +1325,7 @@ take a {{Blob}} parameter.
 This section defines this parameter.
 
 <dl>
-  <dt><dfn id="dfn-fileBlob" argument for="FileReader/readAsArrayBuffer(blob), FileReader/readAsBinaryString(blob), FileReader/readAsText(blob, label), FileReader/readAsDataURL(blob), URL/createObjectURL(blob), URL/createFor(blob), FileReaderSync/readAsArrayBuffer(blob), FileReaderSync/readAsBinaryString(blob), FileReaderSync/readAsText(blob, label), FileReaderSync/readAsDataURL(blob)">blob</dfn>
+  <dt><dfn id="dfn-fileBlob" argument for="FileReader/readAsArrayBuffer(blob), FileReader/readAsBinaryString(blob), FileReader/readAsText(blob, label), FileReader/readAsText(), FileReader/readAsDataURL(blob), URL/createObjectURL(blob), URL/createFor(blob), FileReaderSync/readAsArrayBuffer(blob), FileReaderSync/readAsBinaryString(blob), FileReaderSync/readAsText(blob, label), FileReaderSync/readAsDataURL(blob)">blob</dfn>
   <dd>This is a {{Blob}} argument
     and must be a reference to a single {{File}} in a {{FileList}}
     or a {{Blob}} argument not obtained from the underlying OS file system.
