@@ -14,7 +14,7 @@ Previous Version: http://www.w3.org/TR/2012/WD-FileAPI-20121025/
 Abstract: This specification provides an API for representing file objects in web applications,
   as well as programmatically selecting them and accessing their data. This includes:
 
-  * A {{FileList}} interface, which represents an array of individually selected files from the underlying system. The user interface for selection can be invoked via <code>&lt;input type="file"></code>, i.e. when the input element is in the <code>File Upload</code> state [[HTML]] .
+  * A {{FileList}} interface, which represents an array of individually selected files from the underlying system. The user interface for selection can be invoked via <code>&lt;input type="file"></code>, i.e. when the input element is in the <code>File Upload</code> state [[HTML]].
   * A {{Blob}} interface, which represents immutable raw binary data, and allows access to ranges of bytes within the {{Blob}} object as a separate {{Blob}}.
   * A {{File}} interface, which includes readonly informational attributes about a file such as its name and the date of the last modification (on disk) of the file.
   * A {{FileReader}} interface, which provides methods to read a {{File}} or a {{Blob}}, and an event model to obtain the results of these reads.
@@ -390,7 +390,7 @@ user agents must run the following steps:
     a copy of the bytes held by the buffer source</a>, and append those bytes to <var>bytes</var>.
   4. If <var>element</var> is a {{Blob}},
     append the bytes it represents to <var>bytes</var>.
-    The {{Blob/type}} of the {{Blob}} array element is ignored and will not effect {{Blob/type}} of returned
+    The {{Blob/type}} of the {{Blob}} array element is ignored and will not affect {{Blob/type}} of returned
     {{Blob}} object.
 
 5. If the {{BlobPropertyBag/type}} member of the optional <code>options</code> argument is provided
@@ -532,7 +532,7 @@ It must act as follows:
 
   <ol type="a">
     <li>If the optional {{end}} parameter is not used as a parameter when making this call, let <var>relativeEnd</var> be {{Blob/size}}.
-    <li>If {{end}} is negative, let <var>relativeEnd</var> be <code>max((size + end), 0)</code> .
+    <li>If {{end}} is negative, let <var>relativeEnd</var> be <code>max((size + end), 0)</code>.
     <li>Else, let <var>relativeEnd</var> be <code>min(end, size)</code>.
   </ol>
 
@@ -541,7 +541,7 @@ It must act as follows:
   User agents must process the {{Blob/slice()}} with {{contentType}} normalized according to the following:
 
   <ol type="a">
-    <li>If the {{contentType}} parameter is not provided, let <var>relativeContentType</var> be set to the empty string .
+    <li>If the {{contentType}} parameter is not provided, let <var>relativeContentType</var> be set to the empty string.
     <li>Else let <var>relativeContentType</var> be set to {{contentType}} and run the substeps below:
       1. If <var>relativeContentType</var> contains any characters outside the range of U+0020 to U+007E,
         then set <var>relativeContentType</var> to the empty string and return from these substeps.
@@ -792,7 +792,7 @@ with the {{error!!attribute}} attribute returning a {{NotFoundError}} {{DOMError
   <pre class="lang-javascript">
   var file = document.getElementById("filePicker").files[0];
   var date = new Date(file.lastModified);
-  println("You selected the file " + file.name + " which was modified on " + date.toDateString() + " .");
+  println("You selected the file " + file.name + " which was modified on " + date.toDateString() + ".");
 
   ...
 
@@ -1540,7 +1540,7 @@ the following steps must be followed:
   as a Data URL [[!RFC2397]] subject to the considerations below:
 
   * Use the <code>blob</code>'s {{Blob/type}} attribute as part of the Data URL if it is available
-    in keeping with the Data URL specification [[!RFC2397]] .
+    in keeping with the Data URL specification [[!RFC2397]].
   * If the {{Blob/type}} attribute is not available on the <code>blob</code> return a Data URL without a media-type. [[!RFC2397]].
     Data URLs that do not have media-types [[RFC2046]] must be treated as plain text by conforming user agents. [[!RFC2397]].
 
