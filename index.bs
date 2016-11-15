@@ -5,7 +5,6 @@ Shortname: fileapi
 Level: 1
 Group: webplatform
 Editor: Arun Ranganathan, Mozilla Corporation, http://arunranga.com/, arun@mozilla.com
-Editor: Jonas Sicking, Mozilla Corporation, jonas@sicking.cc
 Editor: Marijn Kruisselbrink, Google, mek@chromium.org
 Status: ED
 ED: https://w3c.github.io/FileAPI/
