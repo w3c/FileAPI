@@ -5,7 +5,6 @@ Shortname: fileapi
 Level: 1
 Group: webplatform
 Editor: Arun Ranganathan, Mozilla Corporation, http://arunranga.com/, arun@mozilla.com
-Editor: Jonas Sicking, Mozilla Corporation, jonas@sicking.cc
 Editor: Marijn Kruisselbrink, Google, mek@chromium.org
 Status: ED
 ED: https://w3c.github.io/FileAPI/
@@ -2355,7 +2354,7 @@ Acknowledgements</h2>
 
 This specification was originally developed by the SVG Working Group. Many thanks to Mark Baker and Anne van Kesteren for their feedback.
 
-Thanks to Robin Berjon for editing the original specification.
+Thanks to Robin Berjon and Jonas Sicking for editing the original specification.
 
 Special thanks to Olli Pettay, Nikunj Mehta, Garrett Smith, Aaron Boodman, Michael Nordman, Jian Li, Dmitry Titov, Ian Hickson, Darin Fisher, Sam Weinig, Adrian Bateman and Julian Reschke.
 
