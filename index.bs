@@ -34,7 +34,6 @@ Abstract: This specification provides an API for representing file objects in we
 Status Text: Previous discussion of this specification has taken place on two other mailing lists: <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archive</a>) and <a href="mailto:public-webapi@w3.org">public-webapi@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapi/">archive</a>). Ongoing discussion will be on the <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> mailing list.
 
   This draft consists of changes made to the previous Last Call Working Draft. Please send comments to the <a href="mailto:public-webapi@w3.org">public-webapi@w3.org</a> as described above. You can see Last Call Feedback on the W3C Wiki: <a href="http://www.w3.org/wiki/Webapps/LCWD-FileAPI-20130912">http://www.w3.org/wiki/Webapps/LCWD-FileAPI-20130912</a>
-Boilerplate: omit conformance
 Translate Ids: dictdef-blobpropertybag dfn-BlobPropertyBag, dictdef-filepropertybag dfn-FilePropertyBag, filereadersync dfn-FileReaderSync, filelist dfn-filelist, filereader dfn-filereader, file dfn-file, blob dfn-Blob, blob-section blob, file-section file
 Markup Shorthands: css no, markdown yes
 </pre>
@@ -162,68 +161,6 @@ An example will be illustrative.
   }
   </pre>
 </div>
-
-<h2 id="conformance">
-Conformance</h2>
-
-Everything in this specification is normative except for
-examples and sections marked as being informative.
-
-The keywords “<span class='rfc2119'>MUST</span>”,
-“<span class='rfc2119'>MUST NOT</span>”,
-“<span class='rfc2119'>REQUIRED</span>”,
-“<span class='rfc2119'>SHALL</span>”,
-“<span class='rfc2119'>SHALL NOT</span>”,
-“<span class='rfc2119'>RECOMMENDED</span>”,
-“<span class='rfc2119'>MAY</span>” and
-“<span class='rfc2119'>OPTIONAL</span>” in this document are to be
-interpreted as described in
-<cite><a href='http://www.ietf.org/rfc/rfc2119'>Key words for use in RFCs to Indicate Requirement Levels</a></cite>
-[[!RFC2119]].
-
-The following conformance classes are defined by this specification:
-
-<dl>
-  <dt><dfn id='dfn-conforming-implementation'>conforming user agent</dfn>
-  <dd>
-    A user agent is considered to be a <a>conforming user agent</a>
-    if it satisfies all of the <span class='rfc2119'>MUST</span>-,
-    <span class='rfc2119'>REQUIRED</span>-,
-    and <span class='rfc2119'>SHALL</span>-level criteria in this specification that apply to implementations.
-    This specification uses both the terms "conforming user agent" and "user agent" to refer to this product class.
-
-    User agents may implement algorithms in this specifications in any way desired,
-    so long as the end result is indistinguishable from the result that would be obtained
-    from the specification's algorithms.
-</dl>
-
-User agents that use ECMAScript to implement the APIs defined in this specification
-must implement them in a manner consistent with the ECMAScript Bindings
-defined in the Web IDL specification [[WebIDL]] as this specification uses that specification and terminology.
-
-
-<h3 id="dependencies">
-Dependencies</h3>
-
-This specification relies on underlying specifications.
-
-: DOM
-:: A <a>conforming user agent</a> must support at least the subset of the functionality defined in DOM4 that this specification relies upon;
-   in particular, it must support {{EventTarget}}.
-: Progress Events
-:: A <a>conforming user agent</a> must support the Progress Events specification.
-   Data access on read operations is enabled via Progress Events. [[!PROGRESS-EVENTS]]
-: HTML
-:: A <a>conforming user agent</a> must support at least the subset of the functionality defined in HTML that this specification relies upon;
-   in particular, it must support <a>event loops</a> and <a>event handler content attributes</a>. [[HTML]]
-: Web IDL
-:: A <a>conforming user agent</a> must also be a conforming implementation of the IDL fragments in this specification,
-   as described in the Web IDL specification. [[WebIDL]]
-: Typed Arrays
-:: A <a>conforming user agent</a> must support the Typed Arrays specification [[TypedArray]].
-
-Parts of this specification rely on the Web Workers specification;
-for those parts of this specification, the Web Workers specification is a normative dependency. [[!Workers]]
 
 <h2 id="terminology">
 Terminology and Algorithms</h2>
