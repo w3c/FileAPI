@@ -1755,7 +1755,7 @@ defined in the Web IDL specification <a data-link-type="biblio" href="#biblio-we
     Data access on read operations is enabled via Progress Events. <a data-link-type="biblio" href="#biblio-progress-events">[PROGRESS-EVENTS]</a> 
     <dt>HTML 
     <dd>A <a data-link-type="dfn" href="#dfn-conforming-implementation" id="ref-for-dfn-conforming-implementation-4">conforming user agent</a> must support at least the subset of the functionality defined in HTML that this specification relies upon;
-  in particular, it must support <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop">event loops</a> and <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-content-attribute">event handler content attributes</a>. <a data-link-type="biblio" href="#biblio-html">[HTML]</a> 
+  in particular, it must support <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop">event loops</a> and <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-content-attributes">event handler content attributes</a>. <a data-link-type="biblio" href="#biblio-html">[HTML]</a> 
     <dt>Web IDL 
     <dd>A <a data-link-type="dfn" href="#dfn-conforming-implementation" id="ref-for-dfn-conforming-implementation-5">conforming user agent</a> must also be a conforming implementation of the IDL fragments in this specification,
   as described in the Web IDL specification. <a data-link-type="biblio" href="#biblio-webidl">[WebIDL]</a> 
@@ -1767,7 +1767,7 @@ for those parts of this specification, the Web Workers specification is a normat
    <h2 class="heading settled" data-level="3" id="terminology"><span class="secno">3. </span><span class="content"> Terminology and Algorithms</span><a class="self-link" href="#terminology"></a></h2>
    <p>When this specification says to <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="terminate an algorithm|terminate this algorithm" data-noexport="" id="terminate-an-algorithm">terminate an algorithm</dfn> the user agent must terminate the algorithm after finishing the step it is on.
 Asynchronous <a data-link-type="dfn" href="#read-method" id="ref-for-read-method-1">read methods</a> defined in this specification may return before the algorithm in question is terminated,
-and can be terminated by an <code class="idl"><a data-link-type="idl">abort()</a></code> call.</p>
+and can be terminated by an <code class="idl"><a data-link-type="idl" href="#dfn-abort" id="ref-for-dfn-abort-1">abort()</a></code> call.</p>
    <p>The algorithms and steps in this specification use the following mathematical operations:</p>
    <ul>
     <li data-md="">
@@ -1787,13 +1787,13 @@ This operation is also defined in ECMAScript <a data-link-type="biblio" href="#b
 (or 1970-01-01T00:00:00Z ISO 8601);
 this is the same time that is conceptually "<code>0</code>" in ECMA-262 <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>.</p>
    <h2 class="heading settled" data-level="4" id="blob"><span class="secno">4. </span><span class="content"> The Blob Interface and Binary Data</span><a class="self-link" href="#blob"></a></h2>
-   <p>A <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-4">Blob</a></code> object refers to a <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#byte">byte</a> sequence,
+   <p>A <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-4">Blob</a></code> object refers to a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a> sequence,
 and has a <code class="idl"><a data-link-type="idl" href="#dfn-size" id="ref-for-dfn-size-1">size</a></code> attribute which is the total number of bytes in the byte sequence,
 and a <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type-1">type</a></code> attribute,
-which is an ASCII-encoded string in lower case representing the media type of the <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#byte">byte</a> sequence.</p>
+which is an ASCII-encoded string in lower case representing the media type of the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a> sequence.</p>
    <p>A <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-5">Blob</a></code> must have a <dfn class="dfn-paneled" data-dfn-for="Blob" data-dfn-type="dfn" data-noexport="" id="readabilityState">readability state</dfn>,
 which is one of <a data-link-type="dfn" href="#dfn-openState" id="ref-for-dfn-openState-1"><code>OPENED</code></a> or <a data-link-type="dfn" href="#dfn-closedState" id="ref-for-dfn-closedState-1"><code>CLOSED</code></a>.
-A <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-6">Blob</a></code> that refers to a <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#byte">byte</a> sequence,
+A <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-6">Blob</a></code> that refers to a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a> sequence,
 including one of 0 bytes,
 is said to be in the <dfn class="dfn-paneled" data-dfn-for="Blob/readability state" data-dfn-type="dfn" data-noexport="" id="dfn-openState"><code>OPENED</code></dfn> <a data-link-type="dfn" href="#readabilityState" id="ref-for-readabilityState-1">readability state</a>.
 A <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-7">Blob</a></code> is said to be <dfn class="dfn-paneled" data-dfn-for="Blob" data-dfn-type="dfn" data-noexport="" id="closed">closed</dfn> if its <code class="idl"><a data-link-type="idl" href="#dfn-close" id="ref-for-dfn-close-1">close()</a></code> method has been called.
@@ -1852,7 +1852,7 @@ For 0 ≤ <var>i</var> &lt; <var>length</var>, repeat the following steps:</p>
        <ol>
         <li data-md="">
          <p>Encode <var>s</var> as <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a> and append the resulting bytes to <var>bytes</var>.</p>
-         <p class="note" role="note">Note: The algorithm from WebIDL <a data-link-type="biblio" href="#biblio-webidl">[WebIDL]</a> replaces unmatched surrogates in an invalid <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-16">utf-16</a> string
+         <p class="note" role="note">Note: The algorithm from WebIDL <a data-link-type="biblio" href="#biblio-webidl">[WebIDL]</a> replaces unmatched surrogates in an invalid utf-16 string
 with U+FFFD replacement characters.
 Scenarios exist when the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-13">Blob</a></code> constructor may result in some data loss
 due to lost or scrambled character sequences.</p>
@@ -1880,7 +1880,7 @@ using the "<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/
      </ol>
     <li data-md="">
      <p>Return a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-17">Blob</a></code> object with its <a data-link-type="dfn" href="#readabilityState" id="ref-for-readabilityState-4">readability state</a> set to <a data-link-type="dfn" href="#dfn-openState" id="ref-for-dfn-openState-3"><code>OPENED</code></a>,
-referring to <var>bytes</var> as its associated <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#byte">byte</a> sequence,
+referring to <var>bytes</var> as its associated <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a> sequence,
 with its <code class="idl"><a data-link-type="idl" href="#dfn-size" id="ref-for-dfn-size-4">size</a></code> set to the length of <var>bytes</var>,
 and its <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type-6">type</a></code> set to the value of <var>t</var> from the substeps above.</p>
    </ol>
@@ -1936,7 +1936,7 @@ Normative conditions for this member are provided in the <a href="#constructorBl
    <h3 class="heading settled" data-level="4.2" id="attributes-blob"><span class="secno">4.2. </span><span class="content"> Attributes</span><a class="self-link" href="#attributes-blob"></a></h3>
    <dl>
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="Blob" data-dfn-type="attribute" data-export="" id="dfn-size">size</dfn> , <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-unsigned-long-long">unsigned long long</a>, readonly</span>
-    <dd>Returns the size of the <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#byte">byte</a> sequence in number of bytes.
+    <dd>Returns the size of the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a> sequence in number of bytes.
     On getting, conforming user agents must return the total number of bytes that can be read by a <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader-2">FileReader</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-FileReaderSync" id="ref-for-dfn-FileReaderSync-1">FileReaderSync</a></code> object,
     or 0 if the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-20">Blob</a></code> has no bytes to be read.
     If the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-21">Blob</a></code> has a readability state of <a data-link-type="dfn" href="#dfn-closedState" id="ref-for-dfn-closedState-2"><code>CLOSED</code></a> then <code class="idl"><a data-link-type="idl" href="#dfn-size" id="ref-for-dfn-size-5">size</a></code> must return 0. 
@@ -1944,7 +1944,7 @@ Normative conditions for this member are provided in the <a href="#constructorBl
     <dd>
      The ASCII-encoded string in lower case representing the media type of the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-22">Blob</a></code>.
     On getting, user agents must return the type of a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-23">Blob</a></code> as an ASCII-encoded string in lower case,
-    such that when it is converted to a <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#byte">byte</a> sequence,
+    such that when it is converted to a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a> sequence,
     it is a <a data-link-type="dfn" href="https://mimesniff.spec.whatwg.org/#parsable-mime-type">parsable MIME type</a>,
     or the empty string – 0 bytes – if the type cannot be determined. 
      <p>The <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type-7">type</a></code> attribute can be set by the web application itself through constructor invocation
@@ -1952,7 +1952,7 @@ Normative conditions for this member are provided in the <a href="#constructorBl
     in these cases, further normative conditions for this attribute are in <a href="#constructorBlob">§4.1 Constructors</a>, <a href="#file-constructor">§5.1 Constructor</a>,
     and <a href="#slice-method-algo">§4.3.1 The slice method</a> respectively.
     User agents can also determine the <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type-8">type</a></code> of a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-24">Blob</a></code>,
-    especially if the <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#byte">byte</a> sequence is from an on-disk file;
+    especially if the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a> sequence is from an on-disk file;
     in this case, further normative conditions are in the <a data-link-type="dfn" href="#file-type-guidelines" id="ref-for-file-type-guidelines-1">file type guidelines</a>.</p>
      <p class="note" role="note">Note: The type <var>t</var> of a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-25">Blob</a></code> is considered a <a data-link-type="dfn" href="https://mimesniff.spec.whatwg.org/#parsable-mime-type">parsable MIME type</a>,
     if performing the <a data-link-type="dfn" href="https://mimesniff.spec.whatwg.org/#parse-a-mime-type">parse a MIME type</a> algorithm to a byte sequence converted from
@@ -2021,8 +2021,8 @@ then set <var>relativeContentType</var> to the empty string and return from thes
     by the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-32">Blob</a></code> object returned by the <code class="idl"><a data-link-type="idl" href="#dfn-slice" id="ref-for-dfn-slice-9">slice()</a></code> call;
     this has implications on whether the returned <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-33">Blob</a></code> is actually usable
     for <a data-link-type="dfn" href="#readOperation" id="ref-for-readOperation-1">read operation</a>s or as a <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-2">Blob URL</a>.</p>
-      <li><var>S</var> refers to <var>span</var> consecutive <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#byte">byte</a>s from <var>O</var>,
-    beginning with the <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#byte">byte</a> at byte-order position <var>relativeStart</var>. 
+      <li><var>S</var> refers to <var>span</var> consecutive <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a>s from <var>O</var>,
+    beginning with the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a> at byte-order position <var>relativeStart</var>. 
       <li><var>S</var>.<code class="idl"><a data-link-type="idl" href="#dfn-size" id="ref-for-dfn-size-8">size</a></code> = <var>span</var>. 
       <li><var>S</var>.<code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type-11">type</a></code> = <var>relativeContentType</var>. 
      </ol>
@@ -2069,8 +2069,8 @@ and must act as follows:</p>
    <h2 class="heading settled" data-level="5" id="file"><span class="secno">5. </span><span class="content"> The File Interface</span><a class="self-link" href="#file"></a></h2>
    <p>A <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-7">File</a></code> object is a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-36">Blob</a></code> object with a <code class="idl"><a data-link-type="idl" href="#dfn-name" id="ref-for-dfn-name-1">name</a></code> attribute, which is a string;
 it can be created within the web application via a constructor,
-or is a reference to a <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#byte">byte</a> sequence from a file from the underlying (OS) file system.</p>
-   <p>If a <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-8">File</a></code> object is a reference to a <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#byte">byte</a> sequence originating from a file on disk,
+or is a reference to a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a> sequence from a file from the underlying (OS) file system.</p>
+   <p>If a <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-8">File</a></code> object is a reference to a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a> sequence originating from a file on disk,
 then its <a data-link-type="dfn" href="#snapshot-state" id="ref-for-snapshot-state-2">snapshot state</a> should be set to the state of the file on disk at the time the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-9">File</a></code> object is created.</p>
    <p class="note" role="note">Note: This is a non-trivial requirement to implement for user agents,
 and is thus not a <em>must</em> but a <em>should</em> <a data-link-type="biblio" href="#biblio-rfc2119">[RFC2119]</a>.
@@ -2115,7 +2115,7 @@ user agents must run the following steps:</p>
    <ol>
     <li data-md="">
      <p>Let <var>a</var> be the <code class="idl"><a data-link-type="idl" href="#dfn-fileBits" id="ref-for-dfn-fileBits-2">fileBits</a></code> sequence argument.
-Let <var>bytes</var> be an empty sequence of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#byte">byte</a>.
+Let <var>bytes</var> be an empty sequence of <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a>.
 Let <var>length</var> be <var>a</var>’s length.
 For 0 ≤ i &lt; <var>length</var>, repeat the following steps:</p>
      <ol>
@@ -2125,9 +2125,9 @@ For 0 ≤ i &lt; <var>length</var>, repeat the following steps:</p>
        <p>If <var>element</var> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-USVString">USVString</a></code>, run the following substeps:</p>
        <ol>
         <li data-md="">
-         <p>Encode <var>s</var> as <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a> and append the resulting <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#byte">byte</a> to <var>bytes</var>.</p>
+         <p>Encode <var>s</var> as <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a> and append the resulting <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a> to <var>bytes</var>.</p>
        </ol>
-       <p class="note" role="note">Note: The algorithm from WebIDL <a data-link-type="biblio" href="#biblio-webidl">[WebIDL]</a> replaces unmatched surrogates in an invalid <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-16">utf-16</a> string with U+FFFD replacement characters.
+       <p class="note" role="note">Note: The algorithm from WebIDL <a data-link-type="biblio" href="#biblio-webidl">[WebIDL]</a> replaces unmatched surrogates in an invalid utf-16 string with U+FFFD replacement characters.
 Scenarios exist when the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-38">Blob</a></code> constructor may result in some data loss due to lost or scrambled character sequences.</p>
       <li data-md="">
        <p>If <var>element</var> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#BufferSource">BufferSource</a></code>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-get-buffer-source-copy">get
@@ -2142,7 +2142,7 @@ The <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-t
 Copy every character from <code class="idl"><a data-link-type="idl" href="#dfn-fileName" id="ref-for-dfn-fileName-3">fileName</a></code> to <var>n</var>,
 replacing any "/" character (U+002F SOLIDUS) with a ":" (U+003A COLON).</p>
      <p class="note" role="note">Note: Underlying OS filesystems use differing conventions for file name;
-with constructed files, mandating UTF-16 lessens ambiquity when file names are converted to <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#byte">byte</a> sequences.</p>
+with constructed files, mandating UTF-16 lessens ambiquity when file names are converted to <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a> sequences.</p>
     <li data-md="">
      <p>If the optional <code class="idl"><a data-link-type="idl" href="#dfn-FilePropertyBag" id="ref-for-dfn-FilePropertyBag-2">FilePropertyBag</a></code> dictionary argument is used,
 then run the following substeps:</p>
@@ -2160,9 +2160,9 @@ let <var>d</var> be set to the <code class="idl"><a data-link-type="idl" href="#
 If it is not provided,
 set <var>d</var> to the current date and time
 represented as the number of milliseconds since the <a data-link-type="dfn" href="#UnixEpoch" id="ref-for-UnixEpoch-1">Unix Epoch</a> (which is the equivalent of <code>Date.now()</code> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>).</p>
-       <p class="note" role="note">Note: Since ECMA-262 <code class="idl"><a data-link-type="idl">Date</a></code> objects convert to <code>long long</code> values
+       <p class="note" role="note">Note: Since ECMA-262 <code class="idl"><a data-link-type="idl" href="http://tc39.github.io/ecma262/#sec-date-constructor">Date</a></code> objects convert to <code>long long</code> values
 representing the number of milliseconds since the <a data-link-type="dfn" href="#UnixEpoch" id="ref-for-UnixEpoch-2">Unix Epoch</a>,
-the <code class="idl"><a data-link-type="idl" href="#dfn-FPdate" id="ref-for-dfn-FPdate-4">lastModified</a></code> member could be a <code class="idl"><a data-link-type="idl">Date</a></code> object <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>.</p>
+the <code class="idl"><a data-link-type="idl" href="#dfn-FPdate" id="ref-for-dfn-FPdate-4">lastModified</a></code> member could be a <code class="idl"><a data-link-type="idl" href="http://tc39.github.io/ecma262/#sec-date-constructor">Date</a></code> object <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>.</p>
      </ol>
     <li data-md="">
      <p>Return a new <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-14">File</a></code> object <var>F</var> such that:</p>
@@ -2170,7 +2170,7 @@ the <code class="idl"><a data-link-type="idl" href="#dfn-FPdate" id="ref-for-dfn
       <li data-md="">
        <p><var>F</var> has a <a data-link-type="dfn" href="#readabilityState" id="ref-for-readabilityState-13">readability state</a> of <a data-link-type="dfn" href="#dfn-openState" id="ref-for-dfn-openState-5"><code>OPENED</code></a>.</p>
       <li data-md="">
-       <p><var>F</var> refers to the <var>bytes</var> <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#byte">byte</a> sequence.</p>
+       <p><var>F</var> refers to the <var>bytes</var> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a> sequence.</p>
       <li data-md="">
        <p><var>F</var>.<code class="idl"><a data-link-type="idl" href="#dfn-size" id="ref-for-dfn-size-9">size</a></code> is set to the number of total bytes in <var>bytes</var>.</p>
       <li data-md="">
@@ -2258,9 +2258,9 @@ println<span class="p">(</span><span class="s2">"You selected the file "</span> 
    <h2 class="heading settled" data-level="6" id="filelist-section"><span class="secno">6. </span><span class="content"> The FileList Interface</span><a class="self-link" href="#filelist-section"></a></h2>
    <p class="note" role="note">Note: The <code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist-2">FileList</a></code> interface should be considered "at risk"
 since the general trend on the Web Platform is to replace such interfaces
-with the <code class="idl"><a data-link-type="idl">Array</a></code> platform object in ECMAScript <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>.
+with the <code class="idl"><a data-link-type="idl" href="http://tc39.github.io/ecma262/#sec-array-constructor">Array</a></code> platform object in ECMAScript <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>.
 In particular, this means syntax of the sort <code class="lang-javascript highlight">filelist<span class="p">.</span>item<span class="p">(</span><span class="mi">0</span><span class="p">)</span></code> is at risk;
-most other programmatic use of <code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist-3">FileList</a></code> is unlikely to be affected by the eventual migration to an <code class="idl"><a data-link-type="idl">Array</a></code> type.</p>
+most other programmatic use of <code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist-3">FileList</a></code> is unlikely to be affected by the eventual migration to an <code class="idl"><a data-link-type="idl" href="http://tc39.github.io/ecma262/#sec-array-constructor">Array</a></code> type.</p>
    <p>This interface is a list of <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-20">File</a></code> objects.</p>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=(<span class="n">Window</span>,<span class="n">Worker</span>)]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="dfn-filelist">FileList</dfn> {
@@ -2311,7 +2311,7 @@ Other interfaces with a readonly attribute of type <code class="idl"><a data-lin
    <h3 class="heading settled" data-level="7.1" id="readOperationSection"><span class="secno">7.1. </span><span class="content"> The Read Operation</span><a class="self-link" href="#readOperationSection"></a></h3>
    <p>The algorithm below defines a <a data-link-type="dfn" href="#readOperation" id="ref-for-readOperation-3">read operation</a>,
 which takes a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-43">Blob</a></code> and a <a data-link-type="dfn" href="#synchronousFlag" id="ref-for-synchronousFlag-1">synchronous flag</a> as input,
-and reads <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#byte">byte</a>s into a byte stream
+and reads <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a>s into a byte stream
 which is returned as the <var>result</var> of the <a data-link-type="dfn" href="#readOperation" id="ref-for-readOperation-4">read operation</a>,
 or else fails along with a <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-1">failure reason</a>.
 Methods in this specification invoke the <a data-link-type="dfn" href="#readOperation" id="ref-for-readOperation-5">read operation</a> with the <a data-link-type="dfn" href="#synchronousFlag" id="ref-for-synchronousFlag-2">synchronous flag</a> either set or unset.</p>
@@ -2408,7 +2408,7 @@ It is to be used for features that trigger in response to asynchronously reading
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsText" id="ref-for-dfn-readAsText-1">readAsText</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-51">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-3">blob</a>, <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-label" id="ref-for-dfn-label-1">label</a>);
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsDataURL" id="ref-for-dfn-readAsDataURL-1">readAsDataURL</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-52">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-4">blob</a>);
 
-  <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-abort" id="ref-for-dfn-abort-1">abort</a>();
+  <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-abort" id="ref-for-dfn-abort-2">abort</a>();
 
   // states
   <span class="kt">const</span> <span class="kt">unsigned</span> <span class="kt">short</span> <a class="nv idl-code" data-link-type="const" href="#dfn-empty" id="ref-for-dfn-empty-1">EMPTY</a> = 0;
@@ -2439,12 +2439,12 @@ the user agent must return a new <code class="idl"><a data-link-type="idl" href=
    <p>In environments where the global object is represented by a <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/browsers.html#window">Window</a></code> or a <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/workers.html#workerglobalscope">WorkerGlobalScope</a></code> object,
 the <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader-4">FileReader</a></code> constructor must be available.</p>
    <h4 class="heading settled" data-level="7.3.2" id="event-handler-attributes-section"><span class="secno">7.3.2. </span><span class="content"> Event Handler Content Attributes</span><a class="self-link" href="#event-handler-attributes-section"></a></h4>
-   <p>The following are the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-content-attribute">event handler content attributes</a> (and their corresponding <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event handler event types</a>)
+   <p>The following are the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-content-attributes">event handler content attributes</a> (and their corresponding <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event handler event types</a>)
 that user agents must support on <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader-5">FileReader</a></code> as DOM attributes:</p>
    <table>
     <thead>
      <tr>
-      <th><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-content-attribute">event handler content attribute</a> 
+      <th><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-content-attributes">event handler content attribute</a> 
       <th><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event handler event type</a> 
     <tbody>
      <tr>
@@ -2486,7 +2486,7 @@ which must be one of the following values:</p>
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="const" data-export="" id="dfn-done">DONE</dfn> (numeric value 2) 
     <dd>The entire <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-29">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-54">Blob</a></code> has been read into memory,
     OR a <a data-link-type="dfn" href="#file-error-read" id="ref-for-file-error-read-5">file read error</a> occurred,
-    OR the read was aborted using <code class="idl"><a data-link-type="idl">abort()</a></code>.
+    OR the read was aborted using <code class="idl"><a data-link-type="idl" href="#dfn-abort" id="ref-for-dfn-abort-3">abort()</a></code>.
     The <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader-9">FileReader</a></code> is no longer reading a <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-30">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-55">Blob</a></code>.
     If <code class="idl"><a data-link-type="idl" href="#dfn-readyState" id="ref-for-dfn-readyState-2">readyState</a></code> is set to <code class="idl"><a data-link-type="idl" href="#dfn-done" id="ref-for-dfn-done-2">DONE</a></code> it means at least one of the <a data-link-type="dfn" href="#read-method" id="ref-for-read-method-5">read methods</a> have been called on this <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader-10">FileReader</a></code>. 
    </dl>
@@ -2774,7 +2774,7 @@ returns a string in <var>encoding</var> format.</p>
    </ol>
    <h3 class="heading settled" data-level="7.5" id="events"><span class="secno">7.5. </span><span class="content"> Events</span><a class="self-link" href="#events"></a></h3>
    <p>The <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader-16">FileReader</a></code> object must be the event target for all events in this specification.</p>
-   <p>When this specification says to <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="fire-a-progress-event">fire a progress event</dfn> <i>called e</i> (for some <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/progress-events/#progressevent">ProgressEvent</a></code> <code>e</code> at a given <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader-17">FileReader</a></code> <code>reader</code> as the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>),
+   <p>When this specification says to <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="fire-a-progress-event">fire a progress event</dfn> <i>called e</i> (for some <code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#progressevent">ProgressEvent</a></code> <code>e</code> at a given <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader-17">FileReader</a></code> <code>reader</code> as the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>),
 the following are normative:</p>
    <ul>
     <li data-md="">
@@ -2793,28 +2793,28 @@ the following are normative:</p>
     <tbody>
      <tr>
       <td><dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="event" data-export="" id="dfn-loadstart-event">loadstart</dfn> 
-      <td><code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/progress-events/#progressevent">ProgressEvent</a></code> 
+      <td><code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#progressevent">ProgressEvent</a></code> 
       <td>When the read starts. 
      <tr>
       <td><dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="event" data-export="" id="dfn-progress-event">progress</dfn> 
-      <td><code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/progress-events/#progressevent">ProgressEvent</a></code> 
+      <td><code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#progressevent">ProgressEvent</a></code> 
       <td>While reading (and decoding) <code>blob</code> 
      <tr>
       <td><dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="event" data-export="" id="dfn-abort-event">abort</dfn> 
-      <td><code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/progress-events/#progressevent">ProgressEvent</a></code> 
+      <td><code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#progressevent">ProgressEvent</a></code> 
       <td>When the read has been aborted.
-        For instance, by invoking the <code class="idl"><a data-link-type="idl" href="#dfn-abort" id="ref-for-dfn-abort-2">abort()</a></code> method. 
+        For instance, by invoking the <code class="idl"><a data-link-type="idl" href="#dfn-abort" id="ref-for-dfn-abort-4">abort()</a></code> method. 
      <tr>
       <td><dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="event" data-export="" id="dfn-error-event">error</dfn> 
-      <td><code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/progress-events/#progressevent">ProgressEvent</a></code> 
+      <td><code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#progressevent">ProgressEvent</a></code> 
       <td>When the read has failed (see <a data-link-type="dfn" href="#file-error-read" id="ref-for-file-error-read-6">file read errors</a>). 
      <tr>
       <td><dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="event" data-export="" id="dfn-load-event">load</dfn> 
-      <td><code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/progress-events/#progressevent">ProgressEvent</a></code> 
+      <td><code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#progressevent">ProgressEvent</a></code> 
       <td>When the read has successfully completed. 
      <tr>
       <td><dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="event" data-export="" id="dfn-loadend-event">loadend</dfn> 
-      <td><code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/progress-events/#progressevent">ProgressEvent</a></code> 
+      <td><code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#progressevent">ProgressEvent</a></code> 
       <td>When the request has completed (either in success or failure). 
    </table>
    <h4 class="heading settled" data-level="7.5.2" id="eventInvariants"><span class="secno">7.5.2. </span><span class="content"> Summary of Event Invariants</span><a class="self-link" href="#eventInvariants"></a></h4>
@@ -2827,7 +2827,7 @@ a corresponding <code class="idl"><a data-link-type="idl" href="#dfn-loadend-eve
 UNLESS any of the following are true:</p>
      <ul>
       <li data-md="">
-       <p>the <a data-link-type="dfn" href="#read-method" id="ref-for-read-method-16">read method</a> has been cancelled using <code class="idl"><a data-link-type="idl">abort()</a></code> and a new <a data-link-type="dfn" href="#read-method" id="ref-for-read-method-17">read method</a> has been invoked</p>
+       <p>the <a data-link-type="dfn" href="#read-method" id="ref-for-read-method-16">read method</a> has been cancelled using <code class="idl"><a data-link-type="idl" href="#dfn-abort" id="ref-for-dfn-abort-5">abort()</a></code> and a new <a data-link-type="dfn" href="#read-method" id="ref-for-read-method-17">read method</a> has been invoked</p>
       <li data-md="">
        <p>the event handler function for a <code class="idl"><a data-link-type="idl" href="#dfn-load-event" id="ref-for-dfn-load-event-6">load</a></code> event initiates a new read</p>
       <li data-md="">
@@ -3066,7 +3066,7 @@ In general, this scheme should be designed to be used wherever URLs can be used 
      <p>This scheme should have defined response codes,
 so that web applications can respond to scenarios where the resource is not found, or raises an error, etc.</p>
     <li data-md="">
-     <p>This scheme should have an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a> policy and a <a data-link-type="dfn" href="#lifeTime" id="ref-for-lifeTime-1">lifetime</a> stipulation,
+     <p>This scheme should have an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">origin</a> policy and a <a data-link-type="dfn" href="#lifeTime" id="ref-for-lifeTime-1">lifetime</a> stipulation,
 to allow safe access to binary data from web applications.</p>
      <p>URLs in this scheme should be used as a references to "in-memory" <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-84">Blob</a></code>s,
 and also be re-used elsewhere on the platform to refer to binary resources
@@ -3131,7 +3131,7 @@ and favors clarity, familiarity, and consistency across the web platform.</p>
    </ul>
    <h3 class="heading settled" data-level="9.3" id="DefinitionOfScheme"><span class="secno">9.3. </span><span class="content"> The Blob URL</span><a class="self-link" href="#DefinitionOfScheme"></a></h3>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-export="" id="blob-url">Blob URL</dfn> is a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url">URL</a> with a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme">scheme</a> of <code>blob</code>,
-a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-host">host</a> of the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a> of the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-3">Blob URL</a>,
+a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-host">host</a> of the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">origin</a> of the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-3">Blob URL</a>,
 a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-path">path</a> with one entry comprised of a UUID <a data-link-type="biblio" href="#biblio-rfc4122">[RFC4122]</a> (see <a href="#ABNFUUID">An ABNF for UUID</a>),
 and an <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-object">object</a> of the associated <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-91">Blob</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-51">File</a></code>.
 A Blob URL may contain an optional <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-fragment">fragment</a>.
@@ -3145,7 +3145,7 @@ scheme = "blob"
 
 ; scheme is always "blob"
 
-; origin is a string representation of the Blob URL’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>.
+; origin is a string representation of the Blob URL’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">origin</a>.
 ; UUID is as defined in <a data-link-type="biblio" href="#biblio-rfc4122">[RFC4122]</a> and <a href="#ABNFUUID">An ABNF for UUID</a>
 ; fragIdentifier is optional and as defined in <a data-link-type="biblio" href="#biblio-rfc3986">[RFC3986]</a> and <a href="#ABNFFragment">An ABNF for Fragment Identifiers</a>
 </pre>
@@ -3154,12 +3154,12 @@ scheme = "blob"
    <p><a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-4">Blob URLs</a> are created using <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-2">createObjectURL()</a></code></code> and/or <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createFor" id="ref-for-dfn-createFor-2">createFor()</a></code></code>,
 and are revoked using <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL-1">revokeObjectURL()</a></code></code>.
 The <dfn data-dfn-type="dfn" data-lt="origin of a Blob URL|Blob URL’s origin" data-noexport="" id="origin-of-a-blob-url">origin of a Blob URL<a class="self-link" href="#origin-of-a-blob-url"></a></dfn> must be the same as the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#effective-script-origin">effective script origin</a> specified by the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#incumbent-settings-object">incumbent settings object</a> at the time the method that created it—<wbr>either <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-3">createObjectURL()</a></code></code> or <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createFor" id="ref-for-dfn-createFor-3">createFor()</a></code></code>—<wbr>was called.</p>
-   <p>The <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a> of a Blob URL,
+   <p>The <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">origin</a> of a Blob URL,
 when serialized as a string,
-must conform to the Web Origin Specification’s <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="unicode-serialization-of-an-origin-algorithm">Unicode Serialization of an Origin algorithm</dfn> <a data-link-type="biblio" href="#biblio-rfc6454">[RFC6454]</a>. <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#http-cors-protocol">Cross-origin requests</a> on Blob URLs must return a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a>.</p>
-   <p class="note" role="note">Note: In practice this means that HTTP and HTTPS <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origins</a> are covered by this specification as valid origins for use with Blob URLs.
-This specification does not address the case of non-HTTP and non-HTTPS <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origins</a>.
-For instance <code>blob:file:///Users/arunranga/702efefb-c234-4988-a73b-6104f1b615ee</code> (which uses the "file:" <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>)
+must conform to the Web Origin Specification’s <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="unicode-serialization-of-an-origin-algorithm">Unicode Serialization of an Origin algorithm</dfn> <a data-link-type="biblio" href="#biblio-rfc6454">[RFC6454]</a>. <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#cors-protocol">Cross-origin requests</a> on Blob URLs must return a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a>.</p>
+   <p class="note" role="note">Note: In practice this means that HTTP and HTTPS <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">origins</a> are covered by this specification as valid origins for use with Blob URLs.
+This specification does not address the case of non-HTTP and non-HTTPS <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">origins</a>.
+For instance <code>blob:file:///Users/arunranga/702efefb-c234-4988-a73b-6104f1b615ee</code> (which uses the "file:" <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">origin</a>)
 may have behavior that is undefined,
 even though user agents may treat such Blob URLs as valid.</p>
    <h4 class="heading settled" data-level="9.3.2" id="unicodeSerializationOfBlobURL"><span class="secno">9.3.2. </span><span class="content"> Unicode Serialization of a Blob URL</span><a class="self-link" href="#unicodeSerializationOfBlobURL"></a></h4>
@@ -3174,7 +3174,7 @@ to <var>result</var>.</p>
     <li data-md="">
      <p>Append the ":" (U+003A COLON) character to <var>result</var>.</p>
     <li data-md="">
-     <p>Let <var>O</var> be the Blob URL’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>.
+     <p>Let <var>O</var> be the Blob URL’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">origin</a>.
 If the <a data-link-type="dfn" href="#unicode-serialization-of-an-origin-algorithm" id="ref-for-unicode-serialization-of-an-origin-algorithm-1">Unicode Serialization of an Origin algorithm</a> on <var>O</var> returns null,
 user agents may substitute an implementation defined value for the return value of the <a data-link-type="dfn" href="#unicode-serialization-of-an-origin-algorithm" id="ref-for-unicode-serialization-of-an-origin-algorithm-2">Unicode Serialization of an Origin algorithm</a>.
 Append the result of the <a data-link-type="dfn" href="#unicode-serialization-of-an-origin-algorithm" id="ref-for-unicode-serialization-of-an-origin-algorithm-3">Unicode Serialization of an Origin algorithm</a> for <var>O</var> <a data-link-type="biblio" href="#biblio-rfc6454">[RFC6454]</a> to <var>result</var>.</p>
@@ -3203,7 +3203,7 @@ nor the <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createFor
    <p class="note" role="note">Note: The <a data-link-type="biblio" href="#biblio-url">[URL]</a> and <a data-link-type="biblio" href="#biblio-fetch">[Fetch]</a> specifications should be considered normative for parsing and fetching <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-6">Blob URLs</a>.</p>
    <p><a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-7">Blob URLs</a> are <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="dereference" data-noexport="" id="dereference">dereferenced</dfn> when the user agent retrieves the resource identified by the Blob URL
 and returns it to the requesting entity.
-This section provides guidance on <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request">requests</a> and <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response">responses</a>.</p>
+This section provides guidance on <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request">requests</a> and <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response">responses</a></p>
    <p>Only <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request">requests</a> with GET <a data-link-type="biblio" href="#biblio-rfc7231">[RFC7231]</a> are supported.
 Specifically, <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response">responses</a> are only a subset of the following from HTTP <a data-link-type="biblio" href="#biblio-rfc7231">[RFC7231]</a>:</p>
    <h4 class="heading settled" data-level="9.4.1" id="TwoHundredOK"><span class="secno">9.4.1. </span><span class="content"> 200 OK</span><a class="self-link" href="#TwoHundredOK"></a></h4>
@@ -3237,7 +3237,7 @@ Network errors are used when:</p>
      <p>The Blob has been <a data-link-type="dfn" href="#closed" id="ref-for-closed-3">closed</a>;
 this also results in the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-10">Blob URL</a> not having an entry in the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-3">Blob URL Store</a>.</p>
     <li data-md="">
-     <p>A <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#http-cors-protocol">cross-origin request</a> is made on a <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-11">Blob URL</a>.</p>
+     <p>A <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#cors-protocol">cross-origin requests</a> is made on a <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-11">Blob URL</a>.</p>
     <li data-md="">
      <p>A security error has occurred.</p>
    </ul>
@@ -3249,8 +3249,8 @@ These examples merely illustrate the <a data-link-type="dfn" href="https://fetch
 web developers are not likely to interact with all the headers,
 but the <code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#dom-xmlhttprequest-getallresponseheaders">getAllResponseHeaders()</a></code> method of <code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#xmlhttprequest">XMLHttpRequest</a></code>, if used,
 will show relevant <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response">response</a> headers.</p>
-   <div class="example" id="example-2f07eb67">
-    <a class="self-link" href="#example-2f07eb67"></a> <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request">Requests</a> could look like this: 
+   <div class="example" id="example-2129ccb8">
+    <a class="self-link" href="#example-2129ccb8"></a> <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request">Requests</a> could look like this: 
 <pre>GET http://example.org:8080/550e8400-e29b-41d4-a716-446655440000
 </pre>
     <p>If the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-95">Blob</a></code> has an affiliated media type <a data-link-type="biblio" href="#biblio-rfc2046">[RFC2046]</a> represented by its <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type-23">type</a></code> attribute,
@@ -3464,7 +3464,7 @@ Subsequent attempts to <a data-link-type="dfn" href="#dereference" id="ref-for-d
 remove all the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-45">Blob URL</a>s in the <a data-link-type="dfn" href="#revokeList" id="ref-for-revokeList-5">Revocation List</a>.</p>
     <li data-md="">
      <p>This specification adds an additional <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#unloading-document-cleanup-steps">unloading document cleanup step</a>:
-user agents must remove all <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-46">Blob URLs</a> from the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-15">Blob URL Store</a> within that <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#dom">document</a>.</p>
+user agents must remove all <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-46">Blob URLs</a> from the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-15">Blob URL Store</a> within that <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a>.</p>
    </ol>
    <p class="note" role="note">Note: User agents are free to garbage collect resources removed from the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-16">Blob URL Store</a>.</p>
    <h2 class="heading settled" data-level="10" id="security-discussion"><span class="secno">10. </span><span class="content"> Security Considerations</span><a class="self-link" href="#security-discussion"></a></h2>
@@ -3765,22 +3765,27 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
      <li><a href="https://dom.spec.whatwg.org/#domerror">DOMError</a>
      <li><a href="https://dom.spec.whatwg.org/#eventtarget">EventTarget</a>
      <li><a href="https://dom.spec.whatwg.org/#context-object">context object</a>
+     <li><a href="https://dom.spec.whatwg.org/#concept-document">document</a>
      <li><a href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[ECMA-262]</a> defines the following terms:
+    <ul>
+     <li><a href="http://tc39.github.io/ecma262/#sec-array-constructor">Array</a>
+     <li><a href="http://tc39.github.io/ecma262/#sec-date-constructor">Date</a>
     </ul>
    <li>
     <a data-link-type="biblio">[Encoding]</a> defines the following terms:
     <ul>
-     <li><a href="https://encoding.spec.whatwg.org/#byte">byte</a>
      <li><a href="https://encoding.spec.whatwg.org/#decode">decode</a>
      <li><a href="https://encoding.spec.whatwg.org/#concept-encoding-get">getting an encoding</a>
-     <li><a href="https://encoding.spec.whatwg.org/#utf-16">utf-16</a>
      <li><a href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a>
     </ul>
    <li>
     <a data-link-type="biblio">[Fetch]</a> defines the following terms:
     <ul>
      <li><a href="https://fetch.spec.whatwg.org/#concept-body">body</a>
-     <li><a href="https://fetch.spec.whatwg.org/#http-cors-protocol">cross-origin request</a>
+     <li><a href="https://fetch.spec.whatwg.org/#cors-protocol">cors protocol</a>
      <li><a href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a>
      <li><a href="https://fetch.spec.whatwg.org/#concept-request">request</a>
      <li><a href="https://fetch.spec.whatwg.org/#concept-response">response</a>
@@ -3795,10 +3800,9 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
      <li><a href="https://html.spec.whatwg.org/multipage/workers.html#workerglobalscope">WorkerGlobalScope</a>
      <li><a href="https://html.spec.whatwg.org/multipage/semantics.html#the-a-element">a</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#converted-to-ascii-lowercase">converting a string to ascii lowercase</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/dom.html#dom">document</a>
      <li><a href="https://html.spec.whatwg.org/multipage/semantics.html#attr-hyperlink-download">download</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#effective-script-origin">effective script origin</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-content-attribute">event handler content attribute</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-content-attributes">event handler content attribute</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event handler event type</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop">event loop</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#global-script-clean-up-jobs-list">global script clean-up jobs list</a>
@@ -3806,7 +3810,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element">img</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#incumbent-settings-object">incumbent settings object</a>
      <li><a href="https://html.spec.whatwg.org/multipage/forms.html#the-input-element">input</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">origin</a>
      <li><a href="https://html.spec.whatwg.org/multipage/workers.html#dom-worker-postmessage">postMessage()</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#same-origin">same origin</a>
@@ -3816,15 +3820,15 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#unloading-document-cleanup-steps">unloading document cleanup steps</a>
     </ul>
    <li>
+    <a data-link-type="biblio">[INFRA]</a> defines the following terms:
+    <ul>
+     <li><a href="https://infra.spec.whatwg.org/#byte">byte</a>
+    </ul>
+   <li>
     <a data-link-type="biblio">[MIMESNIFF]</a> defines the following terms:
     <ul>
      <li><a href="https://mimesniff.spec.whatwg.org/#parsable-mime-type">parsable mime type</a>
      <li><a href="https://mimesniff.spec.whatwg.org/#parse-a-mime-type">parse a mime type</a>
-    </ul>
-   <li>
-    <a data-link-type="biblio">[PROGRESS-EVENTS]</a> defines the following terms:
-    <ul>
-     <li><a href="https://www.w3.org/TR/progress-events/#progressevent">ProgressEvent</a>
     </ul>
    <li>
     <a data-link-type="biblio">[STREAMS]</a> defines the following terms:
@@ -3867,6 +3871,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
    <li>
     <a data-link-type="biblio">[XHR]</a> defines the following terms:
     <ul>
+     <li><a href="https://xhr.spec.whatwg.org/#progressevent">ProgressEvent</a>
      <li><a href="https://xhr.spec.whatwg.org/#xmlhttprequest">XMLHttpRequest</a>
      <li><a href="https://xhr.spec.whatwg.org/#dom-xmlhttprequest-getallresponseheaders">getAllResponseHeaders()</a>
      <li><a href="https://xhr.spec.whatwg.org/#dom-xmlhttprequest-send">send()</a>
@@ -3885,6 +3890,8 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
    <dd>Anne van Kesteren. <a href="https://fetch.spec.whatwg.org/">Fetch Standard</a>. Living Standard. URL: <a href="https://fetch.spec.whatwg.org/">https://fetch.spec.whatwg.org/</a>
    <dt id="biblio-html">[HTML]
    <dd>Anne van Kesteren; et al. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
+   <dt id="biblio-infra">[INFRA]
+   <dd>Anne van Kesteren; Domenic Denicola. <a href="https://infra.spec.whatwg.org/">Infra Standard</a>. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
    <dt id="biblio-mimesniff">[MIMESNIFF]
    <dd>Gordon P. Hemsley. <a href="https://mimesniff.spec.whatwg.org/">MIME Sniffing Standard</a>. Living Standard. URL: <a href="https://mimesniff.spec.whatwg.org/">https://mimesniff.spec.whatwg.org/</a>
    <dt id="biblio-progress-events">[PROGRESS-EVENTS]
@@ -4993,10 +5000,16 @@ The readAsBinaryString() method</a> <a href="#ref-for-dfn-readAsBinaryString-5">
   <aside class="dfn-panel" data-for="dfn-abort">
    <b><a href="#dfn-abort">#dfn-abort</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dfn-abort-1">7.3. 
+    <li><a href="#ref-for-dfn-abort-1">3. 
+Terminology and Algorithms</a>
+    <li><a href="#ref-for-dfn-abort-2">7.3. 
 The FileReader API</a>
-    <li><a href="#ref-for-dfn-abort-2">7.5.1. 
+    <li><a href="#ref-for-dfn-abort-3">7.3.3. 
+FileReader States</a>
+    <li><a href="#ref-for-dfn-abort-4">7.5.1. 
 Event Summary</a>
+    <li><a href="#ref-for-dfn-abort-5">7.5.2. 
+Summary of Event Invariants</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dfn-fileBlob">
