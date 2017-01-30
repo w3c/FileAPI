@@ -1177,7 +1177,7 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 0feafaae1a97b66d9da46b325858f9805ac01fb2" name="generator">
+  <meta content="Bikeshed version 8ced20b1ada534532c822aed50a7dcb3d8dbe809" name="generator">
 <style>/* style-md-lists */
 
             /* This is a weird hack for me not yet following the commonmark spec
@@ -1424,7 +1424,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="http://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">File API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-12-06">6 December 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-01-30">30 January 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1444,7 +1444,7 @@ pre.idl.highlight { color: #708090; }
     </dl>
    </div>
    <div data-fill-with="warning"></div>
-   <p class="copyright" data-fill-with="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2016 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>). W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/2015/copyright-software-and-document" rel="license">permissive document license</a> rules apply. </p>
+   <p class="copyright" data-fill-with="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2017 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>). W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/2015/copyright-software-and-document" rel="license">permissive document license</a> rules apply. </p>
    <hr title="Separator for header">
   </div>
   <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
@@ -1807,7 +1807,7 @@ For 0 ≤ <var>i</var> &lt; <var>length</var>, repeat the following steps:</p>
        <ol>
         <li data-md="">
          <p>Encode <var>s</var> as <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a> and append the resulting bytes to <var>bytes</var>.</p>
-         <p class="note" role="note">Note: The algorithm from WebIDL <a data-link-type="biblio" href="#biblio-webidl">[WebIDL]</a> replaces unmatched surrogates in an invalid utf-16 string
+         <p class="note" role="note"><span>Note:</span> The algorithm from WebIDL <a data-link-type="biblio" href="#biblio-webidl">[WebIDL]</a> replaces unmatched surrogates in an invalid utf-16 string
 with U+FFFD replacement characters.
 Scenarios exist when the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-13">Blob</a></code> constructor may result in some data loss
 due to lost or scrambled character sequences.</p>
@@ -1908,10 +1908,10 @@ Normative conditions for this member are provided in the <a href="#constructorBl
     User agents can also determine the <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type-8">type</a></code> of a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-24">Blob</a></code>,
     especially if the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a> sequence is from an on-disk file;
     in this case, further normative conditions are in the <a data-link-type="dfn" href="#file-type-guidelines" id="ref-for-file-type-guidelines-1">file type guidelines</a>.</p>
-     <p class="note" role="note">Note: The type <var>t</var> of a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-25">Blob</a></code> is considered a <a data-link-type="dfn" href="https://mimesniff.spec.whatwg.org/#parsable-mime-type">parsable MIME type</a>,
+     <p class="note" role="note"><span>Note:</span> The type <var>t</var> of a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-25">Blob</a></code> is considered a <a data-link-type="dfn" href="https://mimesniff.spec.whatwg.org/#parsable-mime-type">parsable MIME type</a>,
     if performing the <a data-link-type="dfn" href="https://mimesniff.spec.whatwg.org/#parse-a-mime-type">parse a MIME type</a> algorithm to a byte sequence converted from
     the ASCII-encoded string representing the Blob object’s type does not return undefined.</p>
-     <p class="note" role="note">Note: Use of the <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type-9">type</a></code> attribute informs the <a data-link-type="dfn" href="#encoding-determination" id="ref-for-encoding-determination-1">encoding determination</a> and <a href="#processing-media-types">parsing the Content-Type header</a> when <a data-link-type="dfn" href="#dereference" id="ref-for-dereference-1">dereferencing</a> <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-1">Blob URLs</a>.</p>
+     <p class="note" role="note"><span>Note:</span> Use of the <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type-9">type</a></code> attribute informs the <a data-link-type="dfn" href="#encoding-determination" id="ref-for-encoding-determination-1">encoding determination</a> and <a href="#processing-media-types">parsing the Content-Type header</a> when <a data-link-type="dfn" href="#dereference" id="ref-for-dereference-1">dereferencing</a> <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-1">Blob URLs</a>.</p>
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="Blob" data-dfn-type="attribute" data-export="" id="dfn-isClosed">isClosed</dfn> , <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-boolean">boolean</a>, readonly</span>
     <dd>The boolean value that indicates whether the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-26">Blob</a></code> is in the <a data-link-type="dfn" href="#dfn-closedState" id="ref-for-dfn-closedState-3"><code>CLOSED</code></a> <a data-link-type="dfn" href="#readabilityState" id="ref-for-readabilityState-5">readability state</a>.
     On getting, user agents must return <code>false</code> if the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-27">Blob</a></code> is in the <a data-link-type="dfn" href="#dfn-openState" id="ref-for-dfn-openState-4"><code>OPENED</code></a> <a data-link-type="dfn" href="#readabilityState" id="ref-for-readabilityState-6">readability state</a>,
@@ -1971,7 +1971,7 @@ then set <var>relativeContentType</var> to the empty string and return from thes
      <ol type="a">
       <li>
        <var>S</var> has a <a data-link-type="dfn" href="#readabilityState" id="ref-for-readabilityState-8">readability state</a> equal to that of <var>O</var>’s <a data-link-type="dfn" href="#readabilityState" id="ref-for-readabilityState-9">readability state</a>. 
-       <p class="note" role="note">Note: The <a data-link-type="dfn" href="#readabilityState" id="ref-for-readabilityState-10">readability state</a> of the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a> is retained
+       <p class="note" role="note"><span>Note:</span> The <a data-link-type="dfn" href="#readabilityState" id="ref-for-readabilityState-10">readability state</a> of the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a> is retained
     by the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-32">Blob</a></code> object returned by the <code class="idl"><a data-link-type="idl" href="#dfn-slice" id="ref-for-dfn-slice-9">slice()</a></code> call;
     this has implications on whether the returned <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-33">Blob</a></code> is actually usable
     for <a data-link-type="dfn" href="#readOperation" id="ref-for-readOperation-1">read operation</a>s or as a <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-2">Blob URL</a>.</p>
@@ -2026,7 +2026,7 @@ it can be created within the web application via a constructor,
 or is a reference to a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a> sequence from a file from the underlying (OS) file system.</p>
    <p>If a <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-8">File</a></code> object is a reference to a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a> sequence originating from a file on disk,
 then its <a data-link-type="dfn" href="#snapshot-state" id="ref-for-snapshot-state-2">snapshot state</a> should be set to the state of the file on disk at the time the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-9">File</a></code> object is created.</p>
-   <p class="note" role="note">Note: This is a non-trivial requirement to implement for user agents,
+   <p class="note" role="note"><span>Note:</span> This is a non-trivial requirement to implement for user agents,
 and is thus not a <em>must</em> but a <em>should</em> <a data-link-type="biblio" href="#biblio-rfc2119">[RFC2119]</a>.
 User agents should endeavor to have a <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-10">File</a></code> object’s <a data-link-type="dfn" href="#snapshot-state" id="ref-for-snapshot-state-3">snapshot state</a> set to the state of the underlying storage on disk at the time the reference is taken.
 If the file is modified on disk following the time a reference has been taken,
@@ -2081,7 +2081,7 @@ For 0 ≤ i &lt; <var>length</var>, repeat the following steps:</p>
         <li data-md="">
          <p>Encode <var>s</var> as <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a> and append the resulting <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a> to <var>bytes</var>.</p>
        </ol>
-       <p class="note" role="note">Note: The algorithm from WebIDL <a data-link-type="biblio" href="#biblio-webidl">[WebIDL]</a> replaces unmatched surrogates in an invalid utf-16 string with U+FFFD replacement characters.
+       <p class="note" role="note"><span>Note:</span> The algorithm from WebIDL <a data-link-type="biblio" href="#biblio-webidl">[WebIDL]</a> replaces unmatched surrogates in an invalid utf-16 string with U+FFFD replacement characters.
 Scenarios exist when the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-38">Blob</a></code> constructor may result in some data loss due to lost or scrambled character sequences.</p>
       <li data-md="">
        <p>If <var>element</var> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#BufferSource">BufferSource</a></code>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-get-buffer-source-copy">get
@@ -2095,7 +2095,7 @@ The <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-t
      <p>Let <var>n</var> be a new string of the same size as the <code class="idl"><a data-link-type="idl" href="#dfn-fileName" id="ref-for-dfn-fileName-2">fileName</a></code> argument to the constructor.
 Copy every character from <code class="idl"><a data-link-type="idl" href="#dfn-fileName" id="ref-for-dfn-fileName-3">fileName</a></code> to <var>n</var>,
 replacing any "/" character (U+002F SOLIDUS) with a ":" (U+003A COLON).</p>
-     <p class="note" role="note">Note: Underlying OS filesystems use differing conventions for file name;
+     <p class="note" role="note"><span>Note:</span> Underlying OS filesystems use differing conventions for file name;
 with constructed files, mandating UTF-16 lessens ambiquity when file names are converted to <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a> sequences.</p>
     <li data-md="">
      <p>If the optional <code class="idl"><a data-link-type="idl" href="#dfn-FilePropertyBag" id="ref-for-dfn-FilePropertyBag-2">FilePropertyBag</a></code> dictionary argument is used,
@@ -2114,7 +2114,7 @@ let <var>d</var> be set to the <code class="idl"><a data-link-type="idl" href="#
 If it is not provided,
 set <var>d</var> to the current date and time
 represented as the number of milliseconds since the <a data-link-type="dfn" href="#UnixEpoch" id="ref-for-UnixEpoch-1">Unix Epoch</a> (which is the equivalent of <code>Date.now()</code> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>).</p>
-       <p class="note" role="note">Note: Since ECMA-262 <code class="idl"><a data-link-type="idl" href="http://tc39.github.io/ecma262/#sec-date-constructor">Date</a></code> objects convert to <code>long long</code> values
+       <p class="note" role="note"><span>Note:</span> Since ECMA-262 <code class="idl"><a data-link-type="idl" href="http://tc39.github.io/ecma262/#sec-date-constructor">Date</a></code> objects convert to <code>long long</code> values
 representing the number of milliseconds since the <a data-link-type="dfn" href="#UnixEpoch" id="ref-for-UnixEpoch-2">Unix Epoch</a>,
 the <code class="idl"><a data-link-type="idl" href="#dfn-FPdate" id="ref-for-dfn-FPdate-4">lastModified</a></code> member could be a <code class="idl"><a data-link-type="idl" href="http://tc39.github.io/ecma262/#sec-date-constructor">Date</a></code> object <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>.</p>
      </ol>
@@ -2192,7 +2192,7 @@ and thus represents file data that can be read into memory at the time a <a data
 User agents must process reads on files that no longer exist at the time of read as <a data-link-type="dfn" href="#file-error-read" id="ref-for-file-error-read-1">errors</a>,
 throwing a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notfounderror">NotFoundError</a></code> exception
 if using a <code class="idl"><a data-link-type="idl" href="#dfn-FileReaderSync" id="ref-for-dfn-FileReaderSync-2">FileReaderSync</a></code> on a Web Worker <a data-link-type="biblio" href="#biblio-workers">[Workers]</a> or firing an <code class="idl"><a class="idl-code" data-link-type="event" href="#dfn-error-event" id="ref-for-dfn-error-event-1">error</a></code> event
-with the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dfn-error" id="ref-for-dfn-error-1">error</a></code> attribute returning a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notfounderror">NotFoundError</a></code> <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#domerror">DOMError</a></code>.</p>
+with the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dfn-error" id="ref-for-dfn-error-1">error</a></code> attribute returning a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notfounderror">NotFoundError</a></code>.</p>
    <div class="example" id="example-0f76d65d">
     <a class="self-link" href="#example-0f76d65d"></a> In the examples below, metadata from a file object is displayed meaningfully, and a file object is created with a name and a last modified date. 
 <pre class="lang-javascript highlight"><span class="kd">var</span> file <span class="o">=</span> document<span class="p">.</span>getElementById<span class="p">(</span><span class="s2">"filePicker"</span><span class="p">)</span><span class="p">.</span>files<span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">;</span>
@@ -2210,7 +2210,7 @@ println<span class="p">(</span><span class="s2">"You selected the file "</span> 
 </pre>
    </div>
    <h2 class="heading settled" data-level="5" id="filelist-section"><span class="secno">5. </span><span class="content"> The FileList Interface</span><a class="self-link" href="#filelist-section"></a></h2>
-   <p class="note" role="note">Note: The <code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist-2">FileList</a></code> interface should be considered "at risk"
+   <p class="note" role="note"><span>Note:</span> The <code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist-2">FileList</a></code> interface should be considered "at risk"
 since the general trend on the Web Platform is to replace such interfaces
 with the <code class="idl"><a data-link-type="idl" href="http://tc39.github.io/ecma262/#sec-array-constructor">Array</a></code> platform object in ECMAScript <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>.
 In particular, this means syntax of the sort <code class="lang-javascript highlight">filelist<span class="p">.</span>item<span class="p">(</span><span class="mi">0</span><span class="p">)</span></code> is at risk;
@@ -2258,7 +2258,7 @@ most other programmatic use of <code class="idl"><a data-link-type="idl" href="#
     If there are no such <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-26">File</a></code> objects,
     then there are no supported property indices.</p>
    </dl>
-   <p class="note" role="note">Note: The <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement">HTMLInputElement</a></code> interface has a readonly attribute of type <code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist-9">FileList</a></code>,
+   <p class="note" role="note"><span>Note:</span> The <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement">HTMLInputElement</a></code> interface has a readonly attribute of type <code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist-9">FileList</a></code>,
 which is what is being accessed in the above example.
 Other interfaces with a readonly attribute of type <code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist-10">FileList</a></code> include the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/interaction.html#datatransfer">DataTransfer</a></code> interface.</p>
    <h2 class="heading settled" data-level="6" id="reading-data-section"><span class="secno">6. </span><span class="content"> Reading Data</span><a class="self-link" href="#reading-data-section"></a></h2>
@@ -2284,7 +2284,7 @@ and <var>bytes</var> initially set to an empty byte sequence.
 Set the <var>length</var> on <var>s</var> to the <code class="idl"><a data-link-type="idl" href="#dfn-size" id="ref-for-dfn-size-10">size</a></code> of <var>b</var>.
 While there are still bytes to be read in <var>b</var>,
 perform the following substeps:</p>
-     <p class="note" role="note">Note: The algorithm assumes that invoking methods have checked for <a data-link-type="dfn" href="#readabilityState" id="ref-for-readabilityState-14">readability state</a>.
+     <p class="note" role="note"><span>Note:</span> The algorithm assumes that invoking methods have checked for <a data-link-type="dfn" href="#readabilityState" id="ref-for-readabilityState-14">readability state</a>.
 A <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-46">Blob</a></code> in the <a data-link-type="dfn" href="#dfn-closedState" id="ref-for-dfn-closedState-7"><code>CLOSED</code></a> state must not have a <a data-link-type="dfn" href="#readOperation" id="ref-for-readOperation-7">read operation</a> called on it.</p>
      <ol>
       <li data-md="">
@@ -2296,7 +2296,7 @@ If a <a data-link-type="dfn" href="#file-error-read" id="ref-for-file-error-read
 return <var>s</var> with the error flag set,
 along with a <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-2">failure reason</a>,
 and <a data-link-type="dfn" href="#terminate-an-algorithm" id="ref-for-terminate-an-algorithm-2">terminate this algorithm</a>.</p>
-         <p class="note" role="note">Note: Along with returning failure,
+         <p class="note" role="note"><span>Note:</span> Along with returning failure,
 the synchronous part of this algorithm must return the <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-3">failure reason</a> that occurred
 for <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throwing an exception</a> by synchronous methods
 that invoke this algorithm with the <a data-link-type="dfn" href="#synchronousFlag" id="ref-for-synchronousFlag-5">synchronous flag</a> set.</p>
@@ -2318,7 +2318,7 @@ Return <var>s</var> and process the rest of this algorithm asynchronously.</p>
 If a <a data-link-type="dfn" href="#file-error-read" id="ref-for-file-error-read-3">file read error</a> occurs reading a <a data-link-type="dfn" href="https://streams.spec.whatwg.org/#chunk">chunk</a> from <var>b</var>,
 set the error flag on <var>s</var>,
 and <a data-link-type="dfn" href="#terminate-an-algorithm" id="ref-for-terminate-an-algorithm-4">terminate this algorithm</a> with a <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-4">failure reason</a>.</p>
-       <p class="note" role="note">Note: The asynchronous part of this algorithm must signal the <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-5">failure reason</a> that occurred
+       <p class="note" role="note"><span>Note:</span> The asynchronous part of this algorithm must signal the <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-5">failure reason</a> that occurred
 for asynchronous error reporting by methods expecting <var>s</var> and which invoke this algorithm with the <a data-link-type="dfn" href="#synchronousFlag" id="ref-for-synchronousFlag-7">synchronous flag</a> unset.</p>
       <li data-md="">
        <p>If no <a data-link-type="dfn" href="#file-error-read" id="ref-for-file-error-read-4">file read error</a> occurs,
@@ -2359,7 +2359,7 @@ It is to be used for features that trigger in response to asynchronously reading
   // async read methods
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsArrayBuffer" id="ref-for-dfn-readAsArrayBuffer-1">readAsArrayBuffer</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-49">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-1">blob</a>);
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsBinaryString" id="ref-for-dfn-readAsBinaryString-1">readAsBinaryString</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-50">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-2">blob</a>);
-  <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsText" id="ref-for-dfn-readAsText-1">readAsText</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-51">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-3">blob</a>, <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-label" id="ref-for-dfn-label-1">label</a>);
+  <span class="kt">void</span> <dfn class="nv idl-code" data-dfn-for="FileReader" data-dfn-type="method" data-export="" data-lt="readAsText(blob, label)|readAsText(blob)" id="dom-filereader-readastext">readAsText<a class="self-link" href="#dom-filereader-readastext"></a></dfn>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-51">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-3">blob</a>, <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-label" id="ref-for-dfn-label-1">label</a>);
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsDataURL" id="ref-for-dfn-readAsDataURL-1">readAsDataURL</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-52">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-4">blob</a>);
 
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-abort" id="ref-for-dfn-abort-2">abort</a>();
@@ -2375,7 +2375,7 @@ It is to be used for features that trigger in response to asynchronously reading
   // File or Blob data
   <span class="kt">readonly</span> <span class="kt">attribute</span> (<span class="kt">DOMString</span> <span class="kt">or</span> <span class="kt">ArrayBuffer</span>)? <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="(DOMString or ArrayBuffer)?" href="#dfn-result" id="ref-for-dfn-result-1">result</a>;
 
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#domerror">DOMError</a>? <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="DOMError?" href="#dfn-error" id="ref-for-dfn-error-2">error</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a>? <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="DOMException?" href="#dfn-error" id="ref-for-dfn-error-2">error</a>;
 
   // event handler content attributes
   <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadstart" id="ref-for-dfn-onloadstart-1">onloadstart</a>;
@@ -2445,7 +2445,7 @@ which must be one of the following values:</p>
     If <code class="idl"><a data-link-type="idl" href="#dfn-readyState" id="ref-for-dfn-readyState-2">readyState</a></code> is set to <code class="idl"><a data-link-type="idl" href="#dfn-done" id="ref-for-dfn-done-2">DONE</a></code> it means at least one of the <a data-link-type="dfn" href="#read-method" id="ref-for-read-method-5">read methods</a> have been called on this <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader-10">FileReader</a></code>. 
    </dl>
    <h4 class="heading settled" data-level="6.3.4" id="reading-a-file"><span class="secno">6.3.4. </span><span class="content"> Reading a File or Blob</span><a class="self-link" href="#reading-a-file"></a></h4>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader-11">FileReader</a></code> interface makes available several <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="asynchronous read method" data-noexport="" id="asynchronous-read-methods">asynchronous read methods</dfn>—<wbr><code class="idl"><a data-link-type="idl" href="#dfn-readAsArrayBuffer" id="ref-for-dfn-readAsArrayBuffer-2">readAsArrayBuffer()</a></code>, <code class="idl"><a data-link-type="idl" href="#dfn-readAsBinaryString" id="ref-for-dfn-readAsBinaryString-2">readAsBinaryString()</a></code>, <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-2">readAsText()</a></code> and <code class="idl"><a data-link-type="idl" href="#dfn-readAsDataURL" id="ref-for-dfn-readAsDataURL-2">readAsDataURL()</a></code>,
+   <p>The <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader-11">FileReader</a></code> interface makes available several <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="asynchronous read method" data-noexport="" id="asynchronous-read-methods">asynchronous read methods</dfn>—<wbr><code class="idl"><a data-link-type="idl" href="#dfn-readAsArrayBuffer" id="ref-for-dfn-readAsArrayBuffer-2">readAsArrayBuffer()</a></code>, <code class="idl"><a data-link-type="idl" href="#dfn-readAsBinaryString" id="ref-for-dfn-readAsBinaryString-2">readAsBinaryString()</a></code>, <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-1">readAsText()</a></code> and <code class="idl"><a data-link-type="idl" href="#dfn-readAsDataURL" id="ref-for-dfn-readAsDataURL-2">readAsDataURL()</a></code>,
 which read files into memory.
 If multiple concurrent read methods are called on the same <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader-12">FileReader</a></code> object,
 user agents must throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code> on any of the read methods that occur
@@ -2478,7 +2478,7 @@ and no error in reading the <code class="idl"><a data-link-type="idl" href="#dfn
 then the <code class="idl"><a data-link-type="idl" href="#dfn-result" id="ref-for-dfn-result-7">result</a></code> attribute must return a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></code> representing the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-34">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-60">Blob</a></code>'s data as a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="binary-string">binary string</dfn>,
 in which every byte is represented by a code unit of equal value [0...255].</p>
     <li data-md="">
-     <p>On getting, if the <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-3">readAsText()</a></code> <a data-link-type="dfn" href="#read-method" id="ref-for-read-method-10">read method</a> is called
+     <p>On getting, if the <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-2">readAsText()</a></code> <a data-link-type="dfn" href="#read-method" id="ref-for-read-method-10">read method</a> is called
 and no error in reading the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-35">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-61">Blob</a></code> has occurred,
 then the <code class="idl"><a data-link-type="idl" href="#dfn-result" id="ref-for-dfn-result-8">result</a></code> attribute must return a string
 representing the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-36">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-62">Blob</a></code>'s data as a text string,
@@ -2534,11 +2534,11 @@ If <code class="idl"><a data-link-type="idl" href="#dfn-readyState" id="ref-for-
     <li data-md="">
      <p><a data-link-type="dfn" href="#terminate-an-algorithm" id="ref-for-terminate-an-algorithm-7">Terminate this algorithm</a>.</p>
    </ol>
-   <h5 class="heading settled" data-level="6.3.4.3" id="readAsDataText"><span class="secno">6.3.4.3. </span><span class="content"> The <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-4">readAsText()</a></code> method</span><a class="self-link" href="#readAsDataText"></a></h5>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-5">readAsText()</a></code> method can be called with an optional parameter, <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader/readAsText(blob, label), FileReader/readAsText(), FileReaderSync/readAsText(blob, label)" data-dfn-type="argument" data-export="" id="dfn-label">label</dfn>,
+   <h5 class="heading settled" data-level="6.3.4.3" id="readAsDataText"><span class="secno">6.3.4.3. </span><span class="content"> The <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-3">readAsText()</a></code> method</span><a class="self-link" href="#readAsDataText"></a></h5>
+   <p>The <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-4">readAsText()</a></code> method can be called with an optional parameter, <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader/readAsText(blob, label), FileReader/readAsText(), FileReaderSync/readAsText(blob, label)" data-dfn-type="argument" data-export="" id="dfn-label">label</dfn>,
 which is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></code> argument that represents the label of an encoding <a data-link-type="biblio" href="#biblio-encoding">[Encoding]</a>;
 if provided, it must be used as part of the <a data-link-type="dfn" href="#encoding-determination" id="ref-for-encoding-determination-3">encoding determination</a> used when processing this method call.</p>
-   <p>When the <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="method" data-export="" data-lt="readAsText(blob, label)|readAsText(blob)" id="dfn-readAsText">readAsText(blob, optional label)</dfn> method is called,
+   <p>When the <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="method" data-export="" id="dfn-readAsText">readAsText(blob, optional label)</dfn> method is called,
 the user agent must run the steps below.</p>
    <ol>
     <li data-md="">
@@ -2658,7 +2658,7 @@ If <code class="idl"><a data-link-type="idl" href="#dfn-readyState" id="ref-for-
      <p>Set the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <code class="idl"><a data-link-type="idl" href="#dfn-readyState" id="ref-for-dfn-readyState-25">readyState</a></code> to <code class="idl"><a data-link-type="idl" href="#dfn-done" id="ref-for-dfn-done-7">DONE</a></code> and <code class="idl"><a data-link-type="idl" href="#dfn-result" id="ref-for-dfn-result-15">result</a></code> to null if it is not already set to null.</p>
     <li data-md="">
      <p>Set the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dfn-error" id="ref-for-dfn-error-7">error</a></code> attribute on the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>;
-on getting, the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dfn-error" id="ref-for-dfn-error-8">error</a></code> attribute must be a a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#domerror">DOMError</a></code> object
+on getting, the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dfn-error" id="ref-for-dfn-error-8">error</a></code> attribute must be a a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> object
 that corresponds to the <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-13">failure reason</a>. <a data-link-type="dfn" href="#fire-a-progress-event" id="ref-for-fire-a-progress-event-21">Fire a progress event</a> called <code class="idl"><a class="idl-code" data-link-type="event" href="#dfn-error-event" id="ref-for-dfn-error-event-7">error</a></code> at the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>.</p>
     <li data-md="">
      <p>Unless <code class="idl"><a data-link-type="idl" href="#dfn-readyState" id="ref-for-dfn-readyState-26">readyState</a></code> is <code class="idl"><a data-link-type="idl" href="#dfn-loading" id="ref-for-dfn-loading-19">LOADING</a></code>, <a data-link-type="dfn" href="#fire-a-progress-event" id="ref-for-fire-a-progress-event-22">fire a progress event</a> called <code class="idl"><a data-link-type="idl" href="#dfn-loadend-event" id="ref-for-dfn-loadend-event-10">loadend</a></code> at the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>.
@@ -2694,7 +2694,7 @@ This section defines this parameter.</p>
     and must be a reference to a single <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-38">File</a></code> in a <code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist-11">FileList</a></code> or a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-66">Blob</a></code> argument not obtained from the underlying OS file system. 
    </dl>
    <h3 class="heading settled" data-level="6.4" id="enctype"><span class="secno">6.4. </span><span class="content"> Determining Encoding</span><a class="self-link" href="#enctype"></a></h3>
-   <p>When reading <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-67">Blob</a></code> objects using the <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-6">readAsText()</a></code> <a data-link-type="dfn" href="#read-method" id="ref-for-read-method-14">read method</a>,
+   <p>When reading <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-67">Blob</a></code> objects using the <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-5">readAsText()</a></code> <a data-link-type="dfn" href="#read-method" id="ref-for-read-method-14">read method</a>,
 the following <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="encoding-determination">encoding determination</dfn> steps must be followed:</p>
    <ol>
     <li data-md="">
@@ -2787,7 +2787,7 @@ UNLESS any of the following are true:</p>
       <li data-md="">
        <p>the event handler function for a <code class="idl"><a class="idl-code" data-link-type="event" href="#dfn-error-event" id="ref-for-dfn-error-event-8">error</a></code> event initiates a new read.</p>
      </ul>
-     <p class="note" role="note">Note: The events <code class="idl"><a data-link-type="idl" href="#dfn-loadstart-event" id="ref-for-dfn-loadstart-event-7">loadstart</a></code> and <code class="idl"><a data-link-type="idl" href="#dfn-loadend-event" id="ref-for-dfn-loadend-event-14">loadend</a></code> are not coupled in a one-to-one manner.</p>
+     <p class="note" role="note"><span>Note:</span> The events <code class="idl"><a data-link-type="idl" href="#dfn-loadstart-event" id="ref-for-dfn-loadstart-event-7">loadstart</a></code> and <code class="idl"><a data-link-type="idl" href="#dfn-loadend-event" id="ref-for-dfn-loadend-event-14">loadend</a></code> are not coupled in a one-to-one manner.</p>
      <div class="example" id="example-89381d0d">
       <a class="self-link" href="#example-89381d0d"></a> This example showcases "read-chaining":
   initiating another read from within an event handler while the "first" read continues processing. 
@@ -2829,7 +2829,7 @@ Workers can avail of both the asynchronous API (the <code class="idl"><a data-li
 
   <span class="kt">ArrayBuffer</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsArrayBufferSync" id="ref-for-dfn-readAsArrayBufferSync-1">readAsArrayBuffer</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-70">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-6">blob</a>);
   <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsBinaryStringSync" id="ref-for-dfn-readAsBinaryStringSync-1">readAsBinaryString</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-71">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-7">blob</a>);
-  <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsTextSync" id="ref-for-dfn-readAsTextSync-2">readAsText</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-72">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-8">blob</a>, <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-label" id="ref-for-dfn-label-4">label</a>);
+  <span class="kt">DOMString</span> <dfn class="nv idl-code" data-dfn-for="FileReaderSync" data-dfn-type="method" data-export="" data-lt="readAsText(blob, label)|readAsText(blob)" id="dom-filereadersync-readastext">readAsText<a class="self-link" href="#dom-filereadersync-readastext"></a></dfn>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-72">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-8">blob</a>, <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-label" id="ref-for-dfn-label-4">label</a>);
   <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsDataURLSync" id="ref-for-dfn-readAsDataURLSync-1">readAsDataURL</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-73">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-9">blob</a>);
 };
 </pre>
@@ -2838,8 +2838,8 @@ Workers can avail of both the asynchronous API (the <code class="idl"><a data-li
 the user agent must return a new <code class="idl"><a data-link-type="idl" href="#dfn-FileReaderSync" id="ref-for-dfn-FileReaderSync-8">FileReaderSync</a></code> object.</p>
    <p>In environments where the global object is represented by a <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/workers.html#workerglobalscope">WorkerGlobalScope</a></code> object,
 the <code class="idl"><a data-link-type="idl" href="#dfn-FileReaderSync" id="ref-for-dfn-FileReaderSync-9">FileReaderSync</a></code> constructor must be available.</p>
-   <h5 class="heading settled" data-level="6.6.1.2" id="readAsTextSync"><span class="secno">6.6.1.2. </span><span class="content"> The <code class="idl"><a data-link-type="idl" href="#dfn-readAsTextSync" id="ref-for-dfn-readAsTextSync-3">readAsText()</a></code> method</span><a class="self-link" href="#readAsTextSync"></a></h5>
-   <p>When the <dfn class="dfn-paneled idl-code" data-dfn-for="FileReaderSync" data-dfn-type="method" data-export="" data-lt="readAsText(blob, label)|readAsText(blob)" id="dfn-readAsTextSync">readAsText(blob, optional label)</dfn> method is called,
+   <h5 class="heading settled" data-level="6.6.1.2" id="readAsTextSync"><span class="secno">6.6.1.2. </span><span class="content"> The <code class="idl"><a data-link-type="idl" href="#dfn-readAsTextSync" id="ref-for-dfn-readAsTextSync-2">readAsText()</a></code> method</span><a class="self-link" href="#readAsTextSync"></a></h5>
+   <p>When the <dfn class="dfn-paneled idl-code" data-dfn-for="FileReaderSync" data-dfn-type="method" data-export="" id="dfn-readAsTextSync">readAsText(blob, optional label)</dfn> method is called,
 the following steps must be followed:</p>
    <ol>
     <li data-md="">
@@ -2959,7 +2959,7 @@ or <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappap
    <p>Synchronous read methods <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> exceptions of the type in the table below
 if there has been an error owing to a particular <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-14">failure reason</a>.</p>
    <p>Asynchronous read methods use the <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="attribute" data-export="" id="dfn-error">error</dfn> attribute of the <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader-20">FileReader</a></code> object,
-which must return a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#domerror">DOMError</a></code> object of the most appropriate type from the table below
+which must return a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> object of the most appropriate type from the table below
 if there has been an error owing to a particular <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-15">failure reason</a>,
 or otherwise return null.</p>
    <table class="data">
@@ -3111,7 +3111,7 @@ The <dfn data-dfn-type="dfn" data-lt="origin of a Blob URL|Blob URL’s origin" 
    <p>The <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-origin">origin</a> of a Blob URL,
 when serialized as a string,
 must conform to the Web Origin Specification’s <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="unicode-serialization-of-an-origin-algorithm">Unicode Serialization of an Origin algorithm</dfn> <a data-link-type="biblio" href="#biblio-rfc6454">[RFC6454]</a>. <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#cors-protocol">Cross-origin requests</a> on Blob URLs must return a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a>.</p>
-   <p class="note" role="note">Note: In practice this means that HTTP and HTTPS <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origins</a> are covered by this specification as valid origins for use with Blob URLs.
+   <p class="note" role="note"><span>Note:</span> In practice this means that HTTP and HTTPS <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origins</a> are covered by this specification as valid origins for use with Blob URLs.
 This specification does not address the case of non-HTTP and non-HTTPS <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origins</a>.
 For instance <code>blob:file:///Users/arunranga/702efefb-c234-4988-a73b-6104f1b615ee</code> (which uses the "file:" <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origin</a>)
 may have behavior that is undefined,
@@ -3149,12 +3149,12 @@ it must ignore the fragment.
 The fragment must not be used to identify a resource;
 only the <code>blob</code> <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme">scheme</a> and the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-origin">origin</a>/<a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-path">path</a> of the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url">URL</a> constitute a valid resource identifier.</p>
    <p>A valid Blob URL reference could look like: <code>blob:http://example.org:8080/550e8400-e29b-41d4-a716-446655440000#aboutABBA</code> where "#aboutABBA" might be an HTML fragment identifier referring to an element with an id attribute of "aboutABBA".</p>
-   <p class="note" role="note">Note: The <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-fragment">fragment</a> is not used to identify the resource.
+   <p class="note" role="note"><span>Note:</span> The <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-fragment">fragment</a> is not used to identify the resource.
 Neither the <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-5">createObjectURL()</a></code></code> method
 nor the <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createFor" id="ref-for-dfn-createFor-5">createFor()</a></code></code> method generate a fragment.</p>
    <h3 class="heading settled" data-level="8.4" id="requestResponseModel"><span class="secno">8.4. </span><span class="content"> Dereferencing Model for Blob URLs</span><a class="self-link" href="#requestResponseModel"></a></h3>
    <p><em>This section is informative.</em></p>
-   <p class="note" role="note">Note: The <a data-link-type="biblio" href="#biblio-url">[URL]</a> and <a data-link-type="biblio" href="#biblio-fetch">[Fetch]</a> specifications should be considered normative for parsing and fetching <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-6">Blob URLs</a>.</p>
+   <p class="note" role="note"><span>Note:</span> The <a data-link-type="biblio" href="#biblio-url">[URL]</a> and <a data-link-type="biblio" href="#biblio-fetch">[Fetch]</a> specifications should be considered normative for parsing and fetching <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-6">Blob URLs</a>.</p>
    <p><a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-7">Blob URLs</a> are <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="dereference" data-noexport="" id="dereference">dereferenced</dfn> when the user agent retrieves the resource identified by the Blob URL
 and returns it to the requesting entity.
 This section provides guidance on <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request">requests</a> and <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response">responses</a></p>
@@ -3176,7 +3176,7 @@ in a manner consistent with the Mime Sniffing specification <a data-link-type="b
 user agents use that file’s <code class="idl"><a data-link-type="idl" href="#dfn-name" id="ref-for-dfn-name-4">name</a></code> attribute,
 as if the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response">response</a> had a <code>Content-Disposition</code> header
 with the filename parameter set to the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-54">File</a></code>'s <code class="idl"><a data-link-type="idl" href="#dfn-name" id="ref-for-dfn-name-5">name</a></code> attribute <a data-link-type="biblio" href="#biblio-rfc6266">[RFC6266]</a>.</p>
-   <p class="note" role="note">Note: A corollary to this is a non-normative implementation guideline:
+   <p class="note" role="note"><span>Note:</span> A corollary to this is a non-normative implementation guideline:
 that the "File Save As" user interface in user agents takes into account the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-55">File</a></code>'s <code class="idl"><a data-link-type="idl" href="#dfn-name" id="ref-for-dfn-name-6">name</a></code> attribute
 if presenting a default name to save the file as.</p>
    <h4 class="heading settled" data-level="8.4.3" id="NetworkError"><span class="secno">8.4.3. </span><span class="content"> Network Errors</span><a class="self-link" href="#NetworkError"></a></h4>
@@ -3249,7 +3249,7 @@ and must NOT evaluate to true otherwise.</p>
       <li data-md="">
        <p>If called with a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-99">Blob</a></code> argument that has a <a data-link-type="dfn" href="#readabilityState" id="ref-for-readabilityState-19">readability state</a> of <a data-link-type="dfn" href="#dfn-closedState" id="ref-for-dfn-closedState-12"><code>CLOSED</code></a>,
 user agents must return the output of the <a data-link-type="dfn" href="#unicodeBlobURL" id="ref-for-unicodeBlobURL-2">Unicode Serialization of a Blob URL</a>.</p>
-       <p class="note" role="note">Note: No entry is added to the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-4">Blob URL Store</a>;
+       <p class="note" role="note"><span>Note:</span> No entry is added to the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-4">Blob URL Store</a>;
 consequently, when this <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-18">Blob URL</a> is <a data-link-type="dfn" href="#dereference" id="ref-for-dereference-3">dereferenced</a>,
 a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a> occurs.</p>
       <li data-md="">
@@ -3272,7 +3272,7 @@ a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-e
       <li data-md="">
        <p>If called with a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-100">Blob</a></code> argument that has a <a data-link-type="dfn" href="#readabilityState" id="ref-for-readabilityState-20">readability state</a> of <a data-link-type="dfn" href="#dfn-closedState" id="ref-for-dfn-closedState-13"><code>CLOSED</code></a>,
 user agents must return the output of the <a data-link-type="dfn" href="#unicodeBlobURL" id="ref-for-unicodeBlobURL-4">Unicode Serialization of a Blob URL</a>.</p>
-       <p class="note" role="note">Note: No entry is added to the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-5">Blob URL Store</a>;
+       <p class="note" role="note"><span>Note:</span> No entry is added to the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-5">Blob URL Store</a>;
 consequently, when this <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-23">Blob URL</a> is <a data-link-type="dfn" href="#dereference" id="ref-for-dereference-4">dereferenced</a>,
 a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a> occurs.</p>
       <li data-md="">
@@ -3315,7 +3315,7 @@ this method call does nothing.
 User agents may display a message on the error console.</p>
       <li data-md="">
        <p>Otherwise, user agents must <a data-link-type="dfn" href="#removeTheEntry" id="ref-for-removeTheEntry-2">remove the entry</a> from the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-8">Blob URL Store</a> for <code class="idl"><a class="idl-code" data-link-type="argument" href="#dfn-urlarg" id="ref-for-dfn-urlarg-6">url</a></code>.</p>
-       <p class="note" role="note">Note: Subsequent attemps to dereference <code class="idl"><a class="idl-code" data-link-type="argument" href="#dfn-urlarg" id="ref-for-dfn-urlarg-7">url</a></code> result in a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a>,
+       <p class="note" role="note"><span>Note:</span> Subsequent attemps to dereference <code class="idl"><a class="idl-code" data-link-type="argument" href="#dfn-urlarg" id="ref-for-dfn-urlarg-7">url</a></code> result in a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a>,
 since the entry has been removed from the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-9">Blob URL Store</a>.</p>
      </ol>
      <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="URL/revokeObjectURL(url)" data-dfn-type="argument" data-export="" id="dfn-urlarg">url</dfn> argument to the <code class="idl"><a data-link-type="idl" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL-3">revokeObjectURL()</a></code> method
@@ -3420,7 +3420,7 @@ remove all the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-45"
      <p>This specification adds an additional <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#unloading-document-cleanup-steps">unloading document cleanup step</a>:
 user agents must remove all <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-46">Blob URLs</a> from the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-15">Blob URL Store</a> within that <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a>.</p>
    </ol>
-   <p class="note" role="note">Note: User agents are free to garbage collect resources removed from the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-16">Blob URL Store</a>.</p>
+   <p class="note" role="note"><span>Note:</span> User agents are free to garbage collect resources removed from the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-16">Blob URL Store</a>.</p>
    <h2 class="heading settled" data-level="9" id="security-discussion"><span class="secno">9. </span><span class="content"> Security and Privacy Considerations</span><a class="self-link" href="#security-discussion"></a></h2>
    <p><em>This section is informative.</em></p>
    <p>This specification allows web content to read files from the underlying file system,
@@ -3473,7 +3473,7 @@ which is useful for offline data access for web applications.</p>
   The user can also send the integrated calendar file back to the server calendar store asynchronously. </div>
     <li data-md="">
      <p>User agents should provide the ability to save a local file programmatically given an amount of data and a file name.</p>
-     <p class="note" role="note">Note: While this specification doesn’t provide an explicit API call to trigger downloads,
+     <p class="note" role="note"><span>Note:</span> While this specification doesn’t provide an explicit API call to trigger downloads,
 the HTML5 specification has addressed this.
 The <code><a data-link-type="element-sub" href="https://html.spec.whatwg.org/multipage/semantics.html#attr-hyperlink-download">download</a></code> attribute of the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-a-element">a</a></code> element initiates a download,
 saving a <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-57">File</a></code> with the name specified.
@@ -3704,11 +3704,17 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
    <li>
     readAsText(blob)
     <ul>
-     <li><a href="#dfn-readAsText">method for FileReader</a><span>, in §6.3.4.3</span>
-     <li><a href="#dfn-readAsTextSync">method for FileReaderSync</a><span>, in §6.6.1.2</span>
+     <li><a href="#dom-filereader-readastext">method for FileReader</a><span>, in §6.3</span>
+     <li><a href="#dom-filereadersync-readastext">method for FileReaderSync</a><span>, in §6.6.1</span>
     </ul>
    <li>
     readAsText(blob, label)
+    <ul>
+     <li><a href="#dom-filereader-readastext">method for FileReader</a><span>, in §6.3</span>
+     <li><a href="#dom-filereadersync-readastext">method for FileReaderSync</a><span>, in §6.6.1</span>
+    </ul>
+   <li>
+    readAsText(blob, optional label)
     <ul>
      <li><a href="#dfn-readAsText">method for FileReader</a><span>, in §6.3.4.3</span>
      <li><a href="#dfn-readAsTextSync">method for FileReaderSync</a><span>, in §6.6.1.2</span>
@@ -3749,7 +3755,6 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
    <li>
     <a data-link-type="biblio">[DOM]</a> defines the following terms:
     <ul>
-     <li><a href="https://dom.spec.whatwg.org/#domerror">DOMError</a>
      <li><a href="https://dom.spec.whatwg.org/#eventtarget">EventTarget</a>
      <li><a href="https://dom.spec.whatwg.org/#context-object">context object</a>
      <li><a href="https://dom.spec.whatwg.org/#concept-document">document</a>
@@ -3839,6 +3844,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
      <li><a href="https://heycam.github.io/webidl/#idl-ArrayBuffer">ArrayBuffer</a>
      <li><a href="https://heycam.github.io/webidl/#BufferSource">BufferSource</a>
      <li><a href="https://heycam.github.io/webidl/#Clamp">Clamp</a>
+     <li><a href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a>
      <li><a href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a>
      <li><a href="https://heycam.github.io/webidl/#Exposed">Exposed</a>
      <li><a href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a>
@@ -3971,7 +3977,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
   // async read methods
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsArrayBuffer">readAsArrayBuffer</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsBinaryString">readAsBinaryString</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
-  <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsText">readAsText</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>, <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-label">label</a>);
+  <span class="kt">void</span> <a class="nv" href="#dom-filereader-readastext">readAsText</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>, <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-label">label</a>);
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsDataURL">readAsDataURL</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
 
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-abort">abort</a>();
@@ -3987,7 +3993,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
   // File or Blob data
   <span class="kt">readonly</span> <span class="kt">attribute</span> (<span class="kt">DOMString</span> <span class="kt">or</span> <span class="kt">ArrayBuffer</span>)? <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="(DOMString or ArrayBuffer)?" href="#dfn-result">result</a>;
 
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#domerror">DOMError</a>? <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="DOMError?" href="#dfn-error">error</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a>? <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="DOMException?" href="#dfn-error">error</a>;
 
   // event handler content attributes
   <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadstart">onloadstart</a>;
@@ -4005,7 +4011,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
 
   <span class="kt">ArrayBuffer</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
   <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsBinaryStringSync">readAsBinaryString</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
-  <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsTextSync">readAsText</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>, <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-label">label</a>);
+  <span class="kt">DOMString</span> <a class="nv" href="#dom-filereadersync-readastext">readAsText</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>, <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-label">label</a>);
   <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsDataURLSync">readAsDataURL</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
 };
 
@@ -4930,15 +4936,13 @@ The FileReaderSync API</a>
   <aside class="dfn-panel" data-for="dfn-readAsText">
    <b><a href="#dfn-readAsText">#dfn-readAsText</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dfn-readAsText-1">6.3. 
-The FileReader API</a>
-    <li><a href="#ref-for-dfn-readAsText-2">6.3.4. 
+    <li><a href="#ref-for-dfn-readAsText-1">6.3.4. 
 Reading a File or Blob</a>
-    <li><a href="#ref-for-dfn-readAsText-3">6.3.4.1. 
+    <li><a href="#ref-for-dfn-readAsText-2">6.3.4.1. 
 The result attribute</a>
-    <li><a href="#ref-for-dfn-readAsText-4">6.3.4.3. 
-The readAsText() method</a> <a href="#ref-for-dfn-readAsText-5">(2)</a>
-    <li><a href="#ref-for-dfn-readAsText-6">6.4. 
+    <li><a href="#ref-for-dfn-readAsText-3">6.3.4.3. 
+The readAsText() method</a> <a href="#ref-for-dfn-readAsText-4">(2)</a>
+    <li><a href="#ref-for-dfn-readAsText-5">6.4. 
 Determining Encoding</a>
    </ul>
   </aside>
@@ -5174,9 +5178,7 @@ Constructors</a> <a href="#ref-for-dfn-FileReaderSync-9">(2)</a>
    <ul>
     <li><a href="#ref-for-dfn-readAsTextSync-1">6.4. 
 Determining Encoding</a>
-    <li><a href="#ref-for-dfn-readAsTextSync-2">6.6.1. 
-The FileReaderSync API</a>
-    <li><a href="#ref-for-dfn-readAsTextSync-3">6.6.1.2. 
+    <li><a href="#ref-for-dfn-readAsTextSync-2">6.6.1.2. 
 The readAsText() method</a>
    </ul>
   </aside>

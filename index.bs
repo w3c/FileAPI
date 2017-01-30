@@ -669,7 +669,7 @@ User agents must process reads on files that no longer exist at the time of read
 throwing a {{NotFoundError}} exception
 if using a {{FileReaderSync}} on a Web Worker [[Workers]]
 or firing an {{error!!event}} event
-with the {{error!!attribute}} attribute returning a {{NotFoundError}} {{DOMError}}.
+with the {{error!!attribute}} attribute returning a {{NotFoundError}}.
 
 <div class="example">
   In the examples below, metadata from a file object is displayed meaningfully, and a file object is created with a name and a last modified date.
@@ -893,7 +893,7 @@ interface FileReader: EventTarget {
   // File or Blob data
   readonly attribute (DOMString or ArrayBuffer)? result;
 
-  readonly attribute DOMError? error;
+  readonly attribute DOMException? error;
 
   // event handler content attributes
   attribute EventHandler onloadstart;
@@ -1170,7 +1170,7 @@ These error steps are to <a>process read error</a> with a <a>failure reason</a>.
 1. Set the <a>context object</a>'s {{FileReader/readyState}} to {{FileReader/DONE}}
   and {{FileReader/result}} to null if it is not already set to null.
 2. Set the {{error!!attribute}} attribute on the <a>context object</a>;
-  on getting, the {{error!!attribute}} attribute must be a a {{DOMError}} object
+  on getting, the {{error!!attribute}} attribute must be a a {{DOMException}} object
   that corresponds to the <a>failure reason</a>.
   <a>Fire a progress event</a> called {{error!!event}} at the <a>context object</a>.
 3. Unless {{FileReader/readyState}} is {{FileReader/LOADING}},
@@ -1513,7 +1513,7 @@ Synchronous read methods <a>throw</a> exceptions of the type in the table below
 if there has been an error owing to a particular <a>failure reason</a>.
 
 Asynchronous read methods use the <dfn attribute for=FileReader id="dfn-error">error</dfn> attribute of the {{FileReader}} object,
-which must return a {{DOMError}} object of the most appropriate type from the table below
+which must return a {{DOMException}} object of the most appropriate type from the table below
 if there has been an error owing to a particular <a>failure reason</a>,
 or otherwise return null.
 
