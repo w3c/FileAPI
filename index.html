@@ -1424,7 +1424,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="http://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">File API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-02-01">1 February 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-02-03">3 February 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1588,7 +1588,7 @@ These kinds of behaviors are defined in the appropriate affiliated specification
        <a href="#DefinitionOfScheme"><span class="secno">8.3</span> <span class="content"> The Blob URL</span></a>
        <ol class="toc">
         <li><a href="#originOfBlobURL"><span class="secno">8.3.1</span> <span class="content"> Origin of Blob URLs</span></a>
-        <li><a href="#unicodeSerializationOfBlobURL"><span class="secno">8.3.2</span> <span class="content"> Unicode Serialization of a Blob URL</span></a>
+        <li><a href="#unicodeSerializationOfBlobURL"><span class="secno">8.3.2</span> <span class="content"> Serialization of a Blob URL</span></a>
         <li><a href="#fragmentDiscussion"><span class="secno">8.3.3</span> <span class="content"> Discussion of Fragment Identifier</span></a>
        </ol>
       <li>
@@ -3089,7 +3089,7 @@ a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-host">h
 a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-path">path</a> with one entry comprised of a UUID <a data-link-type="biblio" href="#biblio-rfc4122">[RFC4122]</a> (see <a href="#ABNFUUID">An ABNF for UUID</a>),
 and an <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-object">object</a> of the associated <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-91">Blob</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-51">File</a></code>.
 A Blob URL may contain an optional <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-fragment">fragment</a>.
-The Blob URL is serialized as a string according to the <a data-link-type="dfn" href="#unicodeBlobURL" id="ref-for-unicodeBlobURL-1">Unicode Serialization of a Blob URL</a> algorithm.</p>
+The Blob URL is serialized as a string according to the <a data-link-type="dfn" href="#unicodeBlobURL" id="ref-for-unicodeBlobURL-1">Serialization of a Blob URL</a> algorithm.</p>
    <p>A <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-fragment">fragment</a>, if used,
 has a distinct interpretation depending on the media type of the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-92">Blob</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-52">File</a></code> resource in question
 (see <a href="#fragmentDiscussion">§8.3.3 Discussion of Fragment Identifier</a>).</p>
@@ -3108,16 +3108,14 @@ scheme = "blob"
    <p><a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-4">Blob URLs</a> are created using <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-2">createObjectURL()</a></code></code>,
 and are revoked using <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL-1">revokeObjectURL()</a></code></code>.
 The <dfn data-dfn-type="dfn" data-lt="origin of a Blob URL|Blob URL’s origin" data-noexport="" id="origin-of-a-blob-url">origin of a Blob URL<a class="self-link" href="#origin-of-a-blob-url"></a></dfn> must be the same as the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">origin</a> specified by the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#incumbent-settings-object">incumbent settings object</a> at the time the method that created it was called.</p>
-   <p>The <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-origin">origin</a> of a Blob URL,
-when serialized as a string,
-must conform to the Web Origin Specification’s <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="unicode-serialization-of-an-origin-algorithm">Unicode Serialization of an Origin algorithm</dfn> <a data-link-type="biblio" href="#biblio-rfc6454">[RFC6454]</a>. <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#cors-protocol">Cross-origin requests</a> on Blob URLs must return a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a>.</p>
+   <p><a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#cors-protocol">Cross-origin requests</a> on Blob URLs must return a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a>.</p>
    <p class="note" role="note"><span>Note:</span> In practice this means that HTTP and HTTPS <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origins</a> are covered by this specification as valid origins for use with Blob URLs.
 This specification does not address the case of non-HTTP and non-HTTPS <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origins</a>.
 For instance <code>blob:file:///Users/arunranga/702efefb-c234-4988-a73b-6104f1b615ee</code> (which uses the "file:" <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origin</a>)
 may have behavior that is undefined,
 even though user agents may treat such Blob URLs as valid.</p>
-   <h4 class="heading settled" data-level="8.3.2" id="unicodeSerializationOfBlobURL"><span class="secno">8.3.2. </span><span class="content"> Unicode Serialization of a Blob URL</span><a class="self-link" href="#unicodeSerializationOfBlobURL"></a></h4>
-   <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="unicodeBlobURL">Unicode Serialization of a Blob URL</dfn> is the value returned by the following algorithm,
+   <h4 class="heading settled" data-level="8.3.2" id="unicodeSerializationOfBlobURL"><span class="secno">8.3.2. </span><span class="content"> Serialization of a Blob URL</span><a class="self-link" href="#unicodeSerializationOfBlobURL"></a></h4>
+   <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="unicodeBlobURL">Serialization of a Blob URL</dfn> is the value returned by the following algorithm,
 which is invoked by <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-3">createObjectURL()</a></code></code>:</p>
    <ol>
     <li data-md="">
@@ -3128,10 +3126,15 @@ to <var>result</var>.</p>
     <li data-md="">
      <p>Append the ":" (U+003A COLON) character to <var>result</var>.</p>
     <li data-md="">
-     <p>Let <var>O</var> be the Blob URL’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-origin">origin</a>.
-If the <a data-link-type="dfn" href="#unicode-serialization-of-an-origin-algorithm" id="ref-for-unicode-serialization-of-an-origin-algorithm-1">Unicode Serialization of an Origin algorithm</a> on <var>O</var> returns null,
-user agents may substitute an implementation defined value for the return value of the <a data-link-type="dfn" href="#unicode-serialization-of-an-origin-algorithm" id="ref-for-unicode-serialization-of-an-origin-algorithm-2">Unicode Serialization of an Origin algorithm</a>.
-Append the result of the <a data-link-type="dfn" href="#unicode-serialization-of-an-origin-algorithm" id="ref-for-unicode-serialization-of-an-origin-algorithm-3">Unicode Serialization of an Origin algorithm</a> for <var>O</var> <a data-link-type="biblio" href="#biblio-rfc6454">[RFC6454]</a> to <var>result</var>.</p>
+     <p>Let <var>settings</var> be the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#incumbent-settings-object">incumbent settings object</a></p>
+    <li data-md="">
+     <p>Let <var>origin</var> be <var>settings</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">origin</a>.</p>
+    <li data-md="">
+     <p>Let <var>serialized</var> be the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#ascii-serialisation-of-an-origin">ASCII serialization</a> of <var>origin</var>.</p>
+    <li data-md="">
+     <p>If <var>serialized</var> is "null", set it to an implementation-defined value.</p>
+    <li data-md="">
+     <p>Append <var>serialized</var> to <var>result</var>.</p>
     <li data-md="">
      <p>Append the "/" character (U+0024 SOLIDUS) to <var>result</var>.</p>
     <li data-md="">
@@ -3246,7 +3249,7 @@ and must NOT evaluate to true otherwise.</p>
      <ol>
       <li data-md="">
        <p>If called with a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-98">Blob</a></code> argument that has a <a data-link-type="dfn" href="#readabilityState" id="ref-for-readabilityState-19">readability state</a> of <a data-link-type="dfn" href="#dfn-closedState" id="ref-for-dfn-closedState-12"><code>CLOSED</code></a>,
-user agents must return the output of the <a data-link-type="dfn" href="#unicodeBlobURL" id="ref-for-unicodeBlobURL-2">Unicode Serialization of a Blob URL</a>.</p>
+user agents must return the output of the <a data-link-type="dfn" href="#unicodeBlobURL" id="ref-for-unicodeBlobURL-2">Serialization of a Blob URL</a> algorithm.</p>
        <p class="note" role="note"><span>Note:</span> No entry is added to the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-4">Blob URL Store</a>;
 consequently, when this <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-18">Blob URL</a> is <a data-link-type="dfn" href="#dereference" id="ref-for-dereference-3">dereferenced</a>,
 a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a> occurs.</p>
@@ -3254,7 +3257,7 @@ a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-e
        <p>Otherwise, user agents must run the following sub-steps:</p>
        <ol>
         <li data-md="">
-         <p>Let <var>url</var> be the result of the <a data-link-type="dfn" href="#unicodeBlobURL" id="ref-for-unicodeBlobURL-3">Unicode Serialization of a Blob URL</a> algorithm.</p>
+         <p>Let <var>url</var> be the result of the <a data-link-type="dfn" href="#unicodeBlobURL" id="ref-for-unicodeBlobURL-3">Serialization of a Blob URL</a> algorithm.</p>
         <li data-md="">
          <p><a data-link-type="dfn" href="#add-an-entry" id="ref-for-add-an-entry-1">Add an entry to the Blob URL Store</a> for <var>url</var> and <var>blob</var>.</p>
         <li data-md="">
@@ -3626,6 +3629,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
    <li><a href="#removeTheEntry">remove the entry from the Blob URL Store</a><span>, in §8.6</span>
    <li><a href="#dfn-result">result</a><span>, in §6.3.4.1</span>
    <li><a href="#dfn-revokeObjectURL">revokeObjectURL(url)</a><span>, in §8.5.1</span>
+   <li><a href="#unicodeBlobURL">Serialization of a Blob URL</a><span>, in §8.3.2</span>
    <li><a href="#dfn-size">size</a><span>, in §3.2</span>
    <li><a href="#dfn-slice">slice(start, end, contentType), slice(start, end), slice(start), slice()</a><span>, in §3.3.1</span>
    <li><a href="#SnapshotStateFR">SnapshotState</a><span>, in §7.1</span>
@@ -3642,8 +3646,6 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
      <li><a href="#dfn-BPtype">dict-member for BlobPropertyBag</a><span>, in §3.1.1</span>
      <li><a href="#dfn-type">attribute for Blob</a><span>, in §3.2</span>
     </ul>
-   <li><a href="#unicodeBlobURL">Unicode Serialization of a Blob URL</a><span>, in §8.3.2</span>
-   <li><a href="#unicode-serialization-of-an-origin-algorithm">Unicode Serialization of an Origin algorithm</a><span>, in §8.3.1</span>
    <li><a href="#UnixEpoch">Unix Epoch</a><span>, in §2</span>
    <li><a href="#UnsafeFileFR">UnsafeFile</a><span>, in §7.1</span>
   </ul>
@@ -3689,6 +3691,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#window">Window</a>
      <li><a href="https://html.spec.whatwg.org/multipage/workers.html#workerglobalscope">WorkerGlobalScope</a>
      <li><a href="https://html.spec.whatwg.org/multipage/semantics.html#the-a-element">a</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#ascii-serialisation-of-an-origin">ascii serialization of an origin</a>
      <li><a href="https://html.spec.whatwg.org/multipage/semantics.html#attr-hyperlink-download">download</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-content-attributes">event handler content attribute</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event handler event type</a>
@@ -3792,8 +3795,6 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
    <dd>D. Crocker, Ed.; P. Overell. <a href="https://tools.ietf.org/html/rfc5234">Augmented BNF for Syntax Specifications: ABNF</a>. January 2008. Internet Standard. URL: <a href="https://tools.ietf.org/html/rfc5234">https://tools.ietf.org/html/rfc5234</a>
    <dt id="biblio-rfc6266">[RFC6266]
    <dd>J. Reschke. <a href="https://tools.ietf.org/html/rfc6266">Use of the Content-Disposition Header Field in the Hypertext Transfer Protocol (HTTP)</a>. June 2011. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc6266">https://tools.ietf.org/html/rfc6266</a>
-   <dt id="biblio-rfc6454">[RFC6454]
-   <dd>A. Barth. <a href="https://tools.ietf.org/html/rfc6454">The Web Origin Concept</a>. December 2011. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc6454">https://tools.ietf.org/html/rfc6454</a>
    <dt id="biblio-rfc7230">[RFC7230]
    <dd>R. Fielding, Ed.; J. Reschke, Ed.. <a href="https://tools.ietf.org/html/rfc7230">Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing</a>. June 2014. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc7230">https://tools.ietf.org/html/rfc7230</a>
    <dt id="biblio-rfc7231">[RFC7231]
@@ -5196,13 +5197,6 @@ Lifetime of Blob URLs</a> <a href="#ref-for-blob-url-29">(2)</a> <a href="#ref-f
 Security and Privacy Considerations</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="unicode-serialization-of-an-origin-algorithm">
-   <b><a href="#unicode-serialization-of-an-origin-algorithm">#unicode-serialization-of-an-origin-algorithm</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-unicode-serialization-of-an-origin-algorithm-1">8.3.2. 
-Unicode Serialization of a Blob URL</a> <a href="#ref-for-unicode-serialization-of-an-origin-algorithm-2">(2)</a> <a href="#ref-for-unicode-serialization-of-an-origin-algorithm-3">(3)</a>
-   </ul>
-  </aside>
   <aside class="dfn-panel" data-for="unicodeBlobURL">
    <b><a href="#unicodeBlobURL">#unicodeBlobURL</a></b><b>Referenced in:</b>
    <ul>
@@ -5235,7 +5229,7 @@ Blob Parameters</a>
     <li><a href="#ref-for-dfn-createObjectURL-2">8.3.1. 
 Origin of Blob URLs</a>
     <li><a href="#ref-for-dfn-createObjectURL-3">8.3.2. 
-Unicode Serialization of a Blob URL</a>
+Serialization of a Blob URL</a>
     <li><a href="#ref-for-dfn-createObjectURL-4">8.3.3. 
 Discussion of Fragment Identifier</a>
     <li><a href="#ref-for-dfn-createObjectURL-5">8.5. 

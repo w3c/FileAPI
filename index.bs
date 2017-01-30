@@ -1647,7 +1647,7 @@ a <a for=url>path</a> with one entry comprised of a UUID [[RFC4122]]
 (see [[#ABNFUUID]]),
 and an <a for=url>object</a> of the associated {{Blob}} or {{File}}.
 A Blob URL may contain an optional <a for=url>fragment</a>.
-The Blob URL is serialized as a string according to the <a>Unicode Serialization of a Blob URL</a> algorithm.
+The Blob URL is serialized as a string according to the <a>Serialization of a Blob URL</a> algorithm.
 
 A <a for=url>fragment</a>, if used,
 has a distinct interpretation depending on the media type of the {{Blob}} or {{File}} resource in question
@@ -1680,9 +1680,6 @@ The <dfn lt="origin of a Blob URL|Blob URL's origin">origin of a Blob URL</dfn> 
 specified by the <a>incumbent settings object</a>
 at the time the method that created it was called.
 
-The [=url/origin=] of a Blob URL,
-when serialized as a string,
-must conform to the Web Origin Specification's <dfn>Unicode Serialization of an Origin algorithm</dfn> [[!RFC6454]].
 [=CORS protocol|Cross-origin requests=] on Blob URLs must return a <a>network error</a>.
 
 Note: In practice this means that HTTP and HTTPS [=/origins=]
@@ -1694,9 +1691,9 @@ may have behavior that is undefined,
 even though user agents may treat such Blob URLs as valid.
 
 <h4 id="unicodeSerializationOfBlobURL">
-Unicode Serialization of a Blob URL</h4>
+Serialization of a Blob URL</h4>
 
-The <dfn id="unicodeBlobURL">Unicode Serialization of a Blob URL</dfn>
+The <dfn id="unicodeBlobURL">Serialization of a Blob URL</dfn>
 is the value returned by the following algorithm,
 which is invoked by <code>URL.{{URL/createObjectURL()}}</code>:
 
@@ -1704,14 +1701,15 @@ which is invoked by <code>URL.{{URL/createObjectURL()}}</code>:
   Append the string "blob"
   (that is, the Unicode code point sequence U+0062, U+006C, U+006F, U+0062)
   to |result|.
-2. Append the ":" (U+003A COLON) character to |result|.
-3. Let |O| be the Blob URL's [=url/origin=].
-  If the <a>Unicode Serialization of an Origin algorithm</a> on |O| returns null,
-  user agents may substitute an implementation defined value for the return value of the <a>Unicode Serialization of an Origin algorithm</a>.
-  Append the result of the <a>Unicode Serialization of an Origin algorithm</a> for |O| [[!RFC6454]] to |result|.
-4. Append the "/" character (U+0024 SOLIDUS) to |result|.
-5. Generate a UUID [[RFC4122]] as a Unicode string and append it to |result|.
-6. Return |result|.
+1. Append the ":" (U+003A COLON) character to |result|.
+1. Let |settings| be the [=incumbent settings object=]
+1. Let |origin| be |settings|'s [=environment settings object/origin=].
+1. Let |serialized| be the <a lt="ASCII serialization of an origin">ASCII serialization</a> of |origin|.
+1. If |serialized| is "null", set it to an implementation-defined value.
+1. Append |serialized| to |result|.
+1. Append the "/" character (U+0024 SOLIDUS) to |result|.
+1. Generate a UUID [[RFC4122]] as a Unicode string and append it to |result|.
+1. Return |result|.
 
 <h4 id="fragmentDiscussion">
 Discussion of Fragment Identifier</h4>
@@ -1866,14 +1864,14 @@ Methods and Parameters</h4>
     This method must act as follows:
 
     1. If called with a {{Blob}} argument that has a <a>readability state</a> of <a for="Blob/readability state"><code>CLOSED</code></a>,
-      user agents must return the output of the <a>Unicode Serialization of a Blob URL</a>.
+      user agents must return the output of the <a>Serialization of a Blob URL</a> algorithm.
 
       Note: No entry is added to the <a>Blob URL Store</a>;
       consequently, when this <a>Blob URL</a> is <a>dereferenced</a>,
       a <a>network error</a> occurs.
 
     2. Otherwise, user agents must run the following sub-steps:
-      1. Let |url| be the result of the <a>Unicode Serialization of a Blob URL</a> algorithm.
+      1. Let |url| be the result of the <a>Serialization of a Blob URL</a> algorithm.
       2. <a>Add an entry to the Blob URL Store</a> for |url| and |blob|.
       3. Return |url|.
 
