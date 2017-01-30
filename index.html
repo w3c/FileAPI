@@ -2359,7 +2359,7 @@ It is to be used for features that trigger in response to asynchronously reading
   // async read methods
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsArrayBuffer" id="ref-for-dfn-readAsArrayBuffer-1">readAsArrayBuffer</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-49">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-1">blob</a>);
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsBinaryString" id="ref-for-dfn-readAsBinaryString-1">readAsBinaryString</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-50">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-2">blob</a>);
-  <span class="kt">void</span> <dfn class="nv idl-code" data-dfn-for="FileReader" data-dfn-type="method" data-export="" data-lt="readAsText(blob, label)|readAsText(blob)" id="dom-filereader-readastext">readAsText<a class="self-link" href="#dom-filereader-readastext"></a></dfn>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-51">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-3">blob</a>, <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-label" id="ref-for-dfn-label-1">label</a>);
+  <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsText" id="ref-for-dfn-readAsText-1">readAsText</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-51">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-3">blob</a>, <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-label" id="ref-for-dfn-label-1">label</a>);
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsDataURL" id="ref-for-dfn-readAsDataURL-1">readAsDataURL</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-52">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-4">blob</a>);
 
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-abort" id="ref-for-dfn-abort-2">abort</a>();
@@ -2445,7 +2445,7 @@ which must be one of the following values:</p>
     If <code class="idl"><a data-link-type="idl" href="#dfn-readyState" id="ref-for-dfn-readyState-2">readyState</a></code> is set to <code class="idl"><a data-link-type="idl" href="#dfn-done" id="ref-for-dfn-done-2">DONE</a></code> it means at least one of the <a data-link-type="dfn" href="#read-method" id="ref-for-read-method-5">read methods</a> have been called on this <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader-10">FileReader</a></code>. 
    </dl>
    <h4 class="heading settled" data-level="6.3.4" id="reading-a-file"><span class="secno">6.3.4. </span><span class="content"> Reading a File or Blob</span><a class="self-link" href="#reading-a-file"></a></h4>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader-11">FileReader</a></code> interface makes available several <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="asynchronous read method" data-noexport="" id="asynchronous-read-methods">asynchronous read methods</dfn>—<wbr><code class="idl"><a data-link-type="idl" href="#dfn-readAsArrayBuffer" id="ref-for-dfn-readAsArrayBuffer-2">readAsArrayBuffer()</a></code>, <code class="idl"><a data-link-type="idl" href="#dfn-readAsBinaryString" id="ref-for-dfn-readAsBinaryString-2">readAsBinaryString()</a></code>, <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-1">readAsText()</a></code> and <code class="idl"><a data-link-type="idl" href="#dfn-readAsDataURL" id="ref-for-dfn-readAsDataURL-2">readAsDataURL()</a></code>,
+   <p>The <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader-11">FileReader</a></code> interface makes available several <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="asynchronous read method" data-noexport="" id="asynchronous-read-methods">asynchronous read methods</dfn>—<wbr><code class="idl"><a data-link-type="idl" href="#dfn-readAsArrayBuffer" id="ref-for-dfn-readAsArrayBuffer-2">readAsArrayBuffer()</a></code>, <code class="idl"><a data-link-type="idl" href="#dfn-readAsBinaryString" id="ref-for-dfn-readAsBinaryString-2">readAsBinaryString()</a></code>, <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-2">readAsText()</a></code> and <code class="idl"><a data-link-type="idl" href="#dfn-readAsDataURL" id="ref-for-dfn-readAsDataURL-2">readAsDataURL()</a></code>,
 which read files into memory.
 If multiple concurrent read methods are called on the same <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader-12">FileReader</a></code> object,
 user agents must throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code> on any of the read methods that occur
@@ -2478,7 +2478,7 @@ and no error in reading the <code class="idl"><a data-link-type="idl" href="#dfn
 then the <code class="idl"><a data-link-type="idl" href="#dfn-result" id="ref-for-dfn-result-7">result</a></code> attribute must return a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></code> representing the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-34">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-60">Blob</a></code>'s data as a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="binary-string">binary string</dfn>,
 in which every byte is represented by a code unit of equal value [0...255].</p>
     <li data-md="">
-     <p>On getting, if the <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-2">readAsText()</a></code> <a data-link-type="dfn" href="#read-method" id="ref-for-read-method-10">read method</a> is called
+     <p>On getting, if the <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-3">readAsText()</a></code> <a data-link-type="dfn" href="#read-method" id="ref-for-read-method-10">read method</a> is called
 and no error in reading the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-35">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-61">Blob</a></code> has occurred,
 then the <code class="idl"><a data-link-type="idl" href="#dfn-result" id="ref-for-dfn-result-8">result</a></code> attribute must return a string
 representing the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-36">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-62">Blob</a></code>'s data as a text string,
@@ -2534,11 +2534,11 @@ If <code class="idl"><a data-link-type="idl" href="#dfn-readyState" id="ref-for-
     <li data-md="">
      <p><a data-link-type="dfn" href="#terminate-an-algorithm" id="ref-for-terminate-an-algorithm-7">Terminate this algorithm</a>.</p>
    </ol>
-   <h5 class="heading settled" data-level="6.3.4.3" id="readAsDataText"><span class="secno">6.3.4.3. </span><span class="content"> The <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-3">readAsText()</a></code> method</span><a class="self-link" href="#readAsDataText"></a></h5>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-4">readAsText()</a></code> method can be called with an optional parameter, <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader/readAsText(blob, label), FileReader/readAsText(), FileReaderSync/readAsText(blob, label)" data-dfn-type="argument" data-export="" id="dfn-label">label</dfn>,
+   <h5 class="heading settled" data-level="6.3.4.3" id="readAsDataText"><span class="secno">6.3.4.3. </span><span class="content"> The <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-4">readAsText()</a></code> method</span><a class="self-link" href="#readAsDataText"></a></h5>
+   <p>The <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-5">readAsText()</a></code> method can be called with an optional parameter, <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader/readAsText(blob, label), FileReader/readAsText(), FileReaderSync/readAsText(blob, label)" data-dfn-type="argument" data-export="" id="dfn-label">label</dfn>,
 which is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></code> argument that represents the label of an encoding <a data-link-type="biblio" href="#biblio-encoding">[Encoding]</a>;
 if provided, it must be used as part of the <a data-link-type="dfn" href="#encoding-determination" id="ref-for-encoding-determination-3">encoding determination</a> used when processing this method call.</p>
-   <p>When the <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="method" data-export="" id="dfn-readAsText">readAsText(blob, optional label)</dfn> method is called,
+   <p>When the <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="method" data-export="" data-lt="readAsText(blob, label)|readAsText(blob)" id="dfn-readAsText">readAsText(blob, label)</dfn> method is called,
 the user agent must run the steps below.</p>
    <ol>
     <li data-md="">
@@ -2694,7 +2694,7 @@ This section defines this parameter.</p>
     and must be a reference to a single <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-38">File</a></code> in a <code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist-11">FileList</a></code> or a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-66">Blob</a></code> argument not obtained from the underlying OS file system. 
    </dl>
    <h3 class="heading settled" data-level="6.4" id="enctype"><span class="secno">6.4. </span><span class="content"> Determining Encoding</span><a class="self-link" href="#enctype"></a></h3>
-   <p>When reading <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-67">Blob</a></code> objects using the <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-5">readAsText()</a></code> <a data-link-type="dfn" href="#read-method" id="ref-for-read-method-14">read method</a>,
+   <p>When reading <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-67">Blob</a></code> objects using the <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText-6">readAsText()</a></code> <a data-link-type="dfn" href="#read-method" id="ref-for-read-method-14">read method</a>,
 the following <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="encoding-determination">encoding determination</dfn> steps must be followed:</p>
    <ol>
     <li data-md="">
@@ -2829,7 +2829,7 @@ Workers can avail of both the asynchronous API (the <code class="idl"><a data-li
 
   <span class="kt">ArrayBuffer</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsArrayBufferSync" id="ref-for-dfn-readAsArrayBufferSync-1">readAsArrayBuffer</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-70">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-6">blob</a>);
   <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsBinaryStringSync" id="ref-for-dfn-readAsBinaryStringSync-1">readAsBinaryString</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-71">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-7">blob</a>);
-  <span class="kt">DOMString</span> <dfn class="nv idl-code" data-dfn-for="FileReaderSync" data-dfn-type="method" data-export="" data-lt="readAsText(blob, label)|readAsText(blob)" id="dom-filereadersync-readastext">readAsText<a class="self-link" href="#dom-filereadersync-readastext"></a></dfn>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-72">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-8">blob</a>, <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-label" id="ref-for-dfn-label-4">label</a>);
+  <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsTextSync" id="ref-for-dfn-readAsTextSync-2">readAsText</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-72">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-8">blob</a>, <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-label" id="ref-for-dfn-label-4">label</a>);
   <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsDataURLSync" id="ref-for-dfn-readAsDataURLSync-1">readAsDataURL</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-73">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-9">blob</a>);
 };
 </pre>
@@ -2838,8 +2838,8 @@ Workers can avail of both the asynchronous API (the <code class="idl"><a data-li
 the user agent must return a new <code class="idl"><a data-link-type="idl" href="#dfn-FileReaderSync" id="ref-for-dfn-FileReaderSync-8">FileReaderSync</a></code> object.</p>
    <p>In environments where the global object is represented by a <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/workers.html#workerglobalscope">WorkerGlobalScope</a></code> object,
 the <code class="idl"><a data-link-type="idl" href="#dfn-FileReaderSync" id="ref-for-dfn-FileReaderSync-9">FileReaderSync</a></code> constructor must be available.</p>
-   <h5 class="heading settled" data-level="6.6.1.2" id="readAsTextSync"><span class="secno">6.6.1.2. </span><span class="content"> The <code class="idl"><a data-link-type="idl" href="#dfn-readAsTextSync" id="ref-for-dfn-readAsTextSync-2">readAsText()</a></code> method</span><a class="self-link" href="#readAsTextSync"></a></h5>
-   <p>When the <dfn class="dfn-paneled idl-code" data-dfn-for="FileReaderSync" data-dfn-type="method" data-export="" id="dfn-readAsTextSync">readAsText(blob, optional label)</dfn> method is called,
+   <h5 class="heading settled" data-level="6.6.1.2" id="readAsTextSync"><span class="secno">6.6.1.2. </span><span class="content"> The <code class="idl"><a data-link-type="idl" href="#dfn-readAsTextSync" id="ref-for-dfn-readAsTextSync-3">readAsText()</a></code> method</span><a class="self-link" href="#readAsTextSync"></a></h5>
+   <p>When the <dfn class="dfn-paneled idl-code" data-dfn-for="FileReaderSync" data-dfn-type="method" data-export="" data-lt="readAsText(blob, label)|readAsText(blob)" id="dfn-readAsTextSync">readAsText(blob, label)</dfn> method is called,
 the following steps must be followed:</p>
    <ol>
     <li data-md="">
@@ -3704,17 +3704,11 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
    <li>
     readAsText(blob)
     <ul>
-     <li><a href="#dom-filereader-readastext">method for FileReader</a><span>, in §6.3</span>
-     <li><a href="#dom-filereadersync-readastext">method for FileReaderSync</a><span>, in §6.6.1</span>
+     <li><a href="#dfn-readAsText">method for FileReader</a><span>, in §6.3.4.3</span>
+     <li><a href="#dfn-readAsTextSync">method for FileReaderSync</a><span>, in §6.6.1.2</span>
     </ul>
    <li>
     readAsText(blob, label)
-    <ul>
-     <li><a href="#dom-filereader-readastext">method for FileReader</a><span>, in §6.3</span>
-     <li><a href="#dom-filereadersync-readastext">method for FileReaderSync</a><span>, in §6.6.1</span>
-    </ul>
-   <li>
-    readAsText(blob, optional label)
     <ul>
      <li><a href="#dfn-readAsText">method for FileReader</a><span>, in §6.3.4.3</span>
      <li><a href="#dfn-readAsTextSync">method for FileReaderSync</a><span>, in §6.6.1.2</span>
@@ -3977,7 +3971,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
   // async read methods
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsArrayBuffer">readAsArrayBuffer</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsBinaryString">readAsBinaryString</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
-  <span class="kt">void</span> <a class="nv" href="#dom-filereader-readastext">readAsText</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>, <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-label">label</a>);
+  <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsText">readAsText</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>, <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-label">label</a>);
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsDataURL">readAsDataURL</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
 
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-abort">abort</a>();
@@ -4011,7 +4005,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
 
   <span class="kt">ArrayBuffer</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
   <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsBinaryStringSync">readAsBinaryString</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
-  <span class="kt">DOMString</span> <a class="nv" href="#dom-filereadersync-readastext">readAsText</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>, <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-label">label</a>);
+  <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsTextSync">readAsText</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>, <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-label">label</a>);
   <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsDataURLSync">readAsDataURL</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
 };
 
@@ -4936,13 +4930,15 @@ The FileReaderSync API</a>
   <aside class="dfn-panel" data-for="dfn-readAsText">
    <b><a href="#dfn-readAsText">#dfn-readAsText</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dfn-readAsText-1">6.3.4. 
+    <li><a href="#ref-for-dfn-readAsText-1">6.3. 
+The FileReader API</a>
+    <li><a href="#ref-for-dfn-readAsText-2">6.3.4. 
 Reading a File or Blob</a>
-    <li><a href="#ref-for-dfn-readAsText-2">6.3.4.1. 
+    <li><a href="#ref-for-dfn-readAsText-3">6.3.4.1. 
 The result attribute</a>
-    <li><a href="#ref-for-dfn-readAsText-3">6.3.4.3. 
-The readAsText() method</a> <a href="#ref-for-dfn-readAsText-4">(2)</a>
-    <li><a href="#ref-for-dfn-readAsText-5">6.4. 
+    <li><a href="#ref-for-dfn-readAsText-4">6.3.4.3. 
+The readAsText() method</a> <a href="#ref-for-dfn-readAsText-5">(2)</a>
+    <li><a href="#ref-for-dfn-readAsText-6">6.4. 
 Determining Encoding</a>
    </ul>
   </aside>
@@ -5178,7 +5174,9 @@ Constructors</a> <a href="#ref-for-dfn-FileReaderSync-9">(2)</a>
    <ul>
     <li><a href="#ref-for-dfn-readAsTextSync-1">6.4. 
 Determining Encoding</a>
-    <li><a href="#ref-for-dfn-readAsTextSync-2">6.6.1.2. 
+    <li><a href="#ref-for-dfn-readAsTextSync-2">6.6.1. 
+The FileReaderSync API</a>
+    <li><a href="#ref-for-dfn-readAsTextSync-3">6.6.1.2. 
 The readAsText() method</a>
    </ul>
   </aside>

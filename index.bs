@@ -1071,7 +1071,7 @@ The {{FileReader/readAsText()}} method can be called with an optional parameter,
 which is a {{DOMString}} argument that represents the label of an encoding [[!Encoding]];
 if provided, it must be used as part of the <a>encoding determination</a> used when processing this method call.
 
-When the <dfn method for=FileReader id="dfn-readAsText">readAsText(blob, optional label)</dfn> method is called,
+When the <dfn method for=FileReader id="dfn-readAsText">readAsText(blob, label)</dfn> method is called,
 the user agent must run the steps below.
 
 1. If {{FileReader/readyState}} = {{FileReader/LOADING}} throw an {{InvalidStateError}} and <a>terminate this algorithm</a>.
@@ -1386,7 +1386,7 @@ the {{FileReaderSync}} constructor must be available.
 <h5 id="readAsTextSync">
 The {{FileReaderSync/readAsText()}} method</h5>
 
-When the <dfn method for=FileReaderSync id="dfn-readAsTextSync">readAsText(blob, optional label)</dfn> method is called,
+When the <dfn method for=FileReaderSync id="dfn-readAsTextSync">readAsText(blob, label)</dfn> method is called,
 the following steps must be followed:
 
 1. If {{FileReader/readyState}} = {{FileReader/LOADING}}
