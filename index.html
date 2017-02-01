@@ -1424,7 +1424,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="http://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">File API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-01-30">30 January 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-01-31">31 January 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2686,10 +2686,10 @@ then remove those <a data-link-type="dfn" href="https://html.spec.whatwg.org/mul
    </ol>
    <h5 class="heading settled" data-level="6.3.4.8" id="blobAndFileParams"><span class="secno">6.3.4.8. </span><span class="content"> Blob Parameters</span><a class="self-link" href="#blobAndFileParams"></a></h5>
    <p>The <a data-link-type="dfn" href="#asynchronous-read-methods" id="ref-for-asynchronous-read-methods-1">asynchronous read methods</a>,
-the <a data-link-type="dfn" href="#read-method-sync" id="ref-for-read-method-sync-2">synchronous read methods</a>, <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-1">createObjectURL()</a></code></code> and <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createFor" id="ref-for-dfn-createFor-1">createFor()</a></code></code> take a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-64">Blob</a></code> parameter.
+the <a data-link-type="dfn" href="#read-method-sync" id="ref-for-read-method-sync-2">synchronous read methods</a> and <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-1">createObjectURL()</a></code></code> take a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-64">Blob</a></code> parameter.
 This section defines this parameter.</p>
    <dl>
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="FileReader/readAsArrayBuffer(blob), FileReader/readAsBinaryString(blob), FileReader/readAsText(blob, label), FileReader/readAsText(), FileReader/readAsDataURL(blob), URL/createObjectURL(blob), URL/createFor(blob), FileReaderSync/readAsArrayBuffer(blob), FileReaderSync/readAsBinaryString(blob), FileReaderSync/readAsText(blob, label), FileReaderSync/readAsDataURL(blob)" data-dfn-type="argument" data-export="" id="dfn-fileBlob">blob</dfn> 
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="FileReader/readAsArrayBuffer(blob), FileReader/readAsBinaryString(blob), FileReader/readAsText(blob, label), FileReader/readAsText(), FileReader/readAsDataURL(blob), URL/createObjectURL(blob), FileReaderSync/readAsArrayBuffer(blob), FileReaderSync/readAsBinaryString(blob), FileReaderSync/readAsText(blob, label), FileReaderSync/readAsDataURL(blob)" data-dfn-type="argument" data-export="" id="dfn-fileBlob">blob</dfn> 
     <dd>This is a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-65">Blob</a></code> argument
     and must be a reference to a single <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-38">File</a></code> in a <code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist-11">FileList</a></code> or a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-66">Blob</a></code> argument not obtained from the underlying OS file system. 
    </dl>
@@ -3105,9 +3105,9 @@ scheme = "blob"
 </pre>
    <div class="example" id="example-3011c08e"><a class="self-link" href="#example-3011c08e"></a> An example of a Blob URL might be <code>blob:https://example.org/9115d58c-bcda-ff47-86e5-083e9a215304</code>. </div>
    <h4 class="heading settled" data-level="8.3.1" id="originOfBlobURL"><span class="secno">8.3.1. </span><span class="content"> Origin of Blob URLs</span><a class="self-link" href="#originOfBlobURL"></a></h4>
-   <p><a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-4">Blob URLs</a> are created using <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-2">createObjectURL()</a></code></code> and/or <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createFor" id="ref-for-dfn-createFor-2">createFor()</a></code></code>,
+   <p><a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-4">Blob URLs</a> are created using <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-2">createObjectURL()</a></code></code>,
 and are revoked using <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL-1">revokeObjectURL()</a></code></code>.
-The <dfn data-dfn-type="dfn" data-lt="origin of a Blob URL|Blob URL’s origin" data-noexport="" id="origin-of-a-blob-url">origin of a Blob URL<a class="self-link" href="#origin-of-a-blob-url"></a></dfn> must be the same as the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">origin</a> specified by the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#incumbent-settings-object">incumbent settings object</a> at the time the method that created it—<wbr>either <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-3">createObjectURL()</a></code></code> or <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createFor" id="ref-for-dfn-createFor-3">createFor()</a></code></code>—<wbr>was called.</p>
+The <dfn data-dfn-type="dfn" data-lt="origin of a Blob URL|Blob URL’s origin" data-noexport="" id="origin-of-a-blob-url">origin of a Blob URL<a class="self-link" href="#origin-of-a-blob-url"></a></dfn> must be the same as the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">origin</a> specified by the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#incumbent-settings-object">incumbent settings object</a> at the time the method that created it was called.</p>
    <p>The <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-origin">origin</a> of a Blob URL,
 when serialized as a string,
 must conform to the Web Origin Specification’s <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="unicode-serialization-of-an-origin-algorithm">Unicode Serialization of an Origin algorithm</dfn> <a data-link-type="biblio" href="#biblio-rfc6454">[RFC6454]</a>. <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#cors-protocol">Cross-origin requests</a> on Blob URLs must return a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a>.</p>
@@ -3118,7 +3118,7 @@ may have behavior that is undefined,
 even though user agents may treat such Blob URLs as valid.</p>
    <h4 class="heading settled" data-level="8.3.2" id="unicodeSerializationOfBlobURL"><span class="secno">8.3.2. </span><span class="content"> Unicode Serialization of a Blob URL</span><a class="self-link" href="#unicodeSerializationOfBlobURL"></a></h4>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="unicodeBlobURL">Unicode Serialization of a Blob URL</dfn> is the value returned by the following algorithm,
-which is invoked by <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-4">createObjectURL()</a></code></code> and/or <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createFor" id="ref-for-dfn-createFor-4">createFor()</a></code></code>:</p>
+which is invoked by <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-3">createObjectURL()</a></code></code>:</p>
    <ol>
     <li data-md="">
      <p>Let <var>result</var> be the empty string.
@@ -3150,8 +3150,7 @@ The fragment must not be used to identify a resource;
 only the <code>blob</code> <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme">scheme</a> and the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-origin">origin</a>/<a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-path">path</a> of the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url">URL</a> constitute a valid resource identifier.</p>
    <p>A valid Blob URL reference could look like: <code>blob:http://example.org:8080/550e8400-e29b-41d4-a716-446655440000#aboutABBA</code> where "#aboutABBA" might be an HTML fragment identifier referring to an element with an id attribute of "aboutABBA".</p>
    <p class="note" role="note"><span>Note:</span> The <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-fragment">fragment</a> is not used to identify the resource.
-Neither the <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-5">createObjectURL()</a></code></code> method
-nor the <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createFor" id="ref-for-dfn-createFor-5">createFor()</a></code></code> method generate a fragment.</p>
+The <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-4">createObjectURL()</a></code></code> method does not generate a fragment.</p>
    <h3 class="heading settled" data-level="8.4" id="requestResponseModel"><span class="secno">8.4. </span><span class="content"> Dereferencing Model for Blob URLs</span><a class="self-link" href="#requestResponseModel"></a></h3>
    <p><em>This section is informative.</em></p>
    <p class="note" role="note"><span>Note:</span> The <a data-link-type="biblio" href="#biblio-url">[URL]</a> and <a data-link-type="biblio" href="#biblio-fetch">[Fetch]</a> specifications should be considered normative for parsing and fetching <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-6">Blob URLs</a>.</p>
@@ -3229,8 +3228,7 @@ user agents must act as if a <a data-link-type="dfn" href="https://fetch.spec.wh
 This section describes a supplemental interface to the URL specification <a data-link-type="biblio" href="#biblio-url">[URL]</a> and presents methods for <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-16">Blob URL</a> creation and revocation.</p>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=(<span class="n">Window</span>,<span class="n">DedicatedWorker</span>,<span class="n">SharedWorker</span>)]
 <span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://url.spec.whatwg.org/#url">URL</a> {
-  <span class="kt">static</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-6">createObjectURL</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-97">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-10">blob</a>);
-  <span class="kt">static</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-createFor" id="ref-for-dfn-createFor-6">createFor</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-98">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-11">blob</a>);
+  <span class="kt">static</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-5">createObjectURL</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-97">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-10">blob</a>);
   <span class="kt">static</span> <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL-2">revokeObjectURL</a>(<span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-urlarg" id="ref-for-dfn-urlarg-1">url</a>);
 };
 </pre>
@@ -3247,7 +3245,7 @@ and must NOT evaluate to true otherwise.</p>
     This method must act as follows: 
      <ol>
       <li data-md="">
-       <p>If called with a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-99">Blob</a></code> argument that has a <a data-link-type="dfn" href="#readabilityState" id="ref-for-readabilityState-19">readability state</a> of <a data-link-type="dfn" href="#dfn-closedState" id="ref-for-dfn-closedState-12"><code>CLOSED</code></a>,
+       <p>If called with a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-98">Blob</a></code> argument that has a <a data-link-type="dfn" href="#readabilityState" id="ref-for-readabilityState-19">readability state</a> of <a data-link-type="dfn" href="#dfn-closedState" id="ref-for-dfn-closedState-12"><code>CLOSED</code></a>,
 user agents must return the output of the <a data-link-type="dfn" href="#unicodeBlobURL" id="ref-for-unicodeBlobURL-2">Unicode Serialization of a Blob URL</a>.</p>
        <p class="note" role="note"><span>Note:</span> No entry is added to the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-4">Blob URL Store</a>;
 consequently, when this <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-18">Blob URL</a> is <a data-link-type="dfn" href="#dereference" id="ref-for-dereference-3">dereferenced</a>,
@@ -3263,81 +3261,41 @@ a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-e
          <p>Return <var>url</var>.</p>
        </ol>
      </ol>
-    <dt>The <dfn class="dfn-paneled idl-code" data-dfn-for="URL" data-dfn-type="method" data-export="" id="dfn-createFor">createFor(blob)</dfn> static method 
-    <dd>
-     Returns a unique <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-19">Blob URL</a>. <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-20">Blob URLs</a> created with this method are said to be <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="autoRevoking">auto-revoking</dfn> since user-agents are responsible for the revocation of <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-21">Blob URL</a>s created with this method,
-    subject to the <a data-link-type="dfn" href="#lifeTime" id="ref-for-lifeTime-2">lifetime stipulation</a> for <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-22">Blob URL</a>s.
-    This method must act as follows: 
-     <ol>
-      <li data-md="">
-       <p>If called with a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-100">Blob</a></code> argument that has a <a data-link-type="dfn" href="#readabilityState" id="ref-for-readabilityState-20">readability state</a> of <a data-link-type="dfn" href="#dfn-closedState" id="ref-for-dfn-closedState-13"><code>CLOSED</code></a>,
-user agents must return the output of the <a data-link-type="dfn" href="#unicodeBlobURL" id="ref-for-unicodeBlobURL-4">Unicode Serialization of a Blob URL</a>.</p>
-       <p class="note" role="note"><span>Note:</span> No entry is added to the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-5">Blob URL Store</a>;
-consequently, when this <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-23">Blob URL</a> is <a data-link-type="dfn" href="#dereference" id="ref-for-dereference-4">dereferenced</a>,
-a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a> occurs.</p>
-      <li data-md="">
-       <p>Otherwise, user agents must run the following steps:</p>
-       <ol>
-        <li data-md="">
-         <p>Let <var>url</var> be the result of the <a data-link-type="dfn" href="#unicodeBlobURL" id="ref-for-unicodeBlobURL-5">Unicode Serialization of a Blob URL</a>.</p>
-        <li data-md="">
-         <p><a data-link-type="dfn" href="#add-an-entry" id="ref-for-add-an-entry-2">Add an entry to the Blob URL Store</a> for <var>url</var> and <var>blob</var>.</p>
-        <li data-md="">
-         <p><a data-link-type="dfn" href="#add-an-entry-revoke" id="ref-for-add-an-entry-revoke-1">Add an entry to the Revocation List</a> for <var>url</var>.</p>
-        <li data-md="">
-         <p>Return <var>url</var>.</p>
-       </ol>
-     </ol>
-     <div class="example" id="example-e1e6ab6c">
-      <a class="self-link" href="#example-e1e6ab6c"></a> In the example below,
-      after obtaining a reference to a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-101">Blob</a></code> object
-      (in this case, a user-selected <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-56">File</a></code> from the underlying file system),
-      the static method <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-7">createObjectURL()</a></code></code> is called on that <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-102">Blob</a></code> object. 
-<pre class="lang-javascript highlight"><span class="kd">var</span> file <span class="o">=</span> document<span class="p">.</span>getElementById<span class="p">(</span><span class="s1">'file'</span><span class="p">)</span><span class="p">.</span>files<span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">;</span>
-<span class="k">if</span><span class="p">(</span>file<span class="p">)</span><span class="p">{</span>
-  blobURLref <span class="o">=</span> window<span class="p">.</span>URL<span class="p">.</span>createObjectURL<span class="p">(</span>file<span class="p">)</span><span class="p">;</span>
-  myimg<span class="p">.</span>src <span class="o">=</span> blobURLref<span class="p">;</span>
-
-  <span class="p">.</span><span class="p">.</span><span class="p">.</span><span class="p">.</span>
-
-<span class="p">}</span>
-</pre>
-     </div>
     <dt>The <dfn class="dfn-paneled idl-code" data-dfn-for="URL" data-dfn-type="method" data-export="" id="dfn-revokeObjectURL">revokeObjectURL(url)</dfn> static method 
     <dd>
-     Revokes the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-24">Blob URL</a> provided in the string <code class="idl"><a class="idl-code" data-link-type="argument" href="#dfn-urlarg" id="ref-for-dfn-urlarg-2">url</a></code> by removing the corresponding entry from the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-6">Blob URL Store</a>.
+     Revokes the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-19">Blob URL</a> provided in the string <code class="idl"><a class="idl-code" data-link-type="argument" href="#dfn-urlarg" id="ref-for-dfn-urlarg-2">url</a></code> by removing the corresponding entry from the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-5">Blob URL Store</a>.
     This method must act as follows: 
      <ol>
       <li data-md="">
-       <p>If the <code class="idl"><a class="idl-code" data-link-type="argument" href="#dfn-urlarg" id="ref-for-dfn-urlarg-3">url</a></code> refers to a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-103">Blob</a></code> that has a <a data-link-type="dfn" href="#readabilityState" id="ref-for-readabilityState-21">readability state</a> of <a data-link-type="dfn" href="#dfn-closedState" id="ref-for-dfn-closedState-14"><code>CLOSED</code></a> OR if the value provided for the <code class="idl"><a class="idl-code" data-link-type="argument" href="#dfn-urlarg" id="ref-for-dfn-urlarg-4">url</a></code> argument is not a <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-25">Blob URL</a>,
-OR if the value provided for the <code class="idl"><a class="idl-code" data-link-type="argument" href="#dfn-urlarg" id="ref-for-dfn-urlarg-5">url</a></code> argument does not have an entry in the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-7">Blob URL Store</a>,
+       <p>If the <code class="idl"><a class="idl-code" data-link-type="argument" href="#dfn-urlarg" id="ref-for-dfn-urlarg-3">url</a></code> refers to a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-99">Blob</a></code> that has a <a data-link-type="dfn" href="#readabilityState" id="ref-for-readabilityState-20">readability state</a> of <a data-link-type="dfn" href="#dfn-closedState" id="ref-for-dfn-closedState-13"><code>CLOSED</code></a> OR if the value provided for the <code class="idl"><a class="idl-code" data-link-type="argument" href="#dfn-urlarg" id="ref-for-dfn-urlarg-4">url</a></code> argument is not a <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-20">Blob URL</a>,
+OR if the value provided for the <code class="idl"><a class="idl-code" data-link-type="argument" href="#dfn-urlarg" id="ref-for-dfn-urlarg-5">url</a></code> argument does not have an entry in the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-6">Blob URL Store</a>,
 this method call does nothing.
 User agents may display a message on the error console.</p>
       <li data-md="">
-       <p>Otherwise, user agents must <a data-link-type="dfn" href="#removeTheEntry" id="ref-for-removeTheEntry-2">remove the entry</a> from the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-8">Blob URL Store</a> for <code class="idl"><a class="idl-code" data-link-type="argument" href="#dfn-urlarg" id="ref-for-dfn-urlarg-6">url</a></code>.</p>
+       <p>Otherwise, user agents must <a data-link-type="dfn" href="#removeTheEntry" id="ref-for-removeTheEntry-2">remove the entry</a> from the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-7">Blob URL Store</a> for <code class="idl"><a class="idl-code" data-link-type="argument" href="#dfn-urlarg" id="ref-for-dfn-urlarg-6">url</a></code>.</p>
        <p class="note" role="note"><span>Note:</span> Subsequent attemps to dereference <code class="idl"><a class="idl-code" data-link-type="argument" href="#dfn-urlarg" id="ref-for-dfn-urlarg-7">url</a></code> result in a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a>,
-since the entry has been removed from the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-9">Blob URL Store</a>.</p>
+since the entry has been removed from the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-8">Blob URL Store</a>.</p>
      </ol>
      <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="URL/revokeObjectURL(url)" data-dfn-type="argument" data-export="" id="dfn-urlarg">url</dfn> argument to the <code class="idl"><a data-link-type="idl" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL-3">revokeObjectURL()</a></code> method
-    is a <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-26">Blob URL</a> string.</p>
+    is a <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-21">Blob URL</a> string.</p>
      <div class="example" id="example-a97f8a33">
       <a class="self-link" href="#example-a97f8a33"></a> In the example below, <code>window1</code> and <code>window2</code> are separate,
       but in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#same-origin">same origin</a>; <code>window2</code> could be an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-iframe-element">iframe</a></code> inside <code>window1</code>. 
 <pre class="lang-javascript highlight">myurl <span class="o">=</span> window1<span class="p">.</span>URL<span class="p">.</span>createObjectURL<span class="p">(</span>myblob<span class="p">)</span><span class="p">;</span>
 window2<span class="p">.</span>URL<span class="p">.</span>revokeObjectURL<span class="p">(</span>myurl<span class="p">)</span><span class="p">;</span>
 </pre>
-      <p>Since <code>window1</code> and <code>window2</code> are in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#same-origin">same origin</a> and share the same <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-10">Blob URL Store</a>,
+      <p>Since <code>window1</code> and <code>window2</code> are in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#same-origin">same origin</a> and share the same <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-9">Blob URL Store</a>,
       the <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL-4">revokeObjectURL()</a></code></code> call
       ensures that subsequent dereferencing of <code>myurl</code> results in a the user agent acting as if a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a> has occurred.</p>
      </div>
    </dl>
    <h4 class="heading settled" data-level="8.5.2" id="examplesOfCreationRevocation"><span class="secno">8.5.2. </span><span class="content"> Examples of Blob URL Creation and Revocation</span><a class="self-link" href="#examplesOfCreationRevocation"></a></h4>
-   <p><a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-27">Blob URL</a>s are strings that are used to <a data-link-type="dfn" href="#dereference" id="ref-for-dereference-5">dereference</a> <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-104">Blob</a></code> objects,
+   <p><a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-22">Blob URL</a>s are strings that are used to <a data-link-type="dfn" href="#dereference" id="ref-for-dereference-4">dereference</a> <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-100">Blob</a></code> objects,
 and can persist for as long as the <code>document</code> from which they were minted
-using <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-8">createObjectURL()</a></code></code> or <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createFor" id="ref-for-dfn-createFor-7">createFor()</a></code></code>—<wbr>see <a href="#lifeTime" id="ref-for-lifeTime-3">§8.6 Lifetime of Blob URLs</a>.</p>
-   <p>This section gives sample usage of creation and revocation of <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-28">Blob URL</a>s with explanations.</p>
+using <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-6">createObjectURL()</a></code></code>—<wbr>see <a href="#lifeTime" id="ref-for-lifeTime-2">§8.6 Lifetime of Blob URLs</a>.</p>
+   <p>This section gives sample usage of creation and revocation of <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-23">Blob URL</a>s with explanations.</p>
    <div class="example" id="example-1c236228">
-    <a class="self-link" href="#example-1c236228"></a> In the example below, two <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element">img</a></code> elements <a data-link-type="biblio" href="#biblio-html">[HTML]</a> refer to the same <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-29">Blob URL</a>: 
+    <a class="self-link" href="#example-1c236228"></a> In the example below, two <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element">img</a></code> elements <a data-link-type="biblio" href="#biblio-html">[HTML]</a> refer to the same <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-24">Blob URL</a>: 
 <pre class="lang-javascript highlight">url <span class="o">=</span> URL<span class="p">.</span>createObjectURL<span class="p">(</span>blob<span class="p">)</span><span class="p">;</span>
 img1<span class="p">.</span>src <span class="o">=</span> url<span class="p">;</span>
 img2<span class="p">.</span>src <span class="o">=</span> url<span class="p">;</span>
@@ -3365,62 +3323,22 @@ img2<span class="p">.</span>src <span class="o">=</span> blobURLref<span class="
 <span class="p">}</span>
 </pre>
    </div>
-   <p>The example above allows multiple references to a single <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-30">Blob URL</a>,
-and the web developer then revokes the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-31">Blob URL</a> string after both image objects have been loaded.
-While not restricting number of uses of the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-32">Blob URL</a> offers more flexibility,
+   <p>The example above allows multiple references to a single <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-25">Blob URL</a>,
+and the web developer then revokes the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-26">Blob URL</a> string after both image objects have been loaded.
+While not restricting number of uses of the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-27">Blob URL</a> offers more flexibility,
 it increases the likelihood of leaks;
 developers should pair it with a corresponding call to <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL-6">revokeObjectURL()</a></code></code>.</p>
-   <div class="example" id="example-ffe52a2e">
-    <a class="self-link" href="#example-ffe52a2e"></a> This example uses <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createFor" id="ref-for-dfn-createFor-8">createFor()</a></code></code>,
-  which allows uses such as the one above,
-  and obviates the need for a corresponding call by the web developer to <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL-7">revokeObjectURL()</a></code></code>. 
-<pre class="lang-javascript highlight"><span class="kd">var</span> blobURLref2 <span class="o">=</span> URL<span class="p">.</span>createFor<span class="p">(</span>file<span class="p">)</span><span class="p">;</span>
-img1 <span class="o">=</span> <span class="k">new</span> Image<span class="p">(</span><span class="p">)</span><span class="p">;</span>
-img1<span class="p">.</span>src <span class="o">=</span> blobURLref2<span class="p">;</span>
-<span class="p">.</span><span class="p">.</span><span class="p">.</span><span class="p">.</span>
-</pre>
-   </div>
-   <div class="example" id="example-54a0e6ac">
-    <a class="self-link" href="#example-54a0e6ac"></a> This example uses <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createFor" id="ref-for-dfn-createFor-9">createFor()</a></code></code> to mint a <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-33">Blob URL</a>,
-  and appends a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-fragment">fragment</a> that has an understood meaning within the resource
-  (in this case, it references an anchor within the HTML document). 
-<pre class="lang-javascript highlight"><span class="c1">// file is an HTML file
-</span><span class="c1">// One of the anchor identifiers in file is "#applicationInfo"
-</span>
-<span class="kd">var</span> blobURLAnchorRef <span class="o">=</span> URL<span class="p">.</span>createFor<span class="p">(</span>file<span class="p">)</span> <span class="o">+</span> <span class="s2">"#applicationInfo"</span><span class="p">;</span>
-
-<span class="c1">// openPopup is an utility function to open a small informational window
-</span>
-<span class="kd">var</span> windowRef <span class="o">=</span> openPopup<span class="p">(</span>blobURLAnchorRef<span class="p">,</span> <span class="s2">"Application Info"</span><span class="p">)</span><span class="p">;</span>
-
-<span class="p">.</span><span class="p">.</span><span class="p">.</span><span class="p">.</span>
-</pre>
-   </div>
    <h3 class="heading settled dfn-paneled" data-dfn-for="blob url" data-dfn-type="dfn" data-export="" data-level="8.6" data-lt="lifetime|lifetime stipulation" id="lifeTime"><span class="secno">8.6. </span><span class="content"> Lifetime of Blob URLs</span></h3>
-   <p>A global object which exposes <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-9">createObjectURL()</a></code></code> or <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createFor" id="ref-for-dfn-createFor-10">createFor()</a></code></code> must maintain a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="BlobURLStore">Blob URL Store</dfn> which is a list of <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-34">Blob URLs</a> created by the <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-10">createObjectURL()</a></code></code> method
-or the <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createFor" id="ref-for-dfn-createFor-11">createFor()</a></code></code> method,
-and the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-105">Blob</a></code> resource that each refers to.</p>
-   <p>A global object which exposes <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createFor" id="ref-for-dfn-createFor-12">createFor()</a></code></code> must maintain a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="revokeList">Revocation List</dfn> which is a list of <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-35">Blob URLs</a> created with the <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createFor" id="ref-for-dfn-createFor-13">createFor()</a></code></code> method.</p>
-   <p>When this specification says to <dfn class="dfn-paneled" data-dfn-for="blob url store" data-dfn-type="dfn" data-lt="add an entry|add the entry|add an entry to the Blob URL Store|add the entry to the Blob URL Store" data-noexport="" id="add-an-entry">add an entry to the Blob URL Store</dfn> for a <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-36">Blob URL</a> and a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-106">Blob</a></code> input,
-the user-agent must add the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-37">Blob URL</a> and a reference to the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-107">Blob</a></code> it refers to to the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-11">Blob URL Store</a>.</p>
-   <p>When this specification says to <dfn class="dfn-paneled" data-dfn-for="blob revocation list" data-dfn-type="dfn" data-lt="add an entry|add the entry|add an entry to the Revocation List|add the entry to the Revocation List" data-noexport="" id="add-an-entry-revoke">add an entry to the Revocation List</dfn> for a <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-38">Blob URL</a>,
-user agents must add the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-39">Blob URL</a> to the <a data-link-type="dfn" href="#revokeList" id="ref-for-revokeList-1">Revocation List</a>.
-This is only for <a data-link-type="dfn" href="#autoRevoking" id="ref-for-autoRevoking-1">auto-revoking</a> <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-40">Blob URL</a>s.</p>
-   <p>When this specification says to <dfn class="dfn-paneled" data-dfn-for="blob url store" data-dfn-type="dfn" data-lt="remove an entry|remove the entry|remove an entry from the Blob URL Store|remove the entry from the Blob URL Store" data-noexport="" id="removeTheEntry">remove an entry from the Blob URL Store</dfn> for a given <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-41">Blob URL</a> or for a given <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-108">Blob</a></code>,
-user agents must remove the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-42">Blob URL</a> and the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-109">Blob</a></code> it refers to from the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-12">Blob URL Store</a>.
-Subsequent attempts to <a data-link-type="dfn" href="#dereference" id="ref-for-dereference-6">dereference</a> this URL must result in a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a>.</p>
-   <p>The <a data-link-type="dfn" href="#revokeList" id="ref-for-revokeList-2">Revocation List</a> and the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-13">Blob URL Store</a> must be processed together as follows:</p>
-   <ol>
-    <li data-md="">
-     <p>Add <a data-link-type="dfn" href="#removeTheEntry" id="ref-for-removeTheEntry-3">removing the entries</a> for all the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-43">Blob URLs</a> in the <a data-link-type="dfn" href="#revokeList" id="ref-for-revokeList-3">Revocation List</a> to the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#global-script-clean-up-jobs-list">global script clean-up jobs list</a>.</p>
-    <li data-md="">
-     <p>When all the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-44">Blob URL</a>s in the <a data-link-type="dfn" href="#revokeList" id="ref-for-revokeList-4">Revocation List</a> have had their corresponding entries in the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-14">Blob URL Store</a> removed,
-remove all the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-45">Blob URL</a>s in the <a data-link-type="dfn" href="#revokeList" id="ref-for-revokeList-5">Revocation List</a>.</p>
-    <li data-md="">
-     <p>This specification adds an additional <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#unloading-document-cleanup-steps">unloading document cleanup step</a>:
-user agents must remove all <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-46">Blob URLs</a> from the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-15">Blob URL Store</a> within that <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a>.</p>
-   </ol>
-   <p class="note" role="note"><span>Note:</span> User agents are free to garbage collect resources removed from the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-16">Blob URL Store</a>.</p>
+   <p>A global object which exposes <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-7">createObjectURL()</a></code></code> must maintain a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="BlobURLStore">Blob URL Store</dfn> which is a list of <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-28">Blob URLs</a> created by the <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-8">createObjectURL()</a></code></code> method,
+and the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-101">Blob</a></code> resource that each refers to.</p>
+   <p>When this specification says to <dfn class="dfn-paneled" data-dfn-for="blob url store" data-dfn-type="dfn" data-lt="add an entry|add the entry|add an entry to the Blob URL Store|add the entry to the Blob URL Store" data-noexport="" id="add-an-entry">add an entry to the Blob URL Store</dfn> for a <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-29">Blob URL</a> and a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-102">Blob</a></code> input,
+the user-agent must add the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-30">Blob URL</a> and a reference to the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-103">Blob</a></code> it refers to to the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-10">Blob URL Store</a>.</p>
+   <p>When this specification says to <dfn class="dfn-paneled" data-dfn-for="blob url store" data-dfn-type="dfn" data-lt="remove an entry|remove the entry|remove an entry from the Blob URL Store|remove the entry from the Blob URL Store" data-noexport="" id="removeTheEntry">remove an entry from the Blob URL Store</dfn> for a given <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-31">Blob URL</a> or for a given <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-104">Blob</a></code>,
+user agents must remove the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-32">Blob URL</a> and the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-105">Blob</a></code> it refers to from the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-11">Blob URL Store</a>.
+Subsequent attempts to <a data-link-type="dfn" href="#dereference" id="ref-for-dereference-5">dereference</a> this URL must result in a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a>.</p>
+   <p>This specification adds an additional <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#unloading-document-cleanup-steps">unloading document cleanup step</a>:
+user agents must remove all <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-33">Blob URLs</a> from the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-12">Blob URL Store</a> within that <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document">document</a>.</p>
+   <p class="note" role="note"><span>Note:</span> User agents are free to garbage collect resources removed from the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-13">Blob URL Store</a>.</p>
    <h2 class="heading settled" data-level="9" id="security-discussion"><span class="secno">9. </span><span class="content"> Security and Privacy Considerations</span><a class="self-link" href="#security-discussion"></a></h2>
    <p><em>This section is informative.</em></p>
    <p>This specification allows web content to read files from the underlying file system,
@@ -3439,7 +3357,7 @@ and a user agent may prevent file access to any selections by making the <code c
     <li data-md="">
      <p><dfn data-dfn-type="dfn" data-noexport="" id="sensitive-files">System-sensitive files<a class="self-link" href="#sensitive-files"></a></dfn> (e.g. files in /usr/bin, password files, and other native operating system executables)
 typically should not be exposed to web content,
-and should not be accessed via <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-47">Blob URLs</a>.
+and should not be accessed via <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-34">Blob URLs</a>.
 User agents may <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#securityerror">SecurityError</a></code> exception for synchronous read methods,
 or return a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#securityerror">SecurityError</a></code> exception for asynchronous reads.</p>
    </ul>
@@ -3476,7 +3394,7 @@ which is useful for offline data access for web applications.</p>
      <p class="note" role="note"><span>Note:</span> While this specification doesn’t provide an explicit API call to trigger downloads,
 the HTML5 specification has addressed this.
 The <code><a data-link-type="element-sub" href="https://html.spec.whatwg.org/multipage/semantics.html#attr-hyperlink-download">download</a></code> attribute of the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-a-element">a</a></code> element initiates a download,
-saving a <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-57">File</a></code> with the name specified.
+saving a <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-56">File</a></code> with the name specified.
 The combination of this API and the <code><a data-link-type="element-sub" href="https://html.spec.whatwg.org/multipage/semantics.html#attr-hyperlink-download">download</a></code> attribute on <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-a-element">a</a></code> elements
 allows for the creation of files within web applications,
 and the ability to save them locally.</p>
@@ -3591,25 +3509,12 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
   <ul class="index">
    <li><a href="#dfn-abort">abort()</a><span>, in §6.3.4.7</span>
    <li><a href="#dfn-abort-event">abort</a><span>, in §6.5.1</span>
-   <li>
-    add an entry
-    <ul>
-     <li><a href="#add-an-entry">dfn for blob url store</a><span>, in §8.6</span>
-     <li><a href="#add-an-entry-revoke">dfn for blob revocation list</a><span>, in §8.6</span>
-    </ul>
+   <li><a href="#add-an-entry">add an entry</a><span>, in §8.6</span>
    <li><a href="#add-an-entry">add an entry to the Blob URL Store</a><span>, in §8.6</span>
-   <li><a href="#add-an-entry-revoke">add an entry to the Revocation List</a><span>, in §8.6</span>
-   <li>
-    add the entry
-    <ul>
-     <li><a href="#add-an-entry">dfn for blob url store</a><span>, in §8.6</span>
-     <li><a href="#add-an-entry-revoke">dfn for blob revocation list</a><span>, in §8.6</span>
-    </ul>
+   <li><a href="#add-an-entry">add the entry</a><span>, in §8.6</span>
    <li><a href="#add-an-entry">add the entry to the Blob URL Store</a><span>, in §8.6</span>
-   <li><a href="#add-an-entry-revoke">add the entry to the Revocation List</a><span>, in §8.6</span>
    <li><a href="#task-read-operation">annotated task read operation</a><span>, in §6.1</span>
    <li><a href="#asynchronous-read-methods">asynchronous read method</a><span>, in §6.3.4</span>
-   <li><a href="#autoRevoking">auto-revoking</a><span>, in §8.5.1</span>
    <li><a href="#binary-string">binary string</a><span>, in §6.3.4.1</span>
    <li><a href="#dom-blob-blob">Blob()</a><span>, in §3</span>
    <li><a href="#dfn-Blob">Blob</a><span>, in §3</span>
@@ -3623,7 +3528,6 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
    <li><a href="#dfn-close">close()</a><span>, in §3.3.2</span>
    <li><a href="#closed">closed</a><span>, in §3</span>
    <li><a href="#dfn-closedState">CLOSED</a><span>, in §3</span>
-   <li><a href="#dfn-createFor">createFor(blob)</a><span>, in §8.5.1</span>
    <li><a href="#dfn-createObjectURL">createObjectURL(blob)</a><span>, in §8.5.1</span>
    <li><a href="#dereference">dereference</a><span>, in §8.4</span>
    <li><a href="#dfn-done">DONE</a><span>, in §6.3.3</span>
@@ -3721,7 +3625,6 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
    <li><a href="#removeTheEntry">remove the entry</a><span>, in §8.6</span>
    <li><a href="#removeTheEntry">remove the entry from the Blob URL Store</a><span>, in §8.6</span>
    <li><a href="#dfn-result">result</a><span>, in §6.3.4.1</span>
-   <li><a href="#revokeList">Revocation List</a><span>, in §8.6</span>
    <li><a href="#dfn-revokeObjectURL">revokeObjectURL(url)</a><span>, in §8.5.1</span>
    <li><a href="#dfn-size">size</a><span>, in §3.2</span>
    <li><a href="#dfn-slice">slice(start, end, contentType), slice(start, end), slice(start), slice()</a><span>, in §3.3.1</span>
@@ -3789,7 +3692,6 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
      <li><a href="https://html.spec.whatwg.org/multipage/semantics.html#attr-hyperlink-download">download</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-content-attributes">event handler content attribute</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event handler event type</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#global-script-clean-up-jobs-list">global script clean-up jobs list</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-iframe-element">iframe</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element">img</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#incumbent-settings-object">incumbent settings object</a>
@@ -4012,7 +3914,6 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
 [<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=(<span class="n">Window</span>,<span class="n">DedicatedWorker</span>,<span class="n">SharedWorker</span>)]
 <span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://url.spec.whatwg.org/#url">URL</a> {
   <span class="kt">static</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-createObjectURL">createObjectURL</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
-  <span class="kt">static</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-createFor">createFor</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
   <span class="kt">static</span> <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-revokeObjectURL">revokeObjectURL</a>(<span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-urlarg">url</a>);
 };
 
@@ -4085,7 +3986,7 @@ The readAsArrayBuffer() method</a>
     <li><a href="#ref-for-readabilityState-18">6.3.4.5. 
 The readAsBinaryString() method</a>
     <li><a href="#ref-for-readabilityState-19">8.5.1. 
-Methods and Parameters</a> <a href="#ref-for-readabilityState-20">(2)</a> <a href="#ref-for-readabilityState-21">(3)</a>
+Methods and Parameters</a> <a href="#ref-for-readabilityState-20">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dfn-openState">
@@ -4132,7 +4033,7 @@ The readAsArrayBuffer() method</a>
     <li><a href="#ref-for-dfn-closedState-11">6.3.4.5. 
 The readAsBinaryString() method</a>
     <li><a href="#ref-for-dfn-closedState-12">8.5.1. 
-Methods and Parameters</a> <a href="#ref-for-dfn-closedState-13">(2)</a> <a href="#ref-for-dfn-closedState-14">(3)</a>
+Methods and Parameters</a> <a href="#ref-for-dfn-closedState-13">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="snapshot-state">
@@ -4217,13 +4118,13 @@ Response Headers</a> <a href="#ref-for-dfn-Blob-94">(2)</a>
     <li><a href="#ref-for-dfn-Blob-95">8.4.4. 
 Sample Request and Response Headers</a> <a href="#ref-for-dfn-Blob-96">(2)</a>
     <li><a href="#ref-for-dfn-Blob-97">8.5. 
-Creating and Revoking a Blob URL</a> <a href="#ref-for-dfn-Blob-98">(2)</a>
-    <li><a href="#ref-for-dfn-Blob-99">8.5.1. 
-Methods and Parameters</a> <a href="#ref-for-dfn-Blob-100">(2)</a> <a href="#ref-for-dfn-Blob-101">(3)</a> <a href="#ref-for-dfn-Blob-102">(4)</a> <a href="#ref-for-dfn-Blob-103">(5)</a>
-    <li><a href="#ref-for-dfn-Blob-104">8.5.2. 
+Creating and Revoking a Blob URL</a>
+    <li><a href="#ref-for-dfn-Blob-98">8.5.1. 
+Methods and Parameters</a> <a href="#ref-for-dfn-Blob-99">(2)</a>
+    <li><a href="#ref-for-dfn-Blob-100">8.5.2. 
 Examples of Blob URL Creation and Revocation</a>
-    <li><a href="#ref-for-dfn-Blob-105">8.6. 
-Lifetime of Blob URLs</a> <a href="#ref-for-dfn-Blob-106">(2)</a> <a href="#ref-for-dfn-Blob-107">(3)</a> <a href="#ref-for-dfn-Blob-108">(4)</a> <a href="#ref-for-dfn-Blob-109">(5)</a>
+    <li><a href="#ref-for-dfn-Blob-101">8.6. 
+Lifetime of Blob URLs</a> <a href="#ref-for-dfn-Blob-102">(2)</a> <a href="#ref-for-dfn-Blob-103">(3)</a> <a href="#ref-for-dfn-Blob-104">(4)</a> <a href="#ref-for-dfn-Blob-105">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dfn-BlobPropertyBag">
@@ -4435,9 +4336,7 @@ A URL for Blob and File reference</a>
 The Blob URL</a> <a href="#ref-for-dfn-file-52">(2)</a>
     <li><a href="#ref-for-dfn-file-53">8.4.2. 
 Response Headers</a> <a href="#ref-for-dfn-file-54">(2)</a> <a href="#ref-for-dfn-file-55">(3)</a>
-    <li><a href="#ref-for-dfn-file-56">8.5.1. 
-Methods and Parameters</a>
-    <li><a href="#ref-for-dfn-file-57">10. 
+    <li><a href="#ref-for-dfn-file-56">10. 
 Requirements and Use Cases</a>
    </ul>
   </aside>
@@ -4995,7 +4894,7 @@ Determining Encoding</a>
     <li><a href="#ref-for-dfn-fileBlob-6">6.6.1. 
 The FileReaderSync API</a> <a href="#ref-for-dfn-fileBlob-7">(2)</a> <a href="#ref-for-dfn-fileBlob-8">(3)</a> <a href="#ref-for-dfn-fileBlob-9">(4)</a>
     <li><a href="#ref-for-dfn-fileBlob-10">8.5. 
-Creating and Revoking a Blob URL</a> <a href="#ref-for-dfn-fileBlob-11">(2)</a>
+Creating and Revoking a Blob URL</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="encoding-determination">
@@ -5288,12 +5187,12 @@ Sample Request and Response Headers</a>
     <li><a href="#ref-for-blob-url-13">8.5. 
 Creating and Revoking a Blob URL</a> <a href="#ref-for-blob-url-14">(2)</a> <a href="#ref-for-blob-url-15">(3)</a> <a href="#ref-for-blob-url-16">(4)</a>
     <li><a href="#ref-for-blob-url-17">8.5.1. 
-Methods and Parameters</a> <a href="#ref-for-blob-url-18">(2)</a> <a href="#ref-for-blob-url-19">(3)</a> <a href="#ref-for-blob-url-20">(4)</a> <a href="#ref-for-blob-url-21">(5)</a> <a href="#ref-for-blob-url-22">(6)</a> <a href="#ref-for-blob-url-23">(7)</a> <a href="#ref-for-blob-url-24">(8)</a> <a href="#ref-for-blob-url-25">(9)</a> <a href="#ref-for-blob-url-26">(10)</a>
-    <li><a href="#ref-for-blob-url-27">8.5.2. 
-Examples of Blob URL Creation and Revocation</a> <a href="#ref-for-blob-url-28">(2)</a> <a href="#ref-for-blob-url-29">(3)</a> <a href="#ref-for-blob-url-30">(4)</a> <a href="#ref-for-blob-url-31">(5)</a> <a href="#ref-for-blob-url-32">(6)</a> <a href="#ref-for-blob-url-33">(7)</a>
-    <li><a href="#ref-for-blob-url-34">8.6. 
-Lifetime of Blob URLs</a> <a href="#ref-for-blob-url-35">(2)</a> <a href="#ref-for-blob-url-36">(3)</a> <a href="#ref-for-blob-url-37">(4)</a> <a href="#ref-for-blob-url-38">(5)</a> <a href="#ref-for-blob-url-39">(6)</a> <a href="#ref-for-blob-url-40">(7)</a> <a href="#ref-for-blob-url-41">(8)</a> <a href="#ref-for-blob-url-42">(9)</a> <a href="#ref-for-blob-url-43">(10)</a> <a href="#ref-for-blob-url-44">(11)</a> <a href="#ref-for-blob-url-45">(12)</a> <a href="#ref-for-blob-url-46">(13)</a>
-    <li><a href="#ref-for-blob-url-47">9. 
+Methods and Parameters</a> <a href="#ref-for-blob-url-18">(2)</a> <a href="#ref-for-blob-url-19">(3)</a> <a href="#ref-for-blob-url-20">(4)</a> <a href="#ref-for-blob-url-21">(5)</a>
+    <li><a href="#ref-for-blob-url-22">8.5.2. 
+Examples of Blob URL Creation and Revocation</a> <a href="#ref-for-blob-url-23">(2)</a> <a href="#ref-for-blob-url-24">(3)</a> <a href="#ref-for-blob-url-25">(4)</a> <a href="#ref-for-blob-url-26">(5)</a> <a href="#ref-for-blob-url-27">(6)</a>
+    <li><a href="#ref-for-blob-url-28">8.6. 
+Lifetime of Blob URLs</a> <a href="#ref-for-blob-url-29">(2)</a> <a href="#ref-for-blob-url-30">(3)</a> <a href="#ref-for-blob-url-31">(4)</a> <a href="#ref-for-blob-url-32">(5)</a> <a href="#ref-for-blob-url-33">(6)</a>
+    <li><a href="#ref-for-blob-url-34">9. 
 Security and Privacy Considerations</a>
    </ul>
   </aside>
@@ -5310,7 +5209,7 @@ Unicode Serialization of a Blob URL</a> <a href="#ref-for-unicode-serialization-
     <li><a href="#ref-for-unicodeBlobURL-1">8.3. 
 The Blob URL</a>
     <li><a href="#ref-for-unicodeBlobURL-2">8.5.1. 
-Methods and Parameters</a> <a href="#ref-for-unicodeBlobURL-3">(2)</a> <a href="#ref-for-unicodeBlobURL-4">(3)</a> <a href="#ref-for-unicodeBlobURL-5">(4)</a>
+Methods and Parameters</a> <a href="#ref-for-unicodeBlobURL-3">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dereference">
@@ -5321,10 +5220,10 @@ Attributes</a>
     <li><a href="#ref-for-dereference-2">8.3.3. 
 Discussion of Fragment Identifier</a>
     <li><a href="#ref-for-dereference-3">8.5.1. 
-Methods and Parameters</a> <a href="#ref-for-dereference-4">(2)</a>
-    <li><a href="#ref-for-dereference-5">8.5.2. 
+Methods and Parameters</a>
+    <li><a href="#ref-for-dereference-4">8.5.2. 
 Examples of Blob URL Creation and Revocation</a>
-    <li><a href="#ref-for-dereference-6">8.6. 
+    <li><a href="#ref-for-dereference-5">8.6. 
 Lifetime of Blob URLs</a>
    </ul>
   </aside>
@@ -5334,45 +5233,17 @@ Lifetime of Blob URLs</a>
     <li><a href="#ref-for-dfn-createObjectURL-1">6.3.4.8. 
 Blob Parameters</a>
     <li><a href="#ref-for-dfn-createObjectURL-2">8.3.1. 
-Origin of Blob URLs</a> <a href="#ref-for-dfn-createObjectURL-3">(2)</a>
-    <li><a href="#ref-for-dfn-createObjectURL-4">8.3.2. 
+Origin of Blob URLs</a>
+    <li><a href="#ref-for-dfn-createObjectURL-3">8.3.2. 
 Unicode Serialization of a Blob URL</a>
-    <li><a href="#ref-for-dfn-createObjectURL-5">8.3.3. 
+    <li><a href="#ref-for-dfn-createObjectURL-4">8.3.3. 
 Discussion of Fragment Identifier</a>
-    <li><a href="#ref-for-dfn-createObjectURL-6">8.5. 
+    <li><a href="#ref-for-dfn-createObjectURL-5">8.5. 
 Creating and Revoking a Blob URL</a>
-    <li><a href="#ref-for-dfn-createObjectURL-7">8.5.1. 
-Methods and Parameters</a>
-    <li><a href="#ref-for-dfn-createObjectURL-8">8.5.2. 
+    <li><a href="#ref-for-dfn-createObjectURL-6">8.5.2. 
 Examples of Blob URL Creation and Revocation</a>
-    <li><a href="#ref-for-dfn-createObjectURL-9">8.6. 
-Lifetime of Blob URLs</a> <a href="#ref-for-dfn-createObjectURL-10">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dfn-createFor">
-   <b><a href="#dfn-createFor">#dfn-createFor</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dfn-createFor-1">6.3.4.8. 
-Blob Parameters</a>
-    <li><a href="#ref-for-dfn-createFor-2">8.3.1. 
-Origin of Blob URLs</a> <a href="#ref-for-dfn-createFor-3">(2)</a>
-    <li><a href="#ref-for-dfn-createFor-4">8.3.2. 
-Unicode Serialization of a Blob URL</a>
-    <li><a href="#ref-for-dfn-createFor-5">8.3.3. 
-Discussion of Fragment Identifier</a>
-    <li><a href="#ref-for-dfn-createFor-6">8.5. 
-Creating and Revoking a Blob URL</a>
-    <li><a href="#ref-for-dfn-createFor-7">8.5.2. 
-Examples of Blob URL Creation and Revocation</a> <a href="#ref-for-dfn-createFor-8">(2)</a> <a href="#ref-for-dfn-createFor-9">(3)</a>
-    <li><a href="#ref-for-dfn-createFor-10">8.6. 
-Lifetime of Blob URLs</a> <a href="#ref-for-dfn-createFor-11">(2)</a> <a href="#ref-for-dfn-createFor-12">(3)</a> <a href="#ref-for-dfn-createFor-13">(4)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="autoRevoking">
-   <b><a href="#autoRevoking">#autoRevoking</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-autoRevoking-1">8.6. 
-Lifetime of Blob URLs</a>
+    <li><a href="#ref-for-dfn-createObjectURL-7">8.6. 
+Lifetime of Blob URLs</a> <a href="#ref-for-dfn-createObjectURL-8">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dfn-revokeObjectURL">
@@ -5385,7 +5256,7 @@ Creating and Revoking a Blob URL</a>
     <li><a href="#ref-for-dfn-revokeObjectURL-3">8.5.1. 
 Methods and Parameters</a> <a href="#ref-for-dfn-revokeObjectURL-4">(2)</a>
     <li><a href="#ref-for-dfn-revokeObjectURL-5">8.5.2. 
-Examples of Blob URL Creation and Revocation</a> <a href="#ref-for-dfn-revokeObjectURL-6">(2)</a> <a href="#ref-for-dfn-revokeObjectURL-7">(3)</a>
+Examples of Blob URL Creation and Revocation</a> <a href="#ref-for-dfn-revokeObjectURL-6">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dfn-urlarg">
@@ -5402,9 +5273,7 @@ Methods and Parameters</a> <a href="#ref-for-dfn-urlarg-3">(2)</a> <a href="#ref
    <ul>
     <li><a href="#ref-for-lifeTime-1">8.1. 
 Requirements for a New Scheme</a>
-    <li><a href="#ref-for-lifeTime-2">8.5.1. 
-Methods and Parameters</a>
-    <li><a href="#ref-for-lifeTime-3">8.5.2. 
+    <li><a href="#ref-for-lifeTime-2">8.5.2. 
 Examples of Blob URL Creation and Revocation</a>
    </ul>
   </aside>
@@ -5416,29 +5285,15 @@ The close method</a>
     <li><a href="#ref-for-BlobURLStore-2">8.4.3. 
 Network Errors</a> <a href="#ref-for-BlobURLStore-3">(2)</a>
     <li><a href="#ref-for-BlobURLStore-4">8.5.1. 
-Methods and Parameters</a> <a href="#ref-for-BlobURLStore-5">(2)</a> <a href="#ref-for-BlobURLStore-6">(3)</a> <a href="#ref-for-BlobURLStore-7">(4)</a> <a href="#ref-for-BlobURLStore-8">(5)</a> <a href="#ref-for-BlobURLStore-9">(6)</a> <a href="#ref-for-BlobURLStore-10">(7)</a>
-    <li><a href="#ref-for-BlobURLStore-11">8.6. 
-Lifetime of Blob URLs</a> <a href="#ref-for-BlobURLStore-12">(2)</a> <a href="#ref-for-BlobURLStore-13">(3)</a> <a href="#ref-for-BlobURLStore-14">(4)</a> <a href="#ref-for-BlobURLStore-15">(5)</a> <a href="#ref-for-BlobURLStore-16">(6)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="revokeList">
-   <b><a href="#revokeList">#revokeList</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-revokeList-1">8.6. 
-Lifetime of Blob URLs</a> <a href="#ref-for-revokeList-2">(2)</a> <a href="#ref-for-revokeList-3">(3)</a> <a href="#ref-for-revokeList-4">(4)</a> <a href="#ref-for-revokeList-5">(5)</a>
+Methods and Parameters</a> <a href="#ref-for-BlobURLStore-5">(2)</a> <a href="#ref-for-BlobURLStore-6">(3)</a> <a href="#ref-for-BlobURLStore-7">(4)</a> <a href="#ref-for-BlobURLStore-8">(5)</a> <a href="#ref-for-BlobURLStore-9">(6)</a>
+    <li><a href="#ref-for-BlobURLStore-10">8.6. 
+Lifetime of Blob URLs</a> <a href="#ref-for-BlobURLStore-11">(2)</a> <a href="#ref-for-BlobURLStore-12">(3)</a> <a href="#ref-for-BlobURLStore-13">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="add-an-entry">
    <b><a href="#add-an-entry">#add-an-entry</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-add-an-entry-1">8.5.1. 
-Methods and Parameters</a> <a href="#ref-for-add-an-entry-2">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="add-an-entry-revoke">
-   <b><a href="#add-an-entry-revoke">#add-an-entry-revoke</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-add-an-entry-revoke-1">8.5.1. 
 Methods and Parameters</a>
    </ul>
   </aside>
@@ -5449,8 +5304,6 @@ Methods and Parameters</a>
 The close method</a>
     <li><a href="#ref-for-removeTheEntry-2">8.5.1. 
 Methods and Parameters</a>
-    <li><a href="#ref-for-removeTheEntry-3">8.6. 
-Lifetime of Blob URLs</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */

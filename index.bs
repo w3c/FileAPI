@@ -1203,14 +1203,13 @@ the user agent must run the steps below:
 Blob Parameters</h5>
 
 The <a>asynchronous read methods</a>,
-the <a>synchronous read methods</a>,
+the <a>synchronous read methods</a>, and
 <code>URL.{{URL/createObjectURL()}}</code>
-and <code>URL.{{URL/createFor()}}</code>
 take a {{Blob}} parameter.
 This section defines this parameter.
 
 <dl>
-  <dt><dfn id="dfn-fileBlob" argument for="FileReader/readAsArrayBuffer(blob), FileReader/readAsBinaryString(blob), FileReader/readAsText(blob, label), FileReader/readAsText(), FileReader/readAsDataURL(blob), URL/createObjectURL(blob), URL/createFor(blob), FileReaderSync/readAsArrayBuffer(blob), FileReaderSync/readAsBinaryString(blob), FileReaderSync/readAsText(blob, label), FileReaderSync/readAsDataURL(blob)">blob</dfn>
+  <dt><dfn id="dfn-fileBlob" argument for="FileReader/readAsArrayBuffer(blob), FileReader/readAsBinaryString(blob), FileReader/readAsText(blob, label), FileReader/readAsText(), FileReader/readAsDataURL(blob), URL/createObjectURL(blob), FileReaderSync/readAsArrayBuffer(blob), FileReaderSync/readAsBinaryString(blob), FileReaderSync/readAsText(blob, label), FileReaderSync/readAsDataURL(blob)">blob</dfn>
   <dd>This is a {{Blob}} argument
     and must be a reference to a single {{File}} in a {{FileList}}
     or a {{Blob}} argument not obtained from the underlying OS file system.
@@ -1675,14 +1674,11 @@ has a distinct interpretation depending on the media type of the {{Blob}} or {{F
 <h4 id="originOfBlobURL">
 Origin of Blob URLs</h4>
 
-<a>Blob URLs</a> are created using <code>URL.{{URL/createObjectURL()}}</code>
-and/or <code>URL.{{URL/createFor()}}</code>,
+<a>Blob URLs</a> are created using <code>URL.{{URL/createObjectURL()}}</code>,
 and are revoked using <code>URL.{{URL/revokeObjectURL()}}</code>.
 The <dfn lt="origin of a Blob URL|Blob URL's origin">origin of a Blob URL</dfn> must be the same as the [=environment settings object/origin=]
 specified by the <a>incumbent settings object</a>
-at the time the method that created it--
-either <code>URL.{{URL/createObjectURL()}}</code> or <code>URL.{{URL/createFor()}}</code>--
-was called.
+at the time the method that created it was called.
 
 The [=url/origin=] of a Blob URL,
 when serialized as a string,
@@ -1702,8 +1698,7 @@ Unicode Serialization of a Blob URL</h4>
 
 The <dfn id="unicodeBlobURL">Unicode Serialization of a Blob URL</dfn>
 is the value returned by the following algorithm,
-which is invoked by <code>URL.{{URL/createObjectURL()}}</code>
-and/or <code>URL.{{URL/createFor()}}</code>:
+which is invoked by <code>URL.{{URL/createObjectURL()}}</code>:
 
 1. Let |result| be the empty string.
   Append the string "blob"
@@ -1736,8 +1731,7 @@ A valid Blob URL reference could look like:
 where "#aboutABBA" might be an HTML fragment identifier referring to an element with an id attribute of "aboutABBA".
 
 Note: The <a for=url>fragment</a> is not used to identify the resource.
-Neither the <code>URL.{{URL/createObjectURL()}}</code> method
-nor the <code>URL.{{URL/createFor()}}</code> method generate a fragment.
+The <code>URL.{{URL/createObjectURL()}}</code> method does not generate a fragment.
 
 
 <h3 id="requestResponseModel">
@@ -1853,7 +1847,6 @@ and presents methods for <a>Blob URL</a> creation and revocation.
 [Exposed=(Window,DedicatedWorker,SharedWorker)]
 partial interface URL {
   static DOMString createObjectURL(Blob blob);
-  static DOMString createFor(Blob blob);
   static void revokeObjectURL(DOMString url);
 };
 </pre>
@@ -1883,44 +1876,6 @@ Methods and Parameters</h4>
       1. Let |url| be the result of the <a>Unicode Serialization of a Blob URL</a> algorithm.
       2. <a>Add an entry to the Blob URL Store</a> for |url| and |blob|.
       3. Return |url|.
-
-  <dt>The <dfn method for=URL id="dfn-createFor">createFor(blob)</dfn> static method
-  <dd>Returns a unique <a>Blob URL</a>.
-    <a>Blob URLs</a> created with this method are said to be <dfn id="autoRevoking">auto-revoking</dfn>
-    since user-agents are responsible for the revocation of <a>Blob URL</a>s created with this method,
-    subject to the <a>lifetime stipulation</a> for <a>Blob URL</a>s.
-    This method must act as follows:
-
-    1. If called with a {{Blob}} argument that has a <a>readability state</a> of <a for="Blob/readability state"><code>CLOSED</code></a>,
-      user agents must return the output of the <a>Unicode Serialization of a Blob URL</a>.
-
-      Note: No entry is added to the <a>Blob URL Store</a>;
-      consequently, when this <a>Blob URL</a> is <a>dereferenced</a>,
-      a <a>network error</a> occurs.
-
-    2. Otherwise, user agents must run the following steps:
-      1. Let |url| be the result of the <a>Unicode Serialization of a Blob URL</a>.
-      2. <a>Add an entry to the Blob URL Store</a> for |url| and |blob|.
-      3. <a>Add an entry to the Revocation List</a> for |url|.
-      4. Return |url|.
-
-    <div class="example">
-      In the example below,
-      after obtaining a reference to a {{Blob}} object
-      (in this case, a user-selected {{File}} from the underlying file system),
-      the static method <code>URL.{{createObjectURL()}}</code> is called on that {{Blob}} object.
-
-      <pre class="lang-javascript">
-        var file = document.getElementById('file').files[0];
-        if(file){
-          blobURLref = window.URL.createObjectURL(file);
-          myimg.src = blobURLref;
-
-          ....
-
-        }
-      </pre>
-    </div>
 
   <dt>The <dfn method for=URL id="dfn-revokeObjectURL">revokeObjectURL(url)</dfn> static method
   <dd>Revokes the <a>Blob URL</a> provided in the string {{url!!argument}}
@@ -1964,7 +1919,7 @@ Examples of Blob URL Creation and Revocation</h4>
 
 <a>Blob URL</a>s are strings that are used to <a>dereference</a> {{Blob}} objects,
 and can persist for as long as the <code>document</code> from which they were minted
-using <code>URL.{{createObjectURL()}}</code> or <code>URL.{{URL/createFor()}}</code>--
+using <code>URL.{{createObjectURL()}}</code>--
 see [[#lifeTime]].
 
 This section gives sample usage of creation and revocation of <a>Blob URL</a>s with explanations.
@@ -2010,77 +1965,25 @@ While not restricting number of uses of the <a>Blob URL</a> offers more flexibil
 it increases the likelihood of leaks;
 developers should pair it with a corresponding call to <code>URL.{{revokeObjectURL()}}</code>.
 
-<div class="example">
-  This example uses <code>URL.{{URL/createFor()}}</code>,
-  which allows uses such as the one above,
-  and obviates the need for a corresponding call by the web developer to <code>URL.{{URL/revokeObjectURL()}}</code>.
-
-  <pre class="lang-javascript">
-    var blobURLref2 = URL.createFor(file);
-    img1 = new Image();
-    img1.src = blobURLref2;
-    ....
-  </pre>
-</div>
-
-
-<div class="example">
-  This example uses <code>URL.{{URL/createFor()}}</code> to mint a <a>Blob URL</a>,
-  and appends a <a for=url>fragment</a> that has an understood meaning within the resource
-  (in this case, it references an anchor within the HTML document).
-
-  <pre class="lang-javascript">
-    // file is an HTML file
-    // One of the anchor identifiers in file is "#applicationInfo"
-
-    var blobURLAnchorRef = URL.createFor(file) + "#applicationInfo";
-
-    // openPopup is an utility function to open a small informational window
-
-    var windowRef = openPopup(blobURLAnchorRef, "Application Info");
-
-    ....
-  </pre>
-</div>
-
 <h3 id="lifeTime" dfn for="blob url" lt="lifetime|lifetime stipulation" export>
 Lifetime of Blob URLs</h3>
 
 A global object which exposes <code>URL.{{URL/createObjectURL()}}</code>
-or <code>URL.{{URL/createFor()}}</code>
 must maintain a <dfn id="BlobURLStore">Blob URL Store</dfn>
-which is a list of <a>Blob URLs</a> created by the <code>URL.{{createObjectURL()}}</code> method
-or the <code>URL.{{createFor()}}</code> method,
+which is a list of <a>Blob URLs</a> created by the <code>URL.{{createObjectURL()}}</code> method,
 and the {{Blob}} resource that each refers to.
-
-A global object which exposes <code>URL.{{URL/createFor()}}</code>
-must maintain a <dfn id="revokeList">Revocation List</dfn>
-which is a list of <a>Blob URLs</a> created with the <code>URL.{{URL/createFor()}}</code> method.
 
 When this specification says to <dfn id="add-an-entry" lt="add an entry|add the entry|add an entry to the Blob URL Store|add the entry to the Blob URL Store" for="blob url store">add an entry to the Blob URL Store</dfn>
 for a <a>Blob URL</a> and a {{Blob}} input,
 the user-agent must add the <a>Blob URL</a> and a reference to the {{Blob}} it refers to to the <a>Blob URL Store</a>.
-
-When this specification says to <dfn id="add-an-entry-revoke" lt="add an entry|add the entry|add an entry to the Revocation List|add the entry to the Revocation List" for="blob revocation list">add an entry to the Revocation List</dfn>
-for a <a>Blob URL</a>,
-user agents must add the <a>Blob URL</a> to the <a>Revocation List</a>.
-This is only for <a>auto-revoking</a> <a>Blob URL</a>s.
 
 When this specification says to <dfn id="removeTheEntry" lt="remove an entry|remove the entry|remove an entry from the Blob URL Store|remove the entry from the Blob URL Store" for="blob url store">remove an entry from the Blob URL Store</dfn>
 for a given <a>Blob URL</a> or for a given {{Blob}},
 user agents must remove the <a>Blob URL</a> and the {{Blob}} it refers to from the <a>Blob URL Store</a>.
 Subsequent attempts to <a>dereference</a> this URL must result in a <a>network error</a>.
 
-The <a>Revocation List</a> and the <a>Blob URL Store</a> must be processed together as follows:
-
-1. Add <a lt="remove an entry from the Blob URL Store">removing the entries</a>
-  for all the <a>Blob URLs</a> in the <a>Revocation List</a>
-  to the <a>global script clean-up jobs list</a>.
-2. When all the <a>Blob URL</a>s in the <a>Revocation List</a>
-  have had their corresponding entries in the <a>Blob URL Store</a> removed,
-  remove all the <a>Blob URL</a>s in the <a>Revocation List</a>.
-3. This specification adds an additional <a>unloading document cleanup step</a>:
-  user agents must remove all <a>Blob URLs</a> from the <a>Blob URL Store</a> within that <a>document</a>.
+This specification adds an additional <a>unloading document cleanup step</a>:
+user agents must remove all <a>Blob URLs</a> from the <a>Blob URL Store</a> within that <a>document</a>.
 
 Note: User agents are free to garbage collect resources removed from the <a>Blob URL Store</a>.
 
