@@ -1203,7 +1203,7 @@ the user agent must run the steps below:
 Blob Parameters</h5>
 
 The <a>asynchronous read methods</a>,
-the <a>synchronous read methods</a> and
+the <a>synchronous read methods</a>, and
 <code>URL.{{URL/createObjectURL()}}</code>
 take a {{Blob}} parameter.
 This section defines this parameter.
