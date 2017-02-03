@@ -1362,7 +1362,7 @@ This interface  provides methods to <dfn id="read-method-sync" lt="synchronous r
 {{File}} or {{Blob}} objects into memory.
 
 <pre class="idl">
-[Constructor, Exposed=DedicatedWorker,SharedWorker]
+[Constructor, Exposed=(DedicatedWorker,SharedWorker)]
 interface FileReaderSync {
   // Synchronously return strings
 
