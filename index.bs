@@ -539,8 +539,8 @@ and must follow the <dfn export>file type guidelines</dfn> below:
 
 <pre class="idl">
 [Constructor(sequence&lt;BlobPart> fileBits,
-            [EnsureUTF16] DOMString fileName,
-            optional FilePropertyBag options),
+             USVString fileName,
+             optional FilePropertyBag options),
 Exposed=(Window,Worker)]
 interface File : Blob {
   readonly attribute DOMString name;
@@ -623,7 +623,7 @@ The {{File()}} constructor can be invoked with the parameters below:
     * {{DOMString}} elements.
 
   <dt>A <dfn id="dfn-fileName" argument for="File/File(fileBits, fileName, options)"><code>fileName</code></dfn> parameter
-  <dd>A {{DOMString}} parameter representing the name of the file;
+  <dd>A {{USVString}} parameter representing the name of the file;
     normative conditions for this constructor parameter can be found in [[#file-constructor]].
 
   <dt id="def-Properties">An optional {{FilePropertyBag}} dictionary
