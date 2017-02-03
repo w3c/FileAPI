@@ -2150,7 +2150,7 @@ the <code class="idl"><a data-link-type="idl" href="#dfn-FPdate" id="ref-for-dfn
        <p><code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></code> elements.</p>
      </ul>
     <dt>A <dfn class="dfn-paneled idl-code" data-dfn-for="File/File(fileBits, fileName, options)" data-dfn-type="argument" data-export="" id="dfn-fileName"><code>fileName</code></dfn> parameter 
-    <dd>A <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></code> parameter representing the name of the file;
+    <dd>A <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-USVString">USVString</a></code> parameter representing the name of the file;
     normative conditions for this constructor parameter can be found in <a href="#file-constructor">§4.1 Constructor</a>. 
     <dt id="def-Properties"><a class="self-link" href="#def-Properties"></a>An optional <code class="idl"><a data-link-type="idl" href="#dfn-FilePropertyBag" id="ref-for-dfn-FilePropertyBag-3">FilePropertyBag</a></code> dictionary 
     <dd>
@@ -2823,7 +2823,7 @@ This section defines a synchronous API, which can be used within Workers [[Web W
 Workers can avail of both the asynchronous API (the <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader-19">FileReader</a></code> object) <em>and</em> the synchronous API (the <code class="idl"><a data-link-type="idl" href="#dfn-FileReaderSync" id="ref-for-dfn-FileReaderSync-6">FileReaderSync</a></code> object).</p>
    <h4 class="heading settled" data-level="6.6.1" id="FileReaderSync"><span class="secno">6.6.1. </span><span class="content"> The <code class="idl"><a data-link-type="idl" href="#dfn-FileReaderSync" id="ref-for-dfn-FileReaderSync-7">FileReaderSync</a></code> API</span><a class="self-link" href="#FileReaderSync"></a></h4>
    <p>This interface  provides methods to <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="synchronous read method" data-noexport="" id="read-method-sync">synchronously read</dfn> <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-40">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-69">Blob</a></code> objects into memory.</p>
-<pre class="idl highlight def">[<dfn class="nv dfn-paneled idl-code" data-dfn-for="FileReaderSync" data-dfn-type="constructor" data-export="" data-lt="FileReaderSync()" id="dom-filereadersync-filereadersync">Constructor</dfn>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=<span class="n">Worker</span>]
+<pre class="idl highlight def">[<dfn class="nv dfn-paneled idl-code" data-dfn-for="FileReaderSync" data-dfn-type="constructor" data-export="" data-lt="FileReaderSync()" id="dom-filereadersync-filereadersync">Constructor</dfn>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=<span class="n">DedicatedWorker</span>,<a class="nv idl-code" data-link-type="extended-attribute">SharedWorker</a>]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="dfn-FileReaderSync">FileReaderSync</dfn> {
   // Synchronously return strings
 
@@ -3902,7 +3902,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
 
 };
 
-[<a class="nv" href="#dom-filereadersync-filereadersync">Constructor</a>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=<span class="n">Worker</span>]
+[<a class="nv" href="#dom-filereadersync-filereadersync">Constructor</a>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=<span class="n">DedicatedWorker</span>,<a class="nv idl-code" data-link-type="extended-attribute">SharedWorker</a>]
 <span class="kt">interface</span> <a class="nv" href="#dfn-FileReaderSync">FileReaderSync</a> {
   // Synchronously return strings
 
