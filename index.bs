@@ -266,7 +266,7 @@ user agents must run the following steps:
   1. Let |element| be the |i|th element of |a|.
   2. If |element| is a {{USVString}}, run the following substeps:
 
-    1. Encode |s| as <a>utf-8</a> and append the resulting bytes to |bytes|.
+    1. Append the result of [=UTF-8 encoding=] |s| to |bytes|.
 
       Note: The algorithm from WebIDL [[WebIDL]] replaces unmatched surrogates in an invalid utf-16 string
       with U+FFFD replacement characters.
@@ -567,7 +567,7 @@ user agents must run the following steps:
 
   1. Let |element| be the |i|'th element of |a|.
   2. If |element| is a {{USVString}}, run the following substeps:
-    1. Encode |s| as <a>utf-8</a> and append the resulting <a>byte</a> to |bytes|.
+    1. Append the result of [=UTF-8 encoding=] |s| to |bytes|.
 
     Note: The algorithm from WebIDL [[WebIDL]] replaces unmatched surrogates in an invalid utf-16 string with U+FFFD replacement characters.
     Scenarios exist when the {{Blob}} constructor may result in some data loss due to lost or scrambled character sequences.
@@ -1235,7 +1235,7 @@ the following <dfn id="encoding-determination">encoding determination</dfn> step
 
   <div class="example">
     If <code>blob</code> has a {{Blob/type}} attribute of <code>text/plain;charset=utf-8</code>
-    then <a>getting an encoding</a> is run using <a>utf-8</a> as the label.
+    then <a>getting an encoding</a> is run using <code>"utf-8"</code> as the label.
     Note that user agents must parse and extract the portion of the Charset Parameter that constitutes a <i>label</i> of an encoding.
   </div>
 5. If the <a>getting an encoding</a> steps above return failure,

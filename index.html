@@ -1424,7 +1424,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="http://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">File API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-02-03">3 February 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-02-04">4 February 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1806,7 +1806,7 @@ For 0 ≤ <var>i</var> &lt; <var>length</var>, repeat the following steps:</p>
        <p>If <var>element</var> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-USVString">USVString</a></code>, run the following substeps:</p>
        <ol>
         <li data-md="">
-         <p>Encode <var>s</var> as <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a> and append the resulting bytes to <var>bytes</var>.</p>
+         <p>Append the result of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-encode">UTF-8 encoding</a> <var>s</var> to <var>bytes</var>.</p>
          <p class="note" role="note"><span>Note:</span> The algorithm from WebIDL <a data-link-type="biblio" href="#biblio-webidl">[WebIDL]</a> replaces unmatched surrogates in an invalid utf-16 string
 with U+FFFD replacement characters.
 Scenarios exist when the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-13">Blob</a></code> constructor may result in some data loss
@@ -2079,7 +2079,7 @@ For 0 ≤ i &lt; <var>length</var>, repeat the following steps:</p>
        <p>If <var>element</var> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-USVString">USVString</a></code>, run the following substeps:</p>
        <ol>
         <li data-md="">
-         <p>Encode <var>s</var> as <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a> and append the resulting <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte">byte</a> to <var>bytes</var>.</p>
+         <p>Append the result of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-encode">UTF-8 encoding</a> <var>s</var> to <var>bytes</var>.</p>
        </ol>
        <p class="note" role="note"><span>Note:</span> The algorithm from WebIDL <a data-link-type="biblio" href="#biblio-webidl">[WebIDL]</a> replaces unmatched surrogates in an invalid utf-16 string with U+FFFD replacement characters.
 Scenarios exist when the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-38">Blob</a></code> constructor may result in some data loss due to lost or scrambled character sequences.</p>
@@ -2710,7 +2710,7 @@ then set <var>encoding</var> to null.</p>
 and the <code class="idl"><a data-link-type="idl" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-5">blob</a></code> argument’s <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type-18">type</a></code> attribute is present,
 and it uses a Charset Parameter <a data-link-type="biblio" href="#biblio-rfc2046">[RFC2046]</a>,
 set <var>encoding</var> to the result of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#concept-encoding-get">getting an encoding</a> for the portion of the Charset Parameter that is a <i>label</i> of an encoding.</p>
-     <div class="example" id="example-21540bcb"><a class="self-link" href="#example-21540bcb"></a> If <code>blob</code> has a <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type-19">type</a></code> attribute of <code>text/plain;charset=utf-8</code> then <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#concept-encoding-get">getting an encoding</a> is run using <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a> as the label.
+     <div class="example" id="example-e6bec91d"><a class="self-link" href="#example-e6bec91d"></a> If <code>blob</code> has a <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type-19">type</a></code> attribute of <code>text/plain;charset=utf-8</code> then <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#concept-encoding-get">getting an encoding</a> is run using <code>"utf-8"</code> as the label.
   Note that user agents must parse and extract the portion of the Charset Parameter that constitutes a <i>label</i> of an encoding. </div>
     <li data-md="">
      <p>If the <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#concept-encoding-get">getting an encoding</a> steps above return failure,
@@ -3670,7 +3670,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
     <ul>
      <li><a href="https://encoding.spec.whatwg.org/#decode">decode</a>
      <li><a href="https://encoding.spec.whatwg.org/#concept-encoding-get">getting an encoding</a>
-     <li><a href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a>
+     <li><a href="https://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encode</a>
     </ul>
    <li>
     <a data-link-type="biblio">[Fetch]</a> defines the following terms:
