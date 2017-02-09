@@ -9,6 +9,7 @@ Editor: Marijn Kruisselbrink, Google, mek@chromium.org
 Status: ED
 ED: https://w3c.github.io/FileAPI/
 TR: http://www.w3.org/TR/FileAPI/
+Repository: w3c/FileAPI
 Previous Version: http://www.w3.org/TR/2012/WD-FileAPI-20121025/
 Abstract: This specification provides an API for representing file objects in web applications,
   as well as programmatically selecting them and accessing their data. This includes:
