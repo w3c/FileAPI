@@ -419,7 +419,7 @@
 	[data-algorithm]:not(.heading) {
 	  padding: .5em;
 	  border: thin solid #ddd; border-radius: .5em;
-	  margin: .5em 0;
+	  margin: .5em calc(-0.5em - 1px);
 	}
 	[data-algorithm]:not(.heading) > :first-child {
 	  margin-top: 0;
@@ -1177,7 +1177,7 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 8ced20b1ada534532c822aed50a7dcb3d8dbe809" name="generator">
+  <meta content="Bikeshed version 017e947f5c8044969eb6c697519bf98b715cf564" name="generator">
 <style>/* style-md-lists */
 
             /* This is a weird hack for me not yet following the commonmark spec
@@ -1424,7 +1424,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="http://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">File API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-02-04">4 February 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-02-09">9 February 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2199,14 +2199,14 @@ with the <code class="idl"><a class="idl-code" data-link-type="attribute" href="
 <span class="kd">var</span> date <span class="o">=</span> <span class="k">new</span> Date<span class="p">(</span>file<span class="p">.</span>lastModified<span class="p">)</span><span class="p">;</span>
 println<span class="p">(</span><span class="s2">"You selected the file "</span> <span class="o">+</span> file<span class="p">.</span>name <span class="o">+</span> <span class="s2">" which was modified on "</span> <span class="o">+</span> date<span class="p">.</span>toDateString<span class="p">(</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"."</span><span class="p">)</span><span class="p">;</span>
 
-<span class="p">.</span><span class="p">.</span><span class="p">.</span>
+<span class="p">...</span>
 
 <span class="c1">// Generate a file with a specific last modified date
 </span>
 <span class="kd">var</span> d <span class="o">=</span> <span class="k">new</span> Date<span class="p">(</span><span class="mi">2013</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span><span class="p">;</span>
 <span class="kd">var</span> generatedFile <span class="o">=</span> <span class="k">new</span> File<span class="p">(</span><span class="p">[</span><span class="s2">"Rough Draft ...."</span><span class="p">]</span><span class="p">,</span> <span class="s2">"Draft1.txt"</span><span class="p">,</span> <span class="p">{</span>type<span class="o">:</span> <span class="s2">"text/plain"</span><span class="p">,</span> lastModified<span class="o">:</span> d<span class="p">}</span><span class="p">)</span>
 
-<span class="p">.</span><span class="p">.</span><span class="p">.</span>
+<span class="p">...</span>
 </pre>
    </div>
    <h2 class="heading settled" data-level="5" id="filelist-section"><span class="secno">5. </span><span class="content"> The FileList Interface</span><a class="self-link" href="#filelist-section"></a></h2>
@@ -2795,7 +2795,7 @@ UNLESS any of the following are true:</p>
 </span>reader<span class="p">.</span>readAsText<span class="p">(</span>file<span class="p">)</span><span class="p">;</span>
 reader<span class="p">.</span>onload <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span><span class="p">{</span>reader<span class="p">.</span>readAsText<span class="p">(</span>alternateFile<span class="p">)</span><span class="p">;</span><span class="p">}</span>
 
-<span class="p">.</span><span class="p">.</span><span class="p">.</span><span class="p">.</span><span class="p">.</span>
+<span class="p">...</span><span class="p">.</span><span class="p">.</span>
 
 <span class="c1">//... the loadend event must not fire for the first read
 </span>
@@ -3107,7 +3107,9 @@ scheme = "blob"
    <h4 class="heading settled" data-level="8.3.1" id="originOfBlobURL"><span class="secno">8.3.1. </span><span class="content"> Origin of Blob URLs</span><a class="self-link" href="#originOfBlobURL"></a></h4>
    <p><a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-4">Blob URLs</a> are created using <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-2">createObjectURL()</a></code></code>,
 and are revoked using <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL-1">revokeObjectURL()</a></code></code>.
-The <dfn data-dfn-type="dfn" data-lt="origin of a Blob URL|Blob URL’s origin" data-noexport="" id="origin-of-a-blob-url">origin of a Blob URL<a class="self-link" href="#origin-of-a-blob-url"></a></dfn> must be the same as the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">origin</a> specified by the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#incumbent-settings-object">incumbent settings object</a> at the time the method that created it was called.</p>
+The <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="origin of a Blob URL|Blob URL’s origin" data-noexport="" id="origin-of-a-blob-url">origin of a Blob URL</dfn> must be the same as the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">origin</a> specified by the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#current-settings-object">current settings object</a> at the time the method that created it was called.</p>
+   <p class="issue" id="issue-4a4344c2"><a class="self-link" href="#issue-4a4344c2"></a> there is currently some confusion between the generic definition of the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-origin">origin of a URL</a> and the specific definition of the <a data-link-type="dfn" href="#origin-of-a-blob-url" id="ref-for-origin-of-a-blob-url-1">origin of a Blob URL</a>. This is
+tracked in <a href="https://github.com/w3c/FileAPI/issues/63">issue #63</a> and in <a href="https://github.com/whatwg/url/issues/127">whatwg/url#127</a>.</p>
    <p><a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#cors-protocol">Cross-origin requests</a> on Blob URLs must return a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error">network error</a>.</p>
    <p class="note" role="note"><span>Note:</span> In practice this means that HTTP and HTTPS <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origins</a> are covered by this specification as valid origins for use with Blob URLs.
 This specification does not address the case of non-HTTP and non-HTTPS <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origins</a>.
@@ -3126,7 +3128,7 @@ to <var>result</var>.</p>
     <li data-md="">
      <p>Append the ":" (U+003A COLON) character to <var>result</var>.</p>
     <li data-md="">
-     <p>Let <var>settings</var> be the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#incumbent-settings-object">incumbent settings object</a></p>
+     <p>Let <var>settings</var> be the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#current-settings-object">current settings object</a></p>
     <li data-md="">
      <p>Let <var>origin</var> be <var>settings</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">origin</a>.</p>
     <li data-md="">
@@ -3200,7 +3202,7 @@ this also results in the <a data-link-type="dfn" href="#blob-url" id="ref-for-bl
    <h4 class="heading settled" data-level="8.4.4" id="ProtocolExamples"><span class="secno">8.4.4. </span><span class="content"> Sample Request and Response Headers</span><a class="self-link" href="#ProtocolExamples"></a></h4>
    <p><em>This section is informative.</em></p>
    <p>This section provides sample exchanges between web applications and user agents using <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-12">Blob URLs</a>.
-A <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request">request</a> can be triggered using HTML markup of the sort <code class="lang-markup highlight"><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"blob:http://example.org:8080/550e8400-e29b-41d4-a716-446655440000"</span><span class="nt">></span></code>.
+A <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request">request</a> can be triggered using HTML markup of the sort <code class="lang-markup highlight"><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">"blob:http://example.org:8080/550e8400-e29b-41d4-a716-446655440000"</span><span class="p">></span></code>.
 These examples merely illustrate the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request">request</a> and <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response">response</a>;
 web developers are not likely to interact with all the headers,
 but the <code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#dom-xmlhttprequest-getallresponseheaders">getAllResponseHeaders()</a></code> method of <code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#xmlhttprequest">XMLHttpRequest</a></code>, if used,
@@ -3692,12 +3694,12 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
      <li><a href="https://html.spec.whatwg.org/multipage/workers.html#workerglobalscope">WorkerGlobalScope</a>
      <li><a href="https://html.spec.whatwg.org/multipage/semantics.html#the-a-element">a</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#ascii-serialisation-of-an-origin">ascii serialization of an origin</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#current-settings-object">current settings object</a>
      <li><a href="https://html.spec.whatwg.org/multipage/semantics.html#attr-hyperlink-download">download</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-content-attributes">event handler content attribute</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">event handler event type</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-iframe-element">iframe</a>
      <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element">img</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#incumbent-settings-object">incumbent settings object</a>
      <li><a href="https://html.spec.whatwg.org/multipage/forms.html#the-input-element">input</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origin</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">origin <small>(for environment settings object)</small></a>
@@ -3921,6 +3923,8 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
 </pre>
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
   <div style="counter-reset:issue">
+   <div class="issue"> there is currently some confusion between the generic definition of the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-origin">origin of a URL</a> and the specific definition of the <a data-link-type="dfn" href="#origin-of-a-blob-url">origin of a Blob URL</a>. This is
+tracked in <a href="https://github.com/w3c/FileAPI/issues/63">issue #63</a> and in <a href="https://github.com/whatwg/url/issues/127">whatwg/url#127</a>.<a href="#issue-4a4344c2"> ↵ </a></div>
    <div class="issue"> This section is provisional; more security data may supplement this in subsequent drafts.<a href="#issue-61296551"> ↵ </a></div>
   </div>
   <aside class="dfn-panel" data-for="terminate-an-algorithm">
@@ -5195,6 +5199,13 @@ Examples of Blob URL Creation and Revocation</a> <a href="#ref-for-blob-url-23">
 Lifetime of Blob URLs</a> <a href="#ref-for-blob-url-29">(2)</a> <a href="#ref-for-blob-url-30">(3)</a> <a href="#ref-for-blob-url-31">(4)</a> <a href="#ref-for-blob-url-32">(5)</a> <a href="#ref-for-blob-url-33">(6)</a>
     <li><a href="#ref-for-blob-url-34">9. 
 Security and Privacy Considerations</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="origin-of-a-blob-url">
+   <b><a href="#origin-of-a-blob-url">#origin-of-a-blob-url</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-origin-of-a-blob-url-1">8.3.1. 
+Origin of Blob URLs</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="unicodeBlobURL">

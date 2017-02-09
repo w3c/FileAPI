@@ -9,6 +9,7 @@ Editor: Marijn Kruisselbrink, Google, mek@chromium.org
 Status: ED
 ED: https://w3c.github.io/FileAPI/
 TR: http://www.w3.org/TR/FileAPI/
+Repository: w3c/FileAPI
 Previous Version: http://www.w3.org/TR/2012/WD-FileAPI-20121025/
 Abstract: This specification provides an API for representing file objects in web applications,
   as well as programmatically selecting them and accessing their data. This includes:
@@ -1677,8 +1678,13 @@ Origin of Blob URLs</h4>
 <a>Blob URLs</a> are created using <code>URL.{{URL/createObjectURL()}}</code>,
 and are revoked using <code>URL.{{URL/revokeObjectURL()}}</code>.
 The <dfn lt="origin of a Blob URL|Blob URL's origin">origin of a Blob URL</dfn> must be the same as the [=environment settings object/origin=]
-specified by the <a>incumbent settings object</a>
+specified by the <a>current settings object</a>
 at the time the method that created it was called.
+
+Issue: there is currently some confusion between the generic definition of the
+[=url/origin|origin of a URL=] and the specific definition of the [=origin of a Blob URL=]. This is
+tracked in <a href="https://github.com/w3c/FileAPI/issues/63">issue #63</a> and in
+<a href="https://github.com/whatwg/url/issues/127">whatwg/url#127</a>.
 
 [=CORS protocol|Cross-origin requests=] on Blob URLs must return a <a>network error</a>.
 
@@ -1702,7 +1708,7 @@ which is invoked by <code>URL.{{URL/createObjectURL()}}</code>:
   (that is, the Unicode code point sequence U+0062, U+006C, U+006F, U+0062)
   to |result|.
 1. Append the ":" (U+003A COLON) character to |result|.
-1. Let |settings| be the [=incumbent settings object=]
+1. Let |settings| be the [=current settings object=]
 1. Let |origin| be |settings|'s [=environment settings object/origin=].
 1. Let |serialized| be the <a lt="ASCII serialization of an origin">ASCII serialization</a> of |origin|.
 1. If |serialized| is "null", set it to an implementation-defined value.
