@@ -1680,7 +1680,7 @@ The <dfn lt="origin of a Blob URL|Blob URL's origin">origin of a Blob URL</dfn> 
 specified by the <a>current settings object</a>
 at the time the method that created it was called.
 
-WARNING: there is currently some confusion between the generic definition of the
+Issue: there is currently some confusion between the generic definition of the
 [=url/origin|origin of a URL=] and the specific definition of the [=origin of a Blob URL=]. This is
 tracked in <a href="https://github.com/w3c/FileAPI/issues/63">issue #63</a> and in
 <a href="https://github.com/whatwg/url/issues/127">whatwg/url#127</a>.
