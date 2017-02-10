@@ -205,14 +205,6 @@ and has a {{Blob/size}} attribute which is the total number of bytes in the byte
 and a {{Blob/type}} attribute,
 which is an ASCII-encoded string in lower case representing the media type of the <a>byte</a> sequence.
 
-A {{Blob}} must have a <dfn id="readabilityState" for="Blob">readability state</dfn>,
-which is one of <a><code>OPENED</code></a> or <a for="Blob/readability state"><code>CLOSED</code></a>.
-A {{Blob}} that refers to a <a>byte</a> sequence,
-including one of 0 bytes,
-is said to be in the <dfn id="dfn-openState" for="Blob/readability state"><code>OPENED</code></dfn> <a>readability state</a>.
-A {{Blob}} is said to be <dfn id="closed" for=Blob>closed</dfn> if its {{Blob/close()}} method has been called.
-A {{Blob}} that is <a for=Blob>closed</a> is said to be in the <dfn id="dfn-closedState" for="Blob/readability state"><code>CLOSED</code></dfn> <a>readability state</a>.
-
 Each {{Blob}} must have an internal <dfn id="snapshot-state" for=Blob>snapshot state</dfn>,
 which must be initially set to the state of the underlying storage,
 if any such underlying storage exists,
@@ -226,15 +218,11 @@ interface Blob {
 
   readonly attribute unsigned long long size;
   readonly attribute DOMString type;
-  readonly attribute boolean isClosed;
 
-  //slice Blob into byte-ranged chunks
-
+  // slice Blob into byte-ranged chunks
   Blob slice([Clamp] optional long long start,
             [Clamp] optional long long end,
             optional DOMString contentType);
-  void close();
-
 };
 
 dictionary BlobPropertyBag {
@@ -252,8 +240,7 @@ When the {{Blob()}} constructor is invoked,
 user agents must run the following steps:
 
 1. If invoked with zero parameters,
-  return a new {{Blob}} object with its <a>readability state</a> set to <a><code>OPENED</code></a>,
-  consisting of 0 bytes,
+  return a new {{Blob}} object consisting of 0 bytes,
   with {{Blob/size}} set to 0,
   and with {{Blob/type}} set to the empty string.
 
@@ -289,8 +276,7 @@ user agents must run the following steps:
     then set |t| to the empty string and return from these substeps.
   2. Convert every character in |t| to [=ASCII lowercase=].
 
-6. Return a {{Blob}} object with its <a>readability state</a> set to <a><code>OPENED</code></a>,
-  referring to |bytes| as its associated <a>byte</a> sequence,
+6. Return a {{Blob}} object referring to |bytes| as its associated <a>byte</a> sequence,
   with its {{Blob/size}} set to the length of |bytes|,
   and its {{Blob/type}} set to the value of |t| from the substeps above.
 
@@ -349,8 +335,6 @@ Attributes</h3>
   <dd>Returns the size of the <a>byte</a> sequence in number of bytes.
     On getting, conforming user agents must return the total number of bytes that can be read by a {{FileReader}} or {{FileReaderSync}} object,
     or 0 if the {{Blob}} has no bytes to be read.
-    If the {{Blob}} has a readability state of <a for="Blob/readability state"><code>CLOSED</code></a>
-    then {{Blob/size}} must return 0.
 
   <dt><dfn id="dfn-type">type</dfn>
   <dd>The ASCII-encoded string in lower case representing the media type of the {{Blob}}.
@@ -376,13 +360,6 @@ Attributes</h3>
     Note: Use of the {{Blob/type}} attribute informs the <a>encoding determination</a>
     and <a href="#processing-media-types">parsing the Content-Type header</a>
     when <a>dereferencing</a> <a>Blob URLs</a>.
-
-  <dt><dfn id="dfn-isClosed">isClosed</dfn>
-  <dd>The boolean value that indicates whether the {{Blob}} is in the <a for="Blob/readability state"><code>CLOSED</code></a> <a>readability state</a>.
-    On getting, user agents must return <code>false</code>
-    if the {{Blob}} is in the <a><code>OPENED</code></a> <a>readability state</a>,
-    and <code>true</code> if the {{Blob}} is in the <a for="Blob/readability state"><code>CLOSED</code></a> <a>readability state</a>
-    as a result of the {{Blob/close()}} method being called.
 </dl>
 
 
@@ -439,12 +416,6 @@ It must act as follows:
 6. Return a new {{Blob}} object |S| with the following characteristics:
 
   <ol type="a">
-    <li>|S| has a <a>readability state</a> equal to that of |O|'s <a>readability state</a>.
-
-      Note: The <a>readability state</a> of the <a>context object</a> is retained
-      by the {{Blob}} object returned by the {{Blob/slice()}} call;
-      this has implications on whether the returned {{Blob}} is actually usable
-      for <a>read operation</a>s or as a <a>Blob URL</a>.
     <li>|S| refers to |span| consecutive <a>byte</a>s from |O|,
       beginning with the <a>byte</a> at byte-order position |relativeStart|.
     <li>|S|.{{Blob/size}} = |span|.
@@ -482,19 +453,6 @@ It must act as follows:
     }
   </pre>
 </div>
-
-<h4 id="close-method">
-The close method</h4>
-
-The <dfn id="dfn-close" method for=Blob>close()</dfn> method is said to <a lt="closed" for=Blob>close</a> a {{Blob}},
-and must act as follows:
-
-1. If the <a>readability state</a> of the <a>context object</a> is <a for="Blob/readability state"><code>CLOSED</code></a>,
-  <a>terminate this algorithm</a>.
-2. Otherwise, set the <a>readability state</a> of the <a>context object</a> to <a for="Blob/readability state"><code>CLOSED</code></a>.
-3. If the <a>context object</a> has an entry in the <a>Blob URL Store</a>,
-  <a>remove the entry</a> that corresponds to the <a>context object</a>.
-
 
 <!--
 ████████ ████ ██       ████████
@@ -604,7 +562,6 @@ user agents must run the following steps:
     the {{FilePropertyBag/lastModified}} member could be a {{Date}} object [[ECMA-262]].
 
 4. Return a new {{File}} object |F| such that:
-  1. |F| has a <a>readability state</a> of <a><code>OPENED</code></a>.
   2. |F| refers to the |bytes| <a>byte</a> sequence.
   3. |F|.{{Blob/size}} is set to the number of total bytes in |bytes|.
   4. |F|.{{File/name}} is set to |n|.
@@ -791,9 +748,6 @@ run the following steps:
   Set the |length| on |s| to the {{Blob/size}} of |b|.
   While there are still bytes to be read in |b|,
   perform the following substeps:
-
-  Note: The algorithm assumes that invoking methods have checked for <a>readability state</a>.
-  A {{Blob}} in the <a for="Blob/readability state"><code>CLOSED</code></a> state must not have a <a>read operation</a> called on it.
 
   1. If the <a>synchronous flag</a> is set, follow the steps below:
     1. Let |bytes| be the byte sequence that results from reading a <a>chunk</a> from |b|.
@@ -1036,12 +990,6 @@ the user agent must run the steps below.
 
 1. If {{FileReader/readyState}} = {{FileReader/LOADING}}
   throw an {{InvalidStateError}} exception and <a>terminate this algorithm</a>.
-2. If the <code>blob</code> is in the <a for="Blob/readability state">CLOSED</a> <a>readability state</a>,
-  set the {{error!!attribute}} attribute of the <a>context object</a>
-  to return an {{InvalidStateError}} exception
-  and <a>fire a progress event</a> called {{error!!event}}
-  at the <a>context object</a>.
-  <a>Terminate this algorithm</a>.
 3. Otherwise set {{FileReader/readyState}} to {{FileReader/LOADING}}.
 4. Initiate an <a>annotated task read operation</a> using the <code>blob</code> argument as |input|
   and handle <a lt="queue a task">tasks queued</a> on the <a>file reading task source</a> per below.
@@ -1076,11 +1024,6 @@ When the <dfn method for=FileReader id="dfn-readAsText">readAsText(blob, label)<
 the user agent must run the steps below.
 
 1. If {{FileReader/readyState}} = {{FileReader/LOADING}} throw an {{InvalidStateError}} and <a>terminate this algorithm</a>.
-2. If the <code>blob</code> is in the <a for="Blob/readability state">CLOSED</a> <a>readability state</a>,
-  set the {{error!!attribute}} attribute of the <a>context object</a>
-  to return an {{InvalidStateError}} exception
-  and <a>fire a progress event</a> called {{error!!event}} at the <a>context object</a>.
-  <a>Terminate this algorithm</a>.
 3. Otherwise set {{FileReader/readyState}} to {{FileReader/LOADING}}.
 4. Initiate an <a>annotated task read operation</a> using the <code>blob</code> argument as |input|
   and handle <a lt="queue a task">tasks queued</a> on the <a>file reading task source</a> per below.
@@ -1106,11 +1049,6 @@ When the <dfn method for=FileReader id="dfn-readAsArrayBuffer">readAsArrayBuffer
 the user agent must run the steps below.
 
 1. If {{FileReader/readyState}} = {{FileReader/LOADING}} throw an {{InvalidStateError}} exception and <a>terminate this algorithm</a>.
-2. If the <code>blob</code> is in the <a for="Blob/readability state">CLOSED</a> <a>readability state</a>,
-  set the {{error!!attribute}} attribute of the <a>context object</a>
-  to return an {{InvalidStateError}} exception
-  and <a>fire a progress event</a> called {{error!!event}} at the <a>context object</a>.
-  <a>Terminate this algorithm</a>.
 3. Otherwise set {{FileReader/readyState}} to {{FileReader/LOADING}}.
 4. Initiate an <a>annotated task read operation</a> using the <code>blob</code> argument as |input|
   and handle <a lt="queue a task">tasks queued</a> on the <a>file reading task source</a> per below.
@@ -1135,11 +1073,6 @@ When the <dfn method for=FileReader id="dfn-readAsBinaryString">readAsBinaryStri
 the user agent must run the steps below.
 
 1. If {{FileReader/readyState}} = {{FileReader/LOADING}} throw an {{InvalidStateError}} exception and <a>terminate this algorithm</a>.
-2. If the <code>blob</code> is in the <a for="Blob/readability state">CLOSED</a> <a>readability state</a>,
-  set the {{error!!attribute}} attribute of the <a>context object</a>
-  to return an {{InvalidStateError}} exception
-  and <a>fire a progress event</a> called {{error!!event}} at the <a>context object</a>.
-  <a>Terminate this algorithm</a>.
 3. Otherwise set {{FileReader/readyState}} to {{FileReader/LOADING}}.
 4. Initiate an <a>annotated task read operation</a> using the <code>blob</code> argument as |input|
   and handle <a lt="queue a task">tasks queued</a> on the <a>file reading task source</a> per below.
@@ -1392,9 +1325,6 @@ the following steps must be followed:
 1. If {{FileReader/readyState}} = {{FileReader/LOADING}}
   throw an {{InvalidStateError}} exception
   and <a>terminate this algorithm</a>.
-2. If the <code>blob</code> has been closed through the {{Blob/close()}} method,
-  throw an {{InvalidStateError}} exception
-  and <a>terminate this algorithm</a>.
 3. Otherwise, initiate a <a>read operation</a> using the <code>blob</code> argument,
   and with the <a>synchronous flag</a> *set*.
   If the read operation returns failure,
@@ -1411,9 +1341,6 @@ When the <dfn method for=FileReaderSync id="dfn-readAsDataURLSync">readAsDataURL
 the following steps must be followed:
 
 1. If {{FileReader/readyState}} = {{FileReader/LOADING}}
-  throw an {{InvalidStateError}} exception
-  and <a>terminate this algorithm</a>.
-2. If the <code>blob</code> has been closed through the {{Blob/close()}} method,
   throw an {{InvalidStateError}} exception
   and <a>terminate this algorithm</a>.
 3. Otherwise, initiate a <a>read operation</a> using the <code>blob</code> argument,
@@ -1438,9 +1365,6 @@ the following steps must be followed:
 1. If {{FileReader/readyState}} = {{FileReader/LOADING}}
   throw an {{InvalidStateError}} exception
   and <a>terminate this algorithm</a>.
-2. If the <code>blob</code> has been closed through the {{Blob/close()}} method,
-  throw an {{InvalidStateError}} exception
-  and <a>terminate this algorithm</a>.
 3. Otherwise, initiate a <a>read operation</a> using the <code>blob</code> argument,
   and with the <a>synchronous flag</a> *set*.
   If the <a>read operation</a> returns failure,
@@ -1455,9 +1379,6 @@ When the <dfn method for=FileReaderSync id="dfn-readAsBinaryStringSync">readAsBi
 the following steps must be followed:
 
 1. If {{FileReader/readyState}} = {{FileReader/LOADING}}
-  throw an {{InvalidStateError}} exception
-  and <a>terminate this algorithm</a>.
-2. If the <code>blob</code> has been closed through the {{Blob/close()}} method,
   throw an {{InvalidStateError}} exception
   and <a>terminate this algorithm</a>.
 3. Otherwise, initiate a <a>read operation</a> using the <code>blob</code> argument,
@@ -1793,8 +1714,6 @@ Network errors are used when:
 
 * Any [=/request=] method other than GET is used.
 * The <a>Blob URL</a> does not have an entry in the <a>Blob URL Store</a>.
-* The Blob has been <a for=Blob>closed</a>;
-  this also results in the <a>Blob URL</a> not having an entry in the <a>Blob URL Store</a>.
 * A [=CORS protocol|cross-origin requests=] is made on a <a>Blob URL</a>.
 * A security error has occurred.
 
@@ -1869,25 +1788,16 @@ Methods and Parameters</h4>
   <dd>Returns a unique <a>Blob URL</a>.
     This method must act as follows:
 
-    1. If called with a {{Blob}} argument that has a <a>readability state</a> of <a for="Blob/readability state"><code>CLOSED</code></a>,
-      user agents must return the output of the <a>Serialization of a Blob URL</a> algorithm.
-
-      Note: No entry is added to the <a>Blob URL Store</a>;
-      consequently, when this <a>Blob URL</a> is <a>dereferenced</a>,
-      a <a>network error</a> occurs.
-
-    2. Otherwise, user agents must run the following sub-steps:
-      1. Let |url| be the result of the <a>Serialization of a Blob URL</a> algorithm.
-      2. <a>Add an entry to the Blob URL Store</a> for |url| and |blob|.
-      3. Return |url|.
+    1. Let |url| be the result of the <a>Serialization of a Blob URL</a> algorithm.
+    2. <a>Add an entry to the Blob URL Store</a> for |url| and |blob|.
+    3. Return |url|.
 
   <dt>The <dfn method for=URL id="dfn-revokeObjectURL">revokeObjectURL(url)</dfn> static method
   <dd>Revokes the <a>Blob URL</a> provided in the string {{url!!argument}}
     by removing the corresponding entry from the <a>Blob URL Store</a>.
     This method must act as follows:
 
-    1. If the {{url!!argument}} refers to a {{Blob}} that has a <a>readability state</a> of <a for="Blob/readability state"><code>CLOSED</code></a>
-      OR if the value provided for the {{url!!argument}} argument is not a <a>Blob URL</a>,
+    1. If the value provided for the {{url!!argument}} argument is not a <a>Blob URL</a>,
       OR if the value provided for the {{url!!argument}} argument does not have an entry in the <a>Blob URL Store</a>,
       this method call does nothing.
       User agents may display a message on the error console.
