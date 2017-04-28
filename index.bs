@@ -1883,7 +1883,7 @@ developers should pair it with a corresponding call to <code>URL.{{revokeObjectU
 Lifetime of Blob URLs</h3>
 
 A global object which exposes <code>URL.{{URL/createObjectURL()}}</code>
-must maintain a <dfn id="BlobURLStore">Blob URL Store</dfn>
+must maintain a <dfn id="BlobURLStore" export>Blob URL Store</dfn>
 which is a list of <a>Blob URLs</a> created by the <code>URL.{{createObjectURL()}}</code> method,
 and the {{Blob}} resource that each refers to.
 

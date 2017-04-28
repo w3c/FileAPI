@@ -1177,7 +1177,8 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 017e947f5c8044969eb6c697519bf98b715cf564" name="generator">
+  <meta content="Bikeshed version 5bd73bb15eb04ad9f7d1a57f012e9ee6eca5a765" name="generator">
+  <link href="http://www.w3.org/TR/FileAPI/" rel="canonical">
 <style>/* style-md-lists */
 
             /* This is a weird hack for me not yet following the commonmark spec
@@ -1422,9 +1423,9 @@ pre.idl.highlight { color: #708090; }
         </style>
  <body class="h-entry">
   <div class="head">
-   <p data-fill-with="logo"><a class="logo" href="http://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
+   <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">File API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-02-09">9 February 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-04-29">29 April 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1433,8 +1434,6 @@ pre.idl.highlight { color: #708090; }
      <dd><a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a>
      <dt>Previous Versions:
      <dd><a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025/" rel="previous">http://www.w3.org/TR/2012/WD-FileAPI-20121025/</a>
-     <dt>Feedback:
-     <dd><span><a href="mailto:public-webapps@w3.org?subject=%5Bfileapi%5D%20YOUR%20TOPIC%20HERE">public-webapps@w3.org</a> with subject line “<kbd>[fileapi] <i data-lt="">… message topic …</i></kbd>” (<a href="http://lists.w3.org/Archives/Public/public-webapps/" rel="discussion">archives</a>)</span>
      <dt>Issue Tracking:
      <dd><a href="https://github.com/w3c/FileAPI/issues/">GitHub</a>
      <dd><a href="#issues-index">Inline In Spec</a>
@@ -1447,8 +1446,8 @@ pre.idl.highlight { color: #708090; }
    <p class="copyright" data-fill-with="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2017 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>). W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/2015/copyright-software-and-document" rel="license">permissive document license</a> rules apply. </p>
    <hr title="Separator for header">
   </div>
-  <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
   <div class="p-summary" data-fill-with="abstract">
+   <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
    <p>This specification provides an API for representing file objects in web applications,
 
 as well as programmatically selecting them and accessing their data. This includes:</p>
@@ -1479,14 +1478,15 @@ These kinds of behaviors are defined in the appropriate affiliated specification
   Its publication here does not imply endorsement of its contents by W3C.
   Don’t cite this document other than as work in progress. </p>
    <p> <strong>Changes to this document may be tracked at <a href="https://github.com/w3c/FileAPI">https://github.com/w3c/FileAPI</a>.</strong> </p>
-   <p> If you wish to make comments regarding this document, please send them to this specification’s <a href="https://github.com/w3c/FileAPI">GitHub repository</a> or (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archived</a>) public mailing list <a href="mailto:public-webapps@w3.org?Subject=%5Bfileapi%5D%20PUT%20SUBJECT%20HERE">public-webapps@w3.org</a> (see <a href="http://www.w3.org/Mail/Request">instructions</a>). When sending e-mail, please put the text “fileapi” in the subject, preferably like this: “[fileapi] <em>…summary of comment…</em>. All comments are welcome. </p>
+   <p> <a href="https://github.com/w3c/FileAPI/issues">GitHub issues</a> are preferred for discussion of this specification.
+  There is also a <a href="http://lists.w3.org/Archives/Public/public-webapps/">historical mailing-list archive</a>. </p>
    <p> This document was produced by the <a href="https://www.w3.org/WebPlatform/WG/">Web Platform Working Group</a>. </p>
    <p> This document was produced by a group operating under
   the <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 W3C Patent Policy</a>.
   W3C maintains a <a href="https://www.w3.org/2004/01/pp-impl/83482/status" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group;
   that page also includes instructions for disclosing a patent.
   An individual who has actual knowledge of a patent which the individual believes contains <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section 6 of the W3C Patent Policy</a>. </p>
-   <p> This document is governed by the <a href="https://www.w3.org/2015/Process-20150901/" id="w3c_process_revision">1 September 2015 W3C Process Document</a>. </p>
+   <p> This document is governed by the <a href="https://www.w3.org/2017/Process-20170301/" id="w3c_process_revision">1 March 2017 W3C Process Document</a>. </p>
    <p></p>
    <p>Previous discussion of this specification has taken place on two other mailing lists: <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archive</a>) and <a href="mailto:public-webapi@w3.org">public-webapi@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapi/">archive</a>). Ongoing discussion will be on the <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> mailing list.</p>
    <p>This draft consists of changes made to the previous Last Call Working Draft. Please send comments to the <a href="mailto:public-webapi@w3.org">public-webapi@w3.org</a> as described above. You can see Last Call Feedback on the W3C Wiki: <a href="http://www.w3.org/wiki/Webapps/LCWD-FileAPI-20130912">http://www.w3.org/wiki/Webapps/LCWD-FileAPI-20130912</a></p>
@@ -1748,26 +1748,26 @@ which is an ASCII-encoded string in lower case representing the media type of th
    <p>Each <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-5">Blob</a></code> must have an internal <dfn class="dfn-paneled" data-dfn-for="Blob" data-dfn-type="dfn" data-noexport="" id="snapshot-state">snapshot state</dfn>,
 which must be initially set to the state of the underlying storage,
 if any such underlying storage exists,
-and must be preserved through <a data-link-type="abstract-op" href="https://html.spec.whatwg.org/multipage/infrastructure.html#structuredclone">StructuredClone</a>.
+and must be preserved through <a data-link-type="abstract-op">StructuredClone</a>.
 Further normative definition of <a data-link-type="dfn" href="#snapshot-state" id="ref-for-snapshot-state-1">snapshot state</a> can be found for <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-4">File</a></code>s.</p>
 <pre class="idl highlight def">[<dfn class="nv dfn-paneled idl-code" data-dfn-for="Blob" data-dfn-type="constructor" data-export="" data-lt="Blob(blobParts, options)|Blob(blobParts)|Blob()" id="dom-blob-blob">Constructor</dfn>(<span class="kt">optional</span> <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#typedefdef-blobpart" id="ref-for-typedefdef-blobpart-1">BlobPart</a>> <a class="nv idl-code" data-link-type="argument" href="#dfn-blobParts" id="ref-for-dfn-blobParts-1">blobParts</a>, <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag-1">BlobPropertyBag</a> <dfn class="nv idl-code" data-dfn-for="Blob/Blob(blobParts, options)" data-dfn-type="argument" data-export="" id="dom-blob-blob-blobparts-options-options">options<a class="self-link" href="#dom-blob-blob-blobparts-options-options"></a></dfn>),
 <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=(<span class="n">Window</span>,<span class="n">Worker</span>)]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="dfn-Blob">Blob</dfn> {
 
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="unsigned long long" href="#dfn-size" id="ref-for-dfn-size-2">size</a>;
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="DOMString" href="#dfn-type" id="ref-for-dfn-type-2">type</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long-long"><span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span></a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="unsigned long long" href="#dfn-size" id="ref-for-dfn-size-2">size</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt">DOMString</span></a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="DOMString" href="#dfn-type" id="ref-for-dfn-type-2">type</a>;
 
   // slice Blob into byte-ranged chunks
-  <a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-6">Blob</a> <a class="nv idl-code" data-link-type="method" href="#dfn-slice" id="ref-for-dfn-slice-1">slice</a>([<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Clamp">Clamp</a>] <span class="kt">optional</span> <span class="kt">long</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-start" id="ref-for-dfn-start-1">start</a>,
-            [<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Clamp">Clamp</a>] <span class="kt">optional</span> <span class="kt">long</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-end" id="ref-for-dfn-end-1">end</a>,
-            <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-contentTypeBlob" id="ref-for-dfn-contentTypeBlob-1">contentType</a>);
+  <a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-6">Blob</a> <a class="nv idl-code" data-link-type="method" href="#dfn-slice" id="ref-for-dfn-slice-1">slice</a>([<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Clamp">Clamp</a>] <span class="kt">optional</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long"><span class="kt">long</span> <span class="kt">long</span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-start" id="ref-for-dfn-start-1">start</a>,
+            [<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Clamp">Clamp</a>] <span class="kt">optional</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long"><span class="kt">long</span> <span class="kt">long</span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-end" id="ref-for-dfn-end-1">end</a>,
+            <span class="kt">optional</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt">DOMString</span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-contentTypeBlob" id="ref-for-dfn-contentTypeBlob-1">contentType</a>);
 };
 
 <span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dfn-BlobPropertyBag">BlobPropertyBag</dfn> {
-  <span class="kt">DOMString</span> <a class="nv idl-code" data-default="&quot;&quot;" data-link-type="dict-member" data-type="DOMString " href="#dfn-BPtype" id="ref-for-dfn-BPtype-1">type</a> = "";
+  <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt">DOMString</span></a> <a class="nv idl-code" data-default="&quot;&quot;" data-link-type="dict-member" data-type="DOMString " href="#dfn-BPtype" id="ref-for-dfn-BPtype-1">type</a> = "";
 };
 
-<span class="kt">typedef</span> (<a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#BufferSource">BufferSource</a> <span class="kt">or</span> <a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-7">Blob</a> <span class="kt">or</span> <span class="kt">USVString</span>) <dfn class="nv dfn-paneled idl-code" data-dfn-type="typedef" data-export="" id="typedefdef-blobpart">BlobPart</dfn>;
+<span class="kt">typedef</span> (<a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#BufferSource">BufferSource</a> <span class="kt">or</span> <a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-7">Blob</a> <span class="kt">or</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><span class="kt">USVString</span></a>) <dfn class="nv dfn-paneled idl-code" data-dfn-type="typedef" data-export="" id="typedefdef-blobpart">BlobPart</dfn>;
 </pre>
    <h3 class="heading settled" data-level="3.1" id="constructorBlob"><span class="secno">3.1. </span><span class="content"> Constructors</span><a class="self-link" href="#constructorBlob"></a></h3>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-blob-blob" id="ref-for-dom-blob-blob-1">Blob()</a></code> constructor can be invoked with zero or more parameters.
@@ -1956,8 +1956,8 @@ then set <var>relativeContentType</var> to the empty string and return from thes
       <li><var>S</var>.<code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type-11">type</a></code> = <var>relativeContentType</var>. 
      </ol>
    </ol>
-   <div class="example" id="example-5fb7503c">
-    <a class="self-link" href="#example-5fb7503c"></a> The examples below illustrate the different types of <code class="idl"><a data-link-type="idl" href="#dfn-slice" id="ref-for-dfn-slice-9">slice()</a></code> calls possible. Since the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-5">File</a></code> interface inherits from the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-24">Blob</a></code> interface, examples are based on the use of the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-6">File</a></code> interface. 
+   <div class="example" id="example-5a9eed58">
+    <a class="self-link" href="#example-5a9eed58"></a> The examples below illustrate the different types of <code class="idl"><a data-link-type="idl" href="#dfn-slice" id="ref-for-dfn-slice-9">slice()</a></code> calls possible. Since the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-5">File</a></code> interface inherits from the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-24">Blob</a></code> interface, examples are based on the use of the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-6">File</a></code> interface. 
 <pre class="lang-javascript highlight"><span class="c1">// obtain input element through DOM
 </span>
 <span class="kd">var</span> file <span class="o">=</span> document<span class="p">.</span>getElementById<span class="p">(</span><span class="s1">'file'</span><span class="p">)</span><span class="p">.</span>files<span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">;</span>
@@ -2012,16 +2012,16 @@ or the empty string – 0 bytes – if the type cannot be determined.</p>
      <p>User agents must not attempt heuristic determination of encoding,
 including statistical methods.</p>
 <pre class="idl highlight def">[<dfn class="nv dfn-paneled idl-code" data-dfn-for="File" data-dfn-type="constructor" data-export="" data-lt="File(fileBits, fileName, options)|File(fileBits, fileName)" id="dom-file-file">Constructor</dfn>(<span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#typedefdef-blobpart" id="ref-for-typedefdef-blobpart-2">BlobPart</a>> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBits" id="ref-for-dfn-fileBits-1">fileBits</a>,
-             <span class="kt">USVString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileName" id="ref-for-dfn-fileName-1">fileName</a>,
+             <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><span class="kt">USVString</span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileName" id="ref-for-dfn-fileName-1">fileName</a>,
              <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dfn-FilePropertyBag" id="ref-for-dfn-FilePropertyBag-1">FilePropertyBag</a> <dfn class="nv idl-code" data-dfn-for="File/File(fileBits, fileName, options)" data-dfn-type="argument" data-export="" id="dom-file-file-filebits-filename-options-options">options<a class="self-link" href="#dom-file-file-filebits-filename-options-options"></a></dfn>),
 <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=(<span class="n">Window</span>,<span class="n">Worker</span>)]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="dfn-file">File</dfn> : <a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-26">Blob</a> {
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="DOMString" href="#dfn-name" id="ref-for-dfn-name-2">name</a>;
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">long</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="long long" href="#dfn-lastModified" id="ref-for-dfn-lastModified-1">lastModified</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt">DOMString</span></a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="DOMString" href="#dfn-name" id="ref-for-dfn-name-2">name</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long"><span class="kt">long</span> <span class="kt">long</span></a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="long long" href="#dfn-lastModified" id="ref-for-dfn-lastModified-1">lastModified</a>;
 };
 
 <span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dfn-FilePropertyBag">FilePropertyBag</dfn> : <a class="n" data-link-type="idl-name" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag-3">BlobPropertyBag</a> {
-  <span class="kt">long</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="dict-member" data-type="long long " href="#dfn-FPdate" id="ref-for-dfn-FPdate-1">lastModified</a>;
+  <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long"><span class="kt">long</span> <span class="kt">long</span></a> <a class="nv idl-code" data-link-type="dict-member" data-type="long long " href="#dfn-FPdate" id="ref-for-dfn-FPdate-1">lastModified</a>;
 };
 </pre>
    </ul>
@@ -2161,14 +2161,14 @@ with the <code class="idl"><a class="idl-code" data-link-type="attribute" href="
 <span class="kd">var</span> date <span class="o">=</span> <span class="k">new</span> Date<span class="p">(</span>file<span class="p">.</span>lastModified<span class="p">)</span><span class="p">;</span>
 println<span class="p">(</span><span class="s2">"You selected the file "</span> <span class="o">+</span> file<span class="p">.</span>name <span class="o">+</span> <span class="s2">" which was modified on "</span> <span class="o">+</span> date<span class="p">.</span>toDateString<span class="p">(</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"."</span><span class="p">)</span><span class="p">;</span>
 
-<span class="p">.</span><span class="p">.</span><span class="p">.</span>
+<span class="p">...</span>
 
 <span class="c1">// Generate a file with a specific last modified date
 </span>
 <span class="kd">var</span> d <span class="o">=</span> <span class="k">new</span> Date<span class="p">(</span><span class="mi">2013</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span><span class="p">;</span>
 <span class="kd">var</span> generatedFile <span class="o">=</span> <span class="k">new</span> File<span class="p">(</span><span class="p">[</span><span class="s2">"Rough Draft ...."</span><span class="p">]</span><span class="p">,</span> <span class="s2">"Draft1.txt"</span><span class="p">,</span> <span class="p">{</span>type<span class="o">:</span> <span class="s2">"text/plain"</span><span class="p">,</span> lastModified<span class="o">:</span> d<span class="p">}</span><span class="p">)</span>
 
-<span class="p">.</span><span class="p">.</span><span class="p">.</span>
+<span class="p">...</span>
 </pre>
    </div>
    <h2 class="heading settled" data-level="5" id="filelist-section"><span class="secno">5. </span><span class="content"> The FileList Interface</span><a class="self-link" href="#filelist-section"></a></h2>
@@ -2180,8 +2180,8 @@ most other programmatic use of <code class="idl"><a data-link-type="idl" href="#
    <p>This interface is a list of <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file-20">File</a></code> objects.</p>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=(<span class="n">Window</span>,<span class="n">Worker</span>)]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="dfn-filelist">FileList</dfn> {
-  <span class="kt">getter</span> <a class="n" data-link-type="idl-name" href="#dfn-file" id="ref-for-dfn-file-21">File</a>? <a class="nv idl-code" data-link-type="method" href="#dfn-item" id="ref-for-dfn-item-1">item</a>(<span class="kt">unsigned</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-index" id="ref-for-dfn-index-1">index</a>);
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">unsigned</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="unsigned long" href="#dfn-length" id="ref-for-dfn-length-1">length</a>;
+  <span class="kt">getter</span> <a class="n" data-link-type="idl-name" href="#dfn-file" id="ref-for-dfn-file-21">File</a>? <a class="nv idl-code" data-link-type="method" href="#dfn-item" id="ref-for-dfn-item-1">item</a>(<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long"><span class="kt">unsigned</span> <span class="kt">long</span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-index" id="ref-for-dfn-index-1">index</a>);
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long"><span class="kt">unsigned</span> <span class="kt">long</span></a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="unsigned long" href="#dfn-length" id="ref-for-dfn-length-1">length</a>;
 };
 </pre>
    <div class="example" id="example-6cf5eb7d">
@@ -2319,23 +2319,23 @@ It is to be used for features that trigger in response to asynchronously reading
   // async read methods
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsArrayBuffer" id="ref-for-dfn-readAsArrayBuffer-1">readAsArrayBuffer</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-37">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-1">blob</a>);
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsBinaryString" id="ref-for-dfn-readAsBinaryString-1">readAsBinaryString</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-38">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-2">blob</a>);
-  <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsText" id="ref-for-dfn-readAsText-1">readAsText</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-39">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-3">blob</a>, <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-label" id="ref-for-dfn-label-1">label</a>);
+  <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsText" id="ref-for-dfn-readAsText-1">readAsText</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-39">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-3">blob</a>, <span class="kt">optional</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt">DOMString</span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-label" id="ref-for-dfn-label-1">label</a>);
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsDataURL" id="ref-for-dfn-readAsDataURL-1">readAsDataURL</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-40">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-4">blob</a>);
 
   <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-abort" id="ref-for-dfn-abort-2">abort</a>();
 
   // states
-  <span class="kt">const</span> <span class="kt">unsigned</span> <span class="kt">short</span> <a class="nv idl-code" data-link-type="const" href="#dfn-empty" id="ref-for-dfn-empty-1">EMPTY</a> = 0;
-  <span class="kt">const</span> <span class="kt">unsigned</span> <span class="kt">short</span> <a class="nv idl-code" data-link-type="const" href="#dfn-loading" id="ref-for-dfn-loading-1">LOADING</a> = 1;
-  <span class="kt">const</span> <span class="kt">unsigned</span> <span class="kt">short</span> <a class="nv idl-code" data-link-type="const" href="#dfn-done" id="ref-for-dfn-done-1">DONE</a> = 2;
+  <span class="kt">const</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-short"><span class="kt">unsigned</span> <span class="kt">short</span></a> <a class="nv idl-code" data-link-type="const" href="#dfn-empty" id="ref-for-dfn-empty-1">EMPTY</a> = 0;
+  <span class="kt">const</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-short"><span class="kt">unsigned</span> <span class="kt">short</span></a> <a class="nv idl-code" data-link-type="const" href="#dfn-loading" id="ref-for-dfn-loading-1">LOADING</a> = 1;
+  <span class="kt">const</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-short"><span class="kt">unsigned</span> <span class="kt">short</span></a> <a class="nv idl-code" data-link-type="const" href="#dfn-done" id="ref-for-dfn-done-1">DONE</a> = 2;
 
 
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">unsigned</span> <span class="kt">short</span> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="unsigned short" href="#dfn-readyState" id="ref-for-dfn-readyState-1">readyState</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-short"><span class="kt">unsigned</span> <span class="kt">short</span></a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="unsigned short" href="#dfn-readyState" id="ref-for-dfn-readyState-1">readyState</a>;
 
   // File or Blob data
-  <span class="kt">readonly</span> <span class="kt">attribute</span> (<span class="kt">DOMString</span> <span class="kt">or</span> <span class="kt">ArrayBuffer</span>)? <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="(DOMString or ArrayBuffer)?" href="#dfn-result" id="ref-for-dfn-result-1">result</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> (<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt">DOMString</span></a> <span class="kt">or</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-ArrayBuffer"><span class="kt">ArrayBuffer</span></a>)? <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="(DOMString or ArrayBuffer)?" href="#dfn-result" id="ref-for-dfn-result-1">result</a>;
 
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a>? <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="DOMException?" href="#dfn-error" id="ref-for-dfn-error-2">error</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a>? <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="DOMException?" href="#dfn-error" id="ref-for-dfn-error-2">error</a>;
 
   // event handler content attributes
   <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadstart" id="ref-for-dfn-onloadstart-1">onloadstart</a>;
@@ -2602,7 +2602,7 @@ If <code class="idl"><a data-link-type="idl" href="#dfn-readyState" id="ref-for-
      <p>Set the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <code class="idl"><a data-link-type="idl" href="#dfn-readyState" id="ref-for-dfn-readyState-25">readyState</a></code> to <code class="idl"><a data-link-type="idl" href="#dfn-done" id="ref-for-dfn-done-7">DONE</a></code> and <code class="idl"><a data-link-type="idl" href="#dfn-result" id="ref-for-dfn-result-15">result</a></code> to null if it is not already set to null.</p>
     <li data-md="">
      <p>Set the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dfn-error" id="ref-for-dfn-error-3">error</a></code> attribute on the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>;
-on getting, the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dfn-error" id="ref-for-dfn-error-4">error</a></code> attribute must be a a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> object
+on getting, the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dfn-error" id="ref-for-dfn-error-4">error</a></code> attribute must be a a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> object
 that corresponds to the <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-13">failure reason</a>. <a data-link-type="dfn" href="#fire-a-progress-event" id="ref-for-fire-a-progress-event-17">Fire a progress event</a> called <code class="idl"><a class="idl-code" data-link-type="event" href="#dfn-error-event" id="ref-for-dfn-error-event-3">error</a></code> at the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>.</p>
     <li data-md="">
      <p>Unless <code class="idl"><a data-link-type="idl" href="#dfn-readyState" id="ref-for-dfn-readyState-26">readyState</a></code> is <code class="idl"><a data-link-type="idl" href="#dfn-loading" id="ref-for-dfn-loading-19">LOADING</a></code>, <a data-link-type="dfn" href="#fire-a-progress-event" id="ref-for-fire-a-progress-event-18">fire a progress event</a> called <code class="idl"><a data-link-type="idl" href="#dfn-loadend-event" id="ref-for-dfn-loadend-event-10">loadend</a></code> at the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>.
@@ -2654,7 +2654,7 @@ then set <var>encoding</var> to null.</p>
 and the <code class="idl"><a data-link-type="idl" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-5">blob</a></code> argument’s <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type-18">type</a></code> attribute is present,
 and it uses a Charset Parameter <a data-link-type="biblio" href="#biblio-rfc2046">[RFC2046]</a>,
 set <var>encoding</var> to the result of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#concept-encoding-get">getting an encoding</a> for the portion of the Charset Parameter that is a <i>label</i> of an encoding.</p>
-     <div class="example" id="example-e6bec91d"><a class="self-link" href="#example-e6bec91d"></a> If <code>blob</code> has a <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type-19">type</a></code> attribute of <code>text/plain;charset=utf-8</code> then <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#concept-encoding-get">getting an encoding</a> is run using <code>"utf-8"</code> as the label.
+     <div class="example" id="example-d50f3161"><a class="self-link" href="#example-d50f3161"></a> If <code>blob</code> has a <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type-19">type</a></code> attribute of <code>text/plain;charset=utf-8</code> then <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#concept-encoding-get">getting an encoding</a> is run using <code>"utf-8"</code> as the label.
   Note that user agents must parse and extract the portion of the Charset Parameter that constitutes a <i>label</i> of an encoding. </div>
     <li data-md="">
      <p>If the <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#concept-encoding-get">getting an encoding</a> steps above return failure,
@@ -2739,7 +2739,7 @@ UNLESS any of the following are true:</p>
 </span>reader<span class="p">.</span>readAsText<span class="p">(</span>file<span class="p">)</span><span class="p">;</span>
 reader<span class="p">.</span>onload <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span><span class="p">{</span>reader<span class="p">.</span>readAsText<span class="p">(</span>alternateFile<span class="p">)</span><span class="p">;</span><span class="p">}</span>
 
-<span class="p">.</span><span class="p">.</span><span class="p">.</span><span class="p">.</span><span class="p">.</span>
+<span class="p">...</span><span class="p">.</span><span class="p">.</span>
 
 <span class="c1">//... the loadend event must not fire for the first read
 </span>
@@ -2771,10 +2771,10 @@ Workers can avail of both the asynchronous API (the <code class="idl"><a data-li
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="dfn-FileReaderSync">FileReaderSync</dfn> {
   // Synchronously return strings
 
-  <span class="kt">ArrayBuffer</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsArrayBufferSync" id="ref-for-dfn-readAsArrayBufferSync-1">readAsArrayBuffer</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-58">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-6">blob</a>);
-  <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsBinaryStringSync" id="ref-for-dfn-readAsBinaryStringSync-1">readAsBinaryString</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-59">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-7">blob</a>);
-  <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsTextSync" id="ref-for-dfn-readAsTextSync-2">readAsText</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-60">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-8">blob</a>, <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-label" id="ref-for-dfn-label-4">label</a>);
-  <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsDataURLSync" id="ref-for-dfn-readAsDataURLSync-1">readAsDataURL</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-61">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-9">blob</a>);
+  <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-ArrayBuffer"><span class="kt">ArrayBuffer</span></a> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsArrayBufferSync" id="ref-for-dfn-readAsArrayBufferSync-1">readAsArrayBuffer</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-58">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-6">blob</a>);
+  <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt">DOMString</span></a> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsBinaryStringSync" id="ref-for-dfn-readAsBinaryStringSync-1">readAsBinaryString</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-59">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-7">blob</a>);
+  <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt">DOMString</span></a> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsTextSync" id="ref-for-dfn-readAsTextSync-2">readAsText</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-60">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-8">blob</a>, <span class="kt">optional</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt">DOMString</span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-label" id="ref-for-dfn-label-4">label</a>);
+  <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt">DOMString</span></a> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsDataURLSync" id="ref-for-dfn-readAsDataURLSync-1">readAsDataURL</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-61">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-9">blob</a>);
 };
 </pre>
    <h5 class="heading settled" data-level="6.6.1.1" id="filereadersyncConstrctr"><span class="secno">6.6.1.1. </span><span class="content"> Constructors</span><a class="self-link" href="#filereadersyncConstrctr"></a></h5>
@@ -2887,7 +2887,7 @@ or <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappap
    <p>Synchronous read methods <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> exceptions of the type in the table below
 if there has been an error owing to a particular <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-14">failure reason</a>.</p>
    <p>Asynchronous read methods use the <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="attribute" data-export="" id="dfn-error">error</dfn> attribute of the <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader-20">FileReader</a></code> object,
-which must return a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> object of the most appropriate type from the table below
+which must return a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> object of the most appropriate type from the table below
 if there has been an error owing to a particular <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason-15">failure reason</a>,
 or otherwise return null.</p>
    <table class="data">
@@ -3127,13 +3127,13 @@ Network errors are used when:</p>
    <h4 class="heading settled" data-level="8.4.4" id="ProtocolExamples"><span class="secno">8.4.4. </span><span class="content"> Sample Request and Response Headers</span><a class="self-link" href="#ProtocolExamples"></a></h4>
    <p><em>This section is informative.</em></p>
    <p>This section provides sample exchanges between web applications and user agents using <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-10">Blob URLs</a>.
-A <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request">request</a> can be triggered using HTML markup of the sort <code class="lang-markup highlight"><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"blob:http://example.org:8080/550e8400-e29b-41d4-a716-446655440000"</span><span class="nt">></span></code>.
+A <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request">request</a> can be triggered using HTML markup of the sort <code class="lang-markup highlight"><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">"blob:http://example.org:8080/550e8400-e29b-41d4-a716-446655440000"</span><span class="p">></span></code>.
 These examples merely illustrate the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request">request</a> and <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response">response</a>;
 web developers are not likely to interact with all the headers,
 but the <code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#dom-xmlhttprequest-getallresponseheaders">getAllResponseHeaders()</a></code> method of <code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#xmlhttprequest">XMLHttpRequest</a></code>, if used,
 will show relevant <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response">response</a> headers.</p>
-   <div class="example" id="example-2129ccb8">
-    <a class="self-link" href="#example-2129ccb8"></a> <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request">Requests</a> could look like this: 
+   <div class="example" id="example-d36c2f97">
+    <a class="self-link" href="#example-d36c2f97"></a> <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request">Requests</a> could look like this: 
 <pre>GET http://example.org:8080/550e8400-e29b-41d4-a716-446655440000
 </pre>
     <p>If the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-83">Blob</a></code> has an affiliated media type <a data-link-type="biblio" href="#biblio-rfc2046">[RFC2046]</a> represented by its <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type-23">type</a></code> attribute,
@@ -3158,8 +3158,8 @@ user agents must act as if a <a data-link-type="dfn" href="https://fetch.spec.wh
 This section describes a supplemental interface to the URL specification <a data-link-type="biblio" href="#biblio-url">[URL]</a> and presents methods for <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-14">Blob URL</a> creation and revocation.</p>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=(<span class="n">Window</span>,<span class="n">DedicatedWorker</span>,<span class="n">SharedWorker</span>)]
 <span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://url.spec.whatwg.org/#url">URL</a> {
-  <span class="kt">static</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-5">createObjectURL</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-85">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-10">blob</a>);
-  <span class="kt">static</span> <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL-2">revokeObjectURL</a>(<span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-urlarg" id="ref-for-dfn-urlarg-1">url</a>);
+  <span class="kt">static</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt">DOMString</span></a> <a class="nv idl-code" data-link-type="method" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-5">createObjectURL</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob-85">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob-10">blob</a>);
+  <span class="kt">static</span> <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL-2">revokeObjectURL</a>(<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt">DOMString</span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-urlarg" id="ref-for-dfn-urlarg-1">url</a>);
 };
 </pre>
    <p>ECMAScript user agents of this specification must ensure
@@ -3198,8 +3198,8 @@ since the entry has been removed from the <a data-link-type="dfn" href="#BlobURL
      </ol>
      <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="URL/revokeObjectURL(url)" data-dfn-type="argument" data-export="" id="dfn-urlarg">url</dfn> argument to the <code class="idl"><a data-link-type="idl" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL-3">revokeObjectURL()</a></code> method
     is a <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-18">Blob URL</a> string.</p>
-     <div class="example" id="example-a97f8a33">
-      <a class="self-link" href="#example-a97f8a33"></a> In the example below, <code>window1</code> and <code>window2</code> are separate,
+     <div class="example" id="example-93c45da0">
+      <a class="self-link" href="#example-93c45da0"></a> In the example below, <code>window1</code> and <code>window2</code> are separate,
       but in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#same-origin">same origin</a>; <code>window2</code> could be an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-iframe-element">iframe</a></code> inside <code>window1</code>. 
 <pre class="lang-javascript highlight">myurl <span class="o">=</span> window1<span class="p">.</span>URL<span class="p">.</span>createObjectURL<span class="p">(</span>myblob<span class="p">)</span><span class="p">;</span>
 window2<span class="p">.</span>URL<span class="p">.</span>revokeObjectURL<span class="p">(</span>myurl<span class="p">)</span><span class="p">;</span>
@@ -3221,8 +3221,8 @@ img1<span class="p">.</span>src <span class="o">=</span> url<span class="p">;</s
 img2<span class="p">.</span>src <span class="o">=</span> url<span class="p">;</span>
 </pre>
    </div>
-   <div class="example" id="example-7d838eae">
-    <a class="self-link" href="#example-7d838eae"></a> In the example below, <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL-5">revokeObjectURL()</a></code></code> is explicitly called. 
+   <div class="example" id="example-e25079b1">
+    <a class="self-link" href="#example-e25079b1"></a> In the example below, <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL-5">revokeObjectURL()</a></code></code> is explicitly called. 
 <pre class="lang-javascript highlight"><span class="kd">var</span> blobURLref <span class="o">=</span> URL<span class="p">.</span>createObjectURL<span class="p">(</span>file<span class="p">)</span><span class="p">;</span>
 img1 <span class="o">=</span> <span class="k">new</span> Image<span class="p">(</span><span class="p">)</span><span class="p">;</span>
 img2 <span class="o">=</span> <span class="k">new</span> Image<span class="p">(</span><span class="p">)</span><span class="p">;</span>
@@ -3249,7 +3249,7 @@ While not restricting number of uses of the <a data-link-type="dfn" href="#blob-
 it increases the likelihood of leaks;
 developers should pair it with a corresponding call to <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL-6">revokeObjectURL()</a></code></code>.</p>
    <h3 class="heading settled dfn-paneled" data-dfn-for="blob url" data-dfn-type="dfn" data-export="" data-level="8.6" data-lt="lifetime|lifetime stipulation" id="lifeTime"><span class="secno">8.6. </span><span class="content"> Lifetime of Blob URLs</span></h3>
-   <p>A global object which exposes <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-7">createObjectURL()</a></code></code> must maintain a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="BlobURLStore">Blob URL Store</dfn> which is a list of <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-25">Blob URLs</a> created by the <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-8">createObjectURL()</a></code></code> method,
+   <p>A global object which exposes <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-7">createObjectURL()</a></code></code> must maintain a <dfn class="dfn-paneled" data-dfn-type="dfn" data-export="" id="BlobURLStore">Blob URL Store</dfn> which is a list of <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-25">Blob URLs</a> created by the <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL-8">createObjectURL()</a></code></code> method,
 and the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-87">Blob</a></code> resource that each refers to.</p>
    <p>When this specification says to <dfn class="dfn-paneled" data-dfn-for="blob url store" data-dfn-type="dfn" data-lt="add an entry|add the entry|add an entry to the Blob URL Store|add the entry to the Blob URL Store" data-noexport="" id="add-an-entry">add an entry to the Blob URL Store</dfn> for a <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-26">Blob URL</a> and a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-88">Blob</a></code> input,
 the user-agent must add the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url-27">Blob URL</a> and a reference to the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob-89">Blob</a></code> it refers to to the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore-7">Blob URL Store</a>.</p>
@@ -3598,7 +3598,6 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
      <li><a href="https://html.spec.whatwg.org/multipage/interaction.html#datatransfer">DataTransfer</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a>
      <li><a href="https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement">HTMLInputElement</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#structuredclone">StructuredClone</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#window">Window</a>
      <li><a href="https://html.spec.whatwg.org/multipage/workers.html#workerglobalscope">WorkerGlobalScope</a>
      <li><a href="https://html.spec.whatwg.org/multipage/semantics.html#the-a-element">a</a>
@@ -3654,7 +3653,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
      <li><a href="https://heycam.github.io/webidl/#idl-ArrayBuffer">ArrayBuffer</a>
      <li><a href="https://heycam.github.io/webidl/#BufferSource">BufferSource</a>
      <li><a href="https://heycam.github.io/webidl/#Clamp">Clamp</a>
-     <li><a href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a>
+     <li><a href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a>
      <li><a href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a>
      <li><a href="https://heycam.github.io/webidl/#Exposed">Exposed</a>
      <li><a href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a>
@@ -3668,6 +3667,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
      <li><a href="https://heycam.github.io/webidl/#dfn-throw">throw</a>
      <li><a href="https://heycam.github.io/webidl/#idl-unsigned-long">unsigned long</a>
      <li><a href="https://heycam.github.io/webidl/#idl-unsigned-long-long">unsigned long long</a>
+     <li><a href="https://heycam.github.io/webidl/#idl-unsigned-short">unsigned short</a>
     </ul>
    <li>
     <a data-link-type="biblio">[XHR]</a> defines the following terms:
@@ -3725,103 +3725,103 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
    <dt id="biblio-rfc1630">[RFC1630]
    <dd>T. Berners-Lee. <a href="https://tools.ietf.org/html/rfc1630">Universal Resource Identifiers in WWW: A Unifying Syntax for the Expression of Names and Addresses of Objects on the Network as used in the World-Wide Web</a>. June 1994. Informational. URL: <a href="https://tools.ietf.org/html/rfc1630">https://tools.ietf.org/html/rfc1630</a>
    <dt id="biblio-rfc1738">[RFC1738]
-   <dd>T. Berners-Lee; L. Masinter; M. McCahill. <a href="https://tools.ietf.org/html/rfc1738">Uniform Resource Locators (URL)</a>. December 1994. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc1738">https://tools.ietf.org/html/rfc1738</a>
+   <dd>P. Hoffman. <a href="https://tools.ietf.org/html/rfc4266">The gopher URI Scheme</a>. November 2005. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc4266">https://tools.ietf.org/html/rfc4266</a>
    <dt id="biblio-rfc3986">[RFC3986]
    <dd>T. Berners-Lee; R. Fielding; L. Masinter. <a href="https://tools.ietf.org/html/rfc3986">Uniform Resource Identifier (URI): Generic Syntax</a>. January 2005. Internet Standard. URL: <a href="https://tools.ietf.org/html/rfc3986">https://tools.ietf.org/html/rfc3986</a>
    <dt id="biblio-rfc4122">[RFC4122]
    <dd>P. Leach; M. Mealling; R. Salz. <a href="https://tools.ietf.org/html/rfc4122">A Universally Unique IDentifier (UUID) URN Namespace</a>. July 2005. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc4122">https://tools.ietf.org/html/rfc4122</a>
    <dt id="biblio-webrtc">[WebRTC]
-   <dd>Adam Bergkvist; et al. <a href="https://w3c.github.io/webrtc-pc/">WebRTC 1.0: Real-time Communication Between Browsers</a>. URL: <a href="https://w3c.github.io/webrtc-pc/">https://w3c.github.io/webrtc-pc/</a>
+   <dd>Adam Bergkvist; et al. <a href="https://www.w3.org/TR/webrtc/">WebRTC 1.0: Real-time Communication Between Browsers</a>. URL: <a href="https://www.w3.org/TR/webrtc/">https://www.w3.org/TR/webrtc/</a>
    <dt id="biblio-workers">[Workers]
-   <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/workers.html">Web Workers</a>. URL: <a href="https://html.spec.whatwg.org/multipage/workers.html">https://html.spec.whatwg.org/multipage/workers.html</a>
+   <dd>Ian Hickson. <a href="https://www.w3.org/TR/workers/">Web Workers</a>. URL: <a href="https://www.w3.org/TR/workers/">https://www.w3.org/TR/workers/</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
-<pre class="idl def">[<a class="nv" href="#dom-blob-blob">Constructor</a>(<span class="kt">optional</span> <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#typedefdef-blobpart">BlobPart</a>> <a class="nv idl-code" data-link-type="argument" href="#dfn-blobParts">blobParts</a>, <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dfn-BlobPropertyBag">BlobPropertyBag</a> <a class="nv" href="#dom-blob-blob-blobparts-options-options">options</a>),
-<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=(<span class="n">Window</span>,<span class="n">Worker</span>)]
-<span class="kt">interface</span> <a class="nv" href="#dfn-Blob">Blob</a> {
+<pre class="idl highlight def">[<a class="nv" href="#dom-blob-blob"><span class="nv">Constructor</span></a>(<span class="kt"><span class="kt">optional</span></span> <span class="kt"><span class="kt">sequence</span></span>&lt;<a class="n" data-link-type="idl-name" href="#typedefdef-blobpart"><span class="n">BlobPart</span></a>> <a class="nv idl-code" data-link-type="argument" href="#dfn-blobParts"><span class="nv">blobParts</span></a>, <span class="kt"><span class="kt">optional</span></span> <a class="n" data-link-type="idl-name" href="#dfn-BlobPropertyBag"><span class="n">BlobPropertyBag</span></a> <a class="nv" href="#dom-blob-blob-blobparts-options-options"><span class="nv">options</span></a>),
+<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed"><span class="nv">Exposed</span></a>=(<span class="n"><span class="n">Window</span></span>,<span class="n"><span class="n">Worker</span></span>)]
+<span class="kt"><span class="kt">interface</span></span> <a class="nv" href="#dfn-Blob"><span class="nv">Blob</span></a> {
 
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="unsigned long long" href="#dfn-size">size</a>;
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="DOMString" href="#dfn-type">type</a>;
+  <span class="kt"><span class="kt">readonly</span></span> <span class="kt"><span class="kt">attribute</span></span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long-long"><span class="kt"><span class="kt">unsigned</span></span> <span class="kt"><span class="kt">long</span></span> <span class="kt"><span class="kt">long</span></span></a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="unsigned long long" href="#dfn-size"><span class="nv">size</span></a>;
+  <span class="kt"><span class="kt">readonly</span></span> <span class="kt"><span class="kt">attribute</span></span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt"><span class="kt">DOMString</span></span></a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="DOMString" href="#dfn-type"><span class="nv">type</span></a>;
 
   // slice Blob into byte-ranged chunks
-  <a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="method" href="#dfn-slice">slice</a>([<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Clamp">Clamp</a>] <span class="kt">optional</span> <span class="kt">long</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-start">start</a>,
-            [<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Clamp">Clamp</a>] <span class="kt">optional</span> <span class="kt">long</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-end">end</a>,
-            <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-contentTypeBlob">contentType</a>);
+  <a class="n" data-link-type="idl-name" href="#dfn-Blob"><span class="n">Blob</span></a> <a class="nv idl-code" data-link-type="method" href="#dfn-slice"><span class="nv">slice</span></a>([<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Clamp"><span class="nv">Clamp</span></a>] <span class="kt"><span class="kt">optional</span></span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long"><span class="kt"><span class="kt">long</span></span> <span class="kt"><span class="kt">long</span></span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-start"><span class="nv">start</span></a>,
+            [<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Clamp"><span class="nv">Clamp</span></a>] <span class="kt"><span class="kt">optional</span></span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long"><span class="kt"><span class="kt">long</span></span> <span class="kt"><span class="kt">long</span></span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-end"><span class="nv">end</span></a>,
+            <span class="kt"><span class="kt">optional</span></span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt"><span class="kt">DOMString</span></span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-contentTypeBlob"><span class="nv">contentType</span></a>);
 };
 
-<span class="kt">dictionary</span> <a class="nv" href="#dfn-BlobPropertyBag">BlobPropertyBag</a> {
-  <span class="kt">DOMString</span> <a class="nv idl-code" data-default="&quot;&quot;" data-link-type="dict-member" data-type="DOMString " href="#dfn-BPtype">type</a> = "";
+<span class="kt"><span class="kt">dictionary</span></span> <a class="nv" href="#dfn-BlobPropertyBag"><span class="nv">BlobPropertyBag</span></a> {
+  <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt"><span class="kt">DOMString</span></span></a> <a class="nv idl-code" data-default="&quot;&quot;" data-link-type="dict-member" data-type="DOMString " href="#dfn-BPtype"><span class="nv">type</span></a> = "";
 };
 
-<span class="kt">typedef</span> (<a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#BufferSource">BufferSource</a> <span class="kt">or</span> <a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <span class="kt">or</span> <span class="kt">USVString</span>) <a class="nv" href="#typedefdef-blobpart">BlobPart</a>;
+<span class="kt"><span class="kt">typedef</span></span> (<a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#BufferSource"><span class="n">BufferSource</span></a> <span class="kt"><span class="kt">or</span></span> <a class="n" data-link-type="idl-name" href="#dfn-Blob"><span class="n">Blob</span></a> <span class="kt"><span class="kt">or</span></span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><span class="kt"><span class="kt">USVString</span></span></a>) <a class="nv" href="#typedefdef-blobpart"><span class="nv">BlobPart</span></a>;
 
-[<a class="nv" href="#dom-file-file">Constructor</a>(<span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#typedefdef-blobpart">BlobPart</a>> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBits">fileBits</a>,
-             <span class="kt">USVString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileName">fileName</a>,
-             <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dfn-FilePropertyBag">FilePropertyBag</a> <a class="nv" href="#dom-file-file-filebits-filename-options-options">options</a>),
-<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=(<span class="n">Window</span>,<span class="n">Worker</span>)]
-<span class="kt">interface</span> <a class="nv" href="#dfn-file">File</a> : <a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> {
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="DOMString" href="#dfn-name">name</a>;
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">long</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="long long" href="#dfn-lastModified">lastModified</a>;
+[<a class="nv" href="#dom-file-file"><span class="nv">Constructor</span></a>(<span class="kt"><span class="kt">sequence</span></span>&lt;<a class="n" data-link-type="idl-name" href="#typedefdef-blobpart"><span class="n">BlobPart</span></a>> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBits"><span class="nv">fileBits</span></a>,
+             <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><span class="kt"><span class="kt">USVString</span></span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileName"><span class="nv">fileName</span></a>,
+             <span class="kt"><span class="kt">optional</span></span> <a class="n" data-link-type="idl-name" href="#dfn-FilePropertyBag"><span class="n">FilePropertyBag</span></a> <a class="nv" href="#dom-file-file-filebits-filename-options-options"><span class="nv">options</span></a>),
+<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed"><span class="nv">Exposed</span></a>=(<span class="n"><span class="n">Window</span></span>,<span class="n"><span class="n">Worker</span></span>)]
+<span class="kt"><span class="kt">interface</span></span> <a class="nv" href="#dfn-file"><span class="nv">File</span></a> : <a class="n" data-link-type="idl-name" href="#dfn-Blob"><span class="n">Blob</span></a> {
+  <span class="kt"><span class="kt">readonly</span></span> <span class="kt"><span class="kt">attribute</span></span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt"><span class="kt">DOMString</span></span></a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="DOMString" href="#dfn-name"><span class="nv">name</span></a>;
+  <span class="kt"><span class="kt">readonly</span></span> <span class="kt"><span class="kt">attribute</span></span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long"><span class="kt"><span class="kt">long</span></span> <span class="kt"><span class="kt">long</span></span></a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="long long" href="#dfn-lastModified"><span class="nv">lastModified</span></a>;
 };
 
-<span class="kt">dictionary</span> <a class="nv" href="#dfn-FilePropertyBag">FilePropertyBag</a> : <a class="n" data-link-type="idl-name" href="#dfn-BlobPropertyBag">BlobPropertyBag</a> {
-  <span class="kt">long</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="dict-member" data-type="long long " href="#dfn-FPdate">lastModified</a>;
+<span class="kt"><span class="kt">dictionary</span></span> <a class="nv" href="#dfn-FilePropertyBag"><span class="nv">FilePropertyBag</span></a> : <a class="n" data-link-type="idl-name" href="#dfn-BlobPropertyBag"><span class="n">BlobPropertyBag</span></a> {
+  <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long"><span class="kt"><span class="kt">long</span></span> <span class="kt"><span class="kt">long</span></span></a> <a class="nv idl-code" data-link-type="dict-member" data-type="long long " href="#dfn-FPdate"><span class="nv">lastModified</span></a>;
 };
 
-[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=(<span class="n">Window</span>,<span class="n">Worker</span>)]
-<span class="kt">interface</span> <a class="nv" href="#dfn-filelist">FileList</a> {
-  <span class="kt">getter</span> <a class="n" data-link-type="idl-name" href="#dfn-file">File</a>? <a class="nv idl-code" data-link-type="method" href="#dfn-item">item</a>(<span class="kt">unsigned</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-index">index</a>);
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">unsigned</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="unsigned long" href="#dfn-length">length</a>;
+[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed"><span class="nv">Exposed</span></a>=(<span class="n"><span class="n">Window</span></span>,<span class="n"><span class="n">Worker</span></span>)]
+<span class="kt"><span class="kt">interface</span></span> <a class="nv" href="#dfn-filelist"><span class="nv">FileList</span></a> {
+  <span class="kt"><span class="kt">getter</span></span> <a class="n" data-link-type="idl-name" href="#dfn-file"><span class="n">File</span></a>? <a class="nv idl-code" data-link-type="method" href="#dfn-item"><span class="nv">item</span></a>(<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long"><span class="kt"><span class="kt">unsigned</span></span> <span class="kt"><span class="kt">long</span></span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-index"><span class="nv">index</span></a>);
+  <span class="kt"><span class="kt">readonly</span></span> <span class="kt"><span class="kt">attribute</span></span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long"><span class="kt"><span class="kt">unsigned</span></span> <span class="kt"><span class="kt">long</span></span></a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="unsigned long" href="#dfn-length"><span class="nv">length</span></a>;
 };
 
-[<a class="nv" href="#dom-filereader-filereader">Constructor</a>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=(<span class="n">Window</span>,<span class="n">Worker</span>)]
-<span class="kt">interface</span> <a class="nv" href="#dfn-filereader">FileReader</a>: <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#eventtarget">EventTarget</a> {
+[<a class="nv" href="#dom-filereader-filereader"><span class="nv">Constructor</span></a>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed"><span class="nv">Exposed</span></a>=(<span class="n"><span class="n">Window</span></span>,<span class="n"><span class="n">Worker</span></span>)]
+<span class="kt"><span class="kt">interface</span></span> <a class="nv" href="#dfn-filereader"><span class="nv">FileReader</span></a>: <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#eventtarget"><span class="n">EventTarget</span></a> {
 
   // async read methods
-  <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsArrayBuffer">readAsArrayBuffer</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
-  <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsBinaryString">readAsBinaryString</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
-  <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsText">readAsText</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>, <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-label">label</a>);
-  <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsDataURL">readAsDataURL</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
+  <span class="kt"><span class="kt">void</span></span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsArrayBuffer"><span class="nv">readAsArrayBuffer</span></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob"><span class="n">Blob</span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob"><span class="nv">blob</span></a>);
+  <span class="kt"><span class="kt">void</span></span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsBinaryString"><span class="nv">readAsBinaryString</span></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob"><span class="n">Blob</span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob"><span class="nv">blob</span></a>);
+  <span class="kt"><span class="kt">void</span></span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsText"><span class="nv">readAsText</span></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob"><span class="n">Blob</span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob"><span class="nv">blob</span></a>, <span class="kt"><span class="kt">optional</span></span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt"><span class="kt">DOMString</span></span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-label"><span class="nv">label</span></a>);
+  <span class="kt"><span class="kt">void</span></span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsDataURL"><span class="nv">readAsDataURL</span></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob"><span class="n">Blob</span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob"><span class="nv">blob</span></a>);
 
-  <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-abort">abort</a>();
+  <span class="kt"><span class="kt">void</span></span> <a class="nv idl-code" data-link-type="method" href="#dfn-abort"><span class="nv">abort</span></a>();
 
   // states
-  <span class="kt">const</span> <span class="kt">unsigned</span> <span class="kt">short</span> <a class="nv idl-code" data-link-type="const" href="#dfn-empty">EMPTY</a> = 0;
-  <span class="kt">const</span> <span class="kt">unsigned</span> <span class="kt">short</span> <a class="nv idl-code" data-link-type="const" href="#dfn-loading">LOADING</a> = 1;
-  <span class="kt">const</span> <span class="kt">unsigned</span> <span class="kt">short</span> <a class="nv idl-code" data-link-type="const" href="#dfn-done">DONE</a> = 2;
+  <span class="kt"><span class="kt">const</span></span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-short"><span class="kt"><span class="kt">unsigned</span></span> <span class="kt"><span class="kt">short</span></span></a> <a class="nv idl-code" data-link-type="const" href="#dfn-empty"><span class="nv">EMPTY</span></a> = 0;
+  <span class="kt"><span class="kt">const</span></span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-short"><span class="kt"><span class="kt">unsigned</span></span> <span class="kt"><span class="kt">short</span></span></a> <a class="nv idl-code" data-link-type="const" href="#dfn-loading"><span class="nv">LOADING</span></a> = 1;
+  <span class="kt"><span class="kt">const</span></span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-short"><span class="kt"><span class="kt">unsigned</span></span> <span class="kt"><span class="kt">short</span></span></a> <a class="nv idl-code" data-link-type="const" href="#dfn-done"><span class="nv">DONE</span></a> = 2;
 
 
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">unsigned</span> <span class="kt">short</span> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="unsigned short" href="#dfn-readyState">readyState</a>;
+  <span class="kt"><span class="kt">readonly</span></span> <span class="kt"><span class="kt">attribute</span></span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-short"><span class="kt"><span class="kt">unsigned</span></span> <span class="kt"><span class="kt">short</span></span></a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="unsigned short" href="#dfn-readyState"><span class="nv">readyState</span></a>;
 
   // File or Blob data
-  <span class="kt">readonly</span> <span class="kt">attribute</span> (<span class="kt">DOMString</span> <span class="kt">or</span> <span class="kt">ArrayBuffer</span>)? <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="(DOMString or ArrayBuffer)?" href="#dfn-result">result</a>;
+  <span class="kt"><span class="kt">readonly</span></span> <span class="kt"><span class="kt">attribute</span></span> (<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt"><span class="kt">DOMString</span></span></a> <span class="kt"><span class="kt">or</span></span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-ArrayBuffer"><span class="kt"><span class="kt">ArrayBuffer</span></span></a>)? <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="(DOMString or ArrayBuffer)?" href="#dfn-result"><span class="nv">result</span></a>;
 
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a>? <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="DOMException?" href="#dfn-error">error</a>;
+  <span class="kt"><span class="kt">readonly</span></span> <span class="kt"><span class="kt">attribute</span></span> <a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-DOMException"><span class="n">DOMException</span></a>? <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="DOMException?" href="#dfn-error"><span class="nv">error</span></a>;
 
   // event handler content attributes
-  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadstart">onloadstart</a>;
-  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onprogress">onprogress</a>;
-  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onload">onload</a>;
-  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onabort">onabort</a>;
-  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onerror">onerror</a>;
-  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a> <a class="nv idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadend">onloadend</a>;
+  <span class="kt"><span class="kt">attribute</span></span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><span class="n">EventHandler</span></a> <a class="nv idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadstart"><span class="nv">onloadstart</span></a>;
+  <span class="kt"><span class="kt">attribute</span></span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><span class="n">EventHandler</span></a> <a class="nv idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onprogress"><span class="nv">onprogress</span></a>;
+  <span class="kt"><span class="kt">attribute</span></span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><span class="n">EventHandler</span></a> <a class="nv idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onload"><span class="nv">onload</span></a>;
+  <span class="kt"><span class="kt">attribute</span></span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><span class="n">EventHandler</span></a> <a class="nv idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onabort"><span class="nv">onabort</span></a>;
+  <span class="kt"><span class="kt">attribute</span></span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><span class="n">EventHandler</span></a> <a class="nv idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onerror"><span class="nv">onerror</span></a>;
+  <span class="kt"><span class="kt">attribute</span></span> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><span class="n">EventHandler</span></a> <a class="nv idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadend"><span class="nv">onloadend</span></a>;
 
 };
 
-[<a class="nv" href="#dom-filereadersync-filereadersync">Constructor</a>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=(<span class="n">DedicatedWorker</span>,<span class="n">SharedWorker</span>)]
-<span class="kt">interface</span> <a class="nv" href="#dfn-FileReaderSync">FileReaderSync</a> {
+[<a class="nv" href="#dom-filereadersync-filereadersync"><span class="nv">Constructor</span></a>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed"><span class="nv">Exposed</span></a>=(<span class="n"><span class="n">DedicatedWorker</span></span>,<span class="n"><span class="n">SharedWorker</span></span>)]
+<span class="kt"><span class="kt">interface</span></span> <a class="nv" href="#dfn-FileReaderSync"><span class="nv">FileReaderSync</span></a> {
   // Synchronously return strings
 
-  <span class="kt">ArrayBuffer</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsArrayBufferSync">readAsArrayBuffer</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
-  <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsBinaryStringSync">readAsBinaryString</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
-  <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsTextSync">readAsText</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>, <span class="kt">optional</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-label">label</a>);
-  <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsDataURLSync">readAsDataURL</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
+  <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-ArrayBuffer"><span class="kt"><span class="kt">ArrayBuffer</span></span></a> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsArrayBufferSync"><span class="nv">readAsArrayBuffer</span></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob"><span class="n">Blob</span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob"><span class="nv">blob</span></a>);
+  <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt"><span class="kt">DOMString</span></span></a> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsBinaryStringSync"><span class="nv">readAsBinaryString</span></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob"><span class="n">Blob</span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob"><span class="nv">blob</span></a>);
+  <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt"><span class="kt">DOMString</span></span></a> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsTextSync"><span class="nv">readAsText</span></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob"><span class="n">Blob</span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob"><span class="nv">blob</span></a>, <span class="kt"><span class="kt">optional</span></span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt"><span class="kt">DOMString</span></span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-label"><span class="nv">label</span></a>);
+  <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt"><span class="kt">DOMString</span></span></a> <a class="nv idl-code" data-link-type="method" href="#dfn-readAsDataURLSync"><span class="nv">readAsDataURL</span></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob"><span class="n">Blob</span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob"><span class="nv">blob</span></a>);
 };
 
-[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=(<span class="n">Window</span>,<span class="n">DedicatedWorker</span>,<span class="n">SharedWorker</span>)]
-<span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://url.spec.whatwg.org/#url">URL</a> {
-  <span class="kt">static</span> <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="method" href="#dfn-createObjectURL">createObjectURL</a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob">blob</a>);
-  <span class="kt">static</span> <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dfn-revokeObjectURL">revokeObjectURL</a>(<span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="argument" href="#dfn-urlarg">url</a>);
+[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed"><span class="nv">Exposed</span></a>=(<span class="n"><span class="n">Window</span></span>,<span class="n"><span class="n">DedicatedWorker</span></span>,<span class="n"><span class="n">SharedWorker</span></span>)]
+<span class="kt"><span class="kt">partial</span></span> <span class="kt"><span class="kt">interface</span></span> <a class="nv idl-code" data-link-type="interface" href="https://url.spec.whatwg.org/#url"><span class="nv">URL</span></a> {
+  <span class="kt"><span class="kt">static</span></span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt"><span class="kt">DOMString</span></span></a> <a class="nv idl-code" data-link-type="method" href="#dfn-createObjectURL"><span class="nv">createObjectURL</span></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob"><span class="n">Blob</span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-fileBlob"><span class="nv">blob</span></a>);
+  <span class="kt"><span class="kt">static</span></span> <span class="kt"><span class="kt">void</span></span> <a class="nv idl-code" data-link-type="method" href="#dfn-revokeObjectURL"><span class="nv">revokeObjectURL</span></a>(<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><span class="kt"><span class="kt">DOMString</span></span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-urlarg"><span class="nv">url</span></a>);
 };
 
 </pre>
