@@ -1425,7 +1425,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">File API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-04-29">29 April 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-05-11">11 May 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1440,6 +1440,8 @@ pre.idl.highlight { color: #708090; }
      <dt class="editor">Editors:
      <dd class="editor p-author h-card vcard"><a class="p-name fn u-url url" href="http://arunranga.com/">Arun Ranganathan</a> (<span class="p-org org">Mozilla Corporation</span>) <a class="u-email email" href="mailto:arun@mozilla.com">arun@mozilla.com</a>
      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:mek@chromium.org">Marijn Kruisselbrink</a> (<span class="p-org org">Google</span>)
+     <dt>Tests:
+     <dd><span><a href="https://github.com/w3c/web-platform-tests/tree/master/FileAPI">web-platform-tests FileAPI/</a> (<a href="https://github.com/w3c/web-platform-tests/labels/FileAPI">ongoing work</a>)</span>
     </dl>
    </div>
    <div data-fill-with="warning"></div>
@@ -2973,7 +2975,7 @@ and hence the need to be able to revoke such a URL.</p>
 that may have been repurposed or reused for the use cases for URLs above,
 and justification for why a new scheme is considered preferable.
 These schemes include HTTP <a data-link-type="biblio" href="#biblio-rfc7230">[RFC7230]</a>,
-file <a data-link-type="biblio" href="#biblio-rfc1630">[RFC1630]</a><a data-link-type="biblio" href="#biblio-rfc1738">[RFC1738]</a>,
+file <a data-link-type="biblio" href="#biblio-rfc1630">[RFC1630]</a><a data-link-type="biblio" href="#biblio-rfc4266">[RFC4266]</a>,
 and a scheme such as <code>urn:uuid</code> <a data-link-type="biblio" href="#biblio-rfc4122">[RFC4122]</a>.
 One broad consideration in determining what scheme to use is providing something with intuitive appeal to web developers.</p>
    <ul>
@@ -3724,12 +3726,12 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
   <dl>
    <dt id="biblio-rfc1630">[RFC1630]
    <dd>T. Berners-Lee. <a href="https://tools.ietf.org/html/rfc1630">Universal Resource Identifiers in WWW: A Unifying Syntax for the Expression of Names and Addresses of Objects on the Network as used in the World-Wide Web</a>. June 1994. Informational. URL: <a href="https://tools.ietf.org/html/rfc1630">https://tools.ietf.org/html/rfc1630</a>
-   <dt id="biblio-rfc1738">[RFC1738]
-   <dd>P. Hoffman. <a href="https://tools.ietf.org/html/rfc4266">The gopher URI Scheme</a>. November 2005. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc4266">https://tools.ietf.org/html/rfc4266</a>
    <dt id="biblio-rfc3986">[RFC3986]
    <dd>T. Berners-Lee; R. Fielding; L. Masinter. <a href="https://tools.ietf.org/html/rfc3986">Uniform Resource Identifier (URI): Generic Syntax</a>. January 2005. Internet Standard. URL: <a href="https://tools.ietf.org/html/rfc3986">https://tools.ietf.org/html/rfc3986</a>
    <dt id="biblio-rfc4122">[RFC4122]
    <dd>P. Leach; M. Mealling; R. Salz. <a href="https://tools.ietf.org/html/rfc4122">A Universally Unique IDentifier (UUID) URN Namespace</a>. July 2005. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc4122">https://tools.ietf.org/html/rfc4122</a>
+   <dt id="biblio-rfc4266">[RFC4266]
+   <dd>P. Hoffman. <a href="https://tools.ietf.org/html/rfc4266">The gopher URI Scheme</a>. November 2005. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc4266">https://tools.ietf.org/html/rfc4266</a>
    <dt id="biblio-webrtc">[WebRTC]
    <dd>Adam Bergkvist; et al. <a href="https://www.w3.org/TR/webrtc/">WebRTC 1.0: Real-time Communication Between Browsers</a>. URL: <a href="https://www.w3.org/TR/webrtc/">https://www.w3.org/TR/webrtc/</a>
    <dt id="biblio-workers">[Workers]

@@ -1523,7 +1523,7 @@ This section is an informative discussion of existing schemes
 that may have been repurposed or reused for the use cases for URLs above,
 and justification for why a new scheme is considered preferable.
 These schemes include HTTP [[!RFC7230]],
-file [[RFC1630]][[RFC1738]],
+file [[RFC1630]][[RFC4266]],
 and a scheme such as <code>urn:uuid</code> [[RFC4122]].
 One broad consideration in determining what scheme to use is providing something with intuitive appeal to web developers.
 
