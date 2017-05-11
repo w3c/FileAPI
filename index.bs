@@ -664,6 +664,7 @@ This interface is a list of {{File}} objects.
 [Exposed=(Window,Worker)]
 interface FileList {
   getter File? item(unsigned long index);
+  getter Boolean drop(unsigned long index);
   readonly attribute unsigned long length;
 };
 </pre>
@@ -683,6 +684,16 @@ interface FileList {
     if(file)
     {
       // Perform file ops
+    }
+  </pre>
+
+  <pre class="lang-javascript">
+    var fileChooser = document.forms['uploadData']['fileChooser'];
+    // remove large file before upload
+    var file = fileChooser.files[0];
+
+    if (file.size > 1024 * 32) {
+      fileChooser.drop(0);
     }
   </pre>
 </div>
@@ -712,6 +723,16 @@ Methods and Parameters</h3>
     to one less than the number of {{File}} objects represented by the {{FileList}} object.
     If there are no such {{File}} objects,
     then there are no supported property indices.
+</dl>
+
+<dl>
+  <dt><dfn method for=FileList id="dfn-item">drop(index)</dfn>
+  <dd>must remove the |index|th {{File}} object in the {{FileList}}.
+
+    The method must return <code>true</code> if the removal was completed
+    and <code>false</code> if the removal was failed.
+
+    After removal all other files must to shift their indexes.
 </dl>
 
 Note: The {{HTMLInputElement}} interface has a readonly attribute of type {{FileList}},
