@@ -45,6 +45,9 @@ spec: html
   type: element
     text: a
     text: iframe
+spec: infra
+  type: dfn
+    text: list
 spec: streams
   type: dfn
     text: chunk
@@ -706,14 +709,14 @@ interface FileList {
 {{FileList}} objects are [=serializable objects=]. Their [=serialization steps=],
 given |value| and |serialized|, are:
 
-1. Set |serialized|.\[[Files]] to an empty list.
+1. Set |serialized|.\[[Files]] to an empty [=list=].
 
 2. For each |file| in |value|, append the [=sub-serialization=] of |file| to
    |serialized|.\[[Files]].
 
 Their [=deserialization step=], given |serialized| and |value|, are:
 
-1. For each |file| in |serialized|.\[[Files]], add the [=sub-deserialization=] of |file| to |value|.
+1. [=list/For each=] |file| of |serialized|.\[[Files]], add the [=sub-deserialization=] of |file| to |value|.
 
 <div class="example">
   Sample usage typically involves DOM access to the <code>&lt;input type="file"></code> element within a form,
