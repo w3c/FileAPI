@@ -208,13 +208,13 @@ which is an ASCII-encoded string in lower case representing the media type of th
 
 Each {{Blob}} must have an internal <dfn id="snapshot-state" for=Blob>snapshot state</dfn>,
 which must be initially set to the state of the underlying storage,
-if any such underlying storage exists,
-and must be preserved through <a abstract-op>StructuredClone</a>.
+if any such underlying storage exists.
 Further normative definition of <a>snapshot state</a> can be found for {{File}}s.
 
 <pre class="idl">
-[Constructor(optional sequence&lt;BlobPart> blobParts, optional BlobPropertyBag options),
-Exposed=(Window,Worker)]
+[Constructor(optional sequence&lt;BlobPart> blobParts,
+             optional BlobPropertyBag options),
+ Exposed=(Window,Worker), Serializable]
 interface Blob {
 
   readonly attribute unsigned long long size;
@@ -232,6 +232,19 @@ dictionary BlobPropertyBag {
 
 typedef (BufferSource or Blob or USVString) BlobPart;
 </pre>
+
+{{Blob}} objects are [=serializable objects=]. Their [=serialization steps=],
+given |value| and |serialized|, are:
+
+1. Set |serialized|.\[[SnapshotState]] to |value|'s [=snapshot state=].
+
+2. Set |serialized|.\[[ByteSequence]] to |value|'s underlying byte sequence.
+
+Their [=deserialization step=], given |serialized| and |value|, are:
+
+1. Set |value|'s [=snapshot state=] to |serialized|.\[[SnapshotState]].
+
+2. Set |value|'s underlying byte sequence to |serialized|.\[[ByteSequence]].
 
 <h3 id="constructorBlob">
 Constructors</h3>
@@ -501,7 +514,7 @@ and must follow the <dfn export>file type guidelines</dfn> below:
 [Constructor(sequence&lt;BlobPart> fileBits,
              USVString fileName,
              optional FilePropertyBag options),
-Exposed=(Window,Worker)]
+ Exposed=(Window,Worker), Serializable]
 interface File : Blob {
   readonly attribute DOMString name;
   readonly attribute long long lastModified;
@@ -511,6 +524,28 @@ dictionary FilePropertyBag : BlobPropertyBag {
   long long lastModified;
 };
 </pre>
+
+{{File}} objects are [=serializable objects=]. Their [=serialization steps=],
+given |value| and |serialized|, are:
+
+1. Set |serialized|.\[[SnapshotState]] to |value|'s [=snapshot state=].
+
+2. Set |serialized|.\[[ByteSequence]] to |value|'s underlying byte sequence.
+
+3. Set |serialized|.\[[Name]] to the value of |value|'s {{File/name}} attribute.
+
+4. Set |serialized|.\[[LastModified]] to the value of |value|'s {{File/lastModified}} attribute.
+
+Their [=deserialization steps=], given |value| and |serialized|, are:
+
+1. Set |value|'s [=snapshot state=] to |serialized|.\[[SnapshotState]].
+
+2. Set |value|'s underlying byte sequence to |serialized|.\[[ByteSequence]].
+
+3. Initialize the value of |value|'s {{File/name}} attribute to |serialized|.\[[Name]].
+
+4. Initialize the value of |value|'s {{File/lastModified}} attribute to
+   |serialized|.\[[LastModified]].
 
 <h3 id="file-constructor">
 Constructor</h3>
@@ -661,12 +696,24 @@ most other programmatic use of {{FileList}} is unlikely to be affected by the ev
 This interface is a list of {{File}} objects.
 
 <pre class="idl">
-[Exposed=(Window,Worker)]
+[Exposed=(Window,Worker), Serializable]
 interface FileList {
   getter File? item(unsigned long index);
   readonly attribute unsigned long length;
 };
 </pre>
+
+{{FileList}} objects are [=serializable objects=]. Their [=serialization steps=],
+given |value| and |serialized|, are:
+
+1. Set |serialized|.\[[Files]] to an empty list.
+
+2. For each |file| in |value|, append the [=sub-serialization=] of |file| to
+   |serialized|.\[[Files]].
+
+Their [=deserialization step=], given |serialized| and |value|, are:
+
+1. For each |file| in |serialized|.\[[Files]], add the [=sub-deserialization=] of |file| to |value|.
 
 <div class="example">
   Sample usage typically involves DOM access to the <code>&lt;input type="file"></code> element within a form,
