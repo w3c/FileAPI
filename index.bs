@@ -1,16 +1,17 @@
 <pre class="metadata">
 Indent: 2
 Title: File API
-Shortname: fileapi
+Shortname: FileAPI
 Level: 1
 Group: webplatform
-Editor: Arun Ranganathan, Mozilla Corporation, http://arunranga.com/, arun@mozilla.com
-Editor: Marijn Kruisselbrink, Google, mek@chromium.org
+Editor: Marijn Kruisselbrink, Google, mek@chromium.org, w3cid 72440
+Editor: Vsevolod Shmyroff, Yandex, w3cid 93074
+Former Editor: Arun Ranganathan, Mozilla Corporation, http://arunranga.com/, arun@mozilla.com, w3cid 37240
 Status: ED
 ED: https://w3c.github.io/FileAPI/
-TR: http://www.w3.org/TR/FileAPI/
+TR: https://www.w3.org/TR/FileAPI/
 Repository: w3c/FileAPI
-Previous Version: http://www.w3.org/TR/2012/WD-FileAPI-20121025/
+Previous Version: https://www.w3.org/TR/2015/WD-FileAPI-20150421/
 !Tests: <a href=https://github.com/w3c/web-platform-tests/tree/master/FileAPI>web-platform-tests FileAPI/</a> (<a href=https://github.com/w3c/web-platform-tests/labels/FileAPI>ongoing work</a>)
 Abstract: This specification provides an API for representing file objects in web applications,
   as well as programmatically selecting them and accessing their data. This includes:
@@ -66,6 +67,7 @@ spec: xhr; urlPrefix: https://xhr.spec.whatwg.org/
 spec: html; urlPrefix: https://html.spec.whatwg.org/multipage/
   urlPrefix: semantics.html
     type: element-attr; for: a; text: download; url: #attr-hyperlink-download
+  type:dfn; text:origin
 spec: mimesniff; urlPrefix: https://mimesniff.spec.whatwg.org/
   type: dfn
     text: parsable mime type
@@ -76,8 +78,7 @@ spec: ecma-262; urlPrefix: http://tc39.github.io/ecma262/
     text: Date; url: sec-date-constructor
 </pre>
 
-<h2 id="intro">
-Introduction</h2>
+<h2 id="intro">Introduction</h2>
 
 *This section is informative.*
 
