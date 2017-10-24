@@ -6,6 +6,7 @@ Level: 1
 Group: webplatform
 Editor: Marijn Kruisselbrink, Google, mek@chromium.org
 Editor: Vsevolod Shmyroff, Yandex
+Former Editor: Arun Ranganathan, Mozilla Corporation, http://arunranga.com/, arun@mozilla.com
 Status: ED
 ED: https://w3c.github.io/FileAPI/
 TR: https://www.w3.org/TR/FileAPI/
