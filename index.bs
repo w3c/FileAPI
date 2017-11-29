@@ -349,9 +349,11 @@ To <dfn lt="convert line endings to native|converting line endings to native">
 convert line endings to native</dfn> in a [=string=] |s|,
 run the following steps:
 
-1. Let |native line ending| be be the [=code point=] U+000A LF,
-  or the [=code point=] U+000D CR followed by the [=code point=] U+000A,
-  as determined by the underlying platform's conventions.
+1. Let |native line ending| be be the [=code point=] U+000A LF.
+
+1. If it matches the underlying platform's conventions,
+  set |native line ending| to the [=code point=] U+000D CR
+  followed by the [=code point=] U+000A.
 
 1. Set |result| to the empty [=string=].
 
@@ -366,9 +368,15 @@ run the following steps:
 
 1. While |position| is not past the end of |s|:
 
-  1. If the [=code point=] at |position| within |s| equals U+000D CR
-    and the [=code point=] at |position|+1 within |s| equals U+000A LF,
-    advance |position| by 2 and append |native line ending| to |result|.
+  1. If the [=code point=] at |position| within |s| equals U+000D CR:
+
+    1. Append |native line ending| to |result|.
+
+    1. Advance |position| by 1.
+
+    1. If |position| is not past the end of |s|
+      and the [=code point=] at |position| within |s| equals U+000A LF
+      advance |position| by 1.
 
   1. If the [=code point=] at |position| within |s| equals U+000A LF,
     advance |position| by 1 and append |native line ending| to |result|.
