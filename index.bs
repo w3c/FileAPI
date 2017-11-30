@@ -231,7 +231,7 @@ interface Blob {
             optional DOMString contentType);
 };
 
-enum EndingTypes {"transparent", "native"};
+enum EndingTypes { "transparent", "native" };
 
 dictionary BlobPropertyBag {
   DOMString type = "";
@@ -297,7 +297,7 @@ The {{Blob()}} constructor can be invoked with the parameters below:
     * {{USVString}} elements.
 
   <dt id="dfn-BlobPropertyBagMembers">An *optional* {{BlobPropertyBag}}
-  <dd>which takes two members:
+  <dd>which takes these optional members:
     * <dfn id="dfn-BPtype" dict-member for="BlobPropertyBag">type</dfn>,
       the ASCII-encoded string in lower case representing the media type of the {{Blob}}.
       Normative conditions for this member are provided in the [[#constructorBlob]].
@@ -321,7 +321,7 @@ run the following steps:
 
     1. Let |s| be |element|.
 
-    1. If the {{BlobPropertyBag/endings}} member of |options| is set to {{"native"}},
+    1. If the {{BlobPropertyBag/endings}} member of |options| is {{"native"}},
       set |s| to the result of [=converting line endings to native=] of |element|.
 
     1. Append the result of [=UTF-8 encoding=] |s| to |bytes|.
@@ -351,9 +351,10 @@ run the following steps:
 
 1. Let |native line ending| be be the [=code point=] U+000A LF.
 
-1. If it matches the underlying platform's conventions,
+1. If the underlying platform's conventions are
+  to represent newlines as a carriage return and line feed sequence,
   set |native line ending| to the [=code point=] U+000D CR
-  followed by the [=code point=] U+000A.
+  followed by the [=code point=] U+000A LF.
 
 1. Set |result| to the empty [=string=].
 
@@ -378,7 +379,7 @@ run the following steps:
       and the [=code point=] at |position| within |s| equals U+000A LF
       advance |position| by 1.
 
-  1. If the [=code point=] at |position| within |s| equals U+000A LF,
+  1. Otherwise if the [=code point=] at |position| within |s| equals U+000A LF,
     advance |position| by 1 and append |native line ending| to |result|.
 
   1. Let |token| be the result of [=collecting a sequence of code points=]
