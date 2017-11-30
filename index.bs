@@ -49,6 +49,7 @@ spec: html
 spec: infra
   type: dfn
     text: list
+    text: string
 spec: streams
   type: dfn
     text: chunk
@@ -230,8 +231,11 @@ interface Blob {
             optional DOMString contentType);
 };
 
+enum EndingTypes { "transparent", "native" };
+
 dictionary BlobPropertyBag {
   DOMString type = "";
+  EndingTypes endings = "transparent";
 };
 
 typedef (BufferSource or Blob or USVString) BlobPart;
@@ -253,6 +257,7 @@ Their [=deserialization step=], given |serialized| and |value|, are:
 <h3 id="constructorBlob">
 Constructors</h3>
 
+<div algorithm="blob-constructor">
 The {{Blob()}} constructor can be invoked with zero or more parameters.
 When the {{Blob()}} constructor is invoked,
 user agents must run the following steps:
@@ -262,41 +267,22 @@ user agents must run the following steps:
   with {{Blob/size}} set to 0,
   and with {{Blob/type}} set to the empty string.
 
-2. Otherwise, the constructor is invoked with a {{blobParts}} sequence.  Let |a| be that sequence.
+1. Let |bytes| be the result of [=processing blob parts=] given {{blobParts}} and {{Blob/Blob(blobParts, options)/options}}.
 
-3. Let |bytes| be an empty sequence of bytes.
-
-4. Let |length| be |a|'s length.
-  For 0 ≤ |i| &lt; |length|, repeat the following steps:
-
-  1. Let |element| be the |i|th element of |a|.
-  2. If |element| is a {{USVString}}, run the following substeps:
-
-    1. Append the result of [=UTF-8 encoding=] |s| to |bytes|.
-
-      Note: The algorithm from WebIDL [[WebIDL]] replaces unmatched surrogates in an invalid utf-16 string
-      with U+FFFD replacement characters.
-      Scenarios exist when the {{Blob}} constructor may result in some data loss
-      due to lost or scrambled character sequences.
-  3. If |element| is a {{BufferSource}}, <a lt="get a copy of the buffer source">get
-    a copy of the bytes held by the buffer source</a>, and append those bytes to |bytes|.
-  4. If |element| is a {{Blob}},
-    append the bytes it represents to |bytes|.
-    The {{Blob/type}} of the {{Blob}} array element is ignored and will not affect {{Blob/type}} of returned
-    {{Blob}} object.
-
-5. If the {{BlobPropertyBag/type}} member of the optional <code>options</code> argument is provided
+1. If the {{BlobPropertyBag/type}} member of the optional {{Blob/Blob(blobParts, options)/options}} argument is provided
   and is not the empty string,
   run the following sub-steps:
 
   1. Let |t| be the {{BlobPropertyBag/type}} dictionary member.
     If |t| contains any characters outside the range U+0020 to U+007E,
     then set |t| to the empty string and return from these substeps.
-  2. Convert every character in |t| to [=ASCII lowercase=].
+  1. Convert every character in |t| to [=ASCII lowercase=].
 
-6. Return a {{Blob}} object referring to |bytes| as its associated <a>byte</a> sequence,
+1. Return a {{Blob}} object referring to |bytes| as its associated <a>byte</a> sequence,
   with its {{Blob/size}} set to the length of |bytes|,
   and its {{Blob/type}} set to the value of |t| from the substeps above.
+
+</div>
 
 <h4 id="constructorParams">
 Constructor Parameters</h4>
@@ -308,14 +294,103 @@ The {{Blob()}} constructor can be invoked with the parameters below:
   <dd>which takes any number of the following types of elements, and in any order:
     * {{BufferSource}} elements.
     * {{Blob}} elements.
-    * {{DOMString}} elements.
+    * {{USVString}} elements.
 
   <dt id="dfn-BlobPropertyBagMembers">An *optional* {{BlobPropertyBag}}
-  <dd>which takes one member:
+  <dd>which takes these optional members:
     * <dfn id="dfn-BPtype" dict-member for="BlobPropertyBag">type</dfn>,
       the ASCII-encoded string in lower case representing the media type of the {{Blob}}.
       Normative conditions for this member are provided in the [[#constructorBlob]].
+    * <dfn dict-member for="BlobPropertyBag">endings</dfn>,
+      an enum which can take the values {{"transparent"}} or {{"native"}}.
+      By default this is set to {{"transparent"}}. If set to {{"native"}},
+      [=convert line endings to native|line endings will be converted to native=]
+      in any {{USVString}} elements in {{blobParts}}.
 </dl>
+
+<div algorithm="process-blob-parts">
+To <dfn lt="process blob parts|processing blob parts">process blob parts</dfn> given a sequence of {{BlobPart}}'s |parts|
+and {{BlobPropertyBag}} |options|,
+run the following steps:
+
+1. Let |bytes| be an empty sequence of bytes.
+
+1. For each |element| in |parts|:
+
+  1. If |element| is a {{USVString}}, run the following substeps:
+
+    1. Let |s| be |element|.
+
+    1. If the {{BlobPropertyBag/endings}} member of |options| is {{"native"}},
+      set |s| to the result of [=converting line endings to native=] of |element|.
+
+    1. Append the result of [=UTF-8 encoding=] |s| to |bytes|.
+
+      Note: The algorithm from WebIDL [[WebIDL]] replaces unmatched surrogates in an invalid utf-16 string
+      with U+FFFD replacement characters.
+      Scenarios exist when the {{Blob}} constructor may result in some data loss
+      due to lost or scrambled character sequences.
+
+  1. If |element| is a {{BufferSource}}, <a lt="get a copy of the buffer source">get
+    a copy of the bytes held by the buffer source</a>, and append those bytes to |bytes|.
+
+  1. If |element| is a {{Blob}},
+    append the bytes it represents to |bytes|.
+
+    Note: The {{Blob/type}} of the {{Blob}} array element is ignored and will not affect {{Blob/type}} of returned
+    {{Blob}} object.
+
+1. Return |bytes|.
+
+</div>
+
+<div algorithm="convert-line-endings-to-native">
+To <dfn lt="convert line endings to native|converting line endings to native">
+convert line endings to native</dfn> in a [=string=] |s|,
+run the following steps:
+
+1. Let |native line ending| be be the [=code point=] U+000A LF.
+
+1. If the underlying platform's conventions are
+  to represent newlines as a carriage return and line feed sequence,
+  set |native line ending| to the [=code point=] U+000D CR
+  followed by the [=code point=] U+000A LF.
+
+1. Set |result| to the empty [=string=].
+
+1. Let |position| be a [=position variable=] for |s|,
+  initially pointing at the start of |s|.
+
+1. Let |token| be the result of [=collecting a sequence of code points=]
+  that are not equal to U+000A LF or U+000D CR
+  from |s| given |position|.
+
+1. Append |token| to |result|.
+
+1. While |position| is not past the end of |s|:
+
+  1. If the [=code point=] at |position| within |s| equals U+000D CR:
+
+    1. Append |native line ending| to |result|.
+
+    1. Advance |position| by 1.
+
+    1. If |position| is not past the end of |s|
+      and the [=code point=] at |position| within |s| equals U+000A LF
+      advance |position| by 1.
+
+  1. Otherwise if the [=code point=] at |position| within |s| equals U+000A LF,
+    advance |position| by 1 and append |native line ending| to |result|.
+
+  1. Let |token| be the result of [=collecting a sequence of code points=]
+    that are not equal to U+000A LF or U+000D CR
+    from |s| given |position|.
+
+  1. Append |token| to |result|.
+
+1. Return |result|.
+
+</div>
 
 <div class="example">
   Examples of constructor usage follow.
@@ -371,7 +446,7 @@ Attributes</h3>
     especially if the <a>byte</a> sequence is from an on-disk file;
     in this case, further normative conditions are in the <a>file type guidelines</a>.
 
-    Note: The type |t| of a {{Blob}} is considered a <a>parsable MIME type</a>,
+    Note: The type <var ignore>t</var> of a {{Blob}} is considered a <a>parsable MIME type</a>,
     if performing the <a>parse a MIME type</a> algorithm to a byte sequence converted from
     the ASCII-encoded string representing the Blob object's type does not return undefined.
 
@@ -554,27 +629,16 @@ Their [=deserialization steps=], given |value| and |serialized|, are:
 <h3 id="file-constructor">
 Constructor</h3>
 
+<div algorithm="file-constructor">
 The {{File}} constructor is invoked with two or three parameters,
 depending on whether the optional dictionary parameter is used.
 When the {{File()}} constructor is invoked,
 user agents must run the following steps:
 
-1. Let |a| be the {{fileBits}} sequence argument.
-  Let |bytes| be an empty sequence of <a>byte</a>.
-  Let |length| be |a|'s length.
-  For 0 ≤ i &lt; |length|, repeat the following steps:
+1. Let |bytes| be the result of [=processing blob parts=] given {{fileBits}}
+  and {{File/File(fileBits, fileName, options)/options}}.
 
-  1. Let |element| be the |i|'th element of |a|.
-  2. If |element| is a {{USVString}}, run the following substeps:
-    1. Append the result of [=UTF-8 encoding=] |s| to |bytes|.
 
-    Note: The algorithm from WebIDL [[WebIDL]] replaces unmatched surrogates in an invalid utf-16 string with U+FFFD replacement characters.
-    Scenarios exist when the {{Blob}} constructor may result in some data loss due to lost or scrambled character sequences.
-  3. If |element| is a {{BufferSource}}, <a lt="get a copy of the buffer source">get
-    a copy of the bytes held by the buffer source</a>, and append those bytes to |bytes|.
-  4. If |element| is a {{Blob}},
-    append the bytes it represents to |bytes|.
-    The {{Blob/type}} of the {{Blob}} argument must be ignored.
 2. Let |n| be a new string of the same size as the {{fileName}} argument to the constructor.
   Copy every character from {{fileName}} to |n|,
   replacing any "/" character (U+002F SOLIDUS) with a ":" (U+003A COLON).
@@ -608,6 +672,8 @@ user agents must run the following steps:
   5. |F|.{{Blob/type}} is set to |t|.
   6. |F|.{{File/lastModified}} is set to |d|.
 
+</div>
+
 <h4 id="file-constructor-params">
 Constructor Parameters</h4>
 
@@ -618,7 +684,7 @@ The {{File()}} constructor can be invoked with the parameters below:
   <dd>which takes any number of the following elements, and in any order:
     * {{BufferSource}} elements.
     * {{Blob}} elements, which includes {{File}} elements.
-    * {{DOMString}} elements.
+    * {{USVString}} elements.
 
   <dt>A <dfn id="dfn-fileName" argument for="File/File(fileBits, fileName, options)"><code>fileName</code></dfn> parameter
   <dd>A {{USVString}} parameter representing the name of the file;
