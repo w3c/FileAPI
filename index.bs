@@ -42,6 +42,9 @@ Markup Shorthands: css no, markdown yes
 </pre>
 
 <pre class="link-defaults">
+spec: dom
+  type:interface
+    text:Document
 spec: html
   type: element
     text: a
@@ -451,8 +454,7 @@ Attributes</h3>
     the ASCII-encoded string representing the Blob object's type does not return undefined.
 
     Note: Use of the {{Blob/type}} attribute informs the <a>encoding determination</a>
-    and <a href="#processing-media-types">parsing the Content-Type header</a>
-    when <a>dereferencing</a> <a>Blob URLs</a>.
+    and determines the `Content-Type` header when [=/fetching=] [=Blob URLs=].
 </dl>
 
 
@@ -1598,286 +1600,161 @@ A URL for Blob and File reference</h2>
 
 This section defines a scheme for a URL used to refer to {{Blob}} objects (and {{File}} objects).
 
-<h3 id="use-cases-scheme">
-Requirements for a New Scheme</h3>
+Note: other specifications, such as [[MEDIA-SOURCE]] extend this scheme to also refer to other types of objects.
 
-This specification defines a scheme with URLs of the sort: <code>blob:550e8400-e29b-41d4-a716-446655440000#aboutABBA</code>.
-This section provides some requirements and is an informative discussion.
+<h3 id="url-intro">
+Introduction</h3>
 
-* This scheme should be able to be used with web APIs such as {{XMLHttpRequest}},
-  and with elements that are designed to be used with HTTP URLs,
-  such as the <{img}> element.
-  In general, this scheme should be designed to be used wherever URLs can be used on the web.
+*This section is informative.*
 
-* This scheme should have defined response codes,
-  so that web applications can respond to scenarios where the resource is not found, or raises an error, etc.
+[=Blob URL|Blob (or object) URLs=] are URLs like
+<code>blob:http://example.com/550e8400-e29b-41d4-a716-446655440000</code>.
+This enables integration of {{Blob}}s and {{File}}s with other Web Platform APIs
+that are only designed to be used with URLs, such as the <{img}> element.
+[=Blob URLs=] can also be used to navigate to as well as to trigger downloads of
+locally generated data.
 
-* This scheme should have an [=/origin=] policy and a <a>lifetime</a> stipulation,
-  to allow safe access to binary data from web applications.
+For this purpose two static methods are exposed on the {{URL}} interface,
+{{URL/createObjectURL(blob)}} and {{URL/revokeObjectURL(url)}}.
+The first method creates a mapping from a URL to a Blob,
+and the second method revokes said mapping.
+As long as a mapping exist a Blob  can't be garbage collected,
+so some care must be taken to revoke a URL as soon as a reference is no longer needed.
+All URLs are revoked when the global that created the URL itself goes away.
 
-  URLs in this scheme should be used as a references to "in-memory" {{Blob}}s,
-  and also be re-used elsewhere on the platform to refer to binary resources
-  (e.g. for video-conferencing [[WebRTC]]).
-  URLs in this scheme are designed for impermanence,
-  since they will be typically used to access "in memory" resources.
+<h3 id="url-model">
+Model</h3>
 
-* Developers should have the ability to revoke URLs in this scheme,
-  so that they no longer refer to {{Blob}} objects.
-  This includes scenarios where file references are no longer needed by a program,
-  but also other uses of {{Blob}} objects.
-  Consider a scenario where a {{Blob}} object can be exported from a drawing program
-  which uses the canvas element and API [[HTML]].
-  A snapshot of the drawing can be created by exporting a {{Blob}}.
-  This scheme can be used with the <{img}> [[HTML]] element to display the snapshot;
-  if the user deletes the snapshot,
-  any reference to the snapshot in memory via a URL should be invalid,
-  and hence the need to be able to revoke such a URL.
+Each user agent must maintain a <dfn id="BlobURLStore" export>Blob URL Store</dfn>.
+A [=Blob URL Store=] is a [=map=]
+where [=map/keys=] are [=valid URL strings=]
+and [=map/values=] are [=Blob URL Entries=].
 
-<h3 id="alternative-schemas">
-Discussion of Existing Schemes</h3>
+A <dfn>Blob URL Entry</dfn> consists of
+an <dfn for="Blob URL Entry">object</dfn> (typically a {{Blob}},
+but other specs can extend this to refer to other types of objects),
+and an <dfn for="Blob URL Entry">environment</dfn> (an [=environment settings object=]).
 
-This section is an informative discussion of existing schemes
-that may have been repurposed or reused for the use cases for URLs above,
-and justification for why a new scheme is considered preferable.
-These schemes include HTTP [[!RFC7230]],
-file [[RFC1630]][[RFC4266]],
-and a scheme such as <code>urn:uuid</code> [[RFC4122]].
-One broad consideration in determining what scheme to use is providing something with intuitive appeal to web developers.
-
-* HTTP could be repurposed for the use cases mentioned above;
-  it already comes with well-defined request-response semantics that are already used by web applications.
-  But {{Blob}} resources are typically "in-memory" resident
-  (e.g. after a file has been read into memory),
-  and are thus unlike "traditional" HTTP resources that are dereferenced via DNS.
-  While some user agents automatically "proxy" the underlying file system on the local machine via an HTTP server
-  (e.g. with URLs of the sort <code>http://localhost</code>),
-  HTTP is not traditionally used with local resources.
-  Moreover, an important use case for these URLs are that they can be revoked with an API call.
-  HTTP URLs have traditionally been used for resources that may be more permanent
-  (and that are certainly not chiefly memory-resident, such as files that a web application can read).
-  Reusing the HTTP scheme might be confusing for web developers owing to well-established practice.
-* The reuse of file URLs would involve changes to file URL use today,
-  such as adding response codes.
-  While they are used inconsistently in web applications,
-  the structure of the URLs would change,
-  and request-response behavior would have to be superimposed on what already works in a more-or-less ad-hoc manner.
-  Modifying this for the use cases cited above is imprudent, given legacy usage.
-  Additionally, the use cases for a Blob URL scheme call for uses beyond the file system.
-* A scheme of the sort <code>urn:uuid</code> [[RFC4122]] could be used,
-  though use of this scheme is unprecedented in HTML and JavaScript web applications.
-  The urn:uuid scheme is very generic.
-  URLs in the scheme urn:uuid have the disadvantage of unfamiliarity and inconsistency across the web platform.
-  A new scheme has the advantage of being explicit about what is being referenced.
-  In theory, URLs make no guarantee about what sort of resource is obtained when they are dereferenced;
-  that is left to content labeling and media type.
-  But in practice, the name of the scheme creates an expectation about both the resource
-  and the protocol of the request-response transaction.
-  Choosing a name that clarifies the primary use case--
-  namely, access to memory-resident {{Blob}} resources--
-  is a worthwhile compromise,
-  and favors clarity, familiarity, and consistency across the web platform.
-
-<h3 id="DefinitionOfScheme">
-The Blob URL</h3>
-
-A <dfn export>Blob URL</dfn> is a <a>URL</a>
-with a <a for=url>scheme</a> of <code>blob</code>,
-a <a for=url>host</a> of the [=url/origin=] of the <a>Blob URL</a>,
-a <a for=url>path</a> with one entry comprised of a UUID [[RFC4122]]
-(see [[#ABNFUUID]]),
-and an <a for=url>object</a> of the associated {{Blob}} or {{File}}.
-A Blob URL may contain an optional <a for=url>fragment</a>.
-The Blob URL is serialized as a string according to the <a>Serialization of a Blob URL</a> algorithm.
-
-A <a for=url>fragment</a>, if used,
-has a distinct interpretation depending on the media type of the {{Blob}} or {{File}} resource in question
-(see [[#fragmentDiscussion]]).
-
-<pre>
-  blob = scheme ":" origin "/" UUID [fragIdentifier]
-
-  scheme = "blob"
-
-  ; scheme is always "blob"
-
-  ; origin is a string representation of the Blob URL's [=url/origin=].
-  ; UUID is as defined in <a biblio data-biblio-type=informative>\[RFC4122]</a> and <a href="#ABNFUUID"></a>
-  ; fragIdentifier is optional and as defined in <a biblio data-biblio-type=informative>\[RFC3986]</a> and <a href="#ABNFFragment"></a>
-</pre>
+[=map/Keys=] in the [=Blob URL Store=] (also known as <dfn lt="Blob URL" export>Blob URLs</dfn>)
+are [=valid URL strings=] that when [=URL parser|parsed=]
+result in a [=/URL=] with a [=url/scheme=] equal to <code>"blob"</code>,
+a [=url/host=] equal to the [=environment settings object/origin=]
+of the [=environment settings object=] in which the URL was create,
+and a [=url/path=] with one entry comprised of a UUID [[!RFC4122]].
 
 <div class="example">
   An example of a Blob URL might be
   <code>blob:https://example.org/9115d58c-bcda-ff47-86e5-083e9a215304</code>.
 </div>
 
+<div algorithm="addBlobURL">
+To <dfn id="add-an-entry" lt="add an entry|add the entry|add an entry to the Blob URL Store|add the entry to the Blob URL Store|adding an entry to the Blob URL Store" for="blob url store">
+add an entry to the Blob URL Store</dfn> for a given |object|,
+run the following steps:
 
-<h4 id="originOfBlobURL">
-Origin of Blob URLs</h4>
+1. Let |store| be the user agent's [=Blob URL Store=];
+1. Let |url| be the result of [=generating a new Blob URL=].
+1. Let |entry| be a new [=Blob URL Entry=] consisting of |object| and the [=current settings object=].
+1. [=map/Set=] |store|[|url|] to |entry|.
+1. Return |url|.
 
-<a>Blob URLs</a> are created using <code>URL.{{URL/createObjectURL()}}</code>,
-and are revoked using <code>URL.{{URL/revokeObjectURL()}}</code>.
-The <dfn lt="origin of a Blob URL|Blob URL's origin">origin of a Blob URL</dfn> must be the same as the [=environment settings object/origin=]
-specified by the <a>current settings object</a>
-at the time the method that created it was called.
+</div>
 
-Issue: there is currently some confusion between the generic definition of the
-[=url/origin|origin of a URL=] and the specific definition of the [=origin of a Blob URL=]. This is
-tracked in <a href="https://github.com/w3c/FileAPI/issues/63">issue #63</a> and in
-<a href="https://github.com/whatwg/url/issues/127">whatwg/url#127</a>.
+<div algorithm="removeBlobURL">
+To <dfn id="removeTheEntry" lt="remove an entry|remove the entry|remove an entry from the Blob URL Store|remove the entry from the Blob URL Store" for="blob url store">
+remove an entry from the Blob URL Store</dfn> for a given |url|,
+run the following steps:
 
-[=CORS protocol|Cross-origin requests=] on Blob URLs must return a <a>network error</a>.
+1. Let |store| be the user agent's [=Blob URL Store=];
+1. Let |url string| be the result of [=URL serializer|serializing=] |url|.
+1. Remove |store|[|url string|].
 
-Note: In practice this means that HTTP and HTTPS [=/origins=]
-are covered by this specification as valid origins for use with Blob URLs.
-This specification does not address the case of non-HTTP and non-HTTPS [=/origins=].
-For instance <code>blob:file:///Users/arunranga/702efefb-c234-4988-a73b-6104f1b615ee</code>
-(which uses the "file:" [=/origin=])
-may have behavior that is undefined,
-even though user agents may treat such Blob URLs as valid.
+Issue: Should this ignore fragments, queries and/or extra path components?
 
-<h4 id="unicodeSerializationOfBlobURL">
-Serialization of a Blob URL</h4>
+</div>
 
-The <dfn id="unicodeBlobURL">Serialization of a Blob URL</dfn>
-is the value returned by the following algorithm,
-which is invoked by <code>URL.{{URL/createObjectURL()}}</code>:
+<div algorithm="createBlobURL">
+To <dfn id="unicodeBlobURL" lt="generate a new Blob URL|generating a new Blob URL">
+generate a new Blob URL</dfn>, run the following steps:
 
 1. Let |result| be the empty string.
-  Append the string "blob"
-  (that is, the Unicode code point sequence U+0062, U+006C, U+006F, U+0062)
+1. Append the string "blob"
+  (that is, the Unicode [=code point=] sequence U+0062, U+006C, U+006F, U+0062)
   to |result|.
-1. Append the ":" (U+003A COLON) character to |result|.
+1. Append U+003A COLON (:) to |result|.
 1. Let |settings| be the [=current settings object=]
 1. Let |origin| be |settings|'s [=environment settings object/origin=].
 1. Let |serialized| be the <a lt="ASCII serialization of an origin">ASCII serialization</a> of |origin|.
 1. If |serialized| is "null", set it to an implementation-defined value.
 1. Append |serialized| to |result|.
-1. Append the "/" character (U+0024 SOLIDUS) to |result|.
-1. Generate a UUID [[RFC4122]] as a Unicode string and append it to |result|.
+1. Append U+0024 SOLIDUS (/) to |result|.
+1. Generate a UUID [[!RFC4122]] as a Unicode string and append it to |result|.
 1. Return |result|.
 
-<h4 id="fragmentDiscussion">
-Discussion of Fragment Identifier</h4>
+</div>
 
-The <a for=url>fragment</a>'s resolution and processing directives depend on the media type [[RFC2046]]
-of a potentially retrieved representation,
-even though such a retrieval is only performed if the <a>Blob URL</a> is <a>dereferenced</a>.
-For example, in an HTML file [[HTML]] the fragment could be used to refer to an anchor within the file.
-If the user agent does not recognize the media type of the resource,
-OR if a fragment is not meaningful within the resource,
-it must ignore the fragment.
-The fragment must not be used to identify a resource;
-only the <code>blob</code> [=url/scheme=] and the [=url/origin=]/[=url/path=] of the <a>URL</a> constitute a valid resource identifier.
-
-A valid Blob URL reference could look like:
-<code>blob:http://example.org:8080/550e8400-e29b-41d4-a716-446655440000#aboutABBA</code>
-where "#aboutABBA" might be an HTML fragment identifier referring to an element with an id attribute of "aboutABBA".
-
-Note: The <a for=url>fragment</a> is not used to identify the resource.
-The <code>URL.{{URL/createObjectURL()}}</code> method does not generate a fragment.
-
-
-<h3 id="requestResponseModel">
+<h4 id="requestResponseModel">
 Dereferencing Model for Blob URLs</h3>
 
-*This section is informative.*
+<div algorithm="resolveURL">
+To <dfn for="Blob URL" lt="resolve">resolve a Blob URL</dfn> given a |url| (a [=URL=]), run the following steps:
 
-Note: The [[!URL]] and [[!Fetch]] specifications should be considered normative for parsing and fetching <a>Blob URLs</a>.
+1. [=Assert=]: |url|'s [=url/scheme=] is <code>"blob"</code>.
+1. Let |store| be the user agent's [=Blob URL Store=];
+1. Let |url string| be the result of [=URL serializer|serializing=] |url| with the *exclude fragment flag* set.
+1. Let |entry| be the result of [=map/getting=] |store|[|url string|].
+1. Return |entry|.
 
-<a>Blob URLs</a> are <dfn lt="dereference">dereferenced</dfn>
-when the user agent retrieves the resource identified by the Blob URL
-and returns it to the requesting entity.
-This section provides guidance on [=/requests=] and [=/responses=]
-
-Only [=/requests=] with GET [[RFC7231]] are supported.
-Specifically, [=/responses=] are only a subset of the following from HTTP [[!RFC7231]]:
-
-<h4 id="TwoHundredOK">
-200 OK</h4>
-
-This [=/response=] is used if the [=/request=] has succeeded,
-and no <a>network errors</a> are generated.
-
-<h4 id="processing-media-types">
-Response Headers</h4>
-
-Along with <a href="#TwoHundredOK">200 OK</a> responses,
-user agents use a Content-Type header [[RFC7231]]
-that is equal to the value of the {{Blob}}'s {{Blob/type}} attribute,
-if it is not the empty string.
-
-Along with <a href="#TwoHundredOK">200 OK</a> responses,
-user agents use a Content-Length header [[RFC7230]]
-that is equal to the value of the {{Blob}}'s {{Blob/size}} attribute.
-
-If a Content-Type header [[RFC7231]] is provided,
-then user agents obtain and process that media type
-in a manner consistent with the Mime Sniffing specification [[MIMESNIFF]].
-
-If a resource identified with a <a>Blob URL</a> is a {{File}} object,
-user agents use that file's {{File/name}} attribute,
-as if the [=/response=] had a <code>Content-Disposition</code> header
-with the filename parameter set to the {{File}}'s {{File/name}} attribute [[!RFC6266]].
-
-Note: A corollary to this is a non-normative implementation guideline:
-that the "File Save As" user interface in user agents takes into account the {{File}}'s {{File/name}} attribute
-if presenting a default name to save the file as.
-
-<h4 id="NetworkError">
-Network Errors</h4>
-
-Responses that do not succeed with a <a href="#TwoHundredOK">200 OK</a>
-act as if a <a>network error</a> has occurred.
-Network errors are used when:
-
-* Any [=/request=] method other than GET is used.
-* The <a>Blob URL</a> does not have an entry in the <a>Blob URL Store</a>.
-* A [=CORS protocol|cross-origin requests=] is made on a <a>Blob URL</a>.
-* A security error has occurred.
-
-<h4 id="ProtocolExamples">
-Sample Request and Response Headers</h4>
-
-*This section is informative.*
-
-This section provides sample exchanges between web applications and user agents using <a>Blob URLs</a>.
-A [=/request=] can be triggered using HTML markup of the sort
-<code class="lang-markup">&lt;img src="blob:http://example.org:8080/550e8400-e29b-41d4-a716-446655440000"></code>.
-These examples merely illustrate the [=/request=] and [=/response=];
-web developers are not likely to interact with all the headers,
-but the {{XMLHttpRequest/getAllResponseHeaders()}} method of {{XMLHttpRequest}}, if used,
-will show relevant [=/response=] headers.
-
-<div class="example">
-  [=/Requests=] could look like this:
-
-  <pre>
-  GET http://example.org:8080/550e8400-e29b-41d4-a716-446655440000
-  </pre>
-
-  If the {{Blob}} has an affiliated media type [[!RFC2046]] represented by its {{Blob/type}} attribute,
-  then the response message should include the Content-Type header from RFC7231 [[RFC7231]].
-  See [[#processing-media-types]].
-
-  Example response:
-
-  <pre>
-  200 OK
-  Content-Type: image/jpeg
-  Content-Length: 21897
-
-  ....
-  </pre>
-
-  If there is a <a>file read error</a> associated with the {{Blob}},
-  then a user agent acts as if a <a>network error</a> has occurred.
+Issue: This more or less matches chrome's behavior,
+but other browsers seem to not only ignore fragments,
+but also ignore |url|'s [=url/query=],
+and possibly even extra [=url/path=] components.
 </div>
+
+Futher requirements for the parsing an fetching model for [=Blob URLs=] are defined in the [[!URL]] and [[!Fetch]] specifications.
+
+<h4 id="originOfBlobURL">
+Origin of Blob URLs</h4>
+
+<div algorithm="resolveURLOrigin">
+To <dfn for="Blob URL" lt="resolve the origin">resolve the origin of a Blob URL</dfn> given a |url| (a [=URL=]), run the following steps:
+
+1. [=Assert=]: |url|'s [=url/scheme=] is <code>"blob"</code>.
+1. Let |entry| be the result of [=Blob URL/resolve|resolving=] |url|.
+1. If |entry| is not undefined, return |entry|'s [=Blob URL Entry/environment=]'s [=environment settings object/origin=].
+1. Let |nested url| be the result of [=URL parser|parsing=] |url|'s [=url/path=][0].
+1. Return a new [=opaque origin=], if |nested url| is failure, and |nested url|'s [=url/origin=] otherwise.
+
+</div>
+
+Note: The effect of this algorithm is that the origin of a Blob URL is always
+the same as that of the environment that created the URL,
+as long as the URL hasn't been revoked yet.
+If the URL was revoked the serialization of the origin will still remain the same
+as the serialization of the origin of the environment that created the Blob URL,
+but for opaque origins the origin itself might be distinct.
+This difference isn't observable though, since a revoked Blob URL can't be resolved/fetched anymore anyway.
+
+Issue: The [[URL]] spec should be updated to refer to this algorithm to resolve the origin of a Blob URL when the URL is first parsed.
+This is tracked in <a href="https://github.com/w3c/FileAPI/issues/63">issue #63</a> and in
+<a href="https://github.com/whatwg/url/issues/127">whatwg/url#127</a>.
+
+<h4 id="lifeTime" dfn for="blob url" lt="lifetime|lifetime stipulation" export>
+Lifetime of Blob URLs</h3>
+
+This specification extends the [=unloading document cleanup steps=] with the following steps:
+
+1. Let |environment| be the {{Document}}'s [=relevant settings object=].
+1. Let |store| be the user agent's [=Blob URL Store=];
+1. Remove from |store| any entries for which the [=map/value=]'s [=Blob URL Entry/environment=] is equal to |environment|.
+
+Issue: This needs a similar hook when a worker is unloaded.
 
 <h3 id="creating-revoking">
 Creating and Revoking a Blob URL</h3>
 
 <a>Blob URLs</a> are created and revoked using methods exposed on the {{URL}} object,
-supported by global objects {{Window}} [[HTML]] and {{WorkerGlobalScope}} [[Web Workers]].
+supported by global objects {{Window}} and {{WorkerGlobalScope}}.
 Revocation of a <a>Blob URL</a> decouples the <a>Blob URL</a> from the resource it refers to,
 and if it is dereferenced after it is revoked,
 user agents must act as if a <a>network error</a> has occurred.
@@ -1898,58 +1775,54 @@ unless the user agent also implements the URL [[URL]] specification.
 In other words, <code>URL.prototype</code> must evaluate to true if the user agent implements the URL [[URL]] specification,
 and must NOT evaluate to true otherwise.
 
-<h4 id="createRevokeMethodsParams">
-Methods and Parameters</h4>
+<div algorithm="createObjectURL">
+The <dfn method for=URL id="dfn-createObjectURL">createObjectURL(|blob|)</dfn> static method must run these steps:
 
-<dl>
-  <dt>The <dfn method for=URL id="dfn-createObjectURL">createObjectURL(blob)</dfn> static method
-  <dd>Returns a unique <a>Blob URL</a>.
-    This method must act as follows:
+1. Let |url| be the result of [=adding an entry to the Blob URL Store=] for |blob|.
+4. Return |url|.
 
-    1. Let |url| be the result of the <a>Serialization of a Blob URL</a> algorithm.
-    2. <a>Add an entry to the Blob URL Store</a> for |url| and |blob|.
-    3. Return |url|.
+</div>
 
-  <dt>The <dfn method for=URL id="dfn-revokeObjectURL">revokeObjectURL(url)</dfn> static method
-  <dd>Revokes the <a>Blob URL</a> provided in the string {{url!!argument}}
-    by removing the corresponding entry from the <a>Blob URL Store</a>.
-    This method must act as follows:
+<div algorithm="revokeObjectURL">
+The <dfn method for=URL id="dfn-revokeObjectURL">revokeObjectURL(|url|)</dfn> static method must run these steps:
 
-    1. If the value provided for the {{url!!argument}} argument is not a <a>Blob URL</a>,
-      OR if the value provided for the {{url!!argument}} argument does not have an entry in the <a>Blob URL Store</a>,
-      this method call does nothing.
-      User agents may display a message on the error console.
-    2. Otherwise, user agents must <a>remove the entry</a> from the <a>Blob URL Store</a> for {{url!!argument}}.
+1. [=Remove an entry from the Blob URL Store=] for |url|.
+1. Let |settings| be the [=current settings object=]
+1. Let |origin| be the origin of |url|. FIXME
+1. If |origin| is not [=same origin=] with |settings|'s [=environment settings object/origin=], return.
+1. [=Remove an entry from the Blob URL Store=] for |url|.
 
-      Note: Subsequent attemps to dereference {{url!!argument}} result in a <a>network error</a>,
-      since the entry has been removed from the <a>Blob URL Store</a>.
+Issue: Do we actually need a same-origin check? It doesn't seem like this is something browser currently do, but it seems nice to have.
 
-    The <dfn argument for="URL/revokeObjectURL(url)" id="dfn-urlarg">url</dfn> argument to the {{revokeObjectURL()}} method
-    is a <a>Blob URL</a> string.
+Note: This means that rather than throwing some kind of error, attempting to revoke a URL that isn't registered will silently fail.
+User agents may display a message on the error console is this happens.
 
-    <div class="example">
-      In the example below,
-      <code>window1</code> and <code>window2</code> are separate,
-      but in the <a>same origin</a>;
-      <code>window2</code> could be an <{iframe}> inside <code>window1</code>.
+Note: Attempts to dereference |url| after it has been revoked will result in a [=network error=].
+Requests that were started before the |url| was revoked should still succeed.
+</div>
 
-      <pre class="lang-javascript">
-        myurl = window1.URL.createObjectURL(myblob);
-        window2.URL.revokeObjectURL(myurl);
-      </pre>
+<div class="example">
+  In the example below,
+  <code>window1</code> and <code>window2</code> are separate,
+  but in the <a>same origin</a>;
+  <code>window2</code> could be an <{iframe}> inside <code>window1</code>.
 
-      Since <code>window1</code> and <code>window2</code> are in the <a>same origin</a>
-      and share the same <a>Blob URL Store</a>,
-      the <code>URL.{{revokeObjectURL()}}</code> call
-      ensures that subsequent dereferencing of <code>myurl</code>
-      results in a the user agent acting as if a <a>network error</a> has occurred.
-    </div>
-</dl>
+  <pre class="lang-javascript">
+    myurl = window1.URL.createObjectURL(myblob);
+    window2.URL.revokeObjectURL(myurl);
+  </pre>
+
+  Since a user agent has one global [=Blob URL Store=],
+  it is possible to revoke an object URL from a different window than from which it was created.
+  The <code>URL.{{revokeObjectURL()}}</code> call
+  ensures that subsequent dereferencing of <code>myurl</code>
+  results in a the user agent acting as if a <a>network error</a> has occurred.
+</div>
 
 <h4 id="examplesOfCreationRevocation">
 Examples of Blob URL Creation and Revocation</h4>
 
-<a>Blob URL</a>s are strings that are used to <a>dereference</a> {{Blob}} objects,
+<a>Blob URL</a>s are strings that are used to [=/fetch=] {{Blob}} objects,
 and can persist for as long as the <code>document</code> from which they were minted
 using <code>URL.{{createObjectURL()}}</code>--
 see [[#lifeTime]].
@@ -1996,28 +1869,6 @@ and the web developer then revokes the <a>Blob URL</a> string after both image o
 While not restricting number of uses of the <a>Blob URL</a> offers more flexibility,
 it increases the likelihood of leaks;
 developers should pair it with a corresponding call to <code>URL.{{revokeObjectURL()}}</code>.
-
-<h3 id="lifeTime" dfn for="blob url" lt="lifetime|lifetime stipulation" export>
-Lifetime of Blob URLs</h3>
-
-A global object which exposes <code>URL.{{URL/createObjectURL()}}</code>
-must maintain a <dfn id="BlobURLStore" export>Blob URL Store</dfn>
-which is a list of <a>Blob URLs</a> created by the <code>URL.{{createObjectURL()}}</code> method,
-and the {{Blob}} resource that each refers to.
-
-When this specification says to <dfn id="add-an-entry" lt="add an entry|add the entry|add an entry to the Blob URL Store|add the entry to the Blob URL Store" for="blob url store">add an entry to the Blob URL Store</dfn>
-for a <a>Blob URL</a> and a {{Blob}} input,
-the user-agent must add the <a>Blob URL</a> and a reference to the {{Blob}} it refers to to the <a>Blob URL Store</a>.
-
-When this specification says to <dfn id="removeTheEntry" lt="remove an entry|remove the entry|remove an entry from the Blob URL Store|remove the entry from the Blob URL Store" for="blob url store">remove an entry from the Blob URL Store</dfn>
-for a given <a>Blob URL</a> or for a given {{Blob}},
-user agents must remove the <a>Blob URL</a> and the {{Blob}} it refers to from the <a>Blob URL Store</a>.
-Subsequent attempts to <a>dereference</a> this URL must result in a <a>network error</a>.
-
-This specification adds an additional <a>unloading document cleanup step</a>:
-user agents must remove all <a>Blob URLs</a> from the <a>Blob URL Store</a> within that <a>document</a>.
-
-Note: User agents are free to garbage collect resources removed from the <a>Blob URL Store</a>.
 
 <h2 id="security-discussion">
 Security and Privacy Considerations</h2>
@@ -2111,64 +1962,6 @@ subsequent versions may elect to address these.
   The user is notified of any file selections,
   and can cancel these.
   No invocations to these APIs occur silently without user intervention.
-
-<h2 id="blob-url-grammar" class="no-num">
-Appendix A: Blob URL Grammar</h2>
-
-This section uses the Augmented Backus-Naur Form (ABNF),
-defined in [[!RFC5234]],
-to describe components of blob: URLs.
-
-<h3 id="ABNFUUID">
-An ABNF for UUID</h3>
-
-The following is an ABNF [[RFC5234]] for UUID.
-UUID strings must only use characters in the ranges
-U+002A to U+002B,
-U+002D to U+002E,
-U+0030 to U+0039,
-U+0041 to U+005A,
-U+005E to U+007E [[!Unicode]],
-and should be at least 36 characters long.
-
-<pre>
-  UUID                   = time-low "-" time-mid "-"
-                          time-high-and-version "-"
-                          clock-seq-and-reserved
-                          clock-seq-low "-" node
-  time-low               = 4hexOctet
-  time-mid               = 2hexOctet
-  time-high-and-version  = 2hexOctet
-  clock-seq-and-reserved = hexOctet
-  clock-seq-low          = hexOctet
-  node                   = 6hexOctet
-  hexOctet               = hexDigit hexDigit
-  hexDigit = "0" / "1" / "2" / "3" / "4" / "5" / "6" / "7" / "8" / "9" /
-            "a" / "b" / "c" / "d" / "e" / "f" /
-            "A" / "B" / "C" / "D" / "E" / "F"
-</pre>
-
-<h3 id="ABNFFragment">
-An ABNF for Fragment Identifiers</h3>
-
-<pre>
-  fragIdentifier = "#" fragment
-
-  ; Fragment Identifiers depend on the media type of the Blob
-  ; fragment is defined in <a biblio data-biblio-type=informative>\[RFC3986]</a>
-  ; fragment processing for HTML is defined in <a biblio data-biblio-type=informative>\[HTML]</a>
-
-  fragment    = *( pchar / "/" / "?" )
-
-  pchar       = unreserved / pct-encoded / sub-delims / ":" / "@"
-
-  unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
-
-  pct-encoded   = "%" HEXDIG HEXDIG
-
-  sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
-                  "*" / "+" / "," / ";" / "="
-</pre>
 
 <h2 id="acknowledgements-section" class="no-num">
 Acknowledgements</h2>
