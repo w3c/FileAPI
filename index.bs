@@ -231,11 +231,11 @@ interface Blob {
             optional DOMString contentType);
 };
 
-enum EndingTypes { "transparent", "native" };
+enum EndingType { "transparent", "native" };
 
 dictionary BlobPropertyBag {
   DOMString type = "";
-  EndingTypes endings = "transparent";
+  EndingType endings = "transparent";
 };
 
 typedef (BufferSource or Blob or USVString) BlobPart;

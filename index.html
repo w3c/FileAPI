@@ -1179,7 +1179,7 @@ Possible extra rowspan handling
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
   <meta content="Bikeshed version fbf1456a756299b3ff6d248d0857ec87f2e68cd7" name="generator">
   <link href="https://www.w3.org/TR/FileAPI/" rel="canonical">
-  <meta content="4ce649431d80990eb548904acdcd8d07839adeb9" name="document-revision">
+  <meta content="7ef01574ef6c4a4cbd2aadebc2d26b5d3f9f6960" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1426,7 +1426,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">File API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-11-30">30 November 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-12-04">4 December 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1763,11 +1763,11 @@ Further normative definition of <a data-link-type="dfn" href="#snapshot-state" i
             <span class="kt">optional</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①"><span class="kt">DOMString</span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-contentTypeBlob" id="ref-for-dfn-contentTypeBlob">contentType</a>);
 };
 
-<span class="kt">enum</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="enum" data-export="" id="enumdef-endingtypes"><code>EndingTypes</code></dfn> { <dfn class="s dfn-paneled idl-code" data-dfn-for="EndingTypes" data-dfn-type="enum-value" data-export="" data-lt="&quot;transparent&quot;|transparent" id="dom-endingtypes-transparent"><code>"transparent"</code></dfn>, <dfn class="s dfn-paneled idl-code" data-dfn-for="EndingTypes" data-dfn-type="enum-value" data-export="" data-lt="&quot;native&quot;|native" id="dom-endingtypes-native"><code>"native"</code></dfn> };
+<span class="kt">enum</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="enum" data-export="" id="enumdef-endingtype"><code>EndingType</code></dfn> { <dfn class="s dfn-paneled idl-code" data-dfn-for="EndingType" data-dfn-type="enum-value" data-export="" data-lt="&quot;transparent&quot;|transparent" id="dom-endingtype-transparent"><code>"transparent"</code></dfn>, <dfn class="s dfn-paneled idl-code" data-dfn-for="EndingType" data-dfn-type="enum-value" data-export="" data-lt="&quot;native&quot;|native" id="dom-endingtype-native"><code>"native"</code></dfn> };
 
 <span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dfn-BlobPropertyBag"><code>BlobPropertyBag</code></dfn> {
   <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString②"><span class="kt">DOMString</span></a> <a class="nv idl-code" data-default="&quot;&quot;" data-link-type="dict-member" data-type="DOMString " href="#dfn-BPtype" id="ref-for-dfn-BPtype">type</a> = "";
-  <a class="n" data-link-type="idl-name" href="#enumdef-endingtypes" id="ref-for-enumdef-endingtypes">EndingTypes</a> <a class="nv idl-code" data-default="&quot;transparent&quot;" data-link-type="dict-member" data-type="EndingTypes " href="#dom-blobpropertybag-endings" id="ref-for-dom-blobpropertybag-endings">endings</a> = "transparent";
+  <a class="n" data-link-type="idl-name" href="#enumdef-endingtype" id="ref-for-enumdef-endingtype">EndingType</a> <a class="nv idl-code" data-default="&quot;transparent&quot;" data-link-type="dict-member" data-type="EndingType " href="#dom-blobpropertybag-endings" id="ref-for-dom-blobpropertybag-endings">endings</a> = "transparent";
 };
 
 <span class="kt">typedef</span> (<a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#BufferSource" id="ref-for-BufferSource">BufferSource</a> <span class="kt">or</span> <a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob①①">Blob</a> <span class="kt">or</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString"><span class="kt">USVString</span></a>) <dfn class="nv dfn-paneled idl-code" data-dfn-type="typedef" data-export="" id="typedefdef-blobpart"><code>BlobPart</code></dfn>;
@@ -1842,8 +1842,8 @@ the ASCII-encoded string in lower case representing the media type of the <code 
 Normative conditions for this member are provided in the <a href="#constructorBlob">§3.1 Constructors</a>.</p>
       <li data-md="">
        <p><dfn class="dfn-paneled idl-code" data-dfn-for="BlobPropertyBag" data-dfn-type="dict-member" data-export="" id="dom-blobpropertybag-endings"><code>endings</code></dfn>,
-an enum which can take the values <code class="idl"><a data-link-type="idl" href="#dom-endingtypes-transparent" id="ref-for-dom-endingtypes-transparent">"transparent"</a></code> or <code class="idl"><a data-link-type="idl" href="#dom-endingtypes-native" id="ref-for-dom-endingtypes-native">"native"</a></code>.
-By default this is set to <code class="idl"><a data-link-type="idl" href="#dom-endingtypes-transparent" id="ref-for-dom-endingtypes-transparent①">"transparent"</a></code>. If set to <code class="idl"><a data-link-type="idl" href="#dom-endingtypes-native" id="ref-for-dom-endingtypes-native①">"native"</a></code>, <a data-link-type="dfn" href="#convert-line-endings-to-native" id="ref-for-convert-line-endings-to-native">line endings will be converted to native</a> in any <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString②">USVString</a></code> elements in <code class="idl"><a data-link-type="idl" href="#dfn-blobParts" id="ref-for-dfn-blobParts②">blobParts</a></code>.</p>
+an enum which can take the values <code class="idl"><a data-link-type="idl" href="#dom-endingtype-transparent" id="ref-for-dom-endingtype-transparent">"transparent"</a></code> or <code class="idl"><a data-link-type="idl" href="#dom-endingtype-native" id="ref-for-dom-endingtype-native">"native"</a></code>.
+By default this is set to <code class="idl"><a data-link-type="idl" href="#dom-endingtype-transparent" id="ref-for-dom-endingtype-transparent①">"transparent"</a></code>. If set to <code class="idl"><a data-link-type="idl" href="#dom-endingtype-native" id="ref-for-dom-endingtype-native①">"native"</a></code>, <a data-link-type="dfn" href="#convert-line-endings-to-native" id="ref-for-convert-line-endings-to-native">line endings will be converted to native</a> in any <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString②">USVString</a></code> elements in <code class="idl"><a data-link-type="idl" href="#dfn-blobParts" id="ref-for-dfn-blobParts②">blobParts</a></code>.</p>
      </ul>
    </dl>
    <div class="algorithm" data-algorithm="process-blob-parts">
@@ -1861,7 +1861,7 @@ run the following steps:
          <li data-md="">
           <p>Let <var>s</var> be <var>element</var>.</p>
          <li data-md="">
-          <p>If the <code class="idl"><a data-link-type="idl" href="#dom-blobpropertybag-endings" id="ref-for-dom-blobpropertybag-endings①">endings</a></code> member of <var>options</var> is <code class="idl"><a data-link-type="idl" href="#dom-endingtypes-native" id="ref-for-dom-endingtypes-native②">"native"</a></code>,
+          <p>If the <code class="idl"><a data-link-type="idl" href="#dom-blobpropertybag-endings" id="ref-for-dom-blobpropertybag-endings①">endings</a></code> member of <var>options</var> is <code class="idl"><a data-link-type="idl" href="#dom-endingtype-native" id="ref-for-dom-endingtype-native②">"native"</a></code>,
 set <var>s</var> to the result of <a data-link-type="dfn" href="#convert-line-endings-to-native" id="ref-for-convert-line-endings-to-native①">converting line endings to native</a> of <var>element</var>.</p>
          <li data-md="">
           <p>Append the result of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-encode" id="ref-for-utf-8-encode">UTF-8 encoding</a> <var>s</var> to <var>bytes</var>.</p>
@@ -3553,7 +3553,7 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
    <li><a href="#dfn-empty">EMPTY</a><span>, in §6.3.3</span>
    <li><a href="#encoding-determination">encoding determination</a><span>, in §6.4</span>
    <li><a href="#dom-blobpropertybag-endings">endings</a><span>, in §3.1.1</span>
-   <li><a href="#enumdef-endingtypes">EndingTypes</a><span>, in §3</span>
+   <li><a href="#enumdef-endingtype">EndingType</a><span>, in §3</span>
    <li>
     error
     <ul>
@@ -3590,8 +3590,8 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
    <li><a href="#dfn-loading">LOADING</a><span>, in §6.3.3</span>
    <li><a href="#dfn-loadstart-event">loadstart</a><span>, in §6.5.1</span>
    <li><a href="#dfn-name">name</a><span>, in §4.2</span>
-   <li><a href="#dom-endingtypes-native">"native"</a><span>, in §3</span>
-   <li><a href="#dom-endingtypes-native">native</a><span>, in §3</span>
+   <li><a href="#dom-endingtype-native">"native"</a><span>, in §3</span>
+   <li><a href="#dom-endingtype-native">native</a><span>, in §3</span>
    <li><a href="#NotFoundFR">NotFound</a><span>, in §7.1</span>
    <li><a href="#dfn-onabort">onabort</a><span>, in §6.3.2</span>
    <li><a href="#dfn-onerror">onerror</a><span>, in §6.3.2</span>
@@ -3659,8 +3659,8 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
    <li><a href="#terminate-an-algorithm">terminate an algorithm</a><span>, in §2</span>
    <li><a href="#terminate-an-algorithm">terminate this algorithm</a><span>, in §2</span>
    <li><a href="#TooManyReadsFR">TooManyReads</a><span>, in §7.1</span>
-   <li><a href="#dom-endingtypes-transparent">"transparent"</a><span>, in §3</span>
-   <li><a href="#dom-endingtypes-transparent">transparent</a><span>, in §3</span>
+   <li><a href="#dom-endingtype-transparent">"transparent"</a><span>, in §3</span>
+   <li><a href="#dom-endingtype-transparent">transparent</a><span>, in §3</span>
    <li>
     type
     <ul>
@@ -3872,11 +3872,11 @@ sub-delims    = "!" / "$" / "&amp;" / "'" / "(" / ")" /
             <span class="kt">optional</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①①⓪"><span class="kt">DOMString</span></a> <a class="nv idl-code" data-link-type="argument" href="#dfn-contentTypeBlob" id="ref-for-dfn-contentTypeBlob⑤">contentType</a>);
 };
 
-<span class="kt">enum</span> <a class="nv" href="#enumdef-endingtypes"><code>EndingTypes</code></a> { <a class="s" href="#dom-endingtypes-transparent"><code>"transparent"</code></a>, <a class="s" href="#dom-endingtypes-native"><code>"native"</code></a> };
+<span class="kt">enum</span> <a class="nv" href="#enumdef-endingtype"><code>EndingType</code></a> { <a class="s" href="#dom-endingtype-transparent"><code>"transparent"</code></a>, <a class="s" href="#dom-endingtype-native"><code>"native"</code></a> };
 
 <span class="kt">dictionary</span> <a class="nv" href="#dfn-BlobPropertyBag"><code>BlobPropertyBag</code></a> {
   <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString②①"><span class="kt">DOMString</span></a> <a class="nv idl-code" data-default="&quot;&quot;" data-link-type="dict-member" data-type="DOMString " href="#dfn-BPtype" id="ref-for-dfn-BPtype⑤">type</a> = "";
-  <a class="n" data-link-type="idl-name" href="#enumdef-endingtypes" id="ref-for-enumdef-endingtypes①">EndingTypes</a> <a class="nv idl-code" data-default="&quot;transparent&quot;" data-link-type="dict-member" data-type="EndingTypes " href="#dom-blobpropertybag-endings" id="ref-for-dom-blobpropertybag-endings②">endings</a> = "transparent";
+  <a class="n" data-link-type="idl-name" href="#enumdef-endingtype" id="ref-for-enumdef-endingtype①">EndingType</a> <a class="nv idl-code" data-default="&quot;transparent&quot;" data-link-type="dict-member" data-type="EndingType " href="#dom-blobpropertybag-endings" id="ref-for-dom-blobpropertybag-endings②">endings</a> = "transparent";
 };
 
 <span class="kt">typedef</span> (<a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#BufferSource" id="ref-for-BufferSource④">BufferSource</a> <span class="kt">or</span> <a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob①①①">Blob</a> <span class="kt">or</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑦"><span class="kt">USVString</span></a>) <a class="nv" href="#typedefdef-blobpart"><code>BlobPart</code></a>;
@@ -4084,25 +4084,25 @@ Examples of Blob URL Creation and Revocation</a>
 Lifetime of Blob URLs</a> <a href="#ref-for-dfn-Blob⑨⓪">(2)</a> <a href="#ref-for-dfn-Blob⑨①">(3)</a> <a href="#ref-for-dfn-Blob⑨②">(4)</a> <a href="#ref-for-dfn-Blob⑨③">(5)</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="enumdef-endingtypes">
-   <b><a href="#enumdef-endingtypes">#enumdef-endingtypes</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="enumdef-endingtype">
+   <b><a href="#enumdef-endingtype">#enumdef-endingtype</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-enumdef-endingtypes">3. 
+    <li><a href="#ref-for-enumdef-endingtype">3. 
 The Blob Interface and Binary Data</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="dom-endingtypes-transparent">
-   <b><a href="#dom-endingtypes-transparent">#dom-endingtypes-transparent</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="dom-endingtype-transparent">
+   <b><a href="#dom-endingtype-transparent">#dom-endingtype-transparent</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-endingtypes-transparent">3.1.1. 
-Constructor Parameters</a> <a href="#ref-for-dom-endingtypes-transparent①">(2)</a>
+    <li><a href="#ref-for-dom-endingtype-transparent">3.1.1. 
+Constructor Parameters</a> <a href="#ref-for-dom-endingtype-transparent①">(2)</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="dom-endingtypes-native">
-   <b><a href="#dom-endingtypes-native">#dom-endingtypes-native</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="dom-endingtype-native">
+   <b><a href="#dom-endingtype-native">#dom-endingtype-native</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-endingtypes-native">3.1.1. 
-Constructor Parameters</a> <a href="#ref-for-dom-endingtypes-native①">(2)</a> <a href="#ref-for-dom-endingtypes-native②">(3)</a>
+    <li><a href="#ref-for-dom-endingtype-native">3.1.1. 
+Constructor Parameters</a> <a href="#ref-for-dom-endingtype-native①">(2)</a> <a href="#ref-for-dom-endingtype-native②">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dfn-BlobPropertyBag">
