@@ -1705,7 +1705,7 @@ Futher requirements for the parsing an fetching model for [=blob URLs=] are defi
 Origin of blob URLs</h4>
 
 <div algorithm="resolveURLOrigin">
-To <dfn for="blob URL" lt="resolve the origin">resolve the origin of a blob URL</dfn> given a |url| (a [=URL=]), run the following steps:
+To <dfn for="blob URL" lt="resolve the origin|resolving the origin">resolve the origin of a blob URL</dfn> given a |url| (a [=URL=]), run the following steps:
 
 1. [=Assert=]: |url|'s [=url/scheme=] is "`blob`".
 1. Let |entry| be the result of [=blob URL/resolve|resolving=] |url|.
@@ -1762,8 +1762,14 @@ return the result of [=adding an entry to the blob URL store=] for |blob|.
 </div>
 
 <div algorithm="revokeObjectURL">
-The <dfn method for=URL id="dfn-revokeObjectURL">revokeObjectURL(|url|)</dfn> static method must
-[=Remove an entry from the blob URL store=] for |url|.
+The <dfn method for=URL id="dfn-revokeObjectURL">revokeObjectURL(|url|)</dfn> static method must run these steps:
+
+1. Let |url record| be the result of [=URL parser|parsing=] |url|.
+1. If |url record|'s [=url/scheme=] is not "`blob`", return.
+1. Let |origin| be the result of [=resolving the origin=] of |url record|.
+1. Let |settings| be the [=current settings object=].
+1. If |origin| is not [=same origin=] with |settings|'s [=environment settings object/origin=], return.
+1. [=Remove an entry from the Blob URL Store=] for |url|.
 
 Note: This means that rather than throwing some kind of error, attempting to revoke a URL that isn't registered will silently fail.
 User agents might display a message on the error console is this happens.
