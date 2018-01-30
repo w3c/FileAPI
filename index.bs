@@ -1457,7 +1457,7 @@ The {{FileReaderSync/readAsDataURL()}} method</h5>
 When the <dfn method for=FileReaderSync id="dfn-readAsDataURLSync">readAsDataURL(blob)</dfn> method is called,
 the following steps must be followed:
 
-1. Otherwise, initiate a <a>read operation</a> using the <code>blob</code> argument,
+1. Initiate a <a>read operation</a> using the <code>blob</code> argument,
   and with the <a>synchronous flag</a> *set*.
   If the <a>read operation</a> returns failure,
   throw the appropriate exception as defined in [[#dfn-error-codes]].
@@ -1476,7 +1476,7 @@ The {{FileReaderSync/readAsArrayBuffer()}} method</h5>
 When the <dfn method for=FileReaderSync id="dfn-readAsArrayBufferSync">readAsArrayBuffer(blob)</dfn> method is called,
 the following steps must be followed:
 
-1. Otherwise, initiate a <a>read operation</a> using the <code>blob</code> argument,
+1. Initiate a <a>read operation</a> using the <code>blob</code> argument,
   and with the <a>synchronous flag</a> *set*.
   If the <a>read operation</a> returns failure,
   throw the appropriate exception as defined in [[#dfn-error-codes]].
@@ -1489,7 +1489,7 @@ The {{FileReaderSync/readAsBinaryString()}} method</h5>
 When the <dfn method for=FileReaderSync id="dfn-readAsBinaryStringSync">readAsBinaryString(blob)</dfn> method is called,
 the following steps must be followed:
 
-1. Otherwise, initiate a <a>read operation</a> using the <code>blob</code> argument,
+1. Initiate a <a>read operation</a> using the <code>blob</code> argument,
   and with the <a>synchronous flag</a> *set*.
   If the <a>read operation</a> returns failure,
   throw the appropriate exception as defined in [[#dfn-error-codes]].
