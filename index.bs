@@ -1678,7 +1678,7 @@ run the following steps:
 Dereferencing Model for blob URLs</h3>
 
 <div algorithm="resolveURL">
-To <dfn for="blob URL" lt="resolve">resolve a blob URL</dfn> given a |url| (a [=URL=]), run the following steps:
+To <dfn export for="blob URL" lt="resolve">resolve a blob URL</dfn> given a |url| (a [=URL=]), run the following steps:
 
 1. [=Assert=]: |url|'s [=url/scheme=] is "`blob`".
 1. Let |store| be the user agent's [=blob URL store=].
@@ -1693,7 +1693,7 @@ Futher requirements for the parsing an fetching model for [=blob URLs=] are defi
 Origin of blob URLs</h4>
 
 <div algorithm="resolveURLOrigin">
-To <dfn for="blob URL" lt="resolve the origin|resolving the origin">resolve the origin of a blob URL</dfn> given a |url| (a [=URL=]), run the following steps:
+To <dfn export for="blob URL" lt="resolve the origin|resolving the origin">resolve the origin of a blob URL</dfn> given a |url| (a [=URL=]), run the following steps:
 
 1. [=Assert=]: |url|'s [=url/scheme=] is "`blob`".
 1. Let |entry| be the result of [=blob URL/resolve|resolving=] |url|.
