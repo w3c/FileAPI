@@ -1137,7 +1137,7 @@ the user agent must run the steps below.
 The {{FileReader/readAsText()}} method</h5>
 
 The {{FileReader/readAsText()}} method can be called with an optional parameter,
-<dfn argument for="FileReader/readAsText(blob, encoding), FileReader/readAsText(), FileReaderSync/readAsText(blob, encoding)" id="dfn-encoding">encoding</dfn>,
+<dfn argument for="FileReader/readAsText(blob, encoding), FileReader/readAsText(), FileReaderSync/readAsText(blob, encoding)" id="dfn-encoding" oldids="dfn-label">encoding</dfn>,
 which is a {{DOMString}} argument that represents the label of an encoding [[!Encoding]];
 if provided, it must be used as part of the <a>encoding determination</a> used when processing this method call.
 
