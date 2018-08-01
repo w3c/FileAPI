@@ -7,7 +7,7 @@ in the relevant W3C Working Group or make a non-member patent licensing commitme
 
 # Pull Requests
 
-To make a pull request, please edit the `index.bs` in the `master` branch, our travis bot will generate a `index.html` and push the file to `gh-pages` branch once you submit your patch.
+To make a pull request, please edit the `index.bs` in the `master` branch, our travis bot will generate an `index.html` and push the file to `gh-pages` branch once you submit your patch.
 
 If you are not the sole contributor to a contribution (pull request), please identify all 
 contributors in the pull request comment.
