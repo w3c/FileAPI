@@ -7,6 +7,7 @@ Group: webplatform
 Editor: Marijn Kruisselbrink, Google, mek@chromium.org, w3cid 72440
 Editor: Vsevolod Shmyroff, Yandex, w3cid 93074
 Former Editor: Arun Ranganathan, Mozilla Corporation, http://arunranga.com/, arun@mozilla.com, w3cid 37240
+Prepare For TR: true
 Status: ED
 ED: https://w3c.github.io/FileAPI/
 TR: https://www.w3.org/TR/FileAPI/
