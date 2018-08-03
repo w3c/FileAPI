@@ -953,7 +953,7 @@ interface FileReader: EventTarget {
   // async read methods
   void readAsArrayBuffer(Blob blob);
   void readAsBinaryString(Blob blob);
-  void readAsText(Blob blob, optional DOMString label);
+  void readAsText(Blob blob, optional DOMString encoding);
   void readAsDataURL(Blob blob);
 
   void abort();
@@ -1137,11 +1137,11 @@ the user agent must run the steps below.
 The {{FileReader/readAsText()}} method</h5>
 
 The {{FileReader/readAsText()}} method can be called with an optional parameter,
-<dfn argument for="FileReader/readAsText(blob, label), FileReader/readAsText(), FileReaderSync/readAsText(blob, label)" id="dfn-label">label</dfn>,
+<dfn argument for="FileReader/readAsText(blob, encoding), FileReader/readAsText(), FileReaderSync/readAsText(blob, encoding)" id="dfn-encoding" oldids="dfn-label">encoding</dfn>,
 which is a {{DOMString}} argument that represents the label of an encoding [[!Encoding]];
 if provided, it must be used as part of the <a>encoding determination</a> used when processing this method call.
 
-When the <dfn method for=FileReader id="dfn-readAsText">readAsText(blob, label)</dfn> method is called,
+When the <dfn method for=FileReader id="dfn-readAsText">readAsText(blob, encoding)</dfn> method is called,
 the user agent must run the steps below.
 
 1. If {{FileReader/readyState}} = {{FileReader/LOADING}} throw an {{InvalidStateError}} and <a>terminate this algorithm</a>.
@@ -1264,7 +1264,7 @@ take a {{Blob}} parameter.
 This section defines this parameter.
 
 <dl>
-  <dt><dfn id="dfn-fileBlob" argument for="FileReader/readAsArrayBuffer(blob), FileReader/readAsBinaryString(blob), FileReader/readAsText(blob, label), FileReader/readAsText(), FileReader/readAsDataURL(blob), URL/createObjectURL(blob), FileReaderSync/readAsArrayBuffer(blob), FileReaderSync/readAsBinaryString(blob), FileReaderSync/readAsText(blob, label), FileReaderSync/readAsDataURL(blob)">blob</dfn>
+  <dt><dfn id="dfn-fileBlob" argument for="FileReader/readAsArrayBuffer(blob), FileReader/readAsBinaryString(blob), FileReader/readAsText(blob, encoding), FileReader/readAsText(), FileReader/readAsDataURL(blob), URL/createObjectURL(blob), FileReaderSync/readAsArrayBuffer(blob), FileReaderSync/readAsBinaryString(blob), FileReaderSync/readAsText(blob, encoding), FileReaderSync/readAsDataURL(blob)">blob</dfn>
   <dd>This is a {{Blob}} argument
     and must be a reference to a single {{File}} in a {{FileList}}
     or a {{Blob}} argument not obtained from the underlying OS file system.
@@ -1278,8 +1278,8 @@ When reading {{Blob}} objects using the {{FileReader/readAsText()}} <a>read meth
 the following <dfn id="encoding-determination">encoding determination</dfn> steps must be followed:
 
 1. Let |encoding| be null.
-2. If the {{FileReader/readAsText()/label}} argument is present when calling the method,
-  set |encoding| to the result of the <a>getting an encoding</a> from {{FileReader/readAsText()/label}}.
+2. If the {{FileReader/readAsText()/encoding}} argument is present when calling the method,
+  set |encoding| to the result of the <a>getting an encoding</a> from {{FileReader/readAsText()/encoding}}.
 3. If the <a>getting an encoding</a> steps above return failure,
   then set |encoding| to null.
 4. If |encoding| is null,
@@ -1423,7 +1423,7 @@ interface FileReaderSync {
 
   ArrayBuffer readAsArrayBuffer(Blob blob);
   DOMString readAsBinaryString(Blob blob);
-  DOMString readAsText(Blob blob, optional DOMString label);
+  DOMString readAsText(Blob blob, optional DOMString encoding);
   DOMString readAsDataURL(Blob blob);
 };
 </pre>
@@ -1440,7 +1440,7 @@ the {{FileReaderSync}} constructor must be available.
 <h5 id="readAsTextSync">
 The {{FileReaderSync/readAsText()}} method</h5>
 
-When the <dfn method for=FileReaderSync id="dfn-readAsTextSync">readAsText(blob, label)</dfn> method is called,
+When the <dfn method for=FileReaderSync id="dfn-readAsTextSync">readAsText(blob, encoding)</dfn> method is called,
 the following steps must be followed:
 
 1. Initiate a <a>read operation</a> using the <code>blob</code> argument,
