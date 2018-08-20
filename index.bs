@@ -5,7 +5,6 @@ Shortname: FileAPI
 Level: 1
 Group: webplatform
 Editor: Marijn Kruisselbrink, Google, mek@chromium.org, w3cid 72440
-Editor: Vsevolod Shmyroff, Yandex, w3cid 93074
 Former Editor: Arun Ranganathan, Mozilla Corporation, http://arunranga.com/, arun@mozilla.com, w3cid 37240
 Prepare For TR: true
 Status: ED
@@ -1934,7 +1933,7 @@ Acknowledgements</h2>
 
 This specification was originally developed by the SVG Working Group. Many thanks to Mark Baker and Anne van Kesteren for their feedback.
 
-Thanks to Robin Berjon and Jonas Sicking for editing the original specification.
+Thanks to Robin Berjon, Jonas Sicking and Vsevolod Shmyroff for editing the original specification.
 
 Special thanks to Olli Pettay, Nikunj Mehta, Garrett Smith, Aaron Boodman, Michael Nordman, Jian Li, Dmitry Titov, Ian Hickson, Darin Fisher, Sam Weinig, Adrian Bateman and Julian Reschke.
 
