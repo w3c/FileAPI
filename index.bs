@@ -1760,7 +1760,7 @@ The <dfn method for=URL id="dfn-revokeObjectURL">revokeObjectURL(|url|)</dfn> st
 1. [=Remove an entry from the Blob URL Store=] for |url|.
 
 Note: This means that rather than throwing some kind of error, attempting to revoke a URL that isn't registered will silently fail.
-User agents might display a message on the error console is this happens.
+User agents might display a message on the error console if this happens.
 
 Note: Attempts to dereference |url| after it has been revoked will result in a [=network error=].
 Requests that were started before the |url| was revoked should still succeed.
