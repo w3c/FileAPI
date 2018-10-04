@@ -451,7 +451,7 @@ Attributes</h3>
 
     Note: The type <var ignore>t</var> of a {{Blob}} is considered a <a>parsable MIME type</a>,
     if performing the <a>parse a MIME type</a> algorithm to a byte sequence converted from
-    the ASCII-encoded string representing the Blob object's type does not return undefined.
+    the ASCII-encoded string representing the Blob object's type does not return failure.
 
     Note: Use of the {{Blob/type}} attribute informs the <a>encoding determination</a>
     and determines the `Content-Type` header when [=/fetching=] [=blob URLs=].
