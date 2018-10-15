@@ -37,6 +37,8 @@ Abstract: This specification provides an API for representing file objects in we
 Status Text: Previous discussion of this specification has taken place on two other mailing lists: <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapps/">archive</a>) and <a href="mailto:public-webapi@w3.org">public-webapi@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/public-webapi/">archive</a>). Ongoing discussion will be on the <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> mailing list.
 
   This draft consists of changes made to the previous Last Call Working Draft. Please send comments to the <a href="mailto:public-webapi@w3.org">public-webapi@w3.org</a> as described above. You can see Last Call Feedback on the W3C Wiki: <a href="http://www.w3.org/wiki/Webapps/LCWD-FileAPI-20130912">http://www.w3.org/wiki/Webapps/LCWD-FileAPI-20130912</a>
+
+  An [implementation report](https://wpt.fyi/results/FileAPI) is automatically generated from the test suite.
 Translate Ids: dictdef-blobpropertybag dfn-BlobPropertyBag, dictdef-filepropertybag dfn-FilePropertyBag, filereadersync dfn-FileReaderSync, filelist dfn-filelist, filereader dfn-filereader, file dfn-file, blob dfn-Blob, blob-section blob, file-section file
 Markup Shorthands: css no, markdown yes
 </pre>
