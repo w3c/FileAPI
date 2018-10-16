@@ -1212,9 +1212,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version dff342f4b23fb230b71436fb31b55f5f169715bd" name="generator">
+  <meta content="Bikeshed version 018be3f805d3272ce699a232398d6e3902d1ea8d" name="generator">
   <link href="https://www.w3.org/TR/FileAPI/" rel="canonical">
-  <meta content="f9b1eb29a67082d2a88a4b09acd6f2d51f87f380" name="document-revision">
+  <meta content="dc487d476f71e7aa593fd5decb48cb688c408d45" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1473,7 +1473,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">File API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-10-04">4 October 2018</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-10-16">16 October 2018</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1501,7 +1501,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
    <p>This specification provides an API for representing file objects in web applications,
 
-as well as programmatically selecting them and accessing their data. This includes:</p>
+  as well as programmatically selecting them and accessing their data. This includes:</p>
    <ul>
     <li data-md>
      <p>A <code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist">FileList</a></code> interface, which represents an array of individually selected files from the underlying system. The user interface for selection can be invoked via <code>&lt;input type="file"></code>, i.e. when the input element is in the <code>File Upload</code> state <a data-link-type="biblio" href="#biblio-html">[HTML]</a>.</p>
@@ -1517,10 +1517,10 @@ as well as programmatically selecting them and accessing their data. This includ
    <p>Additionally, this specification defines objects to be used within threaded web applications for the synchronous reading of files.</p>
    <p><a href="#requirements">§10 Requirements and Use Cases</a> covers the motivation behind this specification.</p>
    <p>This API is designed to be used in conjunction with other APIs and elements on the web platform, notably: <code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#xmlhttprequest" id="ref-for-xmlhttprequest">XMLHttpRequest</a></code> (e.g. with an overloaded <code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#dom-xmlhttprequest-send" id="ref-for-dom-xmlhttprequest-send">send()</a></code> method for <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file②">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob④">Blob</a></code> arguments), <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/workers.html#dom-worker-postmessage" id="ref-for-dom-worker-postmessage">postMessage()</a></code>, <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dnd.html#datatransfer" id="ref-for-datatransfer">DataTransfer</a></code> (part of the drag and drop API defined in <a data-link-type="biblio" href="#biblio-html">[HTML]</a>)
-and Web Workers.
-Additionally, it should be possible to programmatically obtain a list of files from the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/input.html#the-input-element" id="ref-for-the-input-element">input</a></code> element
-when it is in the <code>File Upload</code> state <a data-link-type="biblio" href="#biblio-html">[HTML]</a>.
-These kinds of behaviors are defined in the appropriate affiliated specifications.</p>
+  and Web Workers.
+  Additionally, it should be possible to programmatically obtain a list of files from the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/input.html#the-input-element" id="ref-for-the-input-element">input</a></code> element
+  when it is in the <code>File Upload</code> state <a data-link-type="biblio" href="#biblio-html">[HTML]</a>.
+  These kinds of behaviors are defined in the appropriate affiliated specifications.</p>
   </div>
   <h2 class="no-num no-toc no-ref heading settled" id="status"><span class="content">Status of this document</span></h2>
   <div data-fill-with="status">
@@ -1529,6 +1529,7 @@ These kinds of behaviors are defined in the appropriate affiliated specification
    <p></p>
    <p>Previous discussion of this specification has taken place on two other mailing lists: <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> (<a href="https://lists.w3.org/Archives/Public/public-webapps/">archive</a>) and <a href="mailto:public-webapi@w3.org">public-webapi@w3.org</a> (<a href="https://lists.w3.org/Archives/Public/public-webapi/">archive</a>). Ongoing discussion will be on the <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> mailing list.</p>
    <p>This draft consists of changes made to the previous Last Call Working Draft. Please send comments to the <a href="mailto:public-webapi@w3.org">public-webapi@w3.org</a> as described above. You can see Last Call Feedback on the W3C Wiki: <a href="https://www.w3.org/wiki/Webapps/LCWD-FileAPI-20130912">https://www.w3.org/wiki/Webapps/LCWD-FileAPI-20130912</a></p>
+   <p>An <a href="https://wpt.fyi/results/FileAPI">implementation report</a> is automatically generated from the test suite.</p>
    <p></p>
    <p> Feedback and comments on this specification are welcome, please send them to <a href="mailto:public-webapps@w3.org?subject=%5BFileAPI%5D">public-webapps@w3.org</a> (<a href="mailto:public-webapps@w3.org?subject=subscribe">subscribe</a>, <a href="https://lists.w3.org/Archives/Public/public-webapps/">archives</a>) with <code>[FileAPI]</code> at the start of your email’s subject. </p>
    <p> Publication as an Editors Draft does not imply endorsement by the <abbr title="World Wide Web Consortium">W3C</abbr> Membership. This is a draft document and may
