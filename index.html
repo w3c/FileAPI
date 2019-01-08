@@ -1212,9 +1212,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version acda2cc646176dce43c6fae1b17de6710de0cac0" name="generator">
+  <meta content="Bikeshed version 6dcb46ba8cae3704b42c05bcd8578c92d239786a" name="generator">
   <link href="https://www.w3.org/TR/FileAPI/" rel="canonical">
-  <meta content="28e2f7b43ae2a6193053393786504a44994a92c3" name="document-revision">
+  <meta content="94f1192004507d078a27a76a6418ce4da9920e46" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1473,7 +1473,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">File API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-12-13">13 December 2018</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-01-08">8 January 2019</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1494,7 +1494,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     </dl>
    </div>
    <div data-fill-with="warning"></div>
-   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2018 <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>). W3C <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document" rel="license">permissive document license</a> rules apply. </p>
+   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2019 <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>). W3C <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document" rel="license">permissive document license</a> rules apply. </p>
    <hr title="Separator for header">
   </div>
   <div class="p-summary" data-fill-with="abstract">
@@ -3067,10 +3067,10 @@ All URLs are revoked when the global that created the URL itself goes away.</p>
    <h3 class="heading settled" data-level="8.2" id="url-model"><span class="secno">8.2. </span><span class="content"> Model</span><a class="self-link" href="#url-model"></a></h3>
    <p>Each user agent must maintain a <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="BlobURLStore">blob URL store</dfn>.
 A <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore">blob URL store</a> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map" id="ref-for-ordered-map">map</a> where <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-key" id="ref-for-map-key">keys</a> are <a data-link-type="dfn" href="https://url.spec.whatwg.org/#valid-url-string" id="ref-for-valid-url-string">valid URL strings</a> and <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-value" id="ref-for-map-value">values</a> are <a data-link-type="dfn" href="#blob-url-entry" id="ref-for-blob-url-entry">blob URL Entries</a>.</p>
-   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="blob-url-entry">blob URL entry</dfn> consists of
-an <dfn data-dfn-for="blob URL entry" data-dfn-type="dfn" data-noexport id="blob-url-entry-object">object<a class="self-link" href="#blob-url-entry-object"></a></dfn> (typically a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑦⑦">Blob</a></code>,
+   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="blob-url-entry">blob URL entry</dfn> consists of
+an <dfn data-dfn-for="blob URL entry" data-dfn-type="dfn" data-export id="blob-url-entry-object">object<a class="self-link" href="#blob-url-entry-object"></a></dfn> (typically a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑦⑦">Blob</a></code>,
 but other specs can extend this to refer to other types of objects),
-and an <dfn class="dfn-paneled" data-dfn-for="blob URL entry" data-dfn-type="dfn" data-noexport id="blob-url-entry-environment">environment</dfn> (an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object" id="ref-for-environment-settings-object">environment settings object</a>).</p>
+and an <dfn class="dfn-paneled" data-dfn-for="blob URL entry" data-dfn-type="dfn" data-export id="blob-url-entry-environment">environment</dfn> (an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object" id="ref-for-environment-settings-object">environment settings object</a>).</p>
    <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-key" id="ref-for-map-key①">Keys</a> in the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore①">blob URL store</a> (also known as <dfn class="dfn-paneled" data-dfn-type="dfn" data-export data-lt="blob URL|object URL" id="blob-url">blob URLs</dfn>)
 are <a data-link-type="dfn" href="https://url.spec.whatwg.org/#valid-url-string" id="ref-for-valid-url-string①">valid URL strings</a> that when <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-parser" id="ref-for-concept-url-parser">parsed</a> result in a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url②">URL</a> with a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme①">scheme</a> equal to "<code>blob</code>",
 an <a data-link-type="dfn" href="https://url.spec.whatwg.org/#empty-host" id="ref-for-empty-host">empty host</a>, and a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-path" id="ref-for-concept-url-path">path</a> consisting of one element itself also a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#valid-url-string" id="ref-for-valid-url-string②">valid URL string</a>.</p>
@@ -3130,7 +3130,7 @@ run the following steps:
    </div>
    <h4 class="heading settled" data-level="8.2.1" id="requestResponseModel"><span class="secno">8.2.1. </span><span class="content"> Dereferencing Model for blob URLs</span><a class="self-link" href="#requestResponseModel"></a></h4>
    <div class="algorithm" data-algorithm="resolveURL">
-     To <dfn class="dfn-paneled" data-dfn-for="blob URL" data-dfn-type="dfn" data-export data-lt="resolve" id="blob-url-resolve">resolve a blob URL</dfn> given a <var>url</var> (a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url③">URL</a>), run the following steps: 
+     To <dfn data-dfn-for="blob URL" data-dfn-type="dfn" data-export data-lt="resolve" id="blob-url-resolve">resolve a blob URL<a class="self-link" href="#blob-url-resolve"></a></dfn> given a <var>url</var> (a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url③">URL</a>), run the following steps: 
     <ol>
      <li data-md>
       <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert">Assert</a>: <var>url</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme②">scheme</a> is "<code>blob</code>".</p>
@@ -3142,41 +3142,26 @@ run the following steps:
       <p>If <var>store</var>[<var>url string</var>] <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-exists" id="ref-for-map-exists">exists</a>, return <var>store</var>[<var>url string</var>]; otherwise return failure.</p>
     </ol>
    </div>
-   <p>Futher requirements for the parsing an fetching model for <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url③">blob URLs</a> are defined in the <a data-link-type="biblio" href="#biblio-url">[URL]</a> and <a data-link-type="biblio" href="#biblio-fetch">[Fetch]</a> specifications.</p>
+   <p>Futher requirements for the parsing and fetching model for <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url③">blob URLs</a> are defined in the <a data-link-type="biblio" href="#biblio-url">[URL]</a> and <a data-link-type="biblio" href="#biblio-fetch">[Fetch]</a> specifications.</p>
    <h4 class="heading settled" data-level="8.2.2" id="originOfBlobURL"><span class="secno">8.2.2. </span><span class="content"> Origin of blob URLs</span><a class="self-link" href="#originOfBlobURL"></a></h4>
-   <div class="algorithm" data-algorithm="resolveURLOrigin">
-     To <dfn class="dfn-paneled" data-dfn-for="blob URL" data-dfn-type="dfn" data-export data-lt="resolve the origin|resolving the origin" id="blob-url-resolve-the-origin">resolve the origin of a blob URL</dfn> given a <var>url</var> (a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url④">URL</a>), run the following steps: 
-    <ol>
-     <li data-md>
-      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert①">Assert</a>: <var>url</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme③">scheme</a> is "<code>blob</code>".</p>
-     <li data-md>
-      <p>Let <var>entry</var> be the result of <a data-link-type="dfn" href="#blob-url-resolve" id="ref-for-blob-url-resolve">resolving</a> <var>url</var>.</p>
-     <li data-md>
-      <p>If <var>entry</var> is not failure, return <var>entry</var>’s <a data-link-type="dfn" href="#blob-url-entry-environment" id="ref-for-blob-url-entry-environment">environment</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin" id="ref-for-concept-settings-object-origin①">origin</a>.</p>
-     <li data-md>
-      <p>Let <var>nested url</var> be the result of <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-parser" id="ref-for-concept-url-parser①">parsing</a> <var>url</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-path" id="ref-for-concept-url-path①">path</a>[0].</p>
-     <li data-md>
-      <p>Return a new <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/origin.html#concept-origin-opaque" id="ref-for-concept-origin-opaque">opaque origin</a>, if <var>nested url</var> is failure, and <var>nested url</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-origin" id="ref-for-concept-url-origin">origin</a> otherwise.</p>
-    </ol>
-   </div>
-   <p class="note" role="note"><span>Note:</span> The effect of this algorithm is that the origin of a blob URL is always
-the same as that of the environment that created the URL,
-as long as the URL hasn’t been revoked yet.
-If the URL was revoked the serialization of the origin will still remain the same
+   <p><em>This section is informative.</em></p>
+   <p>The origin of a blob URL is always the same as that of the environment that created the URL,
+as long as the URL hasn’t been revoked yet. This is achieved by the <a data-link-type="biblio" href="#biblio-url">[URL]</a> spec looking up
+the URL in the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore⑤">blob URL store</a> when parsing a URL, and using that entry to return
+the correct origin.</p>
+   <p>If the URL was revoked the serialization of the origin will still remain the same
 as the serialization of the origin of the environment that created the blob URL,
-but for opaque origins the origin itself might be distinct.
-This difference isn’t observable though, since a revoked blob URL can’t be resolved/fetched anymore anyway.</p>
-   <p class="issue" id="issue-ea1a509d"><a class="self-link" href="#issue-ea1a509d"></a> The <a data-link-type="biblio" href="#biblio-url">[URL]</a> spec should be updated to refer to this algorithm to resolve the origin of a blob URL when the URL is first parsed.
-This is tracked in <a href="https://github.com/w3c/FileAPI/issues/63">issue #63</a> and in <a href="https://github.com/whatwg/url/issues/127">whatwg/url#127</a>.</p>
+but for opaque origins the origin itself might be distinct. This difference isn’t
+observable though, since a revoked blob URL can’t be resolved/fetched anymore anyway.</p>
    <h4 class="heading settled dfn-paneled" data-dfn-for="blob url" data-dfn-type="dfn" data-export data-level="8.2.3" data-lt="lifetime|lifetime stipulation" id="lifeTime"><span class="secno">8.2.3. </span><span class="content"> Lifetime of blob URLs</span></h4>
    <p>This specification extends the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsing-the-web.html#unloading-document-cleanup-steps" id="ref-for-unloading-document-cleanup-steps">unloading document cleanup steps</a> with the following steps:</p>
    <ol>
     <li data-md>
      <p>Let <var>environment</var> be the <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document">Document</a></code>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object" id="ref-for-relevant-settings-object">relevant settings object</a>.</p>
     <li data-md>
-     <p>Let <var>store</var> be the user agent’s <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore⑤">blob URL store</a>;</p>
+     <p>Let <var>store</var> be the user agent’s <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore⑥">blob URL store</a>;</p>
     <li data-md>
-     <p>Remove from <var>store</var> any entries for which the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-value" id="ref-for-map-value①">value</a>'s <a data-link-type="dfn" href="#blob-url-entry-environment" id="ref-for-blob-url-entry-environment①">environment</a> is equal to <var>environment</var>.</p>
+     <p>Remove from <var>store</var> any entries for which the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-value" id="ref-for-map-value①">value</a>'s <a data-link-type="dfn" href="#blob-url-entry-environment" id="ref-for-blob-url-entry-environment">environment</a> is equal to <var>environment</var>.</p>
    </ol>
    <p class="issue" id="issue-5f2e5a9d"><a class="self-link" href="#issue-5f2e5a9d"></a> This needs a similar hook when a worker is unloaded.</p>
    <h3 class="heading settled" data-level="8.3" id="creating-revoking"><span class="secno">8.3. </span><span class="content"> Creating and Revoking a blob URL</span><a class="self-link" href="#creating-revoking"></a></h3>
@@ -3197,15 +3182,15 @@ return the result of <a data-link-type="dfn" href="#add-an-entry" id="ref-for-ad
      The <dfn class="dfn-paneled idl-code" data-dfn-for="URL" data-dfn-type="method" data-export id="dfn-revokeObjectURL"><code>revokeObjectURL(<var>url</var>)</code></dfn> static method must run these steps: 
     <ol>
      <li data-md>
-      <p>Let <var>url record</var> be the result of <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-parser" id="ref-for-concept-url-parser②">parsing</a> <var>url</var>.</p>
+      <p>Let <var>url record</var> be the result of <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-parser" id="ref-for-concept-url-parser①">parsing</a> <var>url</var>.</p>
      <li data-md>
-      <p>If <var>url record</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme④">scheme</a> is not "<code>blob</code>", return.</p>
+      <p>If <var>url record</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme③">scheme</a> is not "<code>blob</code>", return.</p>
      <li data-md>
-      <p>Let <var>origin</var> be the result of <a data-link-type="dfn" href="#blob-url-resolve-the-origin" id="ref-for-blob-url-resolve-the-origin">resolving the origin</a> of <var>url record</var>.</p>
+      <p>Let <var>origin</var> be the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-origin" id="ref-for-concept-url-origin">origin</a> of <var>url record</var>.</p>
      <li data-md>
       <p>Let <var>settings</var> be the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#current-settings-object" id="ref-for-current-settings-object②">current settings object</a>.</p>
      <li data-md>
-      <p>If <var>origin</var> is not <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/origin.html#same-origin" id="ref-for-same-origin">same origin</a> with <var>settings</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin" id="ref-for-concept-settings-object-origin②">origin</a>, return.</p>
+      <p>If <var>origin</var> is not <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/origin.html#same-origin" id="ref-for-same-origin">same origin</a> with <var>settings</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin" id="ref-for-concept-settings-object-origin①">origin</a>, return.</p>
      <li data-md>
       <p><a data-link-type="dfn" href="#removeTheEntry" id="ref-for-removeTheEntry">Remove an entry from the Blob URL Store</a> for <var>url</var>.</p>
     </ol>
@@ -3220,7 +3205,7 @@ Requests that were started before the <var>url</var> was revoked should still su
 <pre class="lang-javascript highlight">myurl <c- o>=</c-> window1<c- p>.</c->URL<c- p>.</c->createObjectURL<c- p>(</c->myblob<c- p>);</c->
 window2<c- p>.</c->URL<c- p>.</c->revokeObjectURL<c- p>(</c->myurl<c- p>);</c->
 </pre>
-    <p>Since a user agent has one global <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore⑥">blob URL store</a>,
+    <p>Since a user agent has one global <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore⑦">blob URL store</a>,
   it is possible to revoke an object URL from a different window than from which it was created.
   The <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL②">revokeObjectURL()</a></code></code> call
   ensures that subsequent dereferencing of <code>myurl</code> results in a the user agent acting as if a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error" id="ref-for-concept-network-error②">network error</a> has occurred.</p>
@@ -3511,8 +3496,6 @@ No invocations to these APIs occur silently without user intervention.</p>
    <li><a href="#removeTheEntry">remove the entry</a><span>, in §8.2</span>
    <li><a href="#removeTheEntry">remove the entry from the blob URL store</a><span>, in §8.2</span>
    <li><a href="#blob-url-resolve">resolve</a><span>, in §8.2.1</span>
-   <li><a href="#blob-url-resolve-the-origin">resolve the origin</a><span>, in §8.2.2</span>
-   <li><a href="#blob-url-resolve-the-origin">resolving the origin</a><span>, in §8.2.2</span>
    <li><a href="#dfn-result">result</a><span>, in §6.3.4.1</span>
    <li><a href="#dfn-revokeObjectURL">revokeObjectURL(url)</a><span>, in §8.3</span>
    <li><a href="#dfn-size">size</a><span>, in §3.2</span>
@@ -3775,21 +3758,12 @@ Examples of blob URL Creation and Revocation</a>
    <a href="https://html.spec.whatwg.org/multipage/input.html#the-input-element">https://html.spec.whatwg.org/multipage/input.html#the-input-element</a><b>Referenced in:</b>
    <ul></ul>
   </aside>
-  <aside class="dfn-panel" data-for="term-for-concept-origin-opaque">
-   <a href="https://html.spec.whatwg.org/multipage/origin.html#concept-origin-opaque">https://html.spec.whatwg.org/multipage/origin.html#concept-origin-opaque</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-concept-origin-opaque">8.2.2. 
-Origin of blob URLs</a>
-   </ul>
-  </aside>
   <aside class="dfn-panel" data-for="term-for-concept-settings-object-origin">
    <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-concept-settings-object-origin">8.2. 
 Model</a>
-    <li><a href="#ref-for-concept-settings-object-origin①">8.2.2. 
-Origin of blob URLs</a>
-    <li><a href="#ref-for-concept-settings-object-origin②">8.3. 
+    <li><a href="#ref-for-concept-settings-object-origin①">8.3. 
 Creating and Revoking a blob URL</a>
    </ul>
   </aside>
@@ -3905,8 +3879,6 @@ Constructor</a>
    <ul>
     <li><a href="#ref-for-assert">8.2.1. 
 Dereferencing Model for blob URLs</a>
-    <li><a href="#ref-for-assert①">8.2.2. 
-Origin of blob URLs</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-byte">
@@ -4056,8 +4028,8 @@ Model</a>
   <aside class="dfn-panel" data-for="term-for-concept-url-origin">
    <a href="https://url.spec.whatwg.org/#concept-url-origin">https://url.spec.whatwg.org/#concept-url-origin</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-url-origin">8.2.2. 
-Origin of blob URLs</a>
+    <li><a href="#ref-for-concept-url-origin">8.3. 
+Creating and Revoking a blob URL</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-url-path">
@@ -4065,8 +4037,6 @@ Origin of blob URLs</a>
    <ul>
     <li><a href="#ref-for-concept-url-path">8.2. 
 Model</a>
-    <li><a href="#ref-for-concept-url-path①">8.2.2. 
-Origin of blob URLs</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-url-scheme">
@@ -4078,9 +4048,7 @@ A URL for Blob and File reference</a>
 Model</a>
     <li><a href="#ref-for-concept-url-scheme②">8.2.1. 
 Dereferencing Model for blob URLs</a>
-    <li><a href="#ref-for-concept-url-scheme③">8.2.2. 
-Origin of blob URLs</a>
-    <li><a href="#ref-for-concept-url-scheme④">8.3. 
+    <li><a href="#ref-for-concept-url-scheme③">8.3. 
 Creating and Revoking a blob URL</a>
    </ul>
   </aside>
@@ -4095,8 +4063,6 @@ Introduction</a>
 Model</a>
     <li><a href="#ref-for-concept-url③">8.2.1. 
 Dereferencing Model for blob URLs</a>
-    <li><a href="#ref-for-concept-url④">8.2.2. 
-Origin of blob URLs</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-url-parser">
@@ -4104,9 +4070,7 @@ Origin of blob URLs</a>
    <ul>
     <li><a href="#ref-for-concept-url-parser">8.2. 
 Model</a>
-    <li><a href="#ref-for-concept-url-parser①">8.2.2. 
-Origin of blob URLs</a>
-    <li><a href="#ref-for-concept-url-parser②">8.3. 
+    <li><a href="#ref-for-concept-url-parser①">8.3. 
 Creating and Revoking a blob URL</a>
    </ul>
   </aside>
@@ -4397,7 +4361,6 @@ Event Summary</a> <a href="#ref-for-progressevent②">(2)</a> <a href="#ref-for-
      <li><span class="dfn-paneled" id="term-for-the-iframe-element" style="color:initial">iframe</span>
      <li><span class="dfn-paneled" id="term-for-the-img-element" style="color:initial">img</span>
      <li><span class="dfn-paneled" id="term-for-the-input-element" style="color:initial">input</span>
-     <li><span class="dfn-paneled" id="term-for-concept-origin-opaque" style="color:initial">opaque origin</span>
      <li><span class="dfn-paneled" id="term-for-concept-settings-object-origin" style="color:initial">origin</span>
      <li><span class="dfn-paneled" id="term-for-dom-worker-postmessage-options" style="color:initial">postMessage(message, options)</span>
      <li><span class="dfn-paneled" id="term-for-queue-a-task" style="color:initial">queue a task</span>
@@ -4621,8 +4584,6 @@ Event Summary</a> <a href="#ref-for-progressevent②">(2)</a> <a href="#ref-for-
 </pre>
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
   <div style="counter-reset:issue">
-   <div class="issue"> The <a data-link-type="biblio" href="#biblio-url">[URL]</a> spec should be updated to refer to this algorithm to resolve the origin of a blob URL when the URL is first parsed.
-This is tracked in <a href="https://github.com/w3c/FileAPI/issues/63">issue #63</a> and in <a href="https://github.com/whatwg/url/issues/127">whatwg/url#127</a>.<a href="#issue-ea1a509d"> ↵ </a></div>
    <div class="issue"> This needs a similar hook when a worker is unloaded.<a href="#issue-5f2e5a9d"> ↵ </a></div>
    <div class="issue"> This section is provisional; more security data may supplement this in subsequent drafts.<a href="#issue-61296551"> ↵ </a></div>
   </div>
@@ -5773,9 +5734,11 @@ Throwing an Exception or Returning an Error</a> <a href="#ref-for-dfn-error⑤">
 Model</a> <a href="#ref-for-BlobURLStore①">(2)</a> <a href="#ref-for-BlobURLStore②">(3)</a> <a href="#ref-for-BlobURLStore③">(4)</a>
     <li><a href="#ref-for-BlobURLStore④">8.2.1. 
 Dereferencing Model for blob URLs</a>
-    <li><a href="#ref-for-BlobURLStore⑤">8.2.3. 
+    <li><a href="#ref-for-BlobURLStore⑤">8.2.2. 
+Origin of blob URLs</a>
+    <li><a href="#ref-for-BlobURLStore⑥">8.2.3. 
 Lifetime of blob URLs</a>
-    <li><a href="#ref-for-BlobURLStore⑥">8.3. 
+    <li><a href="#ref-for-BlobURLStore⑦">8.3. 
 Creating and Revoking a blob URL</a>
    </ul>
   </aside>
@@ -5789,9 +5752,7 @@ Model</a> <a href="#ref-for-blob-url-entry①">(2)</a>
   <aside class="dfn-panel" data-for="blob-url-entry-environment">
    <b><a href="#blob-url-entry-environment">#blob-url-entry-environment</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-blob-url-entry-environment">8.2.2. 
-Origin of blob URLs</a>
-    <li><a href="#ref-for-blob-url-entry-environment①">8.2.3. 
+    <li><a href="#ref-for-blob-url-entry-environment">8.2.3. 
 Lifetime of blob URLs</a>
    </ul>
   </aside>
@@ -5830,20 +5791,6 @@ Creating and Revoking a blob URL</a>
    <b><a href="#removeTheEntry">#removeTheEntry</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-removeTheEntry">8.3. 
-Creating and Revoking a blob URL</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="blob-url-resolve">
-   <b><a href="#blob-url-resolve">#blob-url-resolve</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-blob-url-resolve">8.2.2. 
-Origin of blob URLs</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="blob-url-resolve-the-origin">
-   <b><a href="#blob-url-resolve-the-origin">#blob-url-resolve-the-origin</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-blob-url-resolve-the-origin">8.3. 
 Creating and Revoking a blob URL</a>
    </ul>
   </aside>
