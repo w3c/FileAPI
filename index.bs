@@ -1620,10 +1620,10 @@ A [=blob URL store=] is a [=map=]
 where [=map/keys=] are [=valid URL strings=]
 and [=map/values=] are [=blob URL Entries=].
 
-A <dfn>blob URL entry</dfn> consists of
-an <dfn for="blob URL entry">object</dfn> (typically a {{Blob}},
+A <dfn export>blob URL entry</dfn> consists of
+an <dfn export for="blob URL entry">object</dfn> (typically a {{Blob}},
 but other specs can extend this to refer to other types of objects),
-and an <dfn for="blob URL entry">environment</dfn> (an [=environment settings object=]).
+and an <dfn export for="blob URL entry">environment</dfn> (an [=environment settings object=]).
 
 [=map/Keys=] in the [=blob URL store=] (also known as <dfn lt="blob URL|object URL" export>blob URLs</dfn>)
 are [=valid URL strings=] that when [=URL parser|parsed=]
@@ -1689,33 +1689,22 @@ To <dfn export for="blob URL" lt="resolve">resolve a blob URL</dfn> given a |url
 
 </div>
 
-Futher requirements for the parsing an fetching model for [=blob URLs=] are defined in the [[!URL]] and [[!Fetch]] specifications.
+Futher requirements for the parsing and fetching model for [=blob URLs=] are defined in the [[!URL]] and [[!Fetch]] specifications.
 
 <h4 id="originOfBlobURL">
 Origin of blob URLs</h4>
 
-<div algorithm="resolveURLOrigin">
-To <dfn export for="blob URL" lt="resolve the origin|resolving the origin">resolve the origin of a blob URL</dfn> given a |url| (a [=URL=]), run the following steps:
+*This section is informative.*
 
-1. [=Assert=]: |url|'s [=url/scheme=] is "`blob`".
-1. Let |entry| be the result of [=blob URL/resolve|resolving=] |url|.
-1. If |entry| is not failure, return |entry|'s [=blob URL entry/environment=]'s [=environment settings object/origin=].
-1. Let |nested url| be the result of [=URL parser|parsing=] |url|'s [=url/path=][0].
-1. Return a new [=opaque origin=], if |nested url| is failure, and |nested url|'s [=url/origin=] otherwise.
+The origin of a blob URL is always the same as that of the environment that created the URL,
+as long as the URL hasn't been revoked yet. This is achieved by the [[URL]] spec looking up
+the URL in the [=blob URL store=] when parsing a URL, and using that entry to return
+the correct origin.
 
-</div>
-
-Note: The effect of this algorithm is that the origin of a blob URL is always
-the same as that of the environment that created the URL,
-as long as the URL hasn't been revoked yet.
 If the URL was revoked the serialization of the origin will still remain the same
 as the serialization of the origin of the environment that created the blob URL,
-but for opaque origins the origin itself might be distinct.
-This difference isn't observable though, since a revoked blob URL can't be resolved/fetched anymore anyway.
-
-Issue: The [[URL]] spec should be updated to refer to this algorithm to resolve the origin of a blob URL when the URL is first parsed.
-This is tracked in <a href="https://github.com/w3c/FileAPI/issues/63">issue #63</a> and in
-<a href="https://github.com/whatwg/url/issues/127">whatwg/url#127</a>.
+but for opaque origins the origin itself might be distinct. This difference isn't
+observable though, since a revoked blob URL can't be resolved/fetched anymore anyway.
 
 <h4 id="lifeTime" dfn for="blob url" lt="lifetime|lifetime stipulation" export>
 Lifetime of blob URLs</h3>
@@ -1756,7 +1745,7 @@ The <dfn method for=URL id="dfn-revokeObjectURL">revokeObjectURL(|url|)</dfn> st
 
 1. Let |url record| be the result of [=URL parser|parsing=] |url|.
 1. If |url record|'s [=url/scheme=] is not "`blob`", return.
-1. Let |origin| be the result of [=resolving the origin=] of |url record|.
+1. Let |origin| be the [=url/origin=] of |url record|.
 1. Let |settings| be the [=current settings object=].
 1. If |origin| is not [=same origin=] with |settings|'s [=environment settings object/origin=], return.
 1. [=Remove an entry from the Blob URL Store=] for |url|.
