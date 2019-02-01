@@ -1212,9 +1212,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 6dcb46ba8cae3704b42c05bcd8578c92d239786a" name="generator">
+  <meta content="Bikeshed version eee3e9e7543e2188fb60d183a6cf3fe3a7d971c1" name="generator">
   <link href="https://www.w3.org/TR/FileAPI/" rel="canonical">
-  <meta content="94f1192004507d078a27a76a6418ce4da9920e46" name="document-revision">
+  <meta content="d3341fd98655226a449255b66576843eb5ec9d0b" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1473,7 +1473,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">File API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-01-08">8 January 2019</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-02-01">1 February 2019</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -3058,7 +3058,7 @@ then this is the <dfn data-dfn-type="dfn" data-noexport id="FileLockFR">FileLock
 This enables integration of <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑦④">Blob</a></code>s and <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file⑤④">File</a></code>s with other Web Platform APIs
 that are only designed to be used with URLs, such as the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element" id="ref-for-the-img-element">img</a></code> element. <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url②">Blob URLs</a> can also be used to navigate to as well as to trigger downloads of
 locally generated data.</p>
-   <p>For this purpose two static methods are exposed on the <code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#url" id="ref-for-url">URL</a></code> interface, <code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL①">createObjectURL(blob)</a></code> and <code class="idl"><a data-link-type="idl" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL">revokeObjectURL(url)</a></code>.
+   <p>For this purpose two static methods are exposed on the <code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#url" id="ref-for-url">URL</a></code> interface, <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-createObjectURL" id="ref-for-dfn-createObjectURL①">createObjectURL(blob)</a></code> and <code class="idl"><a data-link-type="idl" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL">revokeObjectURL(url)</a></code>.
 The first method creates a mapping from a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url①">URL</a> to a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑦⑤">Blob</a></code>,
 and the second method revokes said mapping.
 As long as the mapping exist the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑦⑥">Blob</a></code> can’t be garbage collected,
@@ -3068,8 +3068,7 @@ All URLs are revoked when the global that created the URL itself goes away.</p>
    <p>Each user agent must maintain a <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="BlobURLStore">blob URL store</dfn>.
 A <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore">blob URL store</a> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map" id="ref-for-ordered-map">map</a> where <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-key" id="ref-for-map-key">keys</a> are <a data-link-type="dfn" href="https://url.spec.whatwg.org/#valid-url-string" id="ref-for-valid-url-string">valid URL strings</a> and <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-value" id="ref-for-map-value">values</a> are <a data-link-type="dfn" href="#blob-url-entry" id="ref-for-blob-url-entry">blob URL Entries</a>.</p>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="blob-url-entry">blob URL entry</dfn> consists of
-an <dfn data-dfn-for="blob URL entry" data-dfn-type="dfn" data-export id="blob-url-entry-object">object<a class="self-link" href="#blob-url-entry-object"></a></dfn> (typically a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑦⑦">Blob</a></code>,
-but other specs can extend this to refer to other types of objects),
+an <dfn data-dfn-for="blob URL entry" data-dfn-type="dfn" data-export id="blob-url-entry-object">object<a class="self-link" href="#blob-url-entry-object"></a></dfn> (of type <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑦⑦">Blob</a></code> or <code class="idl"><a data-link-type="idl">MediaSource</a></code>),
 and an <dfn class="dfn-paneled" data-dfn-for="blob URL entry" data-dfn-type="dfn" data-export id="blob-url-entry-environment">environment</dfn> (an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object" id="ref-for-environment-settings-object">environment settings object</a>).</p>
    <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-key" id="ref-for-map-key①">Keys</a> in the <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore①">blob URL store</a> (also known as <dfn class="dfn-paneled" data-dfn-type="dfn" data-export data-lt="blob URL|object URL" id="blob-url">blob URLs</dfn>)
 are <a data-link-type="dfn" href="https://url.spec.whatwg.org/#valid-url-string" id="ref-for-valid-url-string①">valid URL strings</a> that when <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-parser" id="ref-for-concept-url-parser">parsed</a> result in a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url②">URL</a> with a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme①">scheme</a> equal to "<code>blob</code>",
@@ -3172,12 +3171,12 @@ user agents must act as if a <a data-link-type="dfn" href="https://fetch.spec.wh
 This section describes a supplemental interface to the URL specification <a data-link-type="biblio" href="#biblio-url">[URL]</a> and presents methods for <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url⑦">blob URL</a> creation and revocation.</p>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed⑤"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>DedicatedWorker</c->,<c- n>SharedWorker</c->)]
 <c- b>partial</c-> <c- b>interface</c-> <a class="idl-code" data-link-type="interface" href="https://url.spec.whatwg.org/#url" id="ref-for-url②"><c- g>URL</c-></a> {
-  <c- b>static</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①⑦"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL②"><c- g>createObjectURL</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob⑦⑧"><c- n>Blob</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob⑨"><c- g>blob</c-></a>);
+  <c- b>static</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①⑦"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL②"><c- g>createObjectURL</c-></a>((<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob⑦⑧"><c- n>Blob</c-></a> <c- b>or</c-> <a class="n" data-link-type="idl-name"><c- n>MediaSource</c-></a>) <dfn class="idl-code" data-dfn-for="URL/createObjectURL(obj)" data-dfn-type="argument" data-export id="dom-url-createobjecturl-obj-obj"><code><c- g>obj</c-></code><a class="self-link" href="#dom-url-createobjecturl-obj-obj"></a></dfn>);
   <c- b>static</c-> <c- b>void</c-> <a class="idl-code" data-link-type="method" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL①"><c- g>revokeObjectURL</c-></a>(<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①⑧"><c- b>DOMString</c-></a> <dfn class="idl-code" data-dfn-for="URL/revokeObjectURL(url)" data-dfn-type="argument" data-export id="dom-url-revokeobjecturl-url-url"><code><c- g>url</c-></code><a class="self-link" href="#dom-url-revokeobjecturl-url-url"></a></dfn>);
 };
 </pre>
-   <div class="algorithm" data-algorithm="createObjectURL"> The <dfn class="dfn-paneled idl-code" data-dfn-for="URL" data-dfn-type="method" data-export id="dfn-createObjectURL"><code>createObjectURL(<var>blob</var>)</code></dfn> static method must
-return the result of <a data-link-type="dfn" href="#add-an-entry" id="ref-for-add-an-entry">adding an entry to the blob URL store</a> for <var>blob</var>. </div>
+   <div class="algorithm" data-algorithm="createObjectURL"> The <dfn class="dfn-paneled idl-code" data-dfn-for="URL" data-dfn-type="method" data-export id="dfn-createObjectURL"><code>createObjectURL(<var>obj</var>)</code></dfn> static method must
+return the result of <a data-link-type="dfn" href="#add-an-entry" id="ref-for-add-an-entry">adding an entry to the blob URL store</a> for <var>obj</var>. </div>
    <div class="algorithm" data-algorithm="revokeObjectURL">
      The <dfn class="dfn-paneled idl-code" data-dfn-for="URL" data-dfn-type="method" data-export id="dfn-revokeObjectURL"><code>revokeObjectURL(<var>url</var>)</code></dfn> static method must run these steps: 
     <ol>
@@ -3394,7 +3393,7 @@ No invocations to these APIs occur silently without user intervention.</p>
    <li><a href="#BlobURLStore">blob URL store</a><span>, in §8.2</span>
    <li><a href="#convert-line-endings-to-native">converting line endings to native</a><span>, in §3.1.1</span>
    <li><a href="#convert-line-endings-to-native">convert line endings to native</a><span>, in §3.1.1</span>
-   <li><a href="#dfn-createObjectURL">createObjectURL(blob)</a><span>, in §8.3</span>
+   <li><a href="#dfn-createObjectURL">createObjectURL(obj)</a><span>, in §8.3</span>
    <li><a href="#dfn-done">DONE</a><span>, in §6.3.3</span>
    <li><a href="#dfn-empty">EMPTY</a><span>, in §6.3.3</span>
    <li><a href="#encoding-determination">encoding determination</a><span>, in §6.4</span>
@@ -4535,7 +4534,7 @@ Event Summary</a> <a href="#ref-for-progressevent②">(2)</a> <a href="#ref-for-
 <c- b>interface</c-> <a href="#dfn-filereader"><code><c- g>FileReader</c-></code></a>: <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#eventtarget" id="ref-for-eventtarget①"><c- n>EventTarget</c-></a> {
 
   // async read methods
-  <c- b>void</c-> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBuffer" id="ref-for-dfn-readAsArrayBuffer⑤"><c- g>readAsArrayBuffer</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑨①"><c- n>Blob</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob①⓪"><c- g>blob</c-></a>);
+  <c- b>void</c-> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBuffer" id="ref-for-dfn-readAsArrayBuffer⑤"><c- g>readAsArrayBuffer</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑨①"><c- n>Blob</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob⑨"><c- g>blob</c-></a>);
   <c- b>void</c-> <a class="idl-code" data-link-type="method" href="#dfn-readAsBinaryString" id="ref-for-dfn-readAsBinaryString⑤"><c- g>readAsBinaryString</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob④⓪①"><c- n>Blob</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob①①"><c- g>blob</c-></a>);
   <c- b>void</c-> <a class="idl-code" data-link-type="method" href="#dfn-readAsText" id="ref-for-dfn-readAsText⑥"><c- g>readAsText</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob④①①"><c- n>Blob</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob②①"><c- g>blob</c-></a>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString⑥①"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-encoding" id="ref-for-dfn-encoding④"><c- g>encoding</c-></a>);
   <c- b>void</c-> <a class="idl-code" data-link-type="method" href="#dfn-readAsDataURL" id="ref-for-dfn-readAsDataURL④"><c- g>readAsDataURL</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob④②①"><c- n>Blob</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob③①"><c- g>blob</c-></a>);
@@ -4577,7 +4576,7 @@ Event Summary</a> <a href="#ref-for-progressevent②">(2)</a> <a href="#ref-for-
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed⑤①"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>DedicatedWorker</c->,<c- n>SharedWorker</c->)]
 <c- b>partial</c-> <c- b>interface</c-> <a class="idl-code" data-link-type="interface" href="https://url.spec.whatwg.org/#url" id="ref-for-url②①"><c- g>URL</c-></a> {
-  <c- b>static</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①⑦①"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL②①"><c- g>createObjectURL</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob⑦⑧①"><c- n>Blob</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-fileBlob" id="ref-for-dfn-fileBlob⑨①"><c- g>blob</c-></a>);
+  <c- b>static</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①⑦①"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL②①"><c- g>createObjectURL</c-></a>((<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob⑦⑧①"><c- n>Blob</c-></a> <c- b>or</c-> <a class="n" data-link-type="idl-name"><c- n>MediaSource</c-></a>) <a href="#dom-url-createobjecturl-obj-obj"><code><c- g>obj</c-></code></a>);
   <c- b>static</c-> <c- b>void</c-> <a class="idl-code" data-link-type="method" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL①①"><c- g>revokeObjectURL</c-></a>(<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①⑧①"><c- b>DOMString</c-></a> <a href="#dom-url-revokeobjecturl-url-url"><code><c- g>url</c-></code></a>);
 };
 
@@ -5475,8 +5474,6 @@ The FileReader API</a> <a href="#ref-for-dfn-fileBlob①">(2)</a> <a href="#ref-
 Determining Encoding</a>
     <li><a href="#ref-for-dfn-fileBlob⑤">6.6.1. 
 The FileReaderSync API</a> <a href="#ref-for-dfn-fileBlob⑥">(2)</a> <a href="#ref-for-dfn-fileBlob⑦">(3)</a> <a href="#ref-for-dfn-fileBlob⑧">(4)</a>
-    <li><a href="#ref-for-dfn-fileBlob⑨">8.3. 
-Creating and Revoking a blob URL</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="encoding-determination">
@@ -5806,8 +5803,6 @@ Examples of blob URL Creation and Revocation</a>
    <ul>
     <li><a href="#ref-for-dfn-createObjectURL">6.3.4.8. 
 Blob Parameters</a>
-    <li><a href="#ref-for-dfn-createObjectURL①">8.1. 
-Introduction</a>
     <li><a href="#ref-for-dfn-createObjectURL②">8.3. 
 Creating and Revoking a blob URL</a>
     <li><a href="#ref-for-dfn-createObjectURL③">8.3.1. 
