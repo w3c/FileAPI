@@ -1620,7 +1620,7 @@ where [=map/keys=] are [=valid URL strings=]
 and [=map/values=] are [=blob URL Entries=].
 
 A <dfn export>blob URL entry</dfn> consists of
-an <dfn export for="blob URL entry">object</dfn> (of type {{Blob}}, {{File}} or {{MediaSource}}),
+an <dfn export for="blob URL entry">object</dfn> (of type {{Blob}} or {{MediaSource}}),
 and an <dfn export for="blob URL entry">environment</dfn> (an [=environment settings object=]).
 
 [=map/Keys=] in the [=blob URL store=] (also known as <dfn lt="blob URL|object URL" export>blob URLs</dfn>)
