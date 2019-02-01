@@ -1,5 +1,10 @@
- {
-    "group":      ["83482"]
-,   "contacts":   ["siusin"]
-,   "shortName":  "FileAPI"
+{
+  "group": [
+    "83482"
+  ],
+  "contacts": [
+    "siusin"
+  ],
+  "shortName": "FileAPI",
+  "repo-type": "rec-track"
 }
