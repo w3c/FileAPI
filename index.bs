@@ -1586,11 +1586,10 @@ or otherwise return null.
 </table>
 
 <h2 id=url>
-A URL for Blob and File reference</h2>
+A URL for Blob, File and MediaSource reference</h2>
 
-This section defines a [=url/scheme=] for a [=/URL=] used to refer to {{Blob}} objects (and {{File}} objects).
-
-Note: other specifications, such as [[MEDIA-SOURCE]] extend this scheme to also refer to other types of objects.
+This section defines a [=url/scheme=] for a [=/URL=] used to refer to {{Blob}},
+{{File}} and {{MediaSource}} objects.
 
 <h3 id="url-intro">
 Introduction</h3>
@@ -1599,10 +1598,10 @@ Introduction</h3>
 
 [=Blob URL|Blob (or object) URLs=] are URLs like
 `blob:http://example.com/550e8400-e29b-41d4-a716-446655440000`.
-This enables integration of {{Blob}}s and {{File}}s with other Web Platform APIs
-that are only designed to be used with URLs, such as the <{img}> element.
-[=Blob URLs=] can also be used to navigate to as well as to trigger downloads of
-locally generated data.
+This enables integration of {{Blob}}s, {{File}}s and {{MediaSource}}s with other
+Web Platform APIs that are only designed to be used with URLs, such as the
+<{img}> element. [=Blob URLs=] can also be used to navigate to as well as to
+trigger downloads of locally generated data.
 
 For this purpose two static methods are exposed on the {{URL}} interface,
 {{URL/createObjectURL(blob)}} and {{URL/revokeObjectURL(url)}}.
@@ -1621,7 +1620,7 @@ where [=map/keys=] are [=valid URL strings=]
 and [=map/values=] are [=blob URL Entries=].
 
 A <dfn export>blob URL entry</dfn> consists of
-an <dfn export for="blob URL entry">object</dfn> (of type {{Blob}} or {{MediaSource}}),
+an <dfn export for="blob URL entry">object</dfn> (of type {{Blob}}, {{File}} or {{MediaSource}}),
 and an <dfn export for="blob URL entry">environment</dfn> (an [=environment settings object=]).
 
 [=map/Keys=] in the [=blob URL store=] (also known as <dfn lt="blob URL|object URL" export>blob URLs</dfn>)
