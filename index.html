@@ -1214,7 +1214,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version eee3e9e7543e2188fb60d183a6cf3fe3a7d971c1" name="generator">
   <link href="https://www.w3.org/TR/FileAPI/" rel="canonical">
-  <meta content="d3341fd98655226a449255b66576843eb5ec9d0b" name="document-revision">
+  <meta content="b05629655c4ccd5841151b630c01448efc76b896" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1626,7 +1626,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
       <li><a href="#dfn-error-codes"><span class="secno">7.1</span> <span class="content"> Throwing an Exception or Returning an Error</span></a>
      </ol>
     <li>
-     <a href="#url"><span class="secno">8</span> <span class="content"> A URL for Blob and File reference</span></a>
+     <a href="#url"><span class="secno">8</span> <span class="content"> A URL for Blob and MediaSource reference</span></a>
      <ol class="toc">
       <li><a href="#url-intro"><span class="secno">8.1</span> <span class="content"> Introduction</span></a>
       <li>
@@ -3049,15 +3049,14 @@ then this is the <dfn data-dfn-type="dfn" data-noexport id="FileLockFR">FileLock
        <p>For asynchronous read methods the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dfn-error" id="ref-for-dfn-error⑥">error</a></code> attribute must return a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notreadableerror" id="ref-for-notreadableerror②">NotReadableError</a></code> exception
         and synchronous read methods must <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw" id="ref-for-dfn-throw④">throw</a> a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notreadableerror" id="ref-for-notreadableerror③">NotReadableError</a></code> exception.</p>
    </table>
-   <h2 class="heading settled" data-level="8" id="url"><span class="secno">8. </span><span class="content"> A URL for Blob and File reference</span><a class="self-link" href="#url"></a></h2>
-   <p>This section defines a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme">scheme</a> for a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url">URL</a> used to refer to <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑦③">Blob</a></code> objects (and <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file⑤③">File</a></code> objects).</p>
-   <p class="note" role="note"><span>Note:</span> other specifications, such as <a data-link-type="biblio" href="#biblio-media-source">[MEDIA-SOURCE]</a> extend this scheme to also refer to other types of objects.</p>
+   <h2 class="heading settled" data-level="8" id="url"><span class="secno">8. </span><span class="content"> A URL for Blob and MediaSource reference</span><a class="self-link" href="#url"></a></h2>
+   <p>This section defines a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme">scheme</a> for a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url">URL</a> used to refer to <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑦③">Blob</a></code> and <code class="idl"><a data-link-type="idl">MediaSource</a></code> objects.</p>
    <h3 class="heading settled" data-level="8.1" id="url-intro"><span class="secno">8.1. </span><span class="content"> Introduction</span><a class="self-link" href="#url-intro"></a></h3>
    <p><em>This section is informative.</em></p>
    <p><a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url①">Blob (or object) URLs</a> are URLs like <code>blob:http://example.com/550e8400-e29b-41d4-a716-446655440000</code>.
-This enables integration of <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑦④">Blob</a></code>s and <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file⑤④">File</a></code>s with other Web Platform APIs
-that are only designed to be used with URLs, such as the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element" id="ref-for-the-img-element">img</a></code> element. <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url②">Blob URLs</a> can also be used to navigate to as well as to trigger downloads of
-locally generated data.</p>
+This enables integration of <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑦④">Blob</a></code>s and <code class="idl"><a data-link-type="idl">MediaSource</a></code>s with other
+APIs that are only designed to be used with URLs, such as the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element" id="ref-for-the-img-element">img</a></code> element. <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url②">Blob URLs</a> can also be used to navigate to as well as to trigger downloads
+of locally generated data.</p>
    <p>For this purpose two static methods are exposed on the <code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#url" id="ref-for-url">URL</a></code> interface, <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-createObjectURL" id="ref-for-dfn-createObjectURL①">createObjectURL(blob)</a></code> and <code class="idl"><a data-link-type="idl" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL">revokeObjectURL(url)</a></code>.
 The first method creates a mapping from a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url①">URL</a> to a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑦⑤">Blob</a></code>,
 and the second method revokes said mapping.
@@ -3303,7 +3302,7 @@ which is useful for offline data access for web applications.</p>
      <p class="note" role="note"><span>Note:</span> While this specification doesn’t provide an explicit API call to trigger downloads,
 the HTML5 specification has addressed this.
 The <code><a data-link-type="element-sub" href="https://html.spec.whatwg.org/multipage/semantics.html#attr-hyperlink-download" id="ref-for-attr-hyperlink-download">download</a></code> attribute of the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-a-element" id="ref-for-the-a-element">a</a></code> element initiates a download,
-saving a <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file⑤⑤">File</a></code> with the name specified.
+saving a <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file⑤③">File</a></code> with the name specified.
 The combination of this API and the <code><a data-link-type="element-sub" href="https://html.spec.whatwg.org/multipage/semantics.html#attr-hyperlink-download" id="ref-for-attr-hyperlink-download①">download</a></code> attribute on <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-a-element" id="ref-for-the-a-element①">a</a></code> elements
 allows for the creation of files within web applications,
 and the ability to save them locally.</p>
@@ -4042,7 +4041,7 @@ Model</a>
    <a href="https://url.spec.whatwg.org/#concept-url-scheme">https://url.spec.whatwg.org/#concept-url-scheme</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-concept-url-scheme">8. 
-A URL for Blob and File reference</a>
+A URL for Blob and MediaSource reference</a>
     <li><a href="#ref-for-concept-url-scheme①">8.2. 
 Model</a>
     <li><a href="#ref-for-concept-url-scheme②">8.2.1. 
@@ -4055,7 +4054,7 @@ Creating and Revoking a blob URL</a>
    <a href="https://url.spec.whatwg.org/#concept-url">https://url.spec.whatwg.org/#concept-url</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-concept-url">8. 
-A URL for Blob and File reference</a>
+A URL for Blob and MediaSource reference</a>
     <li><a href="#ref-for-concept-url①">8.1. 
 Introduction</a>
     <li><a href="#ref-for-concept-url②">8.2. 
@@ -4480,8 +4479,6 @@ Event Summary</a> <a href="#ref-for-progressevent②">(2)</a> <a href="#ref-for-
   </dl>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
-   <dt id="biblio-media-source">[MEDIA-SOURCE]
-   <dd>Matthew Wolenetz; et al. <a href="https://www.w3.org/TR/media-source/">Media Source Extensions™</a>. 17 November 2016. REC. URL: <a href="https://www.w3.org/TR/media-source/">https://www.w3.org/TR/media-source/</a>
    <dt id="biblio-rfc2046">[RFC2046]
    <dd>N. Freed; N. Borenstein. <a href="https://tools.ietf.org/html/rfc2046">Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types</a>. November 1996. Draft Standard. URL: <a href="https://tools.ietf.org/html/rfc2046">https://tools.ietf.org/html/rfc2046</a>
    <dt id="biblio-workers">[Workers]
@@ -4694,7 +4691,7 @@ Errors and Exceptions</a> <a href="#ref-for-dfn-Blob⑥⑤">(2)</a> <a href="#re
     <li><a href="#ref-for-dfn-Blob⑥⑦">7.1. 
 Throwing an Exception or Returning an Error</a> <a href="#ref-for-dfn-Blob⑥⑧">(2)</a> <a href="#ref-for-dfn-Blob⑥⑨">(3)</a> <a href="#ref-for-dfn-Blob⑦⓪">(4)</a> <a href="#ref-for-dfn-Blob⑦①">(5)</a> <a href="#ref-for-dfn-Blob⑦②">(6)</a>
     <li><a href="#ref-for-dfn-Blob⑦③">8. 
-A URL for Blob and File reference</a>
+A URL for Blob and MediaSource reference</a>
     <li><a href="#ref-for-dfn-Blob⑦④">8.1. 
 Introduction</a> <a href="#ref-for-dfn-Blob⑦⑤">(2)</a> <a href="#ref-for-dfn-Blob⑦⑥">(3)</a>
     <li><a href="#ref-for-dfn-Blob⑦⑦">8.2. 
@@ -4934,11 +4931,7 @@ The FileReaderSync API</a>
 Errors and Exceptions</a> <a href="#ref-for-dfn-file④⑤">(2)</a> <a href="#ref-for-dfn-file④⑥">(3)</a>
     <li><a href="#ref-for-dfn-file④⑦">7.1. 
 Throwing an Exception or Returning an Error</a> <a href="#ref-for-dfn-file④⑧">(2)</a> <a href="#ref-for-dfn-file④⑨">(3)</a> <a href="#ref-for-dfn-file⑤⓪">(4)</a> <a href="#ref-for-dfn-file⑤①">(5)</a> <a href="#ref-for-dfn-file⑤②">(6)</a>
-    <li><a href="#ref-for-dfn-file⑤③">8. 
-A URL for Blob and File reference</a>
-    <li><a href="#ref-for-dfn-file⑤④">8.1. 
-Introduction</a>
-    <li><a href="#ref-for-dfn-file⑤⑤">10. 
+    <li><a href="#ref-for-dfn-file⑤③">10. 
 Requirements and Use Cases</a>
    </ul>
   </aside>
