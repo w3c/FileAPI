@@ -1621,8 +1621,7 @@ where [=map/keys=] are [=valid URL strings=]
 and [=map/values=] are [=blob URL Entries=].
 
 A <dfn export>blob URL entry</dfn> consists of
-an <dfn export for="blob URL entry">object</dfn> (typically a {{Blob}},
-but other specs can extend this to refer to other types of objects),
+an <dfn export for="blob URL entry">object</dfn> (of type {{Blob}} or {{MediaSource}}),
 and an <dfn export for="blob URL entry">environment</dfn> (an [=environment settings object=]).
 
 [=map/Keys=] in the [=blob URL store=] (also known as <dfn lt="blob URL|object URL" export>blob URLs</dfn>)
@@ -1730,14 +1729,14 @@ and presents methods for <a>blob URL</a> creation and revocation.
 <pre class="idl">
 [Exposed=(Window,DedicatedWorker,SharedWorker)]
 partial interface URL {
-  static DOMString createObjectURL(Blob blob);
+  static DOMString createObjectURL((Blob or MediaSource) obj);
   static void revokeObjectURL(DOMString url);
 };
 </pre>
 
 <div algorithm="createObjectURL">
-The <dfn method for=URL id="dfn-createObjectURL">createObjectURL(|blob|)</dfn> static method must
-return the result of [=adding an entry to the blob URL store=] for |blob|.
+The <dfn method for=URL id="dfn-createObjectURL">createObjectURL(|obj|)</dfn> static method must
+return the result of [=adding an entry to the blob URL store=] for |obj|.
 </div>
 
 <div algorithm="revokeObjectURL">
