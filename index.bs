@@ -861,7 +861,7 @@ run the following steps:
 1. Let |s| be a a new [=/body=],
   |b| be the {{Blob}} to be read from,
   and |bytes| initially set to an empty byte sequence.
-  Set the |length| on |s| to the {{Blob/size}} of |b|.
+  Set the [=body/total bytes=] on |s| to the {{Blob/size}} of |b|.
   While there are still bytes to be read in |b|,
   perform the following substeps:
 
@@ -1532,7 +1532,8 @@ Error conditions can arise when reading a {{File}} or a {{Blob}}.
 The <a>read operation</a> can terminate due to error conditions when reading a {{File}} or a {{Blob}};
 the particular error condition that causes a read operation to return failure
 or <a>queue a task</a> to <a>process read error</a>
-is called a <dfn id="failureReason">failure reason</dfn>.
+is called a <dfn id="failureReason">failure reason</dfn>. A <a>failure reason</a> is one of
+[=NotFound=], [=UnsafeFile=], [=TooManyReads=], [=SnapshotState=], or [=FileLock=].
 
 Synchronous read methods <a>throw</a> exceptions of the type in the table below
 if there has been an error owing to a particular <a>failure reason</a>.
@@ -1832,16 +1833,16 @@ Important security considerations include preventing malicious file selection at
 preventing access to system-sensitive files,
 and guarding against modifications of files on disk after a selection has taken place.
 
-* <dfn id="selection-looping">Preventing selection looping</dfn>.
-  During file selection, a user may be bombarded with the file picker associated with <code>&lt;input type="file"/></code>
-  (in a "must choose" loop that forces selection before the file picker is dismissed)
-  and a user agent may prevent file access to any selections by making the  {{FileList}} object returned be of size 0.
-* <dfn id="sensitive-files">System-sensitive files</dfn>
-  (e.g. files in /usr/bin, password files, and other native operating system executables)
-  typically should not be exposed to web content,
-  and should not be accessed via <a>blob URLs</a>.
-  User agents may <a>throw</a> a {{SecurityError}} exception for synchronous read methods,
-  or return a {{SecurityError}} exception for asynchronous reads.
+: Preventing selection looping
+:: During file selection, a user may be bombarded with the file picker associated with <code>&lt;input type="file"/></code>
+   (in a "must choose" loop that forces selection before the file picker is dismissed)
+   and a user agent may prevent file access to any selections by making the  {{FileList}} object returned be of size 0.
+: System-sensitive files
+:: (e.g. files in /usr/bin, password files, and other native operating system executables)
+   typically should not be exposed to web content,
+   and should not be accessed via <a>blob URLs</a>.
+   User agents may <a>throw</a> a {{SecurityError}} exception for synchronous read methods,
+   or return a {{SecurityError}} exception for asynchronous reads.
 
 Issue: This section is provisional; more security data may supplement this in subsequent drafts.
 
