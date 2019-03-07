@@ -577,7 +577,7 @@ of the blob as a {{ReadableStream}}.
 
 It must return the result of [=getting a stream for a Blob=] for the [=context object=].
 
-To <dfn lt="getting a stream for a Blob|getting a stream for a Blob">get a stream for a {{Blob}}</dfn>
+To <dfn lt="get a stream for a Blob|getting a stream for a Blob">get a stream for a {{Blob}}</dfn>
 |blob|, run the following steps:
 
 1. Let |stream| be the result of [=construct a ReadableStream object|constructing=] a
