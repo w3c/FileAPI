@@ -28,7 +28,7 @@ Abstract: This specification provides an API for representing file objects in we
 
   This API is designed to be used in conjunction with other APIs and elements on the web platform, notably:
   {{XMLHttpRequest}} (e.g. with an overloaded {{XMLHttpRequest/send()}} method for {{File}} or {{Blob}} arguments),
-  {{Worker/postMessage()}},
+  {{Worker/postMessage(message, options)|postMessage()}},
   {{DataTransfer}} (part of the drag and drop API defined in [[HTML]])
   and Web Workers.
   Additionally, it should be possible to programmatically obtain a list of files from the <{input}> element
@@ -66,22 +66,16 @@ spec: url
 </pre>
 
 <pre class="anchors">
-spec: xhr; urlPrefix: https://xhr.spec.whatwg.org/
-  type: method
-    for: XMLHttpRequest
-      text: getAllResponseHeaders(); url: #dom-xmlhttprequest-getallresponseheaders
-spec: html; urlPrefix: https://html.spec.whatwg.org/multipage/
-  urlPrefix: semantics.html
-    type: element-attr; for: a; text: download; url: #attr-hyperlink-download
-  type:dfn; text:origin
 spec: mimesniff; urlPrefix: https://mimesniff.spec.whatwg.org/
   type: dfn
     text: parsable mime type
-    text: parse a MIME type
 spec: ecma-262; urlPrefix: http://tc39.github.io/ecma262/
   type: interface
     text: Array; url: sec-array-constructor
     text: Date; url: sec-date-constructor
+spec: media-source; urlPrefix: http://w3c.github.io/media-source/
+  type: interface
+    text: MediaSource; url: #mediasource
 </pre>
 
 <h2 id="intro">Introduction</h2>
@@ -1265,7 +1259,7 @@ take a {{Blob}} parameter.
 This section defines this parameter.
 
 <dl>
-  <dt><dfn id="dfn-fileBlob" argument for="FileReader/readAsArrayBuffer(blob), FileReader/readAsBinaryString(blob), FileReader/readAsText(blob, encoding), FileReader/readAsText(), FileReader/readAsDataURL(blob), URL/createObjectURL(blob), FileReaderSync/readAsArrayBuffer(blob), FileReaderSync/readAsBinaryString(blob), FileReaderSync/readAsText(blob, encoding), FileReaderSync/readAsDataURL(blob)">blob</dfn>
+  <dt><dfn id="dfn-fileBlob" argument for="FileReader/readAsArrayBuffer(blob), FileReader/readAsBinaryString(blob), FileReader/readAsText(blob, encoding), FileReader/readAsText(), FileReader/readAsDataURL(blob), URL/createObjectURL(obj), FileReaderSync/readAsArrayBuffer(blob), FileReaderSync/readAsBinaryString(blob), FileReaderSync/readAsText(blob, encoding), FileReaderSync/readAsDataURL(blob)">blob</dfn>
   <dd>This is a {{Blob}} argument
     and must be a reference to a single {{File}} in a {{FileList}}
     or a {{Blob}} argument not obtained from the underlying OS file system.
@@ -1604,7 +1598,7 @@ APIs that are only designed to be used with URLs, such as the <{img}> element.
 of locally generated data.
 
 For this purpose two static methods are exposed on the {{URL}} interface,
-{{URL/createObjectURL(blob)}} and {{URL/revokeObjectURL(url)}}.
+{{URL/createObjectURL(obj)}} and {{URL/revokeObjectURL(url)}}.
 The first method creates a mapping from a [=/URL=] to a {{Blob}},
 and the second method revokes said mapping.
 As long as the mapping exist the {{Blob}} can't be garbage collected,
