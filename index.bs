@@ -569,56 +569,46 @@ It must act as follows:
   </pre>
 </div>
 
-<h4 id="stream-method-algo">
-The stream method</h4>
+### The {{Blob/stream()}} method ### {#stream-method-algo}
 
-The <dfn method for=Blob>stream()</dfn> method returns the contents
-of the blob as a {{ReadableStream}}.
-
-It must return the result of [=getting a stream for a Blob=] for the [=context object=].
+The <dfn method for=Blob>stream()</dfn> method, when invoked, must return
+the result of [=getting a stream for a Blob=] for the [=context object=].
 
 To <dfn lt="get a stream for a Blob|getting a stream for a Blob">get a stream for a {{Blob}}</dfn>
 |blob|, run the following steps:
 
 1. Let |stream| be the result of [=construct a ReadableStream object|constructing=] a
    {{ReadableStream}} object.
-1. Return |stream| and run the following steps [=in parallel=]:
+1. Run the following steps [=in parallel=]:
   1. While not all bytes of |blob| have been read:
     1. Let |bytes| be the byte sequence that results from reading a [=chunk=] from |blob|.
     1. If a [=file read error=] occured while reading |bytes|, [$ReadableStream/error$]
        |stream| with a [=failure reason=] and abort these steps.
     1. [=ReadableStream/Enqueue=] |bytes| into |stream|.
 
-    Issue: We need to specify more concretely what reading from a Blob actually does, and what
-    possible errors can happen.
+    Issue: We need to specify more concretely what reading from a Blob actually does,
+    and what possible errors can happen.
+1. Return |stream|.
 
-<h4 id="text-method-algo">
-The text method</h4>
+### The {{Blob/text()}} method ### {#text-method-algo}
 
-The <dfn method for=Blob>text()</dfn> method returns the contents
-of the blob as a {{USVString}}.
-
-It must act as follows:
+The <dfn method for=Blob>text()</dfn> method, when invoked, must run these steps:
 
 1. Let |stream| be the the result of [=getting a stream for a Blob=] for the [=context object=].
-1. Let |reader| be the result of [=getting a reader=] from |stream|.
+1. Let |reader| be the result of [=get a reader|getting a reader=] from |stream|.
    If that threw an exception, return a new promise rejected with that exception.
-1. Let |promise| be the result of [=reading all bytes=] from |stream| with |reader|.
+1. Let |promise| be the result of [=read all bytes|reading all bytes=] from |stream| with |reader|.
 1. Return the result of transforming |promise| by a fulfillment handler that returns the result of
    running [=UTF-8 decode=] on its first argument.
 
-<h4 id="arraybuffer-method-algo">
-The arrayBuffer method</h4>
+### The {{Blob/arrayBuffer()}} method ### {#arraybuffer-method-algo}
 
-The <dfn method for=Blob>arrayBuffer()</dfn> method returns the contents
-of the blob as an {{ArrayBuffer}}.
-
-It must act as follows:
+The <dfn method for=Blob>arrayBuffer()</dfn> method, when invoked, must run these steps:
 
 1. Let |stream| be the the result of [=getting a stream for a Blob=] for the [=context object=].
-1. Let |reader| be the result of [=getting a reader=] from |stream|.
+1. Let |reader| be the result of [=get a reader|getting a reader=] from |stream|.
    If that threw an exception, return a new promise rejected with that exception.
-1. Let |promise| be the result of [=reading all bytes=] from |stream| with |reader|.
+1. Let |promise| be the result of [=read all bytes|reading all bytes=] from |stream| with |reader|.
 1. Return the result of transforming |promise| by a fulfillment handler that returns
    a new {{ArrayBuffer} whose contents are its first argument.
 
