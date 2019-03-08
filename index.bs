@@ -450,7 +450,7 @@ run the following steps:
 
 ## Methods and Parameters ## {#methodsandparams-blob}
 
-### The slice method ### {#slice-method-algo}
+### The {{Blob/slice()}} method ### {#slice-method-algo}
 
 The <dfn id="dfn-slice" method for=Blob lt="slice(start, end, contentType), slice(start, end), slice(start), slice()">slice()</dfn> method
 returns a new {{Blob}} object with bytes ranging from
@@ -1200,7 +1200,7 @@ These error steps are to <a>process read error</a> with a <a>failure reason</a>.
   do NOT fire {{loadend}} at the <a>context object</a>.
 4. <a lt="terminate this algorithm">Terminate the algorithm</a> for any <a>read method</a>.
 
-#### The abort() method #### {#abort}
+#### The {{FileReader/abort()}} method #### {#abort}
 
 When the <dfn method for=FileReader id="dfn-abort">abort()</dfn> method is called,
 the user agent must run the steps below:
