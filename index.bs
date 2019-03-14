@@ -261,7 +261,7 @@ which runs these steps:
    {{ReadableStream}} object.
 1. Run the following steps [=in parallel=]:
   1. While not all bytes of |blob| have been read:
-    1. Let |bytes| be the byte sequence that results from reading a [=chunk=] from |blob|.
+    1. Let |bytes| be the [=byte sequence=] that results from reading a [=chunk=] from |blob|.
     1. If a [=file read error=] occured while reading |bytes|, [$ReadableStream/error$]
        |stream| with a [=failure reason=] and abort these steps.
     1. [=ReadableStream/Enqueue=] |bytes| into |stream|.
@@ -888,7 +888,7 @@ interface FileReader: EventTarget {
 
 <div algorithm="read operation">
 A {{FileReader}} has an associated <dfn id=readOperation>read operation</dfn> algorithm,
-given |blob|, a |type| and an optional |encodingName|,
+which given |blob|, a |type| and an optional |encodingName|,
 runs the following steps:
 
 1. Set the [=context object=]'s {{FileReader/result}} to `null`.
@@ -1071,7 +1071,7 @@ the user agent must run the steps below:
 <div algorithm="package data">
 A {{Blob}} has an associated <dfn for=Blob>package data</dfn> algorithm,
 given |bytes|, a |type|, a optional |mimeType|, and a optional |encodingName|,
-switches on |type|, and runs the associated steps:
+which switches on |type| and runs the associated steps:
 
 : DataURL
 :: Return |bytes| as a DataURL [[!RFC2397]] subject to the considerations below:
