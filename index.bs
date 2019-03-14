@@ -264,7 +264,10 @@ which runs these steps:
     1. Let |bytes| be the [=byte sequence=] that results from reading a [=chunk=] from |blob|.
     1. If a [=file read error=] occured while reading |bytes|, [$ReadableStream/error$]
        |stream| with a [=failure reason=] and abort these steps.
-    1. [=ReadableStream/Enqueue=] |bytes| into |stream|.
+    1. [=ReadableStream/Enqueue=] a `Uint8Array` object wrapping an `ArrayBuffer`
+       containing |bytes| into |stream|.
+       If that threw an exception, [$ReadableStream/error$] |stream| with that exception
+       and abort these steps.
 
     Issue: We need to specify more concretely what reading from a Blob actually does,
     what possible errors can happen, perhaps something about chunk sizes, etc.
@@ -887,55 +890,59 @@ interface FileReader: EventTarget {
 </pre>
 
 <div algorithm="read operation">
-A {{FileReader}} has an associated <dfn id=readOperation>read operation</dfn> algorithm,
+A {{FileReader}} |fr| has an associated <dfn id=readOperation>read operation</dfn> algorithm,
 which given |blob|, a |type| and an optional |encodingName|,
 runs the following steps:
 
-1. Set the [=context object=]'s {{FileReader/result}} to `null`.
-1. Set the [=context object=]'s {{FileReader/error!!attribute}} to `null`.
+1. Set |fr|'s {{FileReader/result}} to `null`.
+1. Set |fr|'s {{FileReader/error!!attribute}} to `null`.
 1. Let |stream| be the result of calling [=get stream=] on |blob|.
 1. Let |reader| be the result of [=get a reader|getting a reader=] from |stream|.
 1. Let |bytes| by an empty [=byte sequence=].
-1. Let |chunk| be the result of [=read a chunk|reading a chunk=] from |stream| with |reader|.
+1. Let |chunkPromise| be the result of [=read a chunk|reading a chunk=] from |stream| with |reader|.
 1. Let |isFirstChunk| be true.
 1. [=In parallel=], while true:
-  1. Wait for |chunk| to be fulfilled or rejected.
-  1. If |chunk| is fulfilled, and |isFirstChunk| is true,
-     [=queue a task=] to [=fire a progress event=] called {{loadstart}} at the [=context object=].
+  1. Wait for |chunkPromise| to be fulfilled or rejected.
+  1. If |chunkPromise| is fulfilled, and |isFirstChunk| is true,
+     [=queue a task=] to [=fire a progress event=] called {{loadstart}} at |fr|.
+
+     Issue(119): We might change {{loadstart}} to be dispatched synchronously,
+     to align with XMLHttpRequest behavior.
+
   1. Set |isFirstChunk| to false.
 
-  1. If |chunk| is fulfilled with an object whose `done` property is false and whose `value`
+  1. If |chunkPromise| is fulfilled with an object whose `done` property is false and whose `value`
      property is a `Uint8Array` object, run these steps:
     1. Let |bs| be the [=byte sequence=] represented by the `Uint8Array` object.
     1. Append |bs| to |bytes|.
     1. If roughly 50ms have passed since these steps were last invoked,
-       [=queue a task=] to [=fire a progress event=] called {{progress}} at the [=context object=].
-    1. Set |chunk| to the result of [=read a chunk|reading a chunk=] from |stream| with |reader|.
+       [=queue a task=] to [=fire a progress event=] called {{progress}} at |fr|.
+    1. Set |chunkPromise| to the result of [=read a chunk|reading a chunk=] from |stream| with |reader|.
 
-  1. Otherwise, if |chunk| is fulfilled with an object whose `done` property is true,
+  1. Otherwise, if |chunkPromise| is fulfilled with an object whose `done` property is true,
      [=queue a task=] to run the following steps and abort this algorithm:
-    1. Set the [=context object=]'s {{FileReader/readyState}} to {{DONE}}.
+    1. Set |fr|'s {{FileReader/readyState}} to {{DONE}}.
     1. Let |result| be the result of
        [=package data=] given |bytes|, |type|, |blob|'s {{Blob/type}}, and |encodingName|.
     1. If [=package data=] threw an exception |error|:
-      1. Set the [=context object=]'s {{FileReader/error!!attribute}} attribute to |error|.
-      1. [=Fire a progress event=] called {{error!!event}} at the [=context object=].
+      1. Set |fr|'s {{FileReader/error!!attribute}} attribute to |error|.
+      1. [=Fire a progress event=] called {{error!!event}} at |fr|.
     1. Else:
-      1. Set the [=context object=]'s {{FileReader/result}} to |result|.
-      1. [=Fire a progress event=] called {{load}} at the [=context object=].
-    1. If [=context object=]'s {{FileReader/readyState}} is not {{LOADING}},
-       [=fire a progress event=] called {{loadend}} at the [=context object=].
+      1. Set |fr|'s {{FileReader/result}} to |result|.
+      1. [=Fire a progress event=] called {{load}} at the |fr|.
+    1. If |fr|'s {{FileReader/readyState}} is not {{LOADING}},
+       [=fire a progress event=] called {{loadend}} at the |fr|.
 
        Note: Event handler for the {{load}} or {{error!!event}} events could have started another load,
        if that happens the {{loadend}} event for this load is not fired.
 
-  1. Otherwise, if |chunk| is rejected with an error |error|,
+  1. Otherwise, if |chunkPromise| is rejected with an error |error|,
      [=queue a task=] to run the following steps and abort this algorithm:
-    1. Set the [=context object=]'s {{FileReader/readyState}} to {{DONE}}.
-    1. Set the [=context object=]'s {{FileReader/error!!attribute}} attribute to |error|.
-    1. [=Fire a progress event=] called {{error!!event}} at the [=context object=].
-    1. If [=context object=]'s {{FileReader/readyState}} is not {{LOADING}},
-       [=fire a progress event=] called {{loadend}} at the [=context object=].
+    1. Set |fr|'s {{FileReader/readyState}} to {{DONE}}.
+    1. Set |fr|'s {{FileReader/error!!attribute}} attribute to |error|.
+    1. [=Fire a progress event=] called {{error!!event}} at |fr|.
+    1. If |fr|'s {{FileReader/readyState}} is not {{LOADING}},
+       [=fire a progress event=] called {{loadend}} at |fr|.
 
        Note: Event handler for the {{error!!event}} event could have started another load,
        if that happens the {{loadend}} event for this load is not fired.
