@@ -889,13 +889,45 @@ interface FileReader: EventTarget {
 };
 </pre>
 
+A {{FileReader}} has an associated <dfn for=FileReader>state</dfn>,
+that is `"empty"`, `"loading"`, or `"done"`. It is initially `"empty"`.
+
+A {{FileReader}} has an associated <dfn for=FileReader>result</dfn>
+(`null`, a {{DOMString}} or an {{ArrayBuffer}}). It is initially `null`.
+
+A {{FileReader}} has an associated <dfn for=FileReader>error</dfn>
+(`null` or a {{DOMException}}). It is initially `null`.
+
+The <dfn constructor for=FileReader id=filereaderConstrctr>FileReader()</dfn> constructor,
+when invoked, must return a new {{FileReader}} object.
+
+The <dfn attribute for=FileReader>readyState</dfn> attribute's getter,
+when invoked, switches on the [=context object=]'s [=FileReader/state=]
+and runs the associated step:
+
+: `"empty"`
+:: Return {{EMPTY}}
+: `"loading"`
+:: Return {{LOADING}}
+: `"done"`
+:: Return {{DONE}}
+
+The <dfn attribute for=FileReader>result</dfn> attribute's getter,
+when invoked, must return the [=context object=]'s [=FileReader/result=].
+
+The <dfn attribute for=FileReader>error</dfn> attribute's getter,
+when invoked, must return the [=context object=]'s [=FileReader/error=].
+
 <div algorithm="read operation">
 A {{FileReader}} |fr| has an associated <dfn id=readOperation>read operation</dfn> algorithm,
 which given |blob|, a |type| and an optional |encodingName|,
 runs the following steps:
 
-1. Set |fr|'s {{FileReader/result}} to `null`.
-1. Set |fr|'s {{FileReader/error!!attribute}} to `null`.
+1. If |fr|'s [=FileReader/state=] is `"loading"`,
+   throw an {{InvalidStateError}} {{DOMException}}.
+1. Set |fr|'s [=FileReader/state=] to `"loading"`.
+1. Set |fr|'s [=FileReader/result=] to `null`.
+1. Set |fr|'s [=FileReader/error=] to `null`.
 1. Let |stream| be the result of calling [=get stream=] on |blob|.
 1. Let |reader| be the result of [=get a reader|getting a reader=] from |stream|.
 1. Let |bytes| by an empty [=byte sequence=].
@@ -921,16 +953,16 @@ runs the following steps:
 
   1. Otherwise, if |chunkPromise| is fulfilled with an object whose `done` property is true,
      [=queue a task=] to run the following steps and abort this algorithm:
-    1. Set |fr|'s {{FileReader/readyState}} to {{DONE}}.
+    1. Set |fr|'s [=FileReader/state=] to `"done"`.
     1. Let |result| be the result of
        [=package data=] given |bytes|, |type|, |blob|'s {{Blob/type}}, and |encodingName|.
     1. If [=package data=] threw an exception |error|:
-      1. Set |fr|'s {{FileReader/error!!attribute}} attribute to |error|.
+      1. Set |fr|'s [=FileReader/error=] to |error|.
       1. [=Fire a progress event=] called {{error!!event}} at |fr|.
     1. Else:
-      1. Set |fr|'s {{FileReader/result}} to |result|.
+      1. Set |fr|'s [=FileReader/result=] to |result|.
       1. [=Fire a progress event=] called {{load}} at the |fr|.
-    1. If |fr|'s {{FileReader/readyState}} is not {{LOADING}},
+    1. If |fr|'s [=FileReader/state=] is not `"loading"`,
        [=fire a progress event=] called {{loadend}} at the |fr|.
 
        Note: Event handler for the {{load}} or {{error!!event}} events could have started another load,
@@ -938,10 +970,10 @@ runs the following steps:
 
   1. Otherwise, if |chunkPromise| is rejected with an error |error|,
      [=queue a task=] to run the following steps and abort this algorithm:
-    1. Set |fr|'s {{FileReader/readyState}} to {{DONE}}.
-    1. Set |fr|'s {{FileReader/error!!attribute}} attribute to |error|.
+    1. Set |fr|'s [=FileReader/state=] to `"done"`.
+    1. Set |fr|'s [=FileReader/error=] to |error|.
     1. [=Fire a progress event=] called {{error!!event}} at |fr|.
-    1. If |fr|'s {{FileReader/readyState}} is not {{LOADING}},
+    1. If |fr|'s [=FileReader/state=] is not `"loading"`,
        [=fire a progress event=] called {{loadend}} at |fr|.
 
        Note: Event handler for the {{error!!event}} event could have started another load,
@@ -949,13 +981,6 @@ runs the following steps:
 
 Use the [=file reading task source=] for all these tasks.
 </div>
-
-### Constructor ### {#filereaderConstrctr}
-
-When the {{FileReader()}} constructor is invoked,
-the user agent must return a new {{FileReader}} object.
-The new object's {{FileReader/readyState}} must be set to {{EMPTY}},
-and the new object's {{FileReader/result}} and {{FileReader/error!!attribute}} must be set to `null`.
 
 ### Event Handler Content Attributes ### {#event-handler-attributes-section}
 
@@ -1058,19 +1083,19 @@ compatibility.
 When the <dfn method for=FileReader id="dfn-abort">abort()</dfn> method is called,
 the user agent must run the steps below:
 
-1. If {{FileReader/readyState}} = {{FileReader/EMPTY}}
-   or if {{FileReader/readyState}} = {{FileReader/DONE}}
-   set {{FileReader/result}} to `null`
+1. If [=context object=]'s [=FileReader/state=] is `"empty"`
+   or if [=context object=]'s [=FileReader/state=] is `"done"`
+   set [=context object=]'s [=FileReader/result=] to `null`
    and [=terminate this algorithm=].
-1. If {{FileReader/readyState}} = {{FileReader/LOADING}}
-   set {{FileReader/readyState}} to {{FileReader/DONE}}
-   and {{FileReader/result}} to `null`.
+1. If [=context object=]'s [=FileReader/state=] is `"loading"`
+   set [=context object=]'s [=FileReader/state=] to `"done"`
+   and set [=context object=]'s [=FileReader/result=] to `null`.
 1. If there are any [=tasks=] from the [=context object=]
    on the [=file reading task source=] in an affiliated [=queue a task|task queue=],
    then remove those [=tasks=] from that task queue.
 1. [=terminate an algorithm|Terminate the algorithm=] for the [=read method=] being processed.
 1. [=Fire a progress event=] called {{abort}} at the [=context object=].
-1. If [=context object=]'s {{FileReader/readyState}} is not {{LOADING}},
+1. If [=context object=]'s [=FileReader/state=] is not `"loading"`,
    [=fire a progress event=] called {{loadend}} at the [=context object=].
 
 ## Packaging data ## {#packaging-data}
@@ -1333,7 +1358,7 @@ is called a <dfn id="failureReason">failure reason</dfn>. A <a>failure reason</a
 Synchronous read methods <a>throw</a> exceptions of the type in the table below
 if there has been an error owing to a particular <a>failure reason</a>.
 
-Asynchronous read methods use the <dfn attribute for=FileReader id="dfn-error">error</dfn> attribute of the {{FileReader}} object,
+Asynchronous read methods use the {{FileReader/error!!attribute}} attribute of the {{FileReader}} object,
 which must return a {{DOMException}} object of the most appropriate type from the table below
 if there has been an error owing to a particular <a>failure reason</a>,
 or otherwise return null.
