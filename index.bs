@@ -916,7 +916,7 @@ runs the following steps:
      [=queue a task=] to run the following steps and abort this algorithm:
     1. Set the [=context object=]'s {{FileReader/readyState}} to {{DONE}}.
     1. Let |result| be the result of
-       [=package data=] given |bytes|, |type|, |blob|'s {{Blob/type}} and |encodingName|.
+       [=package data=] given |bytes|, |type|, |blob|'s {{Blob/type}}, and |encodingName|.
     1. If [=package data=] threw an exception |error|:
       1. Set the [=context object=]'s {{FileReader/error!!attribute}} attribute to |error|.
       1. [=Fire a progress event=] called {{error!!event}} at the [=context object=].
@@ -1070,7 +1070,7 @@ the user agent must run the steps below:
 
 <div algorithm="package data">
 A {{Blob}} has an associated <dfn for=Blob>package data</dfn> algorithm,
-given |bytes|, a |type|, a optional |mimeType| and a optional |encodingName|,
+given |bytes|, a |type|, a optional |mimeType|, and a optional |encodingName|,
 switches on |type|, and runs the associated steps:
 
 : DataURL
@@ -1079,18 +1079,17 @@ switches on |type|, and runs the associated steps:
   * Use |mimeType| as part of the Data URL if it is available
     in keeping with the Data URL specification [[!RFC2397]].
   * If |mimeType| is not available return a Data URL without a media-type. [[!RFC2397]].
-    Data URLs that do not have media-types [[RFC2046]]
-    must be treated as plain text by conforming user agents. [[!RFC2397]].
+
+  Issue(104): Better specify how the DataURL is generated.
 
 : Text
-:: 1. Let |encoding| be null.
+:: 1. Let |encoding| be failure.
    1. If the |encodingName| is present, set |encoding| to the result of
       [=getting an encoding=] from |encodingName|.
-   1. If the [=getting an encoding=] step above returns failure, set |encoding| to null.
-   1. If |encoding| is null, and |mimeType| is present:
+   1. If |encoding| is failure, and |mimeType| is present:
      1. Let |type| be the result of [=parse a MIME type=] given |mimeType|.
-     1. If |type| is failure, abort these substeps.
-     1. Set |encoding| to the result of [=getting an encoding=]
+     1. If |type| is not failure,
+        set |encoding| to the result of [=getting an encoding=]
         from |type|'s [=MIME type/parameters=][`"charset"`].
 
       <div class="example">
@@ -1099,9 +1098,7 @@ switches on |type|, and runs the associated steps:
         Note that user agents must parse and extract the portion of the Charset Parameter
         that constitutes a *label* of an encoding.
       </div>
-     1. If the [=getting an encoding=] steps above return failure,
-        then set |encoding| to null.
-   1. If |encoding| is null, then set |encoding| to [=UTF-8=].
+   1. If |encoding| is failure, then set |encoding| to [=UTF-8=].
    1. [=Decode=] |bytes| using fallback encoding |encoding|, and return the result.
 
 : ArrayBuffer
@@ -1244,13 +1241,11 @@ when invoked, must run these steps:
 
 1. Let |stream| be the result of calling [=get stream=] on |blob|.
 1. Let |reader| be the result of [=get a reader|getting a reader=] from |stream|.
-   If that threw an exception, abort these steps and rethrow that exception.
 1. Let |promise| be the result of [=read all bytes|reading all bytes=] from |stream| with |reader|.
 1. Wait for |promise| to be fulfilled or rejected.
 1. If |promise| fulfilled with a [=byte sequence=] |bytes|:
-  1. Return the result of [=package data=] given |bytes|, *Text*, |blob|'s {{Blob/type}} and |encoding|.
-1. Otherwise:
-  1. Throw whatever |promise| was rejected with.
+  1. Return the result of [=package data=] given |bytes|, *Text*, |blob|'s {{Blob/type}}, and |encoding|.
+1. Throw |promise|'s rejection reason.
 
 #### The {{FileReaderSync/readAsDataURL()}} method #### {#readAsDataURLSync-section}
 
@@ -1259,13 +1254,11 @@ when invoked, must run these steps:
 
 1. Let |stream| be the result of calling [=get stream=] on |blob|.
 1. Let |reader| be the result of [=get a reader|getting a reader=] from |stream|.
-   If that threw an exception, abort these steps and rethrow that exception.
 1. Let |promise| be the result of [=read all bytes|reading all bytes=] from |stream| with |reader|.
 1. Wait for |promise| to be fulfilled or rejected.
 1. If |promise| fulfilled with a [=byte sequence=] |bytes|:
-  1. Return the result of [=package data=] given |bytes|, *DataURL* and |blob|'s {{Blob/type}}.
-1. Otherwise:
-  1. Throw whatever |promise| was rejected with.
+  1. Return the result of [=package data=] given |bytes|, *DataURL*, and |blob|'s {{Blob/type}}.
+1. Throw |promise|'s rejection reason.
 
 #### The {{FileReaderSync/readAsArrayBuffer()}} method #### {#readAsArrayBufferSyncSection}
 
@@ -1274,13 +1267,11 @@ when invoked, must run these steps:
 
 1. Let |stream| be the result of calling [=get stream=] on |blob|.
 1. Let |reader| be the result of [=get a reader|getting a reader=] from |stream|.
-   If that threw an exception, abort these steps and rethrow that exception.
 1. Let |promise| be the result of [=read all bytes|reading all bytes=] from |stream| with |reader|.
 1. Wait for |promise| to be fulfilled or rejected.
 1. If |promise| fulfilled with a [=byte sequence=] |bytes|:
-  1. Return the result of [=package data=] given |bytes|, *ArrayBuffer* and |blob|'s {{Blob/type}}.
-1. Otherwise:
-  1. Throw whatever |promise| was rejected with.
+  1. Return the result of [=package data=] given |bytes|, *ArrayBuffer*, and |blob|'s {{Blob/type}}.
+1. Throw |promise|'s rejection reason.
 
 #### The {{FileReaderSync/readAsBinaryString()}} method #### {#readAsBinaryStringSyncSection}
 
@@ -1289,13 +1280,11 @@ when invoked, must run these steps:
 
 1. Let |stream| be the result of calling [=get stream=] on |blob|.
 1. Let |reader| be the result of [=get a reader|getting a reader=] from |stream|.
-   If that threw an exception, abort these steps and rethrow that exception.
 1. Let |promise| be the result of [=read all bytes|reading all bytes=] from |stream| with |reader|.
 1. Wait for |promise| to be fulfilled or rejected.
 1. If |promise| fulfilled with a [=byte sequence=] |bytes|:
-  1. Return the result of [=package data=] given |bytes|, *BinaryString* and |blob|'s {{Blob/type}}.
-1. Otherwise:
-  1. Throw whatever |promise| was rejected with.
+  1. Return the result of [=package data=] given |bytes|, *BinaryString*, and |blob|'s {{Blob/type}}.
+1. Throw |promise|'s rejection reason.
 
 Note: The use of {{FileReaderSync/readAsArrayBuffer()}} is preferred over
 {{FileReaderSync/readAsBinaryString()}}, which is provided for
