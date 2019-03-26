@@ -233,9 +233,9 @@ interface Blob {
             optional DOMString contentType);
 
   // read from the Blob.
-  ReadableStream stream();
-  Promise<USVString> text();
-  Promise<ArrayBuffer> arrayBuffer();
+  [NewObject] ReadableStream stream();
+  [NewObject] Promise<USVString> text();
+  [NewObject] Promise<ArrayBuffer> arrayBuffer();
 };
 
 enum EndingType { "transparent", "native" };
@@ -586,7 +586,7 @@ The <dfn method for=Blob>text()</dfn> method, when invoked, must run these steps
    running [=UTF-8 decode=] on its first argument.
 
 Note: This is different from the behavior of {{FileReader/readAsText()}} to align better
-with the behavior of {{Body/text()|Body.text()}}. Specifically this method will always
+with the behavior of {{Body/text()|Fetch's text()}}. Specifically this method will always
 use UTF-8 as encoding, while {{FileReader}} can use a different encoding depending on
 the blob's type and passed in encoding name.
 
