@@ -219,7 +219,7 @@ if any such underlying storage exists.
 Further normative definition of <a>snapshot state</a> can be found for {{File}}s.
 
 <xmp class="idl">
-[Constructor(optional sequence&lt;BlobPart> blobParts,
+[Constructor(optional sequence<BlobPart> blobParts,
              optional BlobPropertyBag options),
  Exposed=(Window,Worker), Serializable]
 interface Blob {
