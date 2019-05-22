@@ -17,5 +17,5 @@ env:
   - DECISION="https://lists.w3.org/Archives/Public/public-webapps/2014JulSep/0627.html"
 
 after_success:
-  - 'bikeshed --u $USER --p $PASS --decision $DECISION'
+  - 'bikeshed echidna --u $USER --p $PASS --decision $DECISION'
   
