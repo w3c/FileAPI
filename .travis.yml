@@ -17,4 +17,4 @@ env:
   - DECISION: "https://lists.w3.org/Archives/Public/public-webapps/2014JulSep/0627.html"
 
 after_success:
-  - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && bikeshed echidna --u "$USER" --p "$PASS" --decision "$DECISION"'  
+  - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && bikeshed echidna --md-status=WD --u "$USER" --p "$PASS" --decision "$DECISION"'  
