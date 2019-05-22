@@ -14,7 +14,7 @@ env:
   global:
   - ENCRYPTION_LABEL: "4571b087bd76"
   - COMMIT_AUTHOR_EMAIL: "plh+deploy@w3.org"
-  - DECISION="https://lists.w3.org/Archives/Public/public-webapps/2014JulSep/0627.html"
+  - DECISION: "https://lists.w3.org/Archives/Public/public-webapps/2014JulSep/0627.html"
 
 after_success:
-  - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && bikeshed echidna --u $USER --p $PASS --decision $DECISION'  
+  - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && bikeshed echidna --u "$USER" --p "$PASS" --decision "$DECISION"'  
