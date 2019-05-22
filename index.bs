@@ -2,6 +2,7 @@
 Indent: 2
 Title: File API
 Shortname: FileAPI
+Level: 1
 Group: webapps
 Editor: Marijn Kruisselbrink, Google, mek@chromium.org, w3cid 72440
 Former Editor: Arun Ranganathan, Mozilla Corporation, http://arunranga.com/, arun@mozilla.com, w3cid 37240
