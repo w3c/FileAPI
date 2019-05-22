@@ -55,6 +55,7 @@ spec: infra
   type: dfn
     text: list
     text: string
+    text: code point
 spec: streams
   type:interface
     text:ReadableStream
