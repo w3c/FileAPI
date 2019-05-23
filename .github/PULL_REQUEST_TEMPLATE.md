@@ -1,8 +1,7 @@
 Closes #???
 
-The following tasks have been completed:
+For *normative* changes, the following tasks have been completed:
 
- * [ ] Confirmed there are no ReSpec/BikeShed errors or warnings.
  * [ ] Modified Web platform tests (link to pull request)
 
 Implementation commitment:

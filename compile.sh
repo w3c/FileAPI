@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e # Exit with nonzero exit code if anything fails
 
-bikeshed spec
+bikeshed spec --die-on=everything
 
 if [ -d out ]; then
   echo Copy the generated spec into out/index.html
