@@ -18,4 +18,4 @@ env:
 
 after_success:
   - echo "If it fails, check https://lists.w3.org/Archives/Public/public-tr-notifications/"
-  - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && bikeshed echidna --md-status=WD --u "$USER" --p "$PASS" --decision "$DECISION"'  
+  - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && bikeshed echidna --md-status=WD --u "$USER" --p "$PASS" --decision "$DECISION"' --cc="marcos@marcosc.com"  
