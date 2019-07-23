@@ -221,7 +221,7 @@ Further normative definition of <a>snapshot state</a> can be found for {{File}}s
 
 <xmp class="idl">
 [Constructor(optional sequence<BlobPart> blobParts,
-             optional BlobPropertyBag options),
+             optional BlobPropertyBag options = {}),
  Exposed=(Window,Worker), Serializable]
 interface Blob {
 
@@ -298,8 +298,7 @@ user agents must run the following steps:
 
 1. Let |bytes| be the result of [=processing blob parts=] given {{blobParts}} and {{Blob/Blob(blobParts, options)/options}}.
 
-1. If the {{BlobPropertyBag/type}} member of the optional {{Blob/Blob(blobParts, options)/options}} argument is provided
-  and is not the empty string,
+1. If the {{BlobPropertyBag/type}} member of the {{Blob/Blob(blobParts, options)/options}} argument is not the empty string,
   run the following sub-steps:
 
   1. Let |t| be the {{BlobPropertyBag/type}} dictionary member.
@@ -646,7 +645,7 @@ and must follow the <dfn export>file type guidelines</dfn> below:
 <pre class="idl">
 [Constructor(sequence&lt;BlobPart> fileBits,
              USVString fileName,
-             optional FilePropertyBag options),
+             optional FilePropertyBag options = {}),
  Exposed=(Window,Worker), Serializable]
 interface File : Blob {
   readonly attribute DOMString name;
@@ -699,8 +698,7 @@ user agents must run the following steps:
   Note: Underlying OS filesystems use differing conventions for file name;
   with constructed files, mandating UTF-16 lessens ambiquity when file names are converted to <a>byte</a> sequences.
 
-3. If the optional {{FilePropertyBag}} dictionary argument is used,
-  then run the following substeps:
+3. Process {{FilePropertyBag}} dictionary argument by running the following substeps:
 
   1. If the {{BlobPropertyBag/type}} member is provided and is not the empty string,
     let |t| be set to the {{BlobPropertyBag/type}} dictionary member.
