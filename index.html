@@ -3,9 +3,9 @@
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <title>File API</title>
-  <meta content="Bikeshed version 39652c9ea7fd5d09639da5e1182cd481b0c5ae70" name="generator">
+  <meta content="Bikeshed version cb5a17652cb33dffd20b8b6a876bb811c1f749a9" name="generator">
   <link href="https://www.w3.org/TR/FileAPI/" rel="canonical">
-  <meta content="7a0ed1dca0af6c415f838215155d8e9ea4ab57dc" name="document-revision">
+  <meta content="5d7d4cb90d28e79a6a9d0403ff9218994ac058cd" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -264,7 +264,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">File API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-07-23">23 July 2019</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-09-11">11 September 2019</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -570,10 +570,10 @@ which is an ASCII-encoded string in lower case representing the media type of th
 which must be initially set to the state of the underlying storage,
 if any such underlying storage exists.
 Further normative definition of <a data-link-type="dfn" href="#snapshot-state" id="ref-for-snapshot-state">snapshot state</a> can be found for <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file⑥">File</a></code>s.</p>
-<pre class="idl highlight def">[Constructor(optional sequence&lt;BlobPart> blobParts,
-             optional BlobPropertyBag options = {}),
- <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable" id="ref-for-serializable"><c- g>Serializable</c-></a>]
+<pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable" id="ref-for-serializable"><c- g>Serializable</c-></a>]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="dfn-Blob"><code><c- g>Blob</c-></code></dfn> {
+  <c- b>constructor</c->(<c- b>optional</c-> <c- b>sequence</c->&lt;<a class="n" data-link-type="idl-name" href="#typedefdef-blobpart" id="ref-for-typedefdef-blobpart"><c- n>BlobPart</c-></a>> <dfn class="idl-code" data-dfn-for="Blob" data-dfn-type="argument" data-export id="dom-blob-blobparts"><code><c- g>blobParts</c-></code><a class="self-link" href="#dom-blob-blobparts"></a></dfn>,
+              <c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag"><c- n>BlobPropertyBag</c-></a> <dfn class="idl-code" data-dfn-for="Blob" data-dfn-type="argument" data-export id="dom-blob-options"><code><c- g>options</c-></code><a class="self-link" href="#dom-blob-options"></a></dfn> = {});
 
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long-long" id="ref-for-idl-unsigned-long-long"><c- b>unsigned</c-> <c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="unsigned long long" href="#dfn-size" id="ref-for-dfn-size①"><c- g>size</c-></a>;
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMString" href="#dfn-type" id="ref-for-dfn-type①"><c- g>type</c-></a>;
@@ -643,8 +643,8 @@ what possible errors can happen, perhaps something about chunk sizes, etc.</p>
    </div>
    <h3 class="heading settled" data-level="3.1" id="constructorBlob"><span class="secno">3.1. </span><span class="content">Constructors</span><a class="self-link" href="#constructorBlob"></a></h3>
    <div class="algorithm" data-algorithm="blob-constructor">
-     The <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dom-blob-blob" id="ref-for-dom-blob-blob">Blob()</a></code> constructor can be invoked with zero or more parameters.
-When the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dom-blob-blob" id="ref-for-dom-blob-blob①">Blob()</a></code> constructor is invoked,
+     The <code class="idl"><a data-link-type="idl">Blob()</a></code> constructor can be invoked with zero or more parameters.
+When the <code class="idl"><a data-link-type="idl">Blob()</a></code> constructor is invoked,
 user agents must run the following steps: 
     <ol>
      <li data-md>
@@ -653,9 +653,9 @@ return a new <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-
 with <code class="idl"><a data-link-type="idl" href="#dfn-size" id="ref-for-dfn-size②">size</a></code> set to 0,
 and with <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type②">type</a></code> set to the empty string.</p>
      <li data-md>
-      <p>Let <var>bytes</var> be the result of <a data-link-type="dfn" href="#process-blob-parts" id="ref-for-process-blob-parts">processing blob parts</a> given <code class="idl"><a data-link-type="idl" href="#dfn-blobParts" id="ref-for-dfn-blobParts">blobParts</a></code> and <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dom-blob-blob-blobparts-options-options" id="ref-for-dom-blob-blob-blobparts-options-options">options</a></code>.</p>
+      <p>Let <var>bytes</var> be the result of <a data-link-type="dfn" href="#process-blob-parts" id="ref-for-process-blob-parts">processing blob parts</a> given <code class="idl"><a data-link-type="idl" href="#dfn-blobParts" id="ref-for-dfn-blobParts">blobParts</a></code> and <code class="idl"><a data-link-type="idl">options</a></code>.</p>
      <li data-md>
-      <p>If the <code class="idl"><a data-link-type="idl" href="#dfn-BPtype" id="ref-for-dfn-BPtype①">type</a></code> member of the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dom-blob-blob-blobparts-options-options" id="ref-for-dom-blob-blob-blobparts-options-options①">options</a></code> argument is not the empty string,
+      <p>If the <code class="idl"><a data-link-type="idl" href="#dfn-BPtype" id="ref-for-dfn-BPtype①">type</a></code> member of the <code class="idl"><a data-link-type="idl">options</a></code> argument is not the empty string,
 run the following sub-steps:</p>
       <ol>
        <li data-md>
@@ -672,7 +672,7 @@ and its <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-d
     </ol>
    </div>
    <h4 class="heading settled" data-level="3.1.1" id="constructorParams"><span class="secno">3.1.1. </span><span class="content">Constructor Parameters</span><a class="self-link" href="#constructorParams"></a></h4>
-   <p>The <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dom-blob-blob" id="ref-for-dom-blob-blob②">Blob()</a></code> constructor can be invoked with the parameters below:</p>
+   <p>The <code class="idl"><a data-link-type="idl">Blob()</a></code> constructor can be invoked with the parameters below:</p>
    <dl>
     <dt>A <dfn class="dfn-paneled idl-code" data-dfn-for="Blob/Blob(blobParts, options)" data-dfn-type="argument" data-export id="dfn-blobParts"><code>blobParts</code></dfn> <code>sequence</code> 
     <dd>
@@ -685,7 +685,7 @@ and its <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-d
       <li data-md>
        <p><code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString②">USVString</a></code> elements.</p>
      </ul>
-    <dt id="dfn-BlobPropertyBagMembers"><a class="self-link" href="#dfn-BlobPropertyBagMembers"></a>An <em>optional</em> <code class="idl"><a data-link-type="idl" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag">BlobPropertyBag</a></code> 
+    <dt id="dfn-BlobPropertyBagMembers"><a class="self-link" href="#dfn-BlobPropertyBagMembers"></a>An <em>optional</em> <code class="idl"><a data-link-type="idl" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag①">BlobPropertyBag</a></code> 
     <dd>
      which takes these optional members: 
      <ul>
@@ -700,7 +700,7 @@ By default this is set to <code class="idl"><a data-link-type="idl" href="#dom-e
      </ul>
    </dl>
    <div class="algorithm" data-algorithm="process-blob-parts">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="process blob parts|processing blob parts" data-noexport id="process-blob-parts">process blob parts</dfn> given a sequence of <code class="idl"><a data-link-type="idl" href="#typedefdef-blobpart" id="ref-for-typedefdef-blobpart">BlobPart</a></code>'s <var>parts</var> and <code class="idl"><a data-link-type="idl" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag①">BlobPropertyBag</a></code> <var>options</var>,
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="process blob parts|processing blob parts" data-noexport id="process-blob-parts">process blob parts</dfn> given a sequence of <code class="idl"><a data-link-type="idl" href="#typedefdef-blobpart" id="ref-for-typedefdef-blobpart①">BlobPart</a></code>'s <var>parts</var> and <code class="idl"><a data-link-type="idl" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag②">BlobPropertyBag</a></code> <var>options</var>,
 run the following steps: 
     <ol>
      <li data-md>
@@ -983,16 +983,16 @@ or the empty string – 0 bytes – if the type cannot be determined.</p>
      <p>User agents must not attempt heuristic determination of encoding,
 including statistical methods.</p>
    </ul>
-<pre class="idl highlight def">[Constructor(sequence&lt;BlobPart> fileBits,
-             USVString fileName,
-             optional FilePropertyBag options = {}),
- <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed①"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable" id="ref-for-serializable①"><c- g>Serializable</c-></a>]
+<pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed①"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable" id="ref-for-serializable①"><c- g>Serializable</c-></a>]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="dfn-file"><code><c- g>File</c-></code></dfn> : <a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③②"><c- n>Blob</c-></a> {
+  <c- b>constructor</c->(<c- b>sequence</c->&lt;<a class="n" data-link-type="idl-name" href="#typedefdef-blobpart" id="ref-for-typedefdef-blobpart②"><c- n>BlobPart</c-></a>> <dfn class="idl-code" data-dfn-for="File" data-dfn-type="argument" data-export id="dom-file-filebits"><code><c- g>fileBits</c-></code><a class="self-link" href="#dom-file-filebits"></a></dfn>,
+              <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑤"><c- b>USVString</c-></a> <dfn class="idl-code" data-dfn-for="File" data-dfn-type="argument" data-export id="dom-file-filename"><code><c- g>fileName</c-></code><a class="self-link" href="#dom-file-filename"></a></dfn>,
+              <c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dfn-FilePropertyBag" id="ref-for-dfn-FilePropertyBag"><c- n>FilePropertyBag</c-></a> <dfn class="idl-code" data-dfn-for="File" data-dfn-type="argument" data-export id="dom-file-options"><code><c- g>options</c-></code><a class="self-link" href="#dom-file-options"></a></dfn> = {});
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString④"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMString" href="#dfn-name" id="ref-for-dfn-name①"><c- g>name</c-></a>;
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long" id="ref-for-idl-long-long②"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="long long" href="#dfn-lastModified" id="ref-for-dfn-lastModified"><c- g>lastModified</c-></a>;
 };
 
-<c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dfn-FilePropertyBag"><code><c- g>FilePropertyBag</c-></code></dfn> : <a class="n" data-link-type="idl-name" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag②"><c- n>BlobPropertyBag</c-></a> {
+<c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dfn-FilePropertyBag"><code><c- g>FilePropertyBag</c-></code></dfn> : <a class="n" data-link-type="idl-name" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag③"><c- n>BlobPropertyBag</c-></a> {
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long" id="ref-for-idl-long-long③"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="long long " href="#dfn-FPdate" id="ref-for-dfn-FPdate"><c- g>lastModified</c-></a>;
 };
 </pre>
@@ -1023,11 +1023,11 @@ given <var>value</var> and <var>serialized</var>, are:</p>
    <div class="algorithm" data-algorithm="file-constructor">
      The <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file①⑥">File</a></code> constructor is invoked with two or three parameters,
 depending on whether the optional dictionary parameter is used.
-When the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dom-file-file" id="ref-for-dom-file-file">File()</a></code> constructor is invoked,
+When the <code class="idl"><a data-link-type="idl">File()</a></code> constructor is invoked,
 user agents must run the following steps: 
     <ol>
      <li data-md>
-      <p>Let <var>bytes</var> be the result of <a data-link-type="dfn" href="#process-blob-parts" id="ref-for-process-blob-parts①">processing blob parts</a> given <code class="idl"><a data-link-type="idl" href="#dfn-fileBits" id="ref-for-dfn-fileBits">fileBits</a></code> and <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dom-file-file-filebits-filename-options-options" id="ref-for-dom-file-file-filebits-filename-options-options">options</a></code>.</p>
+      <p>Let <var>bytes</var> be the result of <a data-link-type="dfn" href="#process-blob-parts" id="ref-for-process-blob-parts①">processing blob parts</a> given <code class="idl"><a data-link-type="idl" href="#dfn-fileBits" id="ref-for-dfn-fileBits">fileBits</a></code> and <code class="idl"><a data-link-type="idl">options</a></code>.</p>
      <li data-md>
       <p>Let <var>n</var> be a new string of the same size as the <code class="idl"><a data-link-type="idl" href="#dfn-fileName" id="ref-for-dfn-fileName">fileName</a></code> argument to the constructor.
 Copy every character from <code class="idl"><a data-link-type="idl" href="#dfn-fileName" id="ref-for-dfn-fileName①">fileName</a></code> to <var>n</var>,
@@ -1035,7 +1035,7 @@ replacing any "/" character (U+002F SOLIDUS) with a ":" (U+003A COLON).</p>
       <p class="note" role="note"><span>Note:</span> Underlying OS filesystems use differing conventions for file name;
 with constructed files, mandating UTF-16 lessens ambiquity when file names are converted to <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte" id="ref-for-byte①⓪">byte</a> sequences.</p>
      <li data-md>
-      <p>Process <code class="idl"><a data-link-type="idl" href="#dfn-FilePropertyBag" id="ref-for-dfn-FilePropertyBag">FilePropertyBag</a></code> dictionary argument by running the following substeps:</p>
+      <p>Process <code class="idl"><a data-link-type="idl" href="#dfn-FilePropertyBag" id="ref-for-dfn-FilePropertyBag①">FilePropertyBag</a></code> dictionary argument by running the following substeps:</p>
       <ol>
        <li data-md>
         <p>If the <code class="idl"><a data-link-type="idl" href="#dfn-BPtype" id="ref-for-dfn-BPtype③">type</a></code> member is provided and is not the empty string,
@@ -1071,7 +1071,7 @@ the <code class="idl"><a data-link-type="idl" href="#dfn-FPdate" id="ref-for-dfn
     </ol>
    </div>
    <h4 class="heading settled" data-level="4.1.1" id="file-constructor-params"><span class="secno">4.1.1. </span><span class="content">Constructor Parameters</span><a class="self-link" href="#file-constructor-params"></a></h4>
-   <p>The <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dom-file-file" id="ref-for-dom-file-file①">File()</a></code> constructor can be invoked with the parameters below:</p>
+   <p>The <code class="idl"><a data-link-type="idl">File()</a></code> constructor can be invoked with the parameters below:</p>
    <dl>
     <dt>A <dfn class="dfn-paneled idl-code" data-dfn-for="File/File(fileBits, fileName, options)" data-dfn-type="argument" data-export id="dfn-fileBits"><code>fileBits</code></dfn> <code>sequence</code> 
     <dd>
@@ -1082,14 +1082,14 @@ the <code class="idl"><a data-link-type="idl" href="#dfn-FPdate" id="ref-for-dfn
       <li data-md>
        <p><code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob③③">Blob</a></code> elements, which includes <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file①⑧">File</a></code> elements.</p>
       <li data-md>
-       <p><code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑤">USVString</a></code> elements.</p>
+       <p><code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑥">USVString</a></code> elements.</p>
      </ul>
     <dt>A <dfn class="dfn-paneled idl-code" data-dfn-for="File/File(fileBits, fileName, options)" data-dfn-type="argument" data-export id="dfn-fileName"><code>fileName</code></dfn> parameter 
-    <dd>A <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑥">USVString</a></code> parameter representing the name of the file;
+    <dd>A <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑦">USVString</a></code> parameter representing the name of the file;
     normative conditions for this constructor parameter can be found in <a href="#file-constructor">§ 4.1 Constructor</a>. 
-    <dt id="def-Properties"><a class="self-link" href="#def-Properties"></a>An optional <code class="idl"><a data-link-type="idl" href="#dfn-FilePropertyBag" id="ref-for-dfn-FilePropertyBag①">FilePropertyBag</a></code> dictionary 
+    <dt id="def-Properties"><a class="self-link" href="#def-Properties"></a>An optional <code class="idl"><a data-link-type="idl" href="#dfn-FilePropertyBag" id="ref-for-dfn-FilePropertyBag②">FilePropertyBag</a></code> dictionary 
     <dd>
-     which in addition to the <a href="#dfn-BlobPropertyBagMembers">members</a> of <code class="idl"><a data-link-type="idl" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag③">BlobPropertyBag</a></code> takes one member: 
+     which in addition to the <a href="#dfn-BlobPropertyBagMembers">members</a> of <code class="idl"><a data-link-type="idl" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag④">BlobPropertyBag</a></code> takes one member: 
      <ul>
       <li data-md>
        <p>An optional <dfn class="dfn-paneled idl-code" data-dfn-for="FilePropertyBag" data-dfn-type="dict-member" data-export id="dfn-FPdate"><code>lastModified</code></dfn> member,
@@ -1216,9 +1216,9 @@ which is used for all <a data-link-type="dfn" href="https://html.spec.whatwg.org
 to read byte sequences associated with <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob③⑤">Blob</a></code> and <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file③⓪">File</a></code> objects.
 It is to be used for features that trigger in response to asynchronously reading binary data.</p>
    <h3 class="heading settled" data-level="6.2" id="APIASynch"><span class="secno">6.2. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader④">FileReader</a></code> API</span><a class="self-link" href="#APIASynch"></a></h3>
-<pre class="idl highlight def">[<a class="idl-code" data-link-type="constructor" href="#filereaderConstrctr" id="ref-for-filereaderConstrctr"><c- g>Constructor</c-></a>, <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed③"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->)]
+<pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed③"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->)]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="dfn-filereader"><code><c- g>FileReader</c-></code></dfn>: <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#eventtarget" id="ref-for-eventtarget"><c- n>EventTarget</c-></a> {
-
+  <c- b>constructor</c->();
   // async read methods
   <c- b>void</c-> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBuffer" id="ref-for-dfn-readAsArrayBuffer"><c- g>readAsArrayBuffer</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑥"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsArrayBuffer(blob)" data-dfn-type="argument" data-export id="dom-filereader-readasarraybuffer-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereader-readasarraybuffer-blob-blob"></a></dfn>);
   <c- b>void</c-> <a class="idl-code" data-link-type="method" href="#dfn-readAsBinaryString" id="ref-for-dfn-readAsBinaryString"><c- g>readAsBinaryString</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑦"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsBinaryString(blob)" data-dfn-type="argument" data-export id="dom-filereader-readasbinarystring-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereader-readasbinarystring-blob-blob"></a></dfn>);
@@ -1252,7 +1252,7 @@ It is to be used for features that trigger in response to asynchronously reading
 that is <code>"empty"</code>, <code>"loading"</code>, or <code>"done"</code>. It is initially <code>"empty"</code>.</p>
    <p>A <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader⑥">FileReader</a></code> has an associated <dfn class="dfn-paneled" data-dfn-for="FileReader" data-dfn-type="dfn" data-noexport id="filereader-result">result</dfn> (<code>null</code>, a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString⑧">DOMString</a></code> or an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer③">ArrayBuffer</a></code>). It is initially <code>null</code>.</p>
    <p>A <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader⑦">FileReader</a></code> has an associated <dfn class="dfn-paneled" data-dfn-for="FileReader" data-dfn-type="dfn" data-noexport id="filereader-error">error</dfn> (<code>null</code> or a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException①">DOMException</a></code>). It is initially <code>null</code>.</p>
-   <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="constructor" data-export id="filereaderConstrctr"><code>FileReader()</code></dfn> constructor,
+   <p>The <dfn class="idl-code" data-dfn-for="FileReader" data-dfn-type="constructor" data-export id="filereaderConstrctr"><code>FileReader()</code><a class="self-link" href="#filereaderConstrctr"></a></dfn> constructor,
 when invoked, must return a new <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader⑧">FileReader</a></code> object.</p>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="attribute" data-export id="dom-filereader-readystate"><code>readyState</code></dfn> attribute’s getter,
 when invoked, switches on the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object" id="ref-for-context-object④">context object</a>'s <a data-link-type="dfn" href="#filereader-state" id="ref-for-filereader-state">state</a> and runs the associated step:</p>
@@ -1605,8 +1605,9 @@ This section defines a synchronous API, which can be used within Workers [[Web W
 Workers can avail of both the asynchronous API (the <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader②②">FileReader</a></code> object) <em>and</em> the synchronous API (the <code class="idl"><a data-link-type="idl" href="#dfn-FileReaderSync" id="ref-for-dfn-FileReaderSync④">FileReaderSync</a></code> object).</p>
    <h4 class="heading settled" data-level="6.5.1" id="FileReaderSync"><span class="secno">6.5.1. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#dfn-FileReaderSync" id="ref-for-dfn-FileReaderSync⑤">FileReaderSync</a></code> API</span><a class="self-link" href="#FileReaderSync"></a></h4>
    <p>This interface  provides methods to <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="synchronous read method" data-noexport id="read-method-sync">synchronously read</dfn> <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file③⑤">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob④⑤">Blob</a></code> objects into memory.</p>
-<pre class="idl highlight def">[<dfn class="dfn-paneled idl-code" data-dfn-for="FileReaderSync" data-dfn-type="constructor" data-export data-lt="FileReaderSync()" id="dom-filereadersync-filereadersync"><code><c- g>Constructor</c-></code></dfn>, <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed④"><c- g>Exposed</c-></a>=(<c- n>DedicatedWorker</c->,<c- n>SharedWorker</c->)]
+<pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed④"><c- g>Exposed</c-></a>=(<c- n>DedicatedWorker</c->,<c- n>SharedWorker</c->)]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="dfn-FileReaderSync"><code><c- g>FileReaderSync</c-></code></dfn> {
+  <c- b>constructor</c->();
   // Synchronously return strings
 
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer④"><c- b>ArrayBuffer</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBufferSync" id="ref-for-dfn-readAsArrayBufferSync"><c- g>readAsArrayBuffer</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob④⑥"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReaderSync/readAsArrayBuffer(blob)" data-dfn-type="argument" data-export id="dom-filereadersync-readasarraybuffer-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereadersync-readasarraybuffer-blob-blob"></a></dfn>);
@@ -1616,7 +1617,7 @@ Workers can avail of both the asynchronous API (the <code class="idl"><a data-li
 };
 </pre>
    <h5 class="heading settled" data-level="6.5.1.1" id="filereadersyncConstrctr"><span class="secno">6.5.1.1. </span><span class="content">Constructors</span><a class="self-link" href="#filereadersyncConstrctr"></a></h5>
-   <p>When the <code class="idl"><a data-link-type="idl" href="#dom-filereadersync-filereadersync" id="ref-for-dom-filereadersync-filereadersync">FileReaderSync()</a></code> constructor is invoked,
+   <p>When the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dom-filereadersync-filereadersync" id="ref-for-dom-filereadersync-filereadersync">FileReaderSync()</a></code> constructor is invoked,
 the user agent must return a new <code class="idl"><a data-link-type="idl" href="#dfn-FileReaderSync" id="ref-for-dfn-FileReaderSync⑥">FileReaderSync</a></code> object.</p>
    <h5 class="heading settled" data-level="6.5.1.2" id="readAsTextSync"><span class="secno">6.5.1.2. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#dfn-readAsTextSync" id="ref-for-dfn-readAsTextSync①">readAsText()</a></code></span><a class="self-link" href="#readAsTextSync"></a></h5>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="FileReaderSync" data-dfn-type="method" data-export data-lt="readAsText(blob, encoding)|readAsText(blob)" id="dfn-readAsTextSync"><code>readAsText(<var>blob</var>, <var>encoding</var>)</code></dfn> method,
@@ -2144,7 +2145,6 @@ No invocations to these APIs occur silently without user intervention.</p>
    <li><a href="#filereaderConstrctr">FileReader()</a><span>, in §6.2</span>
    <li><a href="#dfn-filereader">FileReader</a><span>, in §6.2</span>
    <li><a href="#file-error-read">file read error</a><span>, in §7</span>
-   <li><a href="#dom-filereadersync-filereadersync">FileReaderSync()</a><span>, in §6.5.1</span>
    <li><a href="#dfn-FileReaderSync">FileReaderSync</a><span>, in §6.5.1</span>
    <li><a href="#fileReadingTaskSource">file reading task source</a><span>, in §6.1</span>
    <li><a href="#file-type-guidelines">file type guidelines</a><span>, in §4</span>
@@ -2392,24 +2392,10 @@ No invocations to these APIs occur silently without user intervention.</p>
     <li><a href="#ref-for-dom-body-text">3.3.3. The text() method</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="term-for-dom-blob-blob">
-   <a href="https://w3c.github.io/FileAPI/#dom-blob-blob">https://w3c.github.io/FileAPI/#dom-blob-blob</a><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="term-for-dom-filereadersync-filereadersync">
+   <a href="https://w3c.github.io/FileAPI/#dom-filereadersync-filereadersync">https://w3c.github.io/FileAPI/#dom-filereadersync-filereadersync</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-blob-blob">3.1. Constructors</a> <a href="#ref-for-dom-blob-blob①">(2)</a>
-    <li><a href="#ref-for-dom-blob-blob②">3.1.1. Constructor Parameters</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-dom-file-file">
-   <a href="https://w3c.github.io/FileAPI/#dom-file-file">https://w3c.github.io/FileAPI/#dom-file-file</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-file-file">4.1. Constructor</a>
-    <li><a href="#ref-for-dom-file-file①">4.1.1. Constructor Parameters</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-dom-file-file-filebits-filename-options-options">
-   <a href="https://w3c.github.io/FileAPI/#dom-file-file-filebits-filename-options-options">https://w3c.github.io/FileAPI/#dom-file-file-filebits-filename-options-options</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-file-file-filebits-filename-options-options">4.1. Constructor</a>
+    <li><a href="#ref-for-dom-filereadersync-filereadersync">6.5.1.1. Constructors</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-datatransfer">
@@ -2891,7 +2877,8 @@ No invocations to these APIs occur silently without user intervention.</p>
    <ul>
     <li><a href="#ref-for-idl-USVString">3. The Blob Interface and Binary Data</a> <a href="#ref-for-idl-USVString①">(2)</a>
     <li><a href="#ref-for-idl-USVString②">3.1.1. Constructor Parameters</a> <a href="#ref-for-idl-USVString③">(2)</a> <a href="#ref-for-idl-USVString④">(3)</a>
-    <li><a href="#ref-for-idl-USVString⑤">4.1.1. Constructor Parameters</a> <a href="#ref-for-idl-USVString⑥">(2)</a>
+    <li><a href="#ref-for-idl-USVString⑤">4. The File Interface</a>
+    <li><a href="#ref-for-idl-USVString⑥">4.1.1. Constructor Parameters</a> <a href="#ref-for-idl-USVString⑦">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-dfn-get-buffer-source-copy">
@@ -2998,9 +2985,7 @@ No invocations to these APIs occur silently without user intervention.</p>
    <li>
     <a data-link-type="biblio">[FileAPI]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-dom-blob-blob" style="color:initial">Blob()</span>
-     <li><span class="dfn-paneled" id="term-for-dom-file-file" style="color:initial">File(fileBits, fileName)</span>
-     <li><span class="dfn-paneled" id="term-for-dom-file-file-filebits-filename-options-options" style="color:initial">options <small>(for File/File(fileBits, fileName, options))</small></span>
+     <li><span class="dfn-paneled" id="term-for-dom-filereadersync-filereadersync" style="color:initial">FileReaderSync()</span>
     </ul>
    <li>
     <a data-link-type="biblio">[HTML]</a> defines the following terms:
@@ -3163,10 +3148,10 @@ No invocations to these APIs occur silently without user intervention.</p>
    <dd>Ian Hickson. <a href="https://www.w3.org/TR/workers/">Web Workers</a>. 24 September 2015. WD. URL: <a href="https://www.w3.org/TR/workers/">https://www.w3.org/TR/workers/</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
-<pre class="idl highlight def">[Constructor(optional sequence&lt;BlobPart> blobParts,
-             optional BlobPropertyBag options = {}),
- <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed⑥"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable" id="ref-for-serializable③"><c- g>Serializable</c-></a>]
+<pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed⑥"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable" id="ref-for-serializable③"><c- g>Serializable</c-></a>]
 <c- b>interface</c-> <a href="#dfn-Blob"><code><c- g>Blob</c-></code></a> {
+  <c- b>constructor</c->(<c- b>optional</c-> <c- b>sequence</c->&lt;<a class="n" data-link-type="idl-name" href="#typedefdef-blobpart" id="ref-for-typedefdef-blobpart③"><c- n>BlobPart</c-></a>> <a href="#dom-blob-blobparts"><code><c- g>blobParts</c-></code></a>,
+              <c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag⑤"><c- n>BlobPropertyBag</c-></a> <a href="#dom-blob-options"><code><c- g>options</c-></code></a> = {});
 
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long-long" id="ref-for-idl-unsigned-long-long②"><c- b>unsigned</c-> <c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="unsigned long long" href="#dfn-size" id="ref-for-dfn-size①①"><c- g>size</c-></a>;
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①⑤"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMString" href="#dfn-type" id="ref-for-dfn-type①①⓪"><c- g>type</c-></a>;
@@ -3178,7 +3163,7 @@ No invocations to these APIs occur silently without user intervention.</p>
 
   // read from the Blob.
   [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NewObject" id="ref-for-NewObject③"><c- g>NewObject</c-></a>] <a class="n" data-link-type="idl-name" href="https://fetch.spec.whatwg.org/#concept-readablestream" id="ref-for-concept-readablestream②"><c- n>ReadableStream</c-></a> <a class="idl-code" data-link-type="method" href="#dom-blob-stream" id="ref-for-dom-blob-stream②"><c- g>stream</c-></a>();
-  [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NewObject" id="ref-for-NewObject①①"><c- g>NewObject</c-></a>] <c- b>Promise</c->&lt;<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑦"><c- b>USVString</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-blob-text" id="ref-for-dom-blob-text②"><c- g>text</c-></a>();
+  [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NewObject" id="ref-for-NewObject①①"><c- g>NewObject</c-></a>] <c- b>Promise</c->&lt;<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑧"><c- b>USVString</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-blob-text" id="ref-for-dom-blob-text②"><c- g>text</c-></a>();
   [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NewObject" id="ref-for-NewObject②①"><c- g>NewObject</c-></a>] <c- b>Promise</c->&lt;<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer⑤"><c- b>ArrayBuffer</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-blob-arraybuffer" id="ref-for-dom-blob-arraybuffer②"><c- g>arrayBuffer</c-></a>();
 };
 
@@ -3191,16 +3176,16 @@ No invocations to these APIs occur silently without user intervention.</p>
 
 <c- b>typedef</c-> (<a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#BufferSource" id="ref-for-BufferSource④"><c- n>BufferSource</c-></a> <c- b>or</c-> <a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob①①①"><c- n>Blob</c-></a> <c- b>or</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString①①"><c- b>USVString</c-></a>) <a href="#typedefdef-blobpart"><code><c- g>BlobPart</c-></code></a>;
 
-[Constructor(sequence&lt;BlobPart> fileBits,
-             USVString fileName,
-             optional FilePropertyBag options = {}),
- <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed①①"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable" id="ref-for-serializable①①"><c- g>Serializable</c-></a>]
+[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed①①"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable" id="ref-for-serializable①①"><c- g>Serializable</c-></a>]
 <c- b>interface</c-> <a href="#dfn-file"><code><c- g>File</c-></code></a> : <a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③②①"><c- n>Blob</c-></a> {
+  <c- b>constructor</c->(<c- b>sequence</c->&lt;<a class="n" data-link-type="idl-name" href="#typedefdef-blobpart" id="ref-for-typedefdef-blobpart②①"><c- n>BlobPart</c-></a>> <a href="#dom-file-filebits"><code><c- g>fileBits</c-></code></a>,
+              <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑤①"><c- b>USVString</c-></a> <a href="#dom-file-filename"><code><c- g>fileName</c-></code></a>,
+              <c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dfn-FilePropertyBag" id="ref-for-dfn-FilePropertyBag③"><c- n>FilePropertyBag</c-></a> <a href="#dom-file-options"><code><c- g>options</c-></code></a> = {});
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString④①"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMString" href="#dfn-name" id="ref-for-dfn-name①①"><c- g>name</c-></a>;
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long" id="ref-for-idl-long-long②①"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="long long" href="#dfn-lastModified" id="ref-for-dfn-lastModified④"><c- g>lastModified</c-></a>;
 };
 
-<c- b>dictionary</c-> <a href="#dfn-FilePropertyBag"><code><c- g>FilePropertyBag</c-></code></a> : <a class="n" data-link-type="idl-name" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag②①"><c- n>BlobPropertyBag</c-></a> {
+<c- b>dictionary</c-> <a href="#dfn-FilePropertyBag"><code><c- g>FilePropertyBag</c-></code></a> : <a class="n" data-link-type="idl-name" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag③①"><c- n>BlobPropertyBag</c-></a> {
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long" id="ref-for-idl-long-long③①"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="long long " href="#dfn-FPdate" id="ref-for-dfn-FPdate④"><c- g>lastModified</c-></a>;
 };
 
@@ -3210,9 +3195,9 @@ No invocations to these APIs occur silently without user intervention.</p>
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long①①"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="unsigned long" href="#dfn-length" id="ref-for-dfn-length①"><c- g>length</c-></a>;
 };
 
-[<a class="idl-code" data-link-type="constructor" href="#filereaderConstrctr" id="ref-for-filereaderConstrctr①"><c- g>Constructor</c-></a>, <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed③①"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->)]
+[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed③①"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->)]
 <c- b>interface</c-> <a href="#dfn-filereader"><code><c- g>FileReader</c-></code></a>: <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#eventtarget" id="ref-for-eventtarget①"><c- n>EventTarget</c-></a> {
-
+  <c- b>constructor</c->();
   // async read methods
   <c- b>void</c-> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBuffer" id="ref-for-dfn-readAsArrayBuffer④"><c- g>readAsArrayBuffer</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑥①"><c- n>Blob</c-></a> <a href="#dom-filereader-readasarraybuffer-blob-blob"><code><c- g>blob</c-></code></a>);
   <c- b>void</c-> <a class="idl-code" data-link-type="method" href="#dfn-readAsBinaryString" id="ref-for-dfn-readAsBinaryString④"><c- g>readAsBinaryString</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑦①"><c- n>Blob</c-></a> <a href="#dom-filereader-readasbinarystring-blob-blob"><code><c- g>blob</c-></code></a>);
@@ -3242,8 +3227,9 @@ No invocations to these APIs occur silently without user intervention.</p>
   <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler⑤①"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadend" id="ref-for-dfn-onloadend①"><c- g>onloadend</c-></a>;
 };
 
-[<a href="#dom-filereadersync-filereadersync"><code><c- g>Constructor</c-></code></a>, <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed④①"><c- g>Exposed</c-></a>=(<c- n>DedicatedWorker</c->,<c- n>SharedWorker</c->)]
+[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed④①"><c- g>Exposed</c-></a>=(<c- n>DedicatedWorker</c->,<c- n>SharedWorker</c->)]
 <c- b>interface</c-> <a href="#dfn-FileReaderSync"><code><c- g>FileReaderSync</c-></code></a> {
+  <c- b>constructor</c->();
   // Synchronously return strings
 
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer④①"><c- b>ArrayBuffer</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBufferSync" id="ref-for-dfn-readAsArrayBufferSync③"><c- g>readAsArrayBuffer</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob④⑥①"><c- n>Blob</c-></a> <a href="#dom-filereadersync-readasarraybuffer-blob-blob"><code><c- g>blob</c-></code></a>);
@@ -3339,15 +3325,18 @@ what possible errors can happen, perhaps something about chunk sizes, etc.<a hre
   <aside class="dfn-panel" data-for="dfn-BlobPropertyBag">
    <b><a href="#dfn-BlobPropertyBag">#dfn-BlobPropertyBag</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dfn-BlobPropertyBag">3.1.1. Constructor Parameters</a> <a href="#ref-for-dfn-BlobPropertyBag①">(2)</a>
-    <li><a href="#ref-for-dfn-BlobPropertyBag②">4. The File Interface</a>
-    <li><a href="#ref-for-dfn-BlobPropertyBag③">4.1.1. Constructor Parameters</a>
+    <li><a href="#ref-for-dfn-BlobPropertyBag">3. The Blob Interface and Binary Data</a>
+    <li><a href="#ref-for-dfn-BlobPropertyBag①">3.1.1. Constructor Parameters</a> <a href="#ref-for-dfn-BlobPropertyBag②">(2)</a>
+    <li><a href="#ref-for-dfn-BlobPropertyBag③">4. The File Interface</a>
+    <li><a href="#ref-for-dfn-BlobPropertyBag④">4.1.1. Constructor Parameters</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="typedefdef-blobpart">
    <b><a href="#typedefdef-blobpart">#typedefdef-blobpart</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-typedefdef-blobpart">3.1.1. Constructor Parameters</a>
+    <li><a href="#ref-for-typedefdef-blobpart">3. The Blob Interface and Binary Data</a>
+    <li><a href="#ref-for-typedefdef-blobpart①">3.1.1. Constructor Parameters</a>
+    <li><a href="#ref-for-typedefdef-blobpart②">4. The File Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="blob-get-stream">
@@ -3506,8 +3495,9 @@ what possible errors can happen, perhaps something about chunk sizes, etc.<a hre
   <aside class="dfn-panel" data-for="dfn-FilePropertyBag">
    <b><a href="#dfn-FilePropertyBag">#dfn-FilePropertyBag</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dfn-FilePropertyBag">4.1. Constructor</a>
-    <li><a href="#ref-for-dfn-FilePropertyBag①">4.1.1. Constructor Parameters</a>
+    <li><a href="#ref-for-dfn-FilePropertyBag">4. The File Interface</a>
+    <li><a href="#ref-for-dfn-FilePropertyBag①">4.1. Constructor</a>
+    <li><a href="#ref-for-dfn-FilePropertyBag②">4.1.1. Constructor Parameters</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dfn-fileBits">
@@ -3635,12 +3625,6 @@ what possible errors can happen, perhaps something about chunk sizes, etc.<a hre
    <b><a href="#filereader-error">#filereader-error</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-filereader-error">6.2. The FileReader API</a> <a href="#ref-for-filereader-error①">(2)</a> <a href="#ref-for-filereader-error②">(3)</a> <a href="#ref-for-filereader-error③">(4)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="filereaderConstrctr">
-   <b><a href="#filereaderConstrctr">#filereaderConstrctr</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-filereaderConstrctr">6.2. The FileReader API</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-filereader-readystate">
@@ -3845,12 +3829,6 @@ what possible errors can happen, perhaps something about chunk sizes, etc.<a hre
    <ul>
     <li><a href="#ref-for-read-method-sync">6.2.3. Reading a File or Blob</a>
     <li><a href="#ref-for-read-method-sync①">7. Errors and Exceptions</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-filereadersync-filereadersync">
-   <b><a href="#dom-filereadersync-filereadersync">#dom-filereadersync-filereadersync</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-filereadersync-filereadersync">6.5.1.1. Constructors</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dfn-FileReaderSync">
