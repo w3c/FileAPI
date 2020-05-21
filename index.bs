@@ -274,6 +274,10 @@ given |value|, |serialized| and |forStorage|, are:
   1. Let |bytes| be the result of [=read all bytes|reading all bytes=] from |value|.
   1. Set |serialized|.\[[BlobData]] to the result of [=creating blob data from bytes=] given |bytes|.
 
+  Issue: In at least Chrome's IndexedDB implementation, this copying of the data of blobs
+  is only done when a transaction is committed (and failure to read the blob will cause
+  the commit to fail).
+
 1. Otherwise:
   1. Set |serialized|.\[[BlobData]] to |value|.[=[[data]]=].
 
