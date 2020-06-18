@@ -969,7 +969,7 @@ runs the following steps:
 1. Set |fr|'s [=FileReader/error=] to `null`.
 1. Let |stream| be the result of calling [=get stream=] on |blob|.
 1. Let |reader| be the result of [=get a reader|getting a reader=] from |stream|.
-1. Let |bytes| by an empty [=byte sequence=].
+1. Let |bytes| be an empty [=byte sequence=].
 1. Let |chunkPromise| be the result of [=read a chunk|reading a chunk=] from |stream| with |reader|.
 1. Let |isFirstChunk| be true.
 1. [=In parallel=], while true:
