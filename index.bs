@@ -84,6 +84,26 @@ spec: media-source; urlPrefix: http://w3c.github.io/media-source/
     text: MediaSource; url: #mediasource
 </pre>
 
+<style>
+.domintro dt {
+    font-family: Menlo, Consolas, "DejaVu Sans Mono", Monaco, monospace;
+
+    padding-top: 0.5em;
+    padding-bottom: 1em;
+}
+.domintro dt a {
+    color: inherit; border-bottom-style: none;
+}
+.domintro dt code {
+    font-size: inherit;
+}
+.domintro::before {
+    content: 'For web developers (non-normative)';
+    text-transform: initial;
+
+}
+</style>
+
 # Introduction # {#intro}
 
 *This section is informative.*
@@ -209,16 +229,6 @@ this is the same time that is conceptually "<code>0</code>" in ECMA-262 [[ECMA-2
 
 # The Blob Interface and Binary Data # {#blob-section}
 
-A {{Blob}} object refers to a <a>byte</a> sequence,
-and has a {{Blob/size}} attribute which is the total number of bytes in the byte sequence,
-and a {{Blob/type}} attribute,
-which is an ASCII-encoded string in lower case representing the media type of the <a>byte</a> sequence.
-
-Each {{Blob}} must have an internal <dfn id="snapshot-state" for=Blob>snapshot state</dfn>,
-which must be initially set to the state of the underlying storage,
-if any such underlying storage exists.
-Further normative definition of <a>snapshot state</a> can be found for {{File}}s.
-
 <xmp class="idl">
 [Exposed=(Window,Worker), Serializable]
 interface Blob {
@@ -249,18 +259,47 @@ dictionary BlobPropertyBag {
 typedef (BufferSource or Blob or USVString) BlobPart;
 </xmp>
 
-{{Blob}} objects are [=serializable objects=]. Their [=serialization steps=],
-given |value| and |serialized|, are:
+A {{Blob}} has an associated <dfn export for=Blob>\[[type]]</dfn> internal slot,
+an ASCII-encoded string in lower case representing the media type of the byte sequence.
 
-1. Set |serialized|.\[[SnapshotState]] to |value|'s [=snapshot state=].
+A {{Blob}} has an associated <dfn export for=Blob>\[[data]]</dfn> internal slot,
+a [=blob data description=].
 
-2. Set |serialized|.\[[ByteSequence]] to |value|'s underlying byte sequence.
+<div algorithm="blob serialize">
+{{Blob}} objects are [=serializable objects=]. Their [=serialization steps=]
+(the <dfn>blob serialization steps</dfn>),
+given |value|, |serialized| and |forStorage|, are:
 
-Their [=deserialization step=], given |serialized| and |value|, are:
+1. If |forStorage| is true:
+  1. Let |bytes| be the result of [=read all bytes|reading all bytes=] from |value|.
+  1. Set |serialized|.\[[BlobData]] to the result of [=creating blob data from bytes=] given |bytes|.
 
-1. Set |value|'s [=snapshot state=] to |serialized|.\[[SnapshotState]].
+  Issue: In at least Chrome's IndexedDB implementation, this copying of the data of blobs
+  is only done when a transaction is committed (and failure to read the blob will cause
+  the commit to fail).
 
-2. Set |value|'s underlying byte sequence to |serialized|.\[[ByteSequence]].
+1. Otherwise:
+  1. Set |serialized|.\[[BlobData]] to |value|.[=[[data]]=].
+
+1. Set |serialized|.\[[Type]] to |value|.[=[[type]]=].
+
+</div>
+
+<div algorithm="blob deserialize">
+Their [=deserialization step=] (the <dfn>blob deserialization steps</dfn>),
+given |serialized| and |value|, are:
+
+1. Set |value|.[=[[data]]=] to |serialized|.\[[BlobData]].
+
+1. Set |value|.[=[[type]]=] to |serialized|.\[[Type]].
+
+</div>
+
+Issue(w3c/webappsec-clear-site-data#49): The actual storage API |serialized| was persisted in will need a way of
+modifying the read algorithms for deserialized blobs. I.e. a Blob that was
+deserialized from IndexedDB should start throwing in its read steps after
+clear-site-data clears all IndexedDB data. Somehow let StructuredDeserialize
+pass along a hook from the storage API to here?
 
 <div algorithm="get stream">
 A {{Blob}} |blob| has an associated <dfn for=Blob>get stream</dfn> algorithm,
@@ -269,88 +308,146 @@ which runs these steps:
 1. Let |stream| be the result of [=construct a ReadableStream object|constructing=] a
    {{ReadableStream}} object.
 1. Run the following steps [=in parallel=]:
-  1. While not all bytes of |blob| have been read:
-    1. Let |bytes| be the [=byte sequence=] that results from reading a [=chunk=] from |blob|.
-    1. If a [=file read error=] occured while reading |bytes|, [$ReadableStream/error$]
-       |stream| with a [=failure reason=] and abort these steps.
+  1. Let |blob data| be |blob|.[=[[data]]=].
+  1. Let |read state| be the result of calling |blob data|'s [=read initialization algorithm=]
+    given |blob data|'s [=snapshot state=] and 0.
+    If that threw an exception, [$ReadableStream/error$] |stream| with that exception
+    and abort these steps.
+  1. While true:
+    1. Let |read result| be the result of calling |blob data|'s [=read algorithm=] given |read state|.
+    1. If that threw an exception (a [=file read error=]),
+      [$ReadableStream/error$] |stream| with that [=failure reason=] and abort these steps.
+    1. If |read result| is [=end of blob=], [=break=].
     1. [=ReadableStream/Enqueue=] a `Uint8Array` object wrapping an `ArrayBuffer`
-       containing |bytes| into |stream|.
-       If that threw an exception, [$ReadableStream/error$] |stream| with that exception
-       and abort these steps.
+      containing |read result| into |stream|.
+      If that threw an exception, [$ReadableStream/error$] |stream| with that exception
+      and abort these steps.
 
-    Issue: We need to specify more concretely what reading from a Blob actually does,
+    Issue(144): We need to specify more concretely what reading from a Blob actually does,
     what possible errors can happen, perhaps something about chunk sizes, etc.
 1. Return |stream|.
 
 </div>
 
-## Constructors ## {#constructorBlob}
+## Concepts ## {#blobConcepts}
 
-<div algorithm="blob-constructor">
-The {{Blob()}} constructor can be invoked with zero or more parameters.
-When the {{Blob()}} constructor is invoked,
-user agents must run the following steps:
+The data represented by a {{Blob}} is described by a <dfn export>blob data description</dfn>,
+consisting of some representation of the data, combined with a set of algorithms to
+return the actual data as a series of [=byte sequences=].
 
-1. If invoked with zero parameters,
-  return a new {{Blob}} object consisting of 0 bytes,
-  with {{Blob/size}} set to 0,
-  and with {{Blob/type}} set to the empty string.
+A [=blob data description=] has an associated <dfn export for="blob data">size</dfn>,
+a number specifying the total number of bytes in the byte sequence represented by the blob.
 
-1. Let |bytes| be the result of [=processing blob parts=] given {{blobParts}} and {{Blob/Blob(blobParts, options)/options}}.
+A [=blob data description=] has an associated <dfn export for="blob data">snapshot state</dfn>.
+This is a [=map=] that represents the data stored in the blob.
 
-1. If the {{BlobPropertyBag/type}} member of the {{Blob/Blob(blobParts, options)/options}} argument is not the empty string,
-  run the following sub-steps:
+A [=blob data description=] has an associated <dfn export for="blob data">read initialization algorithm</dfn>.
+This algorithm takes two arguments: the snapshot state, and a byte offset.
+It returns a [=struct=] which will be used as input for the [=read algorithm=].
 
-  1. Let |t| be the {{BlobPropertyBag/type}} dictionary member.
-    If |t| contains any characters outside the range U+0020 to U+007E,
-    then set |t| to the empty string and return from these substeps.
-  1. Convert every character in |t| to [=ASCII lowercase=].
+A [=blob data description=] has an associated <dfn export for="blob data">read algorithm</dfn>.
+This algorithm takes one argument (the [=struct=] returned by the [=read initialization algorithm=]).
+It returns either a [=byte sequence=] or the special <dfn export>end of blob</dfn> value.
 
-1. Return a {{Blob}} object referring to |bytes| as its associated <a>byte</a> sequence,
-  with its {{Blob/size}} set to the length of |bytes|,
-  and its {{Blob/type}} set to the value of |t| from the substeps above.
+<div algorithm>
+To <dfn>read all bytes</dfn> from a {{Blob}} |blob|, run these steps:
+
+1. Let |bytes| be an empty [=byte sequence=].
+1. Let |blob data| be |blob|.[=[[data]]=].
+1. Let |read state| be the result of calling |blob data|'s [=read initialization algorithm=]
+  given |blob data|'s [=snapshot state=] and 0.
+1. While true:
+  1. Let |read result| be the result of calling |blob data|'s [=read algorithm=] given |read state|.
+  1. If |read result| is [=end of blob=], [=break=].
+  1. Append |read result| to |bytes|.
+1. Return |bytes|.
 
 </div>
 
-### Constructor Parameters ### {#constructorParams}
+Conceptually a {{Blob}} represents a snapshot of some amount of data, and
+is frozen in time at the time a {{Blob}} instance is created.
+As such for any specific instance of a {{Blob}}, every invocation of [=read all bytes=]
+should either return the exact same [=byte sequence=], or throw an exception.
+Additionally the returned [=byte sequence=]'s [=byte sequence/length=] should be equal to
+the blob [=[[data]]=]'s [=blob data/size=].
 
-The {{Blob()}} constructor can be invoked with the parameters below:
+Note: This is a non-trivial requirement to implement for user agents, especially
+when a blob is backed by a file on disk (i.e. was created by the
+[=create a file backed File object=] algorithm).
+User agents can use modification time stamps and other mechanisms to maintain
+this requirement, but this is left as an implementation detail.
 
-<dl>
-  <dt>A <dfn id="dfn-blobParts" argument for="Blob/Blob(blobParts, options)"><code>blobParts</code></dfn> <code>sequence</code>
-  <dd>which takes any number of the following types of elements, and in any order:
-    * {{BufferSource}} elements.
-    * {{Blob}} elements.
-    * {{USVString}} elements.
+### Byte Sequence backed blobs ### {#byte-sequence-backed-blobs}
 
-  <dt id="dfn-BlobPropertyBagMembers">An *optional* {{BlobPropertyBag}}
-  <dd>which takes these optional members:
-    * <dfn id="dfn-BPtype" dict-member for="BlobPropertyBag">type</dfn>,
-      the ASCII-encoded string in lower case representing the media type of the {{Blob}}.
-      Normative conditions for this member are provided in the [[#constructorBlob]].
-    * <dfn dict-member for="BlobPropertyBag">endings</dfn>,
-      an enum which can take the values {{"transparent"}} or {{"native"}}.
-      By default this is set to {{"transparent"}}. If set to {{"native"}},
-      [=convert line endings to native|line endings will be converted to native=]
-      in any {{USVString}} elements in {{blobParts}}.
-</dl>
+The [=snapshot state=] for a byte sequence backed blob contains a
+<dfn for="bytes blob snapshot state"><code>"data"</code></dfn> member, a [=byte sequence=].
+
+<div algorithm="create bytes blob">
+To <dfn lt="creating blob data from bytes">create blob data from bytes</dfn>
+given |bytes| (a [=byte sequence=]), run the following steps:
+
+1. Let |blob data| be a new [=blob data description=].
+1. Set |blob data|.[=snapshot state=][<code><a for="bytes blob snapshot state">"data"</a></code>] to |bytes|.
+
+1. Set |blob data|.[=read initialization algorithm=] to the [=bytes blob read initialization steps=].
+1. Set |blob data|.[=read algorithm=] to the [=bytes blob read steps=].
+
+1. Return |blob data|.
+
+</div>
+
+A <dfn>bytes blob read state</dfn> is a [=struct=] conssting of
+<dfn for="bytes blob read state">bytes</dfn> (a [=byte sequence=]).
+
+<div algorithm>
+The <dfn>bytes blob read initialization steps</dfn>,
+given a |snapshot state| and |offset| are:
+
+1. Let |read state| be a new [=bytes blob read state=].
+1. If |offset| is larger than |snapshot state|[<code><a for="bytes blob snapshot state">"data"</a></code>]'s [=byte sequence/length=],
+  set |read state|.[=bytes blob read state/bytes=] to an empty [=byte sequence=].
+1. Otherwise, set |read state|.[=bytes blob read state/bytes=] to
+  a copy of |snapshot state|[<code><a for="bytes blob snapshot state">"data"</a></code>] with the first |offset| bytes removed.
+1. Return |read state|.
+
+</div>
+
+<div algorithm>
+The <dfn>bytes blob read steps</dfn>,
+given |read state| (a [=bytes blob read state=]) are:
+
+1. Let |result| be |read state|.[=bytes blob read state/bytes=].
+1. Set |read state|.[=bytes blob read state/bytes=] to an empty [=byte sequence=].
+1. If |result| is empty, return [=end of blob=].
+1. Return |result|.
+
+</div>
+
+### Multipart blobs ### {#multipart-blobs}
+
+Blobs created by the {{Blob}} and {{File}} constructors are made up of multiple parts,
+where each part could be a blob itself.
+
+The [=snapshot state=] for a multipart blob contains a
+<dfn for="multipart blob snapshot state"><code>"parts"</code></dfn> member,
+a [=list=] of [=blob data descriptions=].
 
 <div algorithm="process-blob-parts">
-To <dfn lt="process blob parts|processing blob parts">process blob parts</dfn> given a sequence of {{BlobPart}}'s |parts|
-and {{BlobPropertyBag}} |options|,
+To <dfn lt="process blob parts|processing blob parts">process blob parts</dfn>
+given a sequence of {{BlobPart}}'s |blobParts| and {{BlobPropertyBag}} |options|,
 run the following steps:
 
-1. Let |bytes| be an empty sequence of bytes.
+1. Let |size| be 0.
+1. Let |parts| be an empty [=list=].
 
-1. For each |element| in |parts|:
+1. Let |bytes| be an empty [=byte sequence=].
 
+1. For each |element| in |blobParts|:
   1. If |element| is a {{USVString}}, run the following substeps:
 
     1. Let |s| be |element|.
-
     1. If the {{BlobPropertyBag/endings}} member of |options| is {{"native"}},
       set |s| to the result of [=converting line endings to native=] of |element|.
-
     1. Append the result of [=UTF-8 encoding=] |s| to |bytes|.
 
       Note: The algorithm from WebIDL [[WebIDL]] replaces unmatched surrogates in an invalid utf-16 string
@@ -361,15 +458,178 @@ run the following steps:
   1. If |element| is a {{BufferSource}}, <a lt="get a copy of the buffer source">get
     a copy of the bytes held by the buffer source</a>, and append those bytes to |bytes|.
 
-  1. If |element| is a {{Blob}},
-    append the bytes it represents to |bytes|.
+  1. If |element| is a {{Blob}}:
+    1. If |bytes| is not empty:
+      1. Let |part| be the result of [=creating blob data from bytes=] given |bytes|.
+      1. [=list/Append=] |part| to |parts|.
+      1. Set |size| to |size| + |part|.[=blob data/size=].
+      1. Set |bytes| to an empty [=byte sequence=].
+
+    1. Let |part| be |element|.[=[[data]]=].
+    1. [=list/Append=] |part| to |parts|.
+    1. Set |size| to |size| + |part|.[=blob data/size=].
 
     Note: The {{Blob/type}} of the {{Blob}} array element is ignored and will not affect {{Blob/type}} of returned
     {{Blob}} object.
 
-1. Return |bytes|.
+1. If |bytes| is not empty:
+  1. Let |part| be the result of [=creating blob data from bytes=] given |bytes|.
+  1. [=list/Append=] |part| to |parts|.
+  1. Set |size| to |size| + |part|.[=blob data/size=].
+
+1. Let |result| be a [=blob data description=].
+1. Set |result|.[=blob data/size=] to |size|.
+1. Set |result|.[=snapshot state=][<code><a for="multipart blob snapshot state">"parts"</a></code>] to |parts|.
+1. Set |result|.[=read initialization algorithm=] to the [=multipart blob read initialization steps=].
+1. Set |result|.[=read algorithm=] to the [=multipart blob read steps=].
+
+1. Return |result|.
 
 </div>
+
+A <dfn>multipart blob read state</dfn> is a [=struct=] consisting of:
+
+<dl dfn-for="multipart blob read state">
+: <dfn>parts</dfn>
+:: A [=queue=] of [=blob data descriptions=], representing the not yet read parts of the blob.
+: <dfn>offset</df>
+:: A number, representing the byte offset in the remaining blob parts
+  from which to start returning data.
+: <dfn>nested blob data</dfn>
+:: `undefined` or a [=blob data description=]. This is `undefined` unless otherwise specified.
+: <dfn>nested read state</dfn>
+:: `undefined` or a [=struct=], representing the read state for a nested read operation.
+   This is `undefined` unless otherwise specified.
+
+</dl>
+
+<div algorithm>
+The <dfn>multipart blob read initialization steps</dfn>, given a |snapshot state| and |offset| are:
+
+1. Let |read state| be a new [=multipart blob read state=].
+1. Set |read state|.[=multipart blob read state/parts=] to
+  a [=queue/clone=] of |snapshot state|[<code><a for="multipart blob snapshot state">"parts"</a></code>].
+1. Set |read state|.[=multipart blob read state/offset=] to |offset|.
+1. Return |read state|.
+
+</div>
+
+<div algorithm>
+The <dfn>multipart blob read steps</dfn>, given |read state| (a [=multipart blob read state=]) are:
+
+1. Let |result| be [=end of blob=].
+1. While |result| is [=end of blob=]:
+
+  1. If |read state|.[=multipart blob read state/nested read state=] is not `undefined`:
+    1. [=Assert=]: |read state|.[=multipart blob read state/offset=] is 0.
+    1. Set |result| to the result of calling
+      |read state|.[=multipart blob read state/nested blob data=]'s [=read algorithm=]
+      given |read state|.[=multipart blob read state/nested read state=].
+    1. If |result| is [=end of blob=]:
+      1. Set |read state|.[=multipart blob read state/nested read state=] to `undefined`.
+      1. Set |read state|.[=multipart blob read state/nested blob data=] to `undefined`.
+
+  1. Otherwise:
+    1. If |read state|.[=multipart blob read state/parts=] is empty:
+      1. Return [=end of blob=].
+
+    1. Let |current part| be the result of [=dequeueing=] from |read state|.[=multipart blob read state/parts=].
+    1. If |read state|.[=multipart blob read state/offset=] >= |current part|.[=blob data/size=]:
+      1. Set |read state|.[=multipart blob read state/offset=] to
+        |read state|.[=multipart blob read state/offset=] - |current part|.[=blob data/size=].
+      1. [=Continue=].
+
+    1. Set |read state|.[=multipart blob read state/nested blob data=] to |current part|.
+    1. Set |read state|.[=multipart blob read state/nested read state=] to the result of calling
+      |current part|'s [=read initialization algorithm=]
+      given |current part|'s [=snapshot state=]
+      and |read state|.[=multipart blob read state/offset=].
+    1. Set |read state|.[=multipart blob read state/offset=] to 0.
+
+1. Return |result|.
+
+</div>
+
+### Sliced blobs ### {#sliced-blobs}
+
+Blobs created by the {{Blob/slice()}} method are also known as sliced blobs.
+
+The [=snapshot state=] for a sliced blob contains
+a <dfn for="sliced blob snapshot state"><code>"offset"</code></dfn> member (a number),
+a <dfn for="sliced blob snapshot state"><code>"span"</code></dfn> member (a number),
+and a <dfn for="sliced blob snapshot state"><code>"source"</code></dfn> member (a [=blob data description=]).
+
+A <dfn>sliced blob read state</dfn> is a [=struct=] consisting of:
+
+<dl dfn-for="sliced blob read state">
+: <dfn>source</dfn>
+:: A [=blob data description=], representing the blob that was sliced.
+: <dfn>bytes remaining</dfn>
+:: A number, representing the remaining number of bytes to be returned.
+: <dfn>nested read state</dfn>
+:: A [=struct=], representing the read state of the nested read operation.
+
+</dl>
+
+<div algorithm>
+The <dfn>sliced blob read initialization steps</dfn>, given a |snapshot state| and |offset| are:
+
+1. Let |read state| be a new [=sliced blob read state=].
+1. Set |read state|.[=sliced blob read state/source=] to
+  |snapshot state|[<code><a for="sliced blob snapshot state">"source"</a></code>].
+1. Set |read state|.[=sliced blob read state/bytes remaining=] to
+  |snapshot state|[<code><a for="sliced blob snapshot state">"span"</a></code>] - |offset|.
+1. Let |read offset| be |snapshot state|[<code><a for="sliced blob snapshot state">"offset"</a></code>] + |offset|.
+1. Set |read state|.[=sliced blob read state/nested read state=] to the result of calling
+  |read state|.[=sliced blob read state/source=]'s [=read initialization algorithm=]
+  given |read state|.[=sliced blob read state/source=]'s [=snapshot state=]
+  and |read offset|.
+1. Return |read state|.
+
+</div>
+
+<div algorithm>
+The <dfn>sliced blob read steps</dfn>, given |read state| (a [=sliced blob read state=]) are:
+
+1. If |read state|.[=sliced blob read state/bytes remaining=] <= 0:
+  1. Return [=end of blob=].
+
+1. Let |result| be the result of calling
+  |read state|.[=sliced blob read state/source=]'s [=read algorithm=]
+  given |read state|.[=sliced blob read state/nested read state=].
+1. If |result| is not [=end of blob=]:
+  1. If |result|'s [=byte sequence/length=] is larger than |read state|.[=sliced blob read state/bytes remaining=]:
+    1. Truncate |result| to be |read state|.[=sliced blob read state/bytes remaining=] bytes long.
+
+  1. Set |read state|.[=sliced blob read state/bytes remaining=] to
+    |read state|.[=sliced blob read state/bytes remaining=] - |result|'s [=byte sequence/length=].
+
+1. Return |result|.
+
+</div>
+
+## Constructors ## {#constructorBlob}
+
+
+<div algorithm="blob-constructor">
+The <dfn constructor for=Blob lt="Blob(blobParts, options)|Blob(blobParts)|Blob()"><code>new Blob(|blobParts|, |options|)</code></dfn> constructor steps are:
+
+1. Let |blob data| be the result of [=processing blob parts=] given |blobParts| and |options|.
+1. Set [=this=].[=[[data]]=] to |blob data|.
+
+1. Let |type| be an empty string.
+1. If the {{BlobPropertyBag/type}} member of the {{Blob/Blob(blobParts, options)/options}} argument is not the empty string,
+  run the following sub-steps:
+
+  1. Let |type| be the {{BlobPropertyBag/type}} dictionary member.
+    If |type| contains any characters outside the range U+0020 to U+007E,
+    then set |type| to the empty string and return from these substeps.
+  1. Convert every character in |type| to [=ASCII lowercase=].
+
+1. Set [=this=].[=[[type]]=] to |type|.
+
+</div>
+
 
 <div algorithm="convert-line-endings-to-native">
 To <dfn lt="convert line endings to native|converting line endings to native">
@@ -449,93 +709,82 @@ run the following steps:
 
 ## Attributes ## {#attributes-blob}
 
-<dl dfn-type="attribute" dfn-for="Blob">
-  <dt><dfn id="dfn-size">size</dfn>
-  <dd>Returns the size of the <a>byte</a> sequence in number of bytes.
-    On getting, conforming user agents must return the total number of bytes that can be read by a {{FileReader}} or {{FileReaderSync}} object,
-    or 0 if the {{Blob}} has no bytes to be read.
+<div class="note domintro">
+: |blob| . {{Blob/size}}
+:: Returns the size of the [=byte sequence=] represented by |blob| in number of bytes.
 
-  <dt><dfn id="dfn-type">type</dfn>
-  <dd>The ASCII-encoded string in lower case representing the media type of the {{Blob}}.
-    On getting, user agents must return the type of a {{Blob}}
-    as an ASCII-encoded string in lower case,
-    such that when it is converted to a <a>byte</a> sequence,
-    it is a <a>parsable MIME type</a>,
-    or the empty string &ndash; 0 bytes &ndash; if the type cannot be determined.
+</div>
 
-    The {{Blob/type}} attribute can be set by the web application itself through constructor invocation
-    and through the {{Blob/slice()}} call;
-    in these cases, further normative conditions for this attribute are in [[#constructorBlob]],
-    [[#file-constructor]],
-    and [[#slice-method-algo]] respectively.
-    User agents can also determine the {{Blob/type}} of a {{Blob}},
-    especially if the <a>byte</a> sequence is from an on-disk file;
-    in this case, further normative conditions are in the <a>file type guidelines</a>.
+The <dfn attribute for=Blob id="dfn-size">size</dfn> getter steps are to return [=this=].[=[[data]]=].[=blob data/size=].
 
-    Note: The type <var ignore>t</var> of a {{Blob}} is considered a <a>parsable MIME type</a>,
-    if performing the <a>parse a MIME type</a> algorithm to a byte sequence converted from
-    the ASCII-encoded string representing the Blob object's type does not return failure.
+<div class="note domintro">
+: |blob| . {{Blob/type}}
+:: The ASCII-encoded string in lower case representing the media type of the {{Blob}},
+  or an empty string if the type cannot be determined.
 
-    Note: Use of the {{Blob/type}} attribute informs the [=package data=] algorithm
-    and determines the `Content-Type` header when [=/fetching=] [=blob URLs=].
-</dl>
+  The {{Blob/type}} attribute can be set by the web application itself through constructor invocation
+  and through the {{Blob/slice()}} call;
+
+  Note: The type of a {{Blob}} is considered a <a>parsable MIME type</a>,
+  if performing the <a>parse a MIME type</a> algorithm to a byte sequence converted from
+  the ASCII-encoded string representing the Blob object's type does not return failure.
+
+  Note: Use of the {{Blob/type}} attribute informs the [=package data=] algorithm
+  and determines the `Content-Type` header when [=/fetching=] [=blob URLs=].
+
+</div>
+
+The <dfn attribute for=Blob id="dfn-type">type</dfn> getter steps are to return [=this=].[=[[type]]=].
 
 ## Methods and Parameters ## {#methodsandparams-blob}
 
 ### The {{Blob/slice()}} method ### {#slice-method-algo}
 
-The <dfn id="dfn-slice" method for=Blob lt="slice(start, end, contentType), slice(start, end), slice(start), slice()">slice()</dfn> method
-returns a new {{Blob}} object with bytes ranging from
-the optional {{start}} parameter
-up to but not including the optional {{end}} parameter,
-and with a {{Blob/type}} attribute that is the value of the optional {{contentType!!argument}} parameter.
-It must act as follows:
+<div class="note domintro">
+: |slice| = |blob| . {{Blob/slice()|slice}}( |start|, |end|, |contentType| )
+:: |slice| is a new {{Blob}} object, sharing storage with |blob|, with bytes ranging from
+  the optional |start| parameter
+  up to but not including the optional |end| parameter,
+  and with a {{Blob/type}} attribute that is the value of the optional |contentType| parameter.
 
-1. Let |O| be the {{Blob}} <a>context object</a> on which the {{slice()}} method is being called.
-2. The optional <dfn argument for="Blob/slice(start, end, contentType)" id="dfn-start">start</dfn> parameter
-  is a value for the start point of a {{slice()}} call,
-  and must be treated as a byte-order position,
-  with the zeroth position representing the first byte.
-  User agents must process {{Blob/slice()}} with {{start}} normalized according to the following:
+  Negative values for |start| and |end| are interpreted as relative to the end of the |blob|.
 
-  <ol type="a">
-    <li>If the optional {{start}} parameter is not used as a parameter when making this call, let |relativeStart| be 0.
-    <li>If {{start}} is negative, let |relativeStart| be <code>max(({{Blob/size}} + {{start}}), 0)</code>.
-    <li>Else, let |relativeStart| be <code>min(start, size)</code>.
-  </ol>
+</div>
 
-3. The optional <dfn argument for="Blob/slice(start, end, contentType)" id="dfn-end">end</dfn> parameter
-  is a value for the end point of a {{slice()}} call.
-  User agents must process {{Blob/slice()}} with {{end}} normalized according to the following:
+<div algorithm>
+The <dfn id="dfn-slice" method for=Blob lt="slice(start, end, contentType), slice(start, end), slice(start), slice()">slice(|start|, |end|, |contentType|)</dfn> method steps are:
 
-  <ol type="a">
-    <li>If the optional {{end}} parameter is not used as a parameter when making this call, let |relativeEnd| be {{Blob/size}}.
-    <li>If {{end}} is negative, let |relativeEnd| be <code>max((size + end), 0)</code>.
-    <li>Else, let |relativeEnd| be <code>min(end, size)</code>.
-  </ol>
+1. Let |relativeStart| be 0.
+1. If |start| is not `undefined`:
+  1. If |start| < 0, set |relativeStart| to <code>max([=this=].[=[[data]]=].[=blob data/size=] + |start|, 0)</code>.
+  1. Otherwise, set |relativeStart| to <code>min(|start|, [=this=].[=[[data]]=].[=blob data/size=])</code>.
 
-4. The optional <dfn argument for="Blob/slice(start, end, contentType)" id="dfn-contentTypeBlob">contentType</dfn> parameter
-  is used to set the ASCII-encoded string in lower case representing the media type of the Blob.
-  User agents must process the {{Blob/slice()}} with {{contentType}} normalized according to the following:
+1. Let |relativeEnd| be [=this=].[=[[data]]=].[=blob data/size=].
+1. If |end| is not `undefined`:
+  1. If |end| < 0, set |relativeEnd| to <code>max([=this=].[=[[data]]=].[=blob data/size=] + |end|, 0)</code>.
+  1. Otherwise, set |relativeEnd| to <code>min(|end|, [=this=].[=[[data]]=].[=blob data/size=])</code>.
 
-  <ol type="a">
-    <li>If the {{contentType}} parameter is not provided, let |relativeContentType| be set to the empty string.
-    <li>Else let |relativeContentType| be set to {{contentType}} and run the substeps below:
-      1. If |relativeContentType| contains any characters outside the range of U+0020 to U+007E,
-        then set |relativeContentType| to the empty string and return from these substeps.
-      2. Convert every character in |relativeContentType| to [=ASCII lowercase=].
-  </ol>
+1. Let |span| be <code>max((relativeEnd - relativeStart), 0)</code>.
 
-5. Let |span| be <code>max((relativeEnd - relativeStart), 0)</code>.
+1. Let |relativeContentType| be an empty string.
+1. If |contentType| is not `undefined`:
+  1. If |contentType| does not contain any characters outside the range of U+0x0020 to U+0x007E:
+    1. Set |relativeContentType| to [=ASCII lowercase=] of |contentType|.
 
-6. Return a new {{Blob}} object |S| with the following characteristics:
+1. Let |snapshot state| be a new [=map=].
+1. Set |snapshot state|[<code><a for="sliced blob snapshot state">"offset"</a></code>] to |relativeStart|.
+1. Set |snapshot state|[<code><a for="sliced blob snapshot state">"span"</a></code>] to |span|.
+1. Set |snapshot state|[<code><a for="sliced blob snapshot state">"source"</a></code>] to [=this=].[=[[data]]=].
 
-  <ol type="a">
-    <li>|S| refers to |span| consecutive <a>byte</a>s from |O|,
-      beginning with the <a>byte</a> at byte-order position |relativeStart|.
-    <li>|S|.{{Blob/size}} = |span|.
-    <li>|S|.{{Blob/type}} = |relativeContentType|.
-  </ol>
+1. Let |result| be a new {{Blob}} object.
+1. Set |result|.[=[[type]]=] to |relativeContentType|.
+1. Set |result|.[=[[data]]=].[=blob data/size=] to |span|.
+1. Set |result|.[=[[data]]=].[=snapshot state=] to |snapshot state|.
+1. Set |result|.[=[[data]]=].[=read initialization algorithm=] to the [=sliced blob read initialization steps=].
+1. Set |result|.[=[[data]]=].[=read algorithm=] to the [=sliced blob read steps=].
+1. Return |result|.
+
+</div>
 
 <div class="example">
   The examples below illustrate the different types of {{slice()}} calls possible. Since the
@@ -578,12 +827,12 @@ the result of calling [=get stream=] on the [=context object=].
 
 The <dfn method for=Blob>text()</dfn> method, when invoked, must run these steps:
 
-1. Let |stream| be the result of calling [=get stream=] on the [=context object=].
-1. Let |reader| be the result of [=get a reader|getting a reader=] from |stream|.
-   If that threw an exception, return a new promise rejected with that exception.
-1. Let |promise| be the result of [=read all bytes|reading all bytes=] from |stream| with |reader|.
-1. Return the result of transforming |promise| by a fulfillment handler that returns the result of
-   running [=UTF-8 decode=] on its first argument.
+1. Let |promise| be [=a new Promise=].
+1. Run the following steps [=in parallel=]:
+  1. Let |bytes| be the result of [=read all bytes|reading all bytes=] from [=this=].
+    If that threw an exception, [=/reject=] |promise| with that exception and abort.
+  1. [=/Resolve=] |promise| with the result of running [=UTF-8 decode=] on |bytes|.
+1. Return |promise|.
 
 Note: This is different from the behavior of {{FileReader/readAsText()}} to align better
 with the behavior of {{Body/text()|Fetch's text()}}. Specifically this method will always
@@ -594,12 +843,13 @@ the blob's type and passed in encoding name.
 
 The <dfn method for=Blob>arrayBuffer()</dfn> method, when invoked, must run these steps:
 
-1. Let |stream| be the result of calling [=get stream=] on the [=context object=].
-1. Let |reader| be the result of [=get a reader|getting a reader=] from |stream|.
-   If that threw an exception, return a new promise rejected with that exception.
-1. Let |promise| be the result of [=read all bytes|reading all bytes=] from |stream| with |reader|.
-1. Return the result of transforming |promise| by a fulfillment handler that returns
-   a new {{ArrayBuffer}} whose contents are its first argument.
+1. Let |promise| be [=a new Promise=].
+1. Run the following steps [=in parallel=]:
+  1. Let |bytes| be the result of [=read all bytes|reading all bytes=] from [=this=].
+    If that threw an exception, [=/reject=] |promise| with that exception and abort.
+  1. [=/Resolve=] |promise| with a new {{ArrayBuffer}} whose contents are |bytes|.
+1. Return |promise|.
+
 
 <!--
 ████████ ████ ██       ████████
@@ -615,32 +865,7 @@ The <dfn method for=Blob>arrayBuffer()</dfn> method, when invoked, must run thes
 
 A {{File}} object is a {{Blob}} object with a {{File/name}} attribute, which is a string;
 it can be created within the web application via a constructor,
-or is a reference to a <a>byte</a> sequence from a file from the underlying (OS) file system.
-
-If a {{File}} object is a reference to a <a>byte</a> sequence originating from a file on disk,
-then its <a>snapshot state</a> should be set to the state of the file on disk at the time the {{File}} object is created.
-
-Note: This is a non-trivial requirement to implement for user agents,
-and is thus not a *must* but a *should* [[RFC2119]].
-User agents should endeavor to have a {{File}} object's <a>snapshot state</a>
-set to the state of the underlying storage on disk at the time the reference is taken.
-If the file is modified on disk following the time a reference has been taken,
-the {{File}}'s <a>snapshot state</a> will differ from the state of the underlying storage.
-User agents may use modification time stamps and other mechanisms to maintain <a>snapshot state</a>,
-but this is left as an implementation detail.
-
-When a {{File}} object refers to a file on disk,
-user agents must return the {{Blob/type}} of that file,
-and must follow the <dfn export>file type guidelines</dfn> below:
-
-* User agents must return the {{Blob/type}} as an ASCII-encoded string in lower case,
-  such that when it is converted to a corresponding byte sequence,
-  it is a <a>parsable MIME type</a>,
-  or the empty string &ndash; 0 bytes &ndash; if the type cannot be determined.
-* When the file is of type <code>text/plain</code>
-  user agents must NOT append a charset parameter to the <i>dictionary of parameters</i> portion of the media type [[!MIMESNIFF]].
-* User agents must not attempt heuristic determination of encoding,
-  including statistical methods.
+or is a reference to a <a>byte sequence</a> from a file from the underlying (OS) file system.
 
 <pre class="idl">
 [Exposed=(Window,Worker), Serializable]
@@ -657,58 +882,123 @@ dictionary FilePropertyBag : BlobPropertyBag {
 };
 </pre>
 
+A {{File}} has an associated <dfn for=File>\[[name]]</dfn> intenral slot, a string.
+
+A {{File}} has an associated <dfn for=File>\[[lastModified]]</dfn> internal slot, something.
+
 {{File}} objects are [=serializable objects=]. Their [=serialization steps=],
-given |value| and |serialized|, are:
+given |value|, |serialized| and |forStorage|, are:
 
-1. Set |serialized|.\[[SnapshotState]] to |value|'s [=snapshot state=].
-
-2. Set |serialized|.\[[ByteSequence]] to |value|'s underlying byte sequence.
-
-3. Set |serialized|.\[[Name]] to the value of |value|'s {{File/name}} attribute.
-
-4. Set |serialized|.\[[LastModified]] to the value of |value|'s {{File/lastModified}} attribute.
+1. Invoke the [=blob serialization steps=] given |value|, |serialized| and |forStorage|.
+1. Set |serialized|.\[[Name]] to |value|.[=[[name]]=].
+1. Set |serialized|.\[[LastModified]] to |value|.[=[[lastModified]]=].
 
 Their [=deserialization steps=], given |value| and |serialized|, are:
 
-1. Set |value|'s [=snapshot state=] to |serialized|.\[[SnapshotState]].
+1. Invoke the [=blob deserialization steps=] given |value| and |serialized|.
+1. Set |value|.[=[[name]]=] to |serialized|.\[[Name]].
+1. Set |value|.[=[[lastModified]]=] to |serialized|.\[[LastModified]].
 
-2. Set |value|'s underlying byte sequence to |serialized|.\[[ByteSequence]].
+## Concepts ## {#file-concepts}
 
-3. Initialize the value of |value|'s {{File/name}} attribute to |serialized|.\[[Name]].
+The [=snapshot state=] for a file backed blob contains
+a <dfn for="file blob snapshot state"><code>"file"</code></dfn> member (a reference to a native file on disk),
+and a <dfn for="file blob snapshot state"><code>"last modified"</code></dfn> member (a number).
 
-4. Initialize the value of |value|'s {{File/lastModified}} attribute to
-   |serialized|.\[[LastModified]].
+<div algorithm="create a file">
+To <dfn export>create a file backed {{File}} object</dfn> for a given |native file|,
+run these steps:
+
+1. Let |snapshot state| be an empty [=map=].
+1. Set |snapshot state|[<code><a for="file blob snapshot state">"file"</a></code>] to |native file|.
+1. Let |last modified| be the last time |native file| was modified,
+  as the number of milliseconds since the [=Unix Epoch=].
+  If this can't be determined, set |last modified| to the current date and time
+    represented as the number of milliseconds since the [=Unix Epoch=].
+1. Set |snapshot state|[<code><a for="file blob snapshot state">"last modified"</a></code>] to |last modified|.
+
+1. Let |name| be the file name of |native file|, converted to a string in a
+  user agent defined manner.
+1. Let |content type| be the mime type of |native file| (as a lowercase ASCII string),
+  derived from |name| in a user agent defined manner, or an empty string if no type
+  could be determined, taking into account the following <dfn export>file type guidelines</dfn>:
+
+  * User agents must return the {{Blob/type}} as an ASCII-encoded string in lower case,
+    such that when it is converted to a corresponding byte sequence,
+    it is a <a>parsable MIME type</a>,
+    or the empty string &ndash; 0 bytes &ndash; if the type cannot be determined.
+  * When the file is of type <code>text/plain</code>
+    user agents must NOT append a charset parameter to the <i>dictionary of parameters</i> portion of the media type [[!MIMESNIFF]].
+  * User agents must not attempt heuristic determination of encoding,
+    including statistical methods.
+
+1. Let |result| be a new {{File}} object.
+1. Set |result|.[=[[type]]=] to |content type|.
+1. Set |result|.[=[[data]]=].[=blob data/size=] to the size of |native file|.
+1. Set |result|.[=[[data]]=].[=snapshot state=] to |snapshot state|.
+1. Set |result|.[=[[data]]=].[=read initialization algorithm=] to the [=file read initialization steps=].
+1. Set |result|.[=[[data]]=].[=read algorithm=] to the [=file read steps=].
+1. Set |result|.[=[[name]]=] to |name|.
+1. Set |result|.[=[[lastModified]]=] to |last modified|.
+1. Return |result|.
+
+</div>
+
+A <dfn>file blob read state</dfn> is a [=struct=] consisting of
+a <dfn for="file blob read state">file handle</dfn> (a not further defined handle to a file that is open for reading),
+and a <dfn for="file blob read state">offset</dfn> (a number).
+
+<div algorithm="file read init">
+The <dfn>file read initialization steps</dfn>, given a |snapshot state| and |offset| are:
+
+1. Let |file| be |snapshot state|[<code><a for="file blob snapshot state">"file"</a></code>].
+1. If the file referred to |file| no longer exists,
+  throw a {{NotFoundError}}.
+1. Let |last modified| be the last time |file| was modified,
+  as the number of milliseconds since the [=Unix Epoch=].
+1. If |last modified| is different from |snapshot state|[<code><a for="file blob snapshot state">"last modified"</a></code>],
+  throw a {{NotReadableError}}.
+1. User agents may attempt to detect in other ways that the file on disk has been changed.
+  If this is the case, throw a {{NotReadableError}}.
+1. If the user agent for some other reason decides that the file should not be read by a website,
+  throw a {{SecurityError}}.
+1. Let |read state| be a new [=file blob read state=].
+1. Set |read state|.[=file blob read state/file handle=] to the result of opening |file| for reading.
+  If this fails, for example due to permission problems, throw a {{NotReadableError}}.
+1. Set |read state|.[=file blob read state/offset=] to |offset|.
+1. Return |read state|.
+
+</div>
+
+<div algorithm>
+The <dfn>file read steps</dfn>, given a |read state| are:
+
+1. Let |bytes| be the result of reading bytes from |read state|.[=file blob read state/file handle=] at |read state|.[=file blob read state/offset=].
+1. If reading bytes failed other than by reaching the end of the file, throw a {{NotReadableError}}.
+1. If reading bytes failed becaus the end of the file was reached, return [=end of blob=].
+1. Set |read state|.[=file blob read state/offset=] to |read state|.[=file blob read state/offset=] + |bytes|'s [=byte sequence/length=].
+1. Return |bytes|.
+
+</div>
 
 ## Constructor ## {#file-constructor}
 
 <div algorithm="file-constructor">
-The {{File}} constructor is invoked with two or three parameters,
-depending on whether the optional dictionary parameter is used.
-When the {{File()}} constructor is invoked,
-user agents must run the following steps:
+The <dfn constructor for=File lt="File(fileBits, fileName, options)|File(fileBits, fileName)"><code>new File(|fileBits|, |fileName|, |options|)</code></dfn> constructor steps are:
 
-1. Let |bytes| be the result of [=processing blob parts=] given {{fileBits}}
-  and {{File/File(fileBits, fileName, options)/options}}.
+1. Run the {{Blob(blobParts, options)|Blob}}(|fileBits|, |options|) constructor steps.
 
-
-2. Let |n| be a new string of the same size as the {{fileName}} argument to the constructor.
-  Copy every character from {{fileName}} to |n|,
+1. Let |n| be a new string of the same size as |fileName|.
+1. Copy every character from |fileName| to |n|,
   replacing any "/" character (U+002F SOLIDUS) with a ":" (U+003A COLON).
 
   Note: Underlying OS filesystems use differing conventions for file name;
-  with constructed files, mandating UTF-16 lessens ambiquity when file names are converted to <a>byte</a> sequences.
+  with constructed files, mandating UTF-16 lessens ambiquity when file names are converted to <a>byte sequences</a>.
 
-3. Process {{FilePropertyBag}} dictionary argument by running the following substeps:
-
-  1. If the {{BlobPropertyBag/type}} member is provided and is not the empty string,
-    let |t| be set to the {{BlobPropertyBag/type}} dictionary member.
-    If |t| contains any characters outside the range U+0020 to U+007E,
-    then set |t| to the empty string and return from these substeps.
-  2. Convert every character in |t| to [=ASCII lowercase=].
-  3. If the {{FilePropertyBag/lastModified}} member is provided,
-    let |d| be set to the  {{FilePropertyBag/lastModified}} dictionary member.
-    If it is not provided,
-    set |d| to the current date and time
+1. If |options|.{{FilePropertyBag/lastModified}} member is provided:
+  1. Let |d| be |options|.{{FilePropertyBag/lastModified}} dictionary member.
+1. Otherwise:
+  1. Let |d| be the current date and time
     represented as the number of milliseconds since the <a>Unix Epoch</a>
     (which is the equivalent of <code>Date.now()</code> [[ECMA-262]]).
 
@@ -716,73 +1006,36 @@ user agents must run the following steps:
     representing the number of milliseconds since the <a>Unix Epoch</a>,
     the {{FilePropertyBag/lastModified}} member could be a {{Date}} object [[ECMA-262]].
 
-4. Return a new {{File}} object |F| such that:
-  2. |F| refers to the |bytes| <a>byte</a> sequence.
-  3. |F|.{{Blob/size}} is set to the number of total bytes in |bytes|.
-  4. |F|.{{File/name}} is set to |n|.
-  5. |F|.{{Blob/type}} is set to |t|.
-  6. |F|.{{File/lastModified}} is set to |d|.
+1. Set [=this=].[=[[name]]=] to |n|.
+1. Set [=this=].[=[[lastModified]]=] to |d|.
 
 </div>
 
-### Constructor Parameters ### {#file-constructor-params}
-
-The {{File()}} constructor can be invoked with the parameters below:
-
-<dl>
-  <dt>A <dfn id="dfn-fileBits" argument for="File/File(fileBits, fileName, options)"><code>fileBits</code></dfn> <code>sequence</code>
-  <dd>which takes any number of the following elements, and in any order:
-    * {{BufferSource}} elements.
-    * {{Blob}} elements, which includes {{File}} elements.
-    * {{USVString}} elements.
-
-  <dt>A <dfn id="dfn-fileName" argument for="File/File(fileBits, fileName, options)"><code>fileName</code></dfn> parameter
-  <dd>A {{USVString}} parameter representing the name of the file;
-    normative conditions for this constructor parameter can be found in [[#file-constructor]].
-
-  <dt id="def-Properties">An optional {{FilePropertyBag}} dictionary
-  <dd>which in addition to the <a href="#dfn-BlobPropertyBagMembers">members</a> of
-    {{BlobPropertyBag}} takes one member:
-    * An optional <dfn dict-member for=FilePropertyBag id="dfn-FPdate">lastModified</dfn> member,
-      which must be a <code>long long</code>;
-      normative conditions for this member are provided in [[#file-constructor]].
-</dl>
-
 ## Attributes ## {#file-attrs}
 
-<dl dfn-type=attribute dfn-for=File>
-  <dt><dfn id="dfn-name">name</dfn>
-  <dd>The name of the file.
-    On getting, this must return the name of the file as a string.
-    There are numerous file name variations and conventions used by different underlying OS file systems;
-    this is merely the name of the file, without path information.
-    On getting, if user agents cannot make this information available,
-    they must return the empty string.
-    If a {{File}} object is created using a constructor,
-    further normative conditions for this attribute are found in [[#file-constructor]].
+<div class="note domintro">
+: |file| . {{File/name}}
+:: Returns the name of the file as a string.
+  There are numerous file name variations and conventions used by different underlying OS file systems;
+  this is merely the name of the file, without path information.
+  On getting, if user agents cannot make this information available,
+  they return the empty string.
 
-  <dt><dfn id="dfn-lastModified">lastModified</dfn>
-  <dd>The last modified date of the file.
-    On getting, if user agents can make this information available,
-    this must return a <code>long long</code> set to the time the file was last modified
-    as the number of milliseconds since the <a>Unix Epoch</a>.
-    If the last modification date and time are not known,
-    the attribute must return the current date and time
-    as a <code>long long</code> representing the number of milliseconds since the <a>Unix Epoch</a>;
-    this is equivalent to <code class="lang-javascript">Date.now()</code> [[ECMA-262]].
-    If a {{File}} object is created using a constructor,
-    further normative conditions for this attribute are found in [[#file-constructor]].
-</dl>
+</div>
 
-The {{File}} interface is available on objects that expose an attribute of type {{FileList}};
-these objects are defined in HTML [[HTML]].
-The {{File}} interface, which inherits from {{Blob}}, is immutable,
-and thus represents file data that can be read into memory at the time a <a>read operation</a> is initiated.
-User agents must process reads on files that no longer exist at the time of read as <a lt="file read error">errors</a>,
-throwing a {{NotFoundError}} exception
-if using a {{FileReaderSync}} on a Web Worker [[Workers]]
-or firing an {{error!!event}} event
-with the {{error!!attribute}} attribute returning a {{NotFoundError}}.
+The <dfn attribute for=File id="dfn-name">name</dfn> getter steps are to return [=this=].[=[[name]]=].
+
+<div class="note domintro">
+: |file| . {{File/lastModified}}
+:: Return a the time the file was last modified
+  as the number of milliseconds since the [=Unix Epoch=].
+  If the last modification date and time are not known,
+  the attribute returns the current date and time
+  (equivalent to <code class="lang-javascript">Date.now()</code> [[ECMA-262]]).
+
+</div>
+
+The <dfn attribute for=File id="dfn-lastModified">lastModified</dfn> getter steps are to return [=this=].[=[[lastModified]]=].
 
 <div class="example">
   In the examples below, metadata from a file object is displayed meaningfully, and a file object is created with a name and a last modified date.
