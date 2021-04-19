@@ -66,9 +66,6 @@ spec: url
     text: url; for:/
   type: interface
     text: URL
-spec: fetch
-  type:interface
-    text:ReadableStream
 </pre>
 
 <pre class="anchors">
@@ -491,8 +488,7 @@ up to but not including the optional {{end}} parameter,
 and with a {{Blob/type}} attribute that is the value of the optional {{contentType!!argument}} parameter.
 It must act as follows:
 
-1. Let |O| be the {{Blob}} <a>context object</a> on which the {{slice()}} method is being called.
-2. The optional <dfn argument for="Blob/slice(start, end, contentType)" id="dfn-start">start</dfn> parameter
+1. The optional <dfn argument for="Blob/slice(start, end, contentType)" id="dfn-start">start</dfn> parameter
   is a value for the start point of a {{slice()}} call,
   and must be treated as a byte-order position,
   with the zeroth position representing the first byte.
@@ -504,7 +500,7 @@ It must act as follows:
     <li>Else, let |relativeStart| be <code>min(start, size)</code>.
   </ol>
 
-3. The optional <dfn argument for="Blob/slice(start, end, contentType)" id="dfn-end">end</dfn> parameter
+2. The optional <dfn argument for="Blob/slice(start, end, contentType)" id="dfn-end">end</dfn> parameter
   is a value for the end point of a {{slice()}} call.
   User agents must process {{Blob/slice()}} with {{end}} normalized according to the following:
 
@@ -514,7 +510,7 @@ It must act as follows:
     <li>Else, let |relativeEnd| be <code>min(end, size)</code>.
   </ol>
 
-4. The optional <dfn argument for="Blob/slice(start, end, contentType)" id="dfn-contentTypeBlob">contentType</dfn> parameter
+3. The optional <dfn argument for="Blob/slice(start, end, contentType)" id="dfn-contentTypeBlob">contentType</dfn> parameter
   is used to set the ASCII-encoded string in lower case representing the media type of the Blob.
   User agents must process the {{Blob/slice()}} with {{contentType}} normalized according to the following:
 
@@ -526,12 +522,12 @@ It must act as follows:
       2. Convert every character in |relativeContentType| to [=ASCII lowercase=].
   </ol>
 
-5. Let |span| be <code>max((relativeEnd - relativeStart), 0)</code>.
+4. Let |span| be <code>max((relativeEnd - relativeStart), 0)</code>.
 
-6. Return a new {{Blob}} object |S| with the following characteristics:
+5. Return a new {{Blob}} object |S| with the following characteristics:
 
   <ol type="a">
-    <li>|S| refers to |span| consecutive <a>byte</a>s from |O|,
+    <li>|S| refers to |span| consecutive <a>byte</a>s from <a>this</a>,
       beginning with the <a>byte</a> at byte-order position |relativeStart|.
     <li>|S|.{{Blob/size}} = |span|.
     <li>|S|.{{Blob/type}} = |relativeContentType|.
@@ -572,13 +568,13 @@ It must act as follows:
 ### The {{Blob/stream()}} method ### {#stream-method-algo}
 
 The <dfn method for=Blob>stream()</dfn> method, when invoked, must return
-the result of calling [=get stream=] on the [=context object=].
+the result of calling [=get stream=] on [=this=].
 
 ### The {{Blob/text()}} method ### {#text-method-algo}
 
 The <dfn method for=Blob>text()</dfn> method, when invoked, must run these steps:
 
-1. Let |stream| be the result of calling [=get stream=] on the [=context object=].
+1. Let |stream| be the result of calling [=get stream=] on [=this=].
 1. Let |reader| be the result of [=get a reader|getting a reader=] from |stream|.
    If that threw an exception, return a new promise rejected with that exception.
 1. Let |promise| be the result of [=read all bytes|reading all bytes=] from |stream| with |reader|.
@@ -594,7 +590,7 @@ the blob's type and passed in encoding name.
 
 The <dfn method for=Blob>arrayBuffer()</dfn> method, when invoked, must run these steps:
 
-1. Let |stream| be the result of calling [=get stream=] on the [=context object=].
+1. Let |stream| be the result of calling [=get stream=] on [=this=].
 1. Let |reader| be the result of [=get a reader|getting a reader=] from |stream|.
    If that threw an exception, return a new promise rejected with that exception.
 1. Let |promise| be the result of [=read all bytes|reading all bytes=] from |stream| with |reader|.
@@ -941,7 +937,7 @@ The <dfn constructor for=FileReader id=filereaderConstrctr>FileReader()</dfn> co
 when invoked, must return a new {{FileReader}} object.
 
 The <dfn attribute for=FileReader>readyState</dfn> attribute's getter,
-when invoked, switches on the [=context object=]'s [=FileReader/state=]
+when invoked, switches on [=this=]'s [=FileReader/state=]
 and runs the associated step:
 
 : `"empty"`
@@ -952,10 +948,10 @@ and runs the associated step:
 :: Return {{DONE}}
 
 The <dfn attribute for=FileReader>result</dfn> attribute's getter,
-when invoked, must return the [=context object=]'s [=FileReader/result=].
+when invoked, must return [=this=]'s [=FileReader/result=].
 
 The <dfn attribute for=FileReader>error</dfn> attribute's getter,
-when invoked, must return the [=context object=]'s [=FileReader/error=].
+when invoked, must return [=this=]'s [=FileReader/error=].
 
 <div algorithm="read operation">
 A {{FileReader}} |fr| has an associated <dfn id=readOperation>read operation</dfn> algorithm,
@@ -1122,20 +1118,20 @@ compatibility.
 When the <dfn method for=FileReader id="dfn-abort">abort()</dfn> method is called,
 the user agent must run the steps below:
 
-1. If [=context object=]'s [=FileReader/state=] is `"empty"`
-   or if [=context object=]'s [=FileReader/state=] is `"done"`
-   set [=context object=]'s [=FileReader/result=] to `null`
+1. If [=this=]'s [=FileReader/state=] is `"empty"`
+   or if [=this=]'s [=FileReader/state=] is `"done"`
+   set [=this=]'s [=FileReader/result=] to `null`
    and [=terminate this algorithm=].
-1. If [=context object=]'s [=FileReader/state=] is `"loading"`
-   set [=context object=]'s [=FileReader/state=] to `"done"`
-   and set [=context object=]'s [=FileReader/result=] to `null`.
-1. If there are any [=tasks=] from the [=context object=]
+1. If [=this=]'s [=FileReader/state=] is `"loading"`
+   set [=this=]'s [=FileReader/state=] to `"done"`
+   and set [=this=]'s [=FileReader/result=] to `null`.
+1. If there are any [=tasks=] from [=this=]
    on the [=file reading task source=] in an affiliated [=queue a task|task queue=],
    then remove those [=tasks=] from that task queue.
 1. [=terminate an algorithm|Terminate the algorithm=] for the [=read method=] being processed.
-1. [=Fire a progress event=] called {{abort}} at the [=context object=].
-1. If [=context object=]'s [=FileReader/state=] is not `"loading"`,
-   [=fire a progress event=] called {{loadend}} at the [=context object=].
+1. [=Fire a progress event=] called {{abort}} at [=this=].
+1. If [=this=]'s [=FileReader/state=] is not `"loading"`,
+   [=fire a progress event=] called {{loadend}} at [=this=].
 
 ## Packaging data ## {#packaging-data}
 
@@ -1187,7 +1183,7 @@ The {{FileReader}} object must be the event target for all events in this specif
 
 When this specification says to <dfn>fire a progress event</dfn> <i>called e</i>
 (for some {{ProgressEvent}} <code>e</code>
-at a given {{FileReader}} <code>reader</code> as the <a>context object</a>),
+at a given {{FileReader}} <code>reader</code> as <a>this</a>),
 the following are normative:
 
 * The progress event <code>e</code> does not bubble.  <code>e.bubbles</code> must be false [[DOM]]
