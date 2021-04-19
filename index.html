@@ -3,13 +3,13 @@
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <title>File API</title>
-  <meta content="Bikeshed version 65c8882a, updated Fri Aug 14 17:43:28 2020 -0700" name="generator">
+  <meta content="Bikeshed version c6f50773a, updated Fri Apr 16 16:45:47 2021 -0700" name="generator">
   <link href="https://www.w3.org/TR/FileAPI/" rel="canonical">
-  <meta content="37c477b0673c746e139cb5736fd1b0ee973c25a7" name="document-revision">
+  <meta content="90d7bc7d4dcff2438215a52234a8371a1af30a7f" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
-    color: #005a9c;
+    color: var(--a-normal-text);
     font-size: inherit;
     font-family: inherit;
 }
@@ -99,6 +99,10 @@ figcaption:not(.no-marker)::before {
 }</style>
 <style>/* style-dfn-panel */
 
+:root {
+    --dfnpanel-bg: #ddd;
+    --dfnpanel-text: var(--text);
+}
 .dfn-panel {
     position: absolute;
     z-index: 35;
@@ -110,14 +114,14 @@ figcaption:not(.no-marker)::before {
     overflow: auto;
     padding: 0.5em 0.75em;
     font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
-    background: #DDDDDD;
-    color: black;
+    background: var(--dfnpanel-bg);
+    color: var(--dfnpanel-text);
     border: outset 0.2em;
 }
 .dfn-panel:not(.on) { display: none; }
 .dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
 .dfn-panel > b { display: block; }
-.dfn-panel a { color: black; }
+.dfn-panel a { color: var(--dfnpanel-text); }
 .dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
 .dfn-panel > b + b { margin-top: 0.25em; }
 .dfn-panel ul { padding: 0; }
@@ -202,6 +206,11 @@ figcaption:not(.no-marker)::before {
             </style>
 <style>/* style-selflinks */
 
+:root {
+    --selflink-text: white;
+    --selflink-bg: gray;
+    --selflink-hover-text: black;
+}
 .heading, .issue, .note, .example, li, dt {
     position: relative;
 }
@@ -231,8 +240,8 @@ dfn > a.self-link {
     opacity: 0;
     width: 1.5em;
     height: 1.5em;
-    background: gray;
-    color: white;
+    background: var(--selflink-bg);
+    color: var(--selflink-text);
     font-style: normal;
     transition: opacity .2s, background-color .2s, color .2s;
 }
@@ -240,17 +249,23 @@ dfn:hover > a.self-link {
     opacity: 1;
 }
 dfn > a.self-link:hover {
-    color: black;
+    color: var(--selflink-hover-text);
 }
 
 a.self-link::before            { content: "¶"; }
 .heading > a.self-link::before { content: "§"; }
-dfn > a.self-link::before      { content: "#"; }</style>
+dfn > a.self-link::before      { content: "#"; }
+</style>
 <style>/* style-syntax-highlighting */
-pre.idl.highlight { color: #708090; }
-.highlight:not(.idl) { background: hsl(24, 20%, 95%); }
+
+            pre.idl.highlight {
+                background: var(--borderedblock-bg, var(--def-bg));
+            }
+            
 code.highlight { padding: .1em; border-radius: .3em; }
 pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
+
+.highlight:not(.idl) { background: rgba(0, 0, 0, .03); }
 c-[a] { color: #990055 } /* Keyword.Declaration */
 c-[b] { color: #990055 } /* Keyword.Type */
 c-[c] { color: #708090 } /* Comment */
@@ -320,7 +335,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">File API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2020-08-18">18 August 2020</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2021-04-19">19 April 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -341,7 +356,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     </dl>
    </div>
    <div data-fill-with="warning"></div>
-   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2020 <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="https://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="https://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="https://www.keio.ac.jp/">Keio</a>, <a href="https://ev.buaa.edu.cn/">Beihang</a>). W3C <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document" rel="license">permissive document license</a> rules apply. </p>
+   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2021 <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="https://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="https://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="https://www.keio.ac.jp/">Keio</a>, <a href="https://ev.buaa.edu.cn/">Beihang</a>). W3C <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document" rel="license">permissive document license</a> rules apply. </p>
    <hr title="Separator for header">
   </div>
   <div class="p-summary" data-fill-with="abstract">
@@ -384,8 +399,8 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <p> Publication as an Editors Draft does not imply endorsement by the <abbr title="World Wide Web Consortium">W3C</abbr> Membership. This is a draft document and may
     be updated, replaced or obsoleted by other documents at any time. It is inappropriate to cite
     this document as other than work in progress. </p>
-   <p> This document was produced by a group operating under the <a href="https://www.w3.org/Consortium/Patent-Policy/"><abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>. <abbr title="World Wide Web Consortium">W3C</abbr> maintains a <a href="https://www.w3.org/2004/01/pp-impl/114929/status" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group; that page also includes instructions for disclosing a patent. An individual who has actual knowledge of a patent which the individual believes contains <a href="https://www.w3.org/Consortium/Patent-Policy/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="https://www.w3.org/Consortium/Patent-Policy/#sec-Disclosure">section 6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>. </p>
-   <p>This document is governed by the <a href="https://www.w3.org/2019/Process-20190301/" id="w3c_process_revision">1 March 2019 W3C Process Document</a>. </p>
+   <p> This document was produced by a group operating under the <a href="https://www.w3.org/Consortium/Patent-Policy-20200915/"><abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>. <abbr title="World Wide Web Consortium">W3C</abbr> maintains a <a href="https://www.w3.org/2004/01/pp-impl/114929/status" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group; that page also includes instructions for disclosing a patent. An individual who has actual knowledge of a patent which the individual believes contains <a href="https://www.w3.org/Consortium/Patent-Policy-20200915/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="https://www.w3.org/Consortium/Patent-Policy-20200915/#sec-Disclosure">section 6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>. </p>
+   <p>This document is governed by the <a href="https://www.w3.org/2020/Process-20200915/" id="w3c_process_revision">15 September 2020 W3C Process Document</a>. </p>
   </div>
   <div data-fill-with="at-risk"></div>
   <nav data-fill-with="table-of-contents" id="toc">
@@ -545,7 +560,7 @@ An example will be illustrative.</p>
 <pre class="highlight"><c- a>function</c-> startRead<c- p>()</c-> <c- p>{</c->
   <c- c1>// obtain input element through DOM</c->
 
-  <c- a>var</c-> file <c- o>=</c-> document<c- p>.</c->getElementById<c- p>(</c-><c- t>'file'</c-><c- p>).</c->files<c- p>[</c-><c- mi>0</c-><c- p>];</c->
+  <c- a>var</c-> file <c- o>=</c-> document<c- p>.</c->getElementById<c- p>(</c-><c- t>'file'</c-><c- p>).</c->files<c- p>[</c-><c- mf>0</c-><c- p>];</c->
   <c- k>if</c-><c- p>(</c->file<c- p>){</c->
     getAsText<c- p>(</c->file<c- p>);</c->
   <c- p>}</c->
@@ -568,7 +583,7 @@ An example will be illustrative.</p>
   <c- k>if</c-> <c- p>(</c->evt<c- p>.</c->lengthComputable<c- p>)</c-> <c- p>{</c->
     <c- c1>// evt.loaded and evt.total are ProgressEvent properties</c->
     <c- a>var</c-> loaded <c- o>=</c-> <c- p>(</c->evt<c- p>.</c->loaded <c- o>/</c-> evt<c- p>.</c->total<c- p>);</c->
-    <c- k>if</c-> <c- p>(</c->loaded <c- o>&lt;</c-> <c- mi>1</c-><c- p>)</c-> <c- p>{</c->
+    <c- k>if</c-> <c- p>(</c->loaded <c- o>&lt;</c-> <c- mf>1</c-><c- p>)</c-> <c- p>{</c->
       <c- c1>// Increase the prog bar length</c->
       <c- c1>// style.width = (loaded * 200) + "px";</c->
     <c- p>}</c->
@@ -644,31 +659,31 @@ if any such underlying storage exists.
 Further normative definition of <a data-link-type="dfn" href="#snapshot-state" id="ref-for-snapshot-state">snapshot state</a> can be found for <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file⑥">File</a></code>s.</p>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable" id="ref-for-serializable"><c- g>Serializable</c-></a>]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="dfn-Blob"><code><c- g>Blob</c-></code></dfn> {
-  <dfn class="dfn-paneled idl-code" data-dfn-for="Blob" data-dfn-type="constructor" data-export data-lt="Blob(blobParts, options)|constructor(blobParts, options)|Blob(blobParts)|constructor(blobParts)|Blob()|constructor()" id="dom-blob-blob"><code><c- g>constructor</c-></code></dfn>(<c- b>optional</c-> <c- b>sequence</c->&lt;<a class="n" data-link-type="idl-name" href="#typedefdef-blobpart" id="ref-for-typedefdef-blobpart"><c- n>BlobPart</c-></a>> <a class="idl-code" data-link-type="argument" href="#dfn-blobParts" id="ref-for-dfn-blobParts"><c- g>blobParts</c-></a>,
-              <c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag"><c- n>BlobPropertyBag</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Blob/Blob(blobParts, options), Blob/constructor(blobParts, options), Blob/Blob(blobParts), Blob/constructor(blobParts), Blob/Blob(), Blob/constructor()" data-dfn-type="argument" data-export id="dom-blob-blob-blobparts-options-options"><code><c- g>options</c-></code></dfn> = {});
+  <dfn class="dfn-paneled idl-code" data-dfn-for="Blob" data-dfn-type="constructor" data-export data-lt="Blob(blobParts, options)|constructor(blobParts, options)|Blob(blobParts)|constructor(blobParts)|Blob()|constructor()" id="dom-blob-blob"><code><c- g>constructor</c-></code></dfn>(<c- b>optional</c-> <a data-link-type="dfn" href="https://heycam.github.io/webidl/#idl-sequence" id="ref-for-idl-sequence"><c- b>sequence</c-></a>&lt;<a data-link-type="idl-name" href="#typedefdef-blobpart" id="ref-for-typedefdef-blobpart"><c- n>BlobPart</c-></a>> <a class="idl-code" data-link-type="argument" href="#dfn-blobParts" id="ref-for-dfn-blobParts"><c- g>blobParts</c-></a>,
+              <c- b>optional</c-> <a data-link-type="idl-name" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag"><c- n>BlobPropertyBag</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Blob/Blob(blobParts, options), Blob/constructor(blobParts, options), Blob/Blob(blobParts), Blob/constructor(blobParts), Blob/Blob(), Blob/constructor()" data-dfn-type="argument" data-export id="dom-blob-blob-blobparts-options-options"><code><c- g>options</c-></code></dfn> = {});
 
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long-long" id="ref-for-idl-unsigned-long-long"><c- b>unsigned</c-> <c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="unsigned long long" href="#dfn-size" id="ref-for-dfn-size①"><c- g>size</c-></a>;
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMString" href="#dfn-type" id="ref-for-dfn-type①"><c- g>type</c-></a>;
 
   // slice Blob into byte-ranged chunks
-  <a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob①⓪"><c- n>Blob</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-slice" id="ref-for-dfn-slice"><c- g>slice</c-></a>(<c- b>optional</c-> [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Clamp" id="ref-for-Clamp"><c- g>Clamp</c-></a>] <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long" id="ref-for-idl-long-long"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-start" id="ref-for-dfn-start"><c- g>start</c-></a>,
+  <a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob①⓪"><c- n>Blob</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-slice" id="ref-for-dfn-slice"><c- g>slice</c-></a>(<c- b>optional</c-> [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Clamp" id="ref-for-Clamp"><c- g>Clamp</c-></a>] <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long" id="ref-for-idl-long-long"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-start" id="ref-for-dfn-start"><c- g>start</c-></a>,
             <c- b>optional</c-> [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Clamp" id="ref-for-Clamp①"><c- g>Clamp</c-></a>] <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long" id="ref-for-idl-long-long①"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-end" id="ref-for-dfn-end"><c- g>end</c-></a>,
             <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-contentTypeBlob" id="ref-for-dfn-contentTypeBlob"><c- g>contentType</c-></a>);
 
   // read from the Blob.
-  [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NewObject" id="ref-for-NewObject"><c- g>NewObject</c-></a>] <a class="n" data-link-type="idl-name"><c- n>ReadableStream</c-></a> <a class="idl-code" data-link-type="method" href="#dom-blob-stream" id="ref-for-dom-blob-stream"><c- g>stream</c-></a>();
-  [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NewObject" id="ref-for-NewObject①"><c- g>NewObject</c-></a>] <c- b>Promise</c->&lt;<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString"><c- b>USVString</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-blob-text" id="ref-for-dom-blob-text"><c- g>text</c-></a>();
-  [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NewObject" id="ref-for-NewObject②"><c- g>NewObject</c-></a>] <c- b>Promise</c->&lt;<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer"><c- b>ArrayBuffer</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-blob-arraybuffer" id="ref-for-dom-blob-arraybuffer"><c- g>arrayBuffer</c-></a>();
+  [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NewObject" id="ref-for-NewObject"><c- g>NewObject</c-></a>] <a data-link-type="idl-name"><c- n>ReadableStream</c-></a> <a class="idl-code" data-link-type="method" href="#dom-blob-stream" id="ref-for-dom-blob-stream"><c- g>stream</c-></a>();
+  [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NewObject" id="ref-for-NewObject①"><c- g>NewObject</c-></a>] <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-promise" id="ref-for-idl-promise"><c- b>Promise</c-></a>&lt;<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString"><c- b>USVString</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-blob-text" id="ref-for-dom-blob-text"><c- g>text</c-></a>();
+  [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NewObject" id="ref-for-NewObject②"><c- g>NewObject</c-></a>] <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-promise" id="ref-for-idl-promise①"><c- b>Promise</c-></a>&lt;<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer"><c- b>ArrayBuffer</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-blob-arraybuffer" id="ref-for-dom-blob-arraybuffer"><c- g>arrayBuffer</c-></a>();
 };
 
 <c- b>enum</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="enum" data-export id="enumdef-endingtype"><code><c- g>EndingType</c-></code></dfn> { <dfn class="dfn-paneled idl-code" data-dfn-for="EndingType" data-dfn-type="enum-value" data-export id="dom-endingtype-transparent"><code><c- s>"transparent"</c-></code></dfn>, <dfn class="dfn-paneled idl-code" data-dfn-for="EndingType" data-dfn-type="enum-value" data-export id="dom-endingtype-native"><code><c- s>"native"</c-></code></dfn> };
 
 <c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dfn-BlobPropertyBag"><code><c- g>BlobPropertyBag</c-></code></dfn> {
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString②"><c- b>DOMString</c-></a> <a class="idl-code" data-default="&quot;&quot;" data-link-type="dict-member" data-type="DOMString " href="#dfn-BPtype" id="ref-for-dfn-BPtype"><c- g>type</c-></a> = "";
-  <a class="n" data-link-type="idl-name" href="#enumdef-endingtype" id="ref-for-enumdef-endingtype"><c- n>EndingType</c-></a> <a class="idl-code" data-default="&quot;transparent&quot;" data-link-type="dict-member" data-type="EndingType " href="#dom-blobpropertybag-endings" id="ref-for-dom-blobpropertybag-endings"><c- g>endings</c-></a> = "transparent";
+  <a data-link-type="idl-name" href="#enumdef-endingtype" id="ref-for-enumdef-endingtype"><c- n>EndingType</c-></a> <a class="idl-code" data-default="&quot;transparent&quot;" data-link-type="dict-member" data-type="EndingType " href="#dom-blobpropertybag-endings" id="ref-for-dom-blobpropertybag-endings"><c- g>endings</c-></a> = "transparent";
 };
 
-<c- b>typedef</c-> (<a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#BufferSource" id="ref-for-BufferSource"><c- n>BufferSource</c-></a> <c- b>or</c-> <a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob①①"><c- n>Blob</c-></a> <c- b>or</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString①"><c- b>USVString</c-></a>) <dfn class="dfn-paneled idl-code" data-dfn-type="typedef" data-export id="typedefdef-blobpart"><code><c- g>BlobPart</c-></code></dfn>;
+<c- b>typedef</c-> (<a data-link-type="idl-name" href="https://heycam.github.io/webidl/#BufferSource" id="ref-for-BufferSource"><c- n>BufferSource</c-></a> <c- b>or</c-> <a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob①①"><c- n>Blob</c-></a> <c- b>or</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString①"><c- b>USVString</c-></a>) <dfn class="dfn-paneled idl-code" data-dfn-type="typedef" data-export id="typedefdef-blobpart"><code><c- g>BlobPart</c-></code></dfn>;
 </pre>
    <p><code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob①②">Blob</a></code> objects are <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable-objects" id="ref-for-serializable-objects">serializable objects</a>. Their <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/structured-data.html#serialization-steps" id="ref-for-serialization-steps">serialization steps</a>,
 given <var>value</var> and <var>serialized</var>, are:</p>
@@ -690,7 +705,7 @@ given <var>value</var> and <var>serialized</var>, are:</p>
 which runs these steps: 
     <ol>
      <li data-md>
-      <p>Let <var>stream</var> be the result of <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-construct-readablestream" id="ref-for-concept-construct-readablestream">constructing</a> a <code class="idl"><a data-link-type="idl">ReadableStream</a></code> object.</p>
+      <p>Let <var>stream</var> be the result of <a data-link-type="dfn">constructing</a> a <code class="idl"><a data-link-type="idl">ReadableStream</a></code> object.</p>
      <li data-md>
       <p>Run the following steps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-in-parallel">in parallel</a>:</p>
       <ol>
@@ -700,10 +715,10 @@ which runs these steps:
          <li data-md>
           <p>Let <var>bytes</var> be the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte-sequence" id="ref-for-byte-sequence">byte sequence</a> that results from reading a <a data-link-type="dfn" href="https://streams.spec.whatwg.org/#chunk" id="ref-for-chunk">chunk</a> from <var>blob</var>.</p>
          <li data-md>
-          <p>If a <a data-link-type="dfn" href="#file-error-read" id="ref-for-file-error-read">file read error</a> occured while reading <var>bytes</var>, <a data-link-type="abstract-op" href="https://fetch.spec.whatwg.org/#concept-error-readablestream" id="ref-for-concept-error-readablestream">error</a> <var>stream</var> with a <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason">failure reason</a> and abort these steps.</p>
+          <p>If a <a data-link-type="dfn" href="#file-error-read" id="ref-for-file-error-read">file read error</a> occured while reading <var>bytes</var>, <a data-link-type="abstract-op">error</a> <var>stream</var> with a <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason">failure reason</a> and abort these steps.</p>
          <li data-md>
-          <p><a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-enqueue-readablestream" id="ref-for-concept-enqueue-readablestream">Enqueue</a> a <code>Uint8Array</code> object wrapping an <code>ArrayBuffer</code> containing <var>bytes</var> into <var>stream</var>.
- If that threw an exception, <a data-link-type="abstract-op" href="https://fetch.spec.whatwg.org/#concept-error-readablestream" id="ref-for-concept-error-readablestream①">error</a> <var>stream</var> with that exception
+          <p><a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestream-enqueue" id="ref-for-readablestream-enqueue">Enqueue</a> a <code>Uint8Array</code> object wrapping an <code>ArrayBuffer</code> containing <var>bytes</var> into <var>stream</var>.
+ If that threw an exception, <a data-link-type="abstract-op">error</a> <var>stream</var> with that exception
  and abort these steps.</p>
         </ol>
         <p class="issue" id="issue-27e70e89"><a class="self-link" href="#issue-27e70e89"></a> We need to specify more concretely what reading from a Blob actually does,
@@ -880,11 +895,11 @@ from <var>s</var> given <var>position</var>.</p>
 <c- c1>// Create a 1024-byte ArrayBuffer</c->
 <c- c1>// buffer could also come from reading a File</c->
 
-<c- a>var</c-> buffer <c- o>=</c-> <c- k>new</c-> ArrayBuffer<c- p>(</c-><c- mi>1024</c-><c- p>);</c->
+<c- a>var</c-> buffer <c- o>=</c-> <c- k>new</c-> ArrayBuffer<c- p>(</c-><c- mf>1024</c-><c- p>);</c->
 
 <c- c1>// Create ArrayBufferView objects based on buffer</c->
 
-<c- a>var</c-> shorts <c- o>=</c-> <c- k>new</c-> Uint16Array<c- p>(</c->buffer<c- p>,</c-> <c- mi>512</c-><c- p>,</c-> <c- mi>128</c-><c- p>);</c->
+<c- a>var</c-> shorts <c- o>=</c-> <c- k>new</c-> Uint16Array<c- p>(</c->buffer<c- p>,</c-> <c- mf>512</c-><c- p>,</c-> <c- mf>128</c-><c- p>);</c->
 <c- a>var</c-> bytes <c- o>=</c-> <c- k>new</c-> Uint8Array<c- p>(</c->buffer<c- p>,</c-> shorts<c- p>.</c->byteOffset <c- o>+</c-> shorts<c- p>.</c->byteLength<c- p>);</c->
 
 <c- a>var</c-> b <c- o>=</c-> <c- k>new</c-> Blob<c- p>([</c-><c- u>"foobarbazetcetc"</c-> <c- o>+</c-> <c- u>"birdiebirdieboo"</c-><c- p>],</c-> <c- p>{</c->type<c- o>:</c-> <c- u>"text/plain;charset=utf-8"</c-><c- p>});</c->
@@ -911,7 +926,7 @@ from <var>s</var> given <var>position</var>.</p>
         <hr>
         <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>10+</span></span>
         <hr>
-        <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+        <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
        </div>
       </div>
      </div>
@@ -932,20 +947,20 @@ from <var>s</var> given <var>position</var>.</p>
         <hr>
         <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>10+</span></span>
         <hr>
-        <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+        <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
        </div>
       </div>
       <div class="feature">
        <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/File/type" title="Returns the media type (MIME) of the file represented by a File object.">File/type</a></p>
        <p class="all-engines-text">In all current engines.</p>
        <div class="support">
-        <span class="firefox yes"><span>Firefox</span><span>3.6+</span></span><span class="safari yes"><span>Safari</span><span>Yes</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
+        <span class="firefox yes"><span>Firefox</span><span>3.6+</span></span><span class="safari yes"><span>Safari</span><span>6.1+</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
         <hr>
         <span class="opera yes"><span>Opera</span><span>16+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
         <hr>
         <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>10+</span></span>
         <hr>
-        <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>Yes</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+        <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>7+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
        </div>
       </div>
      </div>
@@ -983,7 +998,7 @@ from <var>s</var> given <var>position</var>.</p>
       <hr>
       <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>10+</span></span>
       <hr>
-      <span class="firefox_android yes"><span>Firefox for Android</span><span>14+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>Yes</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>25+</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.5+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>Yes</span></span>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>14+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>Yes</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>25+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.5+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>Yes</span></span>
      </div>
     </div>
    </div>
@@ -1047,27 +1062,27 @@ then set <var>relativeContentType</var> to the empty string and return from thes
     <a class="self-link" href="#example-0ffe45c5"></a> The examples below illustrate the different types of <code class="idl"><a data-link-type="idl" href="#dfn-slice" id="ref-for-dfn-slice⑨">slice()</a></code> calls possible. Since the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file⑦">File</a></code> interface inherits from the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob③⓪">Blob</a></code> interface, examples are based on the use of the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file⑧">File</a></code> interface. 
 <pre class="lang-javascript highlight"><c- c1>// obtain input element through DOM</c->
 
-<c- a>var</c-> file <c- o>=</c-> document<c- p>.</c->getElementById<c- p>(</c-><c- t>'file'</c-><c- p>).</c->files<c- p>[</c-><c- mi>0</c-><c- p>];</c->
+<c- a>var</c-> file <c- o>=</c-> document<c- p>.</c->getElementById<c- p>(</c-><c- t>'file'</c-><c- p>).</c->files<c- p>[</c-><c- mf>0</c-><c- p>];</c->
 <c- k>if</c-><c- p>(</c->file<c- p>)</c->
 <c- p>{</c->
   <c- c1>// create an identical copy of file</c->
   <c- c1>// the two calls below are equivalent</c->
 
   <c- a>var</c-> fileClone <c- o>=</c-> file<c- p>.</c->slice<c- p>();</c->
-  <c- a>var</c-> fileClone2 <c- o>=</c-> file<c- p>.</c->slice<c- p>(</c-><c- mi>0</c-><c- p>,</c-> file<c- p>.</c->size<c- p>);</c->
+  <c- a>var</c-> fileClone2 <c- o>=</c-> file<c- p>.</c->slice<c- p>(</c-><c- mf>0</c-><c- p>,</c-> file<c- p>.</c->size<c- p>);</c->
 
   <c- c1>// slice file into 1/2 chunk starting at middle of file</c->
   <c- c1>// Note the use of negative number</c->
 
-  <c- a>var</c-> fileChunkFromEnd <c- o>=</c-> file<c- p>.</c->slice<c- p>(</c-><c- o>-</c-><c- p>(</c->Math<c- p>.</c->round<c- p>(</c->file<c- p>.</c->size<c- o>/</c-><c- mi>2</c-><c- p>)));</c->
+  <c- a>var</c-> fileChunkFromEnd <c- o>=</c-> file<c- p>.</c->slice<c- p>(</c-><c- o>-</c-><c- p>(</c->Math<c- p>.</c->round<c- p>(</c->file<c- p>.</c->size<c- o>/</c-><c- mf>2</c-><c- p>)));</c->
 
   <c- c1>// slice file into 1/2 chunk starting at beginning of file</c->
 
-  <c- a>var</c-> fileChunkFromStart <c- o>=</c-> file<c- p>.</c->slice<c- p>(</c-><c- mi>0</c-><c- p>,</c-> Math<c- p>.</c->round<c- p>(</c->file<c- p>.</c->size<c- o>/</c-><c- mi>2</c-><c- p>));</c->
+  <c- a>var</c-> fileChunkFromStart <c- o>=</c-> file<c- p>.</c->slice<c- p>(</c-><c- mf>0</c-><c- p>,</c-> Math<c- p>.</c->round<c- p>(</c->file<c- p>.</c->size<c- o>/</c-><c- mf>2</c-><c- p>));</c->
 
   <c- c1>// slice file from beginning till 150 bytes before end</c->
 
-  <c- a>var</c-> fileNoMetadata <c- o>=</c-> file<c- p>.</c->slice<c- p>(</c-><c- mi>0</c-><c- p>,</c-> <c- o>-</c-><c- mi>150</c-><c- p>,</c-> <c- u>"application/experimental"</c-><c- p>);</c->
+  <c- a>var</c-> fileNoMetadata <c- o>=</c-> file<c- p>.</c->slice<c- p>(</c-><c- mf>0</c-><c- p>,</c-> <c- o>-</c-><c- mf>150</c-><c- p>,</c-> <c- u>"application/experimental"</c-><c- p>);</c->
 <c- p>}</c->
 </pre>
    </div>
@@ -1097,7 +1112,7 @@ the result of calling <a data-link-type="dfn" href="#blob-get-stream" id="ref-fo
      <div class="support">
       <span class="firefox yes"><span>Firefox</span><span>69+</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>76+</span></span>
       <hr>
-      <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <span class="opera yes"><span>Opera</span><span>63+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
       <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
@@ -1110,10 +1125,10 @@ the result of calling <a data-link-type="dfn" href="#blob-get-stream" id="ref-fo
     <li data-md>
      <p>Let <var>stream</var> be the result of calling <a data-link-type="dfn" href="#blob-get-stream" id="ref-for-blob-get-stream①">get stream</a> on the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object" id="ref-for-context-object②">context object</a>.</p>
     <li data-md>
-     <p>Let <var>reader</var> be the result of <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-get-reader" id="ref-for-concept-get-reader">getting a reader</a> from <var>stream</var>.
+     <p>Let <var>reader</var> be the result of <a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestream-get-a-reader" id="ref-for-readablestream-get-a-reader">getting a reader</a> from <var>stream</var>.
  If that threw an exception, return a new promise rejected with that exception.</p>
     <li data-md>
-     <p>Let <var>promise</var> be the result of <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-read-all-bytes-from-readablestream" id="ref-for-concept-read-all-bytes-from-readablestream">reading all bytes</a> from <var>stream</var> with <var>reader</var>.</p>
+     <p>Let <var>promise</var> be the result of <a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestreamdefaultreader-read-all-bytes" id="ref-for-readablestreamdefaultreader-read-all-bytes">reading all bytes</a> from <var>stream</var> with <var>reader</var>.</p>
     <li data-md>
      <p>Return the result of transforming <var>promise</var> by a fulfillment handler that returns the result of
  running <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-decode" id="ref-for-utf-8-decode">UTF-8 decode</a> on its first argument.</p>
@@ -1124,17 +1139,18 @@ use UTF-8 as encoding, while <code class="idl"><a data-link-type="idl" href="#df
 the blob’s type and passed in encoding name.</p>
    <h4 class="heading settled" data-level="3.3.4" id="arraybuffer-method-algo"><span class="secno">3.3.4. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#dom-blob-arraybuffer" id="ref-for-dom-blob-arraybuffer①">arrayBuffer()</a></code> method</span><a class="self-link" href="#arraybuffer-method-algo"></a></h4>
    <div class="mdn-anno wrapped">
-    <button class="mdn-anno-btn"><span>MDN</span></button>
+    <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
     <div class="feature">
      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob/arrayBuffer" title="The arrayBuffer() method in the Blob interface returns a Promise that resolves with the contents of the blob as binary data contained in an ArrayBuffer.">Blob/arrayBuffer</a></p>
+     <p class="all-engines-text">In all current engines.</p>
      <div class="support">
-      <span class="firefox yes"><span>Firefox</span><span>69+</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>76+</span></span>
+      <span class="firefox yes"><span>Firefox</span><span>69+</span></span><span class="safari yes"><span>Safari</span><span>14+</span></span><span class="chrome yes"><span>Chrome</span><span>76+</span></span>
       <hr>
       <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
       <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>76+</span></span><span class="webview_android yes"><span>Android WebView</span><span>76+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>12.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>54+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>14+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>76+</span></span><span class="webview_android yes"><span>Android WebView</span><span>76+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>12.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>54+</span></span>
      </div>
     </div>
    </div>
@@ -1143,10 +1159,10 @@ the blob’s type and passed in encoding name.</p>
     <li data-md>
      <p>Let <var>stream</var> be the result of calling <a data-link-type="dfn" href="#blob-get-stream" id="ref-for-blob-get-stream②">get stream</a> on the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object" id="ref-for-context-object③">context object</a>.</p>
     <li data-md>
-     <p>Let <var>reader</var> be the result of <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-get-reader" id="ref-for-concept-get-reader①">getting a reader</a> from <var>stream</var>.
+     <p>Let <var>reader</var> be the result of <a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestream-get-a-reader" id="ref-for-readablestream-get-a-reader①">getting a reader</a> from <var>stream</var>.
  If that threw an exception, return a new promise rejected with that exception.</p>
     <li data-md>
-     <p>Let <var>promise</var> be the result of <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-read-all-bytes-from-readablestream" id="ref-for-concept-read-all-bytes-from-readablestream①">reading all bytes</a> from <var>stream</var> with <var>reader</var>.</p>
+     <p>Let <var>promise</var> be the result of <a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestreamdefaultreader-read-all-bytes" id="ref-for-readablestreamdefaultreader-read-all-bytes①">reading all bytes</a> from <var>stream</var> with <var>reader</var>.</p>
     <li data-md>
      <p>Return the result of transforming <var>promise</var> by a fulfillment handler that returns
  a new <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer①">ArrayBuffer</a></code> whose contents are its first argument.</p>
@@ -1158,13 +1174,13 @@ the blob’s type and passed in encoding name.</p>
      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/File" title="The File interface provides information about files and allows JavaScript in a web page to access their content.">File</a></p>
      <p class="all-engines-text">In all current engines.</p>
      <div class="support">
-      <span class="firefox yes"><span>Firefox</span><span>7+</span></span><span class="safari yes"><span>Safari</span><span>6+</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
+      <span class="firefox yes"><span>Firefox</span><span>7+</span></span><span class="safari yes"><span>Safari</span><span>4+</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
       <hr>
       <span class="opera yes"><span>Opera</span><span>11.5+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
       <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>10+</span></span>
       <hr>
-      <span class="firefox_android yes"><span>Firefox for Android</span><span>7+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>6+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>11.5+</span></span>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>7+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>3.2+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>11.5+</span></span>
      </div>
     </div>
    </div>
@@ -1196,15 +1212,15 @@ or the empty string – 0 bytes – if the type cannot be determined.</p>
 including statistical methods.</p>
    </ul>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed①"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable" id="ref-for-serializable①"><c- g>Serializable</c-></a>]
-<c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="dfn-file"><code><c- g>File</c-></code></dfn> : <a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③②"><c- n>Blob</c-></a> {
-  <dfn class="dfn-paneled idl-code" data-dfn-for="File" data-dfn-type="constructor" data-export data-lt="File(fileBits, fileName, options)|constructor(fileBits, fileName, options)|File(fileBits, fileName)|constructor(fileBits, fileName)" id="dom-file-file"><code><c- g>constructor</c-></code></dfn>(<c- b>sequence</c->&lt;<a class="n" data-link-type="idl-name" href="#typedefdef-blobpart" id="ref-for-typedefdef-blobpart②"><c- n>BlobPart</c-></a>> <a class="idl-code" data-link-type="argument" href="#dfn-fileBits" id="ref-for-dfn-fileBits"><c- g>fileBits</c-></a>,
+<c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="dfn-file"><code><c- g>File</c-></code></dfn> : <a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③②"><c- n>Blob</c-></a> {
+  <dfn class="dfn-paneled idl-code" data-dfn-for="File" data-dfn-type="constructor" data-export data-lt="File(fileBits, fileName, options)|constructor(fileBits, fileName, options)|File(fileBits, fileName)|constructor(fileBits, fileName)" id="dom-file-file"><code><c- g>constructor</c-></code></dfn>(<a data-link-type="dfn" href="https://heycam.github.io/webidl/#idl-sequence" id="ref-for-idl-sequence①"><c- b>sequence</c-></a>&lt;<a data-link-type="idl-name" href="#typedefdef-blobpart" id="ref-for-typedefdef-blobpart②"><c- n>BlobPart</c-></a>> <a class="idl-code" data-link-type="argument" href="#dfn-fileBits" id="ref-for-dfn-fileBits"><c- g>fileBits</c-></a>,
               <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑤"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-fileName" id="ref-for-dfn-fileName"><c- g>fileName</c-></a>,
-              <c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dfn-FilePropertyBag" id="ref-for-dfn-FilePropertyBag"><c- n>FilePropertyBag</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="File/File(fileBits, fileName, options), File/constructor(fileBits, fileName, options), File/File(fileBits, fileName), File/constructor(fileBits, fileName)" data-dfn-type="argument" data-export id="dom-file-file-filebits-filename-options-options"><code><c- g>options</c-></code></dfn> = {});
+              <c- b>optional</c-> <a data-link-type="idl-name" href="#dfn-FilePropertyBag" id="ref-for-dfn-FilePropertyBag"><c- n>FilePropertyBag</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="File/File(fileBits, fileName, options), File/constructor(fileBits, fileName, options), File/File(fileBits, fileName), File/constructor(fileBits, fileName)" data-dfn-type="argument" data-export id="dom-file-file-filebits-filename-options-options"><code><c- g>options</c-></code></dfn> = {});
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString④"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMString" href="#dfn-name" id="ref-for-dfn-name①"><c- g>name</c-></a>;
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long" id="ref-for-idl-long-long②"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="long long" href="#dfn-lastModified" id="ref-for-dfn-lastModified"><c- g>lastModified</c-></a>;
 };
 
-<c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dfn-FilePropertyBag"><code><c- g>FilePropertyBag</c-></code></dfn> : <a class="n" data-link-type="idl-name" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag③"><c- n>BlobPropertyBag</c-></a> {
+<c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dfn-FilePropertyBag"><code><c- g>FilePropertyBag</c-></code></dfn> : <a data-link-type="idl-name" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag③"><c- n>BlobPropertyBag</c-></a> {
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long" id="ref-for-idl-long-long③"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="long long " href="#dfn-FPdate" id="ref-for-dfn-FPdate"><c- g>lastModified</c-></a>;
 };
 </pre>
@@ -1322,20 +1338,20 @@ normative conditions for this member are provided in <a href="#file-constructor"
       <hr>
       <span class="edge yes"><span>Edge (Legacy)</span><span>18</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>10+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>10+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
      </div>
     </div>
     <div class="feature">
      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/File/name" title="Returns the name of the file represented by a File object. For security reasons, the path is excluded from this property.">File/name</a></p>
      <p class="all-engines-text">In all current engines.</p>
      <div class="support">
-      <span class="firefox yes"><span>Firefox</span><span>3.6+</span></span><span class="safari yes"><span>Safari</span><span>Yes</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
+      <span class="firefox yes"><span>Firefox</span><span>3.6+</span></span><span class="safari yes"><span>Safari</span><span>6.1+</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
       <hr>
       <span class="opera yes"><span>Opera</span><span>16+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
       <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>10+</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>4+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>7+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
      </div>
     </div>
    </div>
@@ -1371,7 +1387,7 @@ if using a <code class="idl"><a data-link-type="idl" href="#dfn-FileReaderSync" 
 with the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-filereader-error" id="ref-for-dom-filereader-error">error</a></code> attribute returning a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notfounderror" id="ref-for-notfounderror①">NotFoundError</a></code>.</p>
    <div class="example" id="example-c4014f19">
     <a class="self-link" href="#example-c4014f19"></a> In the examples below, metadata from a file object is displayed meaningfully, and a file object is created with a name and a last modified date. 
-<pre class="lang-javascript highlight"><c- a>var</c-> file <c- o>=</c-> document<c- p>.</c->getElementById<c- p>(</c-><c- u>"filePicker"</c-><c- p>).</c->files<c- p>[</c-><c- mi>0</c-><c- p>];</c->
+<pre class="lang-javascript highlight"><c- a>var</c-> file <c- o>=</c-> document<c- p>.</c->getElementById<c- p>(</c-><c- u>"filePicker"</c-><c- p>).</c->files<c- p>[</c-><c- mf>0</c-><c- p>];</c->
 <c- a>var</c-> date <c- o>=</c-> <c- k>new</c-> Date<c- p>(</c->file<c- p>.</c->lastModified<c- p>);</c->
 println<c- p>(</c-><c- u>"You selected the file "</c-> <c- o>+</c-> file<c- p>.</c->name <c- o>+</c-> <c- u>" which was modified on "</c-> <c- o>+</c-> date<c- p>.</c->toDateString<c- p>()</c-> <c- o>+</c-> <c- u>"."</c-><c- p>);</c->
 
@@ -1379,7 +1395,7 @@ println<c- p>(</c-><c- u>"You selected the file "</c-> <c- o>+</c-> file<c- p>.<
 
 <c- c1>// Generate a file with a specific last modified date</c->
 
-<c- a>var</c-> d <c- o>=</c-> <c- k>new</c-> Date<c- p>(</c-><c- mi>2013</c-><c- p>,</c-> <c- mi>12</c-><c- p>,</c-> <c- mi>5</c-><c- p>,</c-> <c- mi>16</c-><c- p>,</c-> <c- mi>23</c-><c- p>,</c-> <c- mi>45</c-><c- p>,</c-> <c- mi>600</c-><c- p>);</c->
+<c- a>var</c-> d <c- o>=</c-> <c- k>new</c-> Date<c- p>(</c-><c- mf>2013</c-><c- p>,</c-> <c- mf>12</c-><c- p>,</c-> <c- mf>5</c-><c- p>,</c-> <c- mf>16</c-><c- p>,</c-> <c- mf>23</c-><c- p>,</c-> <c- mf>45</c-><c- p>,</c-> <c- mf>600</c-><c- p>);</c->
 <c- a>var</c-> generatedFile <c- o>=</c-> <c- k>new</c-> File<c- p>([</c-><c- u>"Rough Draft ...."</c-><c- p>],</c-> <c- u>"Draft1.txt"</c-><c- p>,</c-> <c- p>{</c->type<c- o>:</c-> <c- u>"text/plain"</c-><c- p>,</c-> lastModified<c- o>:</c-> d<c- p>})</c->
 
 <c- p>...</c->
@@ -1405,12 +1421,12 @@ println<c- p>(</c-><c- u>"You selected the file "</c-> <c- o>+</c-> file<c- p>.<
    <p class="note" role="note"><span>Note:</span> The <code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist②">FileList</a></code> interface should be considered "at risk"
 since the general trend on the Web Platform is to replace such interfaces
 with the <code class="idl"><a data-link-type="idl" href="http://tc39.github.io/ecma262/#sec-array-constructor" id="ref-for-sec-array-constructor">Array</a></code> platform object in ECMAScript <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>.
-In particular, this means syntax of the sort <code class="lang-javascript highlight">filelist<c- p>.</c->item<c- p>(</c-><c- mi>0</c-><c- p>)</c-></code> is at risk;
+In particular, this means syntax of the sort <code class="lang-javascript highlight">filelist<c- p>.</c->item<c- p>(</c-><c- mf>0</c-><c- p>)</c-></code> is at risk;
 most other programmatic use of <code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist③">FileList</a></code> is unlikely to be affected by the eventual migration to an <code class="idl"><a data-link-type="idl" href="http://tc39.github.io/ecma262/#sec-array-constructor" id="ref-for-sec-array-constructor①">Array</a></code> type.</p>
    <p>This interface is a list of <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file②③">File</a></code> objects.</p>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed②"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable" id="ref-for-serializable②"><c- g>Serializable</c-></a>]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="dfn-filelist"><code><c- g>FileList</c-></code></dfn> {
-  <c- b>getter</c-> <a class="n" data-link-type="idl-name" href="#dfn-file" id="ref-for-dfn-file②④"><c- n>File</c-></a>? <a class="idl-code" data-link-type="method" href="#dfn-item" id="ref-for-dfn-item"><c- g>item</c-></a>(<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-index" id="ref-for-dfn-index"><c- g>index</c-></a>);
+  <c- b>getter</c-> <a data-link-type="idl-name" href="#dfn-file" id="ref-for-dfn-file②④"><c- n>File</c-></a>? <a class="idl-code" data-link-type="method" href="#dfn-item" id="ref-for-dfn-item"><c- g>item</c-></a>(<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-index" id="ref-for-dfn-index"><c- g>index</c-></a>);
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long①"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="unsigned long" href="#dfn-length" id="ref-for-dfn-length"><c- g>length</c-></a>;
 };
 </pre>
@@ -1432,7 +1448,7 @@ given <var>value</var> and <var>serialized</var>, are:</p>
   and then accessing selected files. 
 <pre class="lang-javascript highlight"><c- c1>// uploadData is a form element</c->
 <c- c1>// fileChooser is input element of type 'file'</c->
-<c- a>var</c-> file <c- o>=</c-> document<c- p>.</c->forms<c- p>[</c-><c- t>'uploadData'</c-><c- p>][</c-><c- t>'fileChooser'</c-><c- p>].</c->files<c- p>[</c-><c- mi>0</c-><c- p>];</c->
+<c- a>var</c-> file <c- o>=</c-> document<c- p>.</c->forms<c- p>[</c-><c- t>'uploadData'</c-><c- p>][</c-><c- t>'fileChooser'</c-><c- p>].</c->files<c- p>[</c-><c- mf>0</c-><c- p>];</c->
 
 <c- c1>// alternative syntax can be</c->
 <c- c1>// var file = document.forms['uploadData']['fileChooser'].files.item(0);</c->
@@ -1485,18 +1501,18 @@ It is to be used for features that trigger in response to asynchronously reading
       <hr>
       <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>10+</span></span>
       <hr>
-      <span class="firefox_android yes"><span>Firefox for Android</span><span>32+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>6.1+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>11+</span></span>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>32+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>6+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>11+</span></span>
      </div>
     </div>
    </div>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed③"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->)]
-<c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="dfn-filereader"><code><c- g>FileReader</c-></code></dfn>: <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#eventtarget" id="ref-for-eventtarget"><c- n>EventTarget</c-></a> {
+<c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="dfn-filereader"><code><c- g>FileReader</c-></code></dfn>: <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#eventtarget" id="ref-for-eventtarget"><c- n>EventTarget</c-></a> {
   <a class="idl-code" data-link-type="constructor" href="#filereaderConstrctr" id="ref-for-filereaderConstrctr"><c- g>constructor</c-></a>();
   // async read methods
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-undefined" id="ref-for-idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBuffer" id="ref-for-dfn-readAsArrayBuffer"><c- g>readAsArrayBuffer</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑥"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsArrayBuffer(blob)" data-dfn-type="argument" data-export id="dom-filereader-readasarraybuffer-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereader-readasarraybuffer-blob-blob"></a></dfn>);
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-undefined" id="ref-for-idl-undefined①"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsBinaryString" id="ref-for-dfn-readAsBinaryString"><c- g>readAsBinaryString</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑦"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsBinaryString(blob)" data-dfn-type="argument" data-export id="dom-filereader-readasbinarystring-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereader-readasbinarystring-blob-blob"></a></dfn>);
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-undefined" id="ref-for-idl-undefined②"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsText" id="ref-for-dfn-readAsText①"><c- g>readAsText</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑧"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsText(blob, encoding), FileReader/readAsText(blob)" data-dfn-type="argument" data-export id="dom-filereader-readastext-blob-encoding-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereader-readastext-blob-encoding-blob"></a></dfn>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString⑥"><c- b>DOMString</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsText(blob, encoding), FileReader/readAsText(blob)" data-dfn-type="argument" data-export id="dom-filereader-readastext-blob-encoding-encoding"><code><c- g>encoding</c-></code><a class="self-link" href="#dom-filereader-readastext-blob-encoding-encoding"></a></dfn>);
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-undefined" id="ref-for-idl-undefined③"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsDataURL" id="ref-for-dfn-readAsDataURL"><c- g>readAsDataURL</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑨"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsDataURL(blob)" data-dfn-type="argument" data-export id="dom-filereader-readasdataurl-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereader-readasdataurl-blob-blob"></a></dfn>);
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-undefined" id="ref-for-idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBuffer" id="ref-for-dfn-readAsArrayBuffer"><c- g>readAsArrayBuffer</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑥"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsArrayBuffer(blob)" data-dfn-type="argument" data-export id="dom-filereader-readasarraybuffer-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereader-readasarraybuffer-blob-blob"></a></dfn>);
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-undefined" id="ref-for-idl-undefined①"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsBinaryString" id="ref-for-dfn-readAsBinaryString"><c- g>readAsBinaryString</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑦"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsBinaryString(blob)" data-dfn-type="argument" data-export id="dom-filereader-readasbinarystring-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereader-readasbinarystring-blob-blob"></a></dfn>);
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-undefined" id="ref-for-idl-undefined②"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsText" id="ref-for-dfn-readAsText①"><c- g>readAsText</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑧"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsText(blob, encoding), FileReader/readAsText(blob)" data-dfn-type="argument" data-export id="dom-filereader-readastext-blob-encoding-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereader-readastext-blob-encoding-blob"></a></dfn>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString⑥"><c- b>DOMString</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsText(blob, encoding), FileReader/readAsText(blob)" data-dfn-type="argument" data-export id="dom-filereader-readastext-blob-encoding-encoding"><code><c- g>encoding</c-></code><a class="self-link" href="#dom-filereader-readastext-blob-encoding-encoding"></a></dfn>);
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-undefined" id="ref-for-idl-undefined③"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsDataURL" id="ref-for-dfn-readAsDataURL"><c- g>readAsDataURL</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑨"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsDataURL(blob)" data-dfn-type="argument" data-export id="dom-filereader-readasdataurl-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereader-readasdataurl-blob-blob"></a></dfn>);
 
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-undefined" id="ref-for-idl-undefined④"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-abort" id="ref-for-dfn-abort①"><c- g>abort</c-></a>();
 
@@ -1510,15 +1526,15 @@ It is to be used for features that trigger in response to asynchronously reading
   // File or Blob data
   <c- b>readonly</c-> <c- b>attribute</c-> (<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString⑦"><c- b>DOMString</c-></a> <c- b>or</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer②"><c- b>ArrayBuffer</c-></a>)? <a class="idl-code" data-link-type="attribute" data-readonly data-type="(DOMString or ArrayBuffer)?" href="#dom-filereader-result" id="ref-for-dom-filereader-result"><c- g>result</c-></a>;
 
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException"><c- n>DOMException</c-></a>? <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMException?" href="#dom-filereader-error" id="ref-for-dom-filereader-error①"><c- g>error</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException"><c- n>DOMException</c-></a>? <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMException?" href="#dom-filereader-error" id="ref-for-dom-filereader-error①"><c- g>error</c-></a>;
 
   // event handler content attributes
-  <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadstart" id="ref-for-dfn-onloadstart"><c- g>onloadstart</c-></a>;
-  <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler①"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onprogress" id="ref-for-dfn-onprogress"><c- g>onprogress</c-></a>;
-  <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler②"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onload" id="ref-for-dfn-onload"><c- g>onload</c-></a>;
-  <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler③"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onabort" id="ref-for-dfn-onabort"><c- g>onabort</c-></a>;
-  <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler④"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onerror" id="ref-for-dfn-onerror"><c- g>onerror</c-></a>;
-  <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler⑤"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadend" id="ref-for-dfn-onloadend"><c- g>onloadend</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadstart" id="ref-for-dfn-onloadstart"><c- g>onloadstart</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler①"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onprogress" id="ref-for-dfn-onprogress"><c- g>onprogress</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler②"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onload" id="ref-for-dfn-onload"><c- g>onload</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler③"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onabort" id="ref-for-dfn-onabort"><c- g>onabort</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler④"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onerror" id="ref-for-dfn-onerror"><c- g>onerror</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler⑤"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadend" id="ref-for-dfn-onloadend"><c- g>onloadend</c-></a>;
 };
 </pre>
    <p>A <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader⑤">FileReader</a></code> has an associated <dfn class="dfn-paneled" data-dfn-for="FileReader" data-dfn-type="dfn" data-noexport id="filereader-state">state</dfn>,
@@ -1533,13 +1549,13 @@ when invoked, must return a new <code class="idl"><a data-link-type="idl" href="
      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readyState" title="The FileReader readyState property provides the current state of the reading operation a FileReader is in. A FileReader exists in one of the following states:">FileReader/readyState</a></p>
      <p class="all-engines-text">In all current engines.</p>
      <div class="support">
-      <span class="firefox yes"><span>Firefox</span><span>3.6+</span></span><span class="safari yes"><span>Safari</span><span>6+</span></span><span class="chrome yes"><span>Chrome</span><span>7+</span></span>
+      <span class="firefox yes"><span>Firefox</span><span>3.6+</span></span><span class="safari yes"><span>Safari</span><span>6.1+</span></span><span class="chrome yes"><span>Chrome</span><span>7+</span></span>
       <hr>
       <span class="opera yes"><span>Opera</span><span>11+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
       <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>10+</span></span>
       <hr>
-      <span class="firefox_android yes"><span>Firefox for Android</span><span>32+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>6.1+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>11+</span></span>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>32+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>6.1+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>11+</span></span>
      </div>
     </div>
    </div>
@@ -1562,13 +1578,13 @@ when invoked, switches on the <a data-link-type="dfn" href="https://dom.spec.wha
      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileReader/result" title="The FileReader result property returns the file&apos;s contents. This property is only valid after the read operation is complete, and the format of the data depends on which of the methods was used to initiate the read operation.">FileReader/result</a></p>
      <p class="all-engines-text">In all current engines.</p>
      <div class="support">
-      <span class="firefox yes"><span>Firefox</span><span>3.6+</span></span><span class="safari yes"><span>Safari</span><span>6+</span></span><span class="chrome yes"><span>Chrome</span><span>7+</span></span>
+      <span class="firefox yes"><span>Firefox</span><span>3.6+</span></span><span class="safari yes"><span>Safari</span><span>10+</span></span><span class="chrome yes"><span>Chrome</span><span>7+</span></span>
       <hr>
       <span class="opera yes"><span>Opera</span><span>11+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
       <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>10+</span></span>
       <hr>
-      <span class="firefox_android yes"><span>Firefox for Android</span><span>32+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>6.1+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>11+</span></span>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>32+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>6.1+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>11+</span></span>
      </div>
     </div>
    </div>
@@ -1580,13 +1596,13 @@ when invoked, must return the <a data-link-type="dfn" href="https://dom.spec.wha
      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileReader/error" title="The FileReader error property returns the error that occurred while reading the file.">FileReader/error</a></p>
      <p class="all-engines-text">In all current engines.</p>
      <div class="support">
-      <span class="firefox yes"><span>Firefox</span><span>3.6+</span></span><span class="safari yes"><span>Safari</span><span>6+</span></span><span class="chrome yes"><span>Chrome</span><span>7+</span></span>
+      <span class="firefox yes"><span>Firefox</span><span>3.6+</span></span><span class="safari yes"><span>Safari</span><span>6.1+</span></span><span class="chrome yes"><span>Chrome</span><span>7+</span></span>
       <hr>
       <span class="opera yes"><span>Opera</span><span>11+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
       <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>10+</span></span>
       <hr>
-      <span class="firefox_android yes"><span>Firefox for Android</span><span>32+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>6.1+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>11+</span></span>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>32+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>6.1+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>11+</span></span>
      </div>
     </div>
    </div>
@@ -1609,11 +1625,11 @@ runs the following steps:
      <li data-md>
       <p>Let <var>stream</var> be the result of calling <a data-link-type="dfn" href="#blob-get-stream" id="ref-for-blob-get-stream③">get stream</a> on <var>blob</var>.</p>
      <li data-md>
-      <p>Let <var>reader</var> be the result of <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-get-reader" id="ref-for-concept-get-reader②">getting a reader</a> from <var>stream</var>.</p>
+      <p>Let <var>reader</var> be the result of <a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestream-get-a-reader" id="ref-for-readablestream-get-a-reader②">getting a reader</a> from <var>stream</var>.</p>
      <li data-md>
       <p>Let <var>bytes</var> be an empty <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte-sequence" id="ref-for-byte-sequence①">byte sequence</a>.</p>
      <li data-md>
-      <p>Let <var>chunkPromise</var> be the result of <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-read-chunk-from-readablestream" id="ref-for-concept-read-chunk-from-readablestream">reading a chunk</a> from <var>stream</var> with <var>reader</var>.</p>
+      <p>Let <var>chunkPromise</var> be the result of <a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestreamdefaultreader-read-a-chunk" id="ref-for-readablestreamdefaultreader-read-a-chunk">reading a chunk</a> from <var>stream</var> with <var>reader</var>.</p>
      <li data-md>
       <p>Let <var>isFirstChunk</var> be true.</p>
      <li data-md>
@@ -1637,7 +1653,7 @@ runs the following steps:
          <li data-md>
           <p>If roughly 50ms have passed since these steps were last invoked, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task②">queue a task</a> to <a data-link-type="dfn" href="#fire-a-progress-event" id="ref-for-fire-a-progress-event①">fire a progress event</a> called <code class="idl"><a data-link-type="idl" href="#dfn-progress-event" id="ref-for-dfn-progress-event">progress</a></code> at <var>fr</var>.</p>
          <li data-md>
-          <p>Set <var>chunkPromise</var> to the result of <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-read-chunk-from-readablestream" id="ref-for-concept-read-chunk-from-readablestream①">reading a chunk</a> from <var>stream</var> with <var>reader</var>.</p>
+          <p>Set <var>chunkPromise</var> to the result of <a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestreamdefaultreader-read-a-chunk" id="ref-for-readablestreamdefaultreader-read-a-chunk①">reading a chunk</a> from <var>stream</var> with <var>reader</var>.</p>
         </ol>
        <li data-md>
         <p>Otherwise, if <var>chunkPromise</var> is fulfilled with an object whose <code>done</code> property is true, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task③">queue a task</a> to run the following steps and abort this algorithm:</p>
@@ -1760,7 +1776,7 @@ when <code class="idl"><a data-link-type="idl" href="#dom-filereader-readystate"
       <hr>
       <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>10+</span></span>
       <hr>
-      <span class="firefox_android yes"><span>Firefox for Android</span><span>32+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>6.1+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>11+</span></span>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>32+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>6+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>11+</span></span>
      </div>
     </div>
    </div>
@@ -1779,7 +1795,7 @@ when invoked, must initiate a <a data-link-type="dfn" href="#readOperation" id="
       <hr>
       <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>10+</span></span>
       <hr>
-      <span class="firefox_android yes"><span>Firefox for Android</span><span>32+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>6.1+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>11+</span></span>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>32+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>6+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>11+</span></span>
      </div>
     </div>
    </div>
@@ -1798,7 +1814,7 @@ when invoked, must initiate a <a data-link-type="dfn" href="#readOperation" id="
       <hr>
       <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>10+</span></span>
       <hr>
-      <span class="firefox_android yes"><span>Firefox for Android</span><span>32+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>6.1+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>12+</span></span>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>32+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>6+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>12+</span></span>
      </div>
     </div>
    </div>
@@ -1817,7 +1833,7 @@ when invoked, must initiate a <a data-link-type="dfn" href="#readOperation" id="
       <hr>
       <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android yes"><span>Firefox for Android</span><span>32+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>6.1+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>11+</span></span>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>32+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>6+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>11+</span></span>
      </div>
     </div>
    </div>
@@ -1838,7 +1854,7 @@ compatibility.</p>
       <hr>
       <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>10+</span></span>
       <hr>
-      <span class="firefox_android yes"><span>Firefox for Android</span><span>32+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>6.1+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>11+</span></span>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>32+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>6+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>11+</span></span>
      </div>
     </div>
    </div>
@@ -1942,7 +1958,7 @@ the following are normative:</p>
           <hr>
           <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>Yes</span></span>
           <hr>
-          <span class="firefox_android yes"><span>Firefox for Android</span><span>Yes</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>Yes</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>Yes</span></span>
+          <span class="firefox_android yes"><span>Firefox for Android</span><span>79+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>Yes</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>Yes</span></span>
          </div>
         </div>
        </div>
@@ -2108,18 +2124,17 @@ This section defines a synchronous API, which can be used within Workers [[Web W
 Workers can avail of both the asynchronous API (the <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader②②">FileReader</a></code> object) <em>and</em> the synchronous API (the <code class="idl"><a data-link-type="idl" href="#dfn-FileReaderSync" id="ref-for-dfn-FileReaderSync④">FileReaderSync</a></code> object).</p>
    <h4 class="heading settled" data-level="6.5.1" id="FileReaderSync"><span class="secno">6.5.1. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#dfn-FileReaderSync" id="ref-for-dfn-FileReaderSync⑤">FileReaderSync</a></code> API</span><a class="self-link" href="#FileReaderSync"></a></h4>
    <div class="mdn-anno wrapped after">
-    <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
+    <button class="mdn-anno-btn"><span>MDN</span></button>
     <div class="feature">
      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileReaderSync" title="The FileReaderSync interface allows to read File or Blob objects synchronously.">FileReaderSync</a></p>
-     <p class="all-engines-text">In all current engines.</p>
      <div class="support">
-      <span class="firefox yes"><span>Firefox</span><span>8+</span></span><span class="safari yes"><span>Safari</span><span>Yes</span></span><span class="chrome yes"><span>Chrome</span><span>Yes</span></span>
+      <span class="firefox yes"><span>Firefox</span><span>8+</span></span><span class="safari no"><span>Safari</span><span>6–6.1</span></span><span class="chrome yes"><span>Chrome</span><span>7+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>Yes</span></span><span class="edge_blink yes"><span>Edge</span><span>Yes</span></span>
+      <span class="opera yes"><span>Opera</span><span>12.1+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
-      <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>Yes</span></span>
+      <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>10+</span></span>
       <hr>
-      <span class="firefox_android yes"><span>Firefox for Android</span><span>8+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>Yes</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>Yes</span></span>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>8+</span></span><span class="safari_ios no"><span>iOS Safari</span><span>6–7</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>12.1+</span></span>
      </div>
     </div>
    </div>
@@ -2129,10 +2144,10 @@ Workers can avail of both the asynchronous API (the <code class="idl"><a data-li
   <dfn class="dfn-paneled idl-code" data-dfn-for="FileReaderSync" data-dfn-type="constructor" data-export data-lt="FileReaderSync()|constructor()" id="dom-filereadersync-filereadersync"><code><c- g>constructor</c-></code></dfn>();
   // Synchronously return strings
 
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer④"><c- b>ArrayBuffer</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBufferSync" id="ref-for-dfn-readAsArrayBufferSync"><c- g>readAsArrayBuffer</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob④⑥"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReaderSync/readAsArrayBuffer(blob)" data-dfn-type="argument" data-export id="dom-filereadersync-readasarraybuffer-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereadersync-readasarraybuffer-blob-blob"></a></dfn>);
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString⑨"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsBinaryStringSync" id="ref-for-dfn-readAsBinaryStringSync"><c- g>readAsBinaryString</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob④⑦"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReaderSync/readAsBinaryString(blob)" data-dfn-type="argument" data-export id="dom-filereadersync-readasbinarystring-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereadersync-readasbinarystring-blob-blob"></a></dfn>);
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①⓪"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsTextSync" id="ref-for-dfn-readAsTextSync"><c- g>readAsText</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob④⑧"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReaderSync/readAsText(blob, encoding), FileReaderSync/readAsText(blob)" data-dfn-type="argument" data-export id="dom-filereadersync-readastext-blob-encoding-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereadersync-readastext-blob-encoding-blob"></a></dfn>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①①"><c- b>DOMString</c-></a> <dfn class="idl-code" data-dfn-for="FileReaderSync/readAsText(blob, encoding), FileReaderSync/readAsText(blob)" data-dfn-type="argument" data-export id="dom-filereadersync-readastext-blob-encoding-encoding"><code><c- g>encoding</c-></code><a class="self-link" href="#dom-filereadersync-readastext-blob-encoding-encoding"></a></dfn>);
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①②"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsDataURLSync" id="ref-for-dfn-readAsDataURLSync"><c- g>readAsDataURL</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob④⑨"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReaderSync/readAsDataURL(blob)" data-dfn-type="argument" data-export id="dom-filereadersync-readasdataurl-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereadersync-readasdataurl-blob-blob"></a></dfn>);
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer④"><c- b>ArrayBuffer</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBufferSync" id="ref-for-dfn-readAsArrayBufferSync"><c- g>readAsArrayBuffer</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob④⑥"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReaderSync/readAsArrayBuffer(blob)" data-dfn-type="argument" data-export id="dom-filereadersync-readasarraybuffer-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereadersync-readasarraybuffer-blob-blob"></a></dfn>);
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString⑨"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsBinaryStringSync" id="ref-for-dfn-readAsBinaryStringSync"><c- g>readAsBinaryString</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob④⑦"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReaderSync/readAsBinaryString(blob)" data-dfn-type="argument" data-export id="dom-filereadersync-readasbinarystring-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereadersync-readasbinarystring-blob-blob"></a></dfn>);
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①⓪"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsTextSync" id="ref-for-dfn-readAsTextSync"><c- g>readAsText</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob④⑧"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReaderSync/readAsText(blob, encoding), FileReaderSync/readAsText(blob)" data-dfn-type="argument" data-export id="dom-filereadersync-readastext-blob-encoding-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereadersync-readastext-blob-encoding-blob"></a></dfn>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①①"><c- b>DOMString</c-></a> <dfn class="idl-code" data-dfn-for="FileReaderSync/readAsText(blob, encoding), FileReaderSync/readAsText(blob)" data-dfn-type="argument" data-export id="dom-filereadersync-readastext-blob-encoding-encoding"><code><c- g>encoding</c-></code><a class="self-link" href="#dom-filereadersync-readastext-blob-encoding-encoding"></a></dfn>);
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①②"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsDataURLSync" id="ref-for-dfn-readAsDataURLSync"><c- g>readAsDataURL</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob④⑨"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReaderSync/readAsDataURL(blob)" data-dfn-type="argument" data-export id="dom-filereadersync-readasdataurl-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereadersync-readasdataurl-blob-blob"></a></dfn>);
 };
 </pre>
    <h5 class="heading settled" data-level="6.5.1.1" id="filereadersyncConstrctr"><span class="secno">6.5.1.1. </span><span class="content">Constructors</span><a class="self-link" href="#filereadersyncConstrctr"></a></h5>
@@ -2140,18 +2155,17 @@ Workers can avail of both the asynchronous API (the <code class="idl"><a data-li
 the user agent must return a new <code class="idl"><a data-link-type="idl" href="#dfn-FileReaderSync" id="ref-for-dfn-FileReaderSync⑥">FileReaderSync</a></code> object.</p>
    <h5 class="heading settled" data-level="6.5.1.2" id="readAsTextSync"><span class="secno">6.5.1.2. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#dfn-readAsTextSync" id="ref-for-dfn-readAsTextSync①">readAsText()</a></code></span><a class="self-link" href="#readAsTextSync"></a></h5>
    <div class="mdn-anno wrapped">
-    <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
+    <button class="mdn-anno-btn"><span>MDN</span></button>
     <div class="feature">
      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileReaderSync/readAsText" title="The readAsText() method of the FileReaderSync interface allows to read File or Blob objects in a synchronous way into an DOMString. This interface is only available in workers as it enables synchronous I/O that could potentially block.">FileReaderSync/readAsText</a></p>
-     <p class="all-engines-text">In all current engines.</p>
      <div class="support">
-      <span class="firefox yes"><span>Firefox</span><span>8+</span></span><span class="safari yes"><span>Safari</span><span>Yes</span></span><span class="chrome yes"><span>Chrome</span><span>Yes</span></span>
+      <span class="firefox yes"><span>Firefox</span><span>8+</span></span><span class="safari no"><span>Safari</span><span>6–6.1</span></span><span class="chrome yes"><span>Chrome</span><span>7+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>Yes</span></span><span class="edge_blink yes"><span>Edge</span><span>Yes</span></span>
+      <span class="opera yes"><span>Opera</span><span>12.1+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
-      <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>Yes</span></span>
+      <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>10+</span></span>
       <hr>
-      <span class="firefox_android yes"><span>Firefox for Android</span><span>8+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>Yes</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>Yes</span></span>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>8+</span></span><span class="safari_ios no"><span>iOS Safari</span><span>6–7</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>12.1+</span></span>
      </div>
     </div>
    </div>
@@ -2161,9 +2175,9 @@ when invoked, must run these steps:</p>
     <li data-md>
      <p>Let <var>stream</var> be the result of calling <a data-link-type="dfn" href="#blob-get-stream" id="ref-for-blob-get-stream④">get stream</a> on <var>blob</var>.</p>
     <li data-md>
-     <p>Let <var>reader</var> be the result of <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-get-reader" id="ref-for-concept-get-reader③">getting a reader</a> from <var>stream</var>.</p>
+     <p>Let <var>reader</var> be the result of <a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestream-get-a-reader" id="ref-for-readablestream-get-a-reader③">getting a reader</a> from <var>stream</var>.</p>
     <li data-md>
-     <p>Let <var>promise</var> be the result of <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-read-all-bytes-from-readablestream" id="ref-for-concept-read-all-bytes-from-readablestream②">reading all bytes</a> from <var>stream</var> with <var>reader</var>.</p>
+     <p>Let <var>promise</var> be the result of <a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestreamdefaultreader-read-all-bytes" id="ref-for-readablestreamdefaultreader-read-all-bytes②">reading all bytes</a> from <var>stream</var> with <var>reader</var>.</p>
     <li data-md>
      <p>Wait for <var>promise</var> to be fulfilled or rejected.</p>
     <li data-md>
@@ -2177,18 +2191,17 @@ when invoked, must run these steps:</p>
    </ol>
    <h5 class="heading settled" data-level="6.5.1.3" id="readAsDataURLSync-section"><span class="secno">6.5.1.3. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#dfn-readAsDataURLSync" id="ref-for-dfn-readAsDataURLSync①">readAsDataURL()</a></code> method</span><a class="self-link" href="#readAsDataURLSync-section"></a></h5>
    <div class="mdn-anno wrapped">
-    <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
+    <button class="mdn-anno-btn"><span>MDN</span></button>
     <div class="feature">
      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileReaderSync/readAsDataURL" title="The readAsDataURL() method of the FileReaderSync interface allows to read File or Blob objects in a synchronous way into an DOMString representing a data URL. This interface is only available in workers as it enables synchronous I/O that could potentially block.">FileReaderSync/readAsDataURL</a></p>
-     <p class="all-engines-text">In all current engines.</p>
      <div class="support">
-      <span class="firefox yes"><span>Firefox</span><span>8+</span></span><span class="safari yes"><span>Safari</span><span>Yes</span></span><span class="chrome yes"><span>Chrome</span><span>Yes</span></span>
+      <span class="firefox yes"><span>Firefox</span><span>8+</span></span><span class="safari no"><span>Safari</span><span>6–6.1</span></span><span class="chrome yes"><span>Chrome</span><span>7+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>Yes</span></span><span class="edge_blink yes"><span>Edge</span><span>Yes</span></span>
+      <span class="opera yes"><span>Opera</span><span>12.1+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
-      <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>Yes</span></span>
+      <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>10+</span></span>
       <hr>
-      <span class="firefox_android yes"><span>Firefox for Android</span><span>8+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>Yes</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>Yes</span></span>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>8+</span></span><span class="safari_ios no"><span>iOS Safari</span><span>6–7</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>12.1+</span></span>
      </div>
     </div>
    </div>
@@ -2198,9 +2211,9 @@ when invoked, must run these steps:</p>
     <li data-md>
      <p>Let <var>stream</var> be the result of calling <a data-link-type="dfn" href="#blob-get-stream" id="ref-for-blob-get-stream⑤">get stream</a> on <var>blob</var>.</p>
     <li data-md>
-     <p>Let <var>reader</var> be the result of <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-get-reader" id="ref-for-concept-get-reader④">getting a reader</a> from <var>stream</var>.</p>
+     <p>Let <var>reader</var> be the result of <a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestream-get-a-reader" id="ref-for-readablestream-get-a-reader④">getting a reader</a> from <var>stream</var>.</p>
     <li data-md>
-     <p>Let <var>promise</var> be the result of <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-read-all-bytes-from-readablestream" id="ref-for-concept-read-all-bytes-from-readablestream③">reading all bytes</a> from <var>stream</var> with <var>reader</var>.</p>
+     <p>Let <var>promise</var> be the result of <a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestreamdefaultreader-read-all-bytes" id="ref-for-readablestreamdefaultreader-read-all-bytes③">reading all bytes</a> from <var>stream</var> with <var>reader</var>.</p>
     <li data-md>
      <p>Wait for <var>promise</var> to be fulfilled or rejected.</p>
     <li data-md>
@@ -2214,18 +2227,17 @@ when invoked, must run these steps:</p>
    </ol>
    <h5 class="heading settled" data-level="6.5.1.4" id="readAsArrayBufferSyncSection"><span class="secno">6.5.1.4. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#dfn-readAsArrayBufferSync" id="ref-for-dfn-readAsArrayBufferSync①">readAsArrayBuffer()</a></code> method</span><a class="self-link" href="#readAsArrayBufferSyncSection"></a></h5>
    <div class="mdn-anno wrapped">
-    <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
+    <button class="mdn-anno-btn"><span>MDN</span></button>
     <div class="feature">
      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileReaderSync/readAsArrayBuffer" title="The readAsArrayBuffer() method of the FileReaderSync interface allows to read File or Blob objects in a synchronous way into an ArrayBuffer. This interface is only available in workers as it enables synchronous I/O that could potentially block.">FileReaderSync/readAsArrayBuffer</a></p>
-     <p class="all-engines-text">In all current engines.</p>
      <div class="support">
-      <span class="firefox yes"><span>Firefox</span><span>8+</span></span><span class="safari yes"><span>Safari</span><span>Yes</span></span><span class="chrome yes"><span>Chrome</span><span>Yes</span></span>
+      <span class="firefox yes"><span>Firefox</span><span>8+</span></span><span class="safari no"><span>Safari</span><span>6–6.1</span></span><span class="chrome yes"><span>Chrome</span><span>7+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>Yes</span></span><span class="edge_blink yes"><span>Edge</span><span>Yes</span></span>
+      <span class="opera yes"><span>Opera</span><span>12.1+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
-      <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>Yes</span></span>
+      <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>10+</span></span>
       <hr>
-      <span class="firefox_android yes"><span>Firefox for Android</span><span>8+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>Yes</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>Yes</span></span>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>8+</span></span><span class="safari_ios no"><span>iOS Safari</span><span>6–7</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>12.1+</span></span>
      </div>
     </div>
    </div>
@@ -2235,9 +2247,9 @@ when invoked, must run these steps:</p>
     <li data-md>
      <p>Let <var>stream</var> be the result of calling <a data-link-type="dfn" href="#blob-get-stream" id="ref-for-blob-get-stream⑥">get stream</a> on <var>blob</var>.</p>
     <li data-md>
-     <p>Let <var>reader</var> be the result of <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-get-reader" id="ref-for-concept-get-reader⑤">getting a reader</a> from <var>stream</var>.</p>
+     <p>Let <var>reader</var> be the result of <a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestream-get-a-reader" id="ref-for-readablestream-get-a-reader⑤">getting a reader</a> from <var>stream</var>.</p>
     <li data-md>
-     <p>Let <var>promise</var> be the result of <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-read-all-bytes-from-readablestream" id="ref-for-concept-read-all-bytes-from-readablestream④">reading all bytes</a> from <var>stream</var> with <var>reader</var>.</p>
+     <p>Let <var>promise</var> be the result of <a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestreamdefaultreader-read-all-bytes" id="ref-for-readablestreamdefaultreader-read-all-bytes④">reading all bytes</a> from <var>stream</var> with <var>reader</var>.</p>
     <li data-md>
      <p>Wait for <var>promise</var> to be fulfilled or rejected.</p>
     <li data-md>
@@ -2250,31 +2262,15 @@ when invoked, must run these steps:</p>
      <p>Throw <var>promise</var>’s rejection reason.</p>
    </ol>
    <h5 class="heading settled" data-level="6.5.1.5" id="readAsBinaryStringSyncSection"><span class="secno">6.5.1.5. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#dfn-readAsBinaryStringSync" id="ref-for-dfn-readAsBinaryStringSync①">readAsBinaryString()</a></code> method</span><a class="self-link" href="#readAsBinaryStringSyncSection"></a></h5>
-   <div class="mdn-anno wrapped">
-    <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
-    <div class="feature">
-     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileReaderSync/readAsBinaryString" title="The readAsBinaryString() method of the FileReaderSync interface allows to read File or Blob objects in a synchronous way into an DOMString. This interface is only available in workers as it enables synchronous I/O that could potentially block.">FileReaderSync/readAsBinaryString</a></p>
-     <p class="all-engines-text">In all current engines.</p>
-     <div class="support">
-      <span class="firefox yes"><span>Firefox</span><span>8+</span></span><span class="safari yes"><span>Safari</span><span>Yes</span></span><span class="chrome yes"><span>Chrome</span><span>Yes</span></span>
-      <hr>
-      <span class="opera yes"><span>Opera</span><span>Yes</span></span><span class="edge_blink yes"><span>Edge</span><span>Yes</span></span>
-      <hr>
-      <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>Yes</span></span>
-      <hr>
-      <span class="firefox_android yes"><span>Firefox for Android</span><span>8+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>Yes</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>Yes</span></span>
-     </div>
-    </div>
-   </div>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="FileReaderSync" data-dfn-type="method" data-export id="dfn-readAsBinaryStringSync"><code>readAsBinaryString(<var>blob</var>)</code></dfn> method,
 when invoked, must run these steps:</p>
    <ol>
     <li data-md>
      <p>Let <var>stream</var> be the result of calling <a data-link-type="dfn" href="#blob-get-stream" id="ref-for-blob-get-stream⑦">get stream</a> on <var>blob</var>.</p>
     <li data-md>
-     <p>Let <var>reader</var> be the result of <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-get-reader" id="ref-for-concept-get-reader⑥">getting a reader</a> from <var>stream</var>.</p>
+     <p>Let <var>reader</var> be the result of <a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestream-get-a-reader" id="ref-for-readablestream-get-a-reader⑥">getting a reader</a> from <var>stream</var>.</p>
     <li data-md>
-     <p>Let <var>promise</var> be the result of <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-read-all-bytes-from-readablestream" id="ref-for-concept-read-all-bytes-from-readablestream⑤">reading all bytes</a> from <var>stream</var> with <var>reader</var>.</p>
+     <p>Let <var>promise</var> be the result of <a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestreamdefaultreader-read-all-bytes" id="ref-for-readablestreamdefaultreader-read-all-bytes⑤">reading all bytes</a> from <var>stream</var> with <var>reader</var>.</p>
     <li data-md>
      <p>Wait for <var>promise</var> to be fulfilled or rejected.</p>
     <li data-md>
@@ -2506,7 +2502,7 @@ user agents must act as if a <a data-link-type="dfn" href="https://fetch.spec.wh
 This section describes a supplemental interface to the URL specification <a data-link-type="biblio" href="#biblio-url">[URL]</a> and presents methods for <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url⑦">blob URL</a> creation and revocation.</p>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed⑤"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>DedicatedWorker</c->,<c- n>SharedWorker</c->)]
 <c- b>partial</c-> <c- b>interface</c-> <a class="idl-code" data-link-type="interface" href="https://url.spec.whatwg.org/#url" id="ref-for-url②"><c- g>URL</c-></a> {
-  <c- b>static</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①③"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL①"><c- g>createObjectURL</c-></a>((<a class="n" data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob⑥④"><c- n>Blob</c-></a> <c- b>or</c-> <a class="n" data-link-type="idl-name" href="http://w3c.github.io/media-source/#mediasource" id="ref-for-mediasource③"><c- n>MediaSource</c-></a>) <dfn class="idl-code" data-dfn-for="URL/createObjectURL(obj)" data-dfn-type="argument" data-export id="dom-url-createobjecturl-obj-obj"><code><c- g>obj</c-></code><a class="self-link" href="#dom-url-createobjecturl-obj-obj"></a></dfn>);
+  <c- b>static</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①③"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL①"><c- g>createObjectURL</c-></a>((<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob⑥④"><c- n>Blob</c-></a> <c- b>or</c-> <a data-link-type="idl-name" href="http://w3c.github.io/media-source/#mediasource" id="ref-for-mediasource③"><c- n>MediaSource</c-></a>) <dfn class="idl-code" data-dfn-for="URL/createObjectURL(obj)" data-dfn-type="argument" data-export id="dom-url-createobjecturl-obj-obj"><code><c- g>obj</c-></code><a class="self-link" href="#dom-url-createobjecturl-obj-obj"></a></dfn>);
   <c- b>static</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-undefined" id="ref-for-idl-undefined⑤"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL①"><c- g>revokeObjectURL</c-></a>(<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①④"><c- b>DOMString</c-></a> <dfn class="idl-code" data-dfn-for="URL/revokeObjectURL(url)" data-dfn-type="argument" data-export id="dom-url-revokeobjecturl-url-url"><code><c- g>url</c-></code><a class="self-link" href="#dom-url-revokeobjecturl-url-url"></a></dfn>);
 };
 </pre>
@@ -2522,7 +2518,7 @@ This section describes a supplemental interface to the URL specification <a data
       <hr>
       <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie yes"><span>IE</span><span>10+</span></span>
       <hr>
-      <span class="firefox_android yes"><span>Firefox for Android</span><span>19+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>6+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>25+</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.5+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>14+</span></span>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>19+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>6+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>25+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.5+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>14+</span></span>
       <hr>
       <span class="nodejs no"><span>Node.js</span><span>None</span></span>
      </div>
@@ -2674,9 +2670,9 @@ which is useful for offline data access for web applications.</p>
      <p>User agents should provide the ability to save a local file programmatically given an amount of data and a file name.</p>
      <p class="note" role="note"><span>Note:</span> While this specification doesn’t provide an explicit API call to trigger downloads,
 the HTML5 specification has addressed this.
-The <code><a data-link-type="element-sub" href="https://svgwg.org/svg2-draft/linking.html#AElementDownloadAttribute" id="ref-for-AElementDownloadAttribute">download</a></code> attribute of the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-a-element" id="ref-for-the-a-element">a</a></code> element initiates a download,
+The <code><a data-link-type="element-sub" href="https://html.spec.whatwg.org/multipage/links.html#attr-hyperlink-download" id="ref-for-attr-hyperlink-download">download</a></code> attribute of the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-a-element" id="ref-for-the-a-element">a</a></code> element initiates a download,
 saving a <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file④⑤">File</a></code> with the name specified.
-The combination of this API and the <code><a data-link-type="element-sub" href="https://svgwg.org/svg2-draft/linking.html#AElementDownloadAttribute" id="ref-for-AElementDownloadAttribute①">download</a></code> attribute on <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-a-element" id="ref-for-the-a-element①">a</a></code> elements
+The combination of this API and the <code><a data-link-type="element-sub" href="https://html.spec.whatwg.org/multipage/links.html#attr-hyperlink-download" id="ref-for-attr-hyperlink-download①">download</a></code> attribute on <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-a-element" id="ref-for-the-a-element①">a</a></code> elements
 allows for the creation of files within web applications,
 and the ability to save them locally.</p>
      <div class="example" id="example-eb79e741"><a class="self-link" href="#example-eb79e741"></a> A Spreadsheet App.
@@ -2978,24 +2974,6 @@ No invocations to these APIs occur silently without user intervention.</p>
     <li><a href="#ref-for-utf-8-encode">3.1.1. Constructor Parameters</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="term-for-concept-construct-readablestream">
-   <a href="https://fetch.spec.whatwg.org/#concept-construct-readablestream">https://fetch.spec.whatwg.org/#concept-construct-readablestream</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-concept-construct-readablestream">3. The Blob Interface and Binary Data</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-concept-enqueue-readablestream">
-   <a href="https://fetch.spec.whatwg.org/#concept-enqueue-readablestream">https://fetch.spec.whatwg.org/#concept-enqueue-readablestream</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-concept-enqueue-readablestream">3. The Blob Interface and Binary Data</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-concept-error-readablestream">
-   <a href="https://fetch.spec.whatwg.org/#concept-error-readablestream">https://fetch.spec.whatwg.org/#concept-error-readablestream</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-concept-error-readablestream">3. The Blob Interface and Binary Data</a> <a href="#ref-for-concept-error-readablestream①">(2)</a>
-   </ul>
-  </aside>
   <aside class="dfn-panel" data-for="term-for-concept-fetch">
    <a href="https://fetch.spec.whatwg.org/#concept-fetch">https://fetch.spec.whatwg.org/#concept-fetch</a><b>Referenced in:</b>
    <ul>
@@ -3003,39 +2981,10 @@ No invocations to these APIs occur silently without user intervention.</p>
     <li><a href="#ref-for-concept-fetch①">8.4.1. Examples of blob URL Creation and Revocation</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="term-for-concept-get-reader">
-   <a href="https://fetch.spec.whatwg.org/#concept-get-reader">https://fetch.spec.whatwg.org/#concept-get-reader</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-concept-get-reader">3.3.3. The text() method</a>
-    <li><a href="#ref-for-concept-get-reader①">3.3.4. The arrayBuffer() method</a>
-    <li><a href="#ref-for-concept-get-reader②">6.2. The FileReader API</a>
-    <li><a href="#ref-for-concept-get-reader③">6.5.1.2. The readAsText()</a>
-    <li><a href="#ref-for-concept-get-reader④">6.5.1.3. The readAsDataURL() method</a>
-    <li><a href="#ref-for-concept-get-reader⑤">6.5.1.4. The readAsArrayBuffer() method</a>
-    <li><a href="#ref-for-concept-get-reader⑥">6.5.1.5. The readAsBinaryString() method</a>
-   </ul>
-  </aside>
   <aside class="dfn-panel" data-for="term-for-concept-network-error">
    <a href="https://fetch.spec.whatwg.org/#concept-network-error">https://fetch.spec.whatwg.org/#concept-network-error</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-concept-network-error">8.4. Creating and Revoking a blob URL</a> <a href="#ref-for-concept-network-error①">(2)</a> <a href="#ref-for-concept-network-error②">(3)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-concept-read-chunk-from-readablestream">
-   <a href="https://fetch.spec.whatwg.org/#concept-read-chunk-from-readablestream">https://fetch.spec.whatwg.org/#concept-read-chunk-from-readablestream</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-concept-read-chunk-from-readablestream">6.2. The FileReader API</a> <a href="#ref-for-concept-read-chunk-from-readablestream①">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="term-for-concept-read-all-bytes-from-readablestream">
-   <a href="https://fetch.spec.whatwg.org/#concept-read-all-bytes-from-readablestream">https://fetch.spec.whatwg.org/#concept-read-all-bytes-from-readablestream</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-concept-read-all-bytes-from-readablestream">3.3.3. The text() method</a>
-    <li><a href="#ref-for-concept-read-all-bytes-from-readablestream①">3.3.4. The arrayBuffer() method</a>
-    <li><a href="#ref-for-concept-read-all-bytes-from-readablestream②">6.5.1.2. The readAsText()</a>
-    <li><a href="#ref-for-concept-read-all-bytes-from-readablestream③">6.5.1.3. The readAsDataURL() method</a>
-    <li><a href="#ref-for-concept-read-all-bytes-from-readablestream④">6.5.1.4. The readAsArrayBuffer() method</a>
-    <li><a href="#ref-for-concept-read-all-bytes-from-readablestream⑤">6.5.1.5. The readAsBinaryString() method</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-dom-body-text">
@@ -3096,6 +3045,12 @@ No invocations to these APIs occur silently without user intervention.</p>
     <li><a href="#ref-for-deserialization-steps">3. The Blob Interface and Binary Data</a>
     <li><a href="#ref-for-deserialization-steps①">4. The File Interface</a>
     <li><a href="#ref-for-deserialization-steps②">5. The FileList Interface</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-attr-hyperlink-download">
+   <a href="https://html.spec.whatwg.org/multipage/links.html#attr-hyperlink-download">https://html.spec.whatwg.org/multipage/links.html#attr-hyperlink-download</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-attr-hyperlink-download">10. Requirements and Use Cases</a> <a href="#ref-for-attr-hyperlink-download①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-environment-settings-object">
@@ -3365,10 +3320,39 @@ No invocations to these APIs occur silently without user intervention.</p>
     <li><a href="#ref-for-chunk">3. The Blob Interface and Binary Data</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="term-for-AElementDownloadAttribute">
-   <a href="https://svgwg.org/svg2-draft/linking.html#AElementDownloadAttribute">https://svgwg.org/svg2-draft/linking.html#AElementDownloadAttribute</a><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="term-for-readablestream-enqueue">
+   <a href="https://streams.spec.whatwg.org/#readablestream-enqueue">https://streams.spec.whatwg.org/#readablestream-enqueue</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-AElementDownloadAttribute">10. Requirements and Use Cases</a> <a href="#ref-for-AElementDownloadAttribute①">(2)</a>
+    <li><a href="#ref-for-readablestream-enqueue">3. The Blob Interface and Binary Data</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-readablestream-get-a-reader">
+   <a href="https://streams.spec.whatwg.org/#readablestream-get-a-reader">https://streams.spec.whatwg.org/#readablestream-get-a-reader</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-readablestream-get-a-reader">3.3.3. The text() method</a>
+    <li><a href="#ref-for-readablestream-get-a-reader①">3.3.4. The arrayBuffer() method</a>
+    <li><a href="#ref-for-readablestream-get-a-reader②">6.2. The FileReader API</a>
+    <li><a href="#ref-for-readablestream-get-a-reader③">6.5.1.2. The readAsText()</a>
+    <li><a href="#ref-for-readablestream-get-a-reader④">6.5.1.3. The readAsDataURL() method</a>
+    <li><a href="#ref-for-readablestream-get-a-reader⑤">6.5.1.4. The readAsArrayBuffer() method</a>
+    <li><a href="#ref-for-readablestream-get-a-reader⑥">6.5.1.5. The readAsBinaryString() method</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-readablestreamdefaultreader-read-a-chunk">
+   <a href="https://streams.spec.whatwg.org/#readablestreamdefaultreader-read-a-chunk">https://streams.spec.whatwg.org/#readablestreamdefaultreader-read-a-chunk</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-readablestreamdefaultreader-read-a-chunk">6.2. The FileReader API</a> <a href="#ref-for-readablestreamdefaultreader-read-a-chunk①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-readablestreamdefaultreader-read-all-bytes">
+   <a href="https://streams.spec.whatwg.org/#readablestreamdefaultreader-read-all-bytes">https://streams.spec.whatwg.org/#readablestreamdefaultreader-read-all-bytes</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-readablestreamdefaultreader-read-all-bytes">3.3.3. The text() method</a>
+    <li><a href="#ref-for-readablestreamdefaultreader-read-all-bytes①">3.3.4. The arrayBuffer() method</a>
+    <li><a href="#ref-for-readablestreamdefaultreader-read-all-bytes②">6.5.1.2. The readAsText()</a>
+    <li><a href="#ref-for-readablestreamdefaultreader-read-all-bytes③">6.5.1.3. The readAsDataURL() method</a>
+    <li><a href="#ref-for-readablestreamdefaultreader-read-all-bytes④">6.5.1.4. The readAsArrayBuffer() method</a>
+    <li><a href="#ref-for-readablestreamdefaultreader-read-all-bytes⑤">6.5.1.5. The readAsBinaryString() method</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-url">
@@ -3515,6 +3499,12 @@ No invocations to these APIs occur silently without user intervention.</p>
     <li><a href="#ref-for-notreadableerror①">7.1. Throwing an Exception or Returning an Error</a> <a href="#ref-for-notreadableerror②">(2)</a> <a href="#ref-for-notreadableerror③">(3)</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-idl-promise">
+   <a href="https://heycam.github.io/webidl/#idl-promise">https://heycam.github.io/webidl/#idl-promise</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-idl-promise">3. The Blob Interface and Binary Data</a> <a href="#ref-for-idl-promise①">(2)</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-securityerror">
    <a href="https://heycam.github.io/webidl/#securityerror">https://heycam.github.io/webidl/#securityerror</a><b>Referenced in:</b>
    <ul>
@@ -3544,6 +3534,13 @@ No invocations to these APIs occur silently without user intervention.</p>
     <li><a href="#ref-for-idl-long-long">3. The Blob Interface and Binary Data</a> <a href="#ref-for-idl-long-long①">(2)</a>
     <li><a href="#ref-for-idl-long-long②">4. The File Interface</a> <a href="#ref-for-idl-long-long③">(2)</a>
     <li><a href="#ref-for-idl-long-long④">4.2. Attributes</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-idl-sequence">
+   <a href="https://heycam.github.io/webidl/#idl-sequence">https://heycam.github.io/webidl/#idl-sequence</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-idl-sequence">3. The Blob Interface and Binary Data</a>
+    <li><a href="#ref-for-idl-sequence①">4. The File Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-dfn-supported-property-indices">
@@ -3610,155 +3607,151 @@ No invocations to these APIs occur silently without user intervention.</p>
    <li>
     <a data-link-type="biblio">[DOM]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-document" style="color:initial">Document</span>
-     <li><span class="dfn-paneled" id="term-for-eventtarget" style="color:initial">EventTarget</span>
-     <li><span class="dfn-paneled" id="term-for-context-object" style="color:initial">context object</span>
-     <li><span class="dfn-paneled" id="term-for-concept-event-fire" style="color:initial">fire an event</span>
+     <li><span class="dfn-paneled" id="term-for-document">Document</span>
+     <li><span class="dfn-paneled" id="term-for-eventtarget">EventTarget</span>
+     <li><span class="dfn-paneled" id="term-for-context-object">context object</span>
+     <li><span class="dfn-paneled" id="term-for-concept-event-fire">fire an event</span>
     </ul>
    <li>
     <a data-link-type="biblio">[ECMA-262]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-sec-array-constructor" style="color:initial">Array</span>
-     <li><span class="dfn-paneled" id="term-for-sec-date-constructor" style="color:initial">Date</span>
+     <li><span class="dfn-paneled" id="term-for-sec-array-constructor">Array</span>
+     <li><span class="dfn-paneled" id="term-for-sec-date-constructor">Date</span>
     </ul>
    <li>
     <a data-link-type="biblio">[ENCODING]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-decode" style="color:initial">decode</span>
-     <li><span class="dfn-paneled" id="term-for-concept-encoding-get" style="color:initial">getting an encoding</span>
-     <li><span class="dfn-paneled" id="term-for-utf-8" style="color:initial">utf-8</span>
-     <li><span class="dfn-paneled" id="term-for-utf-8-decode" style="color:initial">utf-8 decode</span>
-     <li><span class="dfn-paneled" id="term-for-utf-8-encode" style="color:initial">utf-8 encode</span>
+     <li><span class="dfn-paneled" id="term-for-decode">decode</span>
+     <li><span class="dfn-paneled" id="term-for-concept-encoding-get">getting an encoding</span>
+     <li><span class="dfn-paneled" id="term-for-utf-8">utf-8</span>
+     <li><span class="dfn-paneled" id="term-for-utf-8-decode">utf-8 decode</span>
+     <li><span class="dfn-paneled" id="term-for-utf-8-encode">utf-8 encode</span>
     </ul>
    <li>
     <a data-link-type="biblio">[Fetch]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-concept-construct-readablestream" style="color:initial">construct a readablestream object</span>
-     <li><span class="dfn-paneled" id="term-for-concept-enqueue-readablestream" style="color:initial">enqueue</span>
-     <li><span class="dfn-paneled" id="term-for-concept-error-readablestream" style="color:initial">error</span>
-     <li><span class="dfn-paneled" id="term-for-concept-fetch" style="color:initial">fetch</span>
-     <li><span class="dfn-paneled" id="term-for-concept-get-reader" style="color:initial">get a reader</span>
-     <li><span class="dfn-paneled" id="term-for-concept-network-error" style="color:initial">network error</span>
-     <li><span class="dfn-paneled" id="term-for-concept-read-chunk-from-readablestream" style="color:initial">read a chunk</span>
-     <li><span class="dfn-paneled" id="term-for-concept-read-all-bytes-from-readablestream" style="color:initial">read all bytes</span>
-     <li><span class="dfn-paneled" id="term-for-dom-body-text" style="color:initial">text()</span>
+     <li><span class="dfn-paneled" id="term-for-concept-fetch">fetch</span>
+     <li><span class="dfn-paneled" id="term-for-concept-network-error">network error</span>
+     <li><span class="dfn-paneled" id="term-for-dom-body-text">text()</span>
     </ul>
    <li>
     <a data-link-type="biblio">[HTML]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-datatransfer" style="color:initial">DataTransfer</span>
-     <li><span class="dfn-paneled" id="term-for-eventhandler" style="color:initial">EventHandler</span>
-     <li><span class="dfn-paneled" id="term-for-htmlinputelement" style="color:initial">HTMLInputElement</span>
-     <li><span class="dfn-paneled" id="term-for-serializable" style="color:initial">Serializable</span>
-     <li><span class="dfn-paneled" id="term-for-the-a-element" style="color:initial">a</span>
-     <li><span class="dfn-paneled" id="term-for-ascii-serialisation-of-an-origin" style="color:initial">ascii serialization of an origin</span>
-     <li><span class="dfn-paneled" id="term-for-current-settings-object" style="color:initial">current settings object</span>
-     <li><span class="dfn-paneled" id="term-for-deserialization-steps" style="color:initial">deserialization steps</span>
-     <li><span class="dfn-paneled" id="term-for-environment-settings-object" style="color:initial">environment settings object</span>
-     <li><span class="dfn-paneled" id="term-for-event-handler-content-attributes" style="color:initial">event handler content attribute</span>
-     <li><span class="dfn-paneled" id="term-for-event-handler-event-type" style="color:initial">event handler event type</span>
-     <li><span class="dfn-paneled" id="term-for-the-iframe-element" style="color:initial">iframe</span>
-     <li><span class="dfn-paneled" id="term-for-the-img-element" style="color:initial">img</span>
-     <li><span class="dfn-paneled" id="term-for-in-parallel" style="color:initial">in parallel</span>
-     <li><span class="dfn-paneled" id="term-for-the-input-element" style="color:initial">input</span>
-     <li><span class="dfn-paneled" id="term-for-concept-settings-object-origin" style="color:initial">origin</span>
-     <li><span class="dfn-paneled" id="term-for-dom-worker-postmessage-options" style="color:initial">postMessage(message, options)</span>
-     <li><span class="dfn-paneled" id="term-for-queue-a-task" style="color:initial">queue a task</span>
-     <li><span class="dfn-paneled" id="term-for-relevant-settings-object" style="color:initial">relevant settings object</span>
-     <li><span class="dfn-paneled" id="term-for-same-origin" style="color:initial">same origin</span>
-     <li><span class="dfn-paneled" id="term-for-serializable-objects" style="color:initial">serializable objects</span>
-     <li><span class="dfn-paneled" id="term-for-serialization-steps" style="color:initial">serialization steps</span>
-     <li><span class="dfn-paneled" id="term-for-sub-deserialization" style="color:initial">sub-deserialization</span>
-     <li><span class="dfn-paneled" id="term-for-sub-serialization" style="color:initial">sub-serialization</span>
-     <li><span class="dfn-paneled" id="term-for-concept-task" style="color:initial">task</span>
-     <li><span class="dfn-paneled" id="term-for-task-source" style="color:initial">task source</span>
-     <li><span class="dfn-paneled" id="term-for-unloading-document-cleanup-steps" style="color:initial">unloading document cleanup steps</span>
+     <li><span class="dfn-paneled" id="term-for-datatransfer">DataTransfer</span>
+     <li><span class="dfn-paneled" id="term-for-eventhandler">EventHandler</span>
+     <li><span class="dfn-paneled" id="term-for-htmlinputelement">HTMLInputElement</span>
+     <li><span class="dfn-paneled" id="term-for-serializable">Serializable</span>
+     <li><span class="dfn-paneled" id="term-for-the-a-element">a</span>
+     <li><span class="dfn-paneled" id="term-for-ascii-serialisation-of-an-origin">ascii serialization of an origin</span>
+     <li><span class="dfn-paneled" id="term-for-current-settings-object">current settings object</span>
+     <li><span class="dfn-paneled" id="term-for-deserialization-steps">deserialization steps</span>
+     <li><span class="dfn-paneled" id="term-for-attr-hyperlink-download">download</span>
+     <li><span class="dfn-paneled" id="term-for-environment-settings-object">environment settings object</span>
+     <li><span class="dfn-paneled" id="term-for-event-handler-content-attributes">event handler content attribute</span>
+     <li><span class="dfn-paneled" id="term-for-event-handler-event-type">event handler event type</span>
+     <li><span class="dfn-paneled" id="term-for-the-iframe-element">iframe</span>
+     <li><span class="dfn-paneled" id="term-for-the-img-element">img</span>
+     <li><span class="dfn-paneled" id="term-for-in-parallel">in parallel</span>
+     <li><span class="dfn-paneled" id="term-for-the-input-element">input</span>
+     <li><span class="dfn-paneled" id="term-for-concept-settings-object-origin">origin</span>
+     <li><span class="dfn-paneled" id="term-for-dom-worker-postmessage-options">postMessage(message, options)</span>
+     <li><span class="dfn-paneled" id="term-for-queue-a-task">queue a task</span>
+     <li><span class="dfn-paneled" id="term-for-relevant-settings-object">relevant settings object</span>
+     <li><span class="dfn-paneled" id="term-for-same-origin">same origin</span>
+     <li><span class="dfn-paneled" id="term-for-serializable-objects">serializable objects</span>
+     <li><span class="dfn-paneled" id="term-for-serialization-steps">serialization steps</span>
+     <li><span class="dfn-paneled" id="term-for-sub-deserialization">sub-deserialization</span>
+     <li><span class="dfn-paneled" id="term-for-sub-serialization">sub-serialization</span>
+     <li><span class="dfn-paneled" id="term-for-concept-task">task</span>
+     <li><span class="dfn-paneled" id="term-for-task-source">task source</span>
+     <li><span class="dfn-paneled" id="term-for-unloading-document-cleanup-steps">unloading document cleanup steps</span>
     </ul>
    <li>
     <a data-link-type="biblio">[INFRA]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-ascii-lowercase" style="color:initial">ascii lowercase</span>
-     <li><span class="dfn-paneled" id="term-for-assert" style="color:initial">assert</span>
-     <li><span class="dfn-paneled" id="term-for-byte" style="color:initial">byte</span>
-     <li><span class="dfn-paneled" id="term-for-byte-sequence" style="color:initial">byte sequence</span>
-     <li><span class="dfn-paneled" id="term-for-code-point" style="color:initial">code point</span>
-     <li><span class="dfn-paneled" id="term-for-collect-a-sequence-of-code-points" style="color:initial">collecting a sequence of code points</span>
-     <li><span class="dfn-paneled" id="term-for-map-exists" style="color:initial">exist</span>
-     <li><span class="dfn-paneled" id="term-for-list-iterate" style="color:initial">for each</span>
-     <li><span class="dfn-paneled" id="term-for-map-key" style="color:initial">key</span>
-     <li><span class="dfn-paneled" id="term-for-list" style="color:initial">list</span>
-     <li><span class="dfn-paneled" id="term-for-ordered-map" style="color:initial">map</span>
-     <li><span class="dfn-paneled" id="term-for-string-position-variable" style="color:initial">position variable</span>
-     <li><span class="dfn-paneled" id="term-for-map-remove" style="color:initial">remove</span>
-     <li><span class="dfn-paneled" id="term-for-map-set" style="color:initial">set</span>
-     <li><span class="dfn-paneled" id="term-for-string" style="color:initial">string</span>
-     <li><span class="dfn-paneled" id="term-for-map-value" style="color:initial">value</span>
+     <li><span class="dfn-paneled" id="term-for-ascii-lowercase">ascii lowercase</span>
+     <li><span class="dfn-paneled" id="term-for-assert">assert</span>
+     <li><span class="dfn-paneled" id="term-for-byte">byte</span>
+     <li><span class="dfn-paneled" id="term-for-byte-sequence">byte sequence</span>
+     <li><span class="dfn-paneled" id="term-for-code-point">code point</span>
+     <li><span class="dfn-paneled" id="term-for-collect-a-sequence-of-code-points">collecting a sequence of code points</span>
+     <li><span class="dfn-paneled" id="term-for-map-exists">exist</span>
+     <li><span class="dfn-paneled" id="term-for-list-iterate">for each</span>
+     <li><span class="dfn-paneled" id="term-for-map-key">key</span>
+     <li><span class="dfn-paneled" id="term-for-list">list</span>
+     <li><span class="dfn-paneled" id="term-for-ordered-map">map</span>
+     <li><span class="dfn-paneled" id="term-for-string-position-variable">position variable</span>
+     <li><span class="dfn-paneled" id="term-for-map-remove">remove</span>
+     <li><span class="dfn-paneled" id="term-for-map-set">set</span>
+     <li><span class="dfn-paneled" id="term-for-string">string</span>
+     <li><span class="dfn-paneled" id="term-for-map-value">value</span>
     </ul>
    <li>
     <a data-link-type="biblio">[media-source]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-mediasource" style="color:initial">MediaSource</span>
+     <li><span class="dfn-paneled" id="term-for-mediasource">MediaSource</span>
     </ul>
    <li>
     <a data-link-type="biblio">[MIMESNIFF]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-parameters" style="color:initial">parameters</span>
-     <li><span class="dfn-paneled" id="term-for-parsable-mime-type" style="color:initial">parsable mime type</span>
-     <li><span class="dfn-paneled" id="term-for-parse-a-mime-type" style="color:initial">parse a mime type</span>
+     <li><span class="dfn-paneled" id="term-for-parameters">parameters</span>
+     <li><span class="dfn-paneled" id="term-for-parsable-mime-type">parsable mime type</span>
+     <li><span class="dfn-paneled" id="term-for-parse-a-mime-type">parse a mime type</span>
     </ul>
    <li>
     <a data-link-type="biblio">[STREAMS]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-chunk" style="color:initial">chunk</span>
-    </ul>
-   <li>
-    <a data-link-type="biblio">[SVG2]</a> defines the following terms:
-    <ul>
-     <li><span class="dfn-paneled" id="term-for-AElementDownloadAttribute" style="color:initial">download</span>
+     <li><span class="dfn-paneled" id="term-for-chunk">chunk</span>
+     <li><span class="dfn-paneled" id="term-for-readablestream-enqueue">enqueue</span>
+     <li><span class="dfn-paneled" id="term-for-readablestream-get-a-reader">get a reader</span>
+     <li><span class="dfn-paneled" id="term-for-readablestreamdefaultreader-read-a-chunk">read a chunk</span>
+     <li><span class="dfn-paneled" id="term-for-readablestreamdefaultreader-read-all-bytes">read all bytes</span>
     </ul>
    <li>
     <a data-link-type="biblio">[URL]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-url" style="color:initial">URL</span>
-     <li><span class="dfn-paneled" id="term-for-empty-host" style="color:initial">empty host</span>
-     <li><span class="dfn-paneled" id="term-for-concept-url-origin" style="color:initial">origin</span>
-     <li><span class="dfn-paneled" id="term-for-concept-url-path" style="color:initial">path</span>
-     <li><span class="dfn-paneled" id="term-for-concept-url-scheme" style="color:initial">scheme</span>
-     <li><span class="dfn-paneled" id="term-for-concept-url" style="color:initial">url</span>
-     <li><span class="dfn-paneled" id="term-for-concept-url-parser" style="color:initial">url parser</span>
-     <li><span class="dfn-paneled" id="term-for-concept-url-serializer" style="color:initial">url serializer</span>
-     <li><span class="dfn-paneled" id="term-for-valid-url-string" style="color:initial">valid url string</span>
+     <li><span class="dfn-paneled" id="term-for-url">URL</span>
+     <li><span class="dfn-paneled" id="term-for-empty-host">empty host</span>
+     <li><span class="dfn-paneled" id="term-for-concept-url-origin">origin</span>
+     <li><span class="dfn-paneled" id="term-for-concept-url-path">path</span>
+     <li><span class="dfn-paneled" id="term-for-concept-url-scheme">scheme</span>
+     <li><span class="dfn-paneled" id="term-for-concept-url">url</span>
+     <li><span class="dfn-paneled" id="term-for-concept-url-parser">url parser</span>
+     <li><span class="dfn-paneled" id="term-for-concept-url-serializer">url serializer</span>
+     <li><span class="dfn-paneled" id="term-for-valid-url-string">valid url string</span>
     </ul>
    <li>
     <a data-link-type="biblio">[WebIDL]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-idl-ArrayBuffer" style="color:initial">ArrayBuffer</span>
-     <li><span class="dfn-paneled" id="term-for-BufferSource" style="color:initial">BufferSource</span>
-     <li><span class="dfn-paneled" id="term-for-Clamp" style="color:initial">Clamp</span>
-     <li><span class="dfn-paneled" id="term-for-idl-DOMException" style="color:initial">DOMException</span>
-     <li><span class="dfn-paneled" id="term-for-idl-DOMString" style="color:initial">DOMString</span>
-     <li><span class="dfn-paneled" id="term-for-Exposed" style="color:initial">Exposed</span>
-     <li><span class="dfn-paneled" id="term-for-invalidstateerror" style="color:initial">InvalidStateError</span>
-     <li><span class="dfn-paneled" id="term-for-NewObject" style="color:initial">NewObject</span>
-     <li><span class="dfn-paneled" id="term-for-notfounderror" style="color:initial">NotFoundError</span>
-     <li><span class="dfn-paneled" id="term-for-notreadableerror" style="color:initial">NotReadableError</span>
-     <li><span class="dfn-paneled" id="term-for-securityerror" style="color:initial">SecurityError</span>
-     <li><span class="dfn-paneled" id="term-for-idl-USVString" style="color:initial">USVString</span>
-     <li><span class="dfn-paneled" id="term-for-dfn-get-buffer-source-copy" style="color:initial">get a copy of the buffer source</span>
-     <li><span class="dfn-paneled" id="term-for-idl-long-long" style="color:initial">long long</span>
-     <li><span class="dfn-paneled" id="term-for-dfn-supported-property-indices" style="color:initial">supported property indices</span>
-     <li><span class="dfn-paneled" id="term-for-dfn-throw" style="color:initial">throw</span>
-     <li><span class="dfn-paneled" id="term-for-idl-undefined" style="color:initial">undefined</span>
-     <li><span class="dfn-paneled" id="term-for-idl-unsigned-long" style="color:initial">unsigned long</span>
-     <li><span class="dfn-paneled" id="term-for-idl-unsigned-long-long" style="color:initial">unsigned long long</span>
-     <li><span class="dfn-paneled" id="term-for-idl-unsigned-short" style="color:initial">unsigned short</span>
+     <li><span class="dfn-paneled" id="term-for-idl-ArrayBuffer">ArrayBuffer</span>
+     <li><span class="dfn-paneled" id="term-for-BufferSource">BufferSource</span>
+     <li><span class="dfn-paneled" id="term-for-Clamp">Clamp</span>
+     <li><span class="dfn-paneled" id="term-for-idl-DOMException">DOMException</span>
+     <li><span class="dfn-paneled" id="term-for-idl-DOMString">DOMString</span>
+     <li><span class="dfn-paneled" id="term-for-Exposed">Exposed</span>
+     <li><span class="dfn-paneled" id="term-for-invalidstateerror">InvalidStateError</span>
+     <li><span class="dfn-paneled" id="term-for-NewObject">NewObject</span>
+     <li><span class="dfn-paneled" id="term-for-notfounderror">NotFoundError</span>
+     <li><span class="dfn-paneled" id="term-for-notreadableerror">NotReadableError</span>
+     <li><span class="dfn-paneled" id="term-for-idl-promise">Promise</span>
+     <li><span class="dfn-paneled" id="term-for-securityerror">SecurityError</span>
+     <li><span class="dfn-paneled" id="term-for-idl-USVString">USVString</span>
+     <li><span class="dfn-paneled" id="term-for-dfn-get-buffer-source-copy">get a copy of the buffer source</span>
+     <li><span class="dfn-paneled" id="term-for-idl-long-long">long long</span>
+     <li><span class="dfn-paneled" id="term-for-idl-sequence">sequence</span>
+     <li><span class="dfn-paneled" id="term-for-dfn-supported-property-indices">supported property indices</span>
+     <li><span class="dfn-paneled" id="term-for-dfn-throw">throw</span>
+     <li><span class="dfn-paneled" id="term-for-idl-undefined">undefined</span>
+     <li><span class="dfn-paneled" id="term-for-idl-unsigned-long">unsigned long</span>
+     <li><span class="dfn-paneled" id="term-for-idl-unsigned-long-long">unsigned long long</span>
+     <li><span class="dfn-paneled" id="term-for-idl-unsigned-short">unsigned short</span>
     </ul>
    <li>
     <a data-link-type="biblio">[XHR]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-progressevent" style="color:initial">ProgressEvent</span>
-     <li><span class="dfn-paneled" id="term-for-xmlhttprequest" style="color:initial">XMLHttpRequest</span>
-     <li><span class="dfn-paneled" id="term-for-dom-xmlhttprequest-send" style="color:initial">send()</span>
+     <li><span class="dfn-paneled" id="term-for-progressevent">ProgressEvent</span>
+     <li><span class="dfn-paneled" id="term-for-xmlhttprequest">XMLHttpRequest</span>
+     <li><span class="dfn-paneled" id="term-for-dom-xmlhttprequest-send">send()</span>
     </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
@@ -3783,9 +3776,9 @@ No invocations to these APIs occur silently without user intervention.</p>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
    <dt id="biblio-rfc2397">[RFC2397]
-   <dd>L. Masinter. <a href="https://tools.ietf.org/html/rfc2397">The "data" URL scheme</a>. August 1998. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc2397">https://tools.ietf.org/html/rfc2397</a>
+   <dd>L. Masinter. <a href="https://datatracker.ietf.org/doc/html/rfc2397">The "data" URL scheme</a>. August 1998. Proposed Standard. URL: <a href="https://datatracker.ietf.org/doc/html/rfc2397">https://datatracker.ietf.org/doc/html/rfc2397</a>
    <dt id="biblio-rfc4122">[RFC4122]
-   <dd>P. Leach; M. Mealling; R. Salz. <a href="https://tools.ietf.org/html/rfc4122">A Universally Unique IDentifier (UUID) URN Namespace</a>. July 2005. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc4122">https://tools.ietf.org/html/rfc4122</a>
+   <dd>P. Leach; M. Mealling; R. Salz. <a href="https://datatracker.ietf.org/doc/html/rfc4122">A Universally Unique IDentifier (UUID) URN Namespace</a>. July 2005. Proposed Standard. URL: <a href="https://datatracker.ietf.org/doc/html/rfc4122">https://datatracker.ietf.org/doc/html/rfc4122</a>
    <dt id="biblio-streams">[STREAMS]
    <dd>Adam Rice; Domenic Denicola; 吉野剛史 (Takeshi Yoshino). <a href="https://streams.spec.whatwg.org/">Streams Standard</a>. Living Standard. URL: <a href="https://streams.spec.whatwg.org/">https://streams.spec.whatwg.org/</a>
    <dt id="biblio-url">[URL]
@@ -3797,67 +3790,65 @@ No invocations to these APIs occur silently without user intervention.</p>
   </dl>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
-   <dt id="biblio-svg2">[SVG2]
-   <dd>Amelia Bellamy-Royds; et al. <a href="https://www.w3.org/TR/SVG2/">Scalable Vector Graphics (SVG) 2</a>. 4 October 2018. CR. URL: <a href="https://www.w3.org/TR/SVG2/">https://www.w3.org/TR/SVG2/</a>
    <dt id="biblio-workers">[Workers]
-   <dd>Ian Hickson. <a href="https://www.w3.org/TR/workers/">Web Workers</a>. 24 September 2015. WD. URL: <a href="https://www.w3.org/TR/workers/">https://www.w3.org/TR/workers/</a>
+   <dd>Ian Hickson. <a href="https://www.w3.org/TR/workers/">Web Workers</a>. 28 January 2021. NOTE. URL: <a href="https://www.w3.org/TR/workers/">https://www.w3.org/TR/workers/</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable"><c- g>Serializable</c-></a>]
 <c- b>interface</c-> <a href="#dfn-Blob"><code><c- g>Blob</c-></code></a> {
-  <a href="#dom-blob-blob"><code><c- g>constructor</c-></code></a>(<c- b>optional</c-> <c- b>sequence</c->&lt;<a class="n" data-link-type="idl-name" href="#typedefdef-blobpart"><c- n>BlobPart</c-></a>> <a class="idl-code" data-link-type="argument" href="#dfn-blobParts"><c- g>blobParts</c-></a>,
-              <c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dfn-BlobPropertyBag"><c- n>BlobPropertyBag</c-></a> <a href="#dom-blob-blob-blobparts-options-options"><code><c- g>options</c-></code></a> = {});
+  <a href="#dom-blob-blob"><code><c- g>constructor</c-></code></a>(<c- b>optional</c-> <a data-link-type="dfn" href="https://heycam.github.io/webidl/#idl-sequence"><c- b>sequence</c-></a>&lt;<a data-link-type="idl-name" href="#typedefdef-blobpart"><c- n>BlobPart</c-></a>> <a class="idl-code" data-link-type="argument" href="#dfn-blobParts"><c- g>blobParts</c-></a>,
+              <c- b>optional</c-> <a data-link-type="idl-name" href="#dfn-BlobPropertyBag"><c- n>BlobPropertyBag</c-></a> <a href="#dom-blob-blob-blobparts-options-options"><code><c- g>options</c-></code></a> = {});
 
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long-long"><c- b>unsigned</c-> <c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="unsigned long long" href="#dfn-size"><c- g>size</c-></a>;
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMString" href="#dfn-type"><c- g>type</c-></a>;
 
   // slice Blob into byte-ranged chunks
-  <a class="n" data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-slice"><c- g>slice</c-></a>(<c- b>optional</c-> [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Clamp"><c- g>Clamp</c-></a>] <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-start"><c- g>start</c-></a>,
+  <a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-slice"><c- g>slice</c-></a>(<c- b>optional</c-> [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Clamp"><c- g>Clamp</c-></a>] <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-start"><c- g>start</c-></a>,
             <c- b>optional</c-> [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Clamp"><c- g>Clamp</c-></a>] <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-end"><c- g>end</c-></a>,
             <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-contentTypeBlob"><c- g>contentType</c-></a>);
 
   // read from the Blob.
-  [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NewObject"><c- g>NewObject</c-></a>] <a class="n" data-link-type="idl-name"><c- n>ReadableStream</c-></a> <a class="idl-code" data-link-type="method" href="#dom-blob-stream"><c- g>stream</c-></a>();
-  [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NewObject"><c- g>NewObject</c-></a>] <c- b>Promise</c->&lt;<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-blob-text"><c- g>text</c-></a>();
-  [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NewObject"><c- g>NewObject</c-></a>] <c- b>Promise</c->&lt;<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-ArrayBuffer"><c- b>ArrayBuffer</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-blob-arraybuffer"><c- g>arrayBuffer</c-></a>();
+  [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NewObject"><c- g>NewObject</c-></a>] <a data-link-type="idl-name"><c- n>ReadableStream</c-></a> <a class="idl-code" data-link-type="method" href="#dom-blob-stream"><c- g>stream</c-></a>();
+  [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NewObject"><c- g>NewObject</c-></a>] <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-promise"><c- b>Promise</c-></a>&lt;<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-blob-text"><c- g>text</c-></a>();
+  [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NewObject"><c- g>NewObject</c-></a>] <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-promise"><c- b>Promise</c-></a>&lt;<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-ArrayBuffer"><c- b>ArrayBuffer</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-blob-arraybuffer"><c- g>arrayBuffer</c-></a>();
 };
 
 <c- b>enum</c-> <a href="#enumdef-endingtype"><code><c- g>EndingType</c-></code></a> { <a href="#dom-endingtype-transparent"><code><c- s>"transparent"</c-></code></a>, <a href="#dom-endingtype-native"><code><c- s>"native"</c-></code></a> };
 
 <c- b>dictionary</c-> <a href="#dfn-BlobPropertyBag"><code><c- g>BlobPropertyBag</c-></code></a> {
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-default="&quot;&quot;" data-link-type="dict-member" data-type="DOMString " href="#dfn-BPtype"><c- g>type</c-></a> = "";
-  <a class="n" data-link-type="idl-name" href="#enumdef-endingtype"><c- n>EndingType</c-></a> <a class="idl-code" data-default="&quot;transparent&quot;" data-link-type="dict-member" data-type="EndingType " href="#dom-blobpropertybag-endings"><c- g>endings</c-></a> = "transparent";
+  <a data-link-type="idl-name" href="#enumdef-endingtype"><c- n>EndingType</c-></a> <a class="idl-code" data-default="&quot;transparent&quot;" data-link-type="dict-member" data-type="EndingType " href="#dom-blobpropertybag-endings"><c- g>endings</c-></a> = "transparent";
 };
 
-<c- b>typedef</c-> (<a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#BufferSource"><c- n>BufferSource</c-></a> <c- b>or</c-> <a class="n" data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <c- b>or</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a>) <a href="#typedefdef-blobpart"><code><c- g>BlobPart</c-></code></a>;
+<c- b>typedef</c-> (<a data-link-type="idl-name" href="https://heycam.github.io/webidl/#BufferSource"><c- n>BufferSource</c-></a> <c- b>or</c-> <a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <c- b>or</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a>) <a href="#typedefdef-blobpart"><code><c- g>BlobPart</c-></code></a>;
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable"><c- g>Serializable</c-></a>]
-<c- b>interface</c-> <a href="#dfn-file"><code><c- g>File</c-></code></a> : <a class="n" data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> {
-  <a href="#dom-file-file"><code><c- g>constructor</c-></code></a>(<c- b>sequence</c->&lt;<a class="n" data-link-type="idl-name" href="#typedefdef-blobpart"><c- n>BlobPart</c-></a>> <a class="idl-code" data-link-type="argument" href="#dfn-fileBits"><c- g>fileBits</c-></a>,
+<c- b>interface</c-> <a href="#dfn-file"><code><c- g>File</c-></code></a> : <a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> {
+  <a href="#dom-file-file"><code><c- g>constructor</c-></code></a>(<a data-link-type="dfn" href="https://heycam.github.io/webidl/#idl-sequence"><c- b>sequence</c-></a>&lt;<a data-link-type="idl-name" href="#typedefdef-blobpart"><c- n>BlobPart</c-></a>> <a class="idl-code" data-link-type="argument" href="#dfn-fileBits"><c- g>fileBits</c-></a>,
               <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-fileName"><c- g>fileName</c-></a>,
-              <c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dfn-FilePropertyBag"><c- n>FilePropertyBag</c-></a> <a href="#dom-file-file-filebits-filename-options-options"><code><c- g>options</c-></code></a> = {});
+              <c- b>optional</c-> <a data-link-type="idl-name" href="#dfn-FilePropertyBag"><c- n>FilePropertyBag</c-></a> <a href="#dom-file-file-filebits-filename-options-options"><code><c- g>options</c-></code></a> = {});
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMString" href="#dfn-name"><c- g>name</c-></a>;
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="long long" href="#dfn-lastModified"><c- g>lastModified</c-></a>;
 };
 
-<c- b>dictionary</c-> <a href="#dfn-FilePropertyBag"><code><c- g>FilePropertyBag</c-></code></a> : <a class="n" data-link-type="idl-name" href="#dfn-BlobPropertyBag"><c- n>BlobPropertyBag</c-></a> {
+<c- b>dictionary</c-> <a href="#dfn-FilePropertyBag"><code><c- g>FilePropertyBag</c-></code></a> : <a data-link-type="idl-name" href="#dfn-BlobPropertyBag"><c- n>BlobPropertyBag</c-></a> {
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-long-long"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="long long " href="#dfn-FPdate"><c- g>lastModified</c-></a>;
 };
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable"><c- g>Serializable</c-></a>]
 <c- b>interface</c-> <a href="#dfn-filelist"><code><c- g>FileList</c-></code></a> {
-  <c- b>getter</c-> <a class="n" data-link-type="idl-name" href="#dfn-file"><c- n>File</c-></a>? <a class="idl-code" data-link-type="method" href="#dfn-item"><c- g>item</c-></a>(<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-index"><c- g>index</c-></a>);
+  <c- b>getter</c-> <a data-link-type="idl-name" href="#dfn-file"><c- n>File</c-></a>? <a class="idl-code" data-link-type="method" href="#dfn-item"><c- g>item</c-></a>(<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-index"><c- g>index</c-></a>);
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="unsigned long" href="#dfn-length"><c- g>length</c-></a>;
 };
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->)]
-<c- b>interface</c-> <a href="#dfn-filereader"><code><c- g>FileReader</c-></code></a>: <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#eventtarget"><c- n>EventTarget</c-></a> {
+<c- b>interface</c-> <a href="#dfn-filereader"><code><c- g>FileReader</c-></code></a>: <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#eventtarget"><c- n>EventTarget</c-></a> {
   <a class="idl-code" data-link-type="constructor" href="#filereaderConstrctr"><c- g>constructor</c-></a>();
   // async read methods
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBuffer"><c- g>readAsArrayBuffer</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereader-readasarraybuffer-blob-blob"><code><c- g>blob</c-></code></a>);
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsBinaryString"><c- g>readAsBinaryString</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereader-readasbinarystring-blob-blob"><code><c- g>blob</c-></code></a>);
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsText"><c- g>readAsText</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereader-readastext-blob-encoding-blob"><code><c- g>blob</c-></code></a>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><c- b>DOMString</c-></a> <a href="#dom-filereader-readastext-blob-encoding-encoding"><code><c- g>encoding</c-></code></a>);
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsDataURL"><c- g>readAsDataURL</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereader-readasdataurl-blob-blob"><code><c- g>blob</c-></code></a>);
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBuffer"><c- g>readAsArrayBuffer</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereader-readasarraybuffer-blob-blob"><code><c- g>blob</c-></code></a>);
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsBinaryString"><c- g>readAsBinaryString</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereader-readasbinarystring-blob-blob"><code><c- g>blob</c-></code></a>);
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsText"><c- g>readAsText</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereader-readastext-blob-encoding-blob"><code><c- g>blob</c-></code></a>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><c- b>DOMString</c-></a> <a href="#dom-filereader-readastext-blob-encoding-encoding"><code><c- g>encoding</c-></code></a>);
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsDataURL"><c- g>readAsDataURL</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereader-readasdataurl-blob-blob"><code><c- g>blob</c-></code></a>);
 
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-abort"><c- g>abort</c-></a>();
 
@@ -3871,15 +3862,15 @@ No invocations to these APIs occur silently without user intervention.</p>
   // File or Blob data
   <c- b>readonly</c-> <c- b>attribute</c-> (<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><c- b>DOMString</c-></a> <c- b>or</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-ArrayBuffer"><c- b>ArrayBuffer</c-></a>)? <a class="idl-code" data-link-type="attribute" data-readonly data-type="(DOMString or ArrayBuffer)?" href="#dom-filereader-result"><c- g>result</c-></a>;
 
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-DOMException"><c- n>DOMException</c-></a>? <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMException?" href="#dom-filereader-error"><c- g>error</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-DOMException"><c- n>DOMException</c-></a>? <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMException?" href="#dom-filereader-error"><c- g>error</c-></a>;
 
   // event handler content attributes
-  <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadstart"><c- g>onloadstart</c-></a>;
-  <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onprogress"><c- g>onprogress</c-></a>;
-  <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onload"><c- g>onload</c-></a>;
-  <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onabort"><c- g>onabort</c-></a>;
-  <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onerror"><c- g>onerror</c-></a>;
-  <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadend"><c- g>onloadend</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadstart"><c- g>onloadstart</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onprogress"><c- g>onprogress</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onload"><c- g>onload</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onabort"><c- g>onabort</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onerror"><c- g>onerror</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadend"><c- g>onloadend</c-></a>;
 };
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed"><c- g>Exposed</c-></a>=(<c- n>DedicatedWorker</c->,<c- n>SharedWorker</c->)]
@@ -3887,15 +3878,15 @@ No invocations to these APIs occur silently without user intervention.</p>
   <a href="#dom-filereadersync-filereadersync"><code><c- g>constructor</c-></code></a>();
   // Synchronously return strings
 
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-ArrayBuffer"><c- b>ArrayBuffer</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBufferSync"><c- g>readAsArrayBuffer</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereadersync-readasarraybuffer-blob-blob"><code><c- g>blob</c-></code></a>);
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsBinaryStringSync"><c- g>readAsBinaryString</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereadersync-readasbinarystring-blob-blob"><code><c- g>blob</c-></code></a>);
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsTextSync"><c- g>readAsText</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereadersync-readastext-blob-encoding-blob"><code><c- g>blob</c-></code></a>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><c- b>DOMString</c-></a> <a href="#dom-filereadersync-readastext-blob-encoding-encoding"><code><c- g>encoding</c-></code></a>);
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsDataURLSync"><c- g>readAsDataURL</c-></a>(<a class="n" data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereadersync-readasdataurl-blob-blob"><code><c- g>blob</c-></code></a>);
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-ArrayBuffer"><c- b>ArrayBuffer</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBufferSync"><c- g>readAsArrayBuffer</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereadersync-readasarraybuffer-blob-blob"><code><c- g>blob</c-></code></a>);
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsBinaryStringSync"><c- g>readAsBinaryString</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereadersync-readasbinarystring-blob-blob"><code><c- g>blob</c-></code></a>);
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsTextSync"><c- g>readAsText</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereadersync-readastext-blob-encoding-blob"><code><c- g>blob</c-></code></a>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><c- b>DOMString</c-></a> <a href="#dom-filereadersync-readastext-blob-encoding-encoding"><code><c- g>encoding</c-></code></a>);
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsDataURLSync"><c- g>readAsDataURL</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereadersync-readasdataurl-blob-blob"><code><c- g>blob</c-></code></a>);
 };
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>DedicatedWorker</c->,<c- n>SharedWorker</c->)]
 <c- b>partial</c-> <c- b>interface</c-> <a class="idl-code" data-link-type="interface" href="https://url.spec.whatwg.org/#url"><c- g>URL</c-></a> {
-  <c- b>static</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-createObjectURL"><c- g>createObjectURL</c-></a>((<a class="n" data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <c- b>or</c-> <a class="n" data-link-type="idl-name" href="http://w3c.github.io/media-source/#mediasource"><c- n>MediaSource</c-></a>) <a href="#dom-url-createobjecturl-obj-obj"><code><c- g>obj</c-></code></a>);
+  <c- b>static</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-createObjectURL"><c- g>createObjectURL</c-></a>((<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <c- b>or</c-> <a data-link-type="idl-name" href="http://w3c.github.io/media-source/#mediasource"><c- n>MediaSource</c-></a>) <a href="#dom-url-createobjecturl-obj-obj"><code><c- g>obj</c-></code></a>);
   <c- b>static</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-revokeObjectURL"><c- g>revokeObjectURL</c-></a>(<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><c- b>DOMString</c-></a> <a href="#dom-url-revokeobjecturl-url-url"><code><c- g>url</c-></code></a>);
 };
 
@@ -4800,7 +4791,7 @@ document.body.addEventListener("click", function(e) {
             }
         }
         function getVarName(el) {
-            return el.textContent.replace(/(\s| )+/, " ").trim();
+            return el.textContent.replace(/(\s|\xa0)+/, " ").trim();
         }
         function chooseHighlightIndex(algoName, varName) {
             let indexes = null;
