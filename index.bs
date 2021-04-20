@@ -500,7 +500,7 @@ It must act as follows:
     <li>Else, let |relativeStart| be <code>min(start, size)</code>.
   </ol>
 
-2. The optional <dfn argument for="Blob/slice(start, end, contentType)" id="dfn-end">end</dfn> parameter
+1. The optional <dfn argument for="Blob/slice(start, end, contentType)" id="dfn-end">end</dfn> parameter
   is a value for the end point of a {{slice()}} call.
   User agents must process {{Blob/slice()}} with {{end}} normalized according to the following:
 
@@ -510,7 +510,7 @@ It must act as follows:
     <li>Else, let |relativeEnd| be <code>min(end, size)</code>.
   </ol>
 
-3. The optional <dfn argument for="Blob/slice(start, end, contentType)" id="dfn-contentTypeBlob">contentType</dfn> parameter
+1. The optional <dfn argument for="Blob/slice(start, end, contentType)" id="dfn-contentTypeBlob">contentType</dfn> parameter
   is used to set the ASCII-encoded string in lower case representing the media type of the Blob.
   User agents must process the {{Blob/slice()}} with {{contentType}} normalized according to the following:
 
@@ -522,9 +522,9 @@ It must act as follows:
       2. Convert every character in |relativeContentType| to [=ASCII lowercase=].
   </ol>
 
-4. Let |span| be <code>max((relativeEnd - relativeStart), 0)</code>.
+1. Let |span| be <code>max((relativeEnd - relativeStart), 0)</code>.
 
-5. Return a new {{Blob}} object |S| with the following characteristics:
+1. Return a new {{Blob}} object |S| with the following characteristics:
 
   <ol type="a">
     <li>|S| refers to |span| consecutive <a>byte</a>s from <a>this</a>,
