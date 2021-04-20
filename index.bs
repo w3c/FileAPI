@@ -51,14 +51,14 @@ spec: html
   type: element
     text: a
     text: iframe
+  type: element-attr
+    text: download; for: a
 spec: infra
   type: dfn
     text: list
     text: string
     text: code point
 spec: streams
-  type:interface
-    text:ReadableStream
   type: dfn
     text: chunk
 spec: url
@@ -66,9 +66,6 @@ spec: url
     text: url; for:/
   type: interface
     text: URL
-spec: fetch
-  type:interface
-    text:ReadableStream
 </pre>
 
 <pre class="anchors">
@@ -266,17 +263,20 @@ Their [=deserialization step=], given |serialized| and |value|, are:
 A {{Blob}} |blob| has an associated <dfn for=Blob>get stream</dfn> algorithm,
 which runs these steps:
 
-1. Let |stream| be the result of [=construct a ReadableStream object|constructing=] a
-   {{ReadableStream}} object.
+1. Let |stream| be a [=new=] {{ReadableStream}} created in |blob|'s [=relevant Realm=].
+1. [=ReadableStream/Set up=] |stream|.
 1. Run the following steps [=in parallel=]:
   1. While not all bytes of |blob| have been read:
-    1. Let |bytes| be the [=byte sequence=] that results from reading a [=chunk=] from |blob|.
-    1. If a [=file read error=] occured while reading |bytes|, [$ReadableStream/error$]
-       |stream| with a [=failure reason=] and abort these steps.
-    1. [=ReadableStream/Enqueue=] a `Uint8Array` object wrapping an `ArrayBuffer`
-       containing |bytes| into |stream|.
-       If that threw an exception, [$ReadableStream/error$] |stream| with that exception
-       and abort these steps.
+    1. Let |bytes| be the [=byte sequence=] that results from reading a [=chunk=] from |blob|, or
+       failure if a chunk cannot be read.
+    1. [=Queue a global task=] on the [=file reading task source=] given |blob|'s
+       [=relevant global object=] to perform the following steps:
+      1. If |bytes| is failure, then [=ReadableStream/error=] |stream| with a [=failure reason=] and
+         abort these steps.
+      1. Let |chunk| be a new {{Uint8Array}} wrapping an {{ArrayBuffer}} containing |bytes|. If
+         creating the {{ArrayBuffer}} throws an exception, then [=ReadableStream/error=] |stream|
+         with that exception and abort these steps.
+      1. [=ReadableStream/Enqueue=] |chunk| in |stream|.
 
     Issue: We need to specify more concretely what reading from a Blob actually does,
     what possible errors can happen, perhaps something about chunk sizes, etc.
