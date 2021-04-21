@@ -1183,7 +1183,7 @@ The {{FileReader}} object must be the event target for all events in this specif
 
 When this specification says to <dfn>fire a progress event</dfn> <i>called e</i>
 (for some {{ProgressEvent}} <code>e</code>
-at a given {{FileReader}} <code>reader</code> as <a>this</a>),
+at a given {{FileReader}} <code>reader</code>),
 the following are normative:
 
 * The progress event <code>e</code> does not bubble.  <code>e.bubbles</code> must be false [[DOM]]
