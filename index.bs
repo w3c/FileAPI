@@ -11,7 +11,6 @@ Status: ED
 ED: https://w3c.github.io/FileAPI/
 TR: https://www.w3.org/TR/FileAPI/
 Repository: w3c/FileAPI
-Previous Version: https://www.w3.org/TR/2019/WD-FileAPI-20190531/
 !Tests: <a href=https://github.com/web-platform-tests/wpt/tree/master/FileAPI>web-platform-tests FileAPI/</a> (<a href=https://github.com/web-platform-tests/wpt/labels/FileAPI>ongoing work</a>)
 Abstract: This specification provides an API for representing file objects in web applications,
   as well as programmatically selecting them and accessing their data. This includes:
