@@ -690,8 +690,7 @@ user agents must run the following steps:
 
 
 2. Let |n| be a new string of the same size as the {{fileName}} argument to the constructor.
-  Copy every character from {{fileName}} to |n|,
-  replacing any "/" character (U+002F SOLIDUS) with a ":" (U+003A COLON).
+  Copy every character from {{fileName}} to |n|.
 
   Note: Underlying OS filesystems use differing conventions for file name;
   with constructed files, mandating UTF-16 lessens ambiquity when file names are converted to <a>byte</a> sequences.
