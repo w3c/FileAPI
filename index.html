@@ -5,7 +5,7 @@
   <title>File API</title>
   <meta content="Bikeshed version c6f50773a, updated Fri Apr 16 16:45:47 2021 -0700" name="generator">
   <link href="https://www.w3.org/TR/FileAPI/" rel="canonical">
-  <meta content="d56cd861f28c2eb7c5e45b86a4239fc172b9bd5b" name="document-revision">
+  <meta content="a7f27059f04dfe81d2b58c516549fd7004cf5e29" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -335,7 +335,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">File API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2021-04-22">22 April 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2021-04-27">27 April 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1262,9 +1262,7 @@ user agents must run the following steps:
      <li data-md>
       <p>Let <var>bytes</var> be the result of <a data-link-type="dfn" href="#process-blob-parts" id="ref-for-process-blob-parts①">processing blob parts</a> given <code class="idl"><a data-link-type="idl" href="#dfn-fileBits" id="ref-for-dfn-fileBits①">fileBits</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-file-file-filebits-filename-options-options" id="ref-for-dom-file-file-filebits-filename-options-options">options</a></code>.</p>
      <li data-md>
-      <p>Let <var>n</var> be a new string of the same size as the <code class="idl"><a data-link-type="idl" href="#dfn-fileName" id="ref-for-dfn-fileName①">fileName</a></code> argument to the constructor.
-Copy every character from <code class="idl"><a data-link-type="idl" href="#dfn-fileName" id="ref-for-dfn-fileName②">fileName</a></code> to <var>n</var>,
-replacing any "/" character (U+002F SOLIDUS) with a ":" (U+003A COLON).</p>
+      <p>Let <var>n</var> be the <code class="idl"><a data-link-type="idl" href="#dfn-fileName" id="ref-for-dfn-fileName①">fileName</a></code> argument to the constructor.</p>
       <p class="note" role="note"><span>Note:</span> Underlying OS filesystems use differing conventions for file name;
 with constructed files, mandating UTF-16 lessens ambiquity when file names are converted to <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte" id="ref-for-byte①⓪">byte</a> sequences.</p>
      <li data-md>
@@ -4244,7 +4242,7 @@ what possible errors can happen, perhaps something about chunk sizes, etc.<a hre
    <b><a href="#dfn-fileName">#dfn-fileName</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dfn-fileName">4. The File Interface</a>
-    <li><a href="#ref-for-dfn-fileName①">4.1. Constructor</a> <a href="#ref-for-dfn-fileName②">(2)</a>
+    <li><a href="#ref-for-dfn-fileName①">4.1. Constructor</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dfn-FPdate">
