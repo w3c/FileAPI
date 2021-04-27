@@ -689,9 +689,7 @@ user agents must run the following steps:
   and {{File/File(fileBits, fileName, options)/options}}.
 
 
-2. Let |n| be a new string of the same size as the {{fileName}} argument to the constructor.
-  Copy every character from {{fileName}} to |n|,
-  replacing any "/" character (U+002F SOLIDUS) with a ":" (U+003A COLON).
+2. Let |n| be the {{fileName}} argument to the constructor.
 
   Note: Underlying OS filesystems use differing conventions for file name;
   with constructed files, mandating UTF-16 lessens ambiquity when file names are converted to <a>byte</a> sequences.
