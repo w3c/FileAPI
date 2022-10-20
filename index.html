@@ -4,9 +4,9 @@
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <title>File API</title>
   <meta content="ED" name="w3c-status">
-  <meta content="Bikeshed version 11cdbd324, updated Fri Oct 7 18:14:16 2022 -0700" name="generator">
+  <meta content="Bikeshed version b0de3432c, updated Thu Oct 13 09:16:59 2022 -0700" name="generator">
   <link href="https://www.w3.org/TR/FileAPI/" rel="canonical">
-  <meta content="e52fcec6866b32b865769ca79af03bc17d867331" name="document-revision">
+  <meta content="57c12ca90689958a1d66ab62148c9911fe37b3bb" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -511,7 +511,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">File API</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2022-10-10">10 October 2022</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2022-10-20">20 October 2022</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -555,9 +555,9 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    </ul>
    <p>Additionally, this specification defines objects to be used within threaded web applications for the synchronous reading of files.</p>
    <p><a href="#requirements">§ 10 Requirements and Use Cases</a> covers the motivation behind this specification.</p>
-   <p>This API is designed to be used in conjunction with other APIs and elements on the web platform, notably: <code class="idl"><a data-link-type="idl">XMLHttpRequest</a></code> (e.g. with an overloaded <code class="idl"><a data-link-type="idl">send()</a></code> method for <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file②">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob④">Blob</a></code> arguments), <code class="idl"><a data-link-type="idl">postMessage()</a></code>, <code class="idl"><a data-link-type="idl">DataTransfer</a></code> (part of the drag and drop API defined in <a data-link-type="biblio" href="#biblio-html">[HTML]</a>)
+   <p>This API is designed to be used in conjunction with other APIs and elements on the web platform, notably: <code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#xmlhttprequest" id="ref-for-xmlhttprequest">XMLHttpRequest</a></code> (e.g. with an overloaded <code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#dom-xmlhttprequest-send" id="ref-for-dom-xmlhttprequest-send">send()</a></code> method for <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file②">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob④">Blob</a></code> arguments), <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/workers.html#dom-worker-postmessage-options" id="ref-for-dom-worker-postmessage-options">postMessage()</a></code>, <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dnd.html#datatransfer" id="ref-for-datatransfer">DataTransfer</a></code> (part of the drag and drop API defined in <a data-link-type="biblio" href="#biblio-html">[HTML]</a>)
   and Web Workers.
-  Additionally, it should be possible to programmatically obtain a list of files from the <code><a data-link-type="element">input</a></code> element
+  Additionally, it should be possible to programmatically obtain a list of files from the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/input.html#the-input-element" id="ref-for-the-input-element">input</a></code> element
   when it is in the <code>File Upload</code> state <a data-link-type="biblio" href="#biblio-html">[HTML]</a>.
   These kinds of behaviors are defined in the appropriate affiliated specifications.</p>
   </div>
@@ -836,35 +836,35 @@ which is an ASCII-encoded string in lower case representing the media type of th
 which must be initially set to the state of the underlying storage,
 if any such underlying storage exists.
 Further normative definition of <a data-link-type="dfn" href="#snapshot-state" id="ref-for-snapshot-state">snapshot state</a> can be found for <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file⑥">File</a></code>s.</p>
-<pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute"><c- g>Serializable</c-></a>]
+<pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable" id="ref-for-serializable"><c- g>Serializable</c-></a>]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="dfn-Blob"><code><c- g>Blob</c-></code></dfn> {
-  <dfn class="dfn-paneled idl-code" data-dfn-for="Blob" data-dfn-type="constructor" data-export data-lt="Blob(blobParts, options)|constructor(blobParts, options)|Blob(blobParts)|constructor(blobParts)|Blob()|constructor()" id="dom-blob-blob"><code><c- g>constructor</c-></code></dfn>(<c- b>optional</c-> <a data-link-type="dfn"><c- b>sequence</c-></a>&lt;<a data-link-type="idl-name" href="#typedefdef-blobpart" id="ref-for-typedefdef-blobpart"><c- n>BlobPart</c-></a>> <a class="idl-code" data-link-type="argument" href="#dfn-blobParts" id="ref-for-dfn-blobParts"><c- g>blobParts</c-></a>,
+  <dfn class="dfn-paneled idl-code" data-dfn-for="Blob" data-dfn-type="constructor" data-export data-lt="Blob(blobParts, options)|constructor(blobParts, options)|Blob(blobParts)|constructor(blobParts)|Blob()|constructor()" id="dom-blob-blob"><code><c- g>constructor</c-></code></dfn>(<c- b>optional</c-> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#idl-sequence" id="ref-for-idl-sequence"><c- b>sequence</c-></a>&lt;<a data-link-type="idl-name" href="#typedefdef-blobpart" id="ref-for-typedefdef-blobpart"><c- n>BlobPart</c-></a>> <a class="idl-code" data-link-type="argument" href="#dfn-blobParts" id="ref-for-dfn-blobParts"><c- g>blobParts</c-></a>,
               <c- b>optional</c-> <a data-link-type="idl-name" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag"><c- n>BlobPropertyBag</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Blob/Blob(blobParts, options), Blob/constructor(blobParts, options), Blob/Blob(blobParts), Blob/constructor(blobParts), Blob/Blob(), Blob/constructor()" data-dfn-type="argument" data-export id="dom-blob-blob-blobparts-options-options"><code><c- g>options</c-></code></dfn> = {});
 
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface"><c- b>unsigned</c-> <c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="unsigned long long" href="#dfn-size" id="ref-for-dfn-size①"><c- g>size</c-></a>;
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMString" href="#dfn-type" id="ref-for-dfn-type①"><c- g>type</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long-long" id="ref-for-idl-unsigned-long-long"><c- b>unsigned</c-> <c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="unsigned long long" href="#dfn-size" id="ref-for-dfn-size①"><c- g>size</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString" id="ref-for-idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMString" href="#dfn-type" id="ref-for-dfn-type①"><c- g>type</c-></a>;
 
   // slice Blob into byte-ranged chunks
-  <a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob①⓪"><c- n>Blob</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-slice" id="ref-for-dfn-slice"><c- g>slice</c-></a>(<c- b>optional</c-> [<a class="idl-code" data-link-type="extended-attribute"><c- g>Clamp</c-></a>] <a class="idl-code" data-link-type="interface"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-start" id="ref-for-dfn-start"><c- g>start</c-></a>,
-            <c- b>optional</c-> [<a class="idl-code" data-link-type="extended-attribute"><c- g>Clamp</c-></a>] <a class="idl-code" data-link-type="interface"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-end" id="ref-for-dfn-end"><c- g>end</c-></a>,
-            <c- b>optional</c-> <a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-contentTypeBlob" id="ref-for-dfn-contentTypeBlob"><c- g>contentType</c-></a>);
+  <a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob①⓪"><c- n>Blob</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-slice" id="ref-for-dfn-slice"><c- g>slice</c-></a>(<c- b>optional</c-> [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Clamp" id="ref-for-Clamp"><c- g>Clamp</c-></a>] <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-long-long" id="ref-for-idl-long-long"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-start" id="ref-for-dfn-start"><c- g>start</c-></a>,
+            <c- b>optional</c-> [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Clamp" id="ref-for-Clamp①"><c- g>Clamp</c-></a>] <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-long-long" id="ref-for-idl-long-long①"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-end" id="ref-for-dfn-end"><c- g>end</c-></a>,
+            <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString" id="ref-for-idl-DOMString①"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-contentTypeBlob" id="ref-for-dfn-contentTypeBlob"><c- g>contentType</c-></a>);
 
   // read from the Blob.
-  [<a class="idl-code" data-link-type="extended-attribute"><c- g>NewObject</c-></a>] <a data-link-type="idl-name"><c- n>ReadableStream</c-></a> <a class="idl-code" data-link-type="method" href="#dom-blob-stream" id="ref-for-dom-blob-stream"><c- g>stream</c-></a>();
-  [<a class="idl-code" data-link-type="extended-attribute"><c- g>NewObject</c-></a>] <a class="idl-code" data-link-type="interface"><c- b>Promise</c-></a>&lt;<a class="idl-code" data-link-type="interface"><c- b>USVString</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-blob-text" id="ref-for-dom-blob-text"><c- g>text</c-></a>();
-  [<a class="idl-code" data-link-type="extended-attribute"><c- g>NewObject</c-></a>] <a class="idl-code" data-link-type="interface"><c- b>Promise</c-></a>&lt;<a class="idl-code" data-link-type="interface"><c- b>ArrayBuffer</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-blob-arraybuffer" id="ref-for-dom-blob-arraybuffer"><c- g>arrayBuffer</c-></a>();
+  [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#NewObject" id="ref-for-NewObject"><c- g>NewObject</c-></a>] <a data-link-type="idl-name" href="https://streams.spec.whatwg.org/#readablestream" id="ref-for-readablestream"><c- n>ReadableStream</c-></a> <a class="idl-code" data-link-type="method" href="#dom-blob-stream" id="ref-for-dom-blob-stream"><c- g>stream</c-></a>();
+  [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#NewObject" id="ref-for-NewObject①"><c- g>NewObject</c-></a>] <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise" id="ref-for-idl-promise"><c- b>Promise</c-></a>&lt;<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString"><c- b>USVString</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-blob-text" id="ref-for-dom-blob-text"><c- g>text</c-></a>();
+  [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#NewObject" id="ref-for-NewObject②"><c- g>NewObject</c-></a>] <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise" id="ref-for-idl-promise①"><c- b>Promise</c-></a>&lt;<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer"><c- b>ArrayBuffer</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-blob-arraybuffer" id="ref-for-dom-blob-arraybuffer"><c- g>arrayBuffer</c-></a>();
 };
 
 <c- b>enum</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="enum" data-export id="enumdef-endingtype"><code><c- g>EndingType</c-></code></dfn> { <dfn class="dfn-paneled idl-code" data-dfn-for="EndingType" data-dfn-type="enum-value" data-export id="dom-endingtype-transparent"><code><c- s>"transparent"</c-></code></dfn>, <dfn class="dfn-paneled idl-code" data-dfn-for="EndingType" data-dfn-type="enum-value" data-export id="dom-endingtype-native"><code><c- s>"native"</c-></code></dfn> };
 
 <c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dfn-BlobPropertyBag"><code><c- g>BlobPropertyBag</c-></code></dfn> {
-  <a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <a class="idl-code" data-default="&quot;&quot;" data-link-type="dict-member" data-type="DOMString " href="#dfn-BPtype" id="ref-for-dfn-BPtype"><c- g>type</c-></a> = "";
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString" id="ref-for-idl-DOMString②"><c- b>DOMString</c-></a> <a class="idl-code" data-default="&quot;&quot;" data-link-type="dict-member" data-type="DOMString " href="#dfn-BPtype" id="ref-for-dfn-BPtype"><c- g>type</c-></a> = "";
   <a data-link-type="idl-name" href="#enumdef-endingtype" id="ref-for-enumdef-endingtype"><c- n>EndingType</c-></a> <a class="idl-code" data-default="&quot;transparent&quot;" data-link-type="dict-member" data-type="EndingType " href="#dom-blobpropertybag-endings" id="ref-for-dom-blobpropertybag-endings"><c- g>endings</c-></a> = "transparent";
 };
 
-<c- b>typedef</c-> (<a data-link-type="idl-name"><c- n>BufferSource</c-></a> <c- b>or</c-> <a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob①①"><c- n>Blob</c-></a> <c- b>or</c-> <a class="idl-code" data-link-type="interface"><c- b>USVString</c-></a>) <dfn class="dfn-paneled idl-code" data-dfn-type="typedef" data-export id="typedefdef-blobpart"><code><c- g>BlobPart</c-></code></dfn>;
+<c- b>typedef</c-> (<a data-link-type="idl-name" href="https://webidl.spec.whatwg.org/#BufferSource" id="ref-for-BufferSource"><c- n>BufferSource</c-></a> <c- b>or</c-> <a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob①①"><c- n>Blob</c-></a> <c- b>or</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString①"><c- b>USVString</c-></a>) <dfn class="dfn-paneled idl-code" data-dfn-type="typedef" data-export id="typedefdef-blobpart"><code><c- g>BlobPart</c-></code></dfn>;
 </pre>
-   <p><code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob①②">Blob</a></code> objects are <a data-link-type="dfn">serializable objects</a>. Their <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/structured-data.html#serialization-steps" id="ref-for-serialization-steps">serialization steps</a>,
+   <p><code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob①②">Blob</a></code> objects are <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable-objects" id="ref-for-serializable-objects">serializable objects</a>. Their <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/structured-data.html#serialization-steps" id="ref-for-serialization-steps">serialization steps</a>,
 given <var>value</var> and <var>serialized</var>, are:</p>
    <ol>
     <li data-md>
@@ -880,11 +880,11 @@ given <var>value</var> and <var>serialized</var>, are:</p>
      <p>Set <var>value</var>’s underlying byte sequence to <var>serialized</var>.[[ByteSequence]].</p>
    </ol>
    <div class="algorithm" data-algorithm="get stream">
-     A <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob①③">Blob</a></code> <var>blob</var> has an associated <dfn class="dfn-paneled" data-dfn-for="Blob" data-dfn-type="dfn" data-noexport id="blob-get-stream">get stream</dfn> algorithm,
+     A <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob①③">Blob</a></code> <var>blob</var> has an associated <dfn class="dfn-paneled" data-dfn-for="Blob" data-dfn-type="dfn" data-export id="blob-get-stream">get stream</dfn> algorithm,
 which runs these steps: 
     <ol>
      <li data-md>
-      <p>Let <var>stream</var> be a <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#new" id="ref-for-new">new</a> <code class="idl"><a data-link-type="idl">ReadableStream</a></code> created in <var>blob</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm" id="ref-for-concept-relevant-realm">relevant Realm</a>.</p>
+      <p>Let <var>stream</var> be a <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#new" id="ref-for-new">new</a> <code class="idl"><a data-link-type="idl" href="https://streams.spec.whatwg.org/#readablestream" id="ref-for-readablestream①">ReadableStream</a></code> created in <var>blob</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm" id="ref-for-concept-relevant-realm">relevant Realm</a>.</p>
      <li data-md>
       <p><a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestream-set-up" id="ref-for-readablestream-set-up">Set up</a> <var>stream</var>.</p>
      <li data-md>
@@ -903,8 +903,8 @@ which runs these steps:
             <p>If <var>bytes</var> is failure, then <a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestream-error" id="ref-for-readablestream-error">error</a> <var>stream</var> with a <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason">failure reason</a> and
  abort these steps.</p>
            <li data-md>
-            <p>Let <var>chunk</var> be a new <code class="idl"><a data-link-type="idl">Uint8Array</a></code> wrapping an <code class="idl"><a data-link-type="idl">ArrayBuffer</a></code> containing <var>bytes</var>. If
- creating the <code class="idl"><a data-link-type="idl">ArrayBuffer</a></code> throws an exception, then <a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestream-error" id="ref-for-readablestream-error①">error</a> <var>stream</var> with that exception and abort these steps.</p>
+            <p>Let <var>chunk</var> be a new <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-Uint8Array" id="ref-for-idl-Uint8Array">Uint8Array</a></code> wrapping an <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer①">ArrayBuffer</a></code> containing <var>bytes</var>. If
+ creating the <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer②">ArrayBuffer</a></code> throws an exception, then <a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestream-error" id="ref-for-readablestream-error①">error</a> <var>stream</var> with that exception and abort these steps.</p>
            <li data-md>
             <p><a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestream-enqueue" id="ref-for-readablestream-enqueue">Enqueue</a> <var>chunk</var> in <var>stream</var>.</p>
           </ol>
@@ -972,11 +972,11 @@ and its <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-d
      which takes any number of the following types of elements, and in any order: 
      <ul>
       <li data-md>
-       <p><code class="idl"><a data-link-type="idl">BufferSource</a></code> elements.</p>
+       <p><code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#BufferSource" id="ref-for-BufferSource①">BufferSource</a></code> elements.</p>
       <li data-md>
        <p><code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob①⑥">Blob</a></code> elements.</p>
       <li data-md>
-       <p><code class="idl"><a data-link-type="idl">USVString</a></code> elements.</p>
+       <p><code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString②">USVString</a></code> elements.</p>
      </ul>
     <dt id="dfn-BlobPropertyBagMembers"><a class="self-link" href="#dfn-BlobPropertyBagMembers"></a>An <em>optional</em> <code class="idl"><a data-link-type="idl" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag①">BlobPropertyBag</a></code> 
     <dd>
@@ -989,7 +989,7 @@ Normative conditions for this member are provided in the <a href="#constructorBl
       <li data-md>
        <p><dfn class="dfn-paneled idl-code" data-dfn-for="BlobPropertyBag" data-dfn-type="dict-member" data-export id="dom-blobpropertybag-endings"><code>endings</code></dfn>,
 an enum which can take the values <code class="idl"><a data-link-type="idl" href="#dom-endingtype-transparent" id="ref-for-dom-endingtype-transparent">"transparent"</a></code> or <code class="idl"><a data-link-type="idl" href="#dom-endingtype-native" id="ref-for-dom-endingtype-native">"native"</a></code>.
-By default this is set to <code class="idl"><a data-link-type="idl" href="#dom-endingtype-transparent" id="ref-for-dom-endingtype-transparent①">"transparent"</a></code>. If set to <code class="idl"><a data-link-type="idl" href="#dom-endingtype-native" id="ref-for-dom-endingtype-native①">"native"</a></code>, <a data-link-type="dfn" href="#convert-line-endings-to-native" id="ref-for-convert-line-endings-to-native">line endings will be converted to native</a> in any <code class="idl"><a data-link-type="idl">USVString</a></code> elements in <code class="idl"><a data-link-type="idl" href="#dfn-blobParts" id="ref-for-dfn-blobParts②">blobParts</a></code>.</p>
+By default this is set to <code class="idl"><a data-link-type="idl" href="#dom-endingtype-transparent" id="ref-for-dom-endingtype-transparent①">"transparent"</a></code>. If set to <code class="idl"><a data-link-type="idl" href="#dom-endingtype-native" id="ref-for-dom-endingtype-native①">"native"</a></code>, <a data-link-type="dfn" href="#convert-line-endings-to-native" id="ref-for-convert-line-endings-to-native">line endings will be converted to native</a> in any <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString③">USVString</a></code> elements in <code class="idl"><a data-link-type="idl" href="#dfn-blobParts" id="ref-for-dfn-blobParts②">blobParts</a></code>.</p>
      </ul>
    </dl>
    <div class="algorithm" data-algorithm="process-blob-parts">
@@ -1002,7 +1002,7 @@ run the following steps:
       <p>For each <var>element</var> in <var>parts</var>:</p>
       <ol>
        <li data-md>
-        <p>If <var>element</var> is a <code class="idl"><a data-link-type="idl">USVString</a></code>, run the following substeps:</p>
+        <p>If <var>element</var> is a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString④">USVString</a></code>, run the following substeps:</p>
         <ol>
          <li data-md>
           <p>Let <var>s</var> be <var>element</var>.</p>
@@ -1017,7 +1017,7 @@ Scenarios exist when the <code class="idl"><a data-link-type="idl" href="#dfn-Bl
 due to lost or scrambled character sequences.</p>
         </ol>
        <li data-md>
-        <p>If <var>element</var> is a <code class="idl"><a data-link-type="idl">BufferSource</a></code>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-get-buffer-source-copy" id="ref-for-dfn-get-buffer-source-copy">get
+        <p>If <var>element</var> is a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#BufferSource" id="ref-for-BufferSource②">BufferSource</a></code>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-get-buffer-source-copy" id="ref-for-dfn-get-buffer-source-copy">get
 a copy of the bytes held by the buffer source</a>, and append those bytes to <var>bytes</var>.</p>
        <li data-md>
         <p>If <var>element</var> is a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob①⑨">Blob</a></code>,
@@ -1122,7 +1122,7 @@ from <var>s</var> given <var>position</var>.</p>
        </div>
       </div>
      </div>
-     <dfn class="dfn-paneled idl-code" data-dfn-for="Blob" data-dfn-type="attribute" data-export id="dfn-size"><code>size</code></dfn>, <span> of type <a data-link-type="idl-name">unsigned long long</a>, readonly</span>
+     <dfn class="dfn-paneled idl-code" data-dfn-for="Blob" data-dfn-type="attribute" data-export id="dfn-size"><code>size</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://webidl.spec.whatwg.org/#idl-unsigned-long-long" id="ref-for-idl-unsigned-long-long①">unsigned long long</a>, readonly</span>
     <dd>Returns the size of the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte" id="ref-for-byte③">byte</a> sequence in number of bytes.
     On getting, conforming user agents must return the total number of bytes that can be read by a <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader②">FileReader</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-FileReaderSync" id="ref-for-dfn-FileReaderSync">FileReaderSync</a></code> object,
     or 0 if the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob②②">Blob</a></code> has no bytes to be read. 
@@ -1158,7 +1158,7 @@ from <var>s</var> given <var>position</var>.</p>
        </div>
       </div>
      </div>
-     <dfn class="dfn-paneled idl-code" data-dfn-for="Blob" data-dfn-type="attribute" data-export id="dfn-type"><code>type</code></dfn>, <span> of type <a data-link-type="idl-name">DOMString</a>, readonly</span>
+     <dfn class="dfn-paneled idl-code" data-dfn-for="Blob" data-dfn-type="attribute" data-export id="dfn-type"><code>type</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://webidl.spec.whatwg.org/#idl-DOMString" id="ref-for-idl-DOMString③">DOMString</a>, readonly</span>
     <dd>
      The ASCII-encoded string in lower case representing the media type of the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob②③">Blob</a></code>.
     On getting, user agents must return the type of a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob②④">Blob</a></code> as an ASCII-encoded string in lower case,
@@ -1334,7 +1334,7 @@ the result of calling <a data-link-type="dfn" href="#blob-get-stream" id="ref-fo
  running <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-decode" id="ref-for-utf-8-decode">UTF-8 decode</a> on its first argument.</p>
    </ol>
    <p class="note" role="note"><span>Note:</span> This is different from the behavior of <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText">readAsText()</a></code> to align better
-with the behavior of <code class="idl"><a data-link-type="idl">Fetch’s text()</a></code>. Specifically this method will always
+with the behavior of <code class="idl"><a data-link-type="idl" href="https://fetch.spec.whatwg.org/#dom-body-text" id="ref-for-dom-body-text">Fetch’s text()</a></code>. Specifically this method will always
 use UTF-8 as encoding, while <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader③">FileReader</a></code> can use a different encoding depending on
 the blob’s type and passed in encoding name.</p>
    <h4 class="heading settled" data-level="3.3.4" id="arraybuffer-method-algo"><span class="secno">3.3.4. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#dom-blob-arraybuffer" id="ref-for-dom-blob-arraybuffer①">arrayBuffer()</a></code> method</span><a class="self-link" href="#arraybuffer-method-algo"></a></h4>
@@ -1367,7 +1367,7 @@ the blob’s type and passed in encoding name.</p>
      <p>Let <var>promise</var> be the result of <a data-link-type="dfn" href="https://streams.spec.whatwg.org/#readablestreamdefaultreader-read-all-bytes" id="ref-for-readablestreamdefaultreader-read-all-bytes①">reading all bytes</a> from <var>stream</var> with <var>reader</var>.</p>
     <li data-md>
      <p>Return the result of transforming <var>promise</var> by a fulfillment handler that returns
- a new <code class="idl"><a data-link-type="idl">ArrayBuffer</a></code> whose contents are its first argument.</p>
+ a new <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer③">ArrayBuffer</a></code> whose contents are its first argument.</p>
    </ol>
    <h2 class="heading settled" data-level="4" id="file-section"><span class="secno">4. </span><span class="content">The File Interface</span><a class="self-link" href="#file-section"></a></h2>
    <div class="mdn-anno wrapped after">
@@ -1413,20 +1413,20 @@ or the empty string – 0 bytes – if the type cannot be determined.</p>
      <p>User agents must not attempt heuristic determination of encoding,
 including statistical methods.</p>
    </ul>
-<pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute"><c- g>Serializable</c-></a>]
+<pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed①"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable" id="ref-for-serializable①"><c- g>Serializable</c-></a>]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="dfn-file"><code><c- g>File</c-></code></dfn> : <a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③①"><c- n>Blob</c-></a> {
-  <dfn class="dfn-paneled idl-code" data-dfn-for="File" data-dfn-type="constructor" data-export data-lt="File(fileBits, fileName, options)|constructor(fileBits, fileName, options)|File(fileBits, fileName)|constructor(fileBits, fileName)" id="dom-file-file"><code><c- g>constructor</c-></code></dfn>(<a data-link-type="dfn"><c- b>sequence</c-></a>&lt;<a data-link-type="idl-name" href="#typedefdef-blobpart" id="ref-for-typedefdef-blobpart②"><c- n>BlobPart</c-></a>> <a class="idl-code" data-link-type="argument" href="#dfn-fileBits" id="ref-for-dfn-fileBits"><c- g>fileBits</c-></a>,
-              <a class="idl-code" data-link-type="interface"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-fileName" id="ref-for-dfn-fileName"><c- g>fileName</c-></a>,
+  <dfn class="dfn-paneled idl-code" data-dfn-for="File" data-dfn-type="constructor" data-export data-lt="File(fileBits, fileName, options)|constructor(fileBits, fileName, options)|File(fileBits, fileName)|constructor(fileBits, fileName)" id="dom-file-file"><code><c- g>constructor</c-></code></dfn>(<a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#idl-sequence" id="ref-for-idl-sequence①"><c- b>sequence</c-></a>&lt;<a data-link-type="idl-name" href="#typedefdef-blobpart" id="ref-for-typedefdef-blobpart②"><c- n>BlobPart</c-></a>> <a class="idl-code" data-link-type="argument" href="#dfn-fileBits" id="ref-for-dfn-fileBits"><c- g>fileBits</c-></a>,
+              <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString⑤"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-fileName" id="ref-for-dfn-fileName"><c- g>fileName</c-></a>,
               <c- b>optional</c-> <a data-link-type="idl-name" href="#dfn-FilePropertyBag" id="ref-for-dfn-FilePropertyBag"><c- n>FilePropertyBag</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="File/File(fileBits, fileName, options), File/constructor(fileBits, fileName, options), File/File(fileBits, fileName), File/constructor(fileBits, fileName)" data-dfn-type="argument" data-export id="dom-file-file-filebits-filename-options-options"><code><c- g>options</c-></code></dfn> = {});
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMString" href="#dfn-name" id="ref-for-dfn-name①"><c- g>name</c-></a>;
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="long long" href="#dfn-lastModified" id="ref-for-dfn-lastModified"><c- g>lastModified</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString" id="ref-for-idl-DOMString④"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMString" href="#dfn-name" id="ref-for-dfn-name①"><c- g>name</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-long-long" id="ref-for-idl-long-long②"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="long long" href="#dfn-lastModified" id="ref-for-dfn-lastModified"><c- g>lastModified</c-></a>;
 };
 
 <c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dfn-FilePropertyBag"><code><c- g>FilePropertyBag</c-></code></dfn> : <a data-link-type="idl-name" href="#dfn-BlobPropertyBag" id="ref-for-dfn-BlobPropertyBag③"><c- n>BlobPropertyBag</c-></a> {
-  <a class="idl-code" data-link-type="interface"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="long long " href="#dfn-FPdate" id="ref-for-dfn-FPdate"><c- g>lastModified</c-></a>;
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-long-long" id="ref-for-idl-long-long③"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="long long " href="#dfn-FPdate" id="ref-for-dfn-FPdate"><c- g>lastModified</c-></a>;
 };
 </pre>
-   <p><code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file①⑤">File</a></code> objects are <a data-link-type="dfn">serializable objects</a>. Their <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/structured-data.html#serialization-steps" id="ref-for-serialization-steps①">serialization steps</a>,
+   <p><code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file①⑤">File</a></code> objects are <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable-objects" id="ref-for-serializable-objects①">serializable objects</a>. Their <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/structured-data.html#serialization-steps" id="ref-for-serialization-steps①">serialization steps</a>,
 given <var>value</var> and <var>serialized</var>, are:</p>
    <ol>
     <li data-md>
@@ -1522,14 +1522,14 @@ the <code class="idl"><a data-link-type="idl" href="#dfn-FPdate" id="ref-for-dfn
      which takes any number of the following elements, and in any order: 
      <ul>
       <li data-md>
-       <p><code class="idl"><a data-link-type="idl">BufferSource</a></code> elements.</p>
+       <p><code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#BufferSource" id="ref-for-BufferSource③">BufferSource</a></code> elements.</p>
       <li data-md>
        <p><code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob③②">Blob</a></code> elements, which includes <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file①⑧">File</a></code> elements.</p>
       <li data-md>
-       <p><code class="idl"><a data-link-type="idl">USVString</a></code> elements.</p>
+       <p><code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString⑥">USVString</a></code> elements.</p>
      </ul>
     <dt>A <dfn class="dfn-paneled idl-code" data-dfn-for="File/File(fileBits, fileName, options)" data-dfn-type="argument" data-export id="dfn-fileName"><code>fileName</code></dfn> parameter 
-    <dd>A <code class="idl"><a data-link-type="idl">USVString</a></code> parameter representing the name of the file;
+    <dd>A <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString⑦">USVString</a></code> parameter representing the name of the file;
     normative conditions for this constructor parameter can be found in <a href="#file-constructor">§ 4.1 Constructor</a>. 
     <dt id="def-Properties"><a class="self-link" href="#def-Properties"></a>An optional <code class="idl"><a data-link-type="idl" href="#dfn-FilePropertyBag" id="ref-for-dfn-FilePropertyBag②">FilePropertyBag</a></code> dictionary 
     <dd>
@@ -1560,7 +1560,7 @@ normative conditions for this member are provided in <a href="#file-constructor"
        </div>
       </div>
      </div>
-     <dfn class="dfn-paneled idl-code" data-dfn-for="File" data-dfn-type="attribute" data-export id="dfn-name"><code>name</code></dfn>, <span> of type <a data-link-type="idl-name">DOMString</a>, readonly</span>
+     <dfn class="dfn-paneled idl-code" data-dfn-for="File" data-dfn-type="attribute" data-export id="dfn-name"><code>name</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://webidl.spec.whatwg.org/#idl-DOMString" id="ref-for-idl-DOMString⑤">DOMString</a>, readonly</span>
     <dd>The name of the file.
     On getting, this must return the name of the file as a string.
     There are numerous file name variations and conventions used by different underlying OS file systems;
@@ -1586,7 +1586,7 @@ normative conditions for this member are provided in <a href="#file-constructor"
        </div>
       </div>
      </div>
-     <dfn class="dfn-paneled idl-code" data-dfn-for="File" data-dfn-type="attribute" data-export id="dfn-lastModified"><code>lastModified</code></dfn>, <span> of type <a data-link-type="idl-name">long long</a>, readonly</span>
+     <dfn class="dfn-paneled idl-code" data-dfn-for="File" data-dfn-type="attribute" data-export id="dfn-lastModified"><code>lastModified</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://webidl.spec.whatwg.org/#idl-long-long" id="ref-for-idl-long-long④">long long</a>, readonly</span>
     <dd>The last modified date of the file.
     On getting, if user agents can make this information available,
     this must return a <code>long long</code> set to the time the file was last modified
@@ -1603,9 +1603,9 @@ these objects are defined in HTML <a data-link-type="biblio" href="#biblio-html"
 The <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file②②">File</a></code> interface, which inherits from <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob③③">Blob</a></code>, is immutable,
 and thus represents file data that can be read into memory at the time a <a data-link-type="dfn" href="#readOperation" id="ref-for-readOperation">read operation</a> is initiated.
 User agents must process reads on files that no longer exist at the time of read as <a data-link-type="dfn" href="#file-error-read" id="ref-for-file-error-read">errors</a>,
-throwing a <code class="idl"><a data-link-type="idl">NotFoundError</a></code> exception
+throwing a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#notfounderror" id="ref-for-notfounderror">NotFoundError</a></code> exception
 if using a <code class="idl"><a data-link-type="idl" href="#dfn-FileReaderSync" id="ref-for-dfn-FileReaderSync①">FileReaderSync</a></code> on a Web Worker <a data-link-type="biblio" href="#biblio-workers">[Workers]</a> or firing an <code class="idl"><a class="idl-code" data-link-type="event" href="#dfn-error-event" id="ref-for-dfn-error-event">error</a></code> event
-with the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-filereader-error" id="ref-for-dom-filereader-error">error</a></code> attribute returning a <code class="idl"><a data-link-type="idl">NotFoundError</a></code>.</p>
+with the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-filereader-error" id="ref-for-dom-filereader-error">error</a></code> attribute returning a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#notfounderror" id="ref-for-notfounderror①">NotFoundError</a></code>.</p>
    <div class="example" id="example-c4014f19">
     <a class="self-link" href="#example-c4014f19"></a> In the examples below, metadata from a file object is displayed meaningfully, and a file object is created with a name and a last modified date. 
 <pre class="lang-javascript highlight"><c- a>var</c-> file <c- o>=</c-> document<c- p>.</c->getElementById<c- p>(</c-><c- u>"filePicker"</c-><c- p>).</c->files<c- p>[</c-><c- mf>0</c-><c- p>];</c->
@@ -1645,13 +1645,13 @@ with the <code class="idl"><a data-link-type="idl" href="http://tc39.github.io/e
 In particular, this means syntax of the sort <code class="lang-javascript highlight">filelist<c- p>.</c->item<c- p>(</c-><c- mf>0</c-><c- p>)</c-></code> is at risk;
 most other programmatic use of <code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist③">FileList</a></code> is unlikely to be affected by the eventual migration to an <code class="idl"><a data-link-type="idl" href="http://tc39.github.io/ecma262/#sec-array-constructor" id="ref-for-sec-array-constructor①">Array</a></code> type.</p>
    <p>This interface is a list of <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file②③">File</a></code> objects.</p>
-<pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute"><c- g>Serializable</c-></a>]
+<pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed②"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable" id="ref-for-serializable②"><c- g>Serializable</c-></a>]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="dfn-filelist"><code><c- g>FileList</c-></code></dfn> {
-  <c- b>getter</c-> <a data-link-type="idl-name" href="#dfn-file" id="ref-for-dfn-file②④"><c- n>File</c-></a>? <a class="idl-code" data-link-type="method" href="#dfn-item" id="ref-for-dfn-item"><c- g>item</c-></a>(<a class="idl-code" data-link-type="interface"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-index" id="ref-for-dfn-index"><c- g>index</c-></a>);
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="unsigned long" href="#dfn-length" id="ref-for-dfn-length"><c- g>length</c-></a>;
+  <c- b>getter</c-> <a data-link-type="idl-name" href="#dfn-file" id="ref-for-dfn-file②④"><c- n>File</c-></a>? <a class="idl-code" data-link-type="method" href="#dfn-item" id="ref-for-dfn-item"><c- g>item</c-></a>(<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" id="ref-for-idl-unsigned-long"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-index" id="ref-for-dfn-index"><c- g>index</c-></a>);
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" id="ref-for-idl-unsigned-long①"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="unsigned long" href="#dfn-length" id="ref-for-dfn-length"><c- g>length</c-></a>;
 };
 </pre>
-   <p><code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist④">FileList</a></code> objects are <a data-link-type="dfn">serializable objects</a>. Their <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/structured-data.html#serialization-steps" id="ref-for-serialization-steps②">serialization steps</a>,
+   <p><code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist④">FileList</a></code> objects are <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable-objects" id="ref-for-serializable-objects②">serializable objects</a>. Their <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/structured-data.html#serialization-steps" id="ref-for-serialization-steps②">serialization steps</a>,
 given <var>value</var> and <var>serialized</var>, are:</p>
    <ol>
     <li data-md>
@@ -1699,7 +1699,7 @@ given <var>value</var> and <var>serialized</var>, are:</p>
        </div>
       </div>
      </div>
-     <dfn class="dfn-paneled idl-code" data-dfn-for="FileList" data-dfn-type="attribute" data-export id="dfn-length"><code>length</code></dfn>, <span> of type <a data-link-type="idl-name">unsigned long</a>, readonly</span>
+     <dfn class="dfn-paneled idl-code" data-dfn-for="FileList" data-dfn-type="attribute" data-export id="dfn-length"><code>length</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" id="ref-for-idl-unsigned-long②">unsigned long</a>, readonly</span>
     <dd>must return the number of files in the <code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist⑤">FileList</a></code> object.
       If there are no files, this attribute must return 0. 
    </dl>
@@ -1734,9 +1734,9 @@ given <var>value</var> and <var>serialized</var>, are:</p>
     If there are no such <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file②⑨">File</a></code> objects,
     then there are no supported property indices.</p>
    </dl>
-   <p class="note" role="note"><span>Note:</span> The <code class="idl"><a data-link-type="idl">HTMLInputElement</a></code> interface has a readonly attribute of type <code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist①⓪">FileList</a></code>,
+   <p class="note" role="note"><span>Note:</span> The <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/input.html#htmlinputelement" id="ref-for-htmlinputelement">HTMLInputElement</a></code> interface has a readonly attribute of type <code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist①⓪">FileList</a></code>,
 which is what is being accessed in the above example.
-Other interfaces with a readonly attribute of type <code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist①①">FileList</a></code> include the <code class="idl"><a data-link-type="idl">DataTransfer</a></code> interface.</p>
+Other interfaces with a readonly attribute of type <code class="idl"><a data-link-type="idl" href="#dfn-filelist" id="ref-for-dfn-filelist①①">FileList</a></code> include the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dnd.html#datatransfer" id="ref-for-datatransfer①">DataTransfer</a></code> interface.</p>
    <h2 class="heading settled" data-level="6" id="reading-data-section"><span class="secno">6. </span><span class="content">Reading Data</span><a class="self-link" href="#reading-data-section"></a></h2>
    <h3 class="heading settled" data-level="6.1" id="blobreader-task-source"><span class="secno">6.1. </span><span class="content">The File Reading Task Source</span><a class="self-link" href="#blobreader-task-source"></a></h3>
    <p>This specification defines a new generic <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#task-source" id="ref-for-task-source">task source</a> called the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="fileReadingTaskSource">file reading task source</dfn>,
@@ -1760,42 +1760,42 @@ It is to be used for features that trigger in response to asynchronously reading
      </div>
     </div>
    </div>
-<pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->)]
-<c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="dfn-filereader"><code><c- g>FileReader</c-></code></dfn>: <a data-link-type="idl-name"><c- n>EventTarget</c-></a> {
+<pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed③"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->)]
+<c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="dfn-filereader"><code><c- g>FileReader</c-></code></dfn>: <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#eventtarget" id="ref-for-eventtarget"><c- n>EventTarget</c-></a> {
   <a class="idl-code" data-link-type="constructor" href="#filereaderConstrctr" id="ref-for-filereaderConstrctr"><c- g>constructor</c-></a>();
   // async read methods
-  <a class="idl-code" data-link-type="interface"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBuffer" id="ref-for-dfn-readAsArrayBuffer"><c- g>readAsArrayBuffer</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑤"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsArrayBuffer(blob)" data-dfn-type="argument" data-export id="dom-filereader-readasarraybuffer-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereader-readasarraybuffer-blob-blob"></a></dfn>);
-  <a class="idl-code" data-link-type="interface"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsBinaryString" id="ref-for-dfn-readAsBinaryString"><c- g>readAsBinaryString</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑥"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsBinaryString(blob)" data-dfn-type="argument" data-export id="dom-filereader-readasbinarystring-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereader-readasbinarystring-blob-blob"></a></dfn>);
-  <a class="idl-code" data-link-type="interface"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsText" id="ref-for-dfn-readAsText①"><c- g>readAsText</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑦"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsText(blob, encoding), FileReader/readAsText(blob)" data-dfn-type="argument" data-export id="dom-filereader-readastext-blob-encoding-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereader-readastext-blob-encoding-blob"></a></dfn>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsText(blob, encoding), FileReader/readAsText(blob)" data-dfn-type="argument" data-export id="dom-filereader-readastext-blob-encoding-encoding"><code><c- g>encoding</c-></code><a class="self-link" href="#dom-filereader-readastext-blob-encoding-encoding"></a></dfn>);
-  <a class="idl-code" data-link-type="interface"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsDataURL" id="ref-for-dfn-readAsDataURL"><c- g>readAsDataURL</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑧"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsDataURL(blob)" data-dfn-type="argument" data-export id="dom-filereader-readasdataurl-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereader-readasdataurl-blob-blob"></a></dfn>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined" id="ref-for-idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBuffer" id="ref-for-dfn-readAsArrayBuffer"><c- g>readAsArrayBuffer</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑤"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsArrayBuffer(blob)" data-dfn-type="argument" data-export id="dom-filereader-readasarraybuffer-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereader-readasarraybuffer-blob-blob"></a></dfn>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined" id="ref-for-idl-undefined①"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsBinaryString" id="ref-for-dfn-readAsBinaryString"><c- g>readAsBinaryString</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑥"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsBinaryString(blob)" data-dfn-type="argument" data-export id="dom-filereader-readasbinarystring-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereader-readasbinarystring-blob-blob"></a></dfn>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined" id="ref-for-idl-undefined②"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsText" id="ref-for-dfn-readAsText①"><c- g>readAsText</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑦"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsText(blob, encoding), FileReader/readAsText(blob)" data-dfn-type="argument" data-export id="dom-filereader-readastext-blob-encoding-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereader-readastext-blob-encoding-blob"></a></dfn>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString" id="ref-for-idl-DOMString⑥"><c- b>DOMString</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsText(blob, encoding), FileReader/readAsText(blob)" data-dfn-type="argument" data-export id="dom-filereader-readastext-blob-encoding-encoding"><code><c- g>encoding</c-></code><a class="self-link" href="#dom-filereader-readastext-blob-encoding-encoding"></a></dfn>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined" id="ref-for-idl-undefined③"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsDataURL" id="ref-for-dfn-readAsDataURL"><c- g>readAsDataURL</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob③⑧"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReader/readAsDataURL(blob)" data-dfn-type="argument" data-export id="dom-filereader-readasdataurl-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereader-readasdataurl-blob-blob"></a></dfn>);
 
-  <a class="idl-code" data-link-type="interface"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-abort" id="ref-for-dfn-abort①"><c- g>abort</c-></a>();
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined" id="ref-for-idl-undefined④"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-abort" id="ref-for-dfn-abort①"><c- g>abort</c-></a>();
 
   // states
-  <c- b>const</c-> <a class="idl-code" data-link-type="interface"><c- b>unsigned</c-> <c- b>short</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="const" data-export id="dom-filereader-empty"><code><c- g>EMPTY</c-></code></dfn> = 0;
-  <c- b>const</c-> <a class="idl-code" data-link-type="interface"><c- b>unsigned</c-> <c- b>short</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="const" data-export id="dom-filereader-loading"><code><c- g>LOADING</c-></code></dfn> = 1;
-  <c- b>const</c-> <a class="idl-code" data-link-type="interface"><c- b>unsigned</c-> <c- b>short</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="const" data-export id="dom-filereader-done"><code><c- g>DONE</c-></code></dfn> = 2;
+  <c- b>const</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short" id="ref-for-idl-unsigned-short"><c- b>unsigned</c-> <c- b>short</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="const" data-export id="dom-filereader-empty"><code><c- g>EMPTY</c-></code></dfn> = 0;
+  <c- b>const</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short" id="ref-for-idl-unsigned-short①"><c- b>unsigned</c-> <c- b>short</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="const" data-export id="dom-filereader-loading"><code><c- g>LOADING</c-></code></dfn> = 1;
+  <c- b>const</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short" id="ref-for-idl-unsigned-short②"><c- b>unsigned</c-> <c- b>short</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="const" data-export id="dom-filereader-done"><code><c- g>DONE</c-></code></dfn> = 2;
 
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface"><c- b>unsigned</c-> <c- b>short</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="unsigned short" href="#dom-filereader-readystate" id="ref-for-dom-filereader-readystate"><c- g>readyState</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short" id="ref-for-idl-unsigned-short③"><c- b>unsigned</c-> <c- b>short</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="unsigned short" href="#dom-filereader-readystate" id="ref-for-dom-filereader-readystate"><c- g>readyState</c-></a>;
 
   // File or Blob data
-  <c- b>readonly</c-> <c- b>attribute</c-> (<a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <c- b>or</c-> <a class="idl-code" data-link-type="interface"><c- b>ArrayBuffer</c-></a>)? <a class="idl-code" data-link-type="attribute" data-readonly data-type="(DOMString or ArrayBuffer)?" href="#dom-filereader-result" id="ref-for-dom-filereader-result"><c- g>result</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> (<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString" id="ref-for-idl-DOMString⑦"><c- b>DOMString</c-></a> <c- b>or</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer④"><c- b>ArrayBuffer</c-></a>)? <a class="idl-code" data-link-type="attribute" data-readonly data-type="(DOMString or ArrayBuffer)?" href="#dom-filereader-result" id="ref-for-dom-filereader-result"><c- g>result</c-></a>;
 
-  <c- b>readonly</c-> <c- b>attribute</c-> <a data-link-type="idl-name"><c- n>DOMException</c-></a>? <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMException?" href="#dom-filereader-error" id="ref-for-dom-filereader-error①"><c- g>error</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a data-link-type="idl-name" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException"><c- n>DOMException</c-></a>? <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMException?" href="#dom-filereader-error" id="ref-for-dom-filereader-error①"><c- g>error</c-></a>;
 
   // event handler content attributes
-  <c- b>attribute</c-> <a data-link-type="idl-name"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadstart" id="ref-for-dfn-onloadstart"><c- g>onloadstart</c-></a>;
-  <c- b>attribute</c-> <a data-link-type="idl-name"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onprogress" id="ref-for-dfn-onprogress"><c- g>onprogress</c-></a>;
-  <c- b>attribute</c-> <a data-link-type="idl-name"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onload" id="ref-for-dfn-onload"><c- g>onload</c-></a>;
-  <c- b>attribute</c-> <a data-link-type="idl-name"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onabort" id="ref-for-dfn-onabort"><c- g>onabort</c-></a>;
-  <c- b>attribute</c-> <a data-link-type="idl-name"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onerror" id="ref-for-dfn-onerror"><c- g>onerror</c-></a>;
-  <c- b>attribute</c-> <a data-link-type="idl-name"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadend" id="ref-for-dfn-onloadend"><c- g>onloadend</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadstart" id="ref-for-dfn-onloadstart"><c- g>onloadstart</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler①"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onprogress" id="ref-for-dfn-onprogress"><c- g>onprogress</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler②"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onload" id="ref-for-dfn-onload"><c- g>onload</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler③"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onabort" id="ref-for-dfn-onabort"><c- g>onabort</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler④"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onerror" id="ref-for-dfn-onerror"><c- g>onerror</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler⑤"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadend" id="ref-for-dfn-onloadend"><c- g>onloadend</c-></a>;
 };
 </pre>
    <p>A <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader⑤">FileReader</a></code> has an associated <dfn class="dfn-paneled" data-dfn-for="FileReader" data-dfn-type="dfn" data-noexport id="filereader-state">state</dfn>,
 that is <code>"empty"</code>, <code>"loading"</code>, or <code>"done"</code>. It is initially <code>"empty"</code>.</p>
-   <p>A <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader⑥">FileReader</a></code> has an associated <dfn class="dfn-paneled" data-dfn-for="FileReader" data-dfn-type="dfn" data-noexport id="filereader-result">result</dfn> (<code>null</code>, a <code class="idl"><a data-link-type="idl">DOMString</a></code> or an <code class="idl"><a data-link-type="idl">ArrayBuffer</a></code>). It is initially <code>null</code>.</p>
-   <p>A <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader⑦">FileReader</a></code> has an associated <dfn class="dfn-paneled" data-dfn-for="FileReader" data-dfn-type="dfn" data-noexport id="filereader-error">error</dfn> (<code>null</code> or a <code class="idl"><a data-link-type="idl">DOMException</a></code>). It is initially <code>null</code>.</p>
+   <p>A <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader⑥">FileReader</a></code> has an associated <dfn class="dfn-paneled" data-dfn-for="FileReader" data-dfn-type="dfn" data-noexport id="filereader-result">result</dfn> (<code>null</code>, a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMString" id="ref-for-idl-DOMString⑧">DOMString</a></code> or an <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer⑤">ArrayBuffer</a></code>). It is initially <code>null</code>.</p>
+   <p>A <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader⑦">FileReader</a></code> has an associated <dfn class="dfn-paneled" data-dfn-for="FileReader" data-dfn-type="dfn" data-noexport id="filereader-error">error</dfn> (<code>null</code> or a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException①">DOMException</a></code>). It is initially <code>null</code>.</p>
    <div class="mdn-anno wrapped">
     <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
     <div class="feature">
@@ -1886,7 +1886,7 @@ runs the following steps:
     <ol>
      <li data-md>
       <p>If <var>fr</var>’s <a data-link-type="dfn" href="#filereader-state" id="ref-for-filereader-state①">state</a> is <code>"loading"</code>,
- throw an <code class="idl"><a data-link-type="idl">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl">DOMException</a></code>.</p>
+ throw an <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#invalidstateerror" id="ref-for-invalidstateerror">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException②">DOMException</a></code>.</p>
      <li data-md>
       <p>Set <var>fr</var>’s <a data-link-type="dfn" href="#filereader-state" id="ref-for-filereader-state②">state</a> to <code>"loading"</code>.</p>
      <li data-md>
@@ -2132,7 +2132,7 @@ The <code class="idl"><a data-link-type="idl" href="#dom-filereader-readystate" 
    <p>The <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader①⑥">FileReader</a></code> interface makes available several <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="asynchronous read method" data-noexport id="asynchronous-read-methods">asynchronous read methods</dfn>—<wbr><code class="idl"><a data-link-type="idl" href="#dfn-readAsArrayBuffer" id="ref-for-dfn-readAsArrayBuffer①">readAsArrayBuffer()</a></code>, <code class="idl"><a data-link-type="idl" href="#dfn-readAsBinaryString" id="ref-for-dfn-readAsBinaryString①">readAsBinaryString()</a></code>, <code class="idl"><a data-link-type="idl" href="#dfn-readAsText" id="ref-for-dfn-readAsText②">readAsText()</a></code> and <code class="idl"><a data-link-type="idl" href="#dfn-readAsDataURL" id="ref-for-dfn-readAsDataURL①">readAsDataURL()</a></code>,
 which read files into memory.</p>
    <p class="note" role="note"><span>Note:</span> If multiple concurrent read methods are called on the same <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader①⑦">FileReader</a></code> object,
-user agents throw an <code class="idl"><a data-link-type="idl">InvalidStateError</a></code> on any of the read methods that occur
+user agents throw an <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#invalidstateerror" id="ref-for-invalidstateerror①">InvalidStateError</a></code> on any of the read methods that occur
 when <code class="idl"><a data-link-type="idl" href="#dom-filereader-readystate" id="ref-for-dom-filereader-readystate③">readyState</a></code> = <code class="idl"><a data-link-type="idl" href="#dom-filereader-loading" id="ref-for-dom-filereader-loading②">LOADING</a></code>.</p>
    <p>(<code class="idl"><a data-link-type="idl" href="#dfn-FileReaderSync" id="ref-for-dfn-FileReaderSync②">FileReaderSync</a></code> makes available several <a data-link-type="dfn" href="#read-method-sync" id="ref-for-read-method-sync">synchronous read methods</a>.
   Collectively, the sync and async read methods of <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader①⑧">FileReader</a></code> and <code class="idl"><a data-link-type="idl" href="#dfn-FileReaderSync" id="ref-for-dfn-FileReaderSync③">FileReaderSync</a></code> are referred to as just <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="read method" data-noexport id="read-method">read methods</dfn>.)</p>
@@ -2285,7 +2285,7 @@ in keeping with the Data URL specification <a data-link-type="biblio" href="#bib
   that constitutes a <em>label</em> of an encoding. </div>
         </ol>
        <li data-md>
-        <p>If <var>encoding</var> is failure, then set <var>encoding</var> to <a data-link-type="dfn">UTF-8</a>.</p>
+        <p>If <var>encoding</var> is failure, then set <var>encoding</var> to <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8" id="ref-for-utf-8">UTF-8</a>.</p>
        <li data-md>
         <p><a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#decode" id="ref-for-decode">Decode</a> <var>bytes</var> using fallback encoding <var>encoding</var>, and return the result.</p>
       </ol>
@@ -2300,7 +2300,7 @@ in keeping with the Data URL specification <a data-link-type="biblio" href="#bib
    </div>
    <h3 class="heading settled" data-level="6.4" id="events"><span class="secno">6.4. </span><span class="content">Events</span><a class="self-link" href="#events"></a></h3>
    <p>The <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader①⑨">FileReader</a></code> object must be the event target for all events in this specification.</p>
-   <p>When this specification says to <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="fire-a-progress-event">fire a progress event</dfn> <i>called e</i> (for some <code class="idl"><a data-link-type="idl">ProgressEvent</a></code> <code>e</code> at a given <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader②⓪">FileReader</a></code> <code>reader</code>),
+   <p>When this specification says to <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="fire-a-progress-event">fire a progress event</dfn> <i>called e</i> (for some <code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#progressevent" id="ref-for-progressevent">ProgressEvent</a></code> <code>e</code> at a given <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader②⓪">FileReader</a></code> <code>reader</code>),
 the following are normative:</p>
    <ul>
     <li data-md>
@@ -2336,7 +2336,7 @@ the following are normative:</p>
         </div>
        </div>
        <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="event" data-export id="dfn-loadstart-event"><code>loadstart</code></dfn> 
-      <td><code class="idl"><a data-link-type="idl">ProgressEvent</a></code> 
+      <td><code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#progressevent" id="ref-for-progressevent①">ProgressEvent</a></code> 
       <td>When the read starts. 
      <tr>
       <td>
@@ -2357,7 +2357,7 @@ the following are normative:</p>
         </div>
        </div>
        <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="event" data-export id="dfn-progress-event"><code>progress</code></dfn> 
-      <td><code class="idl"><a data-link-type="idl">ProgressEvent</a></code> 
+      <td><code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#progressevent" id="ref-for-progressevent②">ProgressEvent</a></code> 
       <td>While reading (and decoding) <code>blob</code> 
      <tr>
       <td>
@@ -2378,7 +2378,7 @@ the following are normative:</p>
         </div>
        </div>
        <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="event" data-export id="dfn-abort-event"><code>abort</code></dfn> 
-      <td><code class="idl"><a data-link-type="idl">ProgressEvent</a></code> 
+      <td><code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#progressevent" id="ref-for-progressevent③">ProgressEvent</a></code> 
       <td>When the read has been aborted.
         For instance, by invoking the <code class="idl"><a data-link-type="idl" href="#dfn-abort" id="ref-for-dfn-abort④">abort()</a></code> method. 
      <tr>
@@ -2400,7 +2400,7 @@ the following are normative:</p>
         </div>
        </div>
        <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="event" data-export id="dfn-error-event"><code>error</code></dfn> 
-      <td><code class="idl"><a data-link-type="idl">ProgressEvent</a></code> 
+      <td><code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#progressevent" id="ref-for-progressevent④">ProgressEvent</a></code> 
       <td>When the read has failed (see <a data-link-type="dfn" href="#file-error-read" id="ref-for-file-error-read②">file read errors</a>). 
      <tr>
       <td>
@@ -2421,7 +2421,7 @@ the following are normative:</p>
         </div>
        </div>
        <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="event" data-export id="dfn-load-event"><code>load</code></dfn> 
-      <td><code class="idl"><a data-link-type="idl">ProgressEvent</a></code> 
+      <td><code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#progressevent" id="ref-for-progressevent⑤">ProgressEvent</a></code> 
       <td>When the read has successfully completed. 
      <tr>
       <td>
@@ -2442,7 +2442,7 @@ the following are normative:</p>
         </div>
        </div>
        <dfn class="dfn-paneled idl-code" data-dfn-for="FileReader" data-dfn-type="event" data-export id="dfn-loadend-event"><code>loadend</code></dfn> 
-      <td><code class="idl"><a data-link-type="idl">ProgressEvent</a></code> 
+      <td><code class="idl"><a data-link-type="idl" href="https://xhr.spec.whatwg.org/#progressevent" id="ref-for-progressevent⑥">ProgressEvent</a></code> 
       <td>When the request has completed (either in success or failure). 
    </table>
    <h4 class="heading settled" data-level="6.4.2" id="eventInvariants"><span class="secno">6.4.2. </span><span class="content">Summary of Event Invariants</span><a class="self-link" href="#eventInvariants"></a></h4>
@@ -2513,15 +2513,15 @@ Workers can avail of both the asynchronous API (the <code class="idl"><a data-li
     </div>
    </div>
    <p>This interface  provides methods to <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="synchronous read method" data-noexport id="read-method-sync">synchronously read</dfn> <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file③⑤">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob④④">Blob</a></code> objects into memory.</p>
-<pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute"><c- g>Exposed</c-></a>=(<c- n>DedicatedWorker</c->,<c- n>SharedWorker</c->)]
+<pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed④"><c- g>Exposed</c-></a>=(<c- n>DedicatedWorker</c->,<c- n>SharedWorker</c->)]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="dfn-FileReaderSync"><code><c- g>FileReaderSync</c-></code></dfn> {
   <dfn class="dfn-paneled idl-code" data-dfn-for="FileReaderSync" data-dfn-type="constructor" data-export data-lt="FileReaderSync()|constructor()" id="dom-filereadersync-filereadersync"><code><c- g>constructor</c-></code></dfn>();
   // Synchronously return strings
 
-  <a class="idl-code" data-link-type="interface"><c- b>ArrayBuffer</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBufferSync" id="ref-for-dfn-readAsArrayBufferSync"><c- g>readAsArrayBuffer</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob④⑤"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReaderSync/readAsArrayBuffer(blob)" data-dfn-type="argument" data-export id="dom-filereadersync-readasarraybuffer-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereadersync-readasarraybuffer-blob-blob"></a></dfn>);
-  <a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsBinaryStringSync" id="ref-for-dfn-readAsBinaryStringSync"><c- g>readAsBinaryString</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob④⑥"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReaderSync/readAsBinaryString(blob)" data-dfn-type="argument" data-export id="dom-filereadersync-readasbinarystring-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereadersync-readasbinarystring-blob-blob"></a></dfn>);
-  <a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsTextSync" id="ref-for-dfn-readAsTextSync"><c- g>readAsText</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob④⑦"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReaderSync/readAsText(blob, encoding), FileReaderSync/readAsText(blob)" data-dfn-type="argument" data-export id="dom-filereadersync-readastext-blob-encoding-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereadersync-readastext-blob-encoding-blob"></a></dfn>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <dfn class="idl-code" data-dfn-for="FileReaderSync/readAsText(blob, encoding), FileReaderSync/readAsText(blob)" data-dfn-type="argument" data-export id="dom-filereadersync-readastext-blob-encoding-encoding"><code><c- g>encoding</c-></code><a class="self-link" href="#dom-filereadersync-readastext-blob-encoding-encoding"></a></dfn>);
-  <a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsDataURLSync" id="ref-for-dfn-readAsDataURLSync"><c- g>readAsDataURL</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob④⑧"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReaderSync/readAsDataURL(blob)" data-dfn-type="argument" data-export id="dom-filereadersync-readasdataurl-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereadersync-readasdataurl-blob-blob"></a></dfn>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer⑥"><c- b>ArrayBuffer</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBufferSync" id="ref-for-dfn-readAsArrayBufferSync"><c- g>readAsArrayBuffer</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob④⑤"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReaderSync/readAsArrayBuffer(blob)" data-dfn-type="argument" data-export id="dom-filereadersync-readasarraybuffer-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereadersync-readasarraybuffer-blob-blob"></a></dfn>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString" id="ref-for-idl-DOMString⑨"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsBinaryStringSync" id="ref-for-dfn-readAsBinaryStringSync"><c- g>readAsBinaryString</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob④⑥"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReaderSync/readAsBinaryString(blob)" data-dfn-type="argument" data-export id="dom-filereadersync-readasbinarystring-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereadersync-readasbinarystring-blob-blob"></a></dfn>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString" id="ref-for-idl-DOMString①⓪"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsTextSync" id="ref-for-dfn-readAsTextSync"><c- g>readAsText</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob④⑦"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReaderSync/readAsText(blob, encoding), FileReaderSync/readAsText(blob)" data-dfn-type="argument" data-export id="dom-filereadersync-readastext-blob-encoding-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereadersync-readastext-blob-encoding-blob"></a></dfn>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString" id="ref-for-idl-DOMString①①"><c- b>DOMString</c-></a> <dfn class="idl-code" data-dfn-for="FileReaderSync/readAsText(blob, encoding), FileReaderSync/readAsText(blob)" data-dfn-type="argument" data-export id="dom-filereadersync-readastext-blob-encoding-encoding"><code><c- g>encoding</c-></code><a class="self-link" href="#dom-filereadersync-readastext-blob-encoding-encoding"></a></dfn>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString" id="ref-for-idl-DOMString①②"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsDataURLSync" id="ref-for-dfn-readAsDataURLSync"><c- g>readAsDataURL</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob④⑧"><c- n>Blob</c-></a> <dfn class="idl-code" data-dfn-for="FileReaderSync/readAsDataURL(blob)" data-dfn-type="argument" data-export id="dom-filereadersync-readasdataurl-blob-blob"><code><c- g>blob</c-></code><a class="self-link" href="#dom-filereadersync-readasdataurl-blob-blob"></a></dfn>);
 };
 </pre>
    <h5 class="heading settled" data-level="6.5.1.1" id="filereadersyncConstrctr"><span class="secno">6.5.1.1. </span><span class="content">Constructors</span><a class="self-link" href="#filereadersyncConstrctr"></a></h5>
@@ -2605,7 +2605,7 @@ when invoked, must run these steps:</p>
    <div class="mdn-anno wrapped after">
     <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
     <div class="feature">
-     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileReaderSync/readAsArrayBuffer" title="The File or Blob to read into the File or ArrayBuffer.">FileReaderSync/readAsArrayBuffer</a></p>
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileReaderSync/readAsArrayBuffer" title="The readAsArrayBuffer() method of the FileReaderSync interface allows to read File or Blob objects in a synchronous way into an ArrayBuffer. This interface is only available in workers as it enables synchronous I/O that could potentially block.">FileReaderSync/readAsArrayBuffer</a></p>
      <p class="all-engines-text">In all current engines.</p>
      <div class="support">
       <span class="firefox yes"><span>Firefox</span><span>8+</span></span><span class="safari yes"><span>Safari</span><span>6+</span></span><span class="chrome yes"><span>Chrome</span><span>7+</span></span>
@@ -2670,20 +2670,20 @@ The list below of potential error conditions is <em>informative</em>.</p>
 at the time one of the <a data-link-type="dfn" href="#asynchronous-read-methods" id="ref-for-asynchronous-read-methods">asynchronous read methods</a> or <a data-link-type="dfn" href="#read-method-sync" id="ref-for-read-method-sync①">synchronous read methods</a> are called.
 This may be due to it having been moved or deleted after a reference to it was acquired
 (e.g. concurrent modification with another application).
-See <code class="idl"><a data-link-type="idl">NotFoundError</a></code>.</p>
+See <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#notfounderror" id="ref-for-notfounderror②">NotFoundError</a></code>.</p>
     <li data-md>
      <p>A <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file③⑦">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑤⓪">Blob</a></code> may be unreadable.
 This may be due to permission problems that occur after a reference to a <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file③⑧">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑤①">Blob</a></code> has been acquired
 (e.g. concurrent lock with another application).
 Additionally, the <a data-link-type="dfn" href="#snapshot-state" id="ref-for-snapshot-state⑨">snapshot state</a> may have changed.
-See <code class="idl"><a data-link-type="idl">NotReadableError</a></code>.</p>
+See <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#notreadableerror" id="ref-for-notreadableerror">NotReadableError</a></code>.</p>
     <li data-md>
      <p>User agents MAY determine that some files are unsafe for use within Web applications.
 A file may change on disk since the original file selection,
 thus resulting in an invalid read.
 Additionally, some file and directory structures may be considered restricted by the underlying filesystem;
 attempts to read from them may be considered a security violation.
-See <a href="#security-discussion">§ 9 Security and Privacy Considerations</a> and <code class="idl"><a data-link-type="idl">SecurityError</a></code>.</p>
+See <a href="#security-discussion">§ 9 Security and Privacy Considerations</a> and <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#securityerror" id="ref-for-securityerror">SecurityError</a></code>.</p>
    </ul>
    <h3 class="heading settled" data-level="7.1" id="dfn-error-codes"><span class="secno">7.1. </span><span class="content">Throwing an Exception or Returning an Error</span><a class="self-link" href="#dfn-error-codes"></a></h3>
    <p><em>This section is normative.</em></p>
@@ -2694,7 +2694,7 @@ is called a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="failu
    <p>Synchronous read methods <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw" id="ref-for-dfn-throw">throw</a> exceptions of the type in the table below
 if there has been an error owing to a particular <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason②">failure reason</a>.</p>
    <p>Asynchronous read methods use the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-filereader-error" id="ref-for-dom-filereader-error②">error</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader②③">FileReader</a></code> object,
-which must return a <code class="idl"><a data-link-type="idl">DOMException</a></code> object of the most appropriate type from the table below
+which must return a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException③">DOMException</a></code> object of the most appropriate type from the table below
 if there has been an error owing to a particular <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason③">failure reason</a>,
 or otherwise return null.</p>
    <table class="data">
@@ -2704,14 +2704,14 @@ or otherwise return null.</p>
       <th>Description and Failure Reason 
     <tbody>
      <tr>
-      <td><code class="idl"><a data-link-type="idl">NotFoundError</a></code> 
+      <td><code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#notfounderror" id="ref-for-notfounderror③">NotFoundError</a></code> 
       <td>
        If the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file④①">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑤④">Blob</a></code> resource could not be found at the time the read was processed,
         this is the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="NotFoundFR">NotFound</dfn> <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason④">failure reason</a>. 
-       <p>For asynchronous read methods the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-filereader-error" id="ref-for-dom-filereader-error③">error</a></code> attribute must return a <code class="idl"><a data-link-type="idl">NotFoundError</a></code> exception
-        and synchronous read methods must <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw" id="ref-for-dfn-throw①">throw</a> a <code class="idl"><a data-link-type="idl">NotFoundError</a></code> exception.</p>
+       <p>For asynchronous read methods the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-filereader-error" id="ref-for-dom-filereader-error③">error</a></code> attribute must return a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#notfounderror" id="ref-for-notfounderror④">NotFoundError</a></code> exception
+        and synchronous read methods must <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw" id="ref-for-dfn-throw①">throw</a> a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#notfounderror" id="ref-for-notfounderror⑤">NotFoundError</a></code> exception.</p>
      <tr>
-      <td><code class="idl"><a data-link-type="idl">SecurityError</a></code> 
+      <td><code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#securityerror" id="ref-for-securityerror①">SecurityError</a></code> 
       <td>
        If: 
        <ul>
@@ -2720,11 +2720,11 @@ or otherwise return null.</p>
         <li data-md>
          <p>it is determined that too many read calls are being made on <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file④②">File</a></code> or <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑤⑤">Blob</a></code> resources, this is the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="TooManyReadsFR">TooManyReads</dfn> <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason⑥">failure reason</a>.</p>
        </ul>
-       <p>For asynchronous read methods the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-filereader-error" id="ref-for-dom-filereader-error④">error</a></code> attribute may return a <code class="idl"><a data-link-type="idl">SecurityError</a></code> exception
-        and synchronous read methods may <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw" id="ref-for-dfn-throw②">throw</a> a <code class="idl"><a data-link-type="idl">SecurityError</a></code> exception.</p>
+       <p>For asynchronous read methods the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-filereader-error" id="ref-for-dom-filereader-error④">error</a></code> attribute may return a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#securityerror" id="ref-for-securityerror②">SecurityError</a></code> exception
+        and synchronous read methods may <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw" id="ref-for-dfn-throw②">throw</a> a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#securityerror" id="ref-for-securityerror③">SecurityError</a></code> exception.</p>
        <p>This is a security error to be used in situations not covered by any other <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason⑦">failure reason</a>.</p>
      <tr>
-      <td><code class="idl"><a data-link-type="idl">NotReadableError</a></code> 
+      <td><code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#notreadableerror" id="ref-for-notreadableerror①">NotReadableError</a></code> 
       <td>
        If: 
        <ul>
@@ -2737,8 +2737,8 @@ typically due due to permission problems that occur after a <a data-link-type="d
 (e.g. concurrent lock on the underlying storage with another application)
 then this is the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="FileLockFR">FileLock</dfn> <a data-link-type="dfn" href="#failureReason" id="ref-for-failureReason⑨">failure reason</a>.</p>
        </ul>
-       <p>For asynchronous read methods the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-filereader-error" id="ref-for-dom-filereader-error⑤">error</a></code> attribute must return a <code class="idl"><a data-link-type="idl">NotReadableError</a></code> exception
-        and synchronous read methods must <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw" id="ref-for-dfn-throw③">throw</a> a <code class="idl"><a data-link-type="idl">NotReadableError</a></code> exception.</p>
+       <p>For asynchronous read methods the <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-filereader-error" id="ref-for-dom-filereader-error⑤">error</a></code> attribute must return a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#notreadableerror" id="ref-for-notreadableerror②">NotReadableError</a></code> exception
+        and synchronous read methods must <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw" id="ref-for-dfn-throw③">throw</a> a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#notreadableerror" id="ref-for-notreadableerror③">NotReadableError</a></code> exception.</p>
    </table>
    <h2 class="heading settled" data-level="8" id="url"><span class="secno">8. </span><span class="content">A URL for Blob and MediaSource reference</span><a class="self-link" href="#url"></a></h2>
    <p>This section defines a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme">scheme</a> for a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url">URL</a> used to refer to <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑤⑧">Blob</a></code> and <code class="idl"><a data-link-type="idl" href="http://w3c.github.io/media-source/#mediasource" id="ref-for-mediasource">MediaSource</a></code> objects.</p>
@@ -2746,9 +2746,9 @@ then this is the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="
    <p><em>This section is informative.</em></p>
    <p><a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url①">Blob (or object) URLs</a> are URLs like <code>blob:http://example.com/550e8400-e29b-41d4-a716-446655440000</code>.
 This enables integration of <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑤⑨">Blob</a></code>s and <code class="idl"><a data-link-type="idl" href="http://w3c.github.io/media-source/#mediasource" id="ref-for-mediasource①">MediaSource</a></code>s with other
-APIs that are only designed to be used with URLs, such as the <code><a data-link-type="element">img</a></code> element. <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url②">Blob URLs</a> can also be used to navigate to as well as to trigger downloads
+APIs that are only designed to be used with URLs, such as the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element" id="ref-for-the-img-element">img</a></code> element. <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url②">Blob URLs</a> can also be used to navigate to as well as to trigger downloads
 of locally generated data.</p>
-   <p>For this purpose two static methods are exposed on the <code class="idl"><a data-link-type="idl">URL</a></code> interface, <code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL">createObjectURL(obj)</a></code> and <code class="idl"><a data-link-type="idl" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL">revokeObjectURL(url)</a></code>.
+   <p>For this purpose two static methods are exposed on the <code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#url" id="ref-for-url">URL</a></code> interface, <code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL">createObjectURL(obj)</a></code> and <code class="idl"><a data-link-type="idl" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL">revokeObjectURL(url)</a></code>.
 The first method creates a mapping from a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url①">URL</a> to a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑥⓪">Blob</a></code>,
 and the second method revokes said mapping.
 As long as the mapping exist the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑥①">Blob</a></code> can’t be garbage collected,
@@ -2846,7 +2846,7 @@ observable though, since a revoked blob URL can’t be resolved/fetched anymore 
    <p>This specification extends the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsing-the-web.html#unloading-document-cleanup-steps" id="ref-for-unloading-document-cleanup-steps">unloading document cleanup steps</a> with the following steps:</p>
    <ol>
     <li data-md>
-     <p>Let <var>environment</var> be the <code class="idl"><a data-link-type="idl">Document</a></code>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object" id="ref-for-relevant-settings-object">relevant settings object</a>.</p>
+     <p>Let <var>environment</var> be the <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document">Document</a></code>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object" id="ref-for-relevant-settings-object">relevant settings object</a>.</p>
     <li data-md>
      <p>Let <var>store</var> be the user agent’s <a data-link-type="dfn" href="#BlobURLStore" id="ref-for-BlobURLStore⑥">blob URL store</a>;</p>
     <li data-md>
@@ -2854,15 +2854,15 @@ observable though, since a revoked blob URL can’t be resolved/fetched anymore 
    </ol>
    <p class="issue" id="issue-5f2e5a9d"><a class="self-link" href="#issue-5f2e5a9d"></a> This needs a similar hook when a worker is unloaded.</p>
    <h3 class="heading settled" data-level="8.4" id="creating-revoking"><span class="secno">8.4. </span><span class="content">Creating and Revoking a blob URL</span><a class="self-link" href="#creating-revoking"></a></h3>
-   <p><a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url④">Blob URLs</a> are created and revoked using static methods exposed on the <code class="idl"><a data-link-type="idl">URL</a></code> object.
+   <p><a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url④">Blob URLs</a> are created and revoked using static methods exposed on the <code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#url" id="ref-for-url①">URL</a></code> object.
 Revocation of a <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url⑤">blob URL</a> decouples the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url⑥">blob URL</a> from the resource it refers to,
 and if it is dereferenced after it is revoked,
 user agents must act as if a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error" id="ref-for-concept-network-error">network error</a> has occurred.
 This section describes a supplemental interface to the URL specification <a data-link-type="biblio" href="#biblio-url">[URL]</a> and presents methods for <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url⑦">blob URL</a> creation and revocation.</p>
-<pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>DedicatedWorker</c->,<c- n>SharedWorker</c->)]
-<c- b>partial</c-> <c- b>interface</c-> <a class="idl-code" data-link-type="interface"><c- g>URL</c-></a> {
-  <c- b>static</c-> <a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL①"><c- g>createObjectURL</c-></a>((<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob⑥③"><c- n>Blob</c-></a> <c- b>or</c-> <a data-link-type="idl-name" href="http://w3c.github.io/media-source/#mediasource" id="ref-for-mediasource③"><c- n>MediaSource</c-></a>) <dfn class="idl-code" data-dfn-for="URL/createObjectURL(obj)" data-dfn-type="argument" data-export id="dom-url-createobjecturl-obj-obj"><code><c- g>obj</c-></code><a class="self-link" href="#dom-url-createobjecturl-obj-obj"></a></dfn>);
-  <c- b>static</c-> <a class="idl-code" data-link-type="interface"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL①"><c- g>revokeObjectURL</c-></a>(<a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <dfn class="idl-code" data-dfn-for="URL/revokeObjectURL(url)" data-dfn-type="argument" data-export id="dom-url-revokeobjecturl-url-url"><code><c- g>url</c-></code><a class="self-link" href="#dom-url-revokeobjecturl-url-url"></a></dfn>);
+<pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed⑤"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>DedicatedWorker</c->,<c- n>SharedWorker</c->)]
+<c- b>partial</c-> <c- b>interface</c-> <a class="idl-code" data-link-type="interface" href="https://url.spec.whatwg.org/#url" id="ref-for-url②"><c- g>URL</c-></a> {
+  <c- b>static</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString" id="ref-for-idl-DOMString①③"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL①"><c- g>createObjectURL</c-></a>((<a data-link-type="idl-name" href="#dfn-Blob" id="ref-for-dfn-Blob⑥③"><c- n>Blob</c-></a> <c- b>or</c-> <a data-link-type="idl-name" href="http://w3c.github.io/media-source/#mediasource" id="ref-for-mediasource③"><c- n>MediaSource</c-></a>) <dfn class="idl-code" data-dfn-for="URL/createObjectURL(obj)" data-dfn-type="argument" data-export id="dom-url-createobjecturl-obj-obj"><code><c- g>obj</c-></code><a class="self-link" href="#dom-url-createobjecturl-obj-obj"></a></dfn>);
+  <c- b>static</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined" id="ref-for-idl-undefined⑤"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-revokeObjectURL" id="ref-for-dfn-revokeObjectURL①"><c- g>revokeObjectURL</c-></a>(<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString" id="ref-for-idl-DOMString①④"><c- b>DOMString</c-></a> <dfn class="idl-code" data-dfn-for="URL/revokeObjectURL(url)" data-dfn-type="argument" data-export id="dom-url-revokeobjecturl-url-url"><code><c- g>url</c-></code><a class="self-link" href="#dom-url-revokeobjecturl-url-url"></a></dfn>);
 };
 </pre>
    <div class="mdn-anno wrapped">
@@ -2926,7 +2926,7 @@ Requests that were started before the <var>url</var> was revoked should still su
    </div>
    <div class="example" id="example-8201d564">
     <a class="self-link" href="#example-8201d564"></a> In the example below, <code>window1</code> and <code>window2</code> are separate,
-  but in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/origin.html#same-origin" id="ref-for-same-origin①">same origin</a>; <code>window2</code> could be an <code><a data-link-type="element">iframe</a></code> inside <code>window1</code>. 
+  but in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/origin.html#same-origin" id="ref-for-same-origin①">same origin</a>; <code>window2</code> could be an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-iframe-element" id="ref-for-the-iframe-element">iframe</a></code> inside <code>window1</code>. 
 <pre class="lang-javascript highlight">myurl <c- o>=</c-> window1<c- p>.</c->URL<c- p>.</c->createObjectURL<c- p>(</c->myblob<c- p>);</c->
 window2<c- p>.</c->URL<c- p>.</c->revokeObjectURL<c- p>(</c->myurl<c- p>);</c->
 </pre>
@@ -2941,7 +2941,7 @@ and can persist for as long as the <code>document</code> from which they were mi
 using <code>URL.<code class="idl"><a data-link-type="idl" href="#dfn-createObjectURL" id="ref-for-dfn-createObjectURL②">createObjectURL()</a></code></code>—<wbr>see <a href="#lifeTime" id="ref-for-lifeTime①">§ 8.3.2 Lifetime of blob URLs</a>.</p>
    <p>This section gives sample usage of creation and revocation of <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url⑨">blob URL</a>s with explanations.</p>
    <div class="example" id="example-1527a3d5">
-    <a class="self-link" href="#example-1527a3d5"></a> In the example below, two <code><a data-link-type="element">img</a></code> elements <a data-link-type="biblio" href="#biblio-html">[HTML]</a> refer to the same <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url①⓪">blob URL</a>: 
+    <a class="self-link" href="#example-1527a3d5"></a> In the example below, two <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element" id="ref-for-the-img-element①">img</a></code> elements <a data-link-type="biblio" href="#biblio-html">[HTML]</a> refer to the same <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url①⓪">blob URL</a>: 
 <pre class="lang-javascript highlight">url <c- o>=</c-> URL<c- p>.</c->createObjectURL<c- p>(</c->blob<c- p>);</c->
 img1<c- p>.</c->src <c- o>=</c-> url<c- p>;</c->
 img2<c- p>.</c->src <c- o>=</c-> url<c- p>;</c->
@@ -2994,8 +2994,8 @@ and guarding against modifications of files on disk after a selection has taken 
      <p>(e.g. files in /usr/bin, password files, and other native operating system executables)
  typically should not be exposed to web content,
  and should not be accessed via <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url①④">blob URLs</a>.
- User agents may <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw" id="ref-for-dfn-throw④">throw</a> a <code class="idl"><a data-link-type="idl">SecurityError</a></code> exception for synchronous read methods,
- or return a <code class="idl"><a data-link-type="idl">SecurityError</a></code> exception for asynchronous reads.</p>
+ User agents may <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw" id="ref-for-dfn-throw④">throw</a> a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#securityerror" id="ref-for-securityerror④">SecurityError</a></code> exception for synchronous read methods,
+ or return a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#securityerror" id="ref-for-securityerror⑤">SecurityError</a></code> exception for asynchronous reads.</p>
    </dl>
    <p class="issue" id="issue-61296551"><a class="self-link" href="#issue-61296551"></a> This section is provisional; more security data may supplement this in subsequent drafts.</p>
    <h2 class="heading settled" data-level="10" id="requirements"><span class="secno">10. </span><span class="content">Requirements and Use Cases</span><a class="self-link" href="#requirements"></a></h2>
@@ -3029,9 +3029,9 @@ which is useful for offline data access for web applications.</p>
      <p>User agents should provide the ability to save a local file programmatically given an amount of data and a file name.</p>
      <p class="note" role="note"><span>Note:</span> While this specification doesn’t provide an explicit API call to trigger downloads,
 the HTML5 specification has addressed this.
-The <code><a data-link-type="element-sub">download</a></code> attribute of the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-a-element" id="ref-for-the-a-element">a</a></code> element initiates a download,
+The <code><a data-link-type="element-sub" href="https://html.spec.whatwg.org/multipage/links.html#attr-hyperlink-download" id="ref-for-attr-hyperlink-download">download</a></code> attribute of the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-a-element" id="ref-for-the-a-element">a</a></code> element initiates a download,
 saving a <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file④⑤">File</a></code> with the name specified.
-The combination of this API and the <code><a data-link-type="element-sub">download</a></code> attribute on <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-a-element" id="ref-for-the-a-element①">a</a></code> elements
+The combination of this API and the <code><a data-link-type="element-sub" href="https://html.spec.whatwg.org/multipage/links.html#attr-hyperlink-download" id="ref-for-attr-hyperlink-download①">download</a></code> attribute on <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-a-element" id="ref-for-the-a-element①">a</a></code> elements
 allows for the creation of files within web applications,
 and the ability to save them locally.</p>
      <div class="example" id="example-eb79e741"><a class="self-link" href="#example-eb79e741"></a> A Spreadsheet App.
@@ -3266,6 +3266,18 @@ No invocations to these APIs occur silently without user intervention.</p>
    <li><a href="#UnixEpoch">Unix Epoch</a><span>, in § 2</span>
    <li><a href="#UnsafeFileFR">UnsafeFile</a><span>, in § 7.1</span>
   </ul>
+  <aside class="dfn-panel" data-for="term-for-document">
+   <a href="https://dom.spec.whatwg.org/#document">https://dom.spec.whatwg.org/#document</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-document">8.3.2. Lifetime of blob URLs</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-eventtarget">
+   <a href="https://dom.spec.whatwg.org/#eventtarget">https://dom.spec.whatwg.org/#eventtarget</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-eventtarget">6.2. The FileReader API</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-concept-event-fire">
    <a href="https://dom.spec.whatwg.org/#concept-event-fire">https://dom.spec.whatwg.org/#concept-event-fire</a><b>Referenced in:</b>
    <ul>
@@ -3297,6 +3309,12 @@ No invocations to these APIs occur silently without user intervention.</p>
     <li><a href="#ref-for-concept-encoding-get">6.3. Packaging data</a> <a href="#ref-for-concept-encoding-get①">(2)</a> <a href="#ref-for-concept-encoding-get②">(3)</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-utf-8">
+   <a href="https://encoding.spec.whatwg.org/#utf-8">https://encoding.spec.whatwg.org/#utf-8</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-utf-8">6.3. Packaging data</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-utf-8-decode">
    <a href="https://encoding.spec.whatwg.org/#utf-8-decode">https://encoding.spec.whatwg.org/#utf-8-decode</a><b>Referenced in:</b>
    <ul>
@@ -3320,6 +3338,39 @@ No invocations to these APIs occur silently without user intervention.</p>
    <a href="https://fetch.spec.whatwg.org/#concept-network-error">https://fetch.spec.whatwg.org/#concept-network-error</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-concept-network-error">8.4. Creating and Revoking a blob URL</a> <a href="#ref-for-concept-network-error①">(2)</a> <a href="#ref-for-concept-network-error②">(3)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-dom-body-text">
+   <a href="https://fetch.spec.whatwg.org/#dom-body-text">https://fetch.spec.whatwg.org/#dom-body-text</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-body-text">3.3.3. The text() method</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-datatransfer">
+   <a href="https://html.spec.whatwg.org/multipage/dnd.html#datatransfer">https://html.spec.whatwg.org/multipage/dnd.html#datatransfer</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-datatransfer">Unnumbered Section</a>
+    <li><a href="#ref-for-datatransfer①">5.2. Methods and Parameters</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-eventhandler">
+   <a href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-eventhandler">6.2. The FileReader API</a> <a href="#ref-for-eventhandler①">(2)</a> <a href="#ref-for-eventhandler②">(3)</a> <a href="#ref-for-eventhandler③">(4)</a> <a href="#ref-for-eventhandler④">(5)</a> <a href="#ref-for-eventhandler⑤">(6)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-htmlinputelement">
+   <a href="https://html.spec.whatwg.org/multipage/input.html#htmlinputelement">https://html.spec.whatwg.org/multipage/input.html#htmlinputelement</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-htmlinputelement">5.2. Methods and Parameters</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-serializable">
+   <a href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable">https://html.spec.whatwg.org/multipage/structured-data.html#serializable</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-serializable">3. The Blob Interface and Binary Data</a>
+    <li><a href="#ref-for-serializable①">4. The File Interface</a>
+    <li><a href="#ref-for-serializable②">5. The FileList Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-the-a-element">
@@ -3349,6 +3400,12 @@ No invocations to these APIs occur silently without user intervention.</p>
     <li><a href="#ref-for-deserialization-steps②">5. The FileList Interface</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-attr-hyperlink-download">
+   <a href="https://html.spec.whatwg.org/multipage/links.html#attr-hyperlink-download">https://html.spec.whatwg.org/multipage/links.html#attr-hyperlink-download</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-attr-hyperlink-download">10. Requirements and Use Cases</a> <a href="#ref-for-attr-hyperlink-download①">(2)</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-environment-settings-object">
    <a href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object</a><b>Referenced in:</b>
    <ul>
@@ -3367,6 +3424,19 @@ No invocations to these APIs occur silently without user intervention.</p>
     <li><a href="#ref-for-event-handler-event-type">6.2.1. Event Handler Content Attributes</a> <a href="#ref-for-event-handler-event-type①">(2)</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-the-iframe-element">
+   <a href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-iframe-element">https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-iframe-element</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-the-iframe-element">8.4. Creating and Revoking a blob URL</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-the-img-element">
+   <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element">https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-the-img-element">8.1. Introduction</a>
+    <li><a href="#ref-for-the-img-element①">8.4.1. Examples of blob URL Creation and Revocation</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-in-parallel">
    <a href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel</a><b>Referenced in:</b>
    <ul>
@@ -3374,11 +3444,23 @@ No invocations to these APIs occur silently without user intervention.</p>
     <li><a href="#ref-for-in-parallel①">6.2. The FileReader API</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-the-input-element">
+   <a href="https://html.spec.whatwg.org/multipage/input.html#the-input-element">https://html.spec.whatwg.org/multipage/input.html#the-input-element</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-the-input-element">Unnumbered Section</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-concept-settings-object-origin">
    <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-concept-settings-object-origin">8.2. Model</a>
     <li><a href="#ref-for-concept-settings-object-origin①">8.4. Creating and Revoking a blob URL</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-dom-worker-postmessage-options">
+   <a href="https://html.spec.whatwg.org/multipage/workers.html#dom-worker-postmessage-options">https://html.spec.whatwg.org/multipage/workers.html#dom-worker-postmessage-options</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-worker-postmessage-options">Unnumbered Section</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-queue-a-global-task">
@@ -3417,6 +3499,14 @@ No invocations to these APIs occur silently without user intervention.</p>
    <a href="https://html.spec.whatwg.org/multipage/origin.html#same-origin">https://html.spec.whatwg.org/multipage/origin.html#same-origin</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-same-origin">8.4. Creating and Revoking a blob URL</a> <a href="#ref-for-same-origin①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-serializable-objects">
+   <a href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable-objects">https://html.spec.whatwg.org/multipage/structured-data.html#serializable-objects</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-serializable-objects">3. The Blob Interface and Binary Data</a>
+    <li><a href="#ref-for-serializable-objects①">4. The File Interface</a>
+    <li><a href="#ref-for-serializable-objects②">5. The FileList Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-serialization-steps">
@@ -3600,6 +3690,12 @@ No invocations to these APIs occur silently without user intervention.</p>
     <li><a href="#ref-for-parse-a-mime-type①">6.3. Packaging data</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-readablestream">
+   <a href="https://streams.spec.whatwg.org/#readablestream">https://streams.spec.whatwg.org/#readablestream</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-readablestream">3. The Blob Interface and Binary Data</a> <a href="#ref-for-readablestream①">(2)</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-chunk">
    <a href="https://streams.spec.whatwg.org/#chunk">https://streams.spec.whatwg.org/#chunk</a><b>Referenced in:</b>
    <ul>
@@ -3651,6 +3747,13 @@ No invocations to these APIs occur silently without user intervention.</p>
    <a href="https://streams.spec.whatwg.org/#readablestream-set-up">https://streams.spec.whatwg.org/#readablestream-set-up</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-readablestream-set-up">3. The Blob Interface and Binary Data</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-url">
+   <a href="https://url.spec.whatwg.org/#url">https://url.spec.whatwg.org/#url</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-url">8.1. Introduction</a>
+    <li><a href="#ref-for-url①">8.4. Creating and Revoking a blob URL</a> <a href="#ref-for-url②">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-empty-host">
@@ -3709,16 +3812,141 @@ No invocations to these APIs occur silently without user intervention.</p>
     <li><a href="#ref-for-valid-url-string">8.2. Model</a> <a href="#ref-for-valid-url-string①">(2)</a> <a href="#ref-for-valid-url-string②">(3)</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-idl-ArrayBuffer">
+   <a href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer">https://webidl.spec.whatwg.org/#idl-ArrayBuffer</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-idl-ArrayBuffer">3. The Blob Interface and Binary Data</a> <a href="#ref-for-idl-ArrayBuffer①">(2)</a> <a href="#ref-for-idl-ArrayBuffer②">(3)</a>
+    <li><a href="#ref-for-idl-ArrayBuffer③">3.3.4. The arrayBuffer() method</a>
+    <li><a href="#ref-for-idl-ArrayBuffer④">6.2. The FileReader API</a> <a href="#ref-for-idl-ArrayBuffer⑤">(2)</a>
+    <li><a href="#ref-for-idl-ArrayBuffer⑥">6.5.1. The FileReaderSync API</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-BufferSource">
+   <a href="https://webidl.spec.whatwg.org/#BufferSource">https://webidl.spec.whatwg.org/#BufferSource</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-BufferSource">3. The Blob Interface and Binary Data</a>
+    <li><a href="#ref-for-BufferSource①">3.1.1. Constructor Parameters</a> <a href="#ref-for-BufferSource②">(2)</a>
+    <li><a href="#ref-for-BufferSource③">4.1.1. Constructor Parameters</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-Clamp">
+   <a href="https://webidl.spec.whatwg.org/#Clamp">https://webidl.spec.whatwg.org/#Clamp</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-Clamp">3. The Blob Interface and Binary Data</a> <a href="#ref-for-Clamp①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-idl-DOMException">
+   <a href="https://webidl.spec.whatwg.org/#idl-DOMException">https://webidl.spec.whatwg.org/#idl-DOMException</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-idl-DOMException">6.2. The FileReader API</a> <a href="#ref-for-idl-DOMException①">(2)</a> <a href="#ref-for-idl-DOMException②">(3)</a>
+    <li><a href="#ref-for-idl-DOMException③">7.1. Throwing an Exception or Returning an Error</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-idl-DOMString">
+   <a href="https://webidl.spec.whatwg.org/#idl-DOMString">https://webidl.spec.whatwg.org/#idl-DOMString</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-idl-DOMString">3. The Blob Interface and Binary Data</a> <a href="#ref-for-idl-DOMString①">(2)</a> <a href="#ref-for-idl-DOMString②">(3)</a>
+    <li><a href="#ref-for-idl-DOMString③">3.2. Attributes</a>
+    <li><a href="#ref-for-idl-DOMString④">4. The File Interface</a>
+    <li><a href="#ref-for-idl-DOMString⑤">4.2. Attributes</a>
+    <li><a href="#ref-for-idl-DOMString⑥">6.2. The FileReader API</a> <a href="#ref-for-idl-DOMString⑦">(2)</a> <a href="#ref-for-idl-DOMString⑧">(3)</a>
+    <li><a href="#ref-for-idl-DOMString⑨">6.5.1. The FileReaderSync API</a> <a href="#ref-for-idl-DOMString①⓪">(2)</a> <a href="#ref-for-idl-DOMString①①">(3)</a> <a href="#ref-for-idl-DOMString①②">(4)</a>
+    <li><a href="#ref-for-idl-DOMString①③">8.4. Creating and Revoking a blob URL</a> <a href="#ref-for-idl-DOMString①④">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-Exposed">
+   <a href="https://webidl.spec.whatwg.org/#Exposed">https://webidl.spec.whatwg.org/#Exposed</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-Exposed">3. The Blob Interface and Binary Data</a>
+    <li><a href="#ref-for-Exposed①">4. The File Interface</a>
+    <li><a href="#ref-for-Exposed②">5. The FileList Interface</a>
+    <li><a href="#ref-for-Exposed③">6.2. The FileReader API</a>
+    <li><a href="#ref-for-Exposed④">6.5.1. The FileReaderSync API</a>
+    <li><a href="#ref-for-Exposed⑤">8.4. Creating and Revoking a blob URL</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-invalidstateerror">
+   <a href="https://webidl.spec.whatwg.org/#invalidstateerror">https://webidl.spec.whatwg.org/#invalidstateerror</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-invalidstateerror">6.2. The FileReader API</a>
+    <li><a href="#ref-for-invalidstateerror①">6.2.3. Reading a File or Blob</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-NewObject">
+   <a href="https://webidl.spec.whatwg.org/#NewObject">https://webidl.spec.whatwg.org/#NewObject</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-NewObject">3. The Blob Interface and Binary Data</a> <a href="#ref-for-NewObject①">(2)</a> <a href="#ref-for-NewObject②">(3)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-notfounderror">
+   <a href="https://webidl.spec.whatwg.org/#notfounderror">https://webidl.spec.whatwg.org/#notfounderror</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-notfounderror">4.2. Attributes</a> <a href="#ref-for-notfounderror①">(2)</a>
+    <li><a href="#ref-for-notfounderror②">7. Errors and Exceptions</a>
+    <li><a href="#ref-for-notfounderror③">7.1. Throwing an Exception or Returning an Error</a> <a href="#ref-for-notfounderror④">(2)</a> <a href="#ref-for-notfounderror⑤">(3)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-notreadableerror">
+   <a href="https://webidl.spec.whatwg.org/#notreadableerror">https://webidl.spec.whatwg.org/#notreadableerror</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-notreadableerror">7. Errors and Exceptions</a>
+    <li><a href="#ref-for-notreadableerror①">7.1. Throwing an Exception or Returning an Error</a> <a href="#ref-for-notreadableerror②">(2)</a> <a href="#ref-for-notreadableerror③">(3)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-idl-promise">
+   <a href="https://webidl.spec.whatwg.org/#idl-promise">https://webidl.spec.whatwg.org/#idl-promise</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-idl-promise">3. The Blob Interface and Binary Data</a> <a href="#ref-for-idl-promise①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-securityerror">
+   <a href="https://webidl.spec.whatwg.org/#securityerror">https://webidl.spec.whatwg.org/#securityerror</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-securityerror">7. Errors and Exceptions</a>
+    <li><a href="#ref-for-securityerror①">7.1. Throwing an Exception or Returning an Error</a> <a href="#ref-for-securityerror②">(2)</a> <a href="#ref-for-securityerror③">(3)</a>
+    <li><a href="#ref-for-securityerror④">9. Security and Privacy Considerations</a> <a href="#ref-for-securityerror⑤">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-idl-USVString">
+   <a href="https://webidl.spec.whatwg.org/#idl-USVString">https://webidl.spec.whatwg.org/#idl-USVString</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-idl-USVString">3. The Blob Interface and Binary Data</a> <a href="#ref-for-idl-USVString①">(2)</a>
+    <li><a href="#ref-for-idl-USVString②">3.1.1. Constructor Parameters</a> <a href="#ref-for-idl-USVString③">(2)</a> <a href="#ref-for-idl-USVString④">(3)</a>
+    <li><a href="#ref-for-idl-USVString⑤">4. The File Interface</a>
+    <li><a href="#ref-for-idl-USVString⑥">4.1.1. Constructor Parameters</a> <a href="#ref-for-idl-USVString⑦">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-idl-Uint8Array">
+   <a href="https://webidl.spec.whatwg.org/#idl-Uint8Array">https://webidl.spec.whatwg.org/#idl-Uint8Array</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-idl-Uint8Array">3. The Blob Interface and Binary Data</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-dfn-get-buffer-source-copy">
    <a href="https://webidl.spec.whatwg.org/#dfn-get-buffer-source-copy">https://webidl.spec.whatwg.org/#dfn-get-buffer-source-copy</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dfn-get-buffer-source-copy">3.1.1. Constructor Parameters</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-idl-long-long">
+   <a href="https://webidl.spec.whatwg.org/#idl-long-long">https://webidl.spec.whatwg.org/#idl-long-long</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-idl-long-long">3. The Blob Interface and Binary Data</a> <a href="#ref-for-idl-long-long①">(2)</a>
+    <li><a href="#ref-for-idl-long-long②">4. The File Interface</a> <a href="#ref-for-idl-long-long③">(2)</a>
+    <li><a href="#ref-for-idl-long-long④">4.2. Attributes</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-new">
    <a href="https://webidl.spec.whatwg.org/#new">https://webidl.spec.whatwg.org/#new</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-new">3. The Blob Interface and Binary Data</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-idl-sequence">
+   <a href="https://webidl.spec.whatwg.org/#idl-sequence">https://webidl.spec.whatwg.org/#idl-sequence</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-idl-sequence">3. The Blob Interface and Binary Data</a>
+    <li><a href="#ref-for-idl-sequence①">4. The File Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-dfn-supported-property-indices">
@@ -3745,11 +3973,59 @@ No invocations to these APIs occur silently without user intervention.</p>
     <li><a href="#ref-for-dfn-throw④">9. Security and Privacy Considerations</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-idl-undefined">
+   <a href="https://webidl.spec.whatwg.org/#idl-undefined">https://webidl.spec.whatwg.org/#idl-undefined</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-idl-undefined">6.2. The FileReader API</a> <a href="#ref-for-idl-undefined①">(2)</a> <a href="#ref-for-idl-undefined②">(3)</a> <a href="#ref-for-idl-undefined③">(4)</a> <a href="#ref-for-idl-undefined④">(5)</a>
+    <li><a href="#ref-for-idl-undefined⑤">8.4. Creating and Revoking a blob URL</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-idl-unsigned-long">
+   <a href="https://webidl.spec.whatwg.org/#idl-unsigned-long">https://webidl.spec.whatwg.org/#idl-unsigned-long</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-idl-unsigned-long">5. The FileList Interface</a> <a href="#ref-for-idl-unsigned-long①">(2)</a>
+    <li><a href="#ref-for-idl-unsigned-long②">5.1. Attributes</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-idl-unsigned-long-long">
+   <a href="https://webidl.spec.whatwg.org/#idl-unsigned-long-long">https://webidl.spec.whatwg.org/#idl-unsigned-long-long</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-idl-unsigned-long-long">3. The Blob Interface and Binary Data</a>
+    <li><a href="#ref-for-idl-unsigned-long-long①">3.2. Attributes</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-idl-unsigned-short">
+   <a href="https://webidl.spec.whatwg.org/#idl-unsigned-short">https://webidl.spec.whatwg.org/#idl-unsigned-short</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-idl-unsigned-short">6.2. The FileReader API</a> <a href="#ref-for-idl-unsigned-short①">(2)</a> <a href="#ref-for-idl-unsigned-short②">(3)</a> <a href="#ref-for-idl-unsigned-short③">(4)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-progressevent">
+   <a href="https://xhr.spec.whatwg.org/#progressevent">https://xhr.spec.whatwg.org/#progressevent</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-progressevent">6.4. Events</a>
+    <li><a href="#ref-for-progressevent①">6.4.1. Event Summary</a> <a href="#ref-for-progressevent②">(2)</a> <a href="#ref-for-progressevent③">(3)</a> <a href="#ref-for-progressevent④">(4)</a> <a href="#ref-for-progressevent⑤">(5)</a> <a href="#ref-for-progressevent⑥">(6)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-xmlhttprequest">
+   <a href="https://xhr.spec.whatwg.org/#xmlhttprequest">https://xhr.spec.whatwg.org/#xmlhttprequest</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-xmlhttprequest">Unnumbered Section</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-dom-xmlhttprequest-send">
+   <a href="https://xhr.spec.whatwg.org/#dom-xmlhttprequest-send">https://xhr.spec.whatwg.org/#dom-xmlhttprequest-send</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-xmlhttprequest-send">Unnumbered Section</a>
+   </ul>
+  </aside>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
    <li>
     <a data-link-type="biblio">[DOM]</a> defines the following terms:
     <ul>
+     <li><span class="dfn-paneled" id="term-for-document">Document</span>
+     <li><span class="dfn-paneled" id="term-for-eventtarget">EventTarget</span>
      <li><span class="dfn-paneled" id="term-for-concept-event-fire">fire an event</span>
     </ul>
    <li>
@@ -3763,6 +4039,7 @@ No invocations to these APIs occur silently without user intervention.</p>
     <ul>
      <li><span class="dfn-paneled" id="term-for-decode">decode</span>
      <li><span class="dfn-paneled" id="term-for-concept-encoding-get">getting an encoding</span>
+     <li><span class="dfn-paneled" id="term-for-utf-8">utf-8</span>
      <li><span class="dfn-paneled" id="term-for-utf-8-decode">utf-8 decode</span>
      <li><span class="dfn-paneled" id="term-for-utf-8-encode">utf-8 encode</span>
     </ul>
@@ -3771,25 +4048,36 @@ No invocations to these APIs occur silently without user intervention.</p>
     <ul>
      <li><span class="dfn-paneled" id="term-for-concept-fetch">fetch</span>
      <li><span class="dfn-paneled" id="term-for-concept-network-error">network error</span>
+     <li><span class="dfn-paneled" id="term-for-dom-body-text">text()</span>
     </ul>
    <li>
     <a data-link-type="biblio">[HTML]</a> defines the following terms:
     <ul>
+     <li><span class="dfn-paneled" id="term-for-datatransfer">DataTransfer</span>
+     <li><span class="dfn-paneled" id="term-for-eventhandler">EventHandler</span>
+     <li><span class="dfn-paneled" id="term-for-htmlinputelement">HTMLInputElement</span>
+     <li><span class="dfn-paneled" id="term-for-serializable">Serializable</span>
      <li><span class="dfn-paneled" id="term-for-the-a-element">a</span>
      <li><span class="dfn-paneled" id="term-for-ascii-serialisation-of-an-origin">ascii serialization of an origin</span>
      <li><span class="dfn-paneled" id="term-for-current-settings-object">current settings object</span>
      <li><span class="dfn-paneled" id="term-for-deserialization-steps">deserialization steps</span>
+     <li><span class="dfn-paneled" id="term-for-attr-hyperlink-download">download</span>
      <li><span class="dfn-paneled" id="term-for-environment-settings-object">environment settings object</span>
      <li><span class="dfn-paneled" id="term-for-event-handler-content-attributes">event handler content attribute</span>
      <li><span class="dfn-paneled" id="term-for-event-handler-event-type">event handler event type</span>
+     <li><span class="dfn-paneled" id="term-for-the-iframe-element">iframe</span>
+     <li><span class="dfn-paneled" id="term-for-the-img-element">img</span>
      <li><span class="dfn-paneled" id="term-for-in-parallel">in parallel</span>
+     <li><span class="dfn-paneled" id="term-for-the-input-element">input</span>
      <li><span class="dfn-paneled" id="term-for-concept-settings-object-origin">origin</span>
+     <li><span class="dfn-paneled" id="term-for-dom-worker-postmessage-options">postMessage(message, options)</span>
      <li><span class="dfn-paneled" id="term-for-queue-a-global-task">queue a global task</span>
      <li><span class="dfn-paneled" id="term-for-queue-a-task">queue a task</span>
      <li><span class="dfn-paneled" id="term-for-concept-relevant-global">relevant global object</span>
      <li><span class="dfn-paneled" id="term-for-concept-relevant-realm">relevant realm</span>
      <li><span class="dfn-paneled" id="term-for-relevant-settings-object">relevant settings object</span>
      <li><span class="dfn-paneled" id="term-for-same-origin">same origin</span>
+     <li><span class="dfn-paneled" id="term-for-serializable-objects">serializable objects</span>
      <li><span class="dfn-paneled" id="term-for-serialization-steps">serialization steps</span>
      <li><span class="dfn-paneled" id="term-for-sub-deserialization">sub-deserialization</span>
      <li><span class="dfn-paneled" id="term-for-sub-serialization">sub-serialization</span>
@@ -3833,6 +4121,7 @@ No invocations to these APIs occur silently without user intervention.</p>
    <li>
     <a data-link-type="biblio">[STREAMS]</a> defines the following terms:
     <ul>
+     <li><span class="dfn-paneled" id="term-for-readablestream">ReadableStream</span>
      <li><span class="dfn-paneled" id="term-for-chunk">chunk</span>
      <li><span class="dfn-paneled" id="term-for-readablestream-enqueue">enqueue</span>
      <li><span class="dfn-paneled" id="term-for-readablestream-error">error</span>
@@ -3844,6 +4133,7 @@ No invocations to these APIs occur silently without user intervention.</p>
    <li>
     <a data-link-type="biblio">[URL]</a> defines the following terms:
     <ul>
+     <li><span class="dfn-paneled" id="term-for-url">URL</span>
      <li><span class="dfn-paneled" id="term-for-empty-host">empty host</span>
      <li><span class="dfn-paneled" id="term-for-concept-url-origin">origin</span>
      <li><span class="dfn-paneled" id="term-for-concept-url-path">path</span>
@@ -3856,11 +4146,38 @@ No invocations to these APIs occur silently without user intervention.</p>
    <li>
     <a data-link-type="biblio">[WebIDL]</a> defines the following terms:
     <ul>
+     <li><span class="dfn-paneled" id="term-for-idl-ArrayBuffer">ArrayBuffer</span>
+     <li><span class="dfn-paneled" id="term-for-BufferSource">BufferSource</span>
+     <li><span class="dfn-paneled" id="term-for-Clamp">Clamp</span>
+     <li><span class="dfn-paneled" id="term-for-idl-DOMException">DOMException</span>
+     <li><span class="dfn-paneled" id="term-for-idl-DOMString">DOMString</span>
+     <li><span class="dfn-paneled" id="term-for-Exposed">Exposed</span>
+     <li><span class="dfn-paneled" id="term-for-invalidstateerror">InvalidStateError</span>
+     <li><span class="dfn-paneled" id="term-for-NewObject">NewObject</span>
+     <li><span class="dfn-paneled" id="term-for-notfounderror">NotFoundError</span>
+     <li><span class="dfn-paneled" id="term-for-notreadableerror">NotReadableError</span>
+     <li><span class="dfn-paneled" id="term-for-idl-promise">Promise</span>
+     <li><span class="dfn-paneled" id="term-for-securityerror">SecurityError</span>
+     <li><span class="dfn-paneled" id="term-for-idl-USVString">USVString</span>
+     <li><span class="dfn-paneled" id="term-for-idl-Uint8Array">Uint8Array</span>
      <li><span class="dfn-paneled" id="term-for-dfn-get-buffer-source-copy">get a copy of the buffer source</span>
+     <li><span class="dfn-paneled" id="term-for-idl-long-long">long long</span>
      <li><span class="dfn-paneled" id="term-for-new">new</span>
+     <li><span class="dfn-paneled" id="term-for-idl-sequence">sequence</span>
      <li><span class="dfn-paneled" id="term-for-dfn-supported-property-indices">supported property indices</span>
      <li><span class="dfn-paneled" id="term-for-this">this</span>
      <li><span class="dfn-paneled" id="term-for-dfn-throw">throw</span>
+     <li><span class="dfn-paneled" id="term-for-idl-undefined">undefined</span>
+     <li><span class="dfn-paneled" id="term-for-idl-unsigned-long">unsigned long</span>
+     <li><span class="dfn-paneled" id="term-for-idl-unsigned-long-long">unsigned long long</span>
+     <li><span class="dfn-paneled" id="term-for-idl-unsigned-short">unsigned short</span>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[XHR]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="term-for-progressevent">ProgressEvent</span>
+     <li><span class="dfn-paneled" id="term-for-xmlhttprequest">XMLHttpRequest</span>
+     <li><span class="dfn-paneled" id="term-for-dom-xmlhttprequest-send">send()</span>
     </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
@@ -3894,6 +4211,8 @@ No invocations to these APIs occur silently without user intervention.</p>
    <dd>Anne van Kesteren. <a href="https://url.spec.whatwg.org/"><cite>URL Standard</cite></a>. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a>
    <dt id="biblio-webidl">[WebIDL]
    <dd>Edgar Chen; Timothy Gu. <a href="https://webidl.spec.whatwg.org/"><cite>Web IDL Standard</cite></a>. Living Standard. URL: <a href="https://webidl.spec.whatwg.org/">https://webidl.spec.whatwg.org/</a>
+   <dt id="biblio-xhr">[XHR]
+   <dd>Anne van Kesteren. <a href="https://xhr.spec.whatwg.org/"><cite>XMLHttpRequest Standard</cite></a>. Living Standard. URL: <a href="https://xhr.spec.whatwg.org/">https://xhr.spec.whatwg.org/</a>
   </dl>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
@@ -3901,100 +4220,100 @@ No invocations to these APIs occur silently without user intervention.</p>
    <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/workers.html"><cite>Web Workers</cite></a>. URL: <a href="https://html.spec.whatwg.org/multipage/workers.html">https://html.spec.whatwg.org/multipage/workers.html</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
-<pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute"><c- g>Serializable</c-></a>]
+<pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable"><c- g>Serializable</c-></a>]
 <c- b>interface</c-> <a href="#dfn-Blob"><code><c- g>Blob</c-></code></a> {
-  <a href="#dom-blob-blob"><code><c- g>constructor</c-></code></a>(<c- b>optional</c-> <a data-link-type="dfn"><c- b>sequence</c-></a>&lt;<a data-link-type="idl-name" href="#typedefdef-blobpart"><c- n>BlobPart</c-></a>> <a class="idl-code" data-link-type="argument" href="#dfn-blobParts"><c- g>blobParts</c-></a>,
+  <a href="#dom-blob-blob"><code><c- g>constructor</c-></code></a>(<c- b>optional</c-> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#idl-sequence"><c- b>sequence</c-></a>&lt;<a data-link-type="idl-name" href="#typedefdef-blobpart"><c- n>BlobPart</c-></a>> <a class="idl-code" data-link-type="argument" href="#dfn-blobParts"><c- g>blobParts</c-></a>,
               <c- b>optional</c-> <a data-link-type="idl-name" href="#dfn-BlobPropertyBag"><c- n>BlobPropertyBag</c-></a> <a href="#dom-blob-blob-blobparts-options-options"><code><c- g>options</c-></code></a> = {});
 
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface"><c- b>unsigned</c-> <c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="unsigned long long" href="#dfn-size"><c- g>size</c-></a>;
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMString" href="#dfn-type"><c- g>type</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long-long"><c- b>unsigned</c-> <c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="unsigned long long" href="#dfn-size"><c- g>size</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMString" href="#dfn-type"><c- g>type</c-></a>;
 
   // slice Blob into byte-ranged chunks
-  <a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-slice"><c- g>slice</c-></a>(<c- b>optional</c-> [<a class="idl-code" data-link-type="extended-attribute"><c- g>Clamp</c-></a>] <a class="idl-code" data-link-type="interface"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-start"><c- g>start</c-></a>,
-            <c- b>optional</c-> [<a class="idl-code" data-link-type="extended-attribute"><c- g>Clamp</c-></a>] <a class="idl-code" data-link-type="interface"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-end"><c- g>end</c-></a>,
-            <c- b>optional</c-> <a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-contentTypeBlob"><c- g>contentType</c-></a>);
+  <a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-slice"><c- g>slice</c-></a>(<c- b>optional</c-> [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Clamp"><c- g>Clamp</c-></a>] <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-long-long"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-start"><c- g>start</c-></a>,
+            <c- b>optional</c-> [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Clamp"><c- g>Clamp</c-></a>] <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-long-long"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-end"><c- g>end</c-></a>,
+            <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-contentTypeBlob"><c- g>contentType</c-></a>);
 
   // read from the Blob.
-  [<a class="idl-code" data-link-type="extended-attribute"><c- g>NewObject</c-></a>] <a data-link-type="idl-name"><c- n>ReadableStream</c-></a> <a class="idl-code" data-link-type="method" href="#dom-blob-stream"><c- g>stream</c-></a>();
-  [<a class="idl-code" data-link-type="extended-attribute"><c- g>NewObject</c-></a>] <a class="idl-code" data-link-type="interface"><c- b>Promise</c-></a>&lt;<a class="idl-code" data-link-type="interface"><c- b>USVString</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-blob-text"><c- g>text</c-></a>();
-  [<a class="idl-code" data-link-type="extended-attribute"><c- g>NewObject</c-></a>] <a class="idl-code" data-link-type="interface"><c- b>Promise</c-></a>&lt;<a class="idl-code" data-link-type="interface"><c- b>ArrayBuffer</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-blob-arraybuffer"><c- g>arrayBuffer</c-></a>();
+  [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#NewObject"><c- g>NewObject</c-></a>] <a data-link-type="idl-name" href="https://streams.spec.whatwg.org/#readablestream"><c- n>ReadableStream</c-></a> <a class="idl-code" data-link-type="method" href="#dom-blob-stream"><c- g>stream</c-></a>();
+  [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#NewObject"><c- g>NewObject</c-></a>] <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise"><c- b>Promise</c-></a>&lt;<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString"><c- b>USVString</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-blob-text"><c- g>text</c-></a>();
+  [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#NewObject"><c- g>NewObject</c-></a>] <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-promise"><c- b>Promise</c-></a>&lt;<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer"><c- b>ArrayBuffer</c-></a>> <a class="idl-code" data-link-type="method" href="#dom-blob-arraybuffer"><c- g>arrayBuffer</c-></a>();
 };
 
 <c- b>enum</c-> <a href="#enumdef-endingtype"><code><c- g>EndingType</c-></code></a> { <a href="#dom-endingtype-transparent"><code><c- s>"transparent"</c-></code></a>, <a href="#dom-endingtype-native"><code><c- s>"native"</c-></code></a> };
 
 <c- b>dictionary</c-> <a href="#dfn-BlobPropertyBag"><code><c- g>BlobPropertyBag</c-></code></a> {
-  <a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <a class="idl-code" data-default="&quot;&quot;" data-link-type="dict-member" data-type="DOMString " href="#dfn-BPtype"><c- g>type</c-></a> = "";
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-default="&quot;&quot;" data-link-type="dict-member" data-type="DOMString " href="#dfn-BPtype"><c- g>type</c-></a> = "";
   <a data-link-type="idl-name" href="#enumdef-endingtype"><c- n>EndingType</c-></a> <a class="idl-code" data-default="&quot;transparent&quot;" data-link-type="dict-member" data-type="EndingType " href="#dom-blobpropertybag-endings"><c- g>endings</c-></a> = "transparent";
 };
 
-<c- b>typedef</c-> (<a data-link-type="idl-name"><c- n>BufferSource</c-></a> <c- b>or</c-> <a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <c- b>or</c-> <a class="idl-code" data-link-type="interface"><c- b>USVString</c-></a>) <a href="#typedefdef-blobpart"><code><c- g>BlobPart</c-></code></a>;
+<c- b>typedef</c-> (<a data-link-type="idl-name" href="https://webidl.spec.whatwg.org/#BufferSource"><c- n>BufferSource</c-></a> <c- b>or</c-> <a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <c- b>or</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString"><c- b>USVString</c-></a>) <a href="#typedefdef-blobpart"><code><c- g>BlobPart</c-></code></a>;
 
-[<a class="idl-code" data-link-type="extended-attribute"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute"><c- g>Serializable</c-></a>]
+[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable"><c- g>Serializable</c-></a>]
 <c- b>interface</c-> <a href="#dfn-file"><code><c- g>File</c-></code></a> : <a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> {
-  <a href="#dom-file-file"><code><c- g>constructor</c-></code></a>(<a data-link-type="dfn"><c- b>sequence</c-></a>&lt;<a data-link-type="idl-name" href="#typedefdef-blobpart"><c- n>BlobPart</c-></a>> <a class="idl-code" data-link-type="argument" href="#dfn-fileBits"><c- g>fileBits</c-></a>,
-              <a class="idl-code" data-link-type="interface"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-fileName"><c- g>fileName</c-></a>,
+  <a href="#dom-file-file"><code><c- g>constructor</c-></code></a>(<a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#idl-sequence"><c- b>sequence</c-></a>&lt;<a data-link-type="idl-name" href="#typedefdef-blobpart"><c- n>BlobPart</c-></a>> <a class="idl-code" data-link-type="argument" href="#dfn-fileBits"><c- g>fileBits</c-></a>,
+              <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-fileName"><c- g>fileName</c-></a>,
               <c- b>optional</c-> <a data-link-type="idl-name" href="#dfn-FilePropertyBag"><c- n>FilePropertyBag</c-></a> <a href="#dom-file-file-filebits-filename-options-options"><code><c- g>options</c-></code></a> = {});
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMString" href="#dfn-name"><c- g>name</c-></a>;
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="long long" href="#dfn-lastModified"><c- g>lastModified</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMString" href="#dfn-name"><c- g>name</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-long-long"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="long long" href="#dfn-lastModified"><c- g>lastModified</c-></a>;
 };
 
 <c- b>dictionary</c-> <a href="#dfn-FilePropertyBag"><code><c- g>FilePropertyBag</c-></code></a> : <a data-link-type="idl-name" href="#dfn-BlobPropertyBag"><c- n>BlobPropertyBag</c-></a> {
-  <a class="idl-code" data-link-type="interface"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="long long " href="#dfn-FPdate"><c- g>lastModified</c-></a>;
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-long-long"><c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="long long " href="#dfn-FPdate"><c- g>lastModified</c-></a>;
 };
 
-[<a class="idl-code" data-link-type="extended-attribute"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute"><c- g>Serializable</c-></a>]
+[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->), <a class="idl-code" data-link-type="extended-attribute" href="https://html.spec.whatwg.org/multipage/structured-data.html#serializable"><c- g>Serializable</c-></a>]
 <c- b>interface</c-> <a href="#dfn-filelist"><code><c- g>FileList</c-></code></a> {
-  <c- b>getter</c-> <a data-link-type="idl-name" href="#dfn-file"><c- n>File</c-></a>? <a class="idl-code" data-link-type="method" href="#dfn-item"><c- g>item</c-></a>(<a class="idl-code" data-link-type="interface"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-index"><c- g>index</c-></a>);
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="unsigned long" href="#dfn-length"><c- g>length</c-></a>;
+  <c- b>getter</c-> <a data-link-type="idl-name" href="#dfn-file"><c- n>File</c-></a>? <a class="idl-code" data-link-type="method" href="#dfn-item"><c- g>item</c-></a>(<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="argument" href="#dfn-index"><c- g>index</c-></a>);
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="unsigned long" href="#dfn-length"><c- g>length</c-></a>;
 };
 
-[<a class="idl-code" data-link-type="extended-attribute"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->)]
-<c- b>interface</c-> <a href="#dfn-filereader"><code><c- g>FileReader</c-></code></a>: <a data-link-type="idl-name"><c- n>EventTarget</c-></a> {
+[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->)]
+<c- b>interface</c-> <a href="#dfn-filereader"><code><c- g>FileReader</c-></code></a>: <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#eventtarget"><c- n>EventTarget</c-></a> {
   <a class="idl-code" data-link-type="constructor" href="#filereaderConstrctr"><c- g>constructor</c-></a>();
   // async read methods
-  <a class="idl-code" data-link-type="interface"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBuffer"><c- g>readAsArrayBuffer</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereader-readasarraybuffer-blob-blob"><code><c- g>blob</c-></code></a>);
-  <a class="idl-code" data-link-type="interface"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsBinaryString"><c- g>readAsBinaryString</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereader-readasbinarystring-blob-blob"><code><c- g>blob</c-></code></a>);
-  <a class="idl-code" data-link-type="interface"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsText"><c- g>readAsText</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereader-readastext-blob-encoding-blob"><code><c- g>blob</c-></code></a>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <a href="#dom-filereader-readastext-blob-encoding-encoding"><code><c- g>encoding</c-></code></a>);
-  <a class="idl-code" data-link-type="interface"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsDataURL"><c- g>readAsDataURL</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereader-readasdataurl-blob-blob"><code><c- g>blob</c-></code></a>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBuffer"><c- g>readAsArrayBuffer</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereader-readasarraybuffer-blob-blob"><code><c- g>blob</c-></code></a>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsBinaryString"><c- g>readAsBinaryString</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereader-readasbinarystring-blob-blob"><code><c- g>blob</c-></code></a>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsText"><c- g>readAsText</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereader-readastext-blob-encoding-blob"><code><c- g>blob</c-></code></a>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString"><c- b>DOMString</c-></a> <a href="#dom-filereader-readastext-blob-encoding-encoding"><code><c- g>encoding</c-></code></a>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsDataURL"><c- g>readAsDataURL</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereader-readasdataurl-blob-blob"><code><c- g>blob</c-></code></a>);
 
-  <a class="idl-code" data-link-type="interface"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-abort"><c- g>abort</c-></a>();
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-abort"><c- g>abort</c-></a>();
 
   // states
-  <c- b>const</c-> <a class="idl-code" data-link-type="interface"><c- b>unsigned</c-> <c- b>short</c-></a> <a href="#dom-filereader-empty"><code><c- g>EMPTY</c-></code></a> = 0;
-  <c- b>const</c-> <a class="idl-code" data-link-type="interface"><c- b>unsigned</c-> <c- b>short</c-></a> <a href="#dom-filereader-loading"><code><c- g>LOADING</c-></code></a> = 1;
-  <c- b>const</c-> <a class="idl-code" data-link-type="interface"><c- b>unsigned</c-> <c- b>short</c-></a> <a href="#dom-filereader-done"><code><c- g>DONE</c-></code></a> = 2;
+  <c- b>const</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short"><c- b>unsigned</c-> <c- b>short</c-></a> <a href="#dom-filereader-empty"><code><c- g>EMPTY</c-></code></a> = 0;
+  <c- b>const</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short"><c- b>unsigned</c-> <c- b>short</c-></a> <a href="#dom-filereader-loading"><code><c- g>LOADING</c-></code></a> = 1;
+  <c- b>const</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short"><c- b>unsigned</c-> <c- b>short</c-></a> <a href="#dom-filereader-done"><code><c- g>DONE</c-></code></a> = 2;
 
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface"><c- b>unsigned</c-> <c- b>short</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="unsigned short" href="#dom-filereader-readystate"><c- g>readyState</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short"><c- b>unsigned</c-> <c- b>short</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="unsigned short" href="#dom-filereader-readystate"><c- g>readyState</c-></a>;
 
   // File or Blob data
-  <c- b>readonly</c-> <c- b>attribute</c-> (<a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <c- b>or</c-> <a class="idl-code" data-link-type="interface"><c- b>ArrayBuffer</c-></a>)? <a class="idl-code" data-link-type="attribute" data-readonly data-type="(DOMString or ArrayBuffer)?" href="#dom-filereader-result"><c- g>result</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> (<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString"><c- b>DOMString</c-></a> <c- b>or</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer"><c- b>ArrayBuffer</c-></a>)? <a class="idl-code" data-link-type="attribute" data-readonly data-type="(DOMString or ArrayBuffer)?" href="#dom-filereader-result"><c- g>result</c-></a>;
 
-  <c- b>readonly</c-> <c- b>attribute</c-> <a data-link-type="idl-name"><c- n>DOMException</c-></a>? <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMException?" href="#dom-filereader-error"><c- g>error</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a data-link-type="idl-name" href="https://webidl.spec.whatwg.org/#idl-DOMException"><c- n>DOMException</c-></a>? <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMException?" href="#dom-filereader-error"><c- g>error</c-></a>;
 
   // event handler content attributes
-  <c- b>attribute</c-> <a data-link-type="idl-name"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadstart"><c- g>onloadstart</c-></a>;
-  <c- b>attribute</c-> <a data-link-type="idl-name"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onprogress"><c- g>onprogress</c-></a>;
-  <c- b>attribute</c-> <a data-link-type="idl-name"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onload"><c- g>onload</c-></a>;
-  <c- b>attribute</c-> <a data-link-type="idl-name"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onabort"><c- g>onabort</c-></a>;
-  <c- b>attribute</c-> <a data-link-type="idl-name"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onerror"><c- g>onerror</c-></a>;
-  <c- b>attribute</c-> <a data-link-type="idl-name"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadend"><c- g>onloadend</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadstart"><c- g>onloadstart</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onprogress"><c- g>onprogress</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onload"><c- g>onload</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onabort"><c- g>onabort</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onerror"><c- g>onerror</c-></a>;
+  <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dfn-onloadend"><c- g>onloadend</c-></a>;
 };
 
-[<a class="idl-code" data-link-type="extended-attribute"><c- g>Exposed</c-></a>=(<c- n>DedicatedWorker</c->,<c- n>SharedWorker</c->)]
+[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed"><c- g>Exposed</c-></a>=(<c- n>DedicatedWorker</c->,<c- n>SharedWorker</c->)]
 <c- b>interface</c-> <a href="#dfn-FileReaderSync"><code><c- g>FileReaderSync</c-></code></a> {
   <a href="#dom-filereadersync-filereadersync"><code><c- g>constructor</c-></code></a>();
   // Synchronously return strings
 
-  <a class="idl-code" data-link-type="interface"><c- b>ArrayBuffer</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBufferSync"><c- g>readAsArrayBuffer</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereadersync-readasarraybuffer-blob-blob"><code><c- g>blob</c-></code></a>);
-  <a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsBinaryStringSync"><c- g>readAsBinaryString</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereadersync-readasbinarystring-blob-blob"><code><c- g>blob</c-></code></a>);
-  <a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsTextSync"><c- g>readAsText</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereadersync-readastext-blob-encoding-blob"><code><c- g>blob</c-></code></a>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <a href="#dom-filereadersync-readastext-blob-encoding-encoding"><code><c- g>encoding</c-></code></a>);
-  <a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsDataURLSync"><c- g>readAsDataURL</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereadersync-readasdataurl-blob-blob"><code><c- g>blob</c-></code></a>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer"><c- b>ArrayBuffer</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsArrayBufferSync"><c- g>readAsArrayBuffer</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereadersync-readasarraybuffer-blob-blob"><code><c- g>blob</c-></code></a>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsBinaryStringSync"><c- g>readAsBinaryString</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereadersync-readasbinarystring-blob-blob"><code><c- g>blob</c-></code></a>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsTextSync"><c- g>readAsText</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereadersync-readastext-blob-encoding-blob"><code><c- g>blob</c-></code></a>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString"><c- b>DOMString</c-></a> <a href="#dom-filereadersync-readastext-blob-encoding-encoding"><code><c- g>encoding</c-></code></a>);
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-readAsDataURLSync"><c- g>readAsDataURL</c-></a>(<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <a href="#dom-filereadersync-readasdataurl-blob-blob"><code><c- g>blob</c-></code></a>);
 };
 
-[<a class="idl-code" data-link-type="extended-attribute"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>DedicatedWorker</c->,<c- n>SharedWorker</c->)]
-<c- b>partial</c-> <c- b>interface</c-> <a class="idl-code" data-link-type="interface"><c- g>URL</c-></a> {
-  <c- b>static</c-> <a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-createObjectURL"><c- g>createObjectURL</c-></a>((<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <c- b>or</c-> <a data-link-type="idl-name" href="http://w3c.github.io/media-source/#mediasource"><c- n>MediaSource</c-></a>) <a href="#dom-url-createobjecturl-obj-obj"><code><c- g>obj</c-></code></a>);
-  <c- b>static</c-> <a class="idl-code" data-link-type="interface"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-revokeObjectURL"><c- g>revokeObjectURL</c-></a>(<a class="idl-code" data-link-type="interface"><c- b>DOMString</c-></a> <a href="#dom-url-revokeobjecturl-url-url"><code><c- g>url</c-></code></a>);
+[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>DedicatedWorker</c->,<c- n>SharedWorker</c->)]
+<c- b>partial</c-> <c- b>interface</c-> <a class="idl-code" data-link-type="interface" href="https://url.spec.whatwg.org/#url"><c- g>URL</c-></a> {
+  <c- b>static</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-createObjectURL"><c- g>createObjectURL</c-></a>((<a data-link-type="idl-name" href="#dfn-Blob"><c- n>Blob</c-></a> <c- b>or</c-> <a data-link-type="idl-name" href="http://w3c.github.io/media-source/#mediasource"><c- n>MediaSource</c-></a>) <a href="#dom-url-createobjecturl-obj-obj"><code><c- g>obj</c-></code></a>);
+  <c- b>static</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dfn-revokeObjectURL"><c- g>revokeObjectURL</c-></a>(<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString"><c- b>DOMString</c-></a> <a href="#dom-url-revokeobjecturl-url-url"><code><c- g>url</c-></code></a>);
 };
 
 </pre>
