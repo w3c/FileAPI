@@ -259,7 +259,7 @@ Their [=deserialization step=], given |serialized| and |value|, are:
 2. Set |value|'s underlying byte sequence to |serialized|.\[[ByteSequence]].
 
 <div algorithm="get stream">
-A {{Blob}} |blob| has an associated <dfn for=Blob>get stream</dfn> algorithm,
+A {{Blob}} |blob| has an associated <dfn export for=Blob>get stream</dfn> algorithm,
 which runs these steps:
 
 1. Let |stream| be a [=new=] {{ReadableStream}} created in |blob|'s [=relevant Realm=].
