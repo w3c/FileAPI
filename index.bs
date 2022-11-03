@@ -68,9 +68,6 @@ spec: url
 </pre>
 
 <pre class="anchors">
-spec: mimesniff; urlPrefix: https://mimesniff.spec.whatwg.org/
-  type: dfn
-    text: parsable mime type
 spec: ecma-262; urlPrefix: http://tc39.github.io/ecma262/
   type: interface
     text: Array; url: sec-array-constructor
@@ -208,7 +205,7 @@ this is the same time that is conceptually "<code>0</code>" in ECMA-262 [[ECMA-2
 A {{Blob}} object refers to a <a>byte</a> sequence,
 and has a {{Blob/size}} attribute which is the total number of bytes in the byte sequence,
 and a {{Blob/type}} attribute,
-which is an ASCII-encoded string in lower case representing the media type of the <a>byte</a> sequence.
+which is an [=ASCII string=] in lower case representing the media type of the <a>byte</a> sequence.
 
 Each {{Blob}} must have an internal <dfn id="snapshot-state" for=Blob>snapshot state</dfn>,
 which must be initially set to the state of the underlying storage,
@@ -325,7 +322,7 @@ The {{Blob()}} constructor can be invoked with the parameters below:
   <dt id="dfn-BlobPropertyBagMembers">An *optional* {{BlobPropertyBag}}
   <dd>which takes these optional members:
     * <dfn id="dfn-BPtype" dict-member for="BlobPropertyBag">type</dfn>,
-      the ASCII-encoded string in lower case representing the media type of the {{Blob}}.
+      the [=ASCII string=] in lower case representing the media type of the {{Blob}}.
       Normative conditions for this member are provided in the [[#constructorBlob]].
     * <dfn dict-member for="BlobPropertyBag">endings</dfn>,
       an enum which can take the values {{"transparent"}} or {{"native"}}.
@@ -455,11 +452,10 @@ run the following steps:
     or 0 if the {{Blob}} has no bytes to be read.
 
   <dt><dfn id="dfn-type">type</dfn>
-  <dd>The ASCII-encoded string in lower case representing the media type of the {{Blob}}.
+  <dd>The [=ASCII string=] in lower case representing the media type of the {{Blob}}.
     On getting, user agents must return the type of a {{Blob}}
-    as an ASCII-encoded string in lower case,
-    such that when it is converted to a <a>byte</a> sequence,
-    it is a <a>parsable MIME type</a>,
+    as an [=ASCII string=] in lower case,
+    such that <a>parsing a MIME type</a> with it does not return failure,
     or the empty string &ndash; 0 bytes &ndash; if the type cannot be determined.
 
     The {{Blob/type}} attribute can be set by the web application itself through constructor invocation
@@ -470,10 +466,6 @@ run the following steps:
     User agents can also determine the {{Blob/type}} of a {{Blob}},
     especially if the <a>byte</a> sequence is from an on-disk file;
     in this case, further normative conditions are in the <a>file type guidelines</a>.
-
-    Note: The type <var ignore>t</var> of a {{Blob}} is considered a <a>parsable MIME type</a>,
-    if performing the <a>parse a MIME type</a> algorithm to a byte sequence converted from
-    the ASCII-encoded string representing the Blob object's type does not return failure.
 
     Note: Use of the {{Blob/type}} attribute informs the [=package data=] algorithm
     and determines the `Content-Type` header when [=/fetching=] [=blob URLs=].
@@ -513,7 +505,7 @@ It must act as follows:
   </ol>
 
 1. The optional <dfn argument for="Blob/slice(start, end, contentType)" id="dfn-contentTypeBlob">contentType</dfn> parameter
-  is used to set the ASCII-encoded string in lower case representing the media type of the Blob.
+  is used to set the [=ASCII string=] in lower case representing the media type of the Blob.
   User agents must process the {{Blob/slice()}} with {{contentType}} normalized according to the following:
 
   <ol type="a">
@@ -631,9 +623,8 @@ When a {{File}} object refers to a file on disk,
 user agents must return the {{Blob/type}} of that file,
 and must follow the <dfn export>file type guidelines</dfn> below:
 
-* User agents must return the {{Blob/type}} as an ASCII-encoded string in lower case,
-  such that when it is converted to a corresponding byte sequence,
-  it is a <a>parsable MIME type</a>,
+* User agents must return the {{Blob/type}} as an [=ASCII string=] in lower case,
+  such that <a>parsing a MIME type</a> with it does not return failure,
   or the empty string &ndash; 0 bytes &ndash; if the type cannot be determined.
 * When the file is of type <code>text/plain</code>
   user agents must NOT append a charset parameter to the <i>dictionary of parameters</i> portion of the media type [[!MIMESNIFF]].
@@ -1154,7 +1145,7 @@ which switches on |type| and runs the associated steps:
    1. If the |encodingName| is present, set |encoding| to the result of
       [=getting an encoding=] from |encodingName|.
    1. If |encoding| is failure, and |mimeType| is present:
-     1. Let |type| be the result of [=parse a MIME type=] given |mimeType|.
+     1. Let |type| be the result of [=parsing a MIME type=] given |mimeType|.
      1. If |type| is not failure,
         set |encoding| to the result of [=getting an encoding=]
         from |type|'s [=MIME type/parameters=][`"charset"`].
