@@ -193,6 +193,76 @@ The term <dfn id="UnixEpoch">Unix Epoch</dfn> is used in this specification to r
 (or 1970-01-01T00:00:00Z ISO 8601);
 this is the same time that is conceptually "<code>0</code>" in ECMA-262 [[ECMA-262]].
 
+<div algorithm>
+The <dfn export>slice blob</dfn> algorithm given a {{Blob}} <var>blob</var>,
+an optional parameter <var>start</var>, an optional parameter <var>end</var>,
+and an optional parameter <var>contentType</var> is used to refer to the following
+steps and returns a new {{Blob}} containing the bytes ranging from the <var>start</var> parameter
+up to but not including the <var>end</var> parameter. It must act as follows:
+
+1. Let <var>originalSize</var> be <var>blob</var>'s {{Blob/size}}.
+
+1. The optional <var>start</var> parameter is a value for the start point of a <a>slice blob</a>
+   call, and must be treated as a byte-order position, with the zeroth position representing the
+   first byte. User agents must normalize <var>start</var> according to the following:
+
+  <ol type="a">
+   <li>If the optional <var>start</var> parameter is not used as a parameter when making this call,
+   let <var>relativeStart</var> be 0.
+
+   <li>If <var>start</var> is negative, let <var>relativeStart</var> be
+   <code>max((<var>originalSize</var> + <var>start</var>), 0)</code>.
+
+   <li>Otherwise, let <var>relativeStart</var> be
+   <code>min(<var>start</var>, <var>originalSize</var>)</code>.
+  </ol>
+
+1. The optional <var>end</var> parameter is a value for the end point of a <a>slice blob</a> call.
+   User agents must normalize <var>end</var> according to the following:
+
+  <ol type="a">
+    <li>If the optional <var>end</var> parameter is not used as a parameter when making this call,
+    let <var>relativeEnd</var> be <var>originalSize</var>.
+
+    <li>If <var>end</var> is negative, let <var>relativeEnd</var> be
+    <code>max((<var>originalSize</var> + <var>end</var>), 0)</code>.
+
+    <li>Else, let <var>relativeEnd</var> be
+    <code>min(<var>end</var>, <var>originalSize</var>)</code>.
+  </ol>
+
+1. The optional <var>contentType</var> parameter is used to set the ASCII-encoded string in lower
+   case representing the media type of the {{Blob}}. User agents must normalize
+   <var>contentType</var> according to the following:
+
+  <ol type="a">
+    <li>If the <var>contentType</var> parameter is not provided, let <var>relativeContentType</var>
+    be set to the empty string.
+
+    <li>Otherwise, let <var>relativeContentType</var> be set to <var>contentType</var> and run the
+    substeps below:
+      1. If <var>relativeContentType</var> contains any characters outside the range of U+0020 to
+        U+007E, then set <var>relativeContentType</var> to the empty string and return from these
+        substeps.
+      2. Convert every character in <var>relativeContentType</var> to [=ASCII lowercase=].
+  </ol>
+
+1. Let <var>span</var> be <code>max((<var>relativeEnd</var> - <var>relativeStart</var>), 0)</code>.
+
+1. Return a new {{Blob}} object <var>S</var> with the following characteristics:
+
+  <ol type="a">
+    <li><var>S</var> refers to <var>span</var> consecutive <a>byte</a>s from <var>blob</var>'s
+    associated <a>byte</a> sequence, beginning with the <a>byte</a> at byte-order position
+    <var>relativeStart</var>.
+
+    <li><var>S</var>.{{Blob/size}} = <var>span</var>.
+
+    <li><var>S</var>.{{Blob/type}} = <var>relativeContentType</var>.
+  </ol>
+
+</div>
+
 <!--
 ████████  ██        ███████  ████████
 ██     ██ ██       ██     ██ ██     ██
@@ -484,56 +554,12 @@ run the following steps:
 ### The {{Blob/slice()}} method ### {#slice-method-algo}
 
 The <dfn id="dfn-slice" method for=Blob lt="slice(start, end, contentType), slice(start, end), slice(start), slice()">slice()</dfn> method
-returns a new {{Blob}} object with bytes ranging from
-the optional {{start}} parameter
-up to but not including the optional {{end}} parameter,
-and with a {{Blob/type}} attribute that is the value of the optional {{contentType!!argument}} parameter.
-It must act as follows:
+returns a new {{Blob}} object with bytes ranging from the optional <var>start</var> parameter
+up to but not including the optional <var>end</var> parameter, and with a {{Blob/type}} attribute
+that is the value of the optional <var>contentType</var> parameter. It must act as follows:
 
-1. The optional <dfn argument for="Blob/slice(start, end, contentType)" id="dfn-start">start</dfn> parameter
-  is a value for the start point of a {{slice()}} call,
-  and must be treated as a byte-order position,
-  with the zeroth position representing the first byte.
-  User agents must process {{Blob/slice()}} with {{start}} normalized according to the following:
-
-  <ol type="a">
-    <li>If the optional {{start}} parameter is not used as a parameter when making this call, let |relativeStart| be 0.
-    <li>If {{start}} is negative, let |relativeStart| be <code>max(({{Blob/size}} + {{start}}), 0)</code>.
-    <li>Else, let |relativeStart| be <code>min(start, size)</code>.
-  </ol>
-
-1. The optional <dfn argument for="Blob/slice(start, end, contentType)" id="dfn-end">end</dfn> parameter
-  is a value for the end point of a {{slice()}} call.
-  User agents must process {{Blob/slice()}} with {{end}} normalized according to the following:
-
-  <ol type="a">
-    <li>If the optional {{end}} parameter is not used as a parameter when making this call, let |relativeEnd| be {{Blob/size}}.
-    <li>If {{end}} is negative, let |relativeEnd| be <code>max((size + end), 0)</code>.
-    <li>Else, let |relativeEnd| be <code>min(end, size)</code>.
-  </ol>
-
-1. The optional <dfn argument for="Blob/slice(start, end, contentType)" id="dfn-contentTypeBlob">contentType</dfn> parameter
-  is used to set the ASCII-encoded string in lower case representing the media type of the Blob.
-  User agents must process the {{Blob/slice()}} with {{contentType}} normalized according to the following:
-
-  <ol type="a">
-    <li>If the {{contentType}} parameter is not provided, let |relativeContentType| be set to the empty string.
-    <li>Else let |relativeContentType| be set to {{contentType}} and run the substeps below:
-      1. If |relativeContentType| contains any characters outside the range of U+0020 to U+007E,
-        then set |relativeContentType| to the empty string and return from these substeps.
-      2. Convert every character in |relativeContentType| to [=ASCII lowercase=].
-  </ol>
-
-1. Let |span| be <code>max((relativeEnd - relativeStart), 0)</code>.
-
-1. Return a new {{Blob}} object |S| with the following characteristics:
-
-  <ol type="a">
-    <li>|S| refers to |span| consecutive <a>byte</a>s from <a>this</a>,
-      beginning with the <a>byte</a> at byte-order position |relativeStart|.
-    <li>|S|.{{Blob/size}} = |span|.
-    <li>|S|.{{Blob/type}} = |relativeContentType|.
-  </ol>
+1. Return the result of <a>slice blob</a> given <a>this</a>, <var>start</var>, <var>end</var>,
+   and <var>contentType</var>.
 
 <div class="example">
   The examples below illustrate the different types of {{slice()}} calls possible. Since the
