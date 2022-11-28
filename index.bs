@@ -194,21 +194,19 @@ The term <dfn id="UnixEpoch">Unix Epoch</dfn> is used in this specification to r
 this is the same time that is conceptually "<code>0</code>" in ECMA-262 [[ECMA-262]].
 
 <div algorithm>
-The <dfn export>slice blob</dfn> algorithm given a {{Blob}} <var>blob</var>,
-an optional parameter <var>start</var>, an optional parameter <var>end</var>,
-and an optional parameter <var>contentType</var> is used to refer to the following
+The <dfn export>slice blob</dfn> algorithm given a {{Blob}} <var>blob</var>, <var>start</var>,
+<var>end</var>, and <var>contentType</var> is used to refer to the following
 steps and returns a new {{Blob}} containing the bytes ranging from the <var>start</var> parameter
 up to but not including the <var>end</var> parameter. It must act as follows:
 
 1. Let <var>originalSize</var> be <var>blob</var>'s {{Blob/size}}.
 
-1. The optional <var>start</var> parameter is a value for the start point of a <a>slice blob</a>
+1. The <var>start</var> parameter, if non-null, is a value for the start point of a <a>slice blob</a>
    call, and must be treated as a byte-order position, with the zeroth position representing the
    first byte. User agents must normalize <var>start</var> according to the following:
 
   <ol type="a">
-   <li>If the optional <var>start</var> parameter is not used as a parameter when making this call,
-   let <var>relativeStart</var> be 0.
+   <li>If <var>start</var> is null, let <var>relativeStart</var> be 0.
 
    <li>If <var>start</var> is negative, let <var>relativeStart</var> be
    <code>max((<var>originalSize</var> + <var>start</var>), 0)</code>.
@@ -217,27 +215,26 @@ up to but not including the <var>end</var> parameter. It must act as follows:
    <code>min(<var>start</var>, <var>originalSize</var>)</code>.
   </ol>
 
-1. The optional <var>end</var> parameter is a value for the end point of a <a>slice blob</a> call.
-   User agents must normalize <var>end</var> according to the following:
+1. The <var>end</var> parameter, if non-null. is a value for the end point of a <a>slice blob</a>
+   call. User agents must normalize <var>end</var> according to the following:
 
   <ol type="a">
-    <li>If the optional <var>end</var> parameter is not used as a parameter when making this call,
-    let <var>relativeEnd</var> be <var>originalSize</var>.
+    <li>If <var>end</var> is null, let <var>relativeEnd</var> be <var>originalSize</var>.
 
     <li>If <var>end</var> is negative, let <var>relativeEnd</var> be
     <code>max((<var>originalSize</var> + <var>end</var>), 0)</code>.
 
-    <li>Else, let <var>relativeEnd</var> be
+    <li>Otherwise, let <var>relativeEnd</var> be
     <code>min(<var>end</var>, <var>originalSize</var>)</code>.
   </ol>
 
-1. The optional <var>contentType</var> parameter is used to set the ASCII-encoded string in lower
-   case representing the media type of the {{Blob}}. User agents must normalize
+1. The <var>contentType</var> parameter, if non-null, is used to set the ASCII-encoded string in
+   lower case representing the media type of the {{Blob}}. User agents must normalize
    <var>contentType</var> according to the following:
 
   <ol type="a">
-    <li>If the <var>contentType</var> parameter is not provided, let <var>relativeContentType</var>
-    be set to the empty string.
+    <li>If <var>contentType</var> is null, let <var>relativeContentType</var> be set to the empty
+    string.
 
     <li>Otherwise, let <var>relativeContentType</var> be set to <var>contentType</var> and run the
     substeps below:
@@ -553,13 +550,22 @@ run the following steps:
 
 ### The {{Blob/slice()}} method ### {#slice-method-algo}
 
+<div algorithm>
 The <dfn id="dfn-slice" method for=Blob lt="slice(start, end, contentType), slice(start, end), slice(start), slice()">slice()</dfn> method
 returns a new {{Blob}} object with bytes ranging from the optional <var>start</var> parameter
 up to but not including the optional <var>end</var> parameter, and with a {{Blob/type}} attribute
 that is the value of the optional <var>contentType</var> parameter. It must act as follows:
 
-1. Return the result of <a>slice blob</a> given <a>this</a>, <var>start</var>, <var>end</var>,
-   and <var>contentType</var>.
+1. Let <var>sliceStart</var>, <var>sliceEnd</var>, and <var>sliceContentType</var> be null.
+
+1. If <var>start</var> is given, set <var>sliceStart</var> to <var>start</var>.
+
+1. If <var>end</var> is given, set <var>sliceEnd</var> to <var>end</var>.
+
+1. If <var>contentType</var> is given, set <var>sliceContentType</var> to <var>contentType</var>.
+
+1. Return the result of <a>slice blob</a> given <a>this</a>, <var>sliceStart</var>,
+   <var>sliceEnd</var>, and <var>sliceContentType</var>.
 
 <div class="example">
   The examples below illustrate the different types of {{slice()}} calls possible. Since the
@@ -591,6 +597,7 @@ that is the value of the optional <var>contentType</var> parameter. It must act 
       var fileNoMetadata = file.slice(0, -150, "application/experimental");
     }
   </pre>
+</div>
 </div>
 
 ### The {{Blob/stream()}} method ### {#stream-method-algo}
