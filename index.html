@@ -6,7 +6,7 @@
   <meta content="ED" name="w3c-status">
   <meta content="Bikeshed version 63e66730b, updated Tue Oct 25 12:35:05 2022 -0700" name="generator">
   <link href="https://www.w3.org/TR/FileAPI/" rel="canonical">
-  <meta content="3ee8d2313cace7be8decd5b1b595eb51000b09ba" name="document-revision">
+  <meta content="d134dae48ccdad3ad1d5fb6b1df16aa73fb0a4d4" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -519,7 +519,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">File API</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2022-11-14">14 November 2022</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2022-11-30">30 November 2022</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -818,37 +818,33 @@ This operation is also defined in ECMAScript <a data-link-type="biblio" href="#b
 (or 1970-01-01T00:00:00Z ISO 8601);
 this is the same time that is conceptually "<code>0</code>" in ECMA-262 <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>.</p>
    <div class="algorithm" data-algorithm="slice blob">
-     The <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="slice-blob">slice blob</dfn> algorithm given a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑧">Blob</a></code> <var>blob</var>,
-an optional parameter <var>start</var>, an optional parameter <var>end</var>,
-and an optional parameter <var>contentType</var> is used to refer to the following
+     The <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="slice-blob">slice blob</dfn> algorithm given a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑧">Blob</a></code> <var>blob</var>, <var>start</var>, <var>end</var>, and <var>contentType</var> is used to refer to the following
 steps and returns a new <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob⑨">Blob</a></code> containing the bytes ranging from the <var>start</var> parameter
 up to but not including the <var>end</var> parameter. It must act as follows: 
     <ol>
      <li data-md>
       <p>Let <var>originalSize</var> be <var>blob</var>’s <code class="idl"><a data-link-type="idl" href="#dfn-size" id="ref-for-dfn-size">size</a></code>.</p>
      <li data-md>
-      <p>The optional <var>start</var> parameter is a value for the start point of a <a data-link-type="dfn" href="#slice-blob" id="ref-for-slice-blob">slice blob</a> call, and must be treated as a byte-order position, with the zeroth position representing the
+      <p>The <var>start</var> parameter, if non-null, is a value for the start point of a <a data-link-type="dfn" href="#slice-blob" id="ref-for-slice-blob">slice blob</a> call, and must be treated as a byte-order position, with the zeroth position representing the
  first byte. User agents must normalize <var>start</var> according to the following:</p>
       <ol type="a">
-       <li>If the optional <var>start</var> parameter is not used as a parameter when making this call,
- let <var>relativeStart</var> be 0. 
+       <li>If <var>start</var> is null, let <var>relativeStart</var> be 0. 
        <li>If <var>start</var> is negative, let <var>relativeStart</var> be <code>max((<var>originalSize</var> + <var>start</var>), 0)</code>. 
        <li>Otherwise, let <var>relativeStart</var> be <code>min(<var>start</var>, <var>originalSize</var>)</code>. 
       </ol>
      <li data-md>
-      <p>The optional <var>end</var> parameter is a value for the end point of a <a data-link-type="dfn" href="#slice-blob" id="ref-for-slice-blob①">slice blob</a> call.
- User agents must normalize <var>end</var> according to the following:</p>
+      <p>The <var>end</var> parameter, if non-null. is a value for the end point of a <a data-link-type="dfn" href="#slice-blob" id="ref-for-slice-blob①">slice blob</a> call. User agents must normalize <var>end</var> according to the following:</p>
       <ol type="a">
-       <li>If the optional <var>end</var> parameter is not used as a parameter when making this call,
-  let <var>relativeEnd</var> be <var>originalSize</var>. 
+       <li>If <var>end</var> is null, let <var>relativeEnd</var> be <var>originalSize</var>. 
        <li>If <var>end</var> is negative, let <var>relativeEnd</var> be <code>max((<var>originalSize</var> + <var>end</var>), 0)</code>. 
-       <li>Else, let <var>relativeEnd</var> be <code>min(<var>end</var>, <var>originalSize</var>)</code>. 
+       <li>Otherwise, let <var>relativeEnd</var> be <code>min(<var>end</var>, <var>originalSize</var>)</code>. 
       </ol>
      <li data-md>
-      <p>The optional <var>contentType</var> parameter is used to set the ASCII-encoded string in lower
- case representing the media type of the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob①⓪">Blob</a></code>. User agents must normalize <var>contentType</var> according to the following:</p>
+      <p>The <var>contentType</var> parameter, if non-null, is used to set the ASCII-encoded string in
+ lower case representing the media type of the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob①⓪">Blob</a></code>. User agents must normalize <var>contentType</var> according to the following:</p>
       <ol type="a">
-       <li>If the <var>contentType</var> parameter is not provided, let <var>relativeContentType</var> be set to the empty string. 
+       <li>If <var>contentType</var> is null, let <var>relativeContentType</var> be set to the empty
+  string. 
        <li>
         Otherwise, let <var>relativeContentType</var> be set to <var>contentType</var> and run the
   substeps below: 
@@ -1262,17 +1258,25 @@ from <var>s</var> given <var>position</var>.</p>
      </div>
     </div>
    </div>
-   <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="Blob" data-dfn-type="method" data-export data-lt="slice(start, end, contentType)|slice(start, end)|slice(start)|slice()|slice(start, end, contentType), slice(start, end), slice(start), slice()" id="dfn-slice"><code>slice()</code></dfn> method
+   <div class="algorithm" data-algorithm="slice(start, end, contentType), slice(start, end), slice(start), slice()" data-algorithm-for="Blob">
+     The <dfn class="dfn-paneled idl-code" data-dfn-for="Blob" data-dfn-type="method" data-export data-lt="slice(start, end, contentType)|slice(start, end)|slice(start)|slice()|slice(start, end, contentType), slice(start, end), slice(start), slice()" id="dfn-slice"><code>slice()</code></dfn> method
 returns a new <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob③①">Blob</a></code> object with bytes ranging from the optional <var>start</var> parameter
 up to but not including the optional <var>end</var> parameter, and with a <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①⓪">type</a></code> attribute
-that is the value of the optional <var>contentType</var> parameter. It must act as follows:</p>
-   <ol>
-    <li data-md>
-     <p>Return the result of <a data-link-type="dfn" href="#slice-blob" id="ref-for-slice-blob②">slice blob</a> given <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this">this</a>, <var>start</var>, <var>end</var>,
- and <var>contentType</var>.</p>
-   </ol>
-   <div class="example" id="example-0ffe45c5">
-    <a class="self-link" href="#example-0ffe45c5"></a> The examples below illustrate the different types of <code class="idl"><a data-link-type="idl" href="#dfn-slice" id="ref-for-dfn-slice③">slice()</a></code> calls possible. Since the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file⑦">File</a></code> interface inherits from the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob③②">Blob</a></code> interface, examples are based on the use of the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file⑧">File</a></code> interface. 
+that is the value of the optional <var>contentType</var> parameter. It must act as follows: 
+    <ol>
+     <li data-md>
+      <p>Let <var>sliceStart</var>, <var>sliceEnd</var>, and <var>sliceContentType</var> be null.</p>
+     <li data-md>
+      <p>If <var>start</var> is given, set <var>sliceStart</var> to <var>start</var>.</p>
+     <li data-md>
+      <p>If <var>end</var> is given, set <var>sliceEnd</var> to <var>end</var>.</p>
+     <li data-md>
+      <p>If <var>contentType</var> is given, set <var>sliceContentType</var> to <var>contentType</var>.</p>
+     <li data-md>
+      <p>Return the result of <a data-link-type="dfn" href="#slice-blob" id="ref-for-slice-blob②">slice blob</a> given <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this">this</a>, <var>sliceStart</var>, <var>sliceEnd</var>, and <var>sliceContentType</var>.</p>
+    </ol>
+    <div class="example" id="example-0ffe45c5">
+     <a class="self-link" href="#example-0ffe45c5"></a> The examples below illustrate the different types of <code class="idl"><a data-link-type="idl" href="#dfn-slice" id="ref-for-dfn-slice③">slice()</a></code> calls possible. Since the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file⑦">File</a></code> interface inherits from the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob③②">Blob</a></code> interface, examples are based on the use of the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file⑧">File</a></code> interface. 
 <pre class="lang-javascript highlight"><c- c1>// obtain input element through DOM</c->
 
 <c- a>var</c-> file <c- o>=</c-> document<c- p>.</c->getElementById<c- p>(</c-><c- t>'file'</c-><c- p>).</c->files<c- p>[</c-><c- mf>0</c-><c- p>];</c->
@@ -1298,6 +1302,7 @@ that is the value of the optional <var>contentType</var> parameter. It must act 
   <c- a>var</c-> fileNoMetadata <c- o>=</c-> file<c- p>.</c->slice<c- p>(</c-><c- mf>0</c-><c- p>,</c-> <c- o>-</c-><c- mf>150</c-><c- p>,</c-> <c- u>"application/experimental"</c-><c- p>);</c->
 <c- p>}</c->
 </pre>
+    </div>
    </div>
    <h4 class="heading settled" data-level="3.3.2" id="stream-method-algo"><span class="secno">3.3.2. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#dom-blob-stream" id="ref-for-dom-blob-stream①">stream()</a></code> method</span><a class="self-link" href="#stream-method-algo"></a></h4>
    <div class="mdn-anno wrapped">
