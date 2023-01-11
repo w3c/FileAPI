@@ -330,7 +330,7 @@ A {{Blob}} |blob| has an associated <dfn export for=Blob>get stream</dfn> algori
 which runs these steps:
 
 1. Let |stream| be a [=new=] {{ReadableStream}} created in |blob|'s [=relevant Realm=].
-1. [=ReadableStream/Set up=] |stream|.
+1. [=ReadableStream/set up with byte reading support|Set up=] |stream| with byte reading support.
 1. Run the following steps [=in parallel=]:
   1. While not all bytes of |blob| have been read:
     1. Let |bytes| be the [=byte sequence=] that results from reading a [=chunk=] from |blob|, or
