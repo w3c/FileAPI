@@ -1558,7 +1558,7 @@ run the following steps:
 ## Dereferencing Model for blob URLs ## {#requestResponseModel}
 
 <div algorithm="resolveURL">
-To <dfn export for="blob URL" lt="resolve">resolve a blob URL</dfn> given a |url| (a [=URL=]), run the following steps:
+To <dfn export id=blob-url-resolve>resolve a blob URL</dfn> given a [=URL=] |url|:
 
 1. [=Assert=]: |url|'s [=url/scheme=] is "`blob`".
 1. Let |store| be the user agent's [=blob URL store=].
