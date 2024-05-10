@@ -300,6 +300,7 @@ interface Blob {
   [NewObject] ReadableStream stream();
   [NewObject] Promise<USVString> text();
   [NewObject] Promise<ArrayBuffer> arrayBuffer();
+  [NewObject] Promise<ArrayBuffer> bytes();
 };
 
 enum EndingType { "transparent", "native" };
@@ -631,6 +632,17 @@ The <dfn method for=Blob>arrayBuffer()</dfn> method, when invoked, must run thes
 1. Let |promise| be the result of [=read all bytes|reading all bytes=] from |stream| with |reader|.
 1. Return the result of transforming |promise| by a fulfillment handler that returns
    a new {{ArrayBuffer}} whose contents are its first argument.
+
+### The {{Blob/bytes()}} method ### {#bytes-method-algo}
+
+The <dfn method for=Blob>bytes()</dfn> method, when invoked, must run these steps:
+
+1. Let |stream| be the result of calling [=get stream=] on [=this=].
+1. Let |reader| be the result of [=get a reader|getting a reader=] from |stream|.
+   If that threw an exception, return a new promise rejected with that exception.
+1. Let |promise| be the result of [=read all bytes|reading all bytes=] from |stream| with |reader|.
+1. Return the result of transforming |promise| by a fulfillment handler that returns
+   a new {{Uint8Array}} wrapping an {{ArrayBuffer}} containing its first argument.
 
 <!--
 ████████ ████ ██       ████████
