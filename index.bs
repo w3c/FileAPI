@@ -300,7 +300,7 @@ interface Blob {
   [NewObject] ReadableStream stream();
   [NewObject] Promise<USVString> text();
   [NewObject] Promise<ArrayBuffer> arrayBuffer();
-  [NewObject] Promise<ArrayBuffer> bytes();
+  [NewObject] Promise<Uint8Array> bytes();
 };
 
 enum EndingType { "transparent", "native" };
