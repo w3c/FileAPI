@@ -443,7 +443,7 @@ To <dfn lt="convert line endings to native|converting line endings to native">
 convert line endings to native</dfn> in a [=string=] |s|,
 run the following steps:
 
-1. Let |native line ending| be be the [=code point=] U+000A LF.
+1. Let |native line ending| be the [=code point=] U+000A LF.
 
 1. If the underlying platform's conventions are
   to represent newlines as a carriage return and line feed sequence,
