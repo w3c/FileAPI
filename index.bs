@@ -1630,7 +1630,7 @@ return the result of [=adding an entry to the blob URL store=] for |obj|.
 <div algorithm="revokeObjectURL">
 The <dfn method for=URL id="dfn-revokeObjectURL">revokeObjectURL(|url|)</dfn> static method must run these steps:
 
-1. 1. Let |entry| be the result of [=resolving the blob URL=] |url|.
+1. Let |entry| be the result of [=resolving the blob URL=] |url|.
 1. If |entry| is failure, return.
 1. Let |blobStorageKey| be the result of [=obtaining a storage key for non-storage purposes=] with |entry|'s [=environment settings object=].
 1. Let |currentStorageKey| be the result of [=obtaining a storage key for non-storage purposes=] with the [=current settings object=].
