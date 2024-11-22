@@ -1570,7 +1570,7 @@ run the following steps:
 ## Dereferencing Model for blob URLs ## {#requestResponseModel}
 
 <div algorithm="resolveURL">
-To <dfn export id=blob-url-resolve lt="resolve a blob URL|resolving the blob URL">resolve a blob URL</dfn> given a [=URL=] |url|:
+To <dfn export id=blob-url-resolve>resolve a blob URL</dfn> given a [=URL=] |url|:
 
 1. [=Assert=]: |url|'s [=url/scheme=] is "`blob`".
 1. Let |store| be the user agent's [=blob URL store=].
@@ -1630,14 +1630,15 @@ return the result of [=adding an entry to the blob URL store=] for |obj|.
 <div algorithm="revokeObjectURL">
 The <dfn method for=URL id="dfn-revokeObjectURL">revokeObjectURL(|url|)</dfn> static method must run these steps:
 
-1. Let |entry| be the result of [=resolving the blob URL=] |url|.
-1. If |entry| is failure, return.
-1. Let |blobStorageKey| be the result of [=obtaining a storage key for non-storage purposes=] with |entry|'s [=environment settings object=].
+1. Let |url record| be the result of [=URL parser|parsing=] |url|.
+1. If |url record|'s [=url/scheme=] is not "`blob`", return.
+1. Let |entry| be |url record|'s [=blob URL entry=].
+1. Let |blobStorageKey| be the result of [=obtaining a storage key for non-storage purposes=] with |entry|'s [=blob URL entry/environment=].
 1. Let |currentStorageKey| be the result of [=obtaining a storage key for non-storage purposes=] with the [=current settings object=].
 1. If |blobStorageKey| is not [=storage key/equal=] to |currentStorageKey|, return.
 1. [=Remove an entry from the Blob URL Store=] for |url|.
 
-Note: This means that rather than throwing some kind of error, attempting to revoke a URL that isn't registered will silently fail.
+Note: This means that rather than throwing some kind of error, attempting to revoke a URL that isn't registered or that was registered from an environment with a different storage key will silently fail.
 User agents might display a message on the error console if this happens.
 
 Note: Attempts to dereference |url| after it has been revoked will result in a [=network error=].
