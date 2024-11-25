@@ -1512,14 +1512,24 @@ A [=blob URL store=] is a [=map=]
 where [=map/keys=] are [=valid URL strings=]
 and [=map/values=] are [=blob URL Entries=].
 
-A <dfn export>blob URL entry</dfn> consists of
-an <dfn export for="blob URL entry">object</dfn> (of type {{Blob}} or {{MediaSource}}),
-and an <dfn export for="blob URL entry">environment</dfn> (an [=environment settings object=]).
-
 [=map/Keys=] in the [=blob URL store=] (also known as <dfn lt="blob URL|object URL" export>blob URLs</dfn>)
 are [=valid URL strings=] that when [=URL parser|parsed=]
 result in a [=/URL=] with a [=url/scheme=] equal to "`blob`",
 an [=empty host=], and a [=url/path=] consisting of one element itself also a [=valid URL string=].
+
+A <dfn export>blob URL entry</dfn> is used to store an object of type {{Blob}} or {{MediaSource}}.
+
+A [=blob URL entry=] has an <dfn export for="blob URL entry">environment</dfn> (an [=environment settings object=]).
+
+<div algorithm="obtainBlobObject">
+To <dfn export id=blob-url-obtain-object>obtain a blob object</dfn> given a [=blob URL entry=] |blobUrlEntry|, an [=environment=] |environment|, and an optional boolean |isNavigation| (default false):
+
+1. Let |isAuthorized| be true.
+1. If |isNavigation| is false, let |isAuthorized| be the result of [=checking for same-partition blob URL usage=] with |blobUrlEntry| and |environment|.
+1. If |isAuthorized| is false, then return failure.
+1. Return |blobUrlEntry|'s object.
+
+</div>
 
 <div algorithm="createBlobURL">
 To <dfn id="unicodeBlobURL" lt="generate a new blob URL|generating a new blob URL">
@@ -1595,6 +1605,22 @@ as the serialization of the origin of the environment that created the blob URL,
 but for opaque origins the origin itself might be distinct. This difference isn't
 observable though, since a revoked blob URL can't be resolved/fetched anymore anyway.
 
+### Access restrictions on blob URLs ### {#partitioningOfBlobUrls}
+
+<a>Blob URLs</a> can only be fetched from environments where the [=storage key=] matches that of
+the environment where the <a>blob URL</a> was created. <a>blob URL</a> navigations are not subject
+to this restriction.
+
+<div algorithm="checkForSamePartitionBlobUrlUsage">
+To <dfn export id=blob-url-partition-check>check for same-partition blob URL usage</dfn> given a [=blob URL entry=] |blobUrlEntry| and an [=environment=] |environment|:
+
+1. Let |blobStorageKey| be the result of [=obtaining a storage key for non-storage purposes=] with |blobUrlEntry|'s [=blob URL entry/environment=].
+1. Let |environmentStorageKey| be the result of [=obtaining a storage key for non-storage purposes=] with |environment|.
+1. If |blobStorageKey| is not [=storage key/equal=] to |environmentStorageKey|, then return false.
+1. Otherwise, return true.
+
+</div>
+
 <h4 id="lifeTime" dfn for="blob url" lt="lifetime|lifetime stipulation" export>Lifetime of blob URLs</h4>
 
 This specification extends the [=unloading document cleanup steps=] with the following steps:
@@ -1633,12 +1659,12 @@ The <dfn method for=URL id="dfn-revokeObjectURL">revokeObjectURL(|url|)</dfn> st
 1. Let |url record| be the result of [=URL parser|parsing=] |url|.
 1. If |url record|'s [=url/scheme=] is not "`blob`", return.
 1. Let |entry| be |url record|'s [=blob URL entry=].
-1. Let |blobStorageKey| be the result of [=obtaining a storage key for non-storage purposes=] with |entry|'s [=blob URL entry/environment=].
-1. Let |currentStorageKey| be the result of [=obtaining a storage key for non-storage purposes=] with the [=current settings object=].
-1. If |blobStorageKey| is not [=storage key/equal=] to |currentStorageKey|, return.
+1. If |entry| is null, return.
+1. Let |isAuthorized| be the result of [=checking for same-partition blob URL usage=] with |entry| and the [=current settings object=].
+1. If |isAuthorized| is false, return.
 1. [=Remove an entry from the Blob URL Store=] for |url|.
 
-Note: This means that rather than throwing some kind of error, attempting to revoke a URL that isn't registered or that was registered from an environment with a different storage key will silently fail.
+Note: This means that rather than throwing some kind of error, attempting to revoke a URL that isn't registered or that was registered from an environment in a different storage partition will silently fail.
 User agents might display a message on the error console if this happens.
 
 Note: Attempts to dereference |url| after it has been revoked will result in a [=network error=].
