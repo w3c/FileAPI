@@ -1512,20 +1512,25 @@ A [=blob URL store=] is a [=map=]
 where [=map/keys=] are [=valid URL strings=]
 and [=map/values=] are [=blob URL Entries=].
 
+A <dfn export>blob URL entry</dfn> consists of an <i>object</i> (of type {{Blob}} or
+{{MediaSource}}), and an <dfn export for="blob URL entry">environment</dfn> (an
+[=environment settings object=]).
+
+Note: Specifications must use the [=obtain a blob object=] algorithm to access a
+[=blob URL entry=]'s <i>object</i>.
+
 [=map/Keys=] in the [=blob URL store=] (also known as <dfn lt="blob URL|object URL" export>blob URLs</dfn>)
 are [=valid URL strings=] that when [=URL parser|parsed=]
 result in a [=/URL=] with a [=url/scheme=] equal to "`blob`",
 an [=empty host=], and a [=url/path=] consisting of one element itself also a [=valid URL string=].
 
-A <dfn export>blob URL entry</dfn> is used to store an object of type {{Blob}} or {{MediaSource}}.
-
-A [=blob URL entry=] has an <dfn export for="blob URL entry">environment</dfn> (an [=environment settings object=]).
-
 <div algorithm="obtainBlobObject">
-To <dfn export id=blob-url-obtain-object>obtain a blob object</dfn> given a [=blob URL entry=] |blobUrlEntry|, an [=environment=] |environment|, and an optional boolean |isNavigation| (default false):
+To <dfn export id=blob-url-obtain-object>obtain a blob object</dfn> given a [=blob URL entry=]
+|blobUrlEntry|, an [=environment=] or the string "`navigation`" |environment|:
 
 1. Let |isAuthorized| be true.
-1. If |isNavigation| is false, let |isAuthorized| be the result of [=checking for same-partition blob URL usage=] with |blobUrlEntry| and |environment|.
+1. If |environment| is not the string "`navigation`", then set |isAuthorized| to the result of
+[=checking for same-partition blob URL usage=] with |blobUrlEntry| and |environment|.
 1. If |isAuthorized| is false, then return failure.
 1. Return |blobUrlEntry|'s object.
 
@@ -1656,12 +1661,12 @@ return the result of [=adding an entry to the blob URL store=] for |obj|.
 <div algorithm="revokeObjectURL">
 The <dfn method for=URL id="dfn-revokeObjectURL">revokeObjectURL(|url|)</dfn> static method must run these steps:
 
-1. Let |url record| be the result of [=URL parser|parsing=] |url|.
-1. If |url record|'s [=url/scheme=] is not "`blob`", return.
-1. Let |entry| be |url record|'s [=blob URL entry=].
-1. If |entry| is null, return.
+1. Let |urlRecord| be the result of [=URL parser|parsing=] |url|.
+1. If |urlRecord|'s [=url/scheme=] is not "`blob`", return.
+1. Let |entry| be |urlRecord|'s [=blob URL entry=].
+1. If |entry| is null, then return.
 1. Let |isAuthorized| be the result of [=checking for same-partition blob URL usage=] with |entry| and the [=current settings object=].
-1. If |isAuthorized| is false, return.
+1. If |isAuthorized| is false, then return.
 1. [=Remove an entry from the Blob URL Store=] for |url|.
 
 Note: This means that rather than throwing some kind of error, attempting to revoke a URL that isn't registered or that was registered from an environment in a different storage partition will silently fail.
