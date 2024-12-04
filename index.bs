@@ -1512,12 +1512,12 @@ A [=blob URL store=] is a [=map=]
 where [=map/keys=] are [=valid URL strings=]
 and [=map/values=] are [=blob URL Entries=].
 
-A <dfn export>blob URL entry</dfn> consists of an <i>object</i> (of type {{Blob}} or
-{{MediaSource}}), and an <dfn export for="blob URL entry">environment</dfn> (an
+A <dfn export>blob URL entry</dfn> consists of an <dfn for="blob URL entry">object</dfn> (of type
+{{Blob}} or {{MediaSource}}), and an <dfn export for="blob URL entry">environment</dfn> (an
 [=environment settings object=]).
 
-Note: Specifications must use the [=obtain a blob object=] algorithm to access a
-[=blob URL entry=]'s <i>object</i>.
+Note: Specifications have to use the [=obtain a blob object=] algorithm to access a
+[=blob URL entry=]'s [=blob URL entry/object=].
 
 [=map/Keys=] in the [=blob URL store=] (also known as <dfn lt="blob URL|object URL" export>blob URLs</dfn>)
 are [=valid URL strings=] that when [=URL parser|parsed=]
@@ -1531,7 +1531,7 @@ To <dfn export id=blob-url-obtain-object>obtain a blob object</dfn> given a [=bl
 1. Let |isAuthorized| be true.
 1. If |environment| is not the string "`navigation`", then set |isAuthorized| to the result of [=checking for same-partition blob URL usage=] with |blobUrlEntry| and |environment|.
 1. If |isAuthorized| is false, then return failure.
-1. Return |blobUrlEntry|'s object.
+1. Return |blobUrlEntry|'s [=blob URL entry/object=].
 
 </div>
 
@@ -1612,7 +1612,7 @@ observable though, since a revoked blob URL can't be resolved/fetched anymore an
 ### Access restrictions on blob URLs ### {#partitioningOfBlobUrls}
 
 <a>Blob URLs</a> can only be fetched from environments where the [=storage key=] matches that of
-the environment where the <a>blob URL</a> was created. <a>blob URL</a> navigations are not subject
+the environment where the <a>blob URL</a> was created. <a>Blob URL</a> navigations are not subject
 to this restriction.
 
 <div algorithm="checkForSamePartitionBlobUrlUsage">
@@ -1621,7 +1621,7 @@ To <dfn export id=blob-url-partition-check>check for same-partition blob URL usa
 1. Let |blobStorageKey| be the result of [=obtaining a storage key for non-storage purposes=] with |blobUrlEntry|'s [=blob URL entry/environment=].
 1. Let |environmentStorageKey| be the result of [=obtaining a storage key for non-storage purposes=] with |environment|.
 1. If |blobStorageKey| is not [=storage key/equal=] to |environmentStorageKey|, then return false.
-1. Otherwise, return true.
+1. Return true.
 
 </div>
 
