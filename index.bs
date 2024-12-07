@@ -347,6 +347,7 @@ which runs these steps:
 
     Issue: We need to specify more concretely what reading from a Blob actually does,
     what possible errors can happen, perhaps something about chunk sizes, etc.
+  1. Perform [=ReadableStream/close=] on |stream|.
 1. Return |stream|.
 
 </div>
