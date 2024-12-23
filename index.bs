@@ -285,7 +285,7 @@ Further normative definition of <a>snapshot state</a> can be found for {{File}}s
 <xmp class="idl">
 [Exposed=(Window,Worker), Serializable]
 interface Blob {
-  constructor(optional sequence<BlobPart> blobParts,
+  constructor(optional sequence<BlobPart> blobParts = [],
               optional BlobPropertyBag options = {});
 
   readonly attribute unsigned long long size;
@@ -354,28 +354,22 @@ which runs these steps:
 ## Constructors ## {#constructorBlob}
 
 <div algorithm="blob-constructor">
-The {{Blob()}} constructor can be invoked with zero or more parameters.
 When the {{Blob()}} constructor is invoked,
 user agents must run the following steps:
 
-1. If invoked with zero parameters,
-  return a new {{Blob}} object consisting of 0 bytes,
-  with {{Blob/size}} set to 0,
-  and with {{Blob/type}} set to the empty string.
-
 1. Let |bytes| be the result of [=processing blob parts=] given {{blobParts}} and {{Blob/Blob(blobParts, options)/options}}.
 
-1. If the {{BlobPropertyBag/type}} member of the {{Blob/Blob(blobParts, options)/options}} argument is not the empty string,
-  run the following sub-steps:
+1. Let |t| be the empty string.
 
-  1. Let |t| be the {{BlobPropertyBag/type}} dictionary member.
-    If |t| contains any characters outside the range U+0020 to U+007E,
-    then set |t| to the empty string and return from these substeps.
+1. If {{Blob/Blob(blobParts, options)/options}}["{{BlobPropertyBag/type}}"] does not contain any characters outside the range U+0020 to U+007E, inclusive, then:
+
+  1. Set |t| to {{Blob/Blob(blobParts, options)/options}}["{{BlobPropertyBag/type}}"].
+
   1. Convert every character in |t| to [=ASCII lowercase=].
 
 1. Return a {{Blob}} object referring to |bytes| as its associated <a>byte</a> sequence,
   with its {{Blob/size}} set to the length of |bytes|,
-  and its {{Blob/type}} set to the value of |t| from the substeps above.
+  and its {{Blob/type}} set to |t|.
 
 </div>
 
@@ -1842,6 +1836,6 @@ This specification was originally developed by the SVG Working Group. Many thank
 
 Thanks to Robin Berjon, Jonas Sicking and Vsevolod Shmyroff for editing the original specification.
 
-Special thanks to Olli Pettay, Nikunj Mehta, Garrett Smith, Aaron Boodman, Michael Nordman, Jian Li, Dmitry Titov, Ian Hickson, Darin Fisher, Sam Weinig, Adrian Bateman and Julian Reschke.
+Special thanks to Boris Zbarsky, Olli Pettay, Nikunj Mehta, Garrett Smith, Aaron Boodman, Michael Nordman, Jian Li, Dmitry Titov, Ian Hickson, Darin Fisher, Sam Weinig, Adrian Bateman, and Julian Reschke.
 
 Thanks to the W3C WebApps WG, and to participants on the public-webapps@w3.org listserv
