@@ -1509,8 +1509,8 @@ All URLs are revoked when the global that created the URL itself goes away.
 
 Each user agent must maintain a <dfn id="BlobURLStore" export>blob URL store</dfn>.
 A [=blob URL store=] is a [=map=]
-where [=map/keys=] are [=valid URL strings=]
-and [=map/values=] are [=blob URL Entries=].
+where [=map/keys=] are [=blob URLs=]
+and [=map/values=] are [=blob URL entries=].
 
 A <dfn export>blob URL entry</dfn> consists of an <dfn for="blob URL entry">object</dfn> (of type
 {{Blob}} or {{MediaSource}}), and an <dfn export for="blob URL entry">environment</dfn> (an
@@ -1519,7 +1519,7 @@ A <dfn export>blob URL entry</dfn> consists of an <dfn for="blob URL entry">obje
 Note: Specifications have to use the [=obtain a blob object=] algorithm to access a
 [=blob URL entry=]'s [=blob URL entry/object=].
 
-[=map/Keys=] in the [=blob URL store=] (also known as <dfn lt="blob URL|object URL" export>blob URLs</dfn>)
+<dfn lt="blob URL|object URL" export>Blob URLs</dfn>
 are [=valid URL strings=] that when [=URL parser|parsed=]
 result in a [=/URL=] with a [=url/scheme=] equal to "`blob`",
 an [=empty host=], and a [=url/path=] consisting of one element itself also a [=valid URL string=].
