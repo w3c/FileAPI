@@ -1526,13 +1526,12 @@ an [=empty host=], and a [=url/path=] consisting of one element itself also a [=
 
 <div algorithm="obtainBlobObject">
 To <dfn export id=blob-url-obtain-object>obtain a blob object</dfn> given a [=blob URL entry=]
-|blobUrlEntry| and an [=environment settings object=], the string "`navigation`", or the string
-"`top-level-self-fetch`" |environment|, perform the following steps. They return an [=blob URL entry/object=].
+|blobUrlEntry| and an [=environment settings object=], "`navigation`", or "`top-level-self-fetch`"
+|environment|, perform the following steps. They return an [=blob URL entry/object=].
 
 1. Let |isAuthorized| be true.
-1. If |environment| is not the string "`navigation`" and not the string "`top-level-self-fetch`",
-   then set |isAuthorized| to the result of [=checking for same-partition blob URL usage=] with
-   |blobUrlEntry| and |environment|.
+1. If |environment| is an [=environment settings object=], then set |isAuthorized| to the result of
+   [=checking for same-partition blob URL usage=] with |blobUrlEntry| and |environment|.
 1. If |isAuthorized| is false, then return failure.
 1. Return |blobUrlEntry|'s [=blob URL entry/object=].
 
