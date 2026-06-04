@@ -300,6 +300,7 @@ interface Blob {
   [NewObject] ReadableStream stream();
   [NewObject] Promise<USVString> text();
   [NewObject] Promise<ArrayBuffer> arrayBuffer();
+  [NewObject] ReadableStream textStream();
   [NewObject] Promise<Uint8Array> bytes();
 };
 
@@ -644,6 +645,16 @@ The <dfn method for=Blob>bytes()</dfn> method, when invoked, must run these step
 1. Return the result of transforming |promise| by a fulfillment handler that returns
    a new {{Uint8Array}} wrapping an {{ArrayBuffer}} containing its first argument.
 
+### The {{Blob/textStream()}} method ### {#text-stream-method-algo}
+
+The <dfn method for=Blob>textStream()</dfn> method steps are:
+
+1. Let |stream| be the result of calling [=get stream=] on [=this=].
+1. Let |decoder| be a new {{TextDecoderStream}} in [=this=]'s [=relevant realm=].
+1. [=set up a text decoder stream|Set up=] |decoder| with [=UTF-8=].
+1. Return the result of calling |stream|, [=pipe through|piped through=] |decoder|.
+
+Note: This differs from {{FileReader/readAsText()}} in that it always uses the [=UTF-8=] encoding.
 <!--
 ████████ ████ ██       ████████
 ██        ██  ██       ██
