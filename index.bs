@@ -1011,7 +1011,7 @@ when invoked, must return [=this=]'s [=FileReader/error=].
 
 <div algorithm="read operation">
 A {{FileReader}} |fr| has an associated <dfn id=readOperation>read operation</dfn> algorithm,
-which given |blob|, a |type| and an optional |encodingName|,
+which given |blob|, a |type| and an optional |encodingLabel|,
 runs the following steps:
 
 1. If |fr|'s [=FileReader/state=] is `"loading"`,
@@ -1046,7 +1046,7 @@ runs the following steps:
      [=queue a task=] to run the following steps and abort this algorithm:
     1. Set |fr|'s [=FileReader/state=] to `"done"`.
     1. Let |result| be the result of
-       [=package data=] given |bytes|, |type|, |blob|'s {{Blob/type}}, and |encodingName|.
+       [=package data=] given |bytes|, |type|, |blob|'s {{Blob/type}}, and |encodingLabel|.
     1. If [=package data=] threw an exception |error|:
       1. Set |fr|'s [=FileReader/error=] to |error|.
       1. [=Fire a progress event=] called {{error!!event}} at |fr|.
@@ -1193,7 +1193,7 @@ the user agent must run the steps below:
 
 <div algorithm="package data">
 A {{Blob}} has an associated <dfn for=Blob>package data</dfn> algorithm,
-given |bytes|, a |type|, a optional |mimeType|, and a optional |encodingName|,
+given |bytes|, a |type|, a optional |mimeType|, and a optional |encodingLabel|,
 which switches on |type| and runs the associated steps:
 
 : DataURL
@@ -1207,8 +1207,8 @@ which switches on |type| and runs the associated steps:
 
 : Text
 :: 1. Let |encoding| be failure.
-   1. If the |encodingName| is present, set |encoding| to the result of
-      [=getting an encoding=] from |encodingName|.
+   1. If the |encodingLabel| is present, set |encoding| to the result of
+      [=getting an encoding=] from |encodingLabel|.
    1. If |encoding| is failure, and |mimeType| is present:
      1. Let |type| be the result of [=parse a MIME type=] given |mimeType|.
      1. If |type| is not failure,
