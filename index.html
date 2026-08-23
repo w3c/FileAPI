@@ -4,9 +4,9 @@
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <title>File API</title>
   <meta content="ED" name="w3c-status">
-  <meta content="Bikeshed version cfb78d9c0, updated Tue Jun 2 16:21:00 2026 -0700" name="generator">
+  <meta content="Bikeshed version ac92c2f0d, updated Fri Aug 21 16:01:29 2026 -0700" name="generator">
   <link href="https://www.w3.org/TR/FileAPI/" rel="canonical">
-  <meta content="cd1d1da9a5375af0622af4b36e76c6e6bd9d130b" name="revision">
+  <meta content="1341d2687a5dbfc1fa6168e4e45a1c6afb0d6fb4" name="revision">
   <meta content="dark light" name="color-scheme">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
@@ -997,7 +997,7 @@ var[data-var-color="6"] { --var-vg: #FFBCF2; }
 </p>
    <h1 class="no-ref p-name" id="title">File API</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#ED">Editor’s Draft</a>,
-    <time class="dt-updated" datetime="2026-06-04">4 June 2026</time></p>
+    <time class="dt-updated" datetime="2026-08-23">23 August 2026</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -2196,7 +2196,7 @@ when invoked, must return <a data-link-type="dfn" href="https://webidl.spec.what
    <div class="algorithm" data-algorithm="read operation">
     
 A <code class="idl"><a data-link-type="idl" href="#dfn-filereader" id="ref-for-dfn-filereader⑨">FileReader</a></code> <var>fr</var> has an associated <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="readOperation">read operation</dfn> algorithm,
-which given <var>blob</var>, a <var>type</var> and an optional <var>encodingName</var>,
+which given <var>blob</var>, a <var>type</var> and an optional <var>encodingLabel</var>,
 runs the following steps:
 
 
@@ -2254,7 +2254,7 @@ runs the following steps:
           <p>Set <var>fr</var>’s <a data-link-type="dfn" href="#filereader-state" id="ref-for-filereader-state③">state</a> to <code>"done"</code>.</p>
          <li data-md>
           <p>Let <var>result</var> be the result of
- <a data-link-type="dfn" href="#blob-package-data" id="ref-for-blob-package-data①">package data</a> given <var>bytes</var>, <var>type</var>, <var>blob</var>’s <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①④">type</a></code>, and <var>encodingName</var>.</p>
+ <a data-link-type="dfn" href="#blob-package-data" id="ref-for-blob-package-data①">package data</a> given <var>bytes</var>, <var>type</var>, <var>blob</var>’s <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①④">type</a></code>, and <var>encodingLabel</var>.</p>
          <li data-md>
           <p>If <a data-link-type="dfn" href="#blob-package-data" id="ref-for-blob-package-data②">package data</a> threw an exception <var>error</var>:</p>
           <ol>
@@ -2458,7 +2458,7 @@ spec:media-source-2; type:event; for:/; text:abort">abort</u></code> at <a data-
    <div class="algorithm" data-algorithm="package data">
     
 A <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob④⑤">Blob</a></code> has an associated <dfn class="dfn-paneled" data-dfn-for="Blob" data-dfn-type="dfn" data-noexport id="blob-package-data">package data</dfn> algorithm,
-given <var>bytes</var>, a <var>type</var>, a optional <var>mimeType</var>, and a optional <var>encodingName</var>,
+given <var>bytes</var>, a <var>type</var>, a <var>mimeType</var>, and an optional <var>encodingLabel</var>,
 which switches on <var>type</var> and runs the associated steps:
 
 
@@ -2468,10 +2468,10 @@ which switches on <var>type</var> and runs the associated steps:
       <p>Return <var>bytes</var> as a DataURL <a data-link-type="biblio" href="#biblio-rfc2397" title="The &quot;data&quot; URL scheme">[RFC2397]</a> subject to the considerations below:</p>
       <ul>
        <li data-md>
-        <p>Use <var>mimeType</var> as part of the Data URL if it is available
+        <p>Use <var>mimeType</var> as part of the Data URL if it is not the empty string
 in keeping with the Data URL specification <a data-link-type="biblio" href="#biblio-rfc2397" title="The &quot;data&quot; URL scheme">[RFC2397]</a>.</p>
        <li data-md>
-        <p>If <var>mimeType</var> is not available return a Data URL without a media-type. <a data-link-type="biblio" href="#biblio-rfc2397" title="The &quot;data&quot; URL scheme">[RFC2397]</a>.</p>
+        <p>Otherwise, return a Data URL without a media-type. <a data-link-type="biblio" href="#biblio-rfc2397" title="The &quot;data&quot; URL scheme">[RFC2397]</a>.</p>
       </ul>
       <p class="issue" id="issue-f80bda5b"><a class="self-link" href="#issue-f80bda5b"></a> Better specify how the DataURL is generated. <a href="https://github.com/w3c/FileAPI/issues/104">[Issue #104]</a></p>
      <dt data-md>Text
@@ -2480,10 +2480,10 @@ in keeping with the Data URL specification <a data-link-type="biblio" href="#bib
        <li data-md>
         <p>Let <var>encoding</var> be failure.</p>
        <li data-md>
-        <p>If the <var>encodingName</var> is present, set <var>encoding</var> to the result of
-  <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#concept-encoding-get" id="ref-for-concept-encoding-get">getting an encoding</a> from <var>encodingName</var>.</p>
+        <p>If the <var>encodingLabel</var> is present, set <var>encoding</var> to the result of
+  <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#concept-encoding-get" id="ref-for-concept-encoding-get">getting an encoding</a> from <var>encodingLabel</var>.</p>
        <li data-md>
-        <p>If <var>encoding</var> is failure, and <var>mimeType</var> is present:</p>
+        <p>If <var>encoding</var> is failure:</p>
         <ol>
          <li data-md>
           <p>Let <var>type</var> be the result of <a data-link-type="dfn" href="https://mimesniff.spec.whatwg.org/#parse-a-mime-type" id="ref-for-parse-a-mime-type①">parse a MIME type</a> given <var>mimeType</var>.</p>
@@ -3663,9 +3663,9 @@ Acknowledgements</span><a class="self-link" href="#acknowledgements-section"></a
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://datatracker.ietf.org/doc/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. March 1997. Best Current Practice. URL: <a href="https://datatracker.ietf.org/doc/html/rfc2119">https://datatracker.ietf.org/doc/html/rfc2119</a>
    <dt id="biblio-rfc2397">[RFC2397]
-   <dd>L. Masinter. <a href="https://www.rfc-editor.org/rfc/rfc2397"><cite>The "data" URL scheme</cite></a>. August 1998. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc2397">https://www.rfc-editor.org/rfc/rfc2397</a>
+   <dd>L. Masinter. <a href="https://www.rfc-editor.org/info/rfc2397/"><cite>The "data" URL scheme</cite></a>. August 1998. Proposed Standard. URL: <a href="https://www.rfc-editor.org/info/rfc2397/">https://www.rfc-editor.org/info/rfc2397/</a>
    <dt id="biblio-rfc4122">[RFC4122]
-   <dd>K. Davis; B. Peabody; P. Leach. <a href="https://www.rfc-editor.org/rfc/rfc9562"><cite>Universally Unique IDentifiers (UUIDs)</cite></a>. May 2024. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc9562">https://www.rfc-editor.org/rfc/rfc9562</a>
+   <dd>K. Davis; B. Peabody; P. Leach. <a href="https://www.rfc-editor.org/info/rfc9562/"><cite>Universally Unique IDentifiers (UUIDs)</cite></a>. May 2024. Proposed Standard. URL: <a href="https://www.rfc-editor.org/info/rfc9562/">https://www.rfc-editor.org/info/rfc9562/</a>
    <dt id="biblio-storage">[STORAGE]
    <dd>Anne van Kesteren. <a href="https://storage.spec.whatwg.org/"><cite>Storage Standard</cite></a>. Living Standard. URL: <a href="https://storage.spec.whatwg.org/">https://storage.spec.whatwg.org/</a>
    <dt id="biblio-streams">[STREAMS]
