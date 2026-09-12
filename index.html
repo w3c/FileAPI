@@ -6,7 +6,7 @@
   <meta content="ED" name="w3c-status">
   <meta content="Bikeshed version ac92c2f0d, updated Fri Aug 21 16:01:29 2026 -0700" name="generator">
   <link href="https://www.w3.org/TR/FileAPI/" rel="canonical">
-  <meta content="1341d2687a5dbfc1fa6168e4e45a1c6afb0d6fb4" name="revision">
+  <meta content="2f610830afbbcb8116c3f3fc22062c0980456291" name="revision">
   <meta content="dark light" name="color-scheme">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
@@ -997,7 +997,7 @@ var[data-var-color="6"] { --var-vg: #FFBCF2; }
 </p>
    <h1 class="no-ref p-name" id="title">File API</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#ED">Editor’s Draft</a>,
-    <time class="dt-updated" datetime="2026-08-23">23 August 2026</time></p>
+    <time class="dt-updated" datetime="2026-09-12">12 September 2026</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -2899,7 +2899,7 @@ an <a data-link-type="dfn" href="https://url.spec.whatwg.org/#empty-host" id="re
    <div class="algorithm" data-algorithm="obtainBlobObject">
     
 To <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="blob-url-obtain-object">obtain a blob object</dfn> given a <a data-link-type="dfn" href="#blob-url-entry" id="ref-for-blob-url-entry②">blob URL entry</a>
-<var>blobUrlEntry</var> and an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object" id="ref-for-environment-settings-object①">environment settings object</a>, "<code>top-level-navigation</code>", or
+<var>blobUrlEntry</var> and an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment" id="ref-for-environment">environment</a>, "<code>top-level-navigation</code>", or
 "<code>top-level-self-fetch</code>" <var>environment</var>, perform the following steps. They return an
 <a data-link-type="dfn" href="#blob-url-entry-object" id="ref-for-blob-url-entry-object①">object</a>.
 
@@ -2908,7 +2908,7 @@ To <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="blob-url-obtain-
      <li data-md>
       <p>Let <var>isAuthorized</var> be true.</p>
      <li data-md>
-      <p>If <var>environment</var> is an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object" id="ref-for-environment-settings-object②">environment settings object</a>, then set <var>isAuthorized</var> to the result of
+      <p>If <var>environment</var> is an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment" id="ref-for-environment①">environment</a>, then set <var>isAuthorized</var> to the result of
  <a data-link-type="dfn" href="#check-for-same-partition-blob-url-usage" id="ref-for-check-for-same-partition-blob-url-usage">checking for same-partition blob URL usage</a> with <var>blobUrlEntry</var> and <var>environment</var>.</p>
      <li data-md>
       <p>If <var>isAuthorized</var> is false, then return failure.</p>
@@ -3015,11 +3015,11 @@ but for opaque origins the origin itself might be distinct. This difference isn�
 observable though, since a revoked blob URL can’t be resolved/fetched anymore anyway.</p>
    <h4 class="heading settled" data-level="8.3.2" id="partitioningOfBlobUrls"><span class="secno">8.3.2. </span><span class="content">Access restrictions on blob URLs</span><a class="self-link" href="#partitioningOfBlobUrls"></a></h4>
    <p><a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url④">Blob URLs</a> can only be fetched from environments where the <a data-link-type="dfn" href="https://storage.spec.whatwg.org/#storage-key" id="ref-for-storage-key">storage key</a> matches that of
-the environment where the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url⑤">blob URL</a> was created. <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url⑥">Blob URL</a> navigations are not subject
-to this restriction.</p>
+the environment where the <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url⑤">blob URL</a> was created. Top-level <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url⑥">blob URL</a> navigations are
+not subject to this restriction.</p>
    <div class="algorithm" data-algorithm="checkForSamePartitionBlobUrlUsage">
     
-To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="check-for-same-partition-blob-url-usage">check for same-partition blob URL usage</dfn> given a <a data-link-type="dfn" href="#blob-url-entry" id="ref-for-blob-url-entry④">blob URL entry</a> <var>blobUrlEntry</var> and an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object" id="ref-for-environment-settings-object③">environment settings object</a> <var>environment</var>, perform the following steps. They return a boolean.
+To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="check-for-same-partition-blob-url-usage">check for same-partition blob URL usage</dfn> given a <a data-link-type="dfn" href="#blob-url-entry" id="ref-for-blob-url-entry④">blob URL entry</a> <var>blobUrlEntry</var> and an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment" id="ref-for-environment②">environment</a> <var>environment</var>, perform the following steps. They return a boolean.
 
 
     <ol>
@@ -3516,6 +3516,7 @@ Acknowledgements</span><a class="self-link" href="#acknowledgements-section"></a
      <li><span class="dfn-paneled" id="12b8dfc0">current settings object</span>
      <li><span class="dfn-paneled" id="888d7c65">deserialization steps</span>
      <li><span class="dfn-paneled" id="c49c2ced">download</span>
+     <li><span class="dfn-paneled" id="24cf98a1">environment</span>
      <li><span class="dfn-paneled" id="3e12e042">environment settings object</span>
      <li><span class="dfn-paneled" id="cc6d9aed">event handler content attribute</span>
      <li><span class="dfn-paneled" id="9d386f55">event handler event type</span>
@@ -4742,6 +4743,7 @@ let dfnPanelData = {
 "1cd4985f": {"dfnID":"1cd4985f","dfnText":"MediaSource","external":true,"refSections":[{"refs":[{"id":"ref-for-mediasource"}],"title":"8. A URL for Blob and MediaSource reference"},{"refs":[{"id":"ref-for-mediasource\u2460"}],"title":"8.1. Introduction"},{"refs":[{"id":"ref-for-mediasource\u2461"}],"title":"8.2. Model"},{"refs":[{"id":"ref-for-mediasource\u2462"}],"title":"8.4. Creating and Revoking a blob URL"}],"url":"http://w3c.github.io/media-source/#mediasource"},
 "1d1e17fc": {"dfnID":"1d1e17fc","dfnText":"pipe through","external":true,"refSections":[{"refs":[{"id":"ref-for-readablestream-pipe-through"}],"title":"3.3.6. The textStream() method"}],"url":"https://streams.spec.whatwg.org/#readablestream-pipe-through"},
 "1e249f40": {"dfnID":"1e249f40","dfnText":"TextDecoderStream","external":true,"refSections":[{"refs":[{"id":"ref-for-textdecoderstream"}],"title":"3.3.6. The textStream() method"}],"url":"https://encoding.spec.whatwg.org/#textdecoderstream"},
+"24cf98a1": {"dfnID":"24cf98a1","dfnText":"environment","external":true,"refSections":[{"refs":[{"id":"ref-for-environment"},{"id":"ref-for-environment\u2460"}],"title":"8.2. Model"},{"refs":[{"id":"ref-for-environment\u2461"}],"title":"8.3.2. Access restrictions on blob URLs"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#environment"},
 "2b83ae0c": {"dfnID":"2b83ae0c","dfnText":"DataTransfer","external":true,"refSections":[{"refs":[{"id":"ref-for-datatransfer"}],"title":"Unnumbered Section"},{"refs":[{"id":"ref-for-datatransfer\u2460"}],"title":"5.2. Methods and Parameters"}],"url":"https://html.spec.whatwg.org/multipage/dnd.html#datatransfer"},
 "2bc0cdf4": {"dfnID":"2bc0cdf4","dfnText":"EventTarget","external":true,"refSections":[{"refs":[{"id":"ref-for-eventtarget"}],"title":"6.2. The FileReader API"}],"url":"https://dom.spec.whatwg.org/#eventtarget"},
 "2d10bf58": {"dfnID":"2d10bf58","dfnText":"chunk","external":true,"refSections":[{"refs":[{"id":"ref-for-chunk"}],"title":"3. The Blob Interface and Binary Data"}],"url":"https://streams.spec.whatwg.org/#chunk"},
@@ -4752,7 +4754,7 @@ let dfnPanelData = {
 "3aff2fb3": {"dfnID":"3aff2fb3","dfnText":"BufferSource","external":true,"refSections":[{"refs":[{"id":"ref-for-BufferSource"}],"title":"3. The Blob Interface and Binary Data"},{"refs":[{"id":"ref-for-BufferSource\u2460"},{"id":"ref-for-BufferSource\u2461"}],"title":"3.1.1. Constructor Parameters"},{"refs":[{"id":"ref-for-BufferSource\u2462"}],"title":"4.1.1. Constructor Parameters"}],"url":"https://webidl.spec.whatwg.org/#BufferSource"},
 "3bd18bd6": {"dfnID":"3bd18bd6","dfnText":"error","external":true,"refSections":[{"refs":[{"id":"ref-for-readablestream-error"},{"id":"ref-for-readablestream-error\u2460"}],"title":"3. The Blob Interface and Binary Data"}],"url":"https://streams.spec.whatwg.org/#readablestream-error"},
 "3de9e659": {"dfnID":"3de9e659","dfnText":"byte sequence","external":true,"refSections":[{"refs":[{"id":"ref-for-byte-sequence"}],"title":"3. The Blob Interface and Binary Data"},{"refs":[{"id":"ref-for-byte-sequence\u2460"},{"id":"ref-for-byte-sequence\u2461"}],"title":"6.2. The FileReader API"},{"refs":[{"id":"ref-for-byte-sequence\u2462"}],"title":"6.5.1.2. The readAsText()"},{"refs":[{"id":"ref-for-byte-sequence\u2463"}],"title":"6.5.1.3. The readAsDataURL() method"},{"refs":[{"id":"ref-for-byte-sequence\u2464"}],"title":"6.5.1.4. The readAsArrayBuffer() method"},{"refs":[{"id":"ref-for-byte-sequence\u2465"}],"title":"6.5.1.5. The readAsBinaryString() method"}],"url":"https://infra.spec.whatwg.org/#byte-sequence"},
-"3e12e042": {"dfnID":"3e12e042","dfnText":"environment settings object","external":true,"refSections":[{"refs":[{"id":"ref-for-environment-settings-object"},{"id":"ref-for-environment-settings-object\u2460"},{"id":"ref-for-environment-settings-object\u2461"}],"title":"8.2. Model"},{"refs":[{"id":"ref-for-environment-settings-object\u2462"}],"title":"8.3.2. Access restrictions on blob URLs"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object"},
+"3e12e042": {"dfnID":"3e12e042","dfnText":"environment settings object","external":true,"refSections":[{"refs":[{"id":"ref-for-environment-settings-object"}],"title":"8.2. Model"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object"},
 "3fca5a9e": {"dfnID":"3fca5a9e","dfnText":"map","external":true,"refSections":[{"refs":[{"id":"ref-for-ordered-map"}],"title":"8.2. Model"}],"url":"https://infra.spec.whatwg.org/#ordered-map"},
 "4013a022": {"dfnID":"4013a022","dfnText":"this","external":true,"refSections":[{"refs":[{"id":"ref-for-this"}],"title":"3.3.1. The slice() method"},{"refs":[{"id":"ref-for-this\u2460"}],"title":"3.3.2. The stream() method"},{"refs":[{"id":"ref-for-this\u2461"}],"title":"3.3.3. The text() method"},{"refs":[{"id":"ref-for-this\u2462"}],"title":"3.3.4. The arrayBuffer() method"},{"refs":[{"id":"ref-for-this\u2463"}],"title":"3.3.5. The bytes() method"},{"refs":[{"id":"ref-for-this\u2464"},{"id":"ref-for-this\u2465"}],"title":"3.3.6. The textStream() method"},{"refs":[{"id":"ref-for-this\u2466"},{"id":"ref-for-this\u2467"},{"id":"ref-for-this\u2468"}],"title":"6.2. The FileReader API"},{"refs":[{"id":"ref-for-this\u2460\u24ea"},{"id":"ref-for-this\u2460\u2460"},{"id":"ref-for-this\u2460\u2461"},{"id":"ref-for-this\u2460\u2462"},{"id":"ref-for-this\u2460\u2463"},{"id":"ref-for-this\u2460\u2464"},{"id":"ref-for-this\u2460\u2465"},{"id":"ref-for-this\u2460\u2466"},{"id":"ref-for-this\u2460\u2467"},{"id":"ref-for-this\u2460\u2468"}],"title":"6.2.3.5. The abort() method"}],"url":"https://webidl.spec.whatwg.org/#this"},
 "43ac8374": {"dfnID":"43ac8374","dfnText":"origin","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-settings-object-origin"}],"title":"8.2. Model"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin"},
@@ -5542,6 +5544,7 @@ let refsData = {
 "https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin": {"displayText":"origin","export":true,"for_":["environment settings object"],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"origin","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin"},
 "https://html.spec.whatwg.org/multipage/webappapis.html#concept-task": {"displayText":"task","export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"task","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-task"},
 "https://html.spec.whatwg.org/multipage/webappapis.html#current-settings-object": {"displayText":"current settings object","export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"current settings object","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#current-settings-object"},
+"https://html.spec.whatwg.org/multipage/webappapis.html#environment": {"displayText":"environment","export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"environment","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#environment"},
 "https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object": {"displayText":"environment settings object","export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"environment settings object","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object"},
 "https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-content-attributes": {"displayText":"event handler content attribute","export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"event handler content attribute","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-content-attributes"},
 "https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type": {"displayText":"event handler event type","export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"event handler event type","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type"},
