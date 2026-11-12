@@ -5,7 +5,9 @@ Shortname: FileAPI
 Level: none
 Group: webapps
 Editor: Marijn Kruisselbrink, Google, mek@chromium.org, w3cid 72440
+Editor: Julien Cayzac, Rakuten Group https://global.rakuten.com/corp/, julien.cayzac@rakuten.com, w3cid 98525
 Former Editor: Arun Ranganathan, Mozilla Corporation, http://arunranga.com/, arun@mozilla.com, w3cid 37240
+Former Editor: Joshua Bell, Google, w3cid 61302
 Prepare For TR: true
 Status: ED
 ED: https://w3c.github.io/FileAPI/
@@ -20,6 +22,7 @@ Abstract: This specification provides an API for representing file objects in we
   * A {{File}} interface, which includes readonly informational attributes about a file such as its name and the date of the last modification (on disk) of the file.
   * A {{FileReader}} interface, which provides methods to read a {{File}} or a {{Blob}}, and an event model to obtain the results of these reads.
   * A <a section href="#url">URL scheme</a> for use with binary data such as files, so that they can be referenced within web applications.
+  * A set of {{FileSystemEntry}} interfaces representing [=files=] and [=/directories=], with methods for asynchronous [=/directory=] traversal, for use when a hierarchy of files and directories is selected or dropped by the user.
 
   Additionally, this specification defines objects to be used within threaded web applications for the synchronous reading of files.
 
@@ -75,6 +78,9 @@ spec: ecma-262; urlPrefix: http://tc39.github.io/ecma262/
   type: interface
     text: Array; url: sec-array-constructor
     text: Date; url: sec-date-constructor
+  type: dfn
+    text: Promise; url: sec-promise-objects
+    text: AsyncIterator; url: sec-asynciterator-interface
 spec: media-source; urlPrefix: http://w3c.github.io/media-source/
   type: interface
     text: MediaSource; url: #mediasource
@@ -257,6 +263,179 @@ up to but not including the <var>end</var> parameter. It must act as follows:
 
     <li><var>S</var>.{{Blob/type}} = <var>relativeContentType</var>.
   </ol>
+
+</div>
+
+## Names and paths ## {#names-paths}
+
+A <dfn export>name</dfn> is a string which:
+
+  * does not contain '/' (U+002F SOLIDUS)
+  * does not contain NUL (U+0000)
+  * does not contain '\' (U+005C REVERSE SOLIDUS)
+  * is not '.' (U+002E FULL STOP)
+  * is not '..' (U+002E FULL STOP, U+002E FULL STOP)
+
+A <dfn export>path segment</dfn> is a [=/name=], '.' (U+002E FULL STOP) or
+'..' (U+002E FULL STOP, U+002E FULL STOP).
+
+A <dfn export>relative path</dfn> is a string consisting of one or more
+[=path segments=] joined by '/' (U+002F SOLIDUS) that does not start
+with '/' (U+002F SOLIDUS).
+
+An <dfn export>absolute path</dfn> is a string consisting of '/' (U+002F
+SOLIDUS) followed by zero or more [=path segments=] joined by '/'
+(U+002F SOLIDUS).
+
+A <dfn export>path</dfn> is either a [=relative path=] or an [=absolute
+path=].
+
+A <dfn export>valid path</dfn> is a {{USVString}} which is a [=path=].
+
+## Files and directories ## {#files-dirs}
+
+A <dfn export id=file-concept>file</dfn> consists of binary data and a <dfn
+for=file>name</dfn> (a non-empty [=/name=]).
+
+A <dfn export>directory</dfn> consists of a <dfn for=directory>name</dfn> (a
+[=/name=]) and an ordered list of members. Each member is either a
+[=file=] or a [=/directory=]. Each member of a [=/directory=] must have
+a distinct non-empty [=/name=].
+
+A <dfn export>root directory</dfn> is a [=/directory=] that is not a member of
+a [=/directory=]. A [=root directory=]'s [=/name=] is empty.
+
+The <dfn export>parent</dfn> of a [=file=] or [=/directory=] is the
+[=/directory=] it is a member of. A [=root directory=] has no
+[=parent=].
+
+Issue: Should [=/directory=] be defined as a special type of [=file=]
+so that minimal changes are necessary in [[HTML]]?
+
+note:
+  In most cases, the files and directories selected by the user will
+  be presented by the API as if contained by a <em>virtual root</em>
+  that does not exist as an entity in the actual native file system
+  backing the interaction with the API.
+
+A <dfn export>file system</dfn> consists of a <dfn for="file system">name</dfn>
+and a <dfn for="file system">root</dfn> which is an associated [=root
+directory=]. The [=file system/name=] of a [=/file system=] is a
+{{USVString}} which is implementation defined but is unique to the
+[=/file system=]. A [=root directory=] is associated with exactly one
+[=/file system=].
+
+note:
+  Implementations could produce a [=file system/name=] by generating a
+  UUID for each [=/file system=] instance with some fixed prefix and
+  suffix strings applied. Authors using the API are advised not to make
+  assumptions about the structure or content of the names.
+
+## Entries ## {#entries}
+
+An <dfn export id=entry-concept>entry</dfn> is either a <dfn export>file entry</dfn>
+or a <dfn export>directory entry</dfn>.
+
+An [=/entry=] has an <dfn for=entry>name</dfn> (a [=/name=]) and a
+<dfn export>full path</dfn> (an [=absolute path=]).
+
+An [=/entry=] also has a <dfn for=entry>root</dfn>, which is an
+associated [=root directory=].
+
+note:
+  [=/Entries=] are defined in terms of [=paths=] relative to a [=root
+  directory=] to account for the fact that a native file system
+  backing the interaction with the API could be modified asynchronously
+  during operations such as enumerating the contents of a directory.
+  Operations exposed on [=/entries=] will produce errors in such cases
+  where the [=paths=] no longer reference the same entity.
+
+The <dfn for=entry>file system</dfn> of an [=/entry=] is the
+[=/file system=] associated with the [=/entry=]'s [=entry/root=].
+
+## Path algorithms ## {#path-algorithms}
+
+<div algorithm>
+
+To <dfn export>resolve a relative path</dfn> with |abspath| (an [=absolute
+path=]) and |path| (an [=absolute path=], a [=relative path=], or the empty string),
+perform the following steps. They return an [=absolute path=].
+
+1. If |path| is an [=absolute path=], return |path|.
+
+1. Let |abspath segments| be the result of [=strictly splitting=]
+    |abspath| on '/' (U+002F SOLIDUS).
+
+    note: The first string will be empty.
+
+1. Let |path segments| be the result of [=strictly splitting=]
+    |path| on '/' (U+002F SOLIDUS).
+
+1. For each |segment| in |path segments|, switch on |segment|:
+
+     <dl class=switch>
+
+      : empty string
+      :: Continue.
+
+      : '.' (U+002E FULL STOP)
+      :: Continue.
+
+      : '..' (U+002E FULL STOP, U+002E FULL STOP)
+      :: Remove the last member of |abspath segments|
+         unless it is the only member.
+
+      : Otherwise
+      :: Append |segment| to |abspath segments|.
+
+     </dl>
+
+1. Return |abspath segments| joined by '/' (U+002F SOLIDUS).
+
+</div>
+
+<div algorithm>
+
+To <dfn export>evaluate a path</dfn> with |directory| (a [=root directory=])
+and |path| (an [=absolute path=]), perform the following steps. They
+return a [=file=], [=/directory=], or failure.
+
+1. Let |segments| be the result of [=strictly splitting=] |path| on
+    '/' (U+002F SOLIDUS).
+
+1. Remove the first entry from |segments|.
+
+    note: Since |path| was an [=absolute path=],
+      this first entry will always be empty.
+
+1. For each |segment| in |segments|, switch on |segment|:
+
+    <dl class=switch>
+
+      : empty string
+      :: Continue.
+
+      : '.' (U+002E FULL STOP)
+      :: Continue.
+
+      : '..' (U+002E FULL STOP, U+002E FULL STOP)
+      :: Let |directory| be |directory|'s [=parent=],
+          or |directory| if none.
+
+      : Otherwise
+      :: Run these steps:
+
+         1. Let |item| be the member of |directory| with [=/name=]
+            equal to |segment|, or return failure if none.
+
+         1. If |segment| is the last item in |segments|, return
+            |item|.
+
+         1. If |item| is a [=file=], return failure.
+
+         1. Let |directory| be |item|.
+
+    </dl>
 
 </div>
 
@@ -704,6 +883,7 @@ interface File : Blob {
               optional FilePropertyBag options = {});
   readonly attribute DOMString name;
   readonly attribute long long lastModified;
+  readonly attribute USVString webkitRelativePath;
 };
 
 dictionary FilePropertyBag : BlobPropertyBag {
@@ -824,6 +1004,13 @@ The {{File()}} constructor can be invoked with the parameters below:
     this is equivalent to <code class="lang-javascript">Date.now()</code> [[ECMA-262]].
     If a {{File}} object is created using a constructor,
     further normative conditions for this attribute are found in [[#file-constructor]].
+
+  <dt><dfn id="dfn-webkitRelativePath">webkitRelativePath</dfn>
+  <dd>The <code>webkitRelativePath</code> getter steps
+    are to return [=/this=]'s [=relative path=], or the empty string if not specified.
+
+    Note: A {{File}}'s [=relative path=] is set when the {{File}} is selected as part of a
+    directory; see the <{input/webkitdirectory}> attribute [[HTML]].
 </dl>
 
 The {{File}} interface is available on objects that expose an attribute of type {{FileList}};
@@ -1492,6 +1679,522 @@ or otherwise return null.
         and synchronous read methods must <a>throw</a> a {{NotReadableError}} exception.
 </table>
 
+# Files and Directories # {#files-and-directories}
+
+This section defines interfaces for representing and traversing a hierarchy of
+[=files=] and [=/directories=], such as those produced when a user selects a directory
+using a form control or drops one onto a page. The types defined here describe
+[=/entries=] and support asynchronous [=/directory=] traversal.
+
+Note: The mechanisms by which a user agent exposes selected files and directories as
+[=/entries=] — the {{HTMLInputElement/webkitdirectory}} and {{HTMLInputElement/webkitEntries}}
+members of <{input}> elements, and the {{DataTransferItem/webkitGetAsEntry()}} method of
+{{DataTransferItem}} — are defined in HTML [[HTML]].
+
+<xmp class=idl>
+callback ErrorCallback = undefined (DOMException err);
+</xmp>
+
+An {{ErrorCallback}} function is used for operations that may return an
+error asynchronously.
+
+Issue: The [=/task source=] used for [=/queue a task|tasks that are queued=] in the steps
+below is not fully defined. The success and error callbacks of {{FileSystemDirectoryReader/readEntries()}}
+use the [=file reading task source=]. Chromium-based browsers appear to use the
+[=/DOM manipulation task source=] [[HTML]] elsewhere.
+
+Issue: The legacy {{TypeMismatchError}} has been replaced in most
+specifications by {{TypeError}}, but the name differs. Is it
+compatible to switch here as well?
+
+## The {{FileSystemEntry}} Interface ## {#api-entry}
+
+<xmp class=idl>
+[Exposed=Window]
+interface FileSystemEntry {
+    readonly attribute boolean isFile;
+    readonly attribute boolean isDirectory;
+    readonly attribute USVString name;
+    readonly attribute USVString fullPath;
+    readonly attribute FileSystem filesystem;
+
+    undefined getParent(optional FileSystemEntryCallback successCallback,
+                   optional ErrorCallback errorCallback);
+};
+</xmp>
+
+A {{FileSystemEntry}} has an associated [=/entry=].
+
+The <dfn attribute for=FileSystemEntry>isFile</dfn> getter steps are to return true if [=/this=] is a [=file entry=] and false otherwise.
+
+The <dfn attribute for=FileSystemEntry>isDirectory</dfn> getter steps are to return true if [=/this=] is a [=directory entry=] and false otherwise.
+
+The <dfn attribute for=FileSystemEntry>name</dfn> getter steps are to return [=/this=]'s [=entry/name=].
+
+The <dfn attribute for=FileSystemEntry>fullPath</dfn> getter steps are to return [=/this=]'s [=full path=].
+
+The <dfn attribute for=FileSystemEntry>filesystem</dfn> getter steps are to return [=/this=]'s [=entry/file system=].
+
+<div algorithm>
+
+The <dfn method for=FileSystemEntry>getParent(|successCallback|, |errorCallback|)</dfn> method steps are:
+
+1. [=In parallel=], run these steps:
+
+    1. Let |path| be the result of [=resolving a
+        relative path=] with [=/this=]'s [=full path=] and '..'.
+
+    1. Let |item| be the result of [=evaluating a
+        path=] with [=/this=]'s [=entry/root=] and |path|.
+
+    1. If |item| is failure, [=queue a task=] to [=invoke=]
+        |errorCallback| (if given) with « a newly [=exception/created=]
+        "{{NotFoundError}}" {{DOMException}} » and "`report`",
+        and abort these steps.
+
+    1. Let |entry| be a new [=directory entry=] with |item|'s
+        [=directory/name=] as [=entry/name=] and |path| as [=full
+        path=].
+
+    1. [=Queue a task=] to [=invoke=] |successCallback| with « a new
+        {{FileSystemDirectoryEntry}} object associated with |entry| »
+        and "`report`".
+
+</div>
+
+note:
+  An error is possible if files have been modified on disk since the
+  {{FileSystemEntry}} was created.
+
+<div class=example>
+Handling an entry:
+```js
+function handleEntry(entry) {
+  console.log('name: ' + entry.name);
+  console.log('path: ' + entry.fullPath);
+  if (entry.isFile) {
+    console.log('... is a file');
+  } else if (entry.isDirectory) {
+    console.log('... is a directory');
+  }
+}
+```
+</div>
+
+<div class=example>
+Helper function to adapt {{FileSystemEntry/getParent()}} for use with
+[=Promises=]
+[[ECMA-262]]:
+```js
+function getParentAsPromise(entry) {
+  return new Promise((resolve, reject) => {
+    entry.getParent(resolve, reject);
+  });
+}
+```
+</div>
+
+## The {{FileSystemDirectoryEntry}} Interface ## {#api-directoryentry}
+
+<xmp class=idl>
+[Exposed=Window]
+interface FileSystemDirectoryEntry : FileSystemEntry {
+    FileSystemDirectoryReader createReader();
+    undefined getFile(optional USVString? path,
+                 optional FileSystemFlags options = {},
+                 optional FileSystemEntryCallback successCallback,
+                 optional ErrorCallback errorCallback);
+    undefined getDirectory(optional USVString? path,
+                      optional FileSystemFlags options = {},
+                      optional FileSystemEntryCallback successCallback,
+                      optional ErrorCallback errorCallback);
+};
+
+dictionary FileSystemFlags {
+    boolean create = false;
+    boolean exclusive = false;
+};
+
+callback FileSystemEntryCallback = undefined (FileSystemEntry entry);
+</xmp>
+
+note:
+  The {{FileSystemFlags/create}} member of {{FileSystemFlags}} and
+  the associated behavior are included for compatibility with existing
+  implementations, even though there is no useful behavior when the
+  flag is specified. Similarly, the {{FileSystemFlags/exclusive}}
+  member is not explicitly referenced, but the binding behavior is
+  observable from script if an object with a getter is passed.
+
+A {{FileSystemDirectoryEntry}}'s associated [=/entry=] is a [=directory
+entry=].
+
+<div algorithm>
+
+The <dfn method for=FileSystemDirectoryEntry>createReader()</dfn> method steps are:
+
+1. Return a newly created {{FileSystemDirectoryReader}} object
+    associated with [=/this=]'s [=directory entry=].
+
+</div>
+
+<div algorithm>
+
+The <dfn method for=FileSystemDirectoryEntry>getFile(|path|, |options|, |successCallback|, |errorCallback|)</dfn> method steps are:
+
+1. [=In parallel=], run these steps:
+
+    1. If |path| is undefined or null let |path| be the empty string.
+
+    1. If |path| is not a [=valid path=], [=queue a task=] to [=invoke=]
+        |errorCallback| (if given) with « a newly [=exception/created=]
+        "{{TypeMismatchError}}" {{DOMException}} » and "`report`",
+        and abort these steps.
+
+    1. If |options|'s {{FileSystemFlags/create}} member is true,
+        [=queue a task=] to [=invoke=] |errorCallback| (if given) with « a
+        newly [=exception/created=] "{{SecurityError}}" {{DOMException}} »
+        and "`report`", and abort these steps.
+
+    1. Let |path| be the result of [=resolving a
+        relative path=] with [=/this=]'s [=full path=]
+        and |path|.
+
+    1. Let |item| be the result of [=evaluating a
+        path=] with [=/this=]'s [=entry/root=] and |path|.
+
+    1. If |item| is failure, [=queue a task=] to [=invoke=]
+        |errorCallback| (if given) with « a newly [=exception/created=]
+        "{{NotFoundError}}" {{DOMException}} » and "`report`",
+        and abort these steps.
+
+    1. If |item| is not a [=file=], [=queue a task=] to [=invoke=]
+        |errorCallback| (if given) with « a newly [=exception/created=]
+        "{{TypeMismatchError}}" {{DOMException}} » and "`report`",
+        and abort these steps.
+
+    1. Let |entry| be a new [=file entry=] with |item|'s [=file/name=]
+        as [=entry/name=] and |path| as [=full path=].
+
+    1. [=Queue a task=] to [=invoke=] |successCallback| (if given) with « a new
+        {{FileSystemFileEntry}} object associated with |entry| » and "`report`".
+
+</div>
+
+<div algorithm>
+
+The <dfn method for=FileSystemDirectoryEntry>getDirectory(|path|, |options|, |successCallback|, |errorCallback|)</dfn> method steps are:
+
+1. [=In parallel=], run these steps:
+
+    1. If |path| is undefined or null let |path| be the empty string.
+
+    1. If |path| is not a [=valid path=], [=queue a task=] to [=invoke=]
+        |errorCallback| (if given) with « a newly [=exception/created=]
+        "{{TypeMismatchError}}" {{DOMException}} » and "`report`",
+        and abort these steps.
+
+    1. If |options|'s {{FileSystemFlags/create}} member is true,
+        [=queue a task=] to [=invoke=] |errorCallback| (if given) with « a
+        newly [=exception/created=] "{{SecurityError}}" {{DOMException}} »
+        and "`report`", and abort these steps.
+
+    1. Let |path| be the result of [=resolving a
+        relative path=] with [=/this=]'s [=full path=]
+        and |path|.
+
+    1. Let |item| be the result of [=evaluating a
+        path=] with [=/this=]'s [=entry/root=] and |path|.
+
+    1. If |item| is failure, [=queue a task=] to [=invoke=]
+        |errorCallback| (if given) with « a newly [=exception/created=]
+        "{{NotFoundError}}" {{DOMException}} » and "`report`",
+        and abort these steps.
+
+    1. If |item| is not a [=/directory=], [=queue a task=] to [=invoke=]
+        |errorCallback| (if given) with « a newly [=exception/created=]
+        "{{TypeMismatchError}}" {{DOMException}} » and "`report`",
+        and abort these steps.
+
+    1. Let |entry| be a new [=directory entry=] with |item|'s
+        [=directory/name=] as [=entry/name=] and |path| as [=full
+        path=].
+
+    1. [=Queue a task=] to [=invoke=] |successCallback| (if given) with « a new
+        {{FileSystemDirectoryEntry}} associated with |entry| » and "`report`".
+
+</div>
+
+<div class=example>
+Helper functions to adapt {{FileSystemDirectoryEntry/getFile()}} and
+{{FileSystemDirectoryEntry/getDirectory()}} for use
+with [=Promises=] [[ECMA-262]]:
+```js
+function getFileAsPromise(entry, path) {
+  return new Promise((resolve, reject) => {
+    entry.getFile(path, {}, resolve, reject);
+  });
+}
+function getDirectoryAsPromise(entry, path) {
+  return new Promise((resolve, reject) => {
+    entry.getDirectory(path, {}, resolve, reject);
+  });
+}
+```
+</div>
+
+## The {{FileSystemDirectoryReader}} Interface ## {#api-directoryreader}
+
+<xmp class=idl>
+[Exposed=Window]
+interface FileSystemDirectoryReader {
+    undefined readEntries(FileSystemEntriesCallback successCallback,
+                     optional ErrorCallback errorCallback);
+};
+callback FileSystemEntriesCallback = undefined (sequence<FileSystemEntry> entries);
+</xmp>
+
+<div dfn-for=FileSystemDirectoryReader>
+A {{FileSystemDirectoryReader}} has
+an associated <dfn>entry</dfn> (a [=directory entry=]),
+an associated <dfn>directory</dfn> (initially null),
+a <dfn>reading flag</dfn> (initially false),
+a <dfn>done flag</dfn> (initially false),
+and a <dfn>reader error</dfn> (initially null).
+</div>
+
+<div algorithm>
+
+The <dfn method for=FileSystemDirectoryReader>readEntries(|successCallback|, |errorCallback|)</dfn> method steps are:
+
+1. If [=/this=]'s [=FileSystemDirectoryReader/reading flag=] is true, [=queue a task=] to [=invoke=] |errorCallback| with « a newly [=exception/created=] "{{InvalidStateError}}" {{DOMException}} » and "`report`", and abort these steps.
+
+1. If [=/this=]'s [=FileSystemDirectoryReader/reader error=] is not null, [=queue a task=] to [=invoke=] |errorCallback| (if given) with « [=FileSystemDirectoryReader/reader error=]  » and "`report`", and abort these steps.
+
+1. If [=/this=]'s [=FileSystemDirectoryReader/done flag=] is true, [=queue a task=] to [=invoke=] |successCallback| with an empty [=list=] and "`report`", and abort these steps.
+
+1. Set [=/this=]'s [=FileSystemDirectoryReader/reading flag=] to true.
+
+1. [=In parallel=], run these steps:
+
+    1. If [=/this=]'s [=FileSystemDirectoryReader/directory=] is null, then:
+
+        1. Let |dir| be the result of [=evaluating a path=] with [=/this=]'s [=FileSystemDirectoryReader/entry=]'s [=entry/root=] and [=full path=].
+
+        1. If |dir| is failure, then:
+
+            1. [=Queue a task=] to run these steps:
+
+                1. Let |error| be a newly [=exception/created=] "{{NotFoundError}}" {{DOMException}}.
+
+                1. Set [=/this=]'s [=FileSystemDirectoryReader/reader error=] to |error|.
+
+                1. Set [=/this=]'s [=FileSystemDirectoryReader/reading flag=] to false.
+
+                1. [=Invoke=] |errorCallback| (if given) with « |error| » and "`report`".
+
+            1. Abort these steps.
+
+        1. Set [=/this=]'s [=FileSystemDirectoryReader/directory=] to |dir|.
+
+    1. Let |entries| be a non-zero number of entries from [=/this=]'s [=FileSystemDirectoryReader/directory=] that have not yet been produced by this {{FileSystemDirectoryReader}}, if any.
+
+    1. If the previous step failed (for example, the [=/directory=] was deleted or permission is denied), then:
+
+        1. [=Queue a task=] to run these steps:
+
+            1. Let |error| be an appropriate {{DOMException}}.
+
+            1. Set [=/this=]'s [=FileSystemDirectoryReader/reader error=] to |error|.
+
+            1. Set [=/this=]'s [=FileSystemDirectoryReader/reading flag=] to false.
+
+            1. [=Invoke=] |errorCallback| (if given) with « |error| » and "`report`".
+
+        1. Abort these steps.
+
+    1. [=Queue a task=] to run these steps:
+
+        1. If |entries| is empty, then set [=/this=]'s [=FileSystemDirectoryReader/done flag=] to true.
+
+        1. Set [=/this=]'s [=FileSystemDirectoryReader/reading flag=] to false.
+
+        1. [=Invoke=] |successCallback| with « |entries| » and "`report`".
+
+NOTE: The use of the [=FileSystemDirectoryReader/reading flag=] prevents multiple copies of the [=in parallel=] steps above from executing simultaneously. This obviates the need to specify a [=parallel queue=].
+
+</div>
+
+
+<div class=example>
+Enumerating a directory:
+```js
+const reader = dirEntry.createReader();
+const doBatch = () => {
+
+  // Read a batch.
+  reader.readEntries(entries => {
+
+    // Complete?
+    if (entries.length === 0) {
+      return;
+    }
+
+    // Process the batch.
+    entries.forEach(handleEntry);
+
+    // Read the next batch.
+    doBatch();
+
+  }, error => console.warn(error));
+};
+
+// Start reading
+doBatch();
+```
+</div>
+
+<div class=example>
+Helper function to adapt {{FileSystemDirectoryReader}} for use with
+[=Promises=] [[ECMA-262]]:
+```js
+function getEntriesAsPromise(dirEntry) {
+  return new Promise((resolve, reject) => {
+    const result = [];
+    const reader = dirEntry.createReader();
+    const doBatch = () => {
+      reader.readEntries(entries => {
+        if (entries.length > 0) {
+          entries.forEach(e => result.push(e));
+          doBatch();
+        } else {
+          resolve(result);
+        }
+      }, reject);
+    };
+    doBatch();
+  });
+}
+```
+</div>
+
+<div class=example>
+Helper function to adapt {{FileSystemDirectoryReader}} for use with
+[=AsyncIterators=] [[ECMA-262]]:
+```js
+async function* getEntriesAsAsyncIterator(dirEntry) {
+  const reader = dirEntry.createReader();
+  const getNextBatch = () => new Promise((resolve, reject) => {
+    reader.readEntries(resolve, reject);
+  });
+
+  let entries;
+  do {
+    entries = await getNextBatch();
+    for (const entry of entries) {
+      yield entry;
+    }
+  } while (entries.length > 0);
+}
+```
+
+This allows for ordered asynchronous traversal of a directory tree
+using `for-await-of`:
+
+```js
+async function show(entry) {
+  console.log(entry.fullPath);
+  if (entry.isDirectory) {
+    for await (const e of getEntriesAsAsyncIterator(entry)) {
+      await show(e);
+    }
+  }
+}
+```
+</div>
+
+## The {{FileSystemFileEntry}} Interface ## {#api-fileentry}
+
+<xmp class=idl>
+[Exposed=Window]
+interface FileSystemFileEntry : FileSystemEntry {
+    undefined file(FileCallback successCallback,
+              optional ErrorCallback errorCallback);
+};
+callback FileCallback = undefined (File file);
+</xmp>
+
+A {{FileSystemFileEntry}}'s associated [=/entry=] is a [=file entry=].
+
+<div algorithm>
+
+The <dfn method for=FileSystemFileEntry>file(|successCallback|, |errorCallback|)</dfn> method steps are:
+
+1. [=In parallel=], run these steps:
+
+    1. Let |item| be the result of [=evaluating a
+        path=] with [=/this=]'s [=entry/root=] and [=full
+        path=].
+
+    1. If |item| is failure, [=queue a task=] to [=invoke=]
+        |errorCallback| (if given) with « a newly [=exception/created=]
+        "{{NotFoundError}}" {{DOMException}} » and "`report`",
+        and abort these steps.
+
+    1. If |item| is a [=/directory=], [=queue a task=] to [=invoke=]
+        |errorCallback| (if given) with « a newly [=exception/created=]
+        "{{TypeMismatchError}}" {{DOMException}} » and "`report`",
+        and abort these steps.
+
+    1. [=Queue a task=] to [=invoke=] |successCallback| with « a new {{File}}
+        object representing |item| » and "`report`".
+
+</div>
+
+<div class=example>
+Read the contents of a dropped file using {{FileReader}}:
+```js
+function readFileEntry(entry) {
+  entry.file(file => {
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onerror = error => console.warn(error);
+    reader.onload = () => {
+      console.log(reader.result);
+    };
+  }, error => console.warn(error));
+}
+```
+</div>
+
+<div class=example>
+Helper function to adapt {{FileSystemFileEntry/file()}} for use
+with [=Promises=] [[ECMA-262]]:
+```js
+function fileAsPromise(entry) {
+  return new Promise((resolve, reject) => {
+    entry.file(resolve, reject);
+  });
+}
+```
+</div>
+
+## The {{FileSystem}} Interface ## {#api-domfilesystem}
+
+<xmp class=idl>
+[Exposed=Window]
+interface FileSystem {
+    readonly attribute USVString name;
+    readonly attribute FileSystemDirectoryEntry root;
+};
+</xmp>
+
+A {{FileSystem}} has an associated [=/file system=].
+
+The <dfn attribute for=FileSystem>name</dfn> getter steps are to return [=/this=]'s [=file system/name=].
+
+The <dfn attribute for=FileSystem>root</dfn> getter steps are to return a {{FileSystemDirectoryEntry}} associated with [=/this=]'s [=file system/root=].
+
 # A URL for Blob and MediaSource reference # {#url}
 
 This section defines a [=url/scheme=] for a [=/URL=] used to refer to {{Blob}}
@@ -1856,5 +2559,7 @@ This specification was originally developed by the SVG Working Group. Many thank
 Thanks to Robin Berjon, Jonas Sicking and Vsevolod Shmyroff for editing the original specification.
 
 Special thanks to Olli Pettay, Nikunj Mehta, Garrett Smith, Aaron Boodman, Michael Nordman, Jian Li, Dmitry Titov, Ian Hickson, Darin Fisher, Sam Weinig, Adrian Bateman and Julian Reschke.
+
+The file and directory entry interfaces are based heavily on the work of Eric Uhrhane in the File System API, which introduced the {{FileSystemEntry}} types. Thanks to Ali Alabbas, Philip Jägenstedt, Marijn Kruisselbrink, Olli Pettay, and Kent Tamura for suggestions, reviews, and other feedback on that work.
 
 Thanks to the W3C WebApps WG, and to participants on the public-webapps@w3.org listserv
