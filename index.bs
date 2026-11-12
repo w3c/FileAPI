@@ -1560,7 +1560,7 @@ generate a new blob URL</dfn>, run the following steps:
 1. Let |serialized| be the <a lt="ASCII serialization of an origin">ASCII serialization</a> of |origin|.
 1. If |serialized| is "`null`", set it to an implementation-defined value.
 1. Append |serialized| to |result|.
-1. Append U+0024 SOLIDUS (`/`) to |result|.
+1. Append U+002F SOLIDUS (`/`) to |result|.
 1. Generate a UUID [[!RFC4122]] as a string and append it to |result|.
 1. Return |result|.
 
