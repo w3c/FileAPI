@@ -752,11 +752,9 @@ user agents must run the following steps:
 
 3. Process {{FilePropertyBag}} dictionary argument by running the following substeps:
 
-  1. If the {{BlobPropertyBag/type}} member is provided and is not the empty string,
-    let |t| be set to the {{BlobPropertyBag/type}} dictionary member.
-    If |t| contains any characters outside the range U+0020 to U+007E,
-    then set |t| to the empty string and return from these substeps.
-  2. Convert every character in |t| to [=ASCII lowercase=].
+  1. Let |t| be the {{BlobPropertyBag/type}} dictionary member.
+  2. If |t| contains any characters outside the range U+0020 to U+007E,
+    then set |t| to the empty string. Otherwise, convert every character in |t| to [=ASCII lowercase=].
   3. If the {{FilePropertyBag/lastModified}} member is provided,
     let |d| be set to the  {{FilePropertyBag/lastModified}} dictionary member.
     If it is not provided,
