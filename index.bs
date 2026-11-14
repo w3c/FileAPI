@@ -833,7 +833,7 @@ and thus represents file data that can be read into memory at the time a <a>read
 User agents must process reads on files that no longer exist at the time of read as <a lt="file read error">errors</a>,
 throwing a {{NotFoundError}} exception
 if using a {{FileReaderSync}} on a Web Worker [[Workers]]
-or firing an {{error!!event}} event
+or firing an {{FileReader/error!!event}} event
 with the {{error!!attribute}} attribute returning a {{NotFoundError}}.
 
 <div class="example">
@@ -1049,25 +1049,25 @@ runs the following steps:
        [=package data=] given |bytes|, |type|, |blob|'s {{Blob/type}}, and |encodingLabel|.
     1. If [=package data=] threw an exception |error|:
       1. Set |fr|'s [=FileReader/error=] to |error|.
-      1. [=Fire a progress event=] called {{error!!event}} at |fr|.
+      1. [=Fire a progress event=] called {{FileReader/error!!event}} at |fr|.
     1. Else:
       1. Set |fr|'s [=FileReader/result=] to |result|.
       1. [=Fire a progress event=] called {{load}} at the |fr|.
     1. If |fr|'s [=FileReader/state=] is not `"loading"`,
        [=fire a progress event=] called {{loadend}} at the |fr|.
 
-       Note: Event handler for the {{load}} or {{error!!event}} events could have started another load,
+       Note: Event handler for the {{load}} or {{FileReader/error!!event}} events could have started another load,
        if that happens the {{loadend}} event for this load is not fired.
 
   1. Otherwise, if |chunkPromise| is rejected with an error |error|,
      [=queue a task=] to run the following steps and abort this algorithm:
     1. Set |fr|'s [=FileReader/state=] to `"done"`.
     1. Set |fr|'s [=FileReader/error=] to |error|.
-    1. [=Fire a progress event=] called {{error!!event}} at |fr|.
+    1. [=Fire a progress event=] called {{FileReader/error!!event}} at |fr|.
     1. If |fr|'s [=FileReader/state=] is not `"loading"`,
        [=fire a progress event=] called {{loadend}} at |fr|.
 
-       Note: Event handler for the {{error!!event}} event could have started another load,
+       Note: Event handler for the {{FileReader/error!!event}} event could have started another load,
        if that happens the {{loadend}} event for this load is not fired.
 
 Use the [=file reading task source=] for all these tasks.
@@ -1093,10 +1093,10 @@ that user agents must support on {{FileReader}} as DOM attributes:
       <td>{{progress}}
     <tr>
       <td><dfn id="dfn-onabort">onabort</dfn>
-      <td>{{abort}}
+      <td>{{FileReader/abort!!event}}
     <tr>
       <td><dfn id="dfn-onerror">onerror</dfn>
-      <td>{{error!!event}}
+      <td>{{FileReader/error!!event}}
     <tr>
       <td><dfn id="dfn-onload">onload</dfn>
       <td>{{load}}
@@ -1185,7 +1185,7 @@ the user agent must run the steps below:
    on the [=file reading task source=] in an affiliated [=queue a task|task queue=],
    then remove those [=tasks=] from that task queue.
 1. [=terminate an algorithm|Terminate the algorithm=] for the [=read method=] being processed.
-1. [=Fire a progress event=] called {{abort}} at [=this=].
+1. [=Fire a progress event=] called {{FileReader/abort!!event}} at [=this=].
 1. If [=this=]'s [=FileReader/state=] is not `"loading"`,
    [=fire a progress event=] called {{loadend}} at [=this=].
 
@@ -1297,7 +1297,7 @@ for a given asynchronous <a>read method</a> in this specification:
   * the <a>read method</a> has been cancelled using {{FileReader/abort()}}
     and a new <a>read method</a> has been invoked
   * the event handler function for a {{load}} event initiates a new read
-  * the event handler function for a {{error!!event}} event initiates a new read.
+  * the event handler function for a {{FileReader/error!!event}} event initiates a new read.
 
   Note: The events {{loadstart}} and {{loadend}} are not coupled in a one-to-one manner.
 
@@ -1323,9 +1323,9 @@ for a given asynchronous <a>read method</a> in this specification:
   </div>
 2. One {{progress}} event will fire when <code>blob</code> has been completely read into memory.
 3. No {{progress}} event fires before {{loadstart}}.
-4. No {{progress}} event fires after any one of {{abort}}, {{load}}, and {{error!!event}} have fired.
-  At most one of {{abort}}, {{load}}, and {{error!!event}} fire for a given read.
-5. No {{abort}}, {{load}}, or {{error!!event}} event fires after {{loadend}}.
+4. No {{progress}} event fires after any one of {{FileReader/abort!!event}}, {{load}}, and {{FileReader/error!!event}} have fired.
+  At most one of {{FileReader/abort!!event}}, {{load}}, and {{FileReader/error!!event}} fire for a given read.
+5. No {{FileReader/abort!!event}}, {{load}}, or {{FileReader/error!!event}} event fires after {{loadend}}.
 
 ## Reading on Threads ## {#readingOnThreads}
 
