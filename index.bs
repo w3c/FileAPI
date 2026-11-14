@@ -1741,7 +1741,7 @@ This section gives sample usage of creation and revocation of <a>blob URL</a>s w
     // ... Following body load
     // Check if both images have loaded
     if(img1.complete && img2.complete) {
-      // Ensure that subsequent refs throw an exception
+      // Subsequent attempts to fetch this URL result in a network error.
       URL.revokeObjectURL(blobURLref);
     } else {
       msg("Images cannot be previewed!");
