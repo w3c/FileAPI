@@ -579,7 +579,7 @@ that is the value of the optional <var>contentType</var> parameter. It must act 
     var file = document.getElementById('file').files[0];
     if(file)
     {
-      // create an identical copy of file
+      // copy all file bytes into a new Blob with an empty type
       // the two calls below are equivalent
 
       var fileClone = file.slice();
