@@ -267,7 +267,7 @@ up to but not including the <var>end</var> parameter. It must act as follows:
 
 ## Names and paths ## {#names-paths}
 
-A <dfn export>name</dfn> is a string which:
+A <dfn>name</dfn> is a string which:
 
   * does not contain '/' (U+002F SOLIDUS)
   * does not contain NUL (U+0000)
@@ -275,21 +275,21 @@ A <dfn export>name</dfn> is a string which:
   * is not '.' (U+002E FULL STOP)
   * is not '..' (U+002E FULL STOP, U+002E FULL STOP)
 
-A <dfn export>path segment</dfn> is a [=/name=], '.' (U+002E FULL STOP) or
+A <dfn>path segment</dfn> is a [=/name=], '.' (U+002E FULL STOP) or
 '..' (U+002E FULL STOP, U+002E FULL STOP).
 
-A <dfn export>relative path</dfn> is a string consisting of one or more
+A <dfn>relative path</dfn> is a string consisting of one or more
 [=path segments=] joined by '/' (U+002F SOLIDUS) that does not start
 with '/' (U+002F SOLIDUS).
 
-An <dfn export>absolute path</dfn> is a string consisting of '/' (U+002F
+An <dfn>absolute path</dfn> is a string consisting of '/' (U+002F
 SOLIDUS) followed by zero or more [=path segments=] joined by '/'
 (U+002F SOLIDUS).
 
-A <dfn export>path</dfn> is either a [=relative path=] or an [=absolute
+A <dfn>path</dfn> is either a [=relative path=] or an [=absolute
 path=].
 
-A <dfn export>valid path</dfn> is a {{USVString}} which is a [=path=].
+A <dfn>valid path</dfn> is a {{USVString}} which is a [=path=].
 
 ## Files and directories ## {#files-dirs}
 
