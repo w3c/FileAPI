@@ -1702,7 +1702,7 @@ below is not fully defined. The success and error callbacks of {{FileSystemDirec
 use the [=file reading task source=]. Chromium-based browsers appear to use the
 [=/DOM manipulation task source=] [[HTML]] elsewhere.
 
-Issue: The legacy {{TypeMismatchError}} has been replaced in most
+Issue(#233): The legacy {{TypeMismatchError}} has been replaced in most
 specifications by {{TypeError}}, but the name differs. Is it
 compatible to switch here as well?
 
