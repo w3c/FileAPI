@@ -308,7 +308,7 @@ The <dfn export>parent</dfn> of a [=file=] or [=/directory=] is the
 [=/directory=] it is a member of. A [=root directory=] has no
 [=parent=].
 
-Issue: Should [=/directory=] be defined as a special type of [=file=]
+Issue(#234): Should [=/directory=] be defined as a special type of [=file=]
 so that minimal changes are necessary in [[HTML]]?
 
 note:
