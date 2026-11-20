@@ -325,7 +325,7 @@ directory=]. The [=file system/name=] of a [=/file system=] is a
 [=/file system=].
 
 note:
-  Implementations could produce a [=file system/name=] by generating a
+  Implementations could produce a file system [=file system/name=] by generating a
   UUID for each [=/file system=] instance with some fixed prefix and
   suffix strings applied. Authors using the API are advised not to make
   assumptions about the structure or content of the names.
