@@ -79,7 +79,6 @@ spec: ecma-262; urlPrefix: http://tc39.github.io/ecma262/
     text: Array; url: sec-array-constructor
     text: Date; url: sec-date-constructor
   type: dfn
-    text: Promise; url: sec-promise-objects
     text: AsyncIterator; url: sec-asynciterator-interface
 spec: media-source; urlPrefix: http://w3c.github.io/media-source/
   type: interface
