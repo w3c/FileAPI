@@ -321,11 +321,15 @@ given |value| and |serialized|, are:
 
 2. Set |serialized|.\[[ByteSequence]] to |value|'s underlying byte sequence.
 
+3. Set |serialized|.\[[Type]] to the value of |value|'s {{Blob/type}} attribute.
+
 Their [=deserialization step=], given |serialized| and |value|, are:
 
 1. Set |value|'s [=snapshot state=] to |serialized|.\[[SnapshotState]].
 
 2. Set |value|'s underlying byte sequence to |serialized|.\[[ByteSequence]].
+
+3. Initialize the value of |value|'s {{Blob/type}} attribute to |serialized|.\[[Type]].
 
 <div algorithm="get stream">
 A {{Blob}} |blob| has an associated <dfn export for=Blob>get stream</dfn> algorithm,
@@ -722,6 +726,8 @@ given |value| and |serialized|, are:
 
 4. Set |serialized|.\[[LastModified]] to the value of |value|'s {{File/lastModified}} attribute.
 
+5. Set |serialized|.\[[Type]] to the value of |value|'s {{Blob/type}} attribute.
+
 Their [=deserialization steps=], given |value| and |serialized|, are:
 
 1. Set |value|'s [=snapshot state=] to |serialized|.\[[SnapshotState]].
@@ -732,6 +738,8 @@ Their [=deserialization steps=], given |value| and |serialized|, are:
 
 4. Initialize the value of |value|'s {{File/lastModified}} attribute to
    |serialized|.\[[LastModified]].
+
+5. Initialize the value of |value|'s {{Blob/type}} attribute to |serialized|.\[[Type]].
 
 ## Constructor ## {#file-constructor}
 
