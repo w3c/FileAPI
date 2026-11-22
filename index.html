@@ -6,7 +6,7 @@
   <meta content="ED" name="w3c-status">
   <meta content="Bikeshed version e0b165ae4, updated Mon Nov 2 15:16:49 2026 -0800" name="generator">
   <link href="https://www.w3.org/TR/FileAPI/" rel="canonical">
-  <meta content="528c64a385e01e248a95d428a11afc7c3f6595fe" name="revision">
+  <meta content="d733e1b131a622809fa0f49a3a25e878fb106569" name="revision">
   <meta content="dark light" name="color-scheme">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
@@ -1003,7 +1003,7 @@ var[data-var-color="6"] { --var-vg: #FFBCF2; }
 </p>
    <h1 class="no-ref p-name" id="title">File API</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#ED">Editor’s Draft</a>,
-    <time class="dt-updated" datetime="2026-11-14">14 November 2026</time></p>
+    <time class="dt-updated" datetime="2026-11-22">22 November 2026</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1453,6 +1453,8 @@ given <var>value</var> and <var>serialized</var>, are:</p>
      <p>Set <var>serialized</var>.[[SnapshotState]] to <var>value</var>’s <a data-link-type="dfn" href="#snapshot-state" id="ref-for-snapshot-state①">snapshot state</a>.</p>
     <li data-md>
      <p>Set <var>serialized</var>.[[ByteSequence]] to <var>value</var>’s underlying byte sequence.</p>
+    <li data-md>
+     <p>Set <var>serialized</var>.[[LowercaseTypeInput]] to the value of <var>value</var>’s <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type③">type</a></code> attribute.</p>
    </ol>
    <p>Their <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/structured-data.html#deserialization-steps" id="ref-for-deserialization-steps">deserialization step</a>, given <var>serialized</var> and <var>value</var>, are:</p>
    <ol>
@@ -1460,6 +1462,8 @@ given <var>value</var> and <var>serialized</var>, are:</p>
      <p>Set <var>value</var>’s <a data-link-type="dfn" href="#snapshot-state" id="ref-for-snapshot-state②">snapshot state</a> to <var>serialized</var>.[[SnapshotState]].</p>
     <li data-md>
      <p>Set <var>value</var>’s underlying byte sequence to <var>serialized</var>.[[ByteSequence]].</p>
+    <li data-md>
+     <p>Initialize the value of <var>value</var>’s <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type④">type</a></code> attribute to <var>serialized</var>.[[LowercaseTypeInput]].</p>
    </ol>
    <div class="algorithm" data-algorithm="get stream">
     
@@ -1516,7 +1520,7 @@ user agents must run the following steps:
       <p>If invoked with zero parameters,
 return a new <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob①⑧">Blob</a></code> object consisting of 0 bytes,
 with <code class="idl"><a data-link-type="idl" href="#dfn-size" id="ref-for-dfn-size④">size</a></code> set to 0,
-and with <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type③">type</a></code> set to the empty string.</p>
+and with <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type⑤">type</a></code> set to the empty string.</p>
      <li data-md>
       <p>Let <var>bytes</var> be the result of <a data-link-type="dfn" href="#process-blob-parts" id="ref-for-process-blob-parts">processing blob parts</a> given <code class="idl"><a data-link-type="idl" href="#dfn-blobParts" id="ref-for-dfn-blobParts①">blobParts</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-blob-blob-blobparts-options-options" id="ref-for-dom-blob-blob-blobparts-options-options">options</a></code>.</p>
      <li data-md>
@@ -1533,7 +1537,7 @@ then set <var>t</var> to the empty string and return from these substeps.</p>
      <li data-md>
       <p>Return a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob①⑨">Blob</a></code> object referring to <var>bytes</var> as its associated <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte" id="ref-for-byte⑤">byte</a> sequence,
 with its <code class="idl"><a data-link-type="idl" href="#dfn-size" id="ref-for-dfn-size⑤">size</a></code> set to the length of <var>bytes</var>,
-and its <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type④">type</a></code> set to the value of <var>t</var> from the substeps above.</p>
+and its <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type⑥">type</a></code> set to the value of <var>t</var> from the substeps above.</p>
     </ol>
    </div>
    <h4 class="heading settled" data-level="3.1.1" id="constructorParams"><span class="secno">3.1.1. </span><span class="content">Constructor Parameters</span><a class="self-link" href="#constructorParams"></a></h4>
@@ -1604,7 +1608,7 @@ a copy of the bytes held by the buffer source</a>, and append those bytes to <va
        <li data-md>
         <p>If <var>element</var> is a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob②③">Blob</a></code>,
 append the bytes it represents to <var>bytes</var>.</p>
-        <p class="note" role="note"><span class="marker">Note:</span> The <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type⑤">type</a></code> of the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob②④">Blob</a></code> array element is ignored and will not affect <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type⑥">type</a></code> of returned
+        <p class="note" role="note"><span class="marker">Note:</span> The <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type⑦">type</a></code> of the <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob②④">Blob</a></code> array element is ignored and will not affect <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type⑧">type</a></code> of returned
 <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob②⑤">Blob</a></code> object.</p>
       </ol>
      <li data-md>
@@ -1712,18 +1716,18 @@ from <var>s</var> given <var>position</var>.</p>
     or the empty string – 0 bytes – if the type cannot be determined.
 
 
-     <p>The <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type⑦">type</a></code> attribute can be set by the web application itself through constructor invocation
+     <p>The <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type⑨">type</a></code> attribute can be set by the web application itself through constructor invocation
     and through the <code class="idl"><a data-link-type="idl" href="#dfn-slice" id="ref-for-dfn-slice①">slice()</a></code> call;
     in these cases, further normative conditions for this attribute are in <a href="#constructorBlob">§ 3.1 Constructors</a>,
     <a href="#file-constructor">§ 4.1 Constructor</a>,
     and <a href="#slice-method-algo">§ 3.3.1 The slice() method</a> respectively.
-    User agents can also determine the <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type⑧">type</a></code> of a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob②⑨">Blob</a></code>,
+    User agents can also determine the <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①⓪">type</a></code> of a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob②⑨">Blob</a></code>,
     especially if the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte" id="ref-for-byte⑧">byte</a> sequence is from an on-disk file;
     in this case, further normative conditions are in the <a data-link-type="dfn" href="#file-type-guidelines" id="ref-for-file-type-guidelines">file type guidelines</a>.</p>
      <p class="note" role="note"><span class="marker">Note:</span> The type <var>t</var> of a <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob③⓪">Blob</a></code> is considered a <a data-link-type="dfn" href="https://mimesniff.spec.whatwg.org/#parsable-mime-type" id="ref-for-parsable-mime-type①">parsable MIME type</a>,
     if performing the <a data-link-type="dfn" href="https://mimesniff.spec.whatwg.org/#parse-a-mime-type" id="ref-for-parse-a-mime-type">parse a MIME type</a> algorithm to a byte sequence converted from
     the ASCII-encoded string representing the Blob object’s type does not return failure.</p>
-     <p class="note" role="note"><span class="marker">Note:</span> Use of the <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type⑨">type</a></code> attribute informs the <a data-link-type="dfn" href="#blob-package-data" id="ref-for-blob-package-data">package data</a> algorithm
+     <p class="note" role="note"><span class="marker">Note:</span> Use of the <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①①">type</a></code> attribute informs the <a data-link-type="dfn" href="#blob-package-data" id="ref-for-blob-package-data">package data</a> algorithm
     and determines the <code>Content-Type</code> header when <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-fetch" id="ref-for-concept-fetch">fetching</a> <a data-link-type="dfn" href="#blob-url" id="ref-for-blob-url">blob URLs</a>.</p>
    </dl>
    <h3 class="heading settled" data-level="3.3" id="methodsandparams-blob"><span class="secno">3.3. </span><span class="content">Methods and Parameters</span><a class="self-link" href="#methodsandparams-blob"></a></h3>
@@ -1732,7 +1736,7 @@ from <var>s</var> given <var>position</var>.</p>
     
 The <dfn class="dfn-paneled idl-code" data-dfn-for="Blob" data-dfn-type="method" data-export data-lt="slice(start, end, contentType)|slice(start, end)|slice(start)|slice()|slice(start, end, contentType), slice(start, end), slice(start), slice()" id="dfn-slice"><code>slice()</code></dfn> method
 returns a new <code class="idl"><a data-link-type="idl" href="#dfn-Blob" id="ref-for-dfn-Blob③①">Blob</a></code> object with bytes ranging from the optional <var>start</var> parameter
-up to but not including the optional <var>end</var> parameter, and with a <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①⓪">type</a></code> attribute
+up to but not including the optional <var>end</var> parameter, and with a <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①②">type</a></code> attribute
 that is the value of the optional <var>contentType</var> parameter. It must act as follows:
 
 
@@ -1859,11 +1863,11 @@ the <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-f
 User agents may use modification time stamps and other mechanisms to maintain <a data-link-type="dfn" href="#snapshot-state" id="ref-for-snapshot-state⑥">snapshot state</a>,
 but this is left as an implementation detail.</p>
    <p>When a <code class="idl"><a data-link-type="idl" href="#dfn-file" id="ref-for-dfn-file①④">File</a></code> object refers to a file on disk,
-user agents must return the <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①①">type</a></code> of that file,
+user agents must return the <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①③">type</a></code> of that file,
 and must follow the <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="file-type-guidelines">file type guidelines</dfn> below:</p>
    <ul>
     <li data-md>
-     <p>User agents must return the <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①②">type</a></code> as an ASCII-encoded string in lower case,
+     <p>User agents must return the <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①④">type</a></code> as an ASCII-encoded string in lower case,
 such that when it is converted to a corresponding byte sequence,
 it is a <a data-link-type="dfn" href="https://mimesniff.spec.whatwg.org/#parsable-mime-type" id="ref-for-parsable-mime-type②">parsable MIME type</a>,
 or the empty string – 0 bytes – if the type cannot be determined.</p>
@@ -1898,6 +1902,8 @@ given <var>value</var> and <var>serialized</var>, are:</p>
      <p>Set <var>serialized</var>.[[Name]] to the value of <var>value</var>’s <code class="idl"><a data-link-type="idl" href="#dfn-name" id="ref-for-dfn-name②">name</a></code> attribute.</p>
     <li data-md>
      <p>Set <var>serialized</var>.[[LastModified]] to the value of <var>value</var>’s <code class="idl"><a data-link-type="idl" href="#dfn-lastModified" id="ref-for-dfn-lastModified①">lastModified</a></code> attribute.</p>
+    <li data-md>
+     <p>Set <var>serialized</var>.[[LowercaseTypeInput]] to the value of <var>value</var>’s <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①⑤">type</a></code> attribute.</p>
    </ol>
    <p>Their <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/structured-data.html#deserialization-steps" id="ref-for-deserialization-steps①">deserialization steps</a>, given <var>value</var> and <var>serialized</var>, are:</p>
    <ol>
@@ -1910,6 +1916,8 @@ given <var>value</var> and <var>serialized</var>, are:</p>
     <li data-md>
      <p>Initialize the value of <var>value</var>’s <code class="idl"><a data-link-type="idl" href="#dfn-lastModified" id="ref-for-dfn-lastModified②">lastModified</a></code> attribute to
  <var>serialized</var>.[[LastModified]].</p>
+    <li data-md>
+     <p>Initialize the value of <var>value</var>’s <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①⑥">type</a></code> attribute to <var>serialized</var>.[[LowercaseTypeInput]].</p>
    </ol>
    <h3 class="heading settled" data-level="4.1" id="file-constructor"><span class="secno">4.1. </span><span class="content">Constructor</span><a class="self-link" href="#file-constructor"></a></h3>
    <div class="algorithm" data-algorithm="file-constructor">
@@ -1959,7 +1967,7 @@ the <code class="idl"><a data-link-type="idl" href="#dfn-FPdate" id="ref-for-dfn
        <li data-md>
         <p><var>F</var>.<code class="idl"><a data-link-type="idl" href="#dfn-name" id="ref-for-dfn-name④">name</a></code> is set to <var>n</var>.</p>
        <li data-md>
-        <p><var>F</var>.<code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①③">type</a></code> is set to <var>t</var>.</p>
+        <p><var>F</var>.<code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①⑦">type</a></code> is set to <var>t</var>.</p>
        <li data-md>
         <p><var>F</var>.<code class="idl"><a data-link-type="idl" href="#dfn-lastModified" id="ref-for-dfn-lastModified③">lastModified</a></code> is set to <var>d</var>.</p>
       </ol>
@@ -2260,7 +2268,7 @@ runs the following steps:
           <p>Set <var>fr</var>’s <a data-link-type="dfn" href="#filereader-state" id="ref-for-filereader-state③">state</a> to <code>"done"</code>.</p>
          <li data-md>
           <p>Let <var>result</var> be the result of
- <a data-link-type="dfn" href="#blob-package-data" id="ref-for-blob-package-data①">package data</a> given <var>bytes</var>, <var>type</var>, <var>blob</var>’s <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①④">type</a></code>, and <var>encodingLabel</var>.</p>
+ <a data-link-type="dfn" href="#blob-package-data" id="ref-for-blob-package-data①">package data</a> given <var>bytes</var>, <var>type</var>, <var>blob</var>’s <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①⑧">type</a></code>, and <var>encodingLabel</var>.</p>
          <li data-md>
           <p>If <a data-link-type="dfn" href="#blob-package-data" id="ref-for-blob-package-data②">package data</a> threw an exception <var>error</var>:</p>
           <ol>
@@ -2498,7 +2506,7 @@ in keeping with the Data URL specification <a data-link-type="biblio" href="#bib
   set <var>encoding</var> to the result of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#concept-encoding-get" id="ref-for-concept-encoding-get①">getting an encoding</a>
   from <var>type</var>’s <a data-link-type="dfn" href="https://mimesniff.spec.whatwg.org/#parameters" id="ref-for-parameters">parameters</a>[<code>"charset"</code>].</p>
           <div class="example" id="example-161c55fc"><a class="self-link" href="#example-161c55fc"></a>
-  If <code>blob</code> has a <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①⑤">type</a></code> attribute of <code>text/plain;charset=utf-8</code>
+  If <code>blob</code> has a <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①⑨">type</a></code> attribute of <code>text/plain;charset=utf-8</code>
   then <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#concept-encoding-get" id="ref-for-concept-encoding-get②">getting an encoding</a> is run using <code>"utf-8"</code> as the label.
   Note that user agents must parse and extract the portion of the Charset Parameter
   that constitutes a <em>label</em> of an encoding.
@@ -2710,7 +2718,7 @@ when invoked, must run these steps:</p>
      <p>If <var>promise</var> fulfilled with a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte-sequence" id="ref-for-byte-sequence③">byte sequence</a> <var>bytes</var>:</p>
      <ol>
       <li data-md>
-       <p>Return the result of <a data-link-type="dfn" href="#blob-package-data" id="ref-for-blob-package-data③">package data</a> given <var>bytes</var>, <em>Text</em>, <var>blob</var>’s <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①⑥">type</a></code>, and <var>encoding</var>.</p>
+       <p>Return the result of <a data-link-type="dfn" href="#blob-package-data" id="ref-for-blob-package-data③">package data</a> given <var>bytes</var>, <em>Text</em>, <var>blob</var>’s <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type②⓪">type</a></code>, and <var>encoding</var>.</p>
      </ol>
     <li data-md>
      <p>Throw <var>promise</var>’s rejection reason.</p>
@@ -2731,7 +2739,7 @@ when invoked, must run these steps:</p>
      <p>If <var>promise</var> fulfilled with a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte-sequence" id="ref-for-byte-sequence④">byte sequence</a> <var>bytes</var>:</p>
      <ol>
       <li data-md>
-       <p>Return the result of <a data-link-type="dfn" href="#blob-package-data" id="ref-for-blob-package-data④">package data</a> given <var>bytes</var>, <em>DataURL</em>, and <var>blob</var>’s <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①⑦">type</a></code>.</p>
+       <p>Return the result of <a data-link-type="dfn" href="#blob-package-data" id="ref-for-blob-package-data④">package data</a> given <var>bytes</var>, <em>DataURL</em>, and <var>blob</var>’s <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type②①">type</a></code>.</p>
      </ol>
     <li data-md>
      <p>Throw <var>promise</var>’s rejection reason.</p>
@@ -2752,7 +2760,7 @@ when invoked, must run these steps:</p>
      <p>If <var>promise</var> fulfilled with a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte-sequence" id="ref-for-byte-sequence⑤">byte sequence</a> <var>bytes</var>:</p>
      <ol>
       <li data-md>
-       <p>Return the result of <a data-link-type="dfn" href="#blob-package-data" id="ref-for-blob-package-data⑤">package data</a> given <var>bytes</var>, <em>ArrayBuffer</em>, and <var>blob</var>’s <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①⑧">type</a></code>.</p>
+       <p>Return the result of <a data-link-type="dfn" href="#blob-package-data" id="ref-for-blob-package-data⑤">package data</a> given <var>bytes</var>, <em>ArrayBuffer</em>, and <var>blob</var>’s <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type②②">type</a></code>.</p>
      </ol>
     <li data-md>
      <p>Throw <var>promise</var>’s rejection reason.</p>
@@ -2773,7 +2781,7 @@ when invoked, must run these steps:</p>
      <p>If <var>promise</var> fulfilled with a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte-sequence" id="ref-for-byte-sequence⑥">byte sequence</a> <var>bytes</var>:</p>
      <ol>
       <li data-md>
-       <p>Return the result of <a data-link-type="dfn" href="#blob-package-data" id="ref-for-blob-package-data⑥">package data</a> given <var>bytes</var>, <em>BinaryString</em>, and <var>blob</var>’s <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type①⑨">type</a></code>.</p>
+       <p>Return the result of <a data-link-type="dfn" href="#blob-package-data" id="ref-for-blob-package-data⑥">package data</a> given <var>bytes</var>, <em>BinaryString</em>, and <var>blob</var>’s <code class="idl"><a data-link-type="idl" href="#dfn-type" id="ref-for-dfn-type②③">type</a></code>.</p>
      </ol>
     <li data-md>
      <p>Throw <var>promise</var>’s rejection reason.</p>
@@ -4293,7 +4301,7 @@ let dfnPanelData = {
 "dfn-revokeObjectURL": {"dfnID":"dfn-revokeObjectURL","dfnText":"revokeObjectURL(url)","external":false,"refSections":[{"refs":[{"id":"ref-for-dfn-revokeObjectURL"}],"title":"8.1. Introduction"},{"refs":[{"id":"ref-for-dfn-revokeObjectURL\u2460"},{"id":"ref-for-dfn-revokeObjectURL\u2461"}],"title":"8.4. Creating and Revoking a blob URL"},{"refs":[{"id":"ref-for-dfn-revokeObjectURL\u2462"},{"id":"ref-for-dfn-revokeObjectURL\u2463"}],"title":"8.4.1. Examples of blob URL Creation and Revocation"}],"url":"#dfn-revokeObjectURL"},
 "dfn-size": {"dfnID":"dfn-size","dfnText":"size","external":false,"refSections":[{"refs":[{"id":"ref-for-dfn-size"},{"id":"ref-for-dfn-size\u2460"}],"title":"2. Terminology and Algorithms"},{"refs":[{"id":"ref-for-dfn-size\u2461"},{"id":"ref-for-dfn-size\u2462"}],"title":"3. The Blob Interface and Binary Data"},{"refs":[{"id":"ref-for-dfn-size\u2463"},{"id":"ref-for-dfn-size\u2464"}],"title":"3.1. Constructors"},{"refs":[{"id":"ref-for-dfn-size\u2465"}],"title":"4.1. Constructor"}],"url":"#dfn-size"},
 "dfn-slice": {"dfnID":"dfn-slice","dfnText":"slice()","external":false,"refSections":[{"refs":[{"id":"ref-for-dfn-slice"}],"title":"3. The Blob Interface and Binary Data"},{"refs":[{"id":"ref-for-dfn-slice\u2460"}],"title":"3.2. Attributes"},{"refs":[{"id":"ref-for-dfn-slice\u2461"},{"id":"ref-for-dfn-slice\u2462"}],"title":"3.3.1. The slice() method"}],"url":"#dfn-slice"},
-"dfn-type": {"dfnID":"dfn-type","dfnText":"type","external":false,"refSections":[{"refs":[{"id":"ref-for-dfn-type"}],"title":"2. Terminology and Algorithms"},{"refs":[{"id":"ref-for-dfn-type\u2460"},{"id":"ref-for-dfn-type\u2461"}],"title":"3. The Blob Interface and Binary Data"},{"refs":[{"id":"ref-for-dfn-type\u2462"},{"id":"ref-for-dfn-type\u2463"}],"title":"3.1. Constructors"},{"refs":[{"id":"ref-for-dfn-type\u2464"},{"id":"ref-for-dfn-type\u2465"}],"title":"3.1.1. Constructor Parameters"},{"refs":[{"id":"ref-for-dfn-type\u2466"},{"id":"ref-for-dfn-type\u2467"},{"id":"ref-for-dfn-type\u2468"}],"title":"3.2. Attributes"},{"refs":[{"id":"ref-for-dfn-type\u2460\u24ea"}],"title":"3.3.1. The slice() method"},{"refs":[{"id":"ref-for-dfn-type\u2460\u2460"},{"id":"ref-for-dfn-type\u2460\u2461"}],"title":"4. The File Interface"},{"refs":[{"id":"ref-for-dfn-type\u2460\u2462"}],"title":"4.1. Constructor"},{"refs":[{"id":"ref-for-dfn-type\u2460\u2463"}],"title":"6.2. The FileReader API"},{"refs":[{"id":"ref-for-dfn-type\u2460\u2464"}],"title":"6.3. Packaging data"},{"refs":[{"id":"ref-for-dfn-type\u2460\u2465"}],"title":"6.5.1.2. The readAsText()"},{"refs":[{"id":"ref-for-dfn-type\u2460\u2466"}],"title":"6.5.1.3. The readAsDataURL() method"},{"refs":[{"id":"ref-for-dfn-type\u2460\u2467"}],"title":"6.5.1.4. The readAsArrayBuffer() method"},{"refs":[{"id":"ref-for-dfn-type\u2460\u2468"}],"title":"6.5.1.5. The readAsBinaryString() method"}],"url":"#dfn-type"},
+"dfn-type": {"dfnID":"dfn-type","dfnText":"type","external":false,"refSections":[{"refs":[{"id":"ref-for-dfn-type"}],"title":"2. Terminology and Algorithms"},{"refs":[{"id":"ref-for-dfn-type\u2460"},{"id":"ref-for-dfn-type\u2461"},{"id":"ref-for-dfn-type\u2462"},{"id":"ref-for-dfn-type\u2463"}],"title":"3. The Blob Interface and Binary Data"},{"refs":[{"id":"ref-for-dfn-type\u2464"},{"id":"ref-for-dfn-type\u2465"}],"title":"3.1. Constructors"},{"refs":[{"id":"ref-for-dfn-type\u2466"},{"id":"ref-for-dfn-type\u2467"}],"title":"3.1.1. Constructor Parameters"},{"refs":[{"id":"ref-for-dfn-type\u2468"},{"id":"ref-for-dfn-type\u2460\u24ea"},{"id":"ref-for-dfn-type\u2460\u2460"}],"title":"3.2. Attributes"},{"refs":[{"id":"ref-for-dfn-type\u2460\u2461"}],"title":"3.3.1. The slice() method"},{"refs":[{"id":"ref-for-dfn-type\u2460\u2462"},{"id":"ref-for-dfn-type\u2460\u2463"},{"id":"ref-for-dfn-type\u2460\u2464"},{"id":"ref-for-dfn-type\u2460\u2465"}],"title":"4. The File Interface"},{"refs":[{"id":"ref-for-dfn-type\u2460\u2466"}],"title":"4.1. Constructor"},{"refs":[{"id":"ref-for-dfn-type\u2460\u2467"}],"title":"6.2. The FileReader API"},{"refs":[{"id":"ref-for-dfn-type\u2460\u2468"}],"title":"6.3. Packaging data"},{"refs":[{"id":"ref-for-dfn-type\u2461\u24ea"}],"title":"6.5.1.2. The readAsText()"},{"refs":[{"id":"ref-for-dfn-type\u2461\u2460"}],"title":"6.5.1.3. The readAsDataURL() method"},{"refs":[{"id":"ref-for-dfn-type\u2461\u2461"}],"title":"6.5.1.4. The readAsArrayBuffer() method"},{"refs":[{"id":"ref-for-dfn-type\u2461\u2462"}],"title":"6.5.1.5. The readAsBinaryString() method"}],"url":"#dfn-type"},
 "dom-blob-arraybuffer": {"dfnID":"dom-blob-arraybuffer","dfnText":"arrayBuffer()","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-blob-arraybuffer"}],"title":"3. The Blob Interface and Binary Data"},{"refs":[{"id":"ref-for-dom-blob-arraybuffer\u2460"}],"title":"3.3.4. The arrayBuffer() method"}],"url":"#dom-blob-arraybuffer"},
 "dom-blob-blob": {"dfnID":"dom-blob-blob","dfnText":"constructor","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-blob-blob"},{"id":"ref-for-dom-blob-blob\u2460"}],"title":"3.1. Constructors"},{"refs":[{"id":"ref-for-dom-blob-blob\u2461"}],"title":"3.1.1. Constructor Parameters"}],"url":"#dom-blob-blob"},
 "dom-blob-blob-blobparts-options-options": {"dfnID":"dom-blob-blob-blobparts-options-options","dfnText":"options","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-blob-blob-blobparts-options-options"},{"id":"ref-for-dom-blob-blob-blobparts-options-options\u2460"}],"title":"3.1. Constructors"}],"url":"#dom-blob-blob-blobparts-options-options"},
