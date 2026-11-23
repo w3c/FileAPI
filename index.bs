@@ -80,6 +80,7 @@ spec: ecma-262; urlPrefix: http://tc39.github.io/ecma262/
     text: Date; url: sec-date-constructor
   type: dfn
     text: AsyncIterator; url: sec-asynciterator-interface
+    text: Promise; url: sec-promise-objects
 spec: media-source; urlPrefix: http://w3c.github.io/media-source/
   type: interface
     text: MediaSource; url: #mediasource
@@ -1004,12 +1005,12 @@ The {{File()}} constructor can be invoked with the parameters below:
     If a {{File}} object is created using a constructor,
     further normative conditions for this attribute are found in [[#file-constructor]].
 
-  <dt><dfn id="dfn-webkitRelativePath">webkitRelativePath</dfn>
+  <dt><dfn>webkitRelativePath</dfn>
   <dd>The <code>webkitRelativePath</code> getter steps
     are to return [=/this=]'s [=relative path=], or the empty string if not specified.
 
     Note: A {{File}}'s [=relative path=] is set when the {{File}} is selected as part of a
-    directory; see the <{input/webkitdirectory}> attribute [[HTML]].
+    directory; see the {{HTMLInputElement/webkitdirectory}} attribute [[ENTRIES-API]].
 </dl>
 
 The {{File}} interface is available on objects that expose an attribute of type {{FileList}};
@@ -1688,7 +1689,8 @@ using a form control or drops one onto a page. The types defined here describe
 Note: The mechanisms by which a user agent exposes selected files and directories as
 [=/entries=] — the {{HTMLInputElement/webkitdirectory}} and {{HTMLInputElement/webkitEntries}}
 members of <{input}> elements, and the {{DataTransferItem/webkitGetAsEntry()}} method of
-{{DataTransferItem}} — are defined in HTML [[HTML]].
+{{DataTransferItem}} — are currently defined in [[ENTRIES-API]] and are expected to move to
+[[HTML]].
 
 <xmp class=idl>
 callback ErrorCallback = undefined (DOMException err);
@@ -1698,8 +1700,8 @@ An {{ErrorCallback}} function is used for operations that may return an
 error asynchronously.
 
 Issue(#235): The [=/task source=] used for [=/queue a task|tasks that are queued=] in the steps
-below is not fully defined. The success and error callbacks of {{FileSystemDirectoryReader/readEntries()}}
-use the [=file reading task source=]. Chromium-based browsers appear to use the
+below is not defined. Chromium-based browsers appear to use the [=file reading task source=] for
+the success and error callbacks of {{FileSystemDirectoryReader/readEntries()}} and the
 [=/DOM manipulation task source=] [[HTML]] elsewhere.
 
 Issue(#233): The legacy {{TypeMismatchError}} has been replaced in most
